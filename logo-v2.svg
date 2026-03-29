@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000" width="3840" height="3840">
+  <defs>
+    <style>@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@700&amp;display=swap');</style>
+
+    <pattern id="leopard" patternUnits="userSpaceOnUse" width="70" height="70" patternTransform="rotate(8)">
+      <rect width="70" height="70" fill="#FF2D7B"/>
+      <path d="M10,15 Q16,8 22,14 Q25,20 19,24 Q11,24 10,15Z" fill="#FF85B3" opacity="0.5"/>
+      <path d="M42,10 Q50,5 54,12 Q55,20 48,22 Q40,18 42,10Z" fill="#FF85B3" opacity="0.45"/>
+      <path d="M28,40 Q35,34 40,40 Q42,48 35,50 Q26,48 28,40Z" fill="#FF85B3" opacity="0.5"/>
+      <path d="M58,48 Q64,42 68,48 Q70,56 62,58 Q54,54 58,48Z" fill="#FF85B3" opacity="0.45"/>
+      <path d="M6,50 Q12,44 18,50 Q18,58 12,60 Q4,58 6,50Z" fill="#FF85B3" opacity="0.5"/>
+      <path d="M40,62 Q46,58 50,64 Q48,70 42,70 Q36,68 40,62Z" fill="#FF85B3" opacity="0.45"/>
+    </pattern>
+
+    <pattern id="pf" patternUnits="userSpaceOnUse" width="45" height="45" patternTransform="rotate(-8)">
+      <rect width="45" height="45" fill="#FF2D7B"/>
+      <path d="M7,10 Q12,5 16,10 Q17,16 11,18 Q5,16 7,10Z" fill="#FF85B3" opacity="0.55"/>
+      <path d="M25,25 Q30,20 34,25 Q34,32 28,33 Q22,30 25,25Z" fill="#FF85B3" opacity="0.5"/>
+      <path d="M10,34 Q14,30 18,34 Q18,38 14,40 Q8,38 10,34Z" fill="#FF85B3" opacity="0.45"/>
+      <path d="M34,6 Q38,2 42,6 Q42,12 36,12 Q32,10 34,6Z" fill="#FF85B3" opacity="0.5"/>
+    </pattern>
+  </defs>
+
+  <rect width="1000" height="1000" fill="#FFFFFF"/>
+  <circle cx="500" cy="500" r="465" fill="#0D0D0D"/>
+  <circle cx="500" cy="500" r="420" fill="url(#leopard)"/>
+  <circle cx="500" cy="500" r="295" fill="#FFFFFF"/>
+
+  <!-- === THE M — ultra bold, block letter === -->
+  <!-- The original M has very thick vertical bars (~70px wide) and thick diagonals -->
+  <!-- The V center dips to about 60% down -->
+  <!-- Overall the M spans from about -190 to 190 horizontally and -155 to 155 vertically -->
+  <g transform="translate(500, 498)">
+    <!-- Left vertical bar -->
+    <rect x="-190" y="-155" width="70" height="310" fill="url(#pf)" stroke="#0D0D0D" stroke-width="5"/>
+    
+    <!-- Right vertical bar -->
+    <rect x="120" y="-155" width="70" height="310" fill="url(#pf)" stroke="#0D0D0D" stroke-width="5"/>
+    
+    <!-- Left diagonal (top-left down to center V) -->
+    <polygon points="-155,-155 -120,-155 0,50 -35,50" fill="url(#pf)" stroke="#0D0D0D" stroke-width="5" stroke-linejoin="miter"/>
+    
+    <!-- Right diagonal (top-right down to center V) -->
+    <polygon points="120,-155 155,-155 35,50 0,50" fill="url(#pf)" stroke="#0D0D0D" stroke-width="5" stroke-linejoin="miter"/>
+    
+    <!-- Cover the internal stroke lines where bars meet diagonals -->
+    <rect x="-185" y="-150" width="60" height="20" fill="url(#pf)"/>
+    <rect x="125" y="-150" width="60" height="20" fill="url(#pf)"/>
+  </g>
+
+  <!-- === LIGHTNING BOLT — large, overlapping M's right side === -->
+  <g transform="translate(540, 484)">
+    <path d="
+      M -12,-175
+      L 48,-175
+      L 16,-35
+      L 58,-35
+      L -28,195
+      L 10,22
+      L -38,22
+      Z
+    " fill="url(#pf)" stroke="#0D0D0D" stroke-width="5" stroke-linejoin="round"/>
+  </g>
+
+  <!-- Text: MEXZUNGU -->
+  <g font-family="'Space Grotesk', sans-serif" font-weight="700" font-size="50" fill="#FFFFFF">
+    <text transform="translate(220,250) rotate(-58)" text-anchor="middle">M</text>
+    <text transform="translate(260,208) rotate(-47)" text-anchor="middle">E</text>
+    <text transform="translate(310,172) rotate(-36)" text-anchor="middle">X</text>
+    <text transform="translate(366,144) rotate(-25)" text-anchor="middle">Z</text>
+    <text transform="translate(428,126) rotate(-13)" text-anchor="middle">U</text>
+    <text transform="translate(494,118) rotate(0)" text-anchor="middle">N</text>
+    <text transform="translate(560,126) rotate(13)" text-anchor="middle">G</text>
+    <text transform="translate(622,146) rotate(25)" text-anchor="middle">U</text>
+  </g>
+
+  <!-- Text: GROUP -->
+  <g font-family="'Space Grotesk', sans-serif" font-weight="700" font-size="50" fill="#FFFFFF">
+    <text transform="translate(340,852) rotate(30)" text-anchor="middle">G</text>
+    <text transform="translate(400,872) rotate(16)" text-anchor="middle">R</text>
+    <text transform="translate(462,884) rotate(4)" text-anchor="middle">O</text>
+    <text transform="translate(528,884) rotate(-8)" text-anchor="middle">U</text>
+    <text transform="translate(590,870) rotate(-20)" text-anchor="middle">P</text>
+  </g>
+</svg>
