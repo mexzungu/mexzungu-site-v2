@@ -83,8 +83,16 @@
         .tz-note { font-size:0.78rem; color:var(--gray); margin-top:0.5rem; }
         .notice-note { font-size:0.82rem; color:var(--gray); margin-top:1rem; font-style:italic; }
 
-        .social-proof { display:flex; flex-wrap:wrap; gap:2rem; justify-content:center; align-items:center; padding:2rem 0; margin-top:1rem; opacity:0.4; }
-        .social-proof span { font-size:0.85rem; font-weight:600; letter-spacing:0.05em; text-transform:uppercase; color:var(--gray-light); }
+        .trusted-by { text-align:center; padding:3rem 0; }
+        .logo-carousel { overflow:hidden; width:100%; margin-top:1.5rem; }
+        .logo-track {
+            display:flex; align-items:center; gap:3rem;
+            animation: scroll-logos 25s linear infinite;
+            width: max-content;
+        }
+        .logo-track img { height:36px; opacity:0.45; filter:grayscale(1) brightness(1.8); transition:all .3s; flex-shrink:0; }
+        .logo-track img:hover { opacity:1; filter:none; }
+        @keyframes scroll-logos { 0% { transform:translateX(0); } 100% { transform:translateX(-50%); } }
 
         @media (max-width:768px) { .zone-cards,.what-next { grid-template-columns:1fr; } .form-row { grid-template-columns:1fr; } }
     </style>
@@ -111,13 +119,6 @@
     <div class="section-label">Book a Call</div>
     <h1>Pick your <span class="highlight">poison.</span></h1>
     <p>No gatekeepers. No forms that go nowhere. Every call is prepped individually — that's why we ask for 24 hours notice.</p>
-    <div class="social-proof">
-        <span>Goldman Sachs</span>
-        <span>ENGIE</span>
-        <span>Nissan</span>
-        <span>Sand Technologies</span>
-        <span>ALU / ALX</span>
-    </div>
 </div>
 
 <section>
@@ -258,6 +259,35 @@
             </div>
             <p id="meet-link-msg" class="hidden" style="margin-top:2rem;"><a id="meet-link" href="#" target="_blank" class="submit-btn">Join Google Meet</a></p>
             <p style="margin-top:2rem; font-size:0.85rem; color:var(--gray);">Need to reschedule? Reply to the calendar invite or email info@mexzungu.com.</p>
+        </div>
+    </div>
+</section>
+
+<hr class="leopard-divider">
+
+<section class="trusted-by">
+    <div class="section-label">Recommended by folks at</div>
+    <div class="logo-carousel">
+        <div class="logo-track">
+            <img src="/logos/goldman-sachs.png" alt="Goldman Sachs">
+            <img src="/logos/engie.png" alt="ENGIE">
+            <img src="/logos/nissan.png" alt="Nissan">
+            <img src="/logos/sand-technologies.png" alt="Sand Technologies">
+            <img src="/logos/alu.png" alt="ALU">
+            <img src="/logos/alx.png" alt="ALX">
+            <img src="/logos/duara-education.png" alt="Duara Education">
+            <img src="/logos/nca.png" alt="NCA">
+            <img src="/logos/ladx.png" alt="LADX">
+            <!-- duplicate set for seamless loop -->
+            <img src="/logos/goldman-sachs.png" alt="Goldman Sachs">
+            <img src="/logos/engie.png" alt="ENGIE">
+            <img src="/logos/nissan.png" alt="Nissan">
+            <img src="/logos/sand-technologies.png" alt="Sand Technologies">
+            <img src="/logos/alu.png" alt="ALU">
+            <img src="/logos/alx.png" alt="ALX">
+            <img src="/logos/duara-education.png" alt="Duara Education">
+            <img src="/logos/nca.png" alt="NCA">
+            <img src="/logos/ladx.png" alt="LADX">
         </div>
     </div>
 </section>
