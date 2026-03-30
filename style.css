@@ -617,6 +617,16 @@ section {
 .testimonial-author {
     border-top: 1px solid var(--card-border);
     padding-top: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+}
+.testimonial-photo {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
 }
 .testimonial-name {
     display: block;
