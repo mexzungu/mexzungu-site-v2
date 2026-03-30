@@ -127,6 +127,64 @@ nav {
     border-radius: 2px;
 }
 
+/* DROPDOWN */
+.nav-dropdown {
+    position: relative;
+}
+.nav-dropdown > a {
+    cursor: pointer;
+}
+.nav-dropdown > a::after {
+    content: ' ▾';
+    font-size: 0.7em;
+    opacity: 0.5;
+}
+.nav-dropdown-menu {
+    display: none;
+    position: absolute;
+    top: calc(100% + 12px);
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(255, 255, 255, 0.97);
+    backdrop-filter: blur(16px);
+    border: 1px solid var(--card-border);
+    border-radius: 8px;
+    padding: 0.5rem 0;
+    min-width: 200px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+    z-index: 200;
+    list-style: none;
+}
+.nav-dropdown:hover .nav-dropdown-menu { display: block; }
+.nav-dropdown-menu li a {
+    display: block;
+    padding: 0.6rem 1.2rem;
+    font-size: 0.85rem;
+    color: var(--gray-dark);
+    white-space: nowrap;
+}
+.nav-dropdown-menu li a:hover {
+    background: rgba(255, 45, 123, 0.05);
+    color: var(--pink);
+}
+.nav-dropdown-menu li a.active {
+    font-size: 0.85rem;
+}
+.nav-dropdown-menu li a.active::after { display: none; }
+
+/* NAV CTA */
+.nav-cta {
+    background: var(--pink);
+    color: var(--white) !important;
+    padding: 0.5rem 1.2rem;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 0.82rem !important;
+    letter-spacing: 0.02em;
+    transition: all 0.2s;
+}
+.nav-cta:hover { background: var(--pink-light); color: var(--white) !important; }
+
 /* HERO */
 .hero {
     min-height: 100vh;
@@ -849,6 +907,18 @@ footer {
         border-bottom: 1px solid var(--card-border);
     }
     .nav-links.open { display: flex; }
+    .nav-dropdown-menu {
+        position: static;
+        transform: none;
+        box-shadow: none;
+        border: none;
+        padding: 0 0 0 1rem;
+        background: transparent;
+        backdrop-filter: none;
+    }
+    .nav-dropdown:hover .nav-dropdown-menu,
+    .nav-dropdown .nav-dropdown-menu { display: block; }
+    .nav-dropdown > a::after { content: ''; }
 }
 .menu-toggle { display: none; background: none; border: none; cursor: pointer; }
 .menu-toggle span {
