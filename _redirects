@@ -1,0 +1,29 @@
+# Redirect old URLs to new branded paths
+/consulting /venture-architecture 301
+/consulting/ /venture-architecture/ 301
+/growth /rockstar-accelerator 301
+/growth/ /rockstar-accelerator/ 301
+/investments /rebel-capital 301
+/investments/ /rebel-capital/ 301
+/dispatches /outlaw-chronicles 301
+/dispatches/ /outlaw-chronicles/ 301
+/dispatches/* /outlaw-chronicles/:splat 301
+/about /meet-the-band 301
+/about/ /meet-the-band/ 301
+/talk_to_pepe /lets-jam 301
+/talk_to_pepe/ /lets-jam/ 301
+
+# Spanish redirects
+/es/consulting /es/venture-architecture 301
+/es/consulting/ /es/venture-architecture/ 301
+/es/growth /es/rockstar-accelerator 301
+/es/growth/ /es/rockstar-accelerator/ 301
+/es/investments /es/rebel-capital 301
+/es/investments/ /es/rebel-capital/ 301
+/es/dispatches /es/outlaw-chronicles 301
+/es/dispatches/ /es/outlaw-chronicles/ 301
+/es/dispatches/* /es/outlaw-chronicles/:splat 301
+/es/about /es/meet-the-band 301
+/es/about/ /es/meet-the-band/ 301
+/es/talk_to_pepe /es/lets-jam 301
+/es/talk_to_pepe/ /es/lets-jam/ 301
