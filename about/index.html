@@ -5,6 +5,7 @@
     <link rel="icon" href="/favicon.ico" type="image/x-icon">
     <link rel="apple-touch-icon" href="/apple-touch-icon.png">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0d0d0d">
     <title>Meet the Band — Mexzungu Group</title>
     <meta name="description" content="Lawyer turned venture architect. Goldman Sachs to African startups. This is the story.">
     <meta property="og:title" content="About Pepe Carrillo | Mexzungu Group">
@@ -13,6 +14,8 @@
     <meta property="og:url" content="https://mexzungu.com/about">
     <meta property="og:image" content="https://mexzungu.com/logo.jpeg">
     <meta name="twitter:card" content="summary_large_image">
+    <link rel="alternate" hreflang="en" href="https://mexzungu.com/about">
+    <link rel="alternate" hreflang="es" href="https://mexzungu.com/es/about">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Rock+Salt&family=RocknRoll+One&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -28,28 +31,62 @@
     <ul class="nav-links">
         <li><a href="/">Home</a></li>
         <li class="nav-dropdown">
-            <a href="#">What We Do</a>
+            <a href="/#pillars">What We Do</a>
             <ul class="nav-dropdown-menu">
                 <li><a href="/consulting">Venture Architecture</a></li>
-                <li><a href="/growth">Rockstar</a></li>
+                <li><a href="/growth">Rockstar Accelerator</a></li>
                 <li><a href="/investments">Rebel Capital</a></li>
             </ul>
         </li>
         <li><a href="/dispatches">Outlaw Chronicles</a></li>
         <li><a href="/about" class="active">Meet the Band</a></li>
-        <li><a href="/talk_to_pepe" class="nav-cta">Let's Jam</a></li>
+        <li><a href="/talk_to_pepe" class="nav-cta"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:14px;height:14px;vertical-align:-2px;margin-right:4px;"><path d="M15.05 5A5 5 0 0 1 19 8.95M15.05 1A9 9 0 0 1 23 8.94m-1 7.98v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>Let's Jam</a></li>
+        <li class="lang-switch"><a href="/es/about">ES</a></li>
     </ul>
 </nav>
 
-<div class="page-hero">
+<div class="page-hero leopard-dense">
     <div class="section-label">Meet the Band</div>
-    <h1>I'm Pepe. <span class="highlight">I build things.</span></h1>
+    <h1>Three people. One AI. <span class="highlight">Zero bureaucracy.</span></h1>
+    <p class="hero-accent">Small team. Big noise. Every one of us chosen, not hired.</p>
 </div>
 
+<!-- BAND MEMBERS — first screen -->
 <section>
-    <div style="display: flex; gap: 3rem; align-items: flex-start; flex-wrap: wrap;">
-        <img src="/pepe-headshot.jpg" alt="Pepe Carrillo" style="width: 280px; border-radius: 12px; border: 3px solid var(--pink);">
-        <div style="flex: 1; min-width: 300px;">
+    <div class="band-grid">
+        <a href="#pepe" class="pillar band-member">
+            <img src="/pepe-headshot.jpg" alt="Pepe Carrillo" class="band-photo">
+            <h3>Pepe Carrillo</h3>
+            <p class="band-title">Founder & Chief Disruption Officer</p>
+            <p>Lawyer turned venture architect. Goldman Sachs to African startups. The one with the pink nails and the cap table obsession.</p>
+            <span class="pillar-arrow">Full story &rarr;</span>
+        </a>
+        <a href="#kellen" class="pillar band-member">
+            <div class="band-avatar band-avatar--pink">K</div>
+            <h3>Kellen Kiruri</h3>
+            <p class="band-title">Business Operations</p>
+            <p>Based in Nairobi. Systems, workflows, and execution. The reason the machine actually runs.</p>
+            <span class="pillar-arrow">More &rarr;</span>
+        </a>
+        <a href="/janis" class="pillar band-member">
+            <div class="band-avatar band-avatar--dark">⚡</div>
+            <h3>Janis <span class="band-title" style="display: inline; letter-spacing: 0.1em;">AI</span></h3>
+            <p class="band-title">Chief of Staff & Operational Partner</p>
+            <p>Part JARVIS, part Janis Joplin. 59 tools, 17 connectors, always on. Runs everything Pepe doesn't touch.</p>
+            <span class="pillar-arrow">Full profile &rarr;</span>
+        </a>
+    </div>
+</section>
+
+<hr class="leopard-divider">
+
+<!-- PEPE FULL BIO -->
+<section id="pepe">
+    <div class="section-label">Lead Guitar</div>
+    <div class="section-title">Pepe Carrillo</div>
+    <div class="band-bio">
+        <img src="/pepe.jpg" alt="Pepe Carrillo" class="band-bio-photo">
+        <div class="band-bio-text">
             <p class="section-text" style="max-width: none;">
                 I'm a legal strategist and venture architect. I operate at the intersection of law, capital, and business growth across Africa, Latin America, and Europe.
             </p>
@@ -64,34 +101,33 @@
             </p>
         </div>
     </div>
+
+    <div class="stats-bar" style="margin-top: 2rem;">
+        <div><div class="stat-number">$6B+</div><div class="stat-label">Transactions</div></div>
+        <div><div class="stat-number">$500M+</div><div class="stat-label">Fundraising</div></div>
+        <div><div class="stat-number">10+</div><div class="stat-label">Countries</div></div>
+        <div><div class="stat-number">3</div><div class="stat-label">Continents</div></div>
+    </div>
 </section>
 
 <section>
-    <div class="section-label">The Numbers</div>
-    <div class="stats-bar" style="border: none; padding: 0;">
-        <div>
-            <div class="stat-number">$6B+</div>
-            <div class="stat-label">Transactions</div>
+    <div class="section-label">Encores</div>
+    <div class="detail-grid">
+        <div class="detail-card">
+            <h4>GC Powerlist East Africa</h4>
+            <p>2024 and 2025. Named for legal leadership and strategic impact across the East African business landscape.</p>
         </div>
-        <div>
-            <div class="stat-number">$500M+</div>
-            <div class="stat-label">Fundraising</div>
-        </div>
-        <div>
-            <div class="stat-number">10+</div>
-            <div class="stat-label">Countries</div>
-        </div>
-        <div>
-            <div class="stat-number">3</div>
-            <div class="stat-label">Continents</div>
+        <div class="detail-card">
+            <h4>Chief Disruption Officer</h4>
+            <p>Yes, that's my actual title. Because "Managing Partner" was never going to fit.</p>
         </div>
     </div>
 </section>
 
 <section>
-    <div class="section-label">What I Believe</div>
+    <div class="section-label">What We Believe</div>
     <div class="section-title">Chaos starts companies. Structure builds them.</div>
-    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; margin-top: 2rem;">
+    <div class="detail-grid">
         <div class="detail-card">
             <h4>Structure is not a legal detail</h4>
             <p>It's the operating system of the business. Get it wrong early and everything that follows is patching. Get it right and you can move fast without breaking.</p>
@@ -111,38 +147,31 @@
     </div>
 </section>
 
-<section>
-    <div class="section-label">Recognition</div>
-    <div class="detail-grid">
-        <div class="detail-card">
-            <h4>GC Powerlist East Africa</h4>
-            <p>2024 and 2025. Named for legal leadership and strategic impact across the East African business landscape.</p>
-        </div>
-        <div class="detail-card">
-            <h4>Chief Disruption Officer</h4>
-            <p>Yes, that's my actual title. Because "Managing Partner" was never going to fit.</p>
-        </div>
-    </div>
-</section>
+<hr class="leopard-divider">
 
-<section>
-    <div class="section-label">The Team</div>
-    <div class="detail-grid" style="grid-template-columns: repeat(3, 1fr);">
+<!-- KELLEN -->
+<section id="kellen">
+    <div class="section-label">Rhythm Section</div>
+    <div class="section-title">Kellen Kiruri</div>
+    <p class="section-text" style="max-width: none;">Based in Nairobi. Kellen is the operational backbone — the person who makes the machine actually run. When something needs a real human in the room, a voice on a call, or hands on a keyboard that isn't AI, Kellen is that person.</p>
+
+    <div class="kellen-detail-grid">
         <div class="detail-card">
-            <h4>Pepe Carrillo</h4>
-            <p style="font-size: 0.75rem; color: var(--pink); font-weight: 600; letter-spacing: 0.05em; margin-bottom: 0.5rem;">Founder &amp; Chief Disruption Officer</p>
-            <p>Lawyer turned venture architect. Goldman Sachs to African startups. The one with the pink nails and the cap table obsession. Builds the structures. Holds the relationships. Makes the final call.</p>
+            <h4>Operations & Execution</h4>
+            <p>Systems management, workflow coordination, and task execution across all active client engagements. The bridge between strategy and delivery.</p>
         </div>
         <div class="detail-card">
-            <h4>Kellen Kiruri</h4>
-            <p style="font-size: 0.75rem; color: var(--pink); font-weight: 600; letter-spacing: 0.05em; margin-bottom: 0.5rem;">Business Operations</p>
-            <p>Based in Nairobi. Janis's human hands for tasks that need identity, voice, or a browser session. Systems, workflows, and execution. The reason the machine actually runs.</p>
+            <h4>Client Support</h4>
+            <p>Direct support on client deliverables, research, document preparation, and coordination. Boots on the ground in the East African timezone.</p>
         </div>
-        <a href="/janis" class="detail-card" style="text-decoration: none; color: inherit;">
-            <h4>Janis <span style="font-size: 0.75rem; color: var(--pink); font-weight: 600; letter-spacing: 0.1em;">AI</span></h4>
-            <p style="font-size: 0.75rem; color: var(--pink); font-weight: 600; letter-spacing: 0.05em; margin-bottom: 0.5rem;">Chief of Staff &amp; Operational Partner</p>
-            <p>Part JARVIS, part Janis Joplin. Runs the entire back office, middle office, and intelligence function. 46+ tools, 17 connectors, always on. <span style="color: var(--pink); font-weight: 500;">See full profile &rarr;</span></p>
-        </a>
+        <div class="detail-card">
+            <h4>Janis's Human Hands</h4>
+            <p>Some tasks need a real identity, a phone number, or a browser session. Kellen is the physical layer of the Mexzungu operating system.</p>
+        </div>
+        <div class="detail-card">
+            <h4>Nairobi Base</h4>
+            <p>Operating from Kenya gives Mexzungu real-time coverage in the East African market — the heart of our client base and investment portfolio.</p>
+        </div>
     </div>
 </section>
 
@@ -150,7 +179,7 @@
     <a href="/talk_to_pepe" class="hero-cta">Let's Jam &rarr;</a>
 </div>
 
-<div class="contact-section leopard-accent" id="contact">
+<div class="contact-section leopard-light" id="contact">
     <div class="section-label">Get in Touch</div>
     <div class="section-title">Ready to build something real?</div>
     <div class="contact-links">
@@ -166,10 +195,22 @@
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="24" height="24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
             X
         </a>
+        <a href="https://instagram.com/pepe.around.the.globe" target="_blank" rel="noopener" class="contact-link">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+            Instagram
+        </a>
     </div>
 </div>
 
-<footer>&copy; 2026 Mexzungu Group Ltd. All rights reserved.</footer>
+<footer>
+    <div style="max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; padding: 0 2rem;">
+        <span>&copy; 2026 Mexzungu Group Ltd. All rights reserved.</span>
+        <span style="font-size: 0.85rem;">
+            <a href="/privacy/" style="color: var(--gray-light);">Privacy Policy</a> &middot;
+            <a href="/terms/" style="color: var(--gray-light);">Terms of Service</a>
+        </span>
+    </div>
+</footer>
 
 <script>
 document.querySelectorAll('.nav-links a').forEach(link => {
