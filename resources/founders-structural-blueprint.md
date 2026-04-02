@@ -541,7 +541,7 @@ Now go fix it. And if you want help, you know where to find me.
 
 ---
 
-*Pepe Carrillo is the founder of Mexzungu Group, an outlaw consulting studio that helps founders build companies that survive the earthquake. He has led more than $6B in corporate transactions across 10+ countries and still paints his nails pink for board meetings.*
+*Pepe Carrillo is the founder of Mexzungu Group, an Outlaw Studio that helps founders build companies that survive the earthquake. He has led more than $6B in corporate transactions across 10+ countries and still paints his nails pink for board meetings.*
 
 *This guide is for educational purposes only. It does not constitute legal advice. If a specific situation arises that needs formal legal analysis, go to a qualified lawyer. That's what they're there for.*
 

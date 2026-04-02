@@ -98,6 +98,9 @@
         --gray:           var(--mist);
         --gray-light:     var(--mist);
     }
+    nav { background: rgba(26, 26, 46, 0.9); }
+    .nav-links { background: rgba(26, 26, 46, 0.97); }
+    .nav-dropdown-menu { background: rgba(37, 37, 64, 0.97); }
 }
 
 html { scroll-behavior: smooth; }
@@ -501,7 +504,7 @@ section {
 /* PILLAR CARDS */
 .pillars {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     gap: var(--space-md);
     margin-top: var(--space-lg);
 }
@@ -1084,6 +1087,21 @@ footer {
 }
 footer a { color: var(--gold); }
 footer a:hover { color: var(--pink-light); }
+
+.footer-disclaimer {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1rem 2rem 0;
+    font-size: var(--text-xs);
+    color: var(--mist);
+    line-height: 1.6;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    margin-top: 1rem;
+}
+
+@media (max-width: 1024px) {
+    .pillars { grid-template-columns: repeat(2, 1fr); }
+}
 
 /* RESPONSIVE */
 @media (max-width: 768px) {
