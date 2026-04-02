@@ -98,9 +98,6 @@
         --gray:           var(--mist);
         --gray-light:     var(--mist);
     }
-    nav { background: rgba(26, 26, 46, 0.9); }
-    .nav-links { background: rgba(26, 26, 46, 0.97); }
-    .nav-dropdown-menu { background: rgba(37, 37, 64, 0.97); }
 }
 
 html { scroll-behavior: smooth; }
