@@ -175,6 +175,19 @@
 
 </div>
 
+<!-- NEWSLETTER -->
+<div class="essay-cta" style="border-top: none; padding-bottom: 0;">
+    <div class="newsletter-section">
+        <h3 style="font-family: var(--heading); font-size: 1.3rem; margin-bottom: 0.5rem;">&iquest;Te gust&oacute; esto?</h3>
+        <p style="font-size: 0.95rem; color: var(--gray-light); margin-bottom: 1rem;">Recibe ensayos como este directo en tu bandeja. Sin spam. Sin relleno. Solo lo estructural que importa.</p>
+        <form class="newsletter-inline" onsubmit="subscribeNewsletter(event)">
+            <input type="email" id="nl-email" placeholder="tu@empresa.com" required>
+            <button type="submit" id="nl-btn">Suscribirse</button>
+        </form>
+        <p class="newsletter-consent">Al suscribirte, aceptas recibir correos ocasionales de Mexzungu Group. Respetamos tus datos — consulta nuestra <a href="/es/privacy/">Pol&iacute;tica de Privacidad</a>. Cancela cuando quieras.</p>
+    </div>
+</div>
+
 <!-- CTA -->
 <div class="essay-cta">
     <p>Yo arreglo esto antes de que explote. Si tu cap table necesita una revisión estructural, o si estás levantando y quieres asegurarte de que la base aguante, hablemos.</p>
@@ -196,6 +209,30 @@
 document.querySelectorAll('.nav-links a').forEach(link => {
     link.addEventListener('click', () => document.querySelector('.nav-links').classList.remove('open'));
 });
+
+async function subscribeNewsletter(e) {
+    e.preventDefault();
+    const btn = document.getElementById('nl-btn');
+    const email = document.getElementById('nl-email').value;
+    btn.textContent = 'Suscribiendo...';
+    btn.disabled = true;
+    const API = window.location.hostname === 'localhost' ? 'http://localhost:8741' : 'https://api.mexzungu.com';
+    try {
+        const res = await fetch(`${API}/newsletter/subscribe`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email }),
+        });
+        if (!res.ok) throw new Error();
+        btn.textContent = "\u00a1Listo!";
+    } catch (e) {
+        btn.textContent = '\u00a1Error \u2014 intenta de nuevo!';
+        btn.style.background = 'var(--error, #C93545)';
+        setTimeout(() => { btn.style.background = ''; }, 3000);
+    }
+    document.getElementById('nl-email').value = '';
+    setTimeout(() => { btn.textContent = 'Suscribirse'; btn.disabled = false; }, 3000);
+}
 </script>
 </body>
 </html>

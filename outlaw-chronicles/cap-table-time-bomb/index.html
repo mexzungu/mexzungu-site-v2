@@ -175,6 +175,19 @@
 
 </div>
 
+<!-- NEWSLETTER -->
+<div class="essay-cta" style="border-top: none; padding-bottom: 0;">
+    <div class="newsletter-section">
+        <h3 style="font-family: var(--heading); font-size: 1.3rem; margin-bottom: 0.5rem;">Liked this?</h3>
+        <p style="font-size: 0.95rem; color: var(--gray-light); margin-bottom: 1rem;">Get essays like this delivered to your inbox. No spam. No fluff. Just the structural stuff that matters.</p>
+        <form class="newsletter-inline" onsubmit="subscribeNewsletter(event)">
+            <input type="email" id="nl-email" placeholder="you@company.com" required>
+            <button type="submit" id="nl-btn">Subscribe</button>
+        </form>
+        <p class="newsletter-consent">By subscribing, you agree to receive occasional emails from Mexzungu Group. We respect your data — see our <a href="/privacy/">Privacy Policy</a>. Unsubscribe anytime.</p>
+    </div>
+</div>
+
 <!-- CTA -->
 <div class="essay-cta">
     <p>I fix this stuff before it blows up. If your cap table needs a structural review, or if you're raising and want to make sure the foundation holds, let's talk.</p>
@@ -195,6 +208,30 @@
 document.querySelectorAll('.nav-links a').forEach(link => {
     link.addEventListener('click', () => document.querySelector('.nav-links').classList.remove('open'));
 });
+
+async function subscribeNewsletter(e) {
+    e.preventDefault();
+    const btn = document.getElementById('nl-btn');
+    const email = document.getElementById('nl-email').value;
+    btn.textContent = 'Subscribing...';
+    btn.disabled = true;
+    const API = window.location.hostname === 'localhost' ? 'http://localhost:8741' : 'https://api.mexzungu.com';
+    try {
+        const res = await fetch(`${API}/newsletter/subscribe`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email }),
+        });
+        if (!res.ok) throw new Error();
+        btn.textContent = "You're in!";
+    } catch (e) {
+        btn.textContent = 'Failed — try again';
+        btn.style.background = 'var(--error, #C93545)';
+        setTimeout(() => { btn.style.background = ''; }, 3000);
+    }
+    document.getElementById('nl-email').value = '';
+    setTimeout(() => { btn.textContent = 'Subscribe'; btn.disabled = false; }, 3000);
+}
 </script>
 </body>
 </html>
