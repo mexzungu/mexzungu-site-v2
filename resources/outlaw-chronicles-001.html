@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>The Outlaw Wire #1 — Your cap table is lying to you</title>
+<title>The Outlaw Chronicles #1 — Your cap table is lying to you</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=Space+Grotesk:wght@400;600&display=swap');
   body { margin:0; padding:0; background:#2A1F1A; font-family:'Lora',Georgia,serif; color:#FAFAFA; -webkit-font-smoothing:antialiased; }
@@ -26,27 +26,27 @@
   .footer a { color:#9A8F88; text-decoration:none; }
 </style>
 </head>
-<body>
-<div class="wrap">
+<body style="margin:0; padding:0; background:#2A1F1A; font-family:'Lora',Georgia,serif; color:#E8D5C4; -webkit-font-smoothing:antialiased;">
+<div style="max-width:600px; margin:0 auto; background:#2A1F1A;">
 
 <!-- HEADER -->
-<div class="header">
-  <h1>The Outlaw Wire</h1>
-  <p class="sub">Cap tables, governance, and the structural stuff nobody tells you.</p>
+<div style="padding:32px 24px 24px; text-align:center; border-bottom:2px solid #E14B87;">
+  <h1 style="font-family:'Space Grotesk',Arial,sans-serif; font-size:22px; font-weight:600; color:#FAFAFA; margin:0 0 4px; letter-spacing:0.5px;">The Outlaw Chronicles</h1>
+  <p style="font-family:'Lora',Georgia,serif; font-size:13px; color:#9A8F88; margin:0; font-style:italic;">Cap tables, governance, and the structural stuff nobody tells you.</p>
 </div>
 
-<div class="body">
+<div style="padding:32px 24px; line-height:1.7; font-size:16px;">
 
 <!-- THE WIRE -->
 <div style="margin-bottom:28px;">
-  <span class="section-badge">The Wire</span>
+  <span style="display:inline-block; font-family:'Space Grotesk',Arial,sans-serif; font-size:11px; text-transform:uppercase; letter-spacing:1.5px; color:#D4A039; border:1px solid #D4A039; border-radius:20px; padding:4px 14px; margin-bottom:16px;">The Wire</span>
   <p>Once upon a spreadsheet, a founder thought she owned 55% of her company. She'd been showing that number to investors for 18 months. Then three SAFEs converted, the real math came in, and she owned 31%. This is the story of how that happens, and how to make sure it doesn't happen to you.</p>
 </div>
 
 <hr>
 
 <!-- DEEP DIVE -->
-<span class="section-badge">The Deep Dive</span>
+<span style="display:inline-block; font-family:'Space Grotesk',Arial,sans-serif; font-size:11px; text-transform:uppercase; letter-spacing:1.5px; color:#D4A039; border:1px solid #D4A039; border-radius:20px; padding:4px 14px; margin-bottom:16px;">The Deep Dive</span>
 <h2>Your Cap Table Is Lying to You</h2>
 
 <p>Let me tell you about something that happens more often than anyone in this industry wants to admit.</p>
@@ -276,45 +276,97 @@
   </tr>
 </table>
 
-<!-- VISUAL: The Dilution Waterfall -->
+<!-- VISUAL: Dilution Waterfall — Stepping bars -->
 <table cellpadding="0" cellspacing="0" border="0" width="100%" style="margin:16px 0 28px;">
   <tr>
-    <td style="text-align:center; padding:12px; background:#362E28; border-radius:8px;">
-      <table cellpadding="0" cellspacing="0" border="0" width="100%">
+    <td style="padding:16px; background:#362E28; border-radius:8px;">
+      <table cellpadding="0" cellspacing="0" border="0" width="100%" style="font-family:'Space Grotesk',Arial,sans-serif;">
+        <!-- Labels row -->
         <tr>
-          <td style="text-align:center; padding:0 4px;" width="22%">
-            <p style="font-family:'Space Grotesk',sans-serif; font-size:10px; color:#9A8F88; margin:0; text-transform:uppercase; letter-spacing:0.5px;">Day 1</p>
-            <p style="font-family:'Space Grotesk',sans-serif; font-size:26px; color:#D4A039; margin:4px 0; font-weight:600;">90%</p>
+          <td width="25%" style="text-align:center; padding:0 4px 6px; font-size:10px; text-transform:uppercase; letter-spacing:0.5px; color:#9A8F88;">Day 1</td>
+          <td width="25%" style="text-align:center; padding:0 4px 6px; font-size:10px; text-transform:uppercase; letter-spacing:0.5px; color:#9A8F88;">+ SAFEs convert</td>
+          <td width="25%" style="text-align:center; padding:0 4px 6px; font-size:10px; text-transform:uppercase; letter-spacing:0.5px; color:#9A8F88;">+ Pool expands</td>
+          <td width="25%" style="text-align:center; padding:0 4px 6px; font-size:10px; text-transform:uppercase; letter-spacing:0.5px; color:#9A8F88;">+ Series A</td>
+        </tr>
+        <!-- Bar chart row: bars anchored to bottom via vertical-align:bottom -->
+        <tr>
+          <td style="vertical-align:bottom; text-align:center; padding:0 6px; height:120px;">
+            <table cellpadding="0" cellspacing="0" border="0" width="100%" style="height:108px;">
+              <tr><td style="vertical-align:bottom;">
+                <table cellpadding="0" cellspacing="0" border="0" width="100%"><tr>
+                  <td style="background:linear-gradient(180deg,#D4A039,#B8904A); height:108px; border-radius:4px 4px 0 0; font-size:1px;">&nbsp;</td>
+                </tr></table>
+              </td></tr>
+            </table>
           </td>
-          <td style="text-align:center; color:#4A403A; font-size:18px; padding:0 2px;" width="6%">&#8594;</td>
-          <td style="text-align:center; padding:0 4px;" width="22%">
-            <p style="font-family:'Space Grotesk',sans-serif; font-size:10px; color:#9A8F88; margin:0; text-transform:uppercase; letter-spacing:0.5px;">+ SAFEs</p>
-            <p style="font-family:'Space Grotesk',sans-serif; font-size:26px; color:#B8734A; margin:4px 0; font-weight:600;">71%</p>
+          <td style="vertical-align:bottom; text-align:center; padding:0 6px; height:120px;">
+            <table cellpadding="0" cellspacing="0" border="0" width="100%" style="height:108px;">
+              <tr><td style="vertical-align:bottom;">
+                <table cellpadding="0" cellspacing="0" border="0" width="100%"><tr>
+                  <td style="background:linear-gradient(180deg,#B8734A,#A06540); height:84px; border-radius:4px 4px 0 0; font-size:1px;">&nbsp;</td>
+                </tr></table>
+              </td></tr>
+            </table>
           </td>
-          <td style="text-align:center; color:#4A403A; font-size:18px; padding:0 2px;" width="6%">&#8594;</td>
-          <td style="text-align:center; padding:0 4px;" width="22%">
-            <p style="font-family:'Space Grotesk',sans-serif; font-size:10px; color:#9A8F88; margin:0; text-transform:uppercase; letter-spacing:0.5px;">+ Pool</p>
-            <p style="font-family:'Space Grotesk',sans-serif; font-size:26px; color:#E86FA0; margin:4px 0; font-weight:600;">60%</p>
+          <td style="vertical-align:bottom; text-align:center; padding:0 6px; height:120px;">
+            <table cellpadding="0" cellspacing="0" border="0" width="100%" style="height:108px;">
+              <tr><td style="vertical-align:bottom;">
+                <table cellpadding="0" cellspacing="0" border="0" width="100%"><tr>
+                  <td style="background:linear-gradient(180deg,#E86FA0,#D45A8A); height:72px; border-radius:4px 4px 0 0; font-size:1px;">&nbsp;</td>
+                </tr></table>
+              </td></tr>
+            </table>
           </td>
-          <td style="text-align:center; color:#4A403A; font-size:18px; padding:0 2px;" width="6%">&#8594;</td>
-          <td style="text-align:center; padding:0 4px;" width="22%">
-            <p style="font-family:'Space Grotesk',sans-serif; font-size:10px; color:#9A8F88; margin:0; text-transform:uppercase; letter-spacing:0.5px;">+ Series A</p>
-            <p style="font-family:'Space Grotesk',sans-serif; font-size:26px; color:#E14B87; margin:4px 0; font-weight:600;">52%</p>
+          <td style="vertical-align:bottom; text-align:center; padding:0 6px; height:120px;">
+            <table cellpadding="0" cellspacing="0" border="0" width="100%" style="height:108px;">
+              <tr><td style="vertical-align:bottom;">
+                <table cellpadding="0" cellspacing="0" border="0" width="100%"><tr>
+                  <td style="background:linear-gradient(180deg,#FF6B9D,#E14B87); height:62px; border-radius:4px 4px 0 0; font-size:1px;">&nbsp;</td>
+                </tr></table>
+              </td></tr>
+            </table>
           </td>
         </tr>
+        <!-- Baseline -->
+        <tr>
+          <td colspan="4" style="height:2px; background:#4A403A; font-size:1px;">&nbsp;</td>
+        </tr>
+        <!-- Percentage row -->
+        <tr>
+          <td style="text-align:center; padding:8px 4px 0; font-size:22px; font-weight:600; color:#D4A039;">90%</td>
+          <td style="text-align:center; padding:8px 4px 0; font-size:22px; font-weight:600; color:#B8734A;">71%</td>
+          <td style="text-align:center; padding:8px 4px 0; font-size:22px; font-weight:600; color:#E86FA0;">60%</td>
+          <td style="text-align:center; padding:8px 4px 0; font-size:22px; font-weight:600; color:#FF6B9D;">52%</td>
+        </tr>
+        <!-- Delta row -->
+        <tr>
+          <td style="text-align:center; padding:2px 4px 0; font-size:10px; color:#6B5E57;">&nbsp;</td>
+          <td style="text-align:center; padding:2px 4px 0; font-size:10px; color:#6B5E57;">&#8595; 19 pts</td>
+          <td style="text-align:center; padding:2px 4px 0; font-size:10px; color:#6B5E57;">&#8595; 11 pts</td>
+          <td style="text-align:center; padding:2px 4px 0; font-size:10px; color:#6B5E57;">&#8595; 8 pts</td>
+        </tr>
       </table>
-      <p style="font-family:'Space Grotesk',sans-serif; font-size:11px; color:#6B5E57; margin:10px 0 0;">Founder ownership at each stage. The spreadsheet only showed the first number.</p>
+      <p style="font-family:'Space Grotesk',Arial,sans-serif; font-size:11px; color:#6B5E57; margin:12px 0 0; text-align:center;">Founder ownership at each stage. The spreadsheet only showed the first number.</p>
     </td>
   </tr>
 </table>
 
 <p>Combined founder ownership: 52%. Down from the 90% they'd been telling themselves. And here's what makes it worse: none of this was hidden. Nobody lied. Nobody acted in bad faith. The math was always going to land here. The founders just never asked the spreadsheet the right questions.</p>
 
-<!-- PULL QUOTE -->
+<!-- PULL QUOTE CARD -->
 <table cellpadding="0" cellspacing="0" border="0" width="100%" style="margin:24px 0;">
   <tr>
-    <td style="border-left:3px solid #E14B87; padding:16px 20px; background:rgba(225,75,135,0.06); border-radius:0 8px 8px 0;">
-      <p style="font-family:'Space Grotesk',sans-serif; font-size:18px; color:#FAFAFA; margin:0; line-height:1.5; font-weight:600;">The math was always going to land here. The founders just never asked the spreadsheet the right questions.</p>
+    <td style="border-left:4px solid #FF6B9D; padding:20px 24px; background:#3A2F2A; border-radius:0 8px 8px 0;">
+      <table cellpadding="0" cellspacing="0" border="0" width="100%">
+        <tr>
+          <td style="font-family:Georgia,serif; font-size:48px; color:#FF6B9D; line-height:1; vertical-align:top; width:30px; padding:0 4px 0 0; opacity:0.6;">&#8220;</td>
+          <td style="vertical-align:top;">
+            <p style="font-family:'Lora',Georgia,serif; font-size:18px; color:#E8D5C4; margin:0 0 8px; line-height:1.55; font-style:italic;">It's like checking your bank balance without accounting for the cheques you've written. The number looks fine until it doesn't.</p>
+            <p style="font-family:'Space Grotesk',Arial,sans-serif; font-size:11px; color:#9A8F88; margin:0; text-transform:uppercase; letter-spacing:1px;">The Outlaw Chronicles #1</p>
+          </td>
+          <td style="font-family:Georgia,serif; font-size:48px; color:#FF6B9D; line-height:1; vertical-align:bottom; width:30px; padding:0 0 0 4px; opacity:0.6; text-align:right;">&#8221;</td>
+        </tr>
+      </table>
     </td>
   </tr>
 </table>
@@ -348,7 +400,7 @@
 <hr>
 
 <!-- THE BLUEPRINT -->
-<span class="section-badge">The Blueprint</span>
+<span style="display:inline-block; font-family:'Space Grotesk',Arial,sans-serif; font-size:11px; text-transform:uppercase; letter-spacing:1.5px; color:#D4A039; border:1px solid #D4A039; border-radius:20px; padding:4px 14px; margin-bottom:16px;">The Blueprint</span>
 <h2>Cap Table Reality Check: 5 Questions</h2>
 
 <table cellpadding="0" cellspacing="0" border="0" width="100%" style="margin:16px 0;">
@@ -386,7 +438,7 @@
 <hr>
 
 <!-- THE DOCKET -->
-<span class="section-badge">The Docket</span>
+<span style="display:inline-block; font-family:'Space Grotesk',Arial,sans-serif; font-size:11px; text-transform:uppercase; letter-spacing:1.5px; color:#D4A039; border:1px solid #D4A039; border-radius:20px; padding:4px 14px; margin-bottom:16px;">The Docket</span>
 <h2>What caught my eye this week</h2>
 
 <table cellpadding="0" cellspacing="0" border="0" width="100%" style="margin:16px 0;">
@@ -410,7 +462,7 @@
 <hr>
 
 <!-- THE QUESTION -->
-<span class="section-badge">The Question</span>
+<span style="display:inline-block; font-family:'Space Grotesk',Arial,sans-serif; font-size:11px; text-transform:uppercase; letter-spacing:1.5px; color:#D4A039; border:1px solid #D4A039; border-radius:20px; padding:4px 14px; margin-bottom:16px;">The Question</span>
 
 <table cellpadding="0" cellspacing="0" border="0" width="100%" style="margin:16px 0;">
   <tr>
@@ -428,13 +480,13 @@
 
 <p>Have a great day ahead,<br>Pepe</p>
 
-<p style="font-size:12px; color:#6B5E57; margin-top:24px; font-style:italic;">The Outlaw Wire is for educational purposes only. It does not constitute legal, financial, or professional advice. For structuring decisions, engage qualified professionals in your jurisdiction.</p>
+<p style="font-size:12px; color:#6B5E57; margin-top:24px; font-style:italic;">The Outlaw Chronicles is for educational purposes only. It does not constitute legal, financial, or professional advice. For structuring decisions, engage qualified professionals in your jurisdiction.</p>
 
 </div>
 
 <!-- FOOTER -->
 <div style="height:2px; background:linear-gradient(to right,#E14B87,#D4A039); margin:0;"></div>
-<div class="footer">
+<div style="padding:24px; text-align:center; border-top:1px solid #4A403A;">
   <p><a href="https://pepecarrillo.co">pepecarrillo.co</a> · <a href="https://mexzungu.com">mexzungu.com</a></p>
   <p>By Pepe Carrillo from Barcelona.</p>
   <p style="margin-top:12px;"><a href="#">Unsubscribe</a> · <a href="#">Read online</a></p>
