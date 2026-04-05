@@ -16,73 +16,109 @@
   <url>
     <loc>https://mexzungu.com/venture-architecture</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://mexzungu.com/venture-architecture"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://mexzungu.com/es/venture-architecture/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://mexzungu.com/es/venture-architecture"/>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://mexzungu.com/es/venture-architecture/</loc>
+    <loc>https://mexzungu.com/es/venture-architecture</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://mexzungu.com/venture-architecture"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://mexzungu.com/es/venture-architecture/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://mexzungu.com/es/venture-architecture"/>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://mexzungu.com/rebel-capital</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://mexzungu.com/rebel-capital"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://mexzungu.com/es/rebel-capital/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://mexzungu.com/es/rebel-capital"/>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://mexzungu.com/es/rebel-capital/</loc>
+    <loc>https://mexzungu.com/es/rebel-capital</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://mexzungu.com/rebel-capital"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://mexzungu.com/es/rebel-capital/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://mexzungu.com/es/rebel-capital"/>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://mexzungu.com/lets-jam</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://mexzungu.com/lets-jam"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://mexzungu.com/es/lets-jam/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://mexzungu.com/es/lets-jam"/>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://mexzungu.com/es/lets-jam/</loc>
+    <loc>https://mexzungu.com/es/lets-jam</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://mexzungu.com/lets-jam"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://mexzungu.com/es/lets-jam/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://mexzungu.com/es/lets-jam"/>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://mexzungu.com/meet-the-band</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://mexzungu.com/meet-the-band"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://mexzungu.com/es/meet-the-band/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://mexzungu.com/es/meet-the-band"/>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://mexzungu.com/es/meet-the-band/</loc>
+    <loc>https://mexzungu.com/es/meet-the-band</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://mexzungu.com/meet-the-band"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://mexzungu.com/es/meet-the-band/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://mexzungu.com/es/meet-the-band"/>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://mexzungu.com/outlaw-chronicles</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://mexzungu.com/outlaw-chronicles"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://mexzungu.com/es/outlaw-chronicles/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://mexzungu.com/es/outlaw-chronicles"/>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://mexzungu.com/es/outlaw-chronicles/</loc>
+    <loc>https://mexzungu.com/es/outlaw-chronicles</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://mexzungu.com/outlaw-chronicles"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://mexzungu.com/es/outlaw-chronicles/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://mexzungu.com/es/outlaw-chronicles"/>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://mexzungu.com/outlaw-chronicles/cap-table-time-bomb</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://mexzungu.com/outlaw-chronicles/cap-table-time-bomb"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://mexzungu.com/es/outlaw-chronicles/cap-table-time-bomb/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://mexzungu.com/es/outlaw-chronicles/cap-table-time-bomb"/>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://mexzungu.com/es/outlaw-chronicles/cap-table-time-bomb/</loc>
+    <loc>https://mexzungu.com/es/outlaw-chronicles/cap-table-time-bomb</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://mexzungu.com/outlaw-chronicles/cap-table-time-bomb"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://mexzungu.com/es/outlaw-chronicles/cap-table-time-bomb/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://mexzungu.com/es/outlaw-chronicles/cap-table-time-bomb"/>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://mexzungu.com/outlaw-chronicles/esop-illegal</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://mexzungu.com/outlaw-chronicles/esop-illegal"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://mexzungu.com/es/outlaw-chronicles/esop-illegal"/>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://mexzungu.com/es/outlaw-chronicles/esop-illegal</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://mexzungu.com/outlaw-chronicles/esop-illegal"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://mexzungu.com/es/outlaw-chronicles/esop-illegal"/>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://mexzungu.com/outlaw-chronicles/founders-guide-structure</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://mexzungu.com/outlaw-chronicles/founders-guide-structure"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://mexzungu.com/es/outlaw-chronicles/founders-guide-structure"/>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://mexzungu.com/es/outlaw-chronicles/founders-guide-structure</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://mexzungu.com/outlaw-chronicles/founders-guide-structure"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://mexzungu.com/es/outlaw-chronicles/founders-guide-structure"/>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://mexzungu.com/outlaw-chronicles/shareholders-agreement</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://mexzungu.com/outlaw-chronicles/shareholders-agreement"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://mexzungu.com/es/outlaw-chronicles/shareholders-agreement"/>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://mexzungu.com/es/outlaw-chronicles/shareholders-agreement</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://mexzungu.com/outlaw-chronicles/shareholders-agreement"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://mexzungu.com/es/outlaw-chronicles/shareholders-agreement"/>
     <priority>0.9</priority>
   </url>
   <url>
@@ -110,15 +146,39 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://mexzungu.com/ai-policy</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://mexzungu.com/ai-policy"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://mexzungu.com/es/ai-policy/"/>
+    <loc>https://mexzungu.com/privacy</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://mexzungu.com/privacy"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://mexzungu.com/es/privacy"/>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://mexzungu.com/es/ai-policy/</loc>
+    <loc>https://mexzungu.com/es/privacy</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://mexzungu.com/privacy"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://mexzungu.com/es/privacy"/>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://mexzungu.com/terms</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://mexzungu.com/terms"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://mexzungu.com/es/terms"/>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://mexzungu.com/es/terms</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://mexzungu.com/terms"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://mexzungu.com/es/terms"/>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://mexzungu.com/ai-policy</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://mexzungu.com/ai-policy"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://mexzungu.com/es/ai-policy/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://mexzungu.com/es/ai-policy"/>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://mexzungu.com/es/ai-policy</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://mexzungu.com/ai-policy"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://mexzungu.com/es/ai-policy"/>
     <priority>0.5</priority>
   </url>
 </urlset>
