@@ -7,9 +7,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#0d0d0d">
     <title>Hablemos — Mexzungu Group</title>
-    <meta name="description" content="Elige tu zona horaria, elige tu veneno, elige tu horario.">
+    <meta name="description" content="Agenda una llamada con Pepe Carrillo. Sin filtros, sin scripts, sin intermediarios.">
     <meta property="og:title" content="Habla con Pepe | Mexzungu Group">
-    <meta property="og:description" content="Elige tu veneno. Pitchéame, Construye Conmigo, Crece Conmigo, o Consulta Rápida.">
+    <meta property="og:description" content="Agenda una llamada con Pepe. Solo dime lo que necesitas.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://mexzungu.com/es/lets-jam">
     <meta property="og:image" content="https://mexzungu.com/logo-v3.png">
@@ -17,20 +17,21 @@
     <link rel="canonical" href="https://mexzungu.com/es/lets-jam">
     <link rel="alternate" hreflang="en" href="https://mexzungu.com/lets-jam">
     <link rel="alternate" hreflang="es" href="https://mexzungu.com/es/lets-jam">
+    <link rel="alternate" hreflang="x-default" href="https://mexzungu.com/lets-jam">
     <link rel="stylesheet" href="/fonts.css">
-    <link rel="stylesheet" href="/style.css?v=8">
+    <link rel="stylesheet" href="/style.css?v=10">
 </head>
 <body>
 
 <nav>
     <a href="/es/" class="nav-logo"><img src="/logo-v3.png" alt="Mexzungu Group"></a>
-    <button class="menu-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')" aria-label="Menú">
+    <button class="menu-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')" aria-label="Menu">
         <span></span><span></span><span></span>
     </button>
     <ul class="nav-links">
         <li><a href="/es/">Inicio</a></li>
         <li class="nav-dropdown">
-            <a href="/es/#pillars">Qué Hacemos</a>
+            <a href="/es/#pillars">Lo Que Hacemos</a>
             <ul class="nav-dropdown-menu">
                 <li><a href="/es/venture-architecture">Venture Architecture</a></li>
                 <li><a href="/es/rebel-capital">Rebel Capital</a></li>
@@ -38,16 +39,19 @@
             </ul>
         </li>
         <li><a href="/es/outlaw-chronicles">Outlaw Chronicles</a></li>
-        <li><a href="/es/meet-the-band">Conoce la Banda</a></li>
+        <li><a href="/es/meet-the-band">La Banda</a></li>
         <li><a href="/es/lets-jam" class="nav-cta"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:14px;height:14px;vertical-align:-2px;margin-right:4px;"><path d="M15.05 5A5 5 0 0 1 19 8.95M15.05 1A9 9 0 0 1 23 8.94m-1 7.98v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>Hablemos</a></li>
-        <li class="lang-switch"><a href="/lets-jam" title="English">🇺🇸</a></li>
+        <li class="lang-switch"><a href="/lets-jam" title="English">🇬🇧</a></li>
     </ul>
 </nav>
+
+<main id="main">
 
 <div class="page-hero leopard-dense">
     <div class="section-label">Hablemos</div>
     <h1>Elige tu <span class="highlight">veneno.</span></h1>
-    <p>Sin filtros. Sin formularios que no llegan a ningún lado. Cada llamada se prepara individualmente — por eso pedimos 24 horas de anticipación.</p>
+    <p>Sin filtros. Sin formularios que no llegan a ningún lado. Cada llamada se prepara individualmente.</p>
+    <p class="hero-accent">Conversacion real. Sin guiones. Tu y yo.</p>
     <span class="margin-whisper">nada de charla. puro riff.</span>
 </div>
 
@@ -58,98 +62,129 @@
             <div class="step-dot active">1</div><div class="step-line"></div>
             <div class="step-dot">2</div><div class="step-line"></div>
             <div class="step-dot">3</div><div class="step-line"></div>
-            <div class="step-dot">4</div>
+            <div class="step-dot">4</div><div class="step-line"></div>
+            <div class="step-dot">5</div>
         </div>
-        <div class="section-title">¿Dónde estás?</div>
+        <div class="section-title">¿Donde estas?</div>
         <div class="zone-cards">
             <div class="zone-card" data-zone="cet">
                 <div class="zone-emoji">🌍</div>
-                <h3>Europa / África / Medio Oriente</h3>
-                <p>Lunes — Viernes, 9am — 5pm CET</p>
+                <h3>Europa / Africa / Medio Oriente</h3>
+                <p>Lunes a Viernes, 9am a 5pm CET</p>
             </div>
             <div class="zone-card" data-zone="us">
                 <div class="zone-emoji">🌎</div>
-                <h3>Américas</h3>
-                <p>Lunes — Jueves, tardes CET / tu tarde</p>
+                <h3>Americas</h3>
+                <p>Lunes a Jueves, tardes CET / tu tarde</p>
             </div>
         </div>
     </div>
 
-    <!-- STEP 2: Call type -->
+    <!-- STEP 2: What do you need? -->
     <div id="step-2" class="hidden">
         <div class="steps">
             <div class="step-dot done">&#10003;</div><div class="step-line"></div>
             <div class="step-dot active">2</div><div class="step-line"></div>
             <div class="step-dot">3</div><div class="step-line"></div>
-            <div class="step-dot">4</div>
+            <div class="step-dot">4</div><div class="step-line"></div>
+            <div class="step-dot">5</div>
         </div>
-        <button class="back-btn" onclick="goTo(1)">&larr; Atrás</button>
-        <div class="section-title">¿De qué se trata?</div>
+        <button class="back-btn" onclick="goTo(1)">&larr; Atras</button>
+        <div class="section-title">¿En que te puedo ayudar?</div>
 
         <div class="type-options">
-            <div class="type-option" data-type="pitch-me">
+            <div class="type-option" data-type="talk">
                 <div class="type-radio"></div>
                 <div class="type-content">
-                    <h4>🔥 Pitchéame</h4>
-                    <div class="type-dur">45 minutos</div>
-                    <p>¿No puedes dormir porque la idea no se calla? ¿Renunciaste a tu trabajo o estás a punto? ¿Todos piensan que estás loco excepto la única persona que importa — tú? Perfecto. Eso es exactamente a quien respaldo.</p>
+                    <h4>💬 Solo quiero platicar</h4>
+                    <p>No tengo un problema especifico todavia. Solo necesito alguien que escuche, haga las preguntas correctas y me ayude a pensar en voz alta.</p>
                 </div>
             </div>
-            <div class="type-option" data-type="build-with-me">
+            <div class="type-option" data-type="brainstorm">
                 <div class="type-radio"></div>
                 <div class="type-content">
-                    <h4>🏗 Construye Conmigo</h4>
-                    <div class="type-dur">60 minutos</div>
-                    <p>¿Tres fundadores, sin acuerdo de accionistas, y un term sheet que llega la próxima semana? ¿Levantaste una ronda pero no sabes qué firmaste? ¿Construiste algo increíble sobre una estructura hecha de cinta adhesiva y rezos? Deja de parchear. Vamos a arquitectear.</p>
+                    <h4>🧠 Necesito un thought partner</h4>
+                    <p>Tengo una idea o una decision que tomar y necesito a alguien que piense conmigo. Que cuestione mis supuestos. Que ponga a prueba mi logica. Que me diga donde estoy equivocado.</p>
                 </div>
             </div>
-            <div class="type-option" data-type="grow-with-me">
+            <div class="type-option" data-type="troubleshoot">
                 <div class="type-radio"></div>
                 <div class="type-content">
-                    <h4>🎸 Crece Conmigo</h4>
-                    <div class="type-dur">60 minutos</div>
-                    <p>¿Facturando 2,000 horas al año y sientes que no avanzas? ¿Sabes que podrías liderar el deal pero no te dejan ni acercarte? ¿Más inteligente que tu jefe y cansado de fingir que no? Esto no es una solicitud de mentoría. Es una prueba de choque.</p>
+                    <h4>🔧 Tengo un problema que resolver</h4>
+                    <p>Algo se rompio o esta a punto de romperse. Cap table, gobernanza, dinamica de cofundadores, estructura de fundraise. Necesito a alguien que ya haya visto esto y sepa como salir.</p>
                 </div>
             </div>
-            <div class="type-option" data-type="pick-my-brain">
+            <div class="type-option" data-type="other">
                 <div class="type-radio"></div>
                 <div class="type-content">
-                    <h4>🧠 Consulta Rápida</h4>
-                    <div class="type-dur">30 minutos</div>
-                    <p>¿Necesitas un invitado que no te dé respuestas ensayadas? ¿Construyendo algo raro y hermoso que no cabe en una categoría? Si es aburrido, no agendes. Si es audaz, ya estoy dentro.</p>
+                    <h4>✨ Otra cosa</h4>
+                    <p>Nada de lo anterior aplica. Tengo algo especifico en mente y te cuento en el siguiente paso.</p>
                 </div>
             </div>
         </div>
-        <button class="next-btn" id="type-next-btn" disabled onclick="loadSlots()">Elige un horario &rarr;</button>
+        <button class="next-btn" id="type-next-btn" disabled onclick="goTo(3)">Siguiente &rarr;</button>
     </div>
 
-    <!-- STEP 3: Pick time -->
+    <!-- STEP 3: Duration -->
     <div id="step-3" class="hidden">
         <div class="steps">
             <div class="step-dot done">&#10003;</div><div class="step-line"></div>
             <div class="step-dot done">&#10003;</div><div class="step-line"></div>
             <div class="step-dot active">3</div><div class="step-line"></div>
-            <div class="step-dot">4</div>
+            <div class="step-dot">4</div><div class="step-line"></div>
+            <div class="step-dot">5</div>
         </div>
-        <button class="back-btn" onclick="goTo(2)">&larr; Atrás</button>
-        <div class="section-title" id="slots-title">Elige un horario</div>
-        <p class="tz-note">Horarios en tu zona horaria local (<span id="user-tz"></span>)</p>
-        <p id="slots-remaining" class="slots-remaining hidden"></p>
-        <div id="slots-loading" class="loading"><div class="spinner"></div><p>Cargando horarios disponibles...</p></div>
-        <div id="slots-container" class="slots-container hidden"></div>
-        <div id="slots-empty" class="loading hidden"><p>No hay horarios disponibles en las próximas 2 semanas. Prueba otro tipo o escríbenos a janis@mexzungu.com.</p></div>
-        <p class="notice-note">Todas las reservas requieren 24h de anticipación para que Pepe pueda prepararse individualmente para tu llamada.</p>
+        <button class="back-btn" onclick="goTo(2)">&larr; Atras</button>
+        <div class="section-title">¿Cuanto tiempo necesitas?</div>
+
+        <div class="duration-options">
+            <div class="duration-option" data-duration="30">
+                <div class="duration-number">30</div>
+                <div class="duration-label">minutos</div>
+                <p>Rapido y enfocado. Una pregunta, un tema.</p>
+            </div>
+            <div class="duration-option" data-duration="45">
+                <div class="duration-number">45</div>
+                <div class="duration-label">minutos</div>
+                <p>Espacio para profundizar. La mayoria de conversaciones caen aqui.</p>
+            </div>
+            <div class="duration-option" data-duration="60">
+                <div class="duration-number">60</div>
+                <div class="duration-label">minutos</div>
+                <p>La sesion completa. Problemas complejos, multiples hilos.</p>
+            </div>
+        </div>
     </div>
 
-    <!-- STEP 4: Details -->
+    <!-- STEP 4: Pick time -->
     <div id="step-4" class="hidden">
         <div class="steps">
             <div class="step-dot done">&#10003;</div><div class="step-line"></div>
             <div class="step-dot done">&#10003;</div><div class="step-line"></div>
             <div class="step-dot done">&#10003;</div><div class="step-line"></div>
-            <div class="step-dot active">4</div>
+            <div class="step-dot active">4</div><div class="step-line"></div>
+            <div class="step-dot">5</div>
         </div>
-        <button class="back-btn" onclick="goTo(3)">&larr; Atrás</button>
+        <button class="back-btn" onclick="goTo(3)">&larr; Atras</button>
+        <div class="section-title" id="slots-title">Elige un horario</div>
+        <p class="tz-note">Horarios en tu zona horaria local (<span id="user-tz"></span>)</p>
+        <p id="slots-remaining" class="slots-remaining hidden"></p>
+        <div id="slots-loading" class="loading"><div class="spinner"></div><p>Cargando horarios disponibles...</p></div>
+        <div id="slots-container" class="slots-container hidden"></div>
+        <div id="slots-empty" class="loading hidden"><p>No hay horarios disponibles en las proximas 2 semanas. Prueba otra duracion o escribenos a janis@mexzungu.com.</p></div>
+        <p class="notice-note">Todas las reservas requieren 24h de anticipacion para que Pepe pueda prepararse individualmente para tu llamada.</p>
+    </div>
+
+    <!-- STEP 5: Details -->
+    <div id="step-5" class="hidden">
+        <div class="steps">
+            <div class="step-dot done">&#10003;</div><div class="step-line"></div>
+            <div class="step-dot done">&#10003;</div><div class="step-line"></div>
+            <div class="step-dot done">&#10003;</div><div class="step-line"></div>
+            <div class="step-dot done">&#10003;</div><div class="step-line"></div>
+            <div class="step-dot active">5</div>
+        </div>
+        <button class="back-btn" onclick="goTo(4)">&larr; Atras</button>
         <div class="section-title">Ya casi.</div>
         <p class="section-text" style="margin-bottom:2rem;">Seleccionado: <strong id="selected-summary"></strong></p>
 
@@ -158,8 +193,9 @@
                 <div class="form-group"><label>Nombre</label><input type="text" id="f-first" required></div>
                 <div class="form-group"><label>Apellido</label><input type="text" id="f-last" required></div>
             </div>
-            <div class="form-group"><label>Correo electrónico</label><input type="email" id="f-email" required placeholder="tu@empresa.com"></div>
-            <div class="form-group"><label id="msg-label">Tu mensaje</label><textarea id="f-message"></textarea></div>
+            <div class="form-group"><label>Correo electronico</label><input type="email" id="f-email" required placeholder="tu@empresa.com"></div>
+            <div class="form-group"><label id="msg-label">Cuentame que tienes en mente</label><textarea id="f-message"></textarea></div>
+            <div class="form-group"><label>¿Algun documento que deba leer antes de nuestra llamada?</label><input type="url" id="f-docs" placeholder="Pega un link (Google Drive, Dropbox, sitio web, etc.)"><p class="form-hint">Cap table, pitch deck, acuerdo de accionistas, cualquier cosa que me de contexto. Opcional pero ayuda a prepararme.</p></div>
             <button type="submit" class="submit-btn" id="submit-btn">Reservar &rarr;</button>
         </form>
     </div>
@@ -174,7 +210,7 @@
                 <div class="what-next-step">
                     <div class="wn-num">01</div>
                     <h4>Revisa tu correo</h4>
-                    <p>Recibirás una invitación de calendario con un link de Google Meet.</p>
+                    <p>Recibiras una invitacion de calendario con un link de Google Meet.</p>
                 </div>
                 <div class="what-next-step">
                     <div class="wn-num">02</div>
@@ -184,12 +220,12 @@
                 <div class="what-next-step">
                     <div class="wn-num">03</div>
                     <h4>Hablamos</h4>
-                    <p>Llega listo. Trae el caos — nosotros construimos la estructura.</p>
+                    <p>Llega listo. Trae el caos. Nosotros construimos la estructura.</p>
                 </div>
             </div>
             <p id="meet-link-msg" class="hidden" style="margin-top:2rem;"><a id="meet-link" href="#" target="_blank" class="submit-btn">Unirse a Google Meet</a></p>
             <p style="margin-top:2rem; font-size:0.85rem; color:var(--gray);">
-                ¿Cambiaste de opinión? <a href="mailto:janis@mexzungu.com?subject=Cancelar mi llamada" style="color:var(--pink);">Cancelar esta llamada</a> &middot;
+                ¿Cambiaste de opinion? <a href="mailto:janis@mexzungu.com?subject=Cancelar mi llamada" style="color:var(--pink);">Cancelar esta llamada</a> &middot;
                 <a href="/es/lets-jam/" style="color:var(--pink);">Reagendar</a>
             </p>
         </div>
@@ -199,49 +235,53 @@
 <hr class="leopard-divider">
 
 <section class="trusted-by">
-    <div class="section-label">Recomendado por gente en</div>
+    <div class="section-label">En Nuestra Orbita</div>
     <div class="logo-carousel">
         <div class="logo-track">
-            <a href="https://www.engie.com" target="_blank" rel="noopener"><img src="/logos/engie.png" alt="ENGIE"></a>
-            <a href="https://www.nissan.com" target="_blank" rel="noopener"><img src="/logos/nissan.png" alt="Nissan"></a>
-            <a href="https://www.sandtech.com" target="_blank" rel="noopener"><img src="/logos/sand-technologies.png" alt="Sand Technologies"></a>
-            <a href="https://www.alueducation.com" target="_blank" rel="noopener"><img src="/logos/alu.png" alt="ALU"></a>
-            <a href="https://www.alxafrica.com" target="_blank" rel="noopener"><img src="/logos/alx.png" alt="ALX"></a>
-            <a href="https://www.duara.education" target="_blank" rel="noopener"><img src="/logos/duara-education.png" alt="Duara Education"></a>
-            <a href="https://nobodies.team" target="_blank" rel="noopener"><img src="/logos/nca.png" alt="NCA"></a>
-            <a href="https://www.ladx.co" target="_blank" rel="noopener"><img src="/logos/ladx.png" alt="LADX"></a>
-            <!-- duplicate set for seamless loop -->
-            <a href="https://www.engie.com" target="_blank" rel="noopener"><img src="/logos/engie.png" alt="ENGIE"></a>
-            <a href="https://www.nissan.com" target="_blank" rel="noopener"><img src="/logos/nissan.png" alt="Nissan"></a>
-            <a href="https://www.sandtech.com" target="_blank" rel="noopener"><img src="/logos/sand-technologies.png" alt="Sand Technologies"></a>
-            <a href="https://www.alueducation.com" target="_blank" rel="noopener"><img src="/logos/alu.png" alt="ALU"></a>
-            <a href="https://www.alxafrica.com" target="_blank" rel="noopener"><img src="/logos/alx.png" alt="ALX"></a>
-            <a href="https://www.duara.education" target="_blank" rel="noopener"><img src="/logos/duara-education.png" alt="Duara Education"></a>
-            <a href="https://nobodies.team" target="_blank" rel="noopener"><img src="/logos/nca.png" alt="NCA"></a>
-            <a href="https://www.ladx.co" target="_blank" rel="noopener"><img src="/logos/ladx.png" alt="LADX"></a>
+            <a href="https://www.sandtech.com" target="_blank" rel="noopener"><img src="/logos/sand-technologies.png" alt="Sand Technologies" class="logo-invert" loading="lazy"></a>
+            <a href="https://www.alxafrica.com" target="_blank" rel="noopener"><img src="/logos/alx.png" alt="ALX" class="logo-invert" loading="lazy"></a>
+            <a href="https://www.duara.education" target="_blank" rel="noopener"><img src="/logos/duara-education.webp" alt="Duara Education" loading="lazy"></a>
+            <a href="https://nobodies.team" target="_blank" rel="noopener"><img src="/logos/nca.png" alt="NCA" class="logo-invert" loading="lazy"></a>
+            <a href="https://www.ladx.co" target="_blank" rel="noopener"><img src="/logos/ladx.png" alt="LADX" loading="lazy"></a>
+            <img src="/logos/ayambe.png" alt="Ayambe" loading="lazy">
+            <img src="/logos/kabisa.webp" alt="Kabisa" loading="lazy">
+            <img src="/logos/diani-kite-club.png" alt="Diani Kite Club" loading="lazy">
+            <img src="/logos/e-moti.png" alt="E-Moti" loading="lazy">
+            <!-- duplicate for loop -->
+            <a href="https://www.sandtech.com" target="_blank" rel="noopener"><img src="/logos/sand-technologies.png" alt="Sand Technologies" class="logo-invert" loading="lazy"></a>
+            <a href="https://www.alxafrica.com" target="_blank" rel="noopener"><img src="/logos/alx.png" alt="ALX" class="logo-invert" loading="lazy"></a>
+            <a href="https://www.duara.education" target="_blank" rel="noopener"><img src="/logos/duara-education.webp" alt="Duara Education" loading="lazy"></a>
+            <a href="https://nobodies.team" target="_blank" rel="noopener"><img src="/logos/nca.png" alt="NCA" class="logo-invert" loading="lazy"></a>
+            <a href="https://www.ladx.co" target="_blank" rel="noopener"><img src="/logos/ladx.png" alt="LADX" loading="lazy"></a>
+            <img src="/logos/ayambe.png" alt="Ayambe" loading="lazy">
+            <img src="/logos/kabisa.webp" alt="Kabisa" loading="lazy">
+            <img src="/logos/diani-kite-club.png" alt="Diani Kite Club" loading="lazy">
+            <img src="/logos/e-moti.png" alt="E-Moti" loading="lazy">
         </div>
     </div>
 </section>
+
+</main>
 
 <footer>
     <div style="max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; padding: 0 2rem;">
         <span>&copy; 2026 Mexzungu Group Ltd. Todos los derechos reservados.</span>
         <span style="font-size: 0.85rem;">
-            <a href="https://pepecarrillo.co" style="color: var(--gray-light);">Pepe's Writing</a> &middot;
-            <a href="/es/privacy/" style="color: var(--gray-light);">Política de Privacidad</a> &middot;
-            <a href="/es/terms/" style="color: var(--gray-light);">Términos de Servicio</a> &middot;
-            <a href="/es/ai-policy/" style="color: var(--gray-light);">Política de IA</a>
+            <a href="https://pepecarrillo.co" style="color: var(--gold);">Pepe's Writing</a> &middot;
+            <a href="/es/privacy/" style="color: var(--gold);">Politica de Privacidad</a> &middot;
+            <a href="/es/terms/" style="color: var(--gold);">Terminos de Servicio</a> &middot;
+            <a href="/es/ai-policy/" style="color: var(--gold);">Politica de IA</a>
         </span>
     </div>
-    <div class="footer-disclaimer">Este contenido no constituye asesoría legal. Para más información, consulta nuestros <a href="/es/terms/" style="color: var(--gold);">Términos</a>.</div>
+    <div class="footer-disclaimer">Este contenido no constituye asesoria legal.</div>
 </footer>
 
 <script>
 const API = window.location.hostname === 'localhost' ? 'http://localhost:8741' : 'https://api.mexzungu.com';
-let selectedZone = null, selectedType = null, selectedSlot = null;
+let selectedZone = null, selectedType = null, selectedDuration = null, selectedSlot = null;
 
-const TYPE_LABELS = { 'pitch-me':'🔥 Pitchéame', 'build-with-me':'🏗 Construye Conmigo', 'grow-with-me':'🎸 Crece Conmigo', 'pick-my-brain':'🧠 Consulta Rápida' };
-const MSG_LABELS = { 'pitch-me':'¿Qué estás construyendo?', 'build-with-me':'¿Cuál es el problema?', 'grow-with-me':'¿Qué quieres construir?', 'pick-my-brain':'¿De qué se trata?' };
+const TYPE_LABELS = { 'talk':'💬 Platicar', 'brainstorm':'🧠 Thought partner', 'troubleshoot':'🔧 Resolver problema', 'other':'✨ Otra cosa' };
+const MSG_LABELS = { 'talk':'¿Que tienes en mente?', 'brainstorm':'¿Que estamos pensando?', 'troubleshoot':'¿Que se rompio?', 'other':'Cuentame mas' };
 
 document.getElementById('user-tz').textContent = Intl.DateTimeFormat().resolvedOptions().timeZone;
 
@@ -271,17 +311,27 @@ document.querySelectorAll('.type-option').forEach(el => {
     });
 });
 
-// Step 3: Slots
+// Step 3: Duration
+document.querySelectorAll('.duration-option').forEach(el => {
+    el.addEventListener('click', () => {
+        selectedDuration = parseInt(el.dataset.duration);
+        document.querySelectorAll('.duration-option').forEach(e => e.classList.remove('selected'));
+        el.classList.add('selected');
+        loadSlots();
+    });
+});
+
+// Step 4: Slots
 async function loadSlots() {
-    goTo(3);
+    goTo(4);
     document.getElementById('slots-loading').classList.remove('hidden');
     document.getElementById('slots-container').classList.add('hidden');
     document.getElementById('slots-empty').classList.add('hidden');
     document.getElementById('slots-remaining').classList.add('hidden');
-    document.getElementById('slots-title').textContent = `Elige un horario — ${TYPE_LABELS[selectedType]}`;
+    document.getElementById('slots-title').textContent = `Elige un horario — ${selectedDuration} min`;
 
     try {
-        const res = await fetch(`${API}/booking/slots/${selectedZone}/${selectedType}`);
+        const res = await fetch(`${API}/booking/slots/${selectedZone}/${selectedType}?duration=${selectedDuration}`);
         const data = await res.json();
         renderSlots(data.slots || [], data.slots_remaining_this_week || 0);
     } catch (e) {
@@ -297,7 +347,7 @@ function renderSlots(slots, remaining) {
 
     if (remaining > 0 && remaining <= 8) {
         const rem = document.getElementById('slots-remaining');
-        rem.textContent = `${remaining} horario${remaining === 1 ? '' : 's'} restante${remaining === 1 ? '' : 's'} esta semana`;
+        rem.textContent = `${remaining} espacio${remaining === 1 ? '' : 's'} disponible${remaining === 1 ? '' : 's'} esta semana`;
         rem.classList.remove('hidden');
     }
 
@@ -306,7 +356,7 @@ function renderSlots(slots, remaining) {
     const byDate = {};
     slots.forEach(s => {
         const dt = new Date(s.start);
-        const key = dt.toLocaleDateString('es-MX', { weekday:'long', month:'long', day:'numeric' });
+        const key = dt.toLocaleDateString('es-ES', { weekday:'long', month:'long', day:'numeric' });
         if (!byDate[key]) byDate[key] = [];
         byDate[key].push(s);
     });
@@ -317,12 +367,12 @@ function renderSlots(slots, remaining) {
         const row = document.createElement('div'); row.className = 'slots-row';
         daySlots.forEach(slot => {
             const btn = document.createElement('button'); btn.className = 'slot-btn';
-            btn.textContent = new Date(slot.start).toLocaleTimeString('es-MX', { hour:'numeric', minute:'2-digit', hour12:true });
+            btn.textContent = new Date(slot.start).toLocaleTimeString('es-ES', { hour:'numeric', minute:'2-digit', hour12:false });
             btn.addEventListener('click', () => {
                 document.querySelectorAll('.slot-btn').forEach(b => b.classList.remove('selected'));
                 btn.classList.add('selected');
                 selectedSlot = slot;
-                setTimeout(() => goToStep4(), 300);
+                setTimeout(() => goToStep5(), 300);
             });
             row.appendChild(btn);
         });
@@ -330,11 +380,11 @@ function renderSlots(slots, remaining) {
     }
 }
 
-function goToStep4() {
-    goTo(4);
+function goToStep5() {
+    goTo(5);
     const dt = new Date(selectedSlot.start);
-    document.getElementById('selected-summary').textContent = `${TYPE_LABELS[selectedType]} — ${dt.toLocaleString('es-MX', { weekday:'long', month:'long', day:'numeric', hour:'numeric', minute:'2-digit', hour12:true })}`;
-    document.getElementById('msg-label').textContent = MSG_LABELS[selectedType] || 'Tu mensaje';
+    document.getElementById('selected-summary').textContent = `${TYPE_LABELS[selectedType]} — ${selectedDuration} min — ${dt.toLocaleString('es-ES', { weekday:'long', day:'numeric', month:'long', hour:'numeric', minute:'2-digit', hour12:false })}`;
+    document.getElementById('msg-label').textContent = MSG_LABELS[selectedType] || 'Cuentame que tienes en mente';
 }
 
 async function submitBooking(e) {
@@ -347,17 +397,19 @@ async function submitBooking(e) {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
                 call_type: selectedType, zone: selectedZone,
+                duration: selectedDuration,
                 start: selectedSlot.start, end: selectedSlot.end,
                 name: `${document.getElementById('f-first').value} ${document.getElementById('f-last').value}`,
                 email: document.getElementById('f-email').value,
                 message: document.getElementById('f-message').value,
+                docs_link: document.getElementById('f-docs').value || null,
             }),
         });
-        if (!res.ok) { const err = await res.json(); alert(err.detail || 'La reserva falló.'); btn.disabled = false; btn.textContent = 'Reservar →'; return; }
+        if (!res.ok) { const err = await res.json(); alert(err.detail || 'Error al reservar.'); btn.disabled = false; btn.textContent = 'Reservar →'; return; }
         const data = await res.json();
         goTo('done');
         if (data.meet_link) { document.getElementById('meet-link').href = data.meet_link; document.getElementById('meet-link-msg').classList.remove('hidden'); }
-    } catch (err) { alert('Algo salió mal. Escribe a janis@mexzungu.com.'); btn.disabled = false; btn.textContent = 'Reservar →'; }
+    } catch (err) { alert('Algo salio mal. Escribenos a janis@mexzungu.com.'); btn.disabled = false; btn.textContent = 'Reservar →'; }
 }
 
 document.querySelectorAll('.nav-links a').forEach(l => l.addEventListener('click', () => document.querySelector('.nav-links').classList.remove('open')));
