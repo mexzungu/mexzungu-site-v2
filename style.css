@@ -799,7 +799,8 @@ section {
     width: max-content;
 }
 .logo-track:hover { animation-play-state: paused; }
-.logo-track img { height: 36px; opacity: 0.85; transition: all 0.3s; flex-shrink: 0; filter: brightness(0) invert(1); }
+.logo-track img { height: 36px; opacity: 0.85; transition: all 0.3s; flex-shrink: 0; }
+.logo-track img.logo-invert { filter: brightness(0) invert(1); }
 .logo-track a { display: inline-flex; flex-shrink: 0; }
 .logo-track img:hover { opacity: 1; transform: translateY(-2px); }
 @keyframes scroll-logos { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
