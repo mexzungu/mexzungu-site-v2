@@ -34,6 +34,7 @@
             <a href="/#pillars" class="active">What We Do</a>
             <ul class="nav-dropdown-menu">
                 <li><a href="/venture-architecture">Venture Architecture</a></li>
+                <li><a href="/data-privacy">Data Privacy</a></li>
                 <li><a href="/rebel-capital" class="active">Rebel Capital</a></li>
                 <li><a href="/ai-ninja-factory">AI Ninja Factory</a></li>
             </ul>
@@ -105,17 +106,80 @@
 </section>
 
 <!-- PORTFOLIO -->
-<div class="trust-section">
-    <div class="trust-label">Portfolio</div>
-    <div class="trust-names">
-        <span>Duara Education (Kenya)</span>
-        <span>e-moti (Kenya)</span>
-        <span>Kabisa (Rwanda)</span>
-        <span>Namirembe Sweater Makers (Uganda)</span>
-        <span>Ayambe (Rwanda)</span>
-        <span>Diani Kite Club (Kenya)</span>
+<style>
+.deals-table-wrap { margin: 2rem 0; overflow-x: auto; }
+.deals-table { width: 100%; border-collapse: collapse; font-size: 0.92rem; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-md, 10px); overflow: hidden; }
+.deals-table th, .deals-table td { padding: 0.85rem 1rem; text-align: left; border-bottom: 1px solid var(--border); vertical-align: top; }
+.deals-table th { font-family: var(--heading); text-transform: uppercase; font-size: 0.78rem; letter-spacing: 0.06em; color: var(--text-accent); background: rgba(255,255,255,0.02); }
+.deals-table tr:last-child td { border-bottom: none; }
+.deals-table .company { font-family: var(--heading); color: var(--text-primary, #fff); }
+.deals-table .terms { color: var(--gray); font-size: 0.86rem; line-height: 1.5; }
+.deals-note { font-size: 0.78rem; color: var(--gray); margin-top: 0.75rem; text-align: center; }
+@media (max-width: 720px) {
+  .deals-table, .deals-table thead, .deals-table tbody, .deals-table tr, .deals-table th, .deals-table td { display: block; }
+  .deals-table thead { display: none; }
+  .deals-table tr { border-bottom: 1px solid var(--border); padding: 0.6rem 0; }
+  .deals-table td { border: none; padding: 0.25rem 1rem; }
+  .deals-table td.company { padding-top: 0.75rem; font-size: 1rem; }
+}
+</style>
+<section>
+    <div class="section-label">Portfolio</div>
+    <div class="section-title">The deals on the books.</div>
+    <p class="section-text">Real cheques, real terms, real founders. No theory.</p>
+    <div class="deals-table-wrap">
+        <table class="deals-table">
+            <thead>
+                <tr><th>Company</th><th>Country</th><th>Instrument</th><th>Key Terms</th></tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="company">Duara Education</td>
+                    <td>Kenya (Delaware C-Corp)</td>
+                    <td>Post-money SAFE (YC, Cap with Discount)</td>
+                    <td class="terms">Valuation cap: USD 5,000,000. Discount rate: 80% (i.e. 20% off). Converts on next equity financing or liquidity event. Sept 2023 round.</td>
+                </tr>
+                <tr>
+                    <td class="company">e-moti</td>
+                    <td>Kenya</td>
+                    <td>Convertible Note</td>
+                    <td class="terms">Principal: USD 5,000. Interest: 9% per annum, simple. Maturity: 24 months from Feb 2025. Valuation cap: USD 12,000,000. Discount: 20%. Qualified financing threshold: USD 500,000. Pro-rata rights.</td>
+                </tr>
+                <tr>
+                    <td class="company">Kabisa</td>
+                    <td>Rwanda (Delaware Inc.)</td>
+                    <td>Post-money SAFE (Discount only)</td>
+                    <td class="terms">No valuation cap. Discount rate: 80% (i.e. 20% off). No interest. Part of NAN syndicate, USD 1,000,000 round, Apr 2024.</td>
+                </tr>
+                <tr>
+                    <td class="company">Namirembe Sweater Makers</td>
+                    <td>Uganda</td>
+                    <td>Loan</td>
+                    <td class="terms">Principal: USD 12,000. Term: 1 year. Interest: 5% per month on capital. Disbursed Mar 2021. Restructuring under discussion.</td>
+                </tr>
+                <tr>
+                    <td class="company">Publisher Prime</td>
+                    <td>New Zealand</td>
+                    <td>Equity (Ordinary Shares)</td>
+                    <td class="terms">Direct equity stake in Publisher Prime Ltd, NZ holding company. Group established 2023, Lane Neave LLP and KPMG advised. Position via Mexzungu Group.</td>
+                </tr>
+                <tr>
+                    <td class="company">Ayambe</td>
+                    <td>Pan-Africa (founder Rwanda)</td>
+                    <td>Loan, recontracting</td>
+                    <td class="terms">End balance owed: USD 35,000 principal plus accrued interest. Original disbursement under earlier facility. New contract being negotiated to formalise the catch-up position. Reported ARR Mar 2025: USD 2.29M.</td>
+                </tr>
+                <tr>
+                    <td class="company">Diani Kite Club</td>
+                    <td>Kenya</td>
+                    <td>Secured Loan, repaid</td>
+                    <td class="terms">Principal: EUR 1,000. Term: 4 months, EUR 250 monthly instalments from Jul 2024. Secured against kitesurfing equipment in Diani Beach. Borrower: Daniel Heinrichs. Status: repaid in full.</td>
+                </tr>
+            </tbody>
+        </table>
+        <p class="deals-note">Cheque sizes are private. Terms above are the founder-side instrument terms.</p>
     </div>
-</div>
+</section>
 
 <!-- WHAT FOUNDERS GET -->
 <section>
@@ -187,7 +251,8 @@
 <section class="page-testimonials">
     <div class="section-label">From the Founders</div>
     <div class="section-title">Capital is the smallest part.</div>
-    <div class="page-testimonial-grid">
+    <div class="testimonials-carousel">
+        <div class="testimonials-track">
         <div class="page-testimonial-card">
             <img src="/testimonials/alex-kalanda.webp" alt="Alex Kalanda" class="testimonial-photo" style="width:64px;height:64px;border-radius:50%;margin-bottom:1rem;">
             <blockquote>"You gave us space, trust and time to figure things out and yet kept us accountable. For our next round we want to give you stock at my personal cost."</blockquote>
@@ -209,6 +274,18 @@
                 </div>
             </div>
             <div class="testimonial-word" style="margin-top:1rem;margin-bottom:0;">Rebel Capital</div>
+        </div>
+        <div class="page-testimonial-card">
+            <img src="/testimonials/alien-avatar.png" alt="Noah Walakira" class="testimonial-photo" style="width:64px;height:64px;border-radius:50%;margin-bottom:1rem;">
+            <blockquote>"Other investors focused on negotiating more interest. You sought to see that I was comfortable with the interest I had suggested. Hard times reveal the right people, and I know you have been patient with me in the hard times."</blockquote>
+            <div class="testimonial-author">
+                <div>
+                    <span class="testimonial-name">Noah Walakira</span>
+                    <span class="testimonial-role">CEO, Namirembe Uniforms &amp; Garments (Uganda)</span>
+                </div>
+            </div>
+            <div class="testimonial-word" style="margin-top:1rem;margin-bottom:0;">Rebel Capital</div>
+        </div>
         </div>
     </div>
 </section>

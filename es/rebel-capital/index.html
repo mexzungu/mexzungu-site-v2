@@ -34,6 +34,7 @@
             <a href="/es/#pillars" class="active">Qué Hacemos</a>
             <ul class="nav-dropdown-menu">
                 <li><a href="/es/venture-architecture">Venture Architecture</a></li>
+                <li><a href="/es/data-privacy">Privacidad de Datos</a></li>
                 <li><a href="/es/rebel-capital" class="active">Rebel Capital</a></li>
                 <li><a href="/es/ai-ninja-factory">AI Ninja Factory</a></li>
             </ul>
@@ -104,17 +105,80 @@
 </section>
 
 <!-- PORTFOLIO -->
-<div class="trust-section">
-    <div class="trust-label">Portafolio</div>
-    <div class="trust-names">
-        <span>Duara Education (Kenya)</span>
-        <span>e-moti (Kenya)</span>
-        <span>Kabisa (Rwanda)</span>
-        <span>Namirembe Sweater Makers (Uganda)</span>
-        <span>Ayambe (Rwanda)</span>
-        <span>Diani Kite Club (Kenya)</span>
+<style>
+.deals-table-wrap { margin: 2rem 0; overflow-x: auto; }
+.deals-table { width: 100%; border-collapse: collapse; font-size: 0.92rem; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-md, 10px); overflow: hidden; }
+.deals-table th, .deals-table td { padding: 0.85rem 1rem; text-align: left; border-bottom: 1px solid var(--border); vertical-align: top; }
+.deals-table th { font-family: var(--heading); text-transform: uppercase; font-size: 0.78rem; letter-spacing: 0.06em; color: var(--text-accent); background: rgba(255,255,255,0.02); }
+.deals-table tr:last-child td { border-bottom: none; }
+.deals-table .company { font-family: var(--heading); color: var(--text-primary, #fff); }
+.deals-table .terms { color: var(--gray); font-size: 0.86rem; line-height: 1.5; }
+.deals-note { font-size: 0.78rem; color: var(--gray); margin-top: 0.75rem; text-align: center; }
+@media (max-width: 720px) {
+  .deals-table, .deals-table thead, .deals-table tbody, .deals-table tr, .deals-table th, .deals-table td { display: block; }
+  .deals-table thead { display: none; }
+  .deals-table tr { border-bottom: 1px solid var(--border); padding: 0.6rem 0; }
+  .deals-table td { border: none; padding: 0.25rem 1rem; }
+  .deals-table td.company { padding-top: 0.75rem; font-size: 1rem; }
+}
+</style>
+<section>
+    <div class="section-label">Portafolio</div>
+    <div class="section-title">Los deals en los libros.</div>
+    <p class="section-text">Cheques reales, términos reales, fundadores reales. Sin teoría.</p>
+    <div class="deals-table-wrap">
+        <table class="deals-table">
+            <thead>
+                <tr><th>Empresa</th><th>País</th><th>Instrumento</th><th>Términos clave</th></tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="company">Duara Education</td>
+                    <td>Kenia (C-Corp de Delaware)</td>
+                    <td>SAFE post-money (YC, con cap y descuento)</td>
+                    <td class="terms">Valuation cap: USD 5,000,000. Tasa de descuento: 80% (es decir, 20% de descuento). Convierte en la siguiente ronda de equity o evento de liquidez. Ronda de septiembre 2023.</td>
+                </tr>
+                <tr>
+                    <td class="company">e-moti</td>
+                    <td>Kenia</td>
+                    <td>Pagaré convertible</td>
+                    <td class="terms">Principal: USD 5,000. Interés: 9% anual, simple. Vencimiento: 24 meses desde febrero 2025. Valuation cap: USD 12,000,000. Descuento: 20%. Umbral de financiamiento calificado: USD 500,000. Derechos pro-rata.</td>
+                </tr>
+                <tr>
+                    <td class="company">Kabisa</td>
+                    <td>Ruanda (Inc. de Delaware)</td>
+                    <td>SAFE post-money (solo descuento)</td>
+                    <td class="terms">Sin valuation cap. Tasa de descuento: 80% (es decir, 20% de descuento). Sin interés. Parte del sindicato NAN, ronda de USD 1,000,000, abril 2024.</td>
+                </tr>
+                <tr>
+                    <td class="company">Namirembe Sweater Makers</td>
+                    <td>Uganda</td>
+                    <td>Préstamo</td>
+                    <td class="terms">Principal: USD 12,000. Plazo: 1 año. Interés: 5% mensual sobre capital. Desembolsado en marzo 2021. Reestructuración en discusión.</td>
+                </tr>
+                <tr>
+                    <td class="company">Publisher Prime</td>
+                    <td>Nueva Zelanda</td>
+                    <td>Equity (acciones ordinarias)</td>
+                    <td class="terms">Participación directa en Publisher Prime Ltd, holding de Nueva Zelanda. Grupo constituido en 2023, asesorado por Lane Neave LLP y KPMG. Posición vía Mexzungu Group.</td>
+                </tr>
+                <tr>
+                    <td class="company">Ayambe</td>
+                    <td>Pan-África (fundador en Ruanda)</td>
+                    <td>Préstamo, en recontratación</td>
+                    <td class="terms">Saldo final adeudado: USD 35,000 de principal más intereses devengados. Desembolso original bajo facilidad anterior. Se está negociando un nuevo contrato para formalizar la posición actualizada. ARR reportado marzo 2025: USD 2.29M.</td>
+                </tr>
+                <tr>
+                    <td class="company">Diani Kite Club</td>
+                    <td>Kenia</td>
+                    <td>Préstamo garantizado, pagado</td>
+                    <td class="terms">Principal: EUR 1,000. Plazo: 4 meses, cuotas mensuales de EUR 250 desde julio 2024. Garantizado con equipo de kitesurf en Diani Beach. Prestatario: Daniel Heinrichs. Estado: pagado en su totalidad.</td>
+                </tr>
+            </tbody>
+        </table>
+        <p class="deals-note">Los montos de cheque son privados. Los términos mostrados son los del instrumento del lado del fundador.</p>
     </div>
-</div>
+</section>
 
 <!-- WHAT FOUNDERS GET -->
 <section>

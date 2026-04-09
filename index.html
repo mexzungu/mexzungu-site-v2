@@ -61,6 +61,7 @@
             <a href="/#pillars">What We Do</a>
             <ul class="nav-dropdown-menu">
                 <li><a href="/venture-architecture">Venture Architecture</a></li>
+                <li><a href="/data-privacy">Data Privacy</a></li>
                 <li><a href="/rebel-capital">Rebel Capital</a></li>
                 <li><a href="/ai-ninja-factory">AI Ninja Factory</a></li>
             </ul>
@@ -232,6 +233,26 @@
                 <div class="testimonial-word" style="margin-top:1rem;margin-bottom:0;">Venture Architecture</div>
             </div>
 
+            <div class="testimonial-card">
+                <blockquote>"If you're ready to get serious and held seriously accountable, Pepe will always be honest with you (even when it stings), but you can trust that he is rooting for you to become the best version of yourself."</blockquote>
+                <div class="testimonial-author">
+                    <img src="/testimonials/alien-avatar.png" alt="Faith Gathoni" class="testimonial-photo">
+                    <span class="testimonial-name">Faith Gathoni</span>
+                    <span class="testimonial-role">Lawyer, ALX/Sand (2020–2024)</span>
+                </div>
+                <div class="testimonial-word" style="margin-top:1rem;margin-bottom:0;">Coaching</div>
+            </div>
+
+            <div class="testimonial-card">
+                <blockquote>"Talk to Pepe, he's great at helping you uncover your 'why.' He challenges your assumptions in a way that leads to deeper clarity about your current path and whether you want to shift into something new."</blockquote>
+                <div class="testimonial-author">
+                    <img src="/testimonials/alien-avatar.png" alt="Anonymous" class="testimonial-photo">
+                    <span class="testimonial-name">Business Ops Specialist</span>
+                    <span class="testimonial-role">Former direct report</span>
+                </div>
+                <div class="testimonial-word" style="margin-top:1rem;margin-bottom:0;">Coaching</div>
+            </div>
+
 
             <!-- duplicate set for seamless loop -->
             <div class="testimonial-card">
@@ -292,6 +313,26 @@
                     <span class="testimonial-role">Head of Partnerships, Rainforest Builder</span>
                 </div>
                 <div class="testimonial-word" style="margin-top:1rem;margin-bottom:0;">Venture Architecture</div>
+            </div>
+
+            <div class="testimonial-card">
+                <blockquote>"If you're ready to get serious and held seriously accountable, Pepe will always be honest with you (even when it stings), but you can trust that he is rooting for you to become the best version of yourself."</blockquote>
+                <div class="testimonial-author">
+                    <img src="/testimonials/alien-avatar.png" alt="Faith Gathoni" class="testimonial-photo">
+                    <span class="testimonial-name">Faith Gathoni</span>
+                    <span class="testimonial-role">Lawyer, ALX/Sand (2020–2024)</span>
+                </div>
+                <div class="testimonial-word" style="margin-top:1rem;margin-bottom:0;">Coaching</div>
+            </div>
+
+            <div class="testimonial-card">
+                <blockquote>"Talk to Pepe, he's great at helping you uncover your 'why.' He challenges your assumptions in a way that leads to deeper clarity about your current path and whether you want to shift into something new."</blockquote>
+                <div class="testimonial-author">
+                    <img src="/testimonials/alien-avatar.png" alt="Anonymous" class="testimonial-photo">
+                    <span class="testimonial-name">Business Ops Specialist</span>
+                    <span class="testimonial-role">Former direct report</span>
+                </div>
+                <div class="testimonial-word" style="margin-top:1rem;margin-bottom:0;">Coaching</div>
             </div>
 
         </div>
@@ -358,9 +399,11 @@
         <h3 style="font-family: var(--heading); font-size: 1.3rem; margin-bottom: 0.5rem;">The Outlaw Chronicles</h3>
         <p style="font-size: 0.9rem; color: var(--gray-light); margin-bottom: 0.5rem;">Cap table traps, governance landmines, and the structural stuff nobody tells founders until it's too late. Every Monday.</p>
         <form class="newsletter-inline" onsubmit="subscribeNewsletter(event)">
-            <input type="email" id="nl-email" placeholder="you@company.com" required>
-            <label style="display:flex;align-items:flex-start;gap:0.5rem;font-size:0.8rem;color:var(--gray);margin:0.5rem 0;cursor:pointer;"><input type="checkbox" required style="margin-top:3px;accent-color:var(--pink);"> I agree to receive emails and accept the <a href="/privacy/" style="color:var(--text-accent);">Privacy Policy</a>.</label>
-            <button type="submit" id="nl-btn">Subscribe</button>
+            <div class="nl-input-row">
+                <input type="email" id="nl-email" placeholder="you@company.com" required>
+                <button type="submit" id="nl-btn">Subscribe</button>
+            </div>
+            <label class="nl-consent-label"><input type="checkbox" required style="accent-color:var(--pink);flex-shrink:0;"> I agree to receive emails and accept the <a href="/privacy/" style="color:var(--text-accent);">Privacy Policy</a>.</label>
         </form>
         <p class="newsletter-consent">By subscribing, you agree to receive occasional emails from Mexzungu Group. We respect your data — see our <a href="/privacy/">Privacy Policy</a>. Unsubscribe anytime.</p>
     </div>
