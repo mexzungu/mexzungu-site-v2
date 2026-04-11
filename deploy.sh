@@ -1,6 +1,6 @@
 #!/bin/bash
 # Deploy mexzungu.com to Cloudflare Pages via direct wrangler upload.
-# Git push to GitHub does NOT trigger deployment — always run this script.
+# Auto-runs via git post-push hook. You can also run manually.
 
 set -e
 
