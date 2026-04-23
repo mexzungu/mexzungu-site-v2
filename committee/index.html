@@ -323,9 +323,9 @@
     .cd-unit { display: flex; flex-direction: column; align-items: center; gap: 6px; }
     .cd-digit {
       font-family: var(--heading);
-      font-size: clamp(60px,14vw,100px);
+      font-size: clamp(100px,22vw,200px);
       color: var(--pink); line-height: 1;
-      text-shadow: 0 0 40px var(--pink-glow), 0 0 80px rgba(225,75,135,0.1);
+      text-shadow: 0 0 60px var(--pink-glow), 0 0 120px rgba(225,75,135,0.2);
       min-width: clamp(90px,20vw,160px);
       text-align: center;
       transition: text-shadow 0.6s ease;
@@ -336,7 +336,7 @@
     }
     .cd-sep {
       font-family: var(--heading);
-      font-size: clamp(48px,10vw,76px);
+      font-size: clamp(80px,18vw,160px);
       color: var(--pink); opacity: 0.18;
       line-height: 1; margin-top: 4px;
     }
@@ -703,6 +703,65 @@
       margin-top: 0.75rem;
     }
 
+    /* ── PHASE 2 SUBMISSION FORM ── */
+    .p2-item { margin-bottom: 1.5rem; padding: 1.5rem 1.25rem; border: 1px solid var(--border); }
+    .p2-item-label { font-size: 0.58rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--pink); margin-bottom: 0.75rem; }
+    .p2-item-text { font-size: 0.88rem; color: var(--mid); line-height: 1.82; }
+    .p2-form { display: flex; flex-direction: column; gap: 1.5rem; margin-top: 2.5rem; }
+    .p2-field-label { display: block; font-size: 0.58rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--dim); margin-bottom: 0.5rem; }
+    .p2-textarea, .p2-input {
+      width: 100%;
+      background: rgba(255,255,255,0.02);
+      border: 1px solid var(--dim);
+      color: var(--text);
+      font-family: var(--sans);
+      font-size: 0.85rem;
+      line-height: 1.6;
+      padding: 0.75rem 1rem;
+      transition: border-color 0.15s;
+      outline: none;
+    }
+    .p2-textarea:focus, .p2-input:focus { border-color: var(--pink); }
+    .p2-textarea { resize: vertical; min-height: 110px; }
+    .p2-submit {
+      background: var(--pink);
+      color: #fff;
+      border: none;
+      padding: 0.8rem 2rem;
+      font-family: var(--sans);
+      font-size: 0.78rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: opacity 0.2s;
+    }
+    .p2-submit:hover { opacity: 0.85; }
+    .p2-deadline {
+      margin-top: 2rem;
+      padding: 1rem 1.25rem;
+      border: 1px solid var(--border);
+      background: rgba(225,75,135,0.025);
+      font-size: 0.78rem;
+      color: var(--dim);
+      line-height: 1.75;
+      font-style: italic;
+    }
+    .p2-deadline strong { color: var(--text); font-style: normal; }
+    .p1-closed-stamp {
+      display: inline-block;
+      background: var(--pink);
+      color: #fff;
+      font-size: 0.62rem;
+      font-weight: 600;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      padding: 0.55rem 1.5rem;
+      margin-bottom: 1.75rem;
+      transform: rotate(-2deg);
+      box-shadow: 0 0 24px rgba(225,75,135,0.3);
+      border: 1px solid rgba(255,255,255,0.18);
+    }
+
     /* ── FOOTER ── */
     .site-footer {
       text-align: center; padding: 2rem 1.5rem;
@@ -729,6 +788,30 @@
     <a href="/">Intergalactic Pepe 🚀</a>
     <div class="site-nav-sub">An independent, free-spirited cosmic travel company</div>
   </nav>
+
+  <!-- COUNTDOWN -->
+  <section class="countdown-section" id="countdown-section">
+    <div class="wrap">
+      <div class="cd-label">Ruling published in</div>
+      <div class="cd-wrap">
+        <div class="cd-unit">
+          <div class="cd-digit" id="cdh">00</div>
+          <div class="cd-unit-l">Hours</div>
+        </div>
+        <div class="cd-sep">:</div>
+        <div class="cd-unit">
+          <div class="cd-digit" id="cdm">00</div>
+          <div class="cd-unit-l">Min</div>
+        </div>
+        <div class="cd-sep">:</div>
+        <div class="cd-unit">
+          <div class="cd-digit" id="cds">00</div>
+          <div class="cd-unit-l">Sec</div>
+        </div>
+      </div>
+      <div class="cd-target">23 April 2026 · 23:59 · Barcelona</div>
+    </div>
+  </section>
 
   <!-- HERO -->
   <div class="hero">
@@ -808,9 +891,9 @@
           <div class="t-icon wait">○</div>
           <div>
             <div class="t-name wait">Stage VII — Final ruling</div>
-            <div class="t-detail">Published at 23:00 precisely. Not before.</div>
+            <div class="t-detail">Published at 23:59:59 precisely. Not before.</div>
           </div>
-          <div class="t-badge wait">23:00</div>
+          <div class="t-badge wait">23:59</div>
         </div>
       </div>
     </div>
@@ -886,7 +969,7 @@
           <div class="stat-l">Candidates admitted<br>to date (2026)</div>
         </div>
       </div>
-      <p class="stats-note">The Candidate is the 8th to complete all required stages in the 2026 cycle. The Committee has not admitted anyone this year. The envelope it will open at 23:00 may or may not change that.</p>
+      <p class="stats-note">The Candidate is the 8th to complete all required stages in the 2026 cycle. The Committee has not admitted anyone this year. The envelope it will open at 23:59 may or may not change that.</p>
     </div>
   </section>
 
@@ -895,32 +978,8 @@
     <div class="wrap">
       <div class="disclaimer">
         <div class="disclaimer-title">Important Notice from the Committee</div>
-        <p>Completion of all application stages does not constitute acceptance. The Committee has rejected candidates who completed every required stage. It applies no predetermined criteria. It is not bound by precedent. It is not bound by statistics, ratification rates, or the quality of supplementary materials. The outcome of Case AC-2026-04 is genuinely uncertain. It will remain uncertain until 23:00 tonight. The Committee does not preview its decisions. It does not take questions. It does not respond to messages sent between now and the ruling.</p>
+        <p>Completion of all application stages does not constitute acceptance. The Committee has rejected candidates who completed every required stage. It applies no predetermined criteria. It is not bound by precedent. It is not bound by statistics, ratification rates, or the quality of supplementary materials. The outcome of Case AC-2026-04 is genuinely uncertain. It will remain uncertain until 23:59 tonight. The Committee does not preview its decisions. It does not take questions. It does not respond to messages sent between now and the ruling.</p>
       </div>
-    </div>
-  </section>
-
-  <!-- COUNTDOWN -->
-  <section class="countdown-section" id="countdown-section">
-    <div class="wrap">
-      <div class="cd-label">Ruling published in</div>
-      <div class="cd-wrap">
-        <div class="cd-unit">
-          <div class="cd-digit" id="cdh">00</div>
-          <div class="cd-unit-l">Hours</div>
-        </div>
-        <div class="cd-sep">:</div>
-        <div class="cd-unit">
-          <div class="cd-digit" id="cdm">00</div>
-          <div class="cd-unit-l">Min</div>
-        </div>
-        <div class="cd-sep">:</div>
-        <div class="cd-unit">
-          <div class="cd-digit" id="cds">00</div>
-          <div class="cd-unit-l">Sec</div>
-        </div>
-      </div>
-      <div class="cd-target">23 April 2026 · 23:00 · Barcelona</div>
     </div>
   </section>
 
@@ -937,7 +996,7 @@
     <div class="wrap">
 
       <div class="r-head">
-        <div class="r-over">Final Ruling — Issued 23 April 2026, 23:00 CET</div>
+        <div class="r-over">Final Ruling — Issued 23 April 2026, 23:59 CET</div>
         <h2 class="r-title">The Committee Rules</h2>
         <div class="r-case">Case AC-2026-04 · The Candidate's Application · IPSC</div>
       </div>
@@ -999,110 +1058,77 @@
         <p>The dissenting member's position will not be disclosed.</p>
         <p>The majority's position is what you are reading.</p>
         <p class="r-sig-key">The Captain will be in touch.</p>
-        <div class="r-sig-ref">Issued by order of the Committee · 23 April 2026, 23:00 CET</div>
+        <div class="r-sig-ref">Issued by order of the Committee · 23 April 2026, 23:59 CET</div>
       </div>
+
 
     </div>
   </section>
 
-  <!-- KNOWLEDGE ASSESSMENT PROTOCOL — hidden until ruling reveals -->
-  <section id="quiz-section">
+  <!-- KNOWLEDGE ASSESSMENT PROTOCOL — PHASE 1 CLOSED -->
+  <section id="quiz-section" style="padding: 3.5rem 0; border-bottom: 1px solid var(--border);">
     <div class="wrap">
-      <div class="sec-label">Knowledge Assessment Protocol — Phase 2 Clearance</div>
+      <div class="sec-label">Knowledge Assessment Protocol — Phase 1</div>
+      <div style="text-align: center; padding: 3rem 1.5rem; border: 1px solid var(--border); background: var(--pink-dim);">
+        <div class="p1-closed-stamp">&#10070; PHASE 1 CLOSED &#10070;</div>
+        <p style="font-size: 0.88rem; color: var(--mid); line-height: 1.85; max-width: 480px; margin: 0 auto;">The Committee has reviewed the assessment record from 23 April 2026. The Assessment has been superseded. Phase 1 is closed. The case has been advanced to Phase 2: Supplementary Review.</p>
+      </div>
+    </div>
+  </section>
 
-      <!-- INTRO STATE -->
-      <div id="quiz-intro">
-        <div class="quiz-intro-panel">
-          <div class="quiz-intro-stamp">IPSC · Case AC-2026-04 · Mandatory Clearance Protocol</div>
-          <h2 class="quiz-intro-title">Knowledge Assessment</h2>
-          <p class="quiz-intro-sub">Before Phase 2 is unlocked, the Candidate must demonstrate accurate recall of the proceedings. The Committee does not accept guesswork. It barely accepts confidence.</p>
-          <div class="quiz-intro-rules">
-            <div class="quiz-intro-rule">11 questions</div>
-            <div class="quiz-intro-rule-sep">·</div>
-            <div class="quiz-intro-rule">10 correct required</div>
-            <div class="quiz-intro-rule-sep">·</div>
-            <div class="quiz-intro-rule">1 wrong tolerated</div>
-          </div>
-          <p class="quiz-intro-warning">A second wrong answer triggers an 8-hour lockout. The Committee is not generous.<br>Answers cannot be changed once confirmed.</p>
-          <button class="quiz-btn" id="quiz-start-btn">Begin Assessment</button>
-        </div>
+  <!-- PHASE 2 — SUPPLEMENTARY STATEMENT -->
+  <section style="padding: 3.5rem 0; border-bottom: 1px solid var(--border);">
+    <div class="wrap">
+      <div class="sec-label">Phase 2 — Supplementary Statement</div>
+      <div style="font-size: 0.68rem; color: var(--dim); letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 2rem;">Case AC-2026-04 · Issued 24 April 2026</div>
+
+      <p style="font-size: 0.88rem; color: var(--mid); line-height: 1.85; margin-bottom: 2.5rem;">Following review of the Phase 1 assessment record, the Committee found the results insufficient to support a final ruling. The Candidate is required to submit a Supplementary Statement addressing the three items below. Submissions are entered into the case record and evaluated by the Committee.</p>
+
+      <div class="p2-item">
+        <div class="p2-item-label">Item 1 — The Contested Moment</div>
+        <p class="p2-item-text">The Committee record contains 11 documented field interactions. Identify one entry the Candidate believes is incomplete or mischaracterized. State what actually happened, in the Candidate's own words.</p>
       </div>
 
-      <!-- ACTIVE QUIZ STATE -->
-      <div id="quiz-active" style="display:none;">
-        <div class="quiz-progress">
-          <div class="quiz-progress-meta">
-            <div class="quiz-progress-label">Question <span id="quiz-q-num">1</span> of 11</div>
-            <div class="quiz-progress-label" id="quiz-wrong-indicator" style="color:var(--dim);"></div>
-          </div>
-          <div class="quiz-progress-track">
-            <div class="quiz-progress-fill" id="quiz-progress-fill" style="width:0%"></div>
-          </div>
-        </div>
-
-        <div class="quiz-q-panel" id="quiz-q-panel">
-          <div class="quiz-q-code" id="quiz-q-code">Q1 / 11</div>
-          <div class="quiz-q-text" id="quiz-q-text"></div>
-        </div>
-
-        <div class="quiz-options" id="quiz-options"></div>
-
-        <div class="quiz-confirm-row">
-          <button class="quiz-btn" id="quiz-confirm-btn" disabled>Confirm Answer</button>
-        </div>
+      <div class="p2-item">
+        <div class="p2-item-label">Item 2 — The Undisclosed Item</div>
+        <p class="p2-item-text">The Committee's file is thorough but not complete. There is one thing the Candidate knows that does not appear in the record, because it was never said. Submit it now.</p>
       </div>
 
-      <!-- LOCKED STATE -->
-      <div id="quiz-locked" style="display:none;">
-        <div class="quiz-locked-panel">
-          <div class="quiz-locked-icon">&#8855;</div>
-          <div class="quiz-locked-title">Assessment Suspended</div>
-          <div class="quiz-locked-text">The Candidate has exceeded the maximum error threshold. The Committee requires an 8-hour cooling period before the next attempt may begin. Use the time wisely.</div>
-          <div class="quiz-locked-cd-label">Next attempt available in</div>
-          <div class="quiz-locked-cd-wrap">
-            <div class="quiz-locked-cd-unit">
-              <div class="quiz-locked-digit" id="lkh">08</div>
-              <div class="quiz-locked-cd-unit-l">Hours</div>
-            </div>
-            <div class="quiz-locked-sep">:</div>
-            <div class="quiz-locked-cd-unit">
-              <div class="quiz-locked-digit" id="lkm">00</div>
-              <div class="quiz-locked-cd-unit-l">Min</div>
-            </div>
-            <div class="quiz-locked-sep">:</div>
-            <div class="quiz-locked-cd-unit">
-              <div class="quiz-locked-digit" id="lks">00</div>
-              <div class="quiz-locked-cd-unit-l">Sec</div>
-            </div>
-          </div>
-          <p class="quiz-locked-note">The Candidate may review the proceedings log while waiting.</p>
-        </div>
+      <div class="p2-item">
+        <div class="p2-item-label">Item 3 — The Proposed Engagement</div>
+        <p class="p2-item-text">If the Candidate advances past Phase 2, what does she propose as the next field interaction? Specify: nature of the engagement, proposed location, and proposed date. The Committee will consider the proposal. It is not binding on either party.</p>
       </div>
 
-      <!-- PASS STATE -->
-      <div id="quiz-pass" style="display:none;">
-        <div class="quiz-pass-panel">
-          <div class="quiz-pass-head">
-            <div class="quiz-pass-over">Assessment Complete · Case AC-2026-04 · Knowledge Protocol Cleared</div>
-            <div class="quiz-pass-verdict">CLEARED</div>
-            <div class="quiz-pass-sub">The Candidate has demonstrated sufficient knowledge of the proceedings to proceed.</div>
-          </div>
-          <div class="quiz-pass-body">
-            <div class="quiz-pass-preamble">
-              The Committee has reviewed the assessment results. The Candidate's recall of the proceedings is consistent with the evidentiary record. Phase 2 access is granted, effective immediately upon receipt of this clearance.
-            </div>
-            <div class="quiz-pass-sh">Phase 2 Status</div>
-            <div class="quiz-pass-unlock">
-              <div class="quiz-pass-unlock-label">Access Level — Chérie Class</div>
-              <div class="quiz-pass-unlock-text">Phase 2 Unlocked — Committee will be in touch.</div>
-            </div>
-            <div class="quiz-pass-sig">
-              <p>Clearance issued by order of the Committee.</p>
-              <p>The Candidate's record has been updated accordingly.</p>
-              <div class="quiz-pass-sig-ref">IPSC · Case AC-2026-04 · Knowledge Protocol v1</div>
-            </div>
-          </div>
+      <form class="p2-form" action="mailto:committee.ac2026@mexzungu.com?subject=Case AC-2026-04 — Supplementary Statement" method="post" enctype="text/plain">
+
+        <div>
+          <label class="p2-field-label" for="p2-item1">Item 1 — The Contested Moment</label>
+          <textarea class="p2-textarea" id="p2-item1" name="Item 1 - The Contested Moment" rows="6" placeholder="Identify the entry and state what actually happened, in your own words."></textarea>
         </div>
+
+        <div>
+          <label class="p2-field-label" for="p2-item2">Item 2 — The Undisclosed Item</label>
+          <textarea class="p2-textarea" id="p2-item2" name="Item 2 - The Undisclosed Item" rows="6" placeholder="The thing that was never said. Submit it now."></textarea>
+        </div>
+
+        <div>
+          <label class="p2-field-label" for="p2-item3">Item 3 — The Proposed Engagement</label>
+          <textarea class="p2-textarea" id="p2-item3" name="Item 3 - The Proposed Engagement" rows="6" placeholder="Nature of engagement, proposed location, proposed date."></textarea>
+        </div>
+
+        <div>
+          <label class="p2-field-label" for="p2-candidate">Candidate Identifier</label>
+          <input class="p2-input" id="p2-candidate" type="text" name="Candidate Identifier" placeholder="Your name or designation" />
+        </div>
+
+        <div style="text-align: right;">
+          <button class="p2-submit" type="submit">Submit Statement</button>
+        </div>
+
+      </form>
+
+      <div class="p2-deadline">
+        Submissions close 48 hours from issue: <strong>26 April 2026, 08:00 CEST.</strong> Late submissions will not be considered.
       </div>
 
     </div>
@@ -1114,8 +1140,8 @@
   </footer>
 
   <script>
-    // TARGET: 23 April 2026 22:59:59 CEST (UTC+2)
-    var TARGET = new Date('2026-04-23T22:59:59+02:00');
+    // TARGET: 23 April 2026 23:59:59 CEST (UTC+2)
+    var TARGET = new Date('2026-04-23T23:59:59+02:00');
 
     var PROCEEDINGS = [
       {
@@ -1163,7 +1189,7 @@
       {
         hour: 22, time: "22:00",
         title: "VERDICT SEALED",
-        text: "The ruling is in an envelope. The envelope is sealed. It contains one word. At 23:00 you will know it. Do not attempt to contact the Committee. Do not attempt to contact The Captain. There is nothing left to do but wait.",
+        text: "The ruling is in an envelope. The envelope is sealed. It contains one word. At 23:59 you will know it. Do not attempt to contact the Committee. Do not attempt to contact The Captain. There is nothing left to do but wait.",
         status: "SEALED"
       }
     ];
@@ -1198,14 +1224,6 @@
       }
     }
 
-    function showQuizSection() {
-      var qz = document.getElementById('quiz-section');
-      if (qz) {
-        qz.style.display = 'block';
-        if (window.initQuiz) window.initQuiz();
-      }
-    }
-
     function reveal() {
       if (revealed) return;
       revealed = true;
@@ -1215,7 +1233,6 @@
         var r = document.getElementById('ruling');
         r.classList.add('revealed');
         r.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        setTimeout(showQuizSection, 1800);
       }, 450);
       updateLog();
     }
@@ -1259,7 +1276,6 @@
       document.getElementById('countdown-section').style.display = 'none';
       document.getElementById('ruling').classList.add('revealed');
       revealed = true;
-      showQuizSection();
     } else {
       updateCountdown();
       setInterval(updateCountdown, 1000);
@@ -1274,7 +1290,7 @@
       'use strict';
 
       var QUIZ_KEY = 'ipsc_quiz_ac2026_v1';
-      var LOCK_MS  = 8 * 60 * 60 * 1000; // 8 hours
+      var LOCK_MS  = 11 * 60 * 60 * 1000; // 11 hours
 
       var QUESTIONS = [
         {
@@ -1328,12 +1344,12 @@
           correct: 3
         },
         {
-          text: "When the Committee arrived announcing itself as Intergalactic Glovo, what was it delivering?",
+          text: "When the Committee arrived at the Candidate\u2019s quarters with food, how did it announce itself?",
           opts: [
-            "Classified documents requiring the Candidate\u2019s immediate signature",
-            "A surprise readiness inspection of the Candidate\u2019s quarters",
-            "Two frozen meals, cooked at the Candidate\u2019s quarters while she packed",
-            "Equipment for the next phase of field experiments"
+            "As a surprise inspection from the Galactic High Council",
+            "As the Captain\u2019s personal provisioning service",
+            "As Intergalactic Glovo",
+            "As the Committee\u2019s Field Operations Unit"
           ],
           correct: 2
         },
@@ -1348,7 +1364,7 @@
           correct: 1
         },
         {
-          text: "During the complimentary gratuity, the Candidate repeatedly struck the bamboo casing of the Committee\u2019s plant, Claudio. As a Panda, the Candidate was expected to revere bamboo. The Committee officially classified this behavior as:",
+          text: "During the Candidate\u2019s first intergalactic mission, she repeatedly assaulted one of the carbon-based crew members, known as Claudio. As a Panda, the Candidate was expected to revere bamboo. The Committee officially classified this behavior as:",
           opts: [
             "Bamboo Defection Incident, Protocol 7",
             "Unauthorized Flora Aggression, Section 4(c)",
@@ -1386,6 +1402,106 @@
             "The date the Candidate submitted her counter-proposal"
           ],
           correct: 2
+        },
+        {
+          text: "Experiment I — the Committee\u2019s first formal evaluation — was conducted at which venue?",
+          opts: [
+            "Sala Apolo, Poble Sec \u2014 a neutral public space with optimal acoustic distance",
+            "Soho Jazz Club, Gothic Quarter \u2014 the Candidate arrived directly after dance practice",
+            "Bar Marsella, Born \u2014 selected for proximity to the Embassy",
+            "Jazz S\u00ed Club, Raval \u2014 chosen for optimal acoustic conditions"
+          ],
+          correct: 1
+        },
+        {
+          text: "The Candidate\u2019s shibari master, who conducted Experiment III in Barcelona, is known as:",
+          opts: [
+            "A certified local practitioner, identity withheld by the Committee",
+            "A Tokyo-based visiting instructor, borrowed for a single session",
+            "Dirty Von P \u2014 the Candidate\u2019s Paris-based master rigger",
+            "An anonymous instructor sourced through the Candidate\u2019s dance partner"
+          ],
+          correct: 2
+        },
+        {
+          text: "Experiment III cost 100 EUR. How was payment handled?",
+          opts: [
+            "Split equally between the Candidate and the Committee",
+            "The Committee settled the invoice in advance",
+            "The Candidate paid the full amount upfront; the Committee reimbursed",
+            "The instructor accepted a formal letter of commendation in lieu of payment"
+          ],
+          correct: 2
+        },
+        {
+          text: "Before the psilocybin journey, the Candidate submitted an emergency contact to the Committee. What was the contact\u2019s name?",
+          opts: [
+            "Camille",
+            "Sophie",
+            "Fiona",
+            "Marine"
+          ],
+          correct: 2
+        },
+        {
+          text: "The Candidate submitted her Ch\u00e9rie Class counter-proposal under which formal designation?",
+          opts: [
+            "The Candidate \u2014 unchanged from the existing case file",
+            "The Panda \u2014 invoking sanctuary precedent",
+            "The Consultant \u2014 professional register, bilateral terms",
+            "The Passenger \u2014 her chosen designation for Phase 2 proceedings"
+          ],
+          correct: 3
+        },
+        {
+          text: "Of the 10 clauses in the Candidate\u2019s Ch\u00e9rie Class counter-proposal, one received an unambiguous hard no. Which clause?",
+          opts: [
+            "The exit protocol \u2014 she reserved unilateral withdrawal rights",
+            "The co-creation mandate \u2014 she declined shared creative ownership",
+            "The CDI clause \u2014 permanence and exclusivity were not on the table",
+            "The transparency requirement \u2014 she declined to disclose prior proceedings"
+          ],
+          correct: 2
+        },
+        {
+          text: "On March 25th, the Candidate made a brief unannounced appearance at the Embassy after sport. What did she return?",
+          opts: [
+            "Her power bank, borrowed during Experiment III",
+            "The Committee\u2019s scarf",
+            "An earring, the original stated reason for the March 18th visit",
+            "A field report she had failed to submit after Experiment II"
+          ],
+          correct: 1
+        },
+        {
+          text: "The psilocybin journey was officially logged in the Committee record. On what date did it take place?",
+          opts: [
+            "Holy Saturday, April 4th",
+            "Easter Monday, April 6th",
+            "Easter Sunday, April 5th",
+            "Good Friday, April 3rd"
+          ],
+          correct: 3
+        },
+        {
+          text: "On March 25th, before departing, the Candidate issued a formal warning to the Committee about its influence. What was the exact wording?",
+          opts: [
+            "\u201cThe Committee\u2019s proximity is becoming a variable I did not account for.\u201d",
+            "\u201cMartian\u2019s Powers could become addictive.\u201d",
+            "\u201cThe Embassy\u2019s visiting hours are poorly calibrated for sustainable operations.\u201d",
+            "\u201cSomething in the Committee\u2019s methodology should probably be regulated.\u201d"
+          ],
+          correct: 1
+        },
+        {
+          text: "According to the Committee\u2019s full case record, how many field interactions \u2014 numbered experiments and informal engagements combined \u2014 are entered into the file for Case AC-2026-04?",
+          opts: [
+            "Eleven",
+            "Thirteen",
+            "Fifteen",
+            "Sixteen"
+          ],
+          correct: 4
         }
       ];
 
@@ -1393,11 +1509,12 @@
 
       // ── State ──
       var qs = {
-        started:       false,
-        questionIndex: 0,
-        wrongCount:    0,
-        lockUntil:     null,
-        passed:        false
+        started:         false,
+        questionIndex:   0,
+        wrongCount:      0,
+        lockUntil:       null,
+        passed:          false,
+        selectedIndices: null
       };
 
       var selectedIdx        = -1;
@@ -1411,11 +1528,12 @@
           if (!raw) return;
           var saved = JSON.parse(raw);
           if (saved && typeof saved === 'object') {
-            qs.started       = !!saved.started;
-            qs.questionIndex = saved.questionIndex || 0;
-            qs.wrongCount    = saved.wrongCount    || 0;
-            qs.lockUntil     = saved.lockUntil     || null;
-            qs.passed        = !!saved.passed;
+            qs.started          = !!saved.started;
+            qs.questionIndex    = saved.questionIndex    || 0;
+            qs.wrongCount       = saved.wrongCount       || 0;
+            qs.lockUntil        = saved.lockUntil        || null;
+            qs.passed           = !!saved.passed;
+            qs.selectedIndices  = saved.selectedIndices  || null;
           }
         } catch(e) {}
       }
@@ -1448,6 +1566,25 @@
         }, 200);
       }
 
+      // ── Shuffle helper (Fisher-Yates) ──
+      function shuffle(arr) {
+        var a = arr.slice();
+        for (var i = a.length - 1; i > 0; i--) {
+          var j = Math.floor(Math.random() * (i + 1));
+          var tmp = a[i]; a[i] = a[j]; a[j] = tmp;
+        }
+        return a;
+      }
+
+      function makeSelection() {
+        var trapIdx = QUESTIONS.length - 1; // Q21 is always last
+        var pool = [];
+        for (var i = 0; i < QUESTIONS.length - 1; i++) pool.push(i);
+        var picked = shuffle(pool).slice(0, 10);
+        picked.push(trapIdx); // trap is always question 11
+        return picked;
+      }
+
       // ── Lockout countdown ──
       function startLockTimer() {
         if (lockTimerInterval) clearInterval(lockTimerInterval);
@@ -1456,10 +1593,11 @@
           if (!qs.lockUntil || Date.now() >= qs.lockUntil) {
             clearInterval(lockTimerInterval);
             // Reset and show intro
-            qs.started = false;
-            qs.questionIndex = 0;
-            qs.wrongCount = 0;
-            qs.lockUntil = null;
+            qs.started          = false;
+            qs.questionIndex    = 0;
+            qs.wrongCount       = 0;
+            qs.lockUntil        = null;
+            qs.selectedIndices  = null;
             saveQS();
             showPanel('quiz-intro');
           } else {
@@ -1485,7 +1623,7 @@
       // ── Render question ──
       function renderQuestion() {
         var qi = qs.questionIndex;
-        var q  = QUESTIONS[qi];
+        var q  = QUESTIONS[qs.selectedIndices[qi]];
         selectedIdx        = -1;
         awaitingTransition = false;
 
@@ -1568,8 +1706,8 @@
 
         if (!isCorrect) qs.wrongCount++;
 
-        // Second wrong = lockout
-        if (qs.wrongCount >= 2) {
+        // First wrong = lockout (intro says 10/11 — it does not)
+        if (qs.wrongCount >= 1) {
           qs.lockUntil = Date.now() + LOCK_MS;
           qs.started   = false;
           qs.questionIndex = 0;
@@ -1619,10 +1757,11 @@
             return;
           } else {
             // Expired: reset
-            qs.started = false;
-            qs.questionIndex = 0;
-            qs.wrongCount = 0;
-            qs.lockUntil = null;
+            qs.started          = false;
+            qs.questionIndex    = 0;
+            qs.wrongCount       = 0;
+            qs.lockUntil        = null;
+            qs.selectedIndices  = null;
             saveQS();
           }
         }
@@ -1633,6 +1772,7 @@
         }
 
         if (qs.started) {
+          if (!qs.selectedIndices) qs.selectedIndices = makeSelection();
           showPanel('quiz-active');
           renderQuestion();
           return;
@@ -1645,11 +1785,12 @@
       var startBtn = document.getElementById('quiz-start-btn');
       if (startBtn) {
         startBtn.addEventListener('click', function() {
-          qs.started       = true;
-          qs.questionIndex = 0;
-          qs.wrongCount    = 0;
-          qs.lockUntil     = null;
-          qs.passed        = false;
+          qs.started          = true;
+          qs.questionIndex    = 0;
+          qs.wrongCount       = 0;
+          qs.lockUntil        = null;
+          qs.passed           = false;
+          qs.selectedIndices  = makeSelection();
           saveQS();
           showPanel('quiz-active');
           renderQuestion();
