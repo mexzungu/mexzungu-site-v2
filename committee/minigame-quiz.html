@@ -88,6 +88,7 @@
     .quiz-progress-fill { position: absolute; left: 0; top: 0; height: 100%; background: var(--pink); transition: width 0.4s ease; }
     .quiz-q-panel { padding: 1.5rem 1.25rem; border: 1px solid var(--border); margin-bottom: 1rem; }
     .quiz-q-code { font-size: 0.54rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--dim); margin-bottom: 0.75rem; }
+    .quiz-q-code.wager-active-code { color: var(--pink); }
     .quiz-q-text { font-size: 0.95rem; line-height: 1.75; color: var(--text); }
     .quiz-options { display: flex; flex-direction: column; gap: 6px; margin-bottom: 1.25rem; }
     .quiz-opt { display: grid; grid-template-columns: 28px 1fr; gap: 12px; align-items: start; padding: 0.85rem 1rem; border: 1px solid var(--border); background: var(--bg); cursor: pointer; transition: border-color 0.15s, background 0.15s; user-select: none; }
@@ -124,11 +125,40 @@
     .quiz-pass-sig-ref { font-size: 0.54rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--pink); margin-top: 0.75rem; }
     .site-footer { text-align: center; padding: 2rem 1.5rem; border-top: 1px solid var(--border); font-size: 0.65rem; color: var(--dim); letter-spacing: 0.08em; line-height: 1.9; }
     .site-footer a { color: var(--dim); text-decoration: none; }
+
+    /* ── WAGER MECHANIC ── */
+    .quiz-wager-panel { text-align: center; padding: 2.5rem 1.5rem; border: 1px solid rgba(225,75,135,0.35); background: rgba(8,8,9,0.97); position: relative; overflow: hidden; }
+    .quiz-wager-panel::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 0%, rgba(225,75,135,0.1) 0%, transparent 65%); pointer-events: none; }
+    .quiz-wager-panel::after { content: ''; position: absolute; inset: 0; border: 1px solid rgba(225,75,135,0.08); pointer-events: none; }
+    .wager-title { font-family: var(--heading); font-size: clamp(2rem,6vw,3.5rem); color: var(--pink); letter-spacing: 0.06em; text-shadow: 0 0 50px var(--pink-glow), 0 0 100px rgba(225,75,135,0.08); margin-bottom: 1.1rem; position: relative; z-index: 1; }
+    .wager-intro { font-size: 0.9rem; color: var(--mid); line-height: 1.8; margin-bottom: 1.75rem; max-width: 460px; margin-left: auto; margin-right: auto; position: relative; z-index: 1; }
+    .wager-tokens-now { display: inline-flex; align-items: center; gap: 0.75rem; padding: 0.5rem 1.25rem; border: 1px solid rgba(225,75,135,0.25); background: rgba(225,75,135,0.06); margin-bottom: 2rem; position: relative; z-index: 1; }
+    .wager-tokens-label { font-size: 0.56rem; letter-spacing: 0.28em; text-transform: uppercase; color: var(--dim); }
+    .wager-tokens-val { font-family: var(--heading); font-size: 1.1rem; color: var(--pink); }
+    .wager-btns { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-bottom: 1.5rem; position: relative; z-index: 1; }
+    .wager-btn { flex: 1 1 100px; max-width: 150px; min-width: 80px; padding: 1rem 0.5rem; border: 1px solid var(--dim); background: var(--bg); color: var(--text); font-family: var(--sans); cursor: pointer; transition: border-color 0.15s, background 0.15s; text-align: center; }
+    .wager-btn .wb-multi { font-family: var(--heading); font-size: 1.65rem; color: var(--pink); display: block; line-height: 1; margin-bottom: 0.3rem; }
+    .wager-btn .wb-label { font-size: 0.58rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--dim); display: block; line-height: 1.4; }
+    .wager-btn.wager-pass-btn .wb-multi { font-size: 1rem; color: var(--mid); }
+    .wager-btn:hover { border-color: var(--pink); background: rgba(225,75,135,0.08); }
+    .wager-btn:hover .wb-label { color: var(--mid); }
+    .wager-disclaimer { font-size: 0.68rem; color: var(--dim); font-style: italic; line-height: 1.7; position: relative; z-index: 1; }
+    /* Result overlay */
+    .wager-result-overlay { position: fixed; inset: 0; z-index: 998; display: flex; align-items: center; justify-content: center; pointer-events: none; opacity: 0; transition: opacity 0.3s ease; }
+    .wager-result-box { text-align: center; padding: 2.5rem 3rem; border: 2px solid var(--pink); background: rgba(8,8,9,0.97); max-width: 420px; width: 90%; box-shadow: 0 0 80px rgba(225,75,135,0.15); }
+    .wager-result-verdict { font-family: var(--heading); font-size: clamp(2.2rem,9vw,4rem); line-height: 1; margin-bottom: 0.75rem; }
+    .wager-result-detail { font-size: 0.9rem; color: var(--mid); line-height: 1.75; }
   </style>
 </head>
 <body>
 
   <div class="quiz-flash" id="quiz-flash"></div>
+  <div class="wager-result-overlay" id="wager-result-overlay">
+    <div class="wager-result-box">
+      <div class="wager-result-verdict" id="wager-result-verdict"></div>
+      <div class="wager-result-detail" id="wager-result-detail"></div>
+    </div>
+  </div>
 
   <div class="phase-banner scheduled">&#9711; &nbsp; PHASE 4 &nbsp; · &nbsp; FINAL SESSION &nbsp; · &nbsp; EXTENDED ASSESSMENT &nbsp; &#9711;</div>
 
@@ -178,9 +208,11 @@
             <span class="quiz-intro-rule-sep">·</span>
             <span class="quiz-intro-rule">Earn 40 per round</span>
             <span class="quiz-intro-rule-sep">·</span>
+            <span class="quiz-intro-rule">Wager at Q10</span>
+            <span class="quiz-intro-rule-sep">·</span>
             <span class="quiz-intro-rule">1 wrong = 11hr lockout</span>
           </div>
-          <p class="quiz-intro-warning">One wrong answer locks you out for eleven hours. Complete a full round of 20 with no errors — earn 40 tokens, play another. The full record is available. Prepare accordingly.</p>
+          <p class="quiz-intro-warning">One wrong answer locks you out for eleven hours. After question 10, the Committee offers a wager — bet a multiplier on a harder question. The full record is available. Prepare accordingly.</p>
           <button class="quiz-btn" id="quiz-start-btn">Begin Extended Assessment</button>
         </div>
       </div>
@@ -202,6 +234,40 @@
         <div class="quiz-options" id="quiz-options"></div>
         <div class="quiz-confirm-row">
           <button class="quiz-btn" id="quiz-confirm-btn" disabled>Confirm Answer</button>
+        </div>
+      </div>
+
+      <div id="quiz-wager" style="display:none;">
+        <div class="quiz-wager-panel">
+          <div class="wager-title">WAGER OPPORTUNITY</div>
+          <p class="wager-intro">The Committee offers you a choice. How much do you trust yourself on the next question?</p>
+          <div class="wager-tokens-now">
+            <span class="wager-tokens-label">Tokens earned this round</span>
+            <span class="wager-tokens-val" id="wager-round-tokens">0</span>
+          </div>
+          <div class="wager-btns">
+            <button class="wager-btn wager-pass-btn" id="wager-pass-btn">
+              <span class="wb-multi">PASS</span>
+              <span class="wb-label">No wager, next question</span>
+            </button>
+            <button class="wager-btn" data-mult="2">
+              <span class="wb-multi">2x</span>
+              <span class="wb-label">Double or nothing</span>
+            </button>
+            <button class="wager-btn" data-mult="3">
+              <span class="wb-multi">3x</span>
+              <span class="wb-label">Triple or nothing</span>
+            </button>
+            <button class="wager-btn" data-mult="5">
+              <span class="wb-multi">5x</span>
+              <span class="wb-label">Five times or nothing</span>
+            </button>
+            <button class="wager-btn" data-mult="10">
+              <span class="wb-multi">10x</span>
+              <span class="wb-label">Ten times or nothing</span>
+            </button>
+          </div>
+          <p class="wager-disclaimer">Wager questions are harder. Wrong answer costs you the same amount. No lockout — token loss is the consequence.</p>
         </div>
       </div>
 
@@ -281,6 +347,13 @@
       bank.total += amount;
       if (bank.breakdown[source] !== undefined) bank.breakdown[source] += amount;
       else bank.breakdown[source] = amount;
+      try { localStorage.setItem('ipsc_tokens_ac2026', JSON.stringify(bank)); } catch(e) {}
+      updateTokenDisplay();
+    }
+    function subtractTokens(source, amount) {
+      var bank = getTokenBank();
+      bank.total = Math.max(0, bank.total - amount);
+      if (bank.breakdown[source] !== undefined) bank.breakdown[source] = Math.max(0, bank.breakdown[source] - amount);
       try { localStorage.setItem('ipsc_tokens_ac2026', JSON.stringify(bank)); } catch(e) {}
       updateTokenDisplay();
     }
@@ -503,6 +576,30 @@
         {text:"The Committee's position on second chances after a lockout is:",opts:["One second chance allowed","No second chances — full 11 hours must expire","Second chance after 6 hours","Reviewed case-by-case"],correct:1}
       ];
 
+      // ── WAGER QUESTIONS (20 hard/tricky questions) ──
+      var WAGER_QUESTIONS = [
+        {text:"The Compliance Engine hidden record counter is capped at what number?",opts:["11","14","17","21"],correct:2},
+        {text:"According to Committee case precedent, a rule submitted in the Protocol Duel containing the word 'always' has what probability of acceptance?",opts:["30%","50%","70%","90%"],correct:2},
+        {text:"The most expensive prize in the Prize Catalog costs how many tokens?",opts:["500","600","700","750"],correct:3},
+        {text:"The Candidate once stated she never lies. The Committee's case file records one exception. What is it?",opts:["She lies about being fine when she isn't","She has lied to protect someone she loves","The file is sealed — no exception appears in the record","She admitted lying to the Committee once, in Phase 1"],correct:2},
+        {text:"What was the Candidate's exact position on the first occasion she formally disputed a Committee ruling?",opts:["She filed a written objection citing procedural error","She invoked Panda Mode and refused to engage","She issued a verbal counter-notice and declined to sign","She submitted the Cherie Class counter-proposal"],correct:3},
+        {text:"The Committee deliberation panel has three members. Which vote threshold produces a ruling?",opts:["One member — the Chair holds sole authority","Two members — simple majority","All three — unanimous only","Two members, but the Chair's vote counts double"],correct:1},
+        {text:"Phase 3 was suspended rather than completed. Which explanation appears in the case file?",opts:["The Candidate failed to appear for a scheduled hearing","The Committee voted to advance directly to Phase 4","The record is sealed — Phase 3 rulings are not disclosed publicly","The Candidate invoked an emergency Protocol provision"],correct:2},
+        {text:"The Candidate's first act of insubordination was a response to which specific Committee statement?",opts:["You seem like someone who always gets what she wants","You don't understand what you've agreed to here","The Committee has seen more cooperative candidates","The record suggests your punctuality is selective"],correct:0},
+        {text:"The Compliance Engine Hidden Record logs something the Candidate cannot see. What does it count?",opts:["Times she has opened the Compliance Engine page","Protocol infractions logged from Phase 3","Rule violations detected during the round","Committee observations about field behavior"],correct:0},
+        {text:"The psilocybin journey was classified as a complimentary gratuity. Whose request triggered it?",opts:["The Committee offered it unilaterally as a Phase 3 provision","The Candidate requested it and the Committee granted it","It was written into the Cherie Class counter-proposal","It was ordered as part of the Phase 3 suspension ruling"],correct:1},
+        {text:"Which word in a Protocol Duel rule gives it a 70% acceptance rate by Committee precedent?",opts:["never","always","sometimes","shall"],correct:1},
+        {text:"Which of these prizes does NOT appear anywhere in the Prize Catalog?",opts:["A 60-minute full body massage","A written private reflection about her","One clause she proposes he accepts without negotiation","A Committee-witnessed session with no rules specified"],correct:3},
+        {text:"During the Physical Endurance Assessment, at what time exactly did the Candidate depart the field?",opts:["4:12 AM","5:41 AM","6:05 AM","3:47 AM"],correct:1},
+        {text:"The Candidate visited the Embassy exactly twice before Phase 4. What was the purpose of the second visit?",opts:["Delivering the Cherie Class counter-proposal","Returning a borrowed scarf","The earring — on March 18th","Collecting the Committee pin"],correct:1},
+        {text:"The Candidate's exact words when warning about Martian Powers were:",opts:["The Committee proximity is becoming a variable I did not account for","Martian Powers could become addictive","Your methodology is beginning to feel irreversible","Something in this process should probably be regulated"],correct:1},
+        {text:"What is the localStorage key name used by the Intergalactic Token system?",opts:["ipsc_tokens","committee_tokens_2026","ipsc_tokens_ac2026","tokens_ipsc_ac2026"],correct:2},
+        {text:"The Committee's position on appeals to the 11-hour lockout is:",opts:["Appeals may be filed within 2 hours of the wrong answer","Appeals are reviewed on Thursdays only","The lockout is not subject to appeal","An appeal requires a 50-token processing fee"],correct:2},
+        {text:"After the Cherie Class counter-proposal was partially accepted, the Candidate's operative standing became:",opts:["Full standing — all clauses accepted","Provisional standing pending Phase 4","Elevated — Cherie Class — with negotiated terms","Active status, subject to Phase 4 final ruling"],correct:2},
+        {text:"The CDI clause was the one hard no. The case file records the Committee's reasoning as:",opts:["It conflicted with the Martian jurisdictional framework","It was outside the procedural scope of Phase 2","No reasoning was entered — the Committee simply refused","It contradicted a prior ruling from Phase 1"],correct:2},
+        {text:"The wager question pool for the Extended Assessment contains how many questions?",opts:["10","15","20","25"],correct:2}
+      ];
+
       var LETTERS = ['A','B','C','D'];
       var selectedIdx = -1;
       var awaitingTransition = false;
@@ -515,6 +612,15 @@
         roundIndices: null
       };
 
+      // Wager state — session only, not persisted
+      var wagerState = {
+        currentWager: 1,
+        isWagerQuestion: false,
+        currentWagerQ: null,
+        wagerQUsed: [],
+        roundCorrectCount: 0
+      };
+
       function loadQS() {
         try {
           var raw = localStorage.getItem(QUIZ_KEY);
@@ -522,7 +628,6 @@
           var saved = JSON.parse(raw);
           if (saved && typeof saved === 'object') {
             qs.lockUntil = saved.lockUntil || null;
-            // New format uses roundIndices; if old format with shuffledIndices, treat as fresh start
             if (saved.roundIndices) {
               qs.started       = !!saved.started;
               qs.questionIndex = saved.questionIndex || 0;
@@ -537,7 +642,7 @@
       }
 
       function showPanel(id) {
-        ['quiz-intro','quiz-active','quiz-locked','quiz-pass'].forEach(function(pid) {
+        ['quiz-intro','quiz-active','quiz-wager','quiz-locked','quiz-pass'].forEach(function(pid) {
           var el = document.getElementById(pid);
           if (el) el.style.display = (pid === id) ? 'block' : 'none';
         });
@@ -620,7 +725,10 @@
         var scoreEl = document.getElementById('quiz-score-display');
         if (numEl)  numEl.textContent  = qi + 1;
         if (fillEl) fillEl.style.width = ((qi / ROUND_SIZE) * 100) + '%';
-        if (codeEl) codeEl.textContent = 'Q' + (qi + 1) + ' / ' + ROUND_SIZE;
+        if (codeEl) {
+          codeEl.textContent = 'Q' + (qi + 1) + ' / ' + ROUND_SIZE;
+          codeEl.classList.remove('wager-active-code');
+        }
         if (scoreEl) scoreEl.textContent = qi + ' correct so far';
 
         var textEl = document.getElementById('quiz-q-text');
@@ -641,6 +749,105 @@
         if (btn) { btn.disabled = true; btn.textContent = 'Confirm Answer'; }
       }
 
+      function renderWagerQuestion() {
+        // Pick random unused wager question; fallback to random main pool question
+        var available = [];
+        for (var i = 0; i < WAGER_QUESTIONS.length; i++) {
+          if (wagerState.wagerQUsed.indexOf(i) === -1) available.push(i);
+        }
+        var wq;
+        if (available.length === 0) {
+          // Fallback: random from main pool
+          var fallbackIdx = qs.roundIndices[Math.floor(Math.random() * qs.roundIndices.length)];
+          wq = QUESTIONS[fallbackIdx];
+        } else {
+          var pick = Math.floor(Math.random() * available.length);
+          wagerState.wagerQUsed.push(available[pick]);
+          wq = WAGER_QUESTIONS[available[pick]];
+        }
+        wagerState.currentWagerQ = wq;
+
+        selectedIdx = -1;
+        awaitingTransition = false;
+
+        var qi = qs.questionIndex;
+        var wagerAmount = 2 * wagerState.currentWager;
+        var numEl  = document.getElementById('quiz-q-num');
+        var fillEl = document.getElementById('quiz-progress-fill');
+        var codeEl = document.getElementById('quiz-q-code');
+        var scoreEl = document.getElementById('quiz-score-display');
+        if (numEl)  numEl.textContent  = qi + 1;
+        if (fillEl) fillEl.style.width = ((qi / ROUND_SIZE) * 100) + '%';
+        if (codeEl) {
+          codeEl.textContent = '\u26A1 WAGER QUESTION \u00B7 ' + wagerState.currentWager + 'x \u00B7 ' + wagerAmount + ' TOKENS AT STAKE';
+          codeEl.classList.add('wager-active-code');
+        }
+        if (scoreEl) scoreEl.textContent = '\u26A1 ' + wagerState.currentWager + 'x WAGER ACTIVE';
+
+        var textEl = document.getElementById('quiz-q-text');
+        if (textEl) textEl.textContent = wq.text;
+
+        var optsEl = document.getElementById('quiz-options');
+        if (!optsEl) return;
+        optsEl.innerHTML = '';
+        wq.opts.forEach(function(opt, i) {
+          var el = document.createElement('div');
+          el.className = 'quiz-opt';
+          el.innerHTML = '<div class="quiz-opt-letter">' + LETTERS[i] + '</div><div class="quiz-opt-text">' + escHtml(opt) + '</div>';
+          el.addEventListener('click', function() { onOptClick(i, el); });
+          optsEl.appendChild(el);
+        });
+
+        var btn = document.getElementById('quiz-confirm-btn');
+        if (btn) { btn.disabled = true; btn.textContent = 'Confirm Answer'; }
+      }
+
+      function showWagerScreen() {
+        var el = document.getElementById('wager-round-tokens');
+        if (el) el.textContent = wagerState.roundCorrectCount * 2;
+        showPanel('quiz-wager');
+      }
+
+      function selectWager(mult) {
+        if (mult === 0) {
+          // PASS — normal next question
+          wagerState.currentWager = 1;
+          wagerState.isWagerQuestion = false;
+          showPanel('quiz-active');
+          renderQuestion();
+        } else {
+          wagerState.currentWager = mult;
+          wagerState.isWagerQuestion = true;
+          showPanel('quiz-active');
+          renderWagerQuestion();
+        }
+      }
+
+      function showWagerResult(isCorrect, multiplier, amount) {
+        var overlay = document.getElementById('wager-result-overlay');
+        var verdict = document.getElementById('wager-result-verdict');
+        var detail  = document.getElementById('wager-result-detail');
+        if (!overlay) return;
+        if (verdict) {
+          verdict.textContent = isCorrect ? 'CORRECT.' : 'WRONG.';
+          verdict.style.color = isCorrect ? 'var(--pink)' : '#c85454';
+        }
+        if (detail) {
+          detail.textContent = isCorrect
+            ? multiplier + 'x applied. +' + amount + ' tokens. The Committee notes this.'
+            : 'The Committee is not surprised. -' + amount + ' tokens.';
+        }
+        overlay.style.opacity = '1';
+        overlay.style.pointerEvents = 'auto';
+      }
+
+      function hideWagerResult() {
+        var overlay = document.getElementById('wager-result-overlay');
+        if (!overlay) return;
+        overlay.style.opacity = '0';
+        overlay.style.pointerEvents = 'none';
+      }
+
       function onOptClick(idx, el) {
         if (awaitingTransition) return;
         selectedIdx = idx;
@@ -654,16 +861,57 @@
         if (awaitingTransition || selectedIdx < 0) return;
         awaitingTransition = true;
 
-        var qi = qs.questionIndex;
-        var q = QUESTIONS[qs.roundIndices[qi]];
-        var isCorrect = (selectedIdx === q.correct);
-
         document.querySelectorAll('.quiz-opt').forEach(function(o) {
           o.classList.add('locked-opt');
           o.style.pointerEvents = 'none';
         });
         var btn = document.getElementById('quiz-confirm-btn');
         if (btn) btn.disabled = true;
+
+        // ── WAGER QUESTION BRANCH ──
+        if (wagerState.isWagerQuestion) {
+          var wq = wagerState.currentWagerQ;
+          var isCorrect = (selectedIdx === wq.correct);
+          var multiplier = wagerState.currentWager;
+          var wagerAmount = 2 * multiplier;
+
+          triggerFlash(isCorrect ? 'correct' : 'wrong');
+
+          // Reset wager state before showing result
+          wagerState.currentWager = 1;
+          wagerState.isWagerQuestion = false;
+          wagerState.currentWagerQ = null;
+
+          showWagerResult(isCorrect, multiplier, wagerAmount);
+
+          if (isCorrect) {
+            addTokens('quiz', wagerAmount);
+          } else {
+            subtractTokens('quiz', wagerAmount);
+          }
+
+          setTimeout(function() {
+            hideWagerResult();
+            // Continue round normally
+            if (qs.questionIndex >= ROUND_SIZE) {
+              addTokens('quiz', ROUND_SIZE * 2);
+              qs.started = false;
+              qs.questionIndex = 0;
+              qs.roundIndices = null;
+              saveQS();
+              showPanel('quiz-pass');
+            } else {
+              showPanel('quiz-active');
+              renderQuestion();
+            }
+          }, 2800);
+          return;
+        }
+
+        // ── NORMAL QUESTION BRANCH ──
+        var qi = qs.questionIndex;
+        var q = QUESTIONS[qs.roundIndices[qi]];
+        var isCorrect = (selectedIdx === q.correct);
 
         triggerFlash(isCorrect ? 'correct' : 'wrong');
 
@@ -678,16 +926,23 @@
         }
 
         qs.questionIndex++;
+        wagerState.roundCorrectCount++;
         saveQS();
 
         if (qs.questionIndex >= ROUND_SIZE) {
-          // Round complete — award 40 tokens
+          // Round complete — award 40 base tokens
           addTokens('quiz', ROUND_SIZE * 2);
           qs.started = false;
           qs.questionIndex = 0;
           qs.roundIndices = null;
           saveQS();
           setTimeout(function() { showPanel('quiz-pass'); }, 900);
+          return;
+        }
+
+        // Trigger wager screen every 10 correct answers
+        if (qs.questionIndex % 10 === 0) {
+          setTimeout(showWagerScreen, 900);
           return;
         }
 
@@ -699,6 +954,10 @@
         qs.questionIndex = 0;
         qs.lockUntil = null;
         qs.roundIndices = makeRoundIndices();
+        wagerState.currentWager = 1;
+        wagerState.isWagerQuestion = false;
+        wagerState.currentWagerQ = null;
+        wagerState.roundCorrectCount = 0;
         saveQS();
         showPanel('quiz-active');
         renderQuestion();
@@ -728,18 +987,25 @@
         showPanel('quiz-intro');
       }
 
+      // ── EVENT LISTENERS ──
       var startBtn = document.getElementById('quiz-start-btn');
-      if (startBtn) {
-        startBtn.addEventListener('click', function() { startNewRound(); });
-      }
+      if (startBtn) startBtn.addEventListener('click', function() { startNewRound(); });
 
       var nextRoundBtn = document.getElementById('quiz-next-round-btn');
-      if (nextRoundBtn) {
-        nextRoundBtn.addEventListener('click', function() { startNewRound(); });
-      }
+      if (nextRoundBtn) nextRoundBtn.addEventListener('click', function() { startNewRound(); });
 
       var confirmBtn = document.getElementById('quiz-confirm-btn');
       if (confirmBtn) confirmBtn.addEventListener('click', confirmAnswer);
+
+      // Wager button listeners
+      var passBtn = document.getElementById('wager-pass-btn');
+      if (passBtn) passBtn.addEventListener('click', function() { selectWager(0); });
+
+      document.querySelectorAll('.wager-btn[data-mult]').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+          selectWager(parseInt(this.getAttribute('data-mult'), 10));
+        });
+      });
 
       initQuiz();
     })();
