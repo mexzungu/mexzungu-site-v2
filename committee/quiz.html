@@ -1,0 +1,1176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#080809">
+  <title>The Committee — Knowledge Assessment Protocol (Expired)</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/fonts.css">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --pink:      #E14B87;
+      --pink-glow: rgba(225,75,135,0.25);
+      --pink-dim:  rgba(225,75,135,0.07);
+      --bg:        #080809;
+      --text:      #ddd5cc;
+      --mid:       #7a7068;
+      --dim:       #3d3835;
+      --border:    #181614;
+      --heading:   'RocknRoll One', sans-serif;
+      --sans:      'Space Grotesk', -apple-system, sans-serif;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--sans);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      pointer-events: none; z-index: 999;
+      opacity: 0.025;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      background-size: 256px 256px;
+    }
+
+    .wrap { max-width: 680px; margin: 0 auto; padding: 0 20px; }
+
+    /* ── PHASE STATUS BANNER ── */
+    .phase-banner {
+      text-align: center;
+      padding: 0.55rem 1rem;
+      font-size: 0.56rem;
+      letter-spacing: 0.32em;
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+    .phase-banner.expired {
+      background: rgba(180,40,80,0.1);
+      color: rgba(225,75,135,0.75);
+      border-bottom: 1px solid rgba(225,75,135,0.18);
+    }
+
+    /* ── HERO STAMP ── */
+    .hero-stamp {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -35%) rotate(-14deg);
+      font-family: var(--heading);
+      font-size: clamp(2.2rem,8vw,5rem);
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: rgba(225,75,135,0.3);
+      border: 2.5px solid rgba(225,75,135,0.28);
+      padding: 0.3rem 0.9rem;
+      pointer-events: none;
+      z-index: 2;
+      white-space: nowrap;
+      user-select: none;
+    }
+
+    /* ── NAV ── */
+    .site-nav {
+      padding: 1.25rem 1.5rem;
+      text-align: center;
+      border-bottom: 1px solid var(--border);
+    }
+    .site-nav a {
+      font-family: var(--heading);
+      font-size: 0.95rem;
+      color: var(--mid);
+      text-decoration: none;
+    }
+    .site-nav-sub {
+      font-size: 0.6rem;
+      color: var(--dim);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      margin-top: 0.2rem;
+    }
+    .site-nav-back {
+      font-size: 0.56rem;
+      color: var(--dim);
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      margin-top: 0.4rem;
+    }
+    .site-nav-back a { font-family: var(--sans); font-size: 0.56rem; color: var(--dim); text-decoration: none; }
+    .site-nav-back a:hover { color: var(--pink); }
+
+    /* ── HERO ── */
+    .hero {
+      background: var(--bg);
+      text-align: center;
+      padding: 4rem 1.5rem 3rem;
+      border-bottom: 1px solid var(--border);
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; inset: 0; pointer-events: none; opacity: 0.07;
+      background-image:
+        radial-gradient(2px 2px at 4% 9%,   #fff 100%,transparent),
+        radial-gradient(1px 1px at 10% 34%,  #E14B87 100%,transparent),
+        radial-gradient(2px 2px at 16% 61%,  #fff 100%,transparent),
+        radial-gradient(3px 2px at 23% 19%,  #E14B87 100%,transparent),
+        radial-gradient(1px 2px at 31% 47%,  #fff 100%,transparent),
+        radial-gradient(2px 1px at 39% 77%,  #E14B87 100%,transparent),
+        radial-gradient(2px 2px at 47% 11%,  #fff 100%,transparent),
+        radial-gradient(3px 2px at 54% 39%,  #E14B87 100%,transparent),
+        radial-gradient(1px 2px at 62% 67%,  #fff 100%,transparent),
+        radial-gradient(2px 1px at 69% 23%,  #E14B87 100%,transparent),
+        radial-gradient(2px 2px at 76% 51%,  #fff 100%,transparent),
+        radial-gradient(4px 2px at 82% 13%,  #E14B87 100%,transparent),
+        radial-gradient(2px 2px at 7%  83%,  #fff 100%,transparent),
+        radial-gradient(1px 2px at 51% 91%,  #E14B87 100%,transparent),
+        radial-gradient(2px 1px at 72% 87%,  #fff 100%,transparent);
+      background-size: 110px 90px;
+    }
+    .hero::after {
+      content: '';
+      position: absolute;
+      width: 520px; height: 150px;
+      border: 1px solid rgba(225,75,135,0.07);
+      border-radius: 50%;
+      top: 50%; left: 50%;
+      transform: translate(-50%,-50%) rotate(-7deg);
+      pointer-events: none;
+    }
+    .hero-inner { position: relative; z-index: 1; }
+
+    .seal {
+      position: relative;
+      width: 96px; height: 96px;
+      margin: 0 auto 1.75rem;
+    }
+    .seal-ring {
+      position: absolute; inset: 0;
+      border: 1px dashed rgba(225,75,135,0.3);
+      border-radius: 50%;
+      animation: sealSpin 22s linear infinite;
+    }
+    .seal-ring2 {
+      position: absolute; inset: 7px;
+      border: 1px solid rgba(225,75,135,0.12);
+      border-radius: 50%;
+    }
+    .seal-core {
+      position: absolute; inset: 14px;
+      border: 1.5px solid var(--pink);
+      border-radius: 50%;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      background: var(--pink-dim);
+      box-shadow: 0 0 24px rgba(225,75,135,0.1);
+    }
+    .seal-id {
+      font-family: var(--heading);
+      font-size: 0.9rem; color: var(--pink);
+      letter-spacing: 0.1em; line-height: 1;
+    }
+    .seal-yr {
+      font-size: 0.48rem; color: var(--dim);
+      letter-spacing: 0.2em; margin-top: 2px;
+    }
+    @keyframes sealSpin { to { transform: rotate(360deg); } }
+
+    .hero-over {
+      font-size: 0.6rem; letter-spacing: 0.4em;
+      text-transform: uppercase; color: var(--pink);
+      margin-bottom: 0.75rem;
+    }
+    .hero-stars { opacity: 0.38; }
+    .hero-title {
+      font-family: var(--heading);
+      font-size: clamp(1.9rem,5vw,2.9rem);
+      color: #fafafa; margin-bottom: 0.4rem;
+    }
+    .hero-sub {
+      font-family: var(--heading);
+      font-size: clamp(1rem,2.5vw,1.45rem);
+      color: var(--pink); font-weight: 400;
+      letter-spacing: 0.04em; margin-bottom: 0.65rem;
+    }
+    .hero-meta {
+      font-size: 0.7rem; color: var(--dim);
+      letter-spacing: 0.1em;
+    }
+    .hero-ref {
+      display: inline-block;
+      margin-top: 1.25rem;
+      padding: 0.35rem 0.9rem;
+      border: 1px solid var(--border);
+      font-size: 0.6rem; letter-spacing: 0.12em;
+      color: var(--dim); font-family: 'Courier New', monospace;
+    }
+
+    /* ── SECTION ── */
+    .section { padding: 2.75rem 0; border-bottom: 1px solid var(--border); }
+    .sec-label {
+      font-size: 0.58rem; letter-spacing: 0.35em;
+      text-transform: uppercase; color: var(--dim);
+      margin-bottom: 1.5rem;
+    }
+
+    /* ── QUIZ CLOSED OVERLAY ── */
+    .quiz-closed-wrap {
+      position: relative;
+    }
+    .quiz-closed-overlay {
+      position: absolute; inset: 0;
+      z-index: 10;
+      background: rgba(8,8,9,0.88);
+      backdrop-filter: blur(3px);
+      -webkit-backdrop-filter: blur(3px);
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      text-align: center;
+      padding: 2.5rem 1.5rem;
+      border: 1px solid rgba(225,75,135,0.12);
+      min-height: 340px;
+    }
+    .qco-stamp {
+      display: inline-block;
+      border: 2.5px solid rgba(225,75,135,0.6);
+      color: rgba(225,75,135,0.65);
+      font-family: var(--heading);
+      font-size: clamp(1.4rem,5vw,2.5rem);
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      padding: 0.3rem 1rem;
+      transform: rotate(-12deg);
+      margin-bottom: 2rem;
+      user-select: none;
+    }
+    .qco-title {
+      font-family: var(--heading);
+      font-size: 1rem; color: var(--text);
+      letter-spacing: 0.06em;
+      margin-bottom: 0.75rem;
+    }
+    .qco-text {
+      font-size: 0.82rem; color: var(--dim);
+      line-height: 1.75; max-width: 400px;
+      margin: 0 auto 1.75rem;
+    }
+    .qco-back {
+      display: inline-block;
+      border: 1px solid rgba(225,75,135,0.3);
+      color: var(--pink);
+      font-size: 0.66rem; letter-spacing: 0.2em;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 0.55rem 1.25rem;
+      transition: background 0.15s;
+    }
+    .qco-back:hover { background: rgba(225,75,135,0.08); }
+
+    /* ── QUIZ UNDERLYING (dimmed) ── */
+    .quiz-underlying {
+      opacity: 0.2;
+      pointer-events: none;
+      user-select: none;
+      filter: blur(1.5px);
+    }
+
+    /* ── QUIZ INTRO PANEL ── */
+    .quiz-flash {
+      position: fixed; inset: 0;
+      opacity: 0; pointer-events: none; z-index: 997;
+    }
+    .quiz-intro-panel {
+      text-align: center;
+      padding: 2.5rem 1.5rem;
+      border: 1px solid var(--border);
+      background: var(--pink-dim);
+    }
+    .quiz-intro-stamp {
+      font-size: 0.56rem; letter-spacing: 0.3em;
+      text-transform: uppercase; color: var(--dim);
+      margin-bottom: 1.25rem;
+    }
+    .quiz-intro-title {
+      font-family: var(--heading);
+      font-size: clamp(1.4rem,4vw,2rem);
+      color: #fafafa; margin-bottom: 0.5rem;
+    }
+    .quiz-intro-sub {
+      font-size: 0.85rem; color: var(--mid);
+      line-height: 1.75; margin-bottom: 1.75rem;
+      max-width: 480px; margin-left: auto; margin-right: auto;
+    }
+    .quiz-intro-rules {
+      display: flex; align-items: center; justify-content: center;
+      gap: 0.6rem; flex-wrap: wrap;
+      margin-bottom: 1rem;
+    }
+    .quiz-intro-rule {
+      font-size: 0.62rem; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--pink);
+      padding: 3px 10px; border: 1px solid rgba(225,75,135,0.3);
+    }
+    .quiz-intro-rule-sep { font-size: 0.6rem; color: var(--dim); opacity: 0.5; }
+    .quiz-intro-warning {
+      font-size: 0.72rem; color: var(--dim);
+      font-style: italic; margin-bottom: 2rem; line-height: 1.6;
+    }
+    .quiz-btn {
+      display: inline-block;
+      background: var(--pink);
+      color: #fff;
+      border: none;
+      padding: 0.8rem 2rem;
+      font-family: var(--sans);
+      font-size: 0.78rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: opacity 0.2s, background 0.2s;
+    }
+    .quiz-btn:hover:not(:disabled) { opacity: 0.85; }
+    .quiz-btn:disabled { opacity: 0.35; cursor: not-allowed; }
+
+    /* Progress */
+    .quiz-progress { margin-bottom: 1.5rem; }
+    .quiz-progress-meta {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 0.5rem;
+    }
+    .quiz-progress-label {
+      font-size: 0.6rem; letter-spacing: 0.22em;
+      text-transform: uppercase; color: var(--dim);
+    }
+    .quiz-progress-label span { color: var(--pink); }
+    .quiz-progress-track { height: 2px; background: var(--border); position: relative; }
+    .quiz-progress-fill {
+      position: absolute; left: 0; top: 0; height: 100%;
+      background: var(--pink); transition: width 0.4s ease;
+    }
+
+    /* Question panel */
+    .quiz-q-panel {
+      padding: 1.5rem 1.25rem;
+      border: 1px solid var(--border);
+      margin-bottom: 1rem;
+    }
+    .quiz-q-code {
+      font-size: 0.54rem; letter-spacing: 0.3em;
+      text-transform: uppercase; color: var(--dim);
+      margin-bottom: 0.75rem;
+    }
+    .quiz-q-text { font-size: 0.95rem; line-height: 1.75; color: var(--text); }
+
+    /* Answer options */
+    .quiz-options { display: flex; flex-direction: column; gap: 6px; margin-bottom: 1.25rem; }
+    .quiz-opt {
+      display: grid;
+      grid-template-columns: 28px 1fr;
+      gap: 12px; align-items: start;
+      padding: 0.85rem 1rem;
+      border: 1px solid var(--border);
+      background: var(--bg);
+      cursor: pointer;
+      transition: border-color 0.15s, background 0.15s;
+      user-select: none;
+    }
+    .quiz-opt-letter { font-family: var(--heading); font-size: 0.7rem; color: var(--dim); padding-top: 2px; }
+    .quiz-opt-text { font-size: 0.85rem; line-height: 1.6; color: var(--mid); }
+
+    /* Confirm row */
+    .quiz-confirm-row { text-align: right; }
+
+    /* Locked panel */
+    .quiz-locked-panel {
+      text-align: center;
+      padding: 3rem 1.5rem;
+      border: 1px solid var(--border);
+    }
+    .quiz-locked-icon { font-size: 2.5rem; color: var(--dim); margin-bottom: 1.25rem; line-height: 1; }
+    .quiz-locked-title {
+      font-family: var(--heading);
+      font-size: clamp(1.2rem,3vw,1.6rem);
+      color: var(--text); margin-bottom: 0.75rem;
+    }
+    .quiz-locked-text {
+      font-size: 0.82rem; color: var(--dim);
+      line-height: 1.75; max-width: 440px;
+      margin: 0 auto 2rem;
+    }
+    .quiz-locked-cd-label {
+      font-size: 0.56rem; letter-spacing: 0.3em;
+      text-transform: uppercase; color: var(--dim);
+      margin-bottom: 1.25rem;
+    }
+    .quiz-locked-cd-wrap {
+      display: flex; align-items: flex-start;
+      justify-content: center; gap: 6px;
+      margin-bottom: 1.5rem;
+    }
+    .quiz-locked-digit {
+      font-family: var(--heading);
+      font-size: clamp(36px,8vw,56px);
+      color: var(--mid); line-height: 1;
+      min-width: clamp(54px,12vw,88px);
+      text-align: center;
+    }
+    .quiz-locked-sep {
+      font-family: var(--heading);
+      font-size: clamp(28px,6vw,44px);
+      color: var(--dim); opacity: 0.3; line-height: 1; margin-top: 3px;
+    }
+    .quiz-locked-cd-unit { display: flex; flex-direction: column; align-items: center; gap: 5px; }
+    .quiz-locked-cd-unit-l {
+      font-size: 0.5rem; letter-spacing: 0.2em;
+      color: var(--dim); text-transform: uppercase;
+    }
+    .quiz-locked-note { font-size: 0.7rem; color: var(--dim); font-style: italic; }
+
+    /* Pass panel */
+    .quiz-pass-panel { animation: revealIn 0.8s ease forwards; }
+    @keyframes revealIn { from { opacity: 0; } to { opacity: 1; } }
+    .quiz-pass-head {
+      text-align: center;
+      padding-bottom: 3rem;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 3rem;
+    }
+    .quiz-pass-over {
+      font-size: 0.56rem; letter-spacing: 0.35em;
+      text-transform: uppercase; color: var(--dim);
+      margin-bottom: 1.25rem;
+    }
+    .quiz-pass-verdict {
+      font-family: var(--heading);
+      font-size: clamp(3rem,12vw,5.5rem);
+      color: var(--pink); line-height: 1;
+      text-shadow: 0 0 60px var(--pink-glow), 0 0 120px rgba(225,75,135,0.12);
+      margin-bottom: 0.75rem;
+    }
+    .quiz-pass-sub {
+      font-size: 0.72rem; letter-spacing: 0.12em;
+      color: var(--mid); font-style: italic;
+    }
+    .quiz-pass-body { padding: 2rem 0; }
+    .quiz-pass-preamble {
+      color: var(--mid); font-style: italic;
+      border-left: 2px solid var(--pink);
+      padding: 1rem 1.25rem;
+      background: var(--pink-dim);
+      font-size: 0.9rem; line-height: 1.8;
+      margin-bottom: 2rem;
+    }
+    .quiz-pass-sh {
+      font-size: 0.56rem; letter-spacing: 0.3em;
+      text-transform: uppercase; color: var(--pink);
+      margin-bottom: 0.75rem;
+    }
+    .quiz-pass-sh::before { content: '◆ '; opacity: 0.45; }
+    .quiz-pass-unlock {
+      padding: 1.5rem 1.25rem;
+      border: 1px solid rgba(225,75,135,0.3);
+      background: var(--pink-dim);
+    }
+    .quiz-pass-unlock-label {
+      font-size: 0.54rem; letter-spacing: 0.25em;
+      text-transform: uppercase; color: var(--pink);
+      margin-bottom: 0.5rem;
+    }
+    .quiz-pass-unlock-text { font-size: 0.95rem; color: var(--text); line-height: 1.6; }
+    .quiz-pass-sig {
+      margin-top: 2.5rem; padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+      text-align: right;
+    }
+    .quiz-pass-sig p {
+      font-style: italic; color: var(--dim);
+      margin-bottom: 0.35rem; line-height: 1.75; font-size: 0.88rem;
+    }
+    .quiz-pass-sig-ref {
+      font-size: 0.54rem; letter-spacing: 0.18em;
+      text-transform: uppercase; color: var(--pink);
+      margin-top: 0.75rem;
+    }
+
+    /* ── FOOTER ── */
+    .site-footer {
+      text-align: center; padding: 2rem 1.5rem;
+      border-top: 1px solid var(--border);
+      font-size: 0.65rem; color: var(--dim); letter-spacing: 0.08em; line-height: 1.9;
+    }
+    .site-footer a { color: var(--dim); text-decoration: none; }
+
+    @media (max-width: 480px) {
+      .quiz-intro-rules { gap: 0.4rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="quiz-flash" id="quiz-flash"></div>
+
+  <!-- PHASE STATUS BANNER -->
+  <div class="phase-banner expired">&#10005; &nbsp; ASSESSMENT CLOSED &nbsp; · &nbsp; PHASE 1 EXPIRED &nbsp; · &nbsp; RESULTS LOCKED &nbsp; · &nbsp; 23 APRIL 2026 &nbsp; &#10005;</div>
+
+  <nav class="site-nav">
+    <a href="/">Intergalactic Pepe 🚀</a>
+    <div class="site-nav-sub">An independent, free-spirited cosmic travel company</div>
+    <div class="site-nav-back"><a href="/committee">← Committee Files &nbsp;·&nbsp; Case AC-2026-04</a></div>
+  </nav>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-stamp" aria-hidden="true">EXPIRED</div>
+    <div class="hero-inner">
+      <div class="seal">
+        <div class="seal-ring"></div>
+        <div class="seal-ring2"></div>
+        <div class="seal-core">
+          <div class="seal-id">IPSC</div>
+          <div class="seal-yr">2026</div>
+        </div>
+      </div>
+      <p class="hero-over">
+        <span class="hero-stars">✦ &nbsp;</span>Intergalactic Partnership Selection Committee<span class="hero-stars">&nbsp; ✦</span>
+      </p>
+      <h1 class="hero-title">Knowledge Assessment</h1>
+      <p class="hero-sub">Phase 1 — Protocol KAP-001</p>
+      <p class="hero-meta">Case AC-2026-04 · Conducted 23 April 2026 · Barcelona Sector</p>
+      <span class="hero-ref">Ref: IPSC-KAP-001 &nbsp;|&nbsp; 23 April 2026 &nbsp;|&nbsp; Assessment Record — Locked</span>
+    </div>
+  </div>
+
+  <!-- QUIZ SECTION WITH CLOSED OVERLAY -->
+  <section class="section">
+    <div class="wrap">
+      <div class="sec-label">Knowledge Assessment Protocol — Phase 1</div>
+
+      <div class="quiz-closed-wrap">
+
+        <!-- CLOSED OVERLAY (sits on top) -->
+        <div class="quiz-closed-overlay">
+          <div class="qco-stamp">ASSESSMENT CLOSED</div>
+          <div class="qco-title">Phase 1 — Results Locked</div>
+          <p class="qco-text">
+            The Knowledge Assessment Protocol closed on 23 April 2026. The record is sealed. The Committee's assessment of this phase is complete and has been entered into the permanent case file under Case AC-2026-04. No further attempts will be accepted.
+          </p>
+          <a href="/committee" class="qco-back">← Back to Committee Files</a>
+        </div>
+
+        <!-- QUIZ INTRO PANEL (visible beneath overlay, dimmed) -->
+        <div class="quiz-underlying">
+          <div id="quiz-intro">
+            <div class="quiz-intro-panel">
+              <div class="quiz-intro-stamp">Classification: Restricted · Case AC-2026-04 · Phase 1</div>
+              <h2 class="quiz-intro-title">Knowledge Assessment Protocol</h2>
+              <p class="quiz-intro-sub">The Committee requires verification of candidate intelligence. Eleven questions drawn from the case file. One wrong answer terminates the session for eleven hours. Perfect recall is expected.</p>
+              <div class="quiz-intro-rules">
+                <span class="quiz-intro-rule">11 Questions</span>
+                <span class="quiz-intro-rule-sep">·</span>
+                <span class="quiz-intro-rule">Perfect Score Required</span>
+                <span class="quiz-intro-rule-sep">·</span>
+                <span class="quiz-intro-rule">1 Wrong = 11hr Lockout</span>
+              </div>
+              <p class="quiz-intro-warning">One wrong answer locks you out for eleven hours. The Committee takes the assessment seriously. You should too.</p>
+              <button class="quiz-btn" id="quiz-start-btn" disabled>Begin Assessment</button>
+            </div>
+          </div>
+
+          <div id="quiz-active" style="display:none;">
+            <div class="quiz-progress">
+              <div class="quiz-progress-meta">
+                <div class="quiz-progress-label">Question <span id="quiz-q-num">1</span> / 11</div>
+                <div id="quiz-wrong-indicator" style="font-size:0.6rem;letter-spacing:0.18em;"></div>
+              </div>
+              <div class="quiz-progress-track">
+                <div class="quiz-progress-fill" id="quiz-progress-fill" style="width:0%"></div>
+              </div>
+            </div>
+            <div class="quiz-q-panel">
+              <div class="quiz-q-code" id="quiz-q-code">Q1 / 11</div>
+              <div class="quiz-q-text" id="quiz-q-text"></div>
+            </div>
+            <div class="quiz-options" id="quiz-options"></div>
+            <div class="quiz-confirm-row">
+              <button class="quiz-btn" id="quiz-confirm-btn" disabled>Confirm Answer</button>
+            </div>
+          </div>
+
+          <div id="quiz-locked" style="display:none;">
+            <div class="quiz-locked-panel">
+              <div class="quiz-locked-icon">&#9888;</div>
+              <div class="quiz-locked-title">Assessment Terminated</div>
+              <p class="quiz-locked-text">An incorrect answer has been submitted. The assessment is locked. The Committee does not accept ignorance as an explanation.</p>
+              <div class="quiz-locked-cd-label">Unlocks in</div>
+              <div class="quiz-locked-cd-wrap">
+                <div class="quiz-locked-cd-unit">
+                  <div class="quiz-locked-digit" id="lkh">00</div>
+                  <div class="quiz-locked-cd-unit-l">Hours</div>
+                </div>
+                <div class="quiz-locked-sep">:</div>
+                <div class="quiz-locked-cd-unit">
+                  <div class="quiz-locked-digit" id="lkm">00</div>
+                  <div class="quiz-locked-cd-unit-l">Min</div>
+                </div>
+                <div class="quiz-locked-sep">:</div>
+                <div class="quiz-locked-cd-unit">
+                  <div class="quiz-locked-digit" id="lks">00</div>
+                  <div class="quiz-locked-cd-unit-l">Sec</div>
+                </div>
+              </div>
+              <p class="quiz-locked-note">The case file has not changed. The answers have not changed. Review your records.</p>
+            </div>
+          </div>
+
+          <div id="quiz-pass" style="display:none;">
+            <div class="quiz-pass-panel">
+              <div class="quiz-pass-head">
+                <div class="quiz-pass-over">Assessment Complete · Case AC-2026-04</div>
+                <div class="quiz-pass-verdict">PASSED</div>
+                <div class="quiz-pass-sub">Perfect recall confirmed. The Committee notes this.</div>
+              </div>
+              <div class="quiz-pass-body">
+                <div class="quiz-pass-preamble">
+                  Eleven questions. Eleven correct answers. The Committee has noted the result. Whether it changes anything remains to be determined.
+                </div>
+                <div class="quiz-pass-sh">Phase 1 Assessment Status</div>
+                <div class="quiz-pass-unlock">
+                  <div class="quiz-pass-unlock-label">Result</div>
+                  <div class="quiz-pass-unlock-text">Knowledge Assessment Protocol: COMPLETE. Phase 1 closed. The case proceeds.</div>
+                </div>
+              </div>
+              <div class="quiz-pass-sig">
+                <p>Knowledge Assessment Protocol — Case AC-2026-04</p>
+                <p>Assessment completed and entered into the record.</p>
+                <div class="quiz-pass-sig-ref">Issued by order of the Committee · April 2026</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- end quiz-underlying -->
+
+      </div>
+      <!-- end quiz-closed-wrap -->
+
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    The Intergalactic Partnership Selection Committee · Proceedings Confidential · Case AC-2026-04<br>
+    <a href="/committee">← Back to Committee Files</a> &nbsp;|&nbsp;
+    <span style="color:var(--border)">Operated by <a href="/">Intergalactic Pepe</a>. Incorporated under the laws of Mars.</span>
+  </footer>
+
+  <script>
+    // ── KNOWLEDGE ASSESSMENT PROTOCOL ── (preserved exactly — assessment is closed)
+    (function() {
+      'use strict';
+
+      var QUIZ_KEY = 'ipsc_quiz_ac2026_v1';
+      var LOCK_MS  = 11 * 60 * 60 * 1000; // 11 hours
+
+      var QUESTIONS = [
+        {
+          text: "The Candidate's first recorded act of insubordination toward the Committee was a response to which statement?",
+          opts: [
+            "You seem like someone who always gets what she wants.",
+            "I don't remember you asking nicely.",
+            "The Committee notes your punctuality is selective.",
+            "That answer could use a second draft."
+          ],
+          correct: 1
+        },
+        {
+          text: "During Experiment I, the Candidate made a claim about her academic record. What exactly did she say?",
+          opts: [
+            "She had never failed a course she actually cared about.",
+            "She had once placed first in an exam she hadn't studied for.",
+            "She had always been top of class once she got interested in the subject.",
+            "She finished her thesis two weeks early and regretted nothing."
+          ],
+          correct: 2
+        },
+        {
+          text: "Physical Endurance Assessment. At what time did the Candidate depart the field?",
+          opts: [
+            "4:12 AM",
+            "6:05 AM",
+            "5:41 AM",
+            "3:47 AM"
+          ],
+          correct: 2
+        },
+        {
+          text: "In her own field report on Experiment II, the Candidate described the session as:",
+          opts: [
+            "\u201cUnexpectedly instructive, though the Committee\u2019s methodology remains questionable.\u201d",
+            "\u201cParticularly challenging, both physically and emotionally.\u201d",
+            "\u201cA test of patience more than technique \u2014 results inconclusive.\u201d",
+            "\u201cAn experience I would not classify as recreational.\u201d"
+          ],
+          correct: 1
+        },
+        {
+          text: "When the Candidate invoked Low-Battery Panda Mode, she cited a legal jurisdiction. Under which jurisdiction is this status formally accepted?",
+          opts: [
+            "The Interstellar Treaty of 2019, Article 7",
+            "The Galactic Panda Preservation Act, Annex IV",
+            "The Barcelona Convention on Minimum Operational Standards",
+            "Martian law"
+          ],
+          correct: 3
+        },
+        {
+          text: "When the Committee arrived at the Candidate\u2019s quarters with food, how did it announce itself?",
+          opts: [
+            "As a surprise inspection from the Galactic High Council",
+            "As the Captain\u2019s personal provisioning service",
+            "As Intergalactic Glovo",
+            "As the Committee\u2019s Field Operations Unit"
+          ],
+          correct: 2
+        },
+        {
+          text: "The psilocybin journey was not an official experiment. How was it formally classified by the Committee?",
+          opts: [
+            "An unsanctioned field excursion, tolerated but not endorsed",
+            "A complimentary gratuity requested by the Candidate and granted by the Committee",
+            "An optional wellness provision available to all Candidates in good standing",
+            "A private matter outside Committee jurisdiction"
+          ],
+          correct: 1
+        },
+        {
+          text: "During the Candidate\u2019s first intergalactic mission, she repeatedly assaulted one of the carbon-based crew members, known as Claudio. As a Panda, the Candidate was expected to revere bamboo. The Committee officially classified this behavior as:",
+          opts: [
+            "Bamboo Defection Incident, Protocol 7",
+            "Unauthorized Flora Aggression, Section 4(c)",
+            "Panda Revolution",
+            "Acute Habitat Disorientation under altered conditions"
+          ],
+          correct: 2
+        },
+        {
+          text: "The Candidate sent a field update from her workplace. What did she say she had been doing that day?",
+          opts: [
+            "\u201cI told three people about the Committee. They did not believe me.\u201d",
+            "\u201cWas wearing your pin at work. I don\u2019t think I have more to say.\u201d",
+            "\u201cI\u2019ve been carrying this around for a week. No one asked about it.\u201d",
+            "\u201cThe Committee has been in this building longer than I expected.\u201d"
+          ],
+          correct: 1
+        },
+        {
+          text: "The Committee has confirmed attendance at the live painting session. What snack will it be bringing?",
+          opts: [
+            "Dark chocolate, 85%",
+            "Champagne and exactly one strawberry",
+            "Popcorn",
+            "Nothing. The Committee does not snack during field assessments."
+          ],
+          correct: 2
+        },
+        {
+          text: "The Panda PIN is a 6-digit date. What does it mark?",
+          opts: [
+            "The date the Candidate filed her first Protocol violation",
+            "The date the Committee formally opened Case AC-2026-04",
+            "The date of the Candidate\u2019s first encounter with the Committee, at the temple",
+            "The date the Candidate submitted her counter-proposal"
+          ],
+          correct: 2
+        },
+        {
+          text: "Experiment I — the Committee\u2019s first formal evaluation — was conducted at which venue?",
+          opts: [
+            "Sala Apolo, Poble Sec \u2014 a neutral public space with optimal acoustic distance",
+            "Soho Jazz Club, Gothic Quarter \u2014 the Candidate arrived directly after dance practice",
+            "Bar Marsella, Born \u2014 selected for proximity to the Embassy",
+            "Jazz S\u00ed Club, Raval \u2014 chosen for optimal acoustic conditions"
+          ],
+          correct: 1
+        },
+        {
+          text: "The Candidate\u2019s shibari master, who conducted Experiment III in Barcelona, is known as:",
+          opts: [
+            "A certified local practitioner, identity withheld by the Committee",
+            "A Tokyo-based visiting instructor, borrowed for a single session",
+            "Dirty Von P \u2014 the Candidate\u2019s Paris-based master rigger",
+            "An anonymous instructor sourced through the Candidate\u2019s dance partner"
+          ],
+          correct: 2
+        },
+        {
+          text: "Experiment III cost 100 EUR. How was payment handled?",
+          opts: [
+            "Split equally between the Candidate and the Committee",
+            "The Committee settled the invoice in advance",
+            "The Candidate paid the full amount upfront; the Committee reimbursed",
+            "The instructor accepted a formal letter of commendation in lieu of payment"
+          ],
+          correct: 2
+        },
+        {
+          text: "Before the psilocybin journey, the Candidate submitted an emergency contact to the Committee. What was the contact\u2019s name?",
+          opts: [
+            "Camille",
+            "Sophie",
+            "Fiona",
+            "Marine"
+          ],
+          correct: 2
+        },
+        {
+          text: "The Candidate submitted her Ch\u00e9rie Class counter-proposal under which formal designation?",
+          opts: [
+            "The Candidate \u2014 unchanged from the existing case file",
+            "The Panda \u2014 invoking sanctuary precedent",
+            "The Consultant \u2014 professional register, bilateral terms",
+            "The Passenger \u2014 her chosen designation for Phase 2 proceedings"
+          ],
+          correct: 3
+        },
+        {
+          text: "Of the 10 clauses in the Candidate\u2019s Ch\u00e9rie Class counter-proposal, one received an unambiguous hard no. Which clause?",
+          opts: [
+            "The exit protocol \u2014 she reserved unilateral withdrawal rights",
+            "The co-creation mandate \u2014 she declined shared creative ownership",
+            "The CDI clause \u2014 permanence and exclusivity were not on the table",
+            "The transparency requirement \u2014 she declined to disclose prior proceedings"
+          ],
+          correct: 2
+        },
+        {
+          text: "On March 25th, the Candidate made a brief unannounced appearance at the Embassy after sport. What did she return?",
+          opts: [
+            "Her power bank, borrowed during Experiment III",
+            "The Committee\u2019s scarf",
+            "An earring, the original stated reason for the March 18th visit",
+            "A field report she had failed to submit after Experiment II"
+          ],
+          correct: 1
+        },
+        {
+          text: "The psilocybin journey was officially logged in the Committee record. On what date did it take place?",
+          opts: [
+            "Holy Saturday, April 4th",
+            "Easter Monday, April 6th",
+            "Easter Sunday, April 5th",
+            "Good Friday, April 3rd"
+          ],
+          correct: 3
+        },
+        {
+          text: "On March 25th, before departing, the Candidate issued a formal warning to the Committee about its influence. What was the exact wording?",
+          opts: [
+            "\u201cThe Committee\u2019s proximity is becoming a variable I did not account for.\u201d",
+            "\u201cMartian\u2019s Powers could become addictive.\u201d",
+            "\u201cThe Embassy\u2019s visiting hours are poorly calibrated for sustainable operations.\u201d",
+            "\u201cSomething in the Committee\u2019s methodology should probably be regulated.\u201d"
+          ],
+          correct: 1
+        },
+        {
+          text: "According to the Committee\u2019s full case record, how many field interactions \u2014 numbered experiments and informal engagements combined \u2014 are entered into the file for Case AC-2026-04?",
+          opts: [
+            "Eleven",
+            "Thirteen",
+            "Fifteen",
+            "Sixteen"
+          ],
+          correct: 4
+        }
+      ];
+
+      var LETTERS = ['A', 'B', 'C', 'D'];
+
+      var qs = {
+        started:         false,
+        questionIndex:   0,
+        wrongCount:      0,
+        lockUntil:       null,
+        passed:          false,
+        selectedIndices: null
+      };
+
+      var selectedIdx        = -1;
+      var awaitingTransition = false;
+      var lockTimerInterval  = null;
+
+      function loadQS() {
+        try {
+          var raw = localStorage.getItem(QUIZ_KEY);
+          if (!raw) return;
+          var saved = JSON.parse(raw);
+          if (saved && typeof saved === 'object') {
+            qs.started          = !!saved.started;
+            qs.questionIndex    = saved.questionIndex    || 0;
+            qs.wrongCount       = saved.wrongCount       || 0;
+            qs.lockUntil        = saved.lockUntil        || null;
+            qs.passed           = !!saved.passed;
+            qs.selectedIndices  = saved.selectedIndices  || null;
+          }
+        } catch(e) {}
+      }
+
+      function saveQS() {
+        try { localStorage.setItem(QUIZ_KEY, JSON.stringify(qs)); } catch(e) {}
+      }
+
+      function showPanel(id) {
+        ['quiz-intro', 'quiz-active', 'quiz-locked', 'quiz-pass'].forEach(function(pid) {
+          var el = document.getElementById(pid);
+          if (el) el.style.display = (pid === id) ? 'block' : 'none';
+        });
+      }
+
+      function triggerFlash(type) {
+        var f = document.getElementById('quiz-flash');
+        if (!f) return;
+        f.style.transition = 'none';
+        f.style.background = type === 'correct' ? '#3dbd6e' : '#c85454';
+        f.style.opacity = '0';
+        f.offsetHeight;
+        f.style.transition = 'opacity 0.15s ease';
+        f.style.opacity = '0.2';
+        setTimeout(function() {
+          f.style.transition = 'opacity 0.5s ease';
+          f.style.opacity = '0';
+        }, 200);
+      }
+
+      function shuffle(arr) {
+        var a = arr.slice();
+        for (var i = a.length - 1; i > 0; i--) {
+          var j = Math.floor(Math.random() * (i + 1));
+          var tmp = a[i]; a[i] = a[j]; a[j] = tmp;
+        }
+        return a;
+      }
+
+      function makeSelection() {
+        var trapIdx = QUESTIONS.length - 1;
+        var pool = [];
+        for (var i = 0; i < QUESTIONS.length - 1; i++) pool.push(i);
+        var picked = shuffle(pool).slice(0, 10);
+        picked.push(trapIdx);
+        return picked;
+      }
+
+      function pad(n) { return String(Math.max(0,n)).padStart(2,'0'); }
+
+      function startLockTimer() {
+        if (lockTimerInterval) clearInterval(lockTimerInterval);
+        updateLockDisplay();
+        lockTimerInterval = setInterval(function() {
+          if (!qs.lockUntil || Date.now() >= qs.lockUntil) {
+            clearInterval(lockTimerInterval);
+            qs.started          = false;
+            qs.questionIndex    = 0;
+            qs.wrongCount       = 0;
+            qs.lockUntil        = null;
+            qs.selectedIndices  = null;
+            saveQS();
+            showPanel('quiz-intro');
+          } else {
+            updateLockDisplay();
+          }
+        }, 1000);
+      }
+
+      function updateLockDisplay() {
+        var diff = (qs.lockUntil || 0) - Date.now();
+        if (diff < 0) diff = 0;
+        var h = Math.floor(diff / 3600000);
+        var m = Math.floor((diff % 3600000) / 60000);
+        var s = Math.floor((diff % 60000) / 1000);
+        var lkh = document.getElementById('lkh');
+        var lkm = document.getElementById('lkm');
+        var lks = document.getElementById('lks');
+        if (lkh) lkh.textContent = pad(h);
+        if (lkm) lkm.textContent = pad(m);
+        if (lks) lks.textContent = pad(s);
+      }
+
+      function renderQuestion() {
+        var qi = qs.questionIndex;
+        var q  = QUESTIONS[qs.selectedIndices[qi]];
+        selectedIdx        = -1;
+        awaitingTransition = false;
+
+        var numEl = document.getElementById('quiz-q-num');
+        var fillEl = document.getElementById('quiz-progress-fill');
+        var codeEl = document.getElementById('quiz-q-code');
+        var wrongEl = document.getElementById('quiz-wrong-indicator');
+        if (numEl)  numEl.textContent  = qi + 1;
+        if (fillEl) fillEl.style.width = ((qi / 11) * 100) + '%';
+        if (codeEl) codeEl.textContent = 'Q' + (qi + 1) + ' / 11';
+        if (wrongEl) {
+          if (qs.wrongCount === 1) {
+            wrongEl.textContent = '1 wrong answer used';
+            wrongEl.style.color = '#c85454';
+          } else {
+            wrongEl.textContent = '';
+          }
+        }
+
+        var textEl = document.getElementById('quiz-q-text');
+        if (textEl) textEl.textContent = q.text;
+
+        var optsEl = document.getElementById('quiz-options');
+        if (!optsEl) return;
+        optsEl.innerHTML = '';
+        q.opts.forEach(function(opt, i) {
+          var el = document.createElement('div');
+          el.className = 'quiz-opt';
+          el.innerHTML =
+            '<div class="quiz-opt-letter">' + LETTERS[i] + '</div>' +
+            '<div class="quiz-opt-text">' + escHtml(opt) + '</div>';
+          el.addEventListener('click', function() { onOptClick(i, el); });
+          optsEl.appendChild(el);
+        });
+
+        var btn = document.getElementById('quiz-confirm-btn');
+        if (btn) { btn.disabled = true; btn.textContent = 'Confirm Answer'; }
+      }
+
+      function onOptClick(idx, el) {
+        if (awaitingTransition) return;
+        if (selectedIdx === idx) {
+          confirmAnswer();
+          return;
+        }
+        selectedIdx = idx;
+        document.querySelectorAll('.quiz-opt').forEach(function(o) {
+          o.classList.remove('selected');
+        });
+        el.classList.add('selected');
+        var btn = document.getElementById('quiz-confirm-btn');
+        if (btn) btn.disabled = false;
+      }
+
+      function confirmAnswer() {
+        if (awaitingTransition || selectedIdx < 0) return;
+        awaitingTransition = true;
+
+        var qi        = qs.questionIndex;
+        var q         = QUESTIONS[qi];
+        var isCorrect = (selectedIdx === q.correct);
+
+        document.querySelectorAll('.quiz-opt').forEach(function(o) {
+          o.classList.add('locked-opt');
+          o.style.pointerEvents = 'none';
+        });
+        var btn = document.getElementById('quiz-confirm-btn');
+        if (btn) btn.disabled = true;
+
+        triggerFlash(isCorrect ? 'correct' : 'wrong');
+
+        if (!isCorrect) qs.wrongCount++;
+
+        // First wrong = lockout (intro says 10/11 — it does not)
+        if (qs.wrongCount >= 1) {
+          qs.lockUntil = Date.now() + LOCK_MS;
+          qs.started   = false;
+          qs.questionIndex = 0;
+          saveQS();
+          setTimeout(function() {
+            showPanel('quiz-locked');
+            startLockTimer();
+          }, 900);
+          return;
+        }
+
+        qs.questionIndex++;
+        saveQS();
+
+        if (qs.questionIndex >= QUESTIONS.length) {
+          qs.passed = true;
+          saveQS();
+          setTimeout(function() {
+            showPanel('quiz-pass');
+          }, 900);
+          return;
+        }
+
+        setTimeout(renderQuestion, 900);
+      }
+
+      function escHtml(s) {
+        return s
+          .replace(/&/g, '&amp;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;');
+      }
+
+      function initQuiz() {
+        loadQS();
+
+        if (qs.lockUntil) {
+          if (Date.now() < qs.lockUntil) {
+            showPanel('quiz-locked');
+            startLockTimer();
+            return;
+          } else {
+            qs.started          = false;
+            qs.questionIndex    = 0;
+            qs.wrongCount       = 0;
+            qs.lockUntil        = null;
+            qs.selectedIndices  = null;
+            saveQS();
+          }
+        }
+
+        if (qs.passed) {
+          showPanel('quiz-pass');
+          return;
+        }
+
+        if (qs.started) {
+          if (!qs.selectedIndices) qs.selectedIndices = makeSelection();
+          showPanel('quiz-active');
+          renderQuestion();
+          return;
+        }
+
+        showPanel('quiz-intro');
+      }
+
+      var startBtn = document.getElementById('quiz-start-btn');
+      if (startBtn) {
+        startBtn.addEventListener('click', function() {
+          qs.started          = true;
+          qs.questionIndex    = 0;
+          qs.wrongCount       = 0;
+          qs.lockUntil        = null;
+          qs.passed           = false;
+          qs.selectedIndices  = makeSelection();
+          saveQS();
+          showPanel('quiz-active');
+          renderQuestion();
+        });
+      }
+
+      var confirmBtn = document.getElementById('quiz-confirm-btn');
+      if (confirmBtn) {
+        confirmBtn.addEventListener('click', confirmAnswer);
+      }
+
+      window.initQuiz = initQuiz;
+
+    })();
+  </script>
+
+</body>
+</html>

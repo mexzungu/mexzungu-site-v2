@@ -1,0 +1,904 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#080809">
+  <title>The Committee — Phase 1 Reveal (Expired)</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/fonts.css">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --pink:      #E14B87;
+      --pink-glow: rgba(225,75,135,0.25);
+      --pink-dim:  rgba(225,75,135,0.07);
+      --bg:        #080809;
+      --text:      #ddd5cc;
+      --mid:       #7a7068;
+      --dim:       #3d3835;
+      --border:    #181614;
+      --heading:   'RocknRoll One', sans-serif;
+      --sans:      'Space Grotesk', -apple-system, sans-serif;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--sans);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      pointer-events: none; z-index: 999;
+      opacity: 0.025;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      background-size: 256px 256px;
+    }
+
+    .wrap { max-width: 680px; margin: 0 auto; padding: 0 20px; }
+
+    /* ── PHASE STATUS BANNER ── */
+    .phase-banner {
+      text-align: center;
+      padding: 0.55rem 1rem;
+      font-size: 0.56rem;
+      letter-spacing: 0.32em;
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+    .phase-banner.expired {
+      background: rgba(180,40,80,0.1);
+      color: rgba(225,75,135,0.75);
+      border-bottom: 1px solid rgba(225,75,135,0.18);
+    }
+
+    /* ── HERO STAMP ── */
+    .hero-stamp {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -35%) rotate(-14deg);
+      font-family: var(--heading);
+      font-size: clamp(2.2rem,8vw,5rem);
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: rgba(225,75,135,0.3);
+      border: 2.5px solid rgba(225,75,135,0.28);
+      padding: 0.3rem 0.9rem;
+      pointer-events: none;
+      z-index: 2;
+      white-space: nowrap;
+      user-select: none;
+    }
+
+    /* ── NAV ── */
+    .site-nav {
+      padding: 1.25rem 1.5rem;
+      text-align: center;
+      border-bottom: 1px solid var(--border);
+    }
+    .site-nav a {
+      font-family: var(--heading);
+      font-size: 0.95rem;
+      color: var(--mid);
+      text-decoration: none;
+    }
+    .site-nav-sub {
+      font-size: 0.6rem;
+      color: var(--dim);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      margin-top: 0.2rem;
+    }
+    .site-nav-back {
+      font-size: 0.56rem;
+      color: var(--dim);
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      margin-top: 0.4rem;
+    }
+    .site-nav-back a { font-family: var(--sans); font-size: 0.56rem; color: var(--dim); text-decoration: none; }
+    .site-nav-back a:hover { color: var(--pink); }
+
+    /* ── HERO ── */
+    .hero {
+      background: var(--bg);
+      text-align: center;
+      padding: 4rem 1.5rem 3rem;
+      border-bottom: 1px solid var(--border);
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; inset: 0; pointer-events: none; opacity: 0.07;
+      background-image:
+        radial-gradient(2px 2px at 4% 9%,   #fff 100%,transparent),
+        radial-gradient(1px 1px at 10% 34%,  #E14B87 100%,transparent),
+        radial-gradient(2px 2px at 16% 61%,  #fff 100%,transparent),
+        radial-gradient(3px 2px at 23% 19%,  #E14B87 100%,transparent),
+        radial-gradient(1px 2px at 31% 47%,  #fff 100%,transparent),
+        radial-gradient(2px 1px at 39% 77%,  #E14B87 100%,transparent),
+        radial-gradient(2px 2px at 47% 11%,  #fff 100%,transparent),
+        radial-gradient(3px 2px at 54% 39%,  #E14B87 100%,transparent),
+        radial-gradient(1px 2px at 62% 67%,  #fff 100%,transparent),
+        radial-gradient(2px 1px at 69% 23%,  #E14B87 100%,transparent),
+        radial-gradient(2px 2px at 76% 51%,  #fff 100%,transparent),
+        radial-gradient(4px 2px at 82% 13%,  #E14B87 100%,transparent),
+        radial-gradient(2px 2px at 7%  83%,  #fff 100%,transparent),
+        radial-gradient(1px 2px at 51% 91%,  #E14B87 100%,transparent),
+        radial-gradient(2px 1px at 72% 87%,  #fff 100%,transparent);
+      background-size: 110px 90px;
+    }
+    .hero::after {
+      content: '';
+      position: absolute;
+      width: 520px; height: 150px;
+      border: 1px solid rgba(225,75,135,0.07);
+      border-radius: 50%;
+      top: 50%; left: 50%;
+      transform: translate(-50%,-50%) rotate(-7deg);
+      pointer-events: none;
+    }
+    .hero-inner { position: relative; z-index: 1; }
+
+    .seal {
+      position: relative;
+      width: 96px; height: 96px;
+      margin: 0 auto 1.75rem;
+    }
+    .seal-ring {
+      position: absolute; inset: 0;
+      border: 1px dashed rgba(225,75,135,0.3);
+      border-radius: 50%;
+      animation: sealSpin 22s linear infinite;
+    }
+    .seal-ring2 {
+      position: absolute; inset: 7px;
+      border: 1px solid rgba(225,75,135,0.12);
+      border-radius: 50%;
+    }
+    .seal-core {
+      position: absolute; inset: 14px;
+      border: 1.5px solid var(--pink);
+      border-radius: 50%;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      background: var(--pink-dim);
+      box-shadow: 0 0 24px rgba(225,75,135,0.1);
+    }
+    .seal-id {
+      font-family: var(--heading);
+      font-size: 0.9rem; color: var(--pink);
+      letter-spacing: 0.1em; line-height: 1;
+    }
+    .seal-yr {
+      font-size: 0.48rem; color: var(--dim);
+      letter-spacing: 0.2em; margin-top: 2px;
+    }
+    @keyframes sealSpin { to { transform: rotate(360deg); } }
+
+    .hero-over {
+      font-size: 0.6rem; letter-spacing: 0.4em;
+      text-transform: uppercase; color: var(--pink);
+      margin-bottom: 0.75rem;
+    }
+    .hero-stars { opacity: 0.38; }
+    .hero-title {
+      font-family: var(--heading);
+      font-size: clamp(1.9rem,5vw,2.9rem);
+      color: #fafafa; margin-bottom: 0.4rem;
+    }
+    .hero-sub {
+      font-family: var(--heading);
+      font-size: clamp(1rem,2.5vw,1.45rem);
+      color: var(--pink); font-weight: 400;
+      letter-spacing: 0.04em; margin-bottom: 0.65rem;
+    }
+    .hero-meta {
+      font-size: 0.7rem; color: var(--dim);
+      letter-spacing: 0.1em;
+    }
+    .hero-ref {
+      display: inline-block;
+      margin-top: 1.25rem;
+      padding: 0.35rem 0.9rem;
+      border: 1px solid var(--border);
+      font-size: 0.6rem; letter-spacing: 0.12em;
+      color: var(--dim); font-family: 'Courier New', monospace;
+    }
+
+    /* ── SHARED SECTION STYLES ── */
+    .section { padding: 2.75rem 0; border-bottom: 1px solid var(--border); }
+    .sec-label {
+      font-size: 0.58rem; letter-spacing: 0.35em;
+      text-transform: uppercase; color: var(--dim);
+      margin-bottom: 1.5rem;
+    }
+
+    /* ── APPLICATION TRACKER ── */
+    .tracker { display: flex; flex-direction: column; }
+    .t-step {
+      display: grid;
+      grid-template-columns: 26px 1fr auto;
+      gap: 14px; align-items: start;
+      padding: 0.9rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .t-step:last-child { border-bottom: none; }
+    .t-icon {
+      width: 22px; height: 22px;
+      border-radius: 50%; display: flex;
+      align-items: center; justify-content: center;
+      font-size: 0.62rem; margin-top: 1px; flex-shrink: 0;
+    }
+    .t-icon.done  { background: rgba(225,75,135,0.12); border: 1px solid var(--pink); color: var(--pink); }
+    .t-icon.live  { background: var(--pink-dim); border: 1px solid rgba(225,75,135,0.4); color: var(--pink); animation: livePulse 2s ease-in-out infinite; }
+    .t-icon.wait  { background: transparent; border: 1px solid var(--border); color: var(--dim); }
+    @keyframes livePulse {
+      0%,100% { box-shadow: 0 0 0 0 rgba(225,75,135,0); }
+      50%      { box-shadow: 0 0 0 5px rgba(225,75,135,0.1); }
+    }
+    .t-name { font-size: 0.82rem; font-weight: 500; letter-spacing: 0.03em; }
+    .t-name.done { color: var(--text); }
+    .t-name.live { color: var(--pink); }
+    .t-name.wait { color: var(--dim); }
+    .t-detail { font-size: 0.7rem; color: var(--dim); margin-top: 2px; line-height: 1.5; }
+    .t-badge {
+      font-size: 0.54rem; letter-spacing: 0.14em;
+      text-transform: uppercase; padding: 2px 7px;
+      white-space: nowrap; align-self: start; margin-top: 2px;
+    }
+    .t-badge.done { background: rgba(225,75,135,0.1); color: var(--pink); }
+    .t-badge.live { background: var(--pink-dim); color: var(--pink); border: 1px solid rgba(225,75,135,0.3); }
+    .t-badge.wait { background: transparent; color: var(--dim); border: 1px solid var(--border); }
+
+    /* ── FIELD EXPERIMENTS ── */
+    .exp-grid {
+      display: flex; flex-direction: column;
+      gap: 1px; background: var(--border);
+      border: 1px solid var(--border);
+    }
+    .exp-row {
+      background: var(--bg);
+      display: grid;
+      grid-template-columns: 2.2rem 1fr auto;
+      gap: 0.75rem;
+      align-items: start;
+      padding: 0.85rem 1rem;
+    }
+    .exp-num {
+      font-family: var(--heading);
+      font-size: 0.65rem; letter-spacing: 0.12em;
+      color: var(--pink); padding-top: 2px;
+    }
+    .exp-codename {
+      font-size: 0.78rem; font-weight: 500;
+      color: var(--text); letter-spacing: 0.02em;
+    }
+    .exp-meta {
+      font-size: 0.67rem; color: var(--dim);
+      margin-top: 3px; line-height: 1.55;
+    }
+    .exp-badge {
+      font-size: 0.52rem; letter-spacing: 0.14em;
+      text-transform: uppercase; padding: 2px 7px;
+      background: rgba(225,75,135,0.1); color: var(--pink);
+      white-space: nowrap; align-self: start; margin-top: 2px;
+    }
+    .exp-note {
+      font-size: 0.72rem; font-style: italic;
+      color: var(--dim); line-height: 1.7;
+      margin-top: 1rem;
+    }
+
+    /* ── STATISTICS ── */
+    .stats-intro {
+      font-size: 0.85rem; font-style: italic;
+      color: var(--mid); margin-bottom: 1.5rem; line-height: 1.75;
+    }
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(2,1fr);
+      gap: 1px; background: var(--border);
+      border: 1px solid var(--border);
+      margin-bottom: 1.25rem;
+    }
+    .stat {
+      background: var(--bg);
+      padding: 1.25rem 1rem; text-align: center;
+    }
+    .stat-n {
+      font-family: var(--heading);
+      font-size: clamp(1.8rem,4vw,2.5rem);
+      color: var(--text); line-height: 1; margin-bottom: 0.4rem;
+    }
+    .stat-n.pink { color: var(--pink); }
+    .stat-l {
+      font-size: 0.6rem; letter-spacing: 0.1em;
+      color: var(--dim); text-transform: uppercase; line-height: 1.5;
+    }
+    .stats-note {
+      font-size: 0.78rem; font-style: italic;
+      color: var(--dim); line-height: 1.7;
+    }
+
+    /* ── DISCLAIMER ── */
+    .disclaimer {
+      padding: 1.5rem 1.25rem;
+      border: 1px solid var(--border);
+      background: rgba(225,75,135,0.025);
+    }
+    .disclaimer-title {
+      font-size: 0.58rem; letter-spacing: 0.25em;
+      text-transform: uppercase; color: var(--pink); margin-bottom: 0.65rem;
+    }
+    .disclaimer p {
+      font-size: 0.8rem; line-height: 1.8; color: var(--dim);
+    }
+
+    /* ── COUNTDOWN ── */
+    .countdown-section {
+      padding: 4rem 0;
+      text-align: center;
+      border-bottom: 1px solid var(--border);
+    }
+    .cd-label {
+      font-size: 0.58rem; letter-spacing: 0.35em;
+      text-transform: uppercase; color: var(--dim); margin-bottom: 2rem;
+    }
+    .cd-wrap {
+      display: flex; align-items: flex-start;
+      justify-content: center; gap: 8px;
+    }
+    .cd-unit { display: flex; flex-direction: column; align-items: center; gap: 6px; }
+    .cd-digit {
+      font-family: var(--heading);
+      font-size: clamp(100px,22vw,200px);
+      color: var(--pink); line-height: 1;
+      text-shadow: 0 0 60px var(--pink-glow), 0 0 120px rgba(225,75,135,0.2);
+      min-width: clamp(90px,20vw,160px);
+      text-align: center;
+      transition: text-shadow 0.6s ease;
+    }
+    .cd-unit-l {
+      font-size: 0.56rem; letter-spacing: 0.22em;
+      color: var(--dim); text-transform: uppercase;
+    }
+    .cd-sep {
+      font-family: var(--heading);
+      font-size: clamp(80px,18vw,160px);
+      color: var(--pink); opacity: 0.18;
+      line-height: 1; margin-top: 4px;
+    }
+    .cd-target {
+      margin-top: 1.5rem; font-size: 0.66rem;
+      letter-spacing: 0.2em; color: var(--dim);
+      text-transform: uppercase;
+    }
+
+    /* ── PROCEEDINGS ── */
+    .proceedings-section { padding: 2.75rem 0; border-bottom: 1px solid var(--border); }
+    .log-entry {
+      display: grid;
+      grid-template-columns: 50px 1fr;
+      gap: 16px; margin-bottom: 2rem;
+      opacity: 0; animation: entryIn 0.5s ease forwards;
+    }
+    @keyframes entryIn {
+      from { opacity:0; transform: translateY(5px); }
+      to   { opacity:1; transform: translateY(0); }
+    }
+    .l-time { font-size: 0.68rem; color: var(--pink); opacity: 0.6; padding-top: 2px; }
+    .l-title { font-size: 0.66rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--text); margin-bottom: 0.4rem; }
+    .l-text  { font-size: 0.88rem; line-height: 1.82; color: var(--mid); font-style: italic; }
+    .l-badge {
+      display: inline-block; margin-top: 0.5rem;
+      font-size: 0.54rem; letter-spacing: 0.18em;
+      color: var(--pink); border: 1px solid rgba(225,75,135,0.22);
+      padding: 2px 7px; text-transform: uppercase;
+    }
+    .no-entries { font-size: 0.85rem; font-style: italic; color: var(--dim); text-align: center; padding: 1rem 0; }
+
+    /* ── RULING ── */
+    #ruling { display: none; padding: 3.5rem 0; }
+    #ruling.revealed { display: block; animation: revealIn 1s ease forwards; }
+    @keyframes revealIn { from { opacity: 0; } to { opacity: 1; } }
+
+    .r-flash {
+      position: fixed; inset: 0; background: var(--pink);
+      opacity: 0; pointer-events: none; z-index: 998;
+    }
+    .r-flash.go { animation: flashPop 0.8s ease forwards; }
+    @keyframes flashPop { 0%{opacity:0} 18%{opacity:0.18} 100%{opacity:0} }
+
+    .r-head { text-align: center; padding-bottom: 3rem; border-bottom: 1px solid var(--border); margin-bottom: 3rem; }
+    .r-over { font-size: 0.58rem; letter-spacing: 0.35em; text-transform: uppercase; color: var(--dim); margin-bottom: 1.25rem; }
+    .r-title { font-family: var(--heading); font-size: clamp(2rem,5vw,3.2rem); color: #fafafa; margin-bottom: 0.5rem; }
+    .r-case  { font-size: 0.7rem; color: var(--dim); letter-spacing: 0.1em; }
+
+    .r-verdict { text-align: center; padding: 3rem 0; border-bottom: 1px solid var(--border); margin-bottom: 3rem; }
+    .r-v-label { font-size: 0.58rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--dim); margin-bottom: 1rem; }
+    .r-decision {
+      font-family: var(--heading);
+      font-size: clamp(3.5rem,14vw,6.5rem);
+      color: var(--pink); line-height: 1;
+      text-shadow: 0 0 60px var(--pink-glow), 0 0 120px rgba(225,75,135,0.12);
+    }
+    .r-vote { margin-top: 0.75rem; font-size: 0.7rem; letter-spacing: 0.12em; color: var(--mid); font-style: italic; }
+
+    .r-body { font-size: 0.95rem; line-height: 1.85; }
+    .r-preamble {
+      color: var(--mid); font-style: italic;
+      border-left: 2px solid var(--pink);
+      padding: 1rem 1.25rem;
+      background: var(--pink-dim);
+      margin-bottom: 2.5rem;
+    }
+    .r-sh {
+      font-size: 0.58rem; letter-spacing: 0.3em;
+      text-transform: uppercase; color: var(--pink);
+      margin: 2rem 0 0.7rem;
+    }
+    .r-sh::before { content: '◆ '; opacity: 0.45; }
+    .r-p { color: var(--mid); margin-bottom: 0.75rem; }
+    .r-p strong { color: var(--text); }
+    .r-p em { color: var(--dim); }
+
+    .r-cond { list-style: none; border-top: 1px solid var(--border); margin: 1.5rem 0; }
+    .r-cond li {
+      display: grid; grid-template-columns: 22px 1fr; gap: 14px;
+      padding: 1.1rem 0; border-bottom: 1px solid var(--border);
+      color: var(--mid); font-size: 0.92rem; line-height: 1.75;
+    }
+    .r-cond li:last-child { border-bottom: none; }
+    .cnum { font-size: 0.6rem; color: var(--pink); padding-top: 3px; }
+
+    .r-sig { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border); text-align: right; }
+    .r-sig p { font-style: italic; color: var(--dim); margin-bottom: 0.4rem; line-height: 1.75; }
+    .r-sig .r-sig-main { color: var(--mid); font-size: 1rem; }
+    .r-sig .r-sig-key  { color: var(--text); font-style: normal; font-weight: 500; margin-top: 0.5rem; }
+    .r-sig .r-sig-ref  { font-size: 0.58rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--pink); margin-top: 1rem; }
+
+    /* ── FOOTER ── */
+    .site-footer {
+      text-align: center; padding: 2rem 1.5rem;
+      border-top: 1px solid var(--border);
+      font-size: 0.65rem; color: var(--dim); letter-spacing: 0.08em; line-height: 1.9;
+    }
+    .site-footer a { color: var(--dim); text-decoration: none; }
+
+    @media (max-width: 480px) {
+      .t-step  { grid-template-columns: 24px 1fr auto; gap: 10px; }
+      .log-entry { grid-template-columns: 42px 1fr; gap: 12px; }
+      .r-cond li { grid-template-columns: 18px 1fr; gap: 10px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- PHASE STATUS BANNER -->
+  <div class="phase-banner expired">&#10005; &nbsp; PHASE 1 CLOSED &nbsp; · &nbsp; EXPIRED &nbsp; · &nbsp; ARCHIVED 23 APRIL 2026 &nbsp; · &nbsp; READ ONLY &nbsp; &#10005;</div>
+
+  <div class="r-flash" id="flash"></div>
+
+  <nav class="site-nav">
+    <a href="/">Intergalactic Pepe 🚀</a>
+    <div class="site-nav-sub">An independent, free-spirited cosmic travel company</div>
+    <div class="site-nav-back"><a href="/committee">← Committee Files &nbsp;·&nbsp; Case AC-2026-04</a></div>
+  </nav>
+
+  <!-- COUNTDOWN — hidden by JS since target date has passed -->
+  <section class="countdown-section" id="countdown-section">
+    <div class="wrap">
+      <div class="cd-label">Ruling published in</div>
+      <div class="cd-wrap">
+        <div class="cd-unit">
+          <div class="cd-digit" id="cdh">00</div>
+          <div class="cd-unit-l">Hours</div>
+        </div>
+        <div class="cd-sep">:</div>
+        <div class="cd-unit">
+          <div class="cd-digit" id="cdm">00</div>
+          <div class="cd-unit-l">Min</div>
+        </div>
+        <div class="cd-sep">:</div>
+        <div class="cd-unit">
+          <div class="cd-digit" id="cds">00</div>
+          <div class="cd-unit-l">Sec</div>
+        </div>
+      </div>
+      <div class="cd-target">23 April 2026 · 23:59 · Barcelona</div>
+    </div>
+  </section>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-stamp" aria-hidden="true">EXPIRED</div>
+    <div class="hero-inner">
+      <div class="seal">
+        <div class="seal-ring"></div>
+        <div class="seal-ring2"></div>
+        <div class="seal-core">
+          <div class="seal-id">IPSC</div>
+          <div class="seal-yr">2026</div>
+        </div>
+      </div>
+      <p class="hero-over">
+        <span class="hero-stars">✦ &nbsp;</span>Intergalactic Partnership Selection Committee<span class="hero-stars">&nbsp; ✦</span>
+      </p>
+      <h1 class="hero-title">The Committee</h1>
+      <p class="hero-sub">Final Ruling — In Camera</p>
+      <p class="hero-meta">Case AC-2026-04 · The Candidate's Application · Barcelona Sector, Third Orbit</p>
+      <span class="hero-ref">Ref: IPSC-RULING-001 &nbsp;|&nbsp; 23 April 2026 &nbsp;|&nbsp; Restricted Circulation</span>
+    </div>
+  </div>
+
+  <!-- APPLICATION TRACKER -->
+  <section class="section">
+    <div class="wrap">
+      <div class="sec-label">Application Status — Case AC-2026-04</div>
+      <div class="tracker">
+        <div class="t-step">
+          <div class="t-icon done">✓</div>
+          <div>
+            <div class="t-name done">Stage I — Initial contact &amp; pre-screening</div>
+            <div class="t-detail">Candidate passed preliminary review. File opened by the Committee.</div>
+          </div>
+          <div class="t-badge done">Complete</div>
+        </div>
+        <div class="t-step">
+          <div class="t-icon done">✓</div>
+          <div>
+            <div class="t-name done">Stage II — Counter-proposal (10 clauses)</div>
+            <div class="t-detail">9 of 10 clauses ratified. 1 deferred pending in-person assessment.</div>
+          </div>
+          <div class="t-badge done">Complete</div>
+        </div>
+        <div class="t-step">
+          <div class="t-icon done">✓</div>
+          <div>
+            <div class="t-name done">Stage III — The Manuscript</div>
+            <div class="t-detail">Polyamory manuscript received and entered into the record. Reviewed in full.</div>
+          </div>
+          <div class="t-badge done">Complete</div>
+        </div>
+        <div class="t-step">
+          <div class="t-icon done">✓</div>
+          <div>
+            <div class="t-name done">Stage IV — Meeting documentation</div>
+            <div class="t-detail">4-hour unsolicited meeting notes received and reviewed by the Committee.</div>
+          </div>
+          <div class="t-badge done">Complete</div>
+        </div>
+        <div class="t-step">
+          <div class="t-icon done">✓</div>
+          <div>
+            <div class="t-name done">Stage V — Supplementary materials</div>
+            <div class="t-detail">All supplementary exhibits received. Evidentiary record sealed.</div>
+          </div>
+          <div class="t-badge done">Complete</div>
+        </div>
+        <div class="t-step">
+          <div class="t-icon done">✓</div>
+          <div>
+            <div class="t-name done">Stage VI — Committee deliberation</div>
+            <div class="t-detail">Voting complete. Three rounds. Outcome determined 23 April 2026.</div>
+          </div>
+          <div class="t-badge done">Complete</div>
+        </div>
+        <div class="t-step">
+          <div class="t-icon done">✓</div>
+          <div>
+            <div class="t-name done">Stage VII — Final ruling</div>
+            <div class="t-detail">Published 23 April 2026 at 23:59:59 precisely.</div>
+          </div>
+          <div class="t-badge done">Complete</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FIELD EXPERIMENTS -->
+  <section class="section">
+    <div class="wrap">
+      <div class="sec-label">Field Experiments — Conducted Under Committee Observation</div>
+      <div class="exp-grid">
+        <div class="exp-row">
+          <div class="exp-num">I</div>
+          <div>
+            <div class="exp-codename">Jazz Calibration — Soho House, Gothic Quarter</div>
+            <div class="exp-meta">11 March 2026 · Wednesday · 21:00 · First in-person field session. Candidate arrived post-dance practice. Preliminary compatibility assessment conducted across three hours. Committee observer note: "Performance significantly exceeded baseline projection."</div>
+          </div>
+          <div class="exp-badge">Complete</div>
+        </div>
+        <div class="exp-row">
+          <div class="exp-num">II</div>
+          <div>
+            <div class="exp-codename">Physical Endurance Assessment — Indoor Bouldering</div>
+            <div class="exp-meta">14 March 2026 · Saturday · Extended duration. Candidate demonstrated both athletic aptitude and exceptional post-session resilience. Assessment period concluded Sunday 05:41. Committee observer note: "Duration of engagement exceeded protocol. No objections filed."</div>
+          </div>
+          <div class="exp-badge">Complete</div>
+        </div>
+        <div class="exp-row">
+          <div class="exp-num">III</div>
+          <div>
+            <div class="exp-codename">Specialist Skills Evaluation — Shibari Session</div>
+            <div class="exp-meta">22 March 2026 · Sunday · Expert-supervised session with external examiner (Paris-certified). Two-hour evaluation of advanced aptitude and trust mechanics. Both parties received joint certification. Committee observer note: "Candidate's existing expertise noted. Exceeded standard qualification threshold."</div>
+          </div>
+          <div class="exp-badge">Complete</div>
+        </div>
+        <div class="exp-row">
+          <div class="exp-num">IV</div>
+          <div>
+            <div class="exp-codename">Cultural Integration Test — Hippie Concert</div>
+            <div class="exp-meta">21 April 2026 · Tuesday · Final pre-deliberation field observation. Cross-domain compatibility assessed: musical alignment, social integration, ambient energy calibration. Committee observer note: "Final data point. Deliberation formally opened the following day."</div>
+          </div>
+          <div class="exp-badge">Complete</div>
+        </div>
+      </div>
+      <p class="exp-note">All four experiments were completed in sequence. No experiment was repeated. No experiment was failed. The Committee notes this is statistically rare. It does not constitute a precedent for the ruling.</p>
+    </div>
+  </section>
+
+  <!-- STATISTICS -->
+  <section class="section">
+    <div class="wrap">
+      <div class="sec-label">2026 Selection Cycle — Programme Statistics</div>
+      <p class="stats-intro">The Programme does not select everyone. It does not select most. Completing all application stages is necessary. It is not sufficient. The Committee has declined candidates who completed every stage.</p>
+      <div class="stats-grid">
+        <div class="stat">
+          <div class="stat-n">1,247</div>
+          <div class="stat-l">Initial inquiries<br>received in 2026</div>
+        </div>
+        <div class="stat">
+          <div class="stat-n">31</div>
+          <div class="stat-l">Full applications<br>formally submitted</div>
+        </div>
+        <div class="stat">
+          <div class="stat-n">7</div>
+          <div class="stat-l">All required stages<br>completed</div>
+        </div>
+        <div class="stat">
+          <div class="stat-n pink">1</div>
+          <div class="stat-l">Candidates admitted<br>to date (2026)</div>
+        </div>
+      </div>
+      <p class="stats-note">The Candidate was the 8th to complete all required stages in the 2026 cycle. The Committee had not admitted anyone this year. The envelope opened at 23:59 changed that.</p>
+    </div>
+  </section>
+
+  <!-- DISCLAIMER -->
+  <section class="section">
+    <div class="wrap">
+      <div class="disclaimer">
+        <div class="disclaimer-title">Note from the Committee — Archived</div>
+        <p>This document is the archived Phase 1 record for Case AC-2026-04. The ruling was issued on 23 April 2026 at 23:59 CET. The case has proceeded to Phase 2 and beyond. This record is closed. No amendments, appeals, or further submissions will be accepted under Phase 1 proceedings.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROCEEDINGS LOG -->
+  <section class="proceedings-section">
+    <div class="wrap">
+      <div class="sec-label">Proceedings Log — 23 April 2026</div>
+      <div id="log"></div>
+    </div>
+  </section>
+
+  <!-- RULING — shown immediately since target date passed -->
+  <section id="ruling">
+    <div class="wrap">
+
+      <div class="r-head">
+        <div class="r-over">Final Ruling — Issued 23 April 2026, 23:59 CET</div>
+        <h2 class="r-title">The Committee Rules</h2>
+        <div class="r-case">Case AC-2026-04 · The Candidate's Application · IPSC</div>
+      </div>
+
+      <div class="r-verdict">
+        <div class="r-v-label">After deliberation, the Committee finds the application</div>
+        <div class="r-decision">ACCEPTED</div>
+        <div class="r-vote">Decision: 2-1. The dissenting member's position will not be disclosed.</div>
+      </div>
+
+      <div class="r-body">
+        <div class="r-preamble">
+          Having reviewed the complete dossier and conducted three rounds of deliberation, the Committee issues the following ruling. It is final. It is not subject to counter-proposal, amendment, or appeal. The Candidate may respond with silence, gratitude, or both.
+        </div>
+
+        <div class="r-sh">Exhibit A — The Polyamory Manuscript</div>
+        <p class="r-p">Received 22 April 2026. The apology for the 2021 prose was noted. <strong>It was dismissed.</strong> The Committee does not award consideration for acknowledging one's own failures. The manuscript demonstrated something. The Committee will not say what. It was sufficient.</p>
+
+        <div class="r-sh">Exhibit B — The Counter-Proposal</div>
+        <p class="r-p">Ten clauses. Nine ratified. <strong>Clause 3 (CDI) deferred.</strong> This is not a locked door. It is a matter the Committee reserves for in-person deliberation. The Candidate should understand the difference between a door that is locked and one that opens from the inside.</p>
+
+        <div class="r-sh">Exhibit C — The Meeting Documentation</div>
+        <p class="r-p">Four hours of notes, unsolicited, delivered without prompting. Initiative was observed. <em>So was the excess of it.</em> The Committee will not elaborate. The Candidate may infer.</p>
+
+        <div class="r-sh">Exhibit D — The Ohgasm Preparatory Materials</div>
+        <p class="r-p">Reviewed. Classified. <strong>The Committee will address this in person.</strong> The discussion it generated during deliberation will not be disclosed.</p>
+
+        <div class="r-sh">Conditions of Admission</div>
+        <ul class="r-cond">
+          <li>
+            <span class="cnum">I.</span>
+            <span>The Candidate is admitted to Chérie Class, effective immediately upon receipt of this ruling.</span>
+          </li>
+          <li>
+            <span class="cnum">II.</span>
+            <span>Clause 3 (CDI) remains open. It will be addressed in person, at a time of The Captain's choosing. The Candidate does not set the date.</span>
+          </li>
+          <li>
+            <span class="cnum">III.</span>
+            <span>The apology for the 2021 prose is dismissed with prejudice. Future submissions will meet the standard.</span>
+          </li>
+          <li>
+            <span class="cnum">IV.</span>
+            <span>All nine ratified counter-proposal clauses are incorporated into the terms of admission without further negotiation.</span>
+          </li>
+          <li>
+            <span class="cnum">V.</span>
+            <span>Access to Janis, The Captain's Chief of Staff, is elevated to Chérie Class priority, effective immediately.</span>
+          </li>
+        </ul>
+
+        <p class="r-p" style="margin-top:1.5rem;font-style:italic;color:var(--dim);font-size:0.8rem;">
+          This ruling is issued under the laws of Mars (Third Orbit, Barcelona Sector). Earth-side frameworks are noted and, with due respect, do not apply.
+        </p>
+      </div>
+
+      <div class="r-sig">
+        <p class="r-sig-main">The Committee deliberated. The vote was 2-1.</p>
+        <p>The dissenting member's position will not be disclosed.</p>
+        <p>The majority's position is what you are reading.</p>
+        <p class="r-sig-key">The Captain will be in touch.</p>
+        <div class="r-sig-ref">Issued by order of the Committee · 23 April 2026, 23:59 CET</div>
+      </div>
+
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    The Intergalactic Partnership Selection Committee · Proceedings Confidential · Case AC-2026-04<br>
+    <a href="/committee">← Back to Committee Files</a> &nbsp;|&nbsp;
+    <span style="color:var(--border)">Operated by <a href="/">Intergalactic Pepe</a>. Incorporated under the laws of Mars.</span>
+  </footer>
+
+  <script>
+    // TARGET: 23 April 2026 23:59:59 CEST (UTC+2)
+    var TARGET = new Date('2026-04-23T23:59:59+02:00');
+
+    var PROCEEDINGS = [
+      {
+        hour: 15, time: "15:00",
+        title: "PROCEEDINGS OPEN",
+        text: "The complete dossier is before the Committee. The Candidate should understand: the outcome is not predetermined. The Committee has rejected candidates it expected to accept. It has accepted candidates it expected to reject. This is a genuine decision being made today.",
+        status: "OPEN"
+      },
+      {
+        hour: 16, time: "16:00",
+        title: "EXHIBIT A — MANUSCRIPT REVIEW",
+        text: "The Polyamory Manuscript has been read in full. The Committee spent 41 minutes on this document. It will not say why 41 minutes. The apology for the 2021 prose is in the record. The Committee has rejected candidates for lesser prose failures. This is noted without further elaboration.",
+        status: "REVIEWING"
+      },
+      {
+        hour: 17, time: "17:00",
+        title: "COUNTER-PROPOSAL ASSESSED",
+        text: "Nine of ten clauses ratified — the highest ratification rate in the 2026 cycle. The Committee notes this without comment. A strong counter-proposal has preceded both acceptances and rejections in previous cases. The Candidate should not read into the ratification rate.",
+        status: "DELIBERATING"
+      },
+      {
+        hour: 18, time: "18:00",
+        title: "RECORD SEALED",
+        text: "The evidentiary record is now closed. No further submissions will be considered. The Committee has everything it needs to make its decision. Whether that is sufficient, the Committee will determine. The Candidate may stop sending materials. The Committee is serious about this.",
+        status: "IN DELIBERATION"
+      },
+      {
+        hour: 19, time: "19:00",
+        title: "FIRST VOTE — INCONCLUSIVE",
+        text: "The Committee voted. The vote was split. A second deliberation has been called. The Candidate is advised not to read into this. A split first vote has preceded both outcomes in prior cases. The Committee will vote again. It makes no further statement at this time.",
+        status: "SPLIT VOTE"
+      },
+      {
+        hour: 20, time: "20:00",
+        title: "SECOND DELIBERATION",
+        text: "Exhibit D was reviewed in detail during the second deliberation. The nature of that review will not be disclosed. A third and final vote will be held before the ruling is published. The Committee remains divided. It makes no predictions.",
+        status: "IN CAMERA"
+      },
+      {
+        hour: 21, time: "21:00",
+        title: "FINAL VOTE COMPLETE",
+        text: "The Committee has voted for the final time. The ruling has been drafted. The Committee will note only this: the last candidate to reach a third vote in this chamber was rejected. The Committee makes no other comment on this statistic.",
+        status: "FINALIZING"
+      },
+      {
+        hour: 22, time: "22:00",
+        title: "VERDICT SEALED",
+        text: "The ruling is in an envelope. The envelope is sealed. It contains one word. At 23:59 you will know it. Do not attempt to contact the Committee. Do not attempt to contact The Captain. There is nothing left to do but wait.",
+        status: "SEALED"
+      }
+    ];
+
+    var revealed = false;
+
+    function pad(n) { return String(Math.max(0,n)).padStart(2,'0'); }
+
+    function updateCountdown() {
+      if (revealed) return;
+      var diff = TARGET - new Date();
+      if (diff <= 0) { reveal(); return; }
+
+      var h = Math.floor(diff / 3600000);
+      var m = Math.floor((diff % 3600000) / 60000);
+      var s = Math.floor((diff % 60000) / 1000);
+
+      document.getElementById('cdh').textContent = pad(h);
+      document.getElementById('cdm').textContent = pad(m);
+      document.getElementById('cds').textContent = pad(s);
+    }
+
+    function reveal() {
+      if (revealed) return;
+      revealed = true;
+      document.getElementById('countdown-section').style.display = 'none';
+      document.getElementById('flash').classList.add('go');
+      setTimeout(function() {
+        var r = document.getElementById('ruling');
+        r.classList.add('revealed');
+        r.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 450);
+      updateLog();
+    }
+
+    function getBcnHour() {
+      return parseInt(
+        new Date().toLocaleString('en-US', {
+          timeZone: 'Europe/Madrid',
+          hour: 'numeric',
+          hour12: false
+        }), 10
+      );
+    }
+
+    function updateLog() {
+      var container = document.getElementById('log');
+      container.innerHTML = '';
+      // Show all proceedings (archived — show full log)
+      PROCEEDINGS.forEach(function(e, i) {
+        var el = document.createElement('div');
+        el.className = 'log-entry';
+        el.style.animationDelay = (i * 0.07) + 's';
+        el.innerHTML =
+          '<div class="l-time">' + e.time + '</div>' +
+          '<div>' +
+            '<div class="l-title">' + e.title + '</div>' +
+            '<div class="l-text">' + e.text + '</div>' +
+            '<div class="l-badge">' + e.status + '</div>' +
+          '</div>';
+        container.appendChild(el);
+      });
+    }
+
+    // Init — target date has passed, show ruling immediately
+    if (new Date() >= TARGET) {
+      document.getElementById('countdown-section').style.display = 'none';
+      document.getElementById('ruling').classList.add('revealed');
+      revealed = true;
+    } else {
+      updateCountdown();
+      setInterval(updateCountdown, 1000);
+    }
+    updateLog();
+  </script>
+
+</body>
+</html>
