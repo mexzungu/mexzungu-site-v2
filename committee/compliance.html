@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#080809">
+  <title>The Committee — The Compliance Engine · Phase 4</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/fonts.css">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --pink:      #E14B87;
+      --pink-glow: rgba(225,75,135,0.25);
+      --pink-dim:  rgba(225,75,135,0.07);
+      --bg:        #080809;
+      --text:      #ddd5cc;
+      --mid:       #7a7068;
+      --dim:       #3d3835;
+      --border:    #181614;
+      --heading:   'RocknRoll One', sans-serif;
+      --sans:      'Space Grotesk', -apple-system, sans-serif;
+      --green:     #3dbd6e;
+      --green-dim: rgba(61,189,110,0.07);
+    }
+
+    body { background: var(--bg); color: var(--text); font-family: var(--sans); min-height: 100vh; overflow-x: hidden; }
+
+    body::before {
+      content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 999; opacity: 0.025;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      background-size: 256px 256px;
+    }
+
+    .wrap { max-width: 680px; margin: 0 auto; padding: 0 20px; }
+
+    /* ── PHASE BANNER ── */
+    .phase-banner { text-align: center; padding: 0.55rem 1rem; font-size: 0.56rem; letter-spacing: 0.32em; text-transform: uppercase; font-weight: 600; }
+    .phase-banner.scheduled { background: rgba(40,120,80,0.08); color: rgba(61,189,110,0.8); border-bottom: 1px solid rgba(61,189,110,0.15); }
+
+    /* ── TOKEN BAR ── */
+    .token-bar { display: flex; align-items: center; justify-content: space-between; padding: 0.6rem 1.5rem; background: rgba(225,75,135,0.08); border-bottom: 1px solid rgba(225,75,135,0.15); }
+    .token-bar-label { font-size: 0.56rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--dim); }
+    .token-bar-count { font-family: var(--heading); font-size: 1rem; color: var(--pink); }
+    .token-bar-link { font-size: 0.52rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--dim); text-decoration: none; }
+    .token-bar-link:hover { color: var(--pink); }
+
+    /* ── NAV ── */
+    .site-nav { padding: 1.25rem 1.5rem; text-align: center; border-bottom: 1px solid var(--border); }
+    .site-nav a { font-family: var(--heading); font-size: 0.95rem; color: var(--mid); text-decoration: none; }
+    .site-nav-sub { font-size: 0.6rem; color: var(--dim); letter-spacing: 0.14em; text-transform: uppercase; margin-top: 0.2rem; }
+    .site-nav-back { font-size: 0.56rem; color: var(--dim); letter-spacing: 0.18em; text-transform: uppercase; margin-top: 0.4rem; }
+    .site-nav-back a { font-family: var(--sans); font-size: 0.56rem; color: var(--dim); text-decoration: none; }
+    .site-nav-back a:hover { color: var(--pink); }
+
+    /* ── HERO ── */
+    .hero { background: var(--bg); text-align: center; padding: 4rem 1.5rem 3rem; border-bottom: 1px solid var(--border); position: relative; overflow: hidden; }
+    .hero::before {
+      content: ''; position: absolute; inset: 0; pointer-events: none; opacity: 0.07;
+      background-image:
+        radial-gradient(2px 2px at 4% 9%,   #fff 100%,transparent),
+        radial-gradient(1px 1px at 10% 34%,  #E14B87 100%,transparent),
+        radial-gradient(2px 2px at 16% 61%,  #fff 100%,transparent),
+        radial-gradient(3px 2px at 23% 19%,  #E14B87 100%,transparent),
+        radial-gradient(1px 2px at 31% 47%,  #fff 100%,transparent),
+        radial-gradient(2px 1px at 39% 77%,  #E14B87 100%,transparent),
+        radial-gradient(2px 2px at 47% 11%,  #fff 100%,transparent),
+        radial-gradient(3px 2px at 54% 39%,  #E14B87 100%,transparent),
+        radial-gradient(1px 2px at 62% 67%,  #fff 100%,transparent),
+        radial-gradient(2px 1px at 69% 23%,  #E14B87 100%,transparent),
+        radial-gradient(2px 2px at 76% 51%,  #fff 100%,transparent),
+        radial-gradient(4px 2px at 82% 13%,  #E14B87 100%,transparent),
+        radial-gradient(2px 2px at 7%  83%,  #fff 100%,transparent),
+        radial-gradient(1px 2px at 51% 91%,  #E14B87 100%,transparent),
+        radial-gradient(2px 1px at 72% 87%,  #fff 100%,transparent);
+      background-size: 110px 90px;
+    }
+    .hero::after { content: ''; position: absolute; width: 520px; height: 150px; border: 1px solid rgba(225,75,135,0.07); border-radius: 50%; top: 50%; left: 50%; transform: translate(-50%,-50%) rotate(-7deg); pointer-events: none; }
+    .hero-inner { position: relative; z-index: 1; }
+
+    /* ── SEAL ── */
+    .seal { position: relative; width: 96px; height: 96px; margin: 0 auto 1.75rem; }
+    .seal-ring { position: absolute; inset: 0; border: 1px dashed rgba(225,75,135,0.3); border-radius: 50%; animation: sealSpin 22s linear infinite; }
+    .seal-ring2 { position: absolute; inset: 7px; border: 1px solid rgba(225,75,135,0.12); border-radius: 50%; }
+    .seal-core { position: absolute; inset: 14px; border: 1.5px solid var(--pink); border-radius: 50%; display: flex; flex-direction: column; align-items: center; justify-content: center; background: var(--pink-dim); box-shadow: 0 0 24px rgba(225,75,135,0.1); }
+    .seal-id { font-family: var(--heading); font-size: 0.9rem; color: var(--pink); letter-spacing: 0.1em; line-height: 1; }
+    .seal-yr { font-size: 0.48rem; color: var(--dim); letter-spacing: 0.2em; margin-top: 2px; }
+    @keyframes sealSpin { to { transform: rotate(360deg); } }
+
+    .hero-over { font-size: 0.6rem; letter-spacing: 0.4em; text-transform: uppercase; color: var(--pink); margin-bottom: 0.75rem; }
+    .hero-stars { opacity: 0.38; }
+    .hero-title { font-family: var(--heading); font-size: clamp(1.9rem,5vw,2.9rem); color: #fafafa; margin-bottom: 0.4rem; }
+    .hero-sub { font-family: var(--heading); font-size: clamp(1rem,2.5vw,1.45rem); color: var(--pink); font-weight: 400; letter-spacing: 0.04em; margin-bottom: 0.65rem; }
+    .hero-meta { font-size: 0.7rem; color: var(--dim); letter-spacing: 0.1em; }
+    .hero-ref { display: inline-block; margin-top: 1.25rem; padding: 0.35rem 0.9rem; border: 1px solid var(--border); font-size: 0.6rem; letter-spacing: 0.12em; color: var(--dim); font-family: 'Courier New', monospace; }
+
+    /* ── SECTIONS ── */
+    .section { padding: 2.75rem 0; border-bottom: 1px solid var(--border); }
+    .sec-label { font-size: 0.58rem; letter-spacing: 0.35em; text-transform: uppercase; color: var(--dim); margin-bottom: 1.5rem; }
+
+    /* ── COUNTDOWN ── */
+    .cd-block { padding: 2.5rem 0 2rem; text-align: center; }
+    .cd-label-top { font-size: 0.56rem; letter-spacing: 0.32em; text-transform: uppercase; color: var(--dim); margin-bottom: 1.75rem; }
+    .cd-wrap { display: flex; align-items: flex-start; justify-content: center; gap: 6px; flex-wrap: wrap; }
+    .cd-unit { display: flex; flex-direction: column; align-items: center; gap: 6px; }
+    .cd-digit { font-family: var(--heading); font-size: clamp(48px,11vw,100px); color: var(--pink); line-height: 1; text-shadow: 0 0 60px var(--pink-glow), 0 0 120px rgba(225,75,135,0.2); min-width: clamp(44px,10vw,86px); text-align: center; transition: text-shadow 0.6s ease; }
+    .cd-unit-l { font-size: 0.52rem; letter-spacing: 0.22em; color: var(--dim); text-transform: uppercase; }
+    .cd-sep { font-family: var(--heading); font-size: clamp(40px,9vw,82px); color: var(--pink); opacity: 0.18; line-height: 1; margin-top: 4px; }
+    .cd-target-line { margin-top: 1.75rem; font-size: 0.64rem; letter-spacing: 0.2em; color: var(--dim); text-transform: uppercase; }
+    .cd-expired-msg { display: none; font-family: var(--heading); font-size: clamp(1.3rem,4vw,2rem); color: rgba(225,75,135,0.55); letter-spacing: 0.14em; border: 2px solid rgba(225,75,135,0.25); display: none; padding: 0.4rem 1.2rem; margin-bottom: 1rem; }
+
+    /* ── TASK LIST ── */
+    .task-list { display: flex; flex-direction: column; gap: 1px; background: var(--border); border: 1px solid var(--border); margin-bottom: 1.75rem; }
+    .task-row { background: var(--bg); padding: 1.1rem 1.25rem; display: grid; grid-template-columns: 1fr auto; gap: 1rem; align-items: start; transition: background 0.2s; }
+    .task-row.completed { background: rgba(225,75,135,0.025); }
+    .task-left { display: flex; flex-direction: column; gap: 0.45rem; }
+    .task-name { font-size: 0.85rem; color: var(--text); line-height: 1.55; }
+    .task-row.completed .task-name { color: var(--dim); text-decoration: line-through; text-decoration-color: rgba(225,75,135,0.35); }
+    .task-meta { display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap; }
+    .task-token-badge { font-size: 0.52rem; letter-spacing: 0.14em; text-transform: uppercase; background: rgba(225,75,135,0.12); border: 1px solid rgba(225,75,135,0.22); color: var(--pink); padding: 2px 7px; white-space: nowrap; }
+    .task-deadline { font-size: 0.56rem; letter-spacing: 0.1em; color: var(--dim); }
+    .task-status { font-size: 0.5rem; letter-spacing: 0.18em; text-transform: uppercase; padding: 2px 6px; white-space: nowrap; }
+    .task-status.pending { border: 1px solid var(--border); color: var(--dim); }
+    .task-status.complete { background: rgba(225,75,135,0.08); border: 1px solid rgba(225,75,135,0.22); color: var(--pink); }
+    .task-right { display: flex; flex-direction: column; align-items: flex-end; gap: 0.5rem; }
+    .task-btn { background: transparent; border: 1px solid rgba(225,75,135,0.3); color: var(--pink); font-family: var(--sans); font-size: 0.58rem; letter-spacing: 0.16em; text-transform: uppercase; padding: 0.45rem 0.85rem; cursor: pointer; transition: background 0.15s, border-color 0.15s; white-space: nowrap; }
+    .task-btn:hover { background: rgba(225,75,135,0.08); border-color: var(--pink); }
+    .task-noted { font-size: 0.6rem; color: var(--pink); font-style: italic; white-space: nowrap; opacity: 0; transition: opacity 0.35s; min-height: 1em; }
+    .task-noted.show { opacity: 1; }
+    .task-done-badge { font-size: 0.52rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--pink); padding: 0.42rem 0.8rem; border: 1px solid rgba(225,75,135,0.2); background: rgba(225,75,135,0.05); }
+
+    /* ── LIVES ── */
+    .lives-bar { padding: 1.25rem 1.5rem; border: 1px solid rgba(225,75,135,0.15); background: var(--pink-dim); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
+    .lives-left-col { display: flex; flex-direction: column; gap: 0.3rem; }
+    .lives-label { font-size: 0.58rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--dim); }
+    .lives-note { font-size: 0.64rem; color: var(--dim); font-style: italic; line-height: 1.5; }
+    .lives-right-col { display: flex; align-items: center; gap: 0.9rem; }
+    .lives-seals { display: flex; gap: 0.5rem; align-items: center; }
+    .life-seal { position: relative; width: 30px; height: 30px; transition: opacity 0.5s; }
+    .life-seal.lost { opacity: 0.1; }
+    .life-seal-ring { position: absolute; inset: 0; border: 1px dashed rgba(225,75,135,0.4); border-radius: 50%; }
+    .life-seal-core { position: absolute; inset: 5px; border: 1px solid var(--pink); border-radius: 50%; background: var(--pink-dim); display: flex; align-items: center; justify-content: center; }
+    .life-seal-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--pink); }
+    .lives-num { font-family: var(--heading); font-size: 1.1rem; color: var(--pink); letter-spacing: 0.06em; }
+
+    /* ── HIDDEN RECORD ── */
+    .hidden-panel { border: 1px solid rgba(225,75,135,0.14); background: rgba(8,8,9,0.8); padding: 2.5rem 1.5rem; text-align: center; position: relative; overflow: hidden; }
+    .hidden-panel::before { content: ''; position: absolute; inset: 0; pointer-events: none; background: radial-gradient(ellipse at 50% 0%, rgba(225,75,135,0.04) 0%, transparent 70%); }
+    .hidden-panel::after { content: ''; position: absolute; inset: 0; pointer-events: none; background: radial-gradient(ellipse at 50% 100%, rgba(225,75,135,0.02) 0%, transparent 60%); }
+    .hr-inner { position: relative; z-index: 1; }
+    .hr-seal { position: relative; width: 60px; height: 60px; margin: 0 auto 1.5rem; }
+    .hr-seal-ring { position: absolute; inset: 0; border: 1px dashed rgba(225,75,135,0.2); border-radius: 50%; animation: sealSpin 40s linear infinite reverse; }
+    .hr-seal-core { position: absolute; inset: 9px; border: 1px solid rgba(225,75,135,0.28); border-radius: 50%; background: rgba(225,75,135,0.03); display: flex; align-items: center; justify-content: center; font-size: 1rem; color: rgba(225,75,135,0.35); }
+    .hr-title { font-family: var(--heading); font-size: clamp(1.25rem,3.5vw,1.75rem); color: var(--text); margin-bottom: 1.1rem; letter-spacing: 0.03em; }
+    .hr-text { font-size: 0.8rem; color: var(--mid); line-height: 1.9; max-width: 480px; margin: 0 auto 2rem; font-style: italic; }
+    .hr-findings { display: inline-block; border: 1px solid rgba(225,75,135,0.18); background: rgba(225,75,135,0.035); padding: 1rem 2rem; margin-bottom: 1.5rem; }
+    .hr-findings-label { font-size: 0.52rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--dim); margin-bottom: 0.4rem; }
+    .hr-count { font-family: var(--heading); font-size: clamp(2.2rem,8vw,3.5rem); color: rgba(225,75,135,0.65); line-height: 1; }
+    .hr-count-sub { font-size: 0.56rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--dim); margin-top: 0.25rem; }
+    .hr-footer-text { font-size: 0.74rem; color: var(--dim); font-style: italic; line-height: 1.75; }
+
+    /* ── FLASH ── */
+    .comp-flash { position: fixed; inset: 0; opacity: 0; pointer-events: none; z-index: 997; background: var(--pink); }
+
+    /* ── FOOTER ── */
+    .site-footer { text-align: center; padding: 2rem 1.5rem; border-top: 1px solid var(--border); font-size: 0.65rem; color: var(--dim); letter-spacing: 0.08em; line-height: 1.9; }
+    .site-footer a { color: var(--dim); text-decoration: none; }
+    .site-footer a:hover { color: var(--pink); }
+
+    /* ── ADMIN TRIGGER ── */
+    .admin-trigger { text-align: center; padding: 0.75rem 0 0.25rem; }
+    .admin-trigger a { font-size: 0.46rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--border); text-decoration: none; transition: color 0.2s; }
+    .admin-trigger a:hover { color: var(--dim); }
+
+    /* ── ADMIN PANEL ── */
+    .admin-panel { display: none; border: 1px solid rgba(225,75,135,0.18); background: rgba(8,8,9,0.96); padding: 1.75rem 1.5rem; margin-top: 0.5rem; margin-bottom: 1.5rem; }
+    .admin-title { font-family: var(--heading); font-size: 1rem; color: var(--pink); margin-bottom: 1.5rem; letter-spacing: 0.05em; }
+    .admin-sec { margin-bottom: 1.5rem; }
+    .admin-sec-label { font-size: 0.52rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--dim); border-bottom: 1px solid var(--border); padding-bottom: 0.4rem; margin-bottom: 0.85rem; }
+    .admin-task-row { display: grid; grid-template-columns: 1fr auto auto; gap: 0.75rem; align-items: center; padding: 0.45rem 0; border-bottom: 1px solid var(--border); }
+    .admin-task-row:last-child { border-bottom: none; }
+    .admin-task-name { font-size: 0.74rem; color: var(--mid); }
+    .admin-task-st { font-size: 0.5rem; letter-spacing: 0.14em; text-transform: uppercase; }
+    .admin-task-st.done { color: var(--pink); }
+    .admin-task-st.pend { color: var(--dim); }
+    .admin-btn { background: rgba(225,75,135,0.08); border: 1px solid rgba(225,75,135,0.22); color: var(--pink); font-family: var(--sans); font-size: 0.54rem; letter-spacing: 0.14em; text-transform: uppercase; padding: 0.3rem 0.65rem; cursor: pointer; transition: background 0.15s; }
+    .admin-btn:hover { background: rgba(225,75,135,0.18); }
+    .admin-row { display: flex; gap: 0.65rem; align-items: center; margin-top: 0.35rem; }
+    .admin-input { background: rgba(255,255,255,0.03); border: 1px solid var(--border); color: var(--text); font-family: var(--sans); font-size: 0.85rem; padding: 0.42rem 0.65rem; width: 90px; }
+    .admin-input:focus { outline: none; border-color: rgba(225,75,135,0.3); }
+    .btn-danger { background: rgba(200,84,84,0.08); color: rgba(200,84,84,0.65); border: 1px solid rgba(200,84,84,0.18); font-family: var(--sans); font-size: 0.58rem; letter-spacing: 0.14em; text-transform: uppercase; padding: 0.45rem 0.9rem; cursor: pointer; transition: background 0.15s; }
+    .btn-danger:hover { background: rgba(200,84,84,0.18); }
+
+    @media (max-width: 480px) {
+      .task-row { grid-template-columns: 1fr; }
+      .task-right { flex-direction: row; align-items: center; }
+      .lives-bar { flex-direction: column; align-items: flex-start; }
+      .admin-task-row { grid-template-columns: 1fr auto; }
+      .admin-task-st { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="comp-flash" id="comp-flash"></div>
+
+  <!-- PHASE STATUS BANNER -->
+  <div class="phase-banner scheduled">&#9711; &nbsp; PHASE 4 &nbsp; · &nbsp; COMPLIANCE ENGINE &nbsp; · &nbsp; CASE AC-2026-04 &nbsp; &#9711;</div>
+
+  <!-- TOKEN BAR -->
+  <div class="token-bar">
+    <span class="token-bar-label">Token Balance</span>
+    <span class="token-bar-count" id="token-display">0</span>
+    <a href="/committee/scorekeeper" class="token-bar-link">Token Registry →</a>
+  </div>
+
+  <nav class="site-nav">
+    <a href="/">Intergalactic Pepe 🚀</a>
+    <div class="site-nav-sub">An independent, free-spirited cosmic travel company</div>
+    <div class="site-nav-back"><a href="/committee">← Committee Files &nbsp;·&nbsp; Case AC-2026-04</a></div>
+  </nav>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-inner">
+      <div class="seal">
+        <div class="seal-ring"></div>
+        <div class="seal-ring2"></div>
+        <div class="seal-core">
+          <div class="seal-id">IPSC</div>
+          <div class="seal-yr">2026</div>
+        </div>
+      </div>
+      <p class="hero-over">
+        <span class="hero-stars">✦ &nbsp;</span>Intergalactic Partnership Selection Committee<span class="hero-stars">&nbsp; ✦</span>
+      </p>
+      <h1 class="hero-title">The Compliance Engine</h1>
+      <p class="hero-sub">Behavioural Assessment — Pre-Session Protocol</p>
+      <p class="hero-meta">Case AC-2026-04 · Phase 4 · Barcelona Sector</p>
+      <span class="hero-ref">Ref: IPSC-COMP-001 &nbsp;|&nbsp; Phase 4 &nbsp;|&nbsp; Active until 30 April 2026</span>
+    </div>
+  </div>
+
+  <!-- SECTION I — THE VISIBLE LEDGER -->
+  <section class="section">
+    <div class="wrap">
+      <div class="sec-label">Section I — The Visible Ledger</div>
+
+      <!-- COUNTDOWN -->
+      <div class="cd-block">
+        <div class="cd-label-top">Time remaining — complete all tasks before the Session</div>
+        <div class="cd-wrap" id="cd-wrap">
+          <div class="cd-unit">
+            <div class="cd-digit" id="cdd">00</div>
+            <div class="cd-unit-l">Days</div>
+          </div>
+          <div class="cd-sep">:</div>
+          <div class="cd-unit">
+            <div class="cd-digit" id="cdh">00</div>
+            <div class="cd-unit-l">Hours</div>
+          </div>
+          <div class="cd-sep">:</div>
+          <div class="cd-unit">
+            <div class="cd-digit" id="cdm">00</div>
+            <div class="cd-unit-l">Min</div>
+          </div>
+          <div class="cd-sep">:</div>
+          <div class="cd-unit">
+            <div class="cd-digit" id="cds">00</div>
+            <div class="cd-unit-l">Sec</div>
+          </div>
+        </div>
+        <div id="cd-expired-msg" style="display:none;text-align:center;padding-top:0.75rem;">
+          <div style="font-family:var(--heading);font-size:clamp(1.3rem,4vw,2rem);color:rgba(225,75,135,0.55);letter-spacing:0.16em;border:2px solid rgba(225,75,135,0.22);display:inline-block;padding:0.35rem 1.1rem;">SESSION CLOSED</div>
+        </div>
+        <div class="cd-target-line">30 April 2026 · 20:00 · Barcelona</div>
+      </div>
+
+      <!-- TASK LIST -->
+      <div class="task-list" id="task-list">
+        <!-- rendered by JS -->
+      </div>
+
+      <!-- LIVES DISPLAY -->
+      <div class="lives-bar">
+        <div class="lives-left-col">
+          <div class="lives-label">Lives Remaining</div>
+          <div class="lives-note">One life is lost for each task left uncompleted at Session time.</div>
+        </div>
+        <div class="lives-right-col">
+          <div class="lives-seals" id="lives-seals"><!-- rendered by JS --></div>
+          <div class="lives-num" id="lives-num">3</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION II — THE HIDDEN RECORD -->
+  <section class="section">
+    <div class="wrap">
+      <div class="sec-label">Section II — The Hidden Record</div>
+
+      <div class="hidden-panel">
+        <div class="hr-inner">
+          <div class="hr-seal">
+            <div class="hr-seal-ring"></div>
+            <div class="hr-seal-core">◆</div>
+          </div>
+
+          <div class="hr-title">The Hidden Record</div>
+
+          <p class="hr-text">
+            The Committee is observing. Not everything it tracks is listed above. Certain behaviours, patterns, and choices are being noted in a parallel record that will be revealed at the Final Session on 30 April 2026. The Candidate is advised that the Committee has been watching since the Extended Assessment went live.
+          </p>
+
+          <div class="hr-findings">
+            <div class="hr-findings-label">Sealed Findings</div>
+            <div class="hr-count" id="hidden-count">0</div>
+            <div class="hr-count-sub">observations recorded</div>
+          </div>
+
+          <p class="hr-footer-text">
+            These findings will be read aloud at the Final Session.<br>
+            The Candidate cannot view them in advance.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    The Intergalactic Partnership Selection Committee · Proceedings Confidential · Case AC-2026-04<br>
+    <a href="/committee">← Back to Committee Files</a> &nbsp;|&nbsp;
+    <a href="/committee/scorekeeper">Token Registry</a> &nbsp;|&nbsp;
+    <a href="/committee/prizes">Prize Catalog</a> &nbsp;|&nbsp;
+    <span style="color:var(--border)">Operated by <a href="/">Intergalactic Pepe</a>. Incorporated under the laws of Mars.</span>
+  </footer>
+
+  <!-- ADMIN TRIGGER (invisible to her) -->
+  <div class="admin-trigger">
+    <a href="#" id="admin-trigger-link">Committee Access</a>
+  </div>
+
+  <div class="wrap">
+    <div class="admin-panel" id="admin-panel">
+      <div class="admin-title">&#9670; Committee Administration Panel</div>
+
+      <div class="admin-sec">
+        <div class="admin-sec-label">Task Management</div>
+        <div id="admin-task-list"><!-- rendered by JS --></div>
+      </div>
+
+      <div class="admin-sec">
+        <div class="admin-sec-label">Hidden Record Count (0–17)</div>
+        <div class="admin-row">
+          <input class="admin-input" type="number" id="admin-hidden-val" min="0" max="17" placeholder="0">
+          <button class="admin-btn" id="admin-set-hidden">Set Count</button>
+        </div>
+      </div>
+
+      <div class="admin-sec">
+        <div class="admin-sec-label">Danger Zone</div>
+        <button class="btn-danger" id="admin-reset-btn">Reset All Compliance Data</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    'use strict';
+
+    // ── TASK DEFINITIONS — edit here ──
+    var TASKS = [
+      { id: 1, name: "Log your daily tracker for 5 consecutive days", tokens: 25 },
+      { id: 2, name: "Complete the Extended Assessment (100 questions)", tokens: 50 },
+      { id: 3, name: "Submit your 5 questions to The Oracle", tokens: 20 },
+      { id: 4, name: "Write a reflection on Phase 3 — minimum 200 words, submitted to the Committee", tokens: 35 },
+      { id: 5, name: "Message the Committee first on one morning before April 30", tokens: 15 },
+      { id: 6, name: "Play The Archive and score at least 60 tokens", tokens: 20 },
+      { id: 7, name: "Complete the Protocol Duel with at least 2 rules accepted", tokens: 30 }
+    ];
+
+    // ── STORAGE KEYS ──
+    var COMP_KEY   = 'ipsc_compliance_ac2026';
+    var HIDDEN_KEY = 'ipsc_hidden_record';
+    var TOKEN_KEY  = 'ipsc_tokens_ac2026';
+
+    // ── SESSION DEADLINE ──
+    var SESSION_END = new Date('2026-04-30T20:00:00+02:00');
+
+    // ── TOKEN HELPERS (from spec) ──
+    function getTokenBank() {
+      try {
+        return JSON.parse(localStorage.getItem(TOKEN_KEY)) || { total: 0, breakdown: {} };
+      } catch(e) { return { total: 0, breakdown: {} }; }
+    }
+    function addTokens(source, amount) {
+      var bank = getTokenBank();
+      bank.breakdown[source] = (bank.breakdown[source] || 0) + amount;
+      bank.total = 0;
+      Object.values(bank.breakdown).forEach(function(v){ bank.total += (typeof v === "number" ? v : 0); });
+      localStorage.setItem(TOKEN_KEY, JSON.stringify(bank));
+      var el = document.getElementById("token-display");
+      if(el) el.textContent = bank.total;
+    }
+
+    // ── COMPLIANCE STATE ──
+    function getCompliance() {
+      try { return JSON.parse(localStorage.getItem(COMP_KEY)) || { tasks: [] }; } catch(e) { return { tasks: [] }; }
+    }
+    function saveCompliance(s) { try { localStorage.setItem(COMP_KEY, JSON.stringify(s)); } catch(e) {} }
+
+    function isCompleted(id) {
+      return getCompliance().tasks.some(function(t) { return t.id === id && t.completed; });
+    }
+    function markComplete(id) {
+      var s = getCompliance();
+      var ex = s.tasks.find(function(t) { return t.id === id; });
+      if (ex) { ex.completed = true; ex.completedAt = new Date().toISOString(); }
+      else { s.tasks.push({ id: id, completed: true, completedAt: new Date().toISOString() }); }
+      saveCompliance(s);
+    }
+    function resetTask(id) {
+      var s = getCompliance();
+      s.tasks = s.tasks.filter(function(t) { return t.id !== id; });
+      saveCompliance(s);
+    }
+    function resetAll() {
+      try { localStorage.removeItem(COMP_KEY); } catch(e) {}
+    }
+
+    // ── HIDDEN RECORD ──
+    function getHidden() { try { return JSON.parse(localStorage.getItem(HIDDEN_KEY)) || { count: 0 }; } catch(e) { return { count: 0 }; } }
+    function saveHidden(r) { try { localStorage.setItem(HIDDEN_KEY, JSON.stringify(r)); } catch(e) {} }
+    function incrementHidden() {
+      var r = getHidden();
+      r.count = Math.min(17, r.count + Math.floor(Math.random() * 2) + 1);
+      saveHidden(r);
+      return r.count;
+    }
+
+    // ── FLASH ──
+    function triggerFlash() {
+      var f = document.getElementById('comp-flash');
+      if (!f) return;
+      f.style.transition = 'none'; f.style.opacity = '0'; f.offsetHeight;
+      f.style.transition = 'opacity 0.1s ease'; f.style.opacity = '0.16';
+      setTimeout(function() { f.style.transition = 'opacity 0.7s ease'; f.style.opacity = '0'; }, 160);
+    }
+
+    // ── COUNTDOWN ──
+    function pad(n) { return String(Math.max(0, n)).padStart(2, '0'); }
+
+    function updateCountdown() {
+      var diff = SESSION_END - new Date();
+      if (diff <= 0) {
+        document.getElementById('cd-wrap').style.display = 'none';
+        document.getElementById('cd-expired-msg').style.display = 'block';
+        updateLives();
+        return;
+      }
+      var d = Math.floor(diff / 86400000);
+      var h = Math.floor((diff % 86400000) / 3600000);
+      var m = Math.floor((diff % 3600000) / 60000);
+      var s = Math.floor((diff % 60000) / 1000);
+      document.getElementById('cdd').textContent = pad(d);
+      document.getElementById('cdh').textContent = pad(h);
+      document.getElementById('cdm').textContent = pad(m);
+      document.getElementById('cds').textContent = pad(s);
+      var secs = diff / 1000;
+      if (secs < 86400) {
+        var t = Math.min(1, 1 - (secs / 86400));
+        var g1 = Math.round(40 + t * 80);
+        var g2 = Math.round((0.25 + t * 0.5) * 100) / 100;
+        var glow = '0 0 ' + g1 + 'px rgba(225,75,135,' + g2 + ')';
+        ['cdd','cdh','cdm','cds'].forEach(function(id) {
+          var el = document.getElementById(id); if (el) el.style.textShadow = glow;
+        });
+      }
+    }
+
+    // ── LIVES ──
+    function updateLives() {
+      var completedCount = TASKS.filter(function(t) { return isCompleted(t.id); }).length;
+      var uncompleted = TASKS.length - completedCount;
+      var now = new Date();
+      var livesLost = (now >= SESSION_END) ? Math.min(uncompleted, 3) : 0;
+      var lives = Math.max(0, 3 - livesLost);
+
+      var sealsEl = document.getElementById('lives-seals');
+      if (sealsEl) {
+        sealsEl.innerHTML = '';
+        for (var i = 0; i < 3; i++) {
+          var d = document.createElement('div');
+          d.className = 'life-seal' + (i >= lives ? ' lost' : '');
+          d.innerHTML = '<div class="life-seal-ring"></div><div class="life-seal-core"><div class="life-seal-dot"></div></div>';
+          sealsEl.appendChild(d);
+        }
+      }
+      var numEl = document.getElementById('lives-num');
+      if (numEl) numEl.textContent = lives;
+    }
+
+    // ── RENDER TASKS ──
+    function escHtml(s) {
+      if (!s) return '';
+      return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+    }
+
+    function renderTasks() {
+      var container = document.getElementById('task-list');
+      if (!container) return;
+      container.innerHTML = '';
+
+      TASKS.forEach(function(task) {
+        var done = isCompleted(task.id);
+        var row = document.createElement('div');
+        row.className = 'task-row' + (done ? ' completed' : '');
+        row.id = 'task-row-' + task.id;
+
+        var rightHtml = done
+          ? '<div class="task-done-badge">COMPLETE</div>'
+          : '<button class="task-btn" data-id="' + task.id + '" data-tokens="' + task.tokens + '">Mark Complete</button>' +
+            '<div class="task-noted" id="noted-' + task.id + '">The Committee noted your compliance.</div>';
+
+        row.innerHTML =
+          '<div class="task-left">' +
+            '<div class="task-name">' + escHtml(task.name) + '</div>' +
+            '<div class="task-meta">' +
+              '<span class="task-token-badge">+' + task.tokens + ' tokens</span>' +
+              '<span class="task-deadline">Due before the Session</span>' +
+              '<span class="task-status ' + (done ? 'complete' : 'pending') + '">' + (done ? 'COMPLETE' : 'PENDING') + '</span>' +
+            '</div>' +
+          '</div>' +
+          '<div class="task-right">' + rightHtml + '</div>';
+
+        container.appendChild(row);
+      });
+
+      container.querySelectorAll('.task-btn').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+          onComplete(parseInt(btn.getAttribute('data-id'), 10), parseInt(btn.getAttribute('data-tokens'), 10));
+        });
+      });
+
+      updateLives();
+    }
+
+    function onComplete(id, tokens) {
+      if (isCompleted(id)) return;
+      markComplete(id);
+      addTokens('compliance', tokens);
+      triggerFlash();
+      var noted = document.getElementById('noted-' + id);
+      if (noted) {
+        noted.classList.add('show');
+        setTimeout(function() { renderTasks(); }, 1500);
+      } else {
+        renderTasks();
+      }
+    }
+
+    // ── ADMIN PANEL ──
+    function renderAdminTasks() {
+      var container = document.getElementById('admin-task-list');
+      if (!container) return;
+      container.innerHTML = '';
+      TASKS.forEach(function(task) {
+        var done = isCompleted(task.id);
+        var row = document.createElement('div');
+        row.className = 'admin-task-row';
+        var shortName = task.name.length > 48 ? task.name.substring(0, 48) + '...' : task.name;
+        row.innerHTML =
+          '<div class="admin-task-name">' + escHtml(shortName) + '</div>' +
+          '<div class="admin-task-st ' + (done ? 'done' : 'pend') + '">' + (done ? 'DONE' : 'PENDING') + '</div>' +
+          '<button class="admin-btn" data-id="' + task.id + '" data-action="' + (done ? 'reset' : 'complete') + '">' + (done ? 'Reset' : 'Complete') + '</button>';
+        container.appendChild(row);
+      });
+      container.querySelectorAll('.admin-btn[data-action]').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+          var id = parseInt(btn.getAttribute('data-id'), 10);
+          if (btn.getAttribute('data-action') === 'complete') {
+            var task = TASKS.find(function(t) { return t.id === id; });
+            if (task) onComplete(task.id, task.tokens);
+          } else {
+            resetTask(id);
+            renderTasks();
+          }
+          renderAdminTasks();
+        });
+      });
+    }
+
+    document.getElementById('admin-trigger-link').addEventListener('click', function(e) {
+      e.preventDefault();
+      var pw = prompt('Authorization code:');
+      if (pw !== 'COMMITTEE2026') return;
+      var panel = document.getElementById('admin-panel');
+      if (panel.style.display === 'block') {
+        panel.style.display = 'none';
+      } else {
+        panel.style.display = 'block';
+        renderAdminTasks();
+        document.getElementById('admin-hidden-val').value = getHidden().count;
+        panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+
+    document.getElementById('admin-set-hidden').addEventListener('click', function() {
+      var val = parseInt(document.getElementById('admin-hidden-val').value, 10);
+      if (isNaN(val)) return;
+      var r = getHidden();
+      r.count = Math.min(17, Math.max(0, val));
+      saveHidden(r);
+      document.getElementById('hidden-count').textContent = r.count;
+    });
+
+    document.getElementById('admin-reset-btn').addEventListener('click', function() {
+      if (!confirm('Reset all compliance data? This cannot be undone.')) return;
+      resetAll();
+      try { localStorage.removeItem(HIDDEN_KEY); } catch(e) {}
+      renderTasks();
+      renderAdminTasks();
+      document.getElementById('hidden-count').textContent = '0';
+      document.getElementById('admin-hidden-val').value = '0';
+    });
+
+    // ── INIT ──
+    (function() {
+      // Sync token display
+      var bank = getTokenBank();
+      var tEl = document.getElementById('token-display');
+      if (tEl) tEl.textContent = bank.total;
+
+      // Increment hidden record each visit
+      var count = incrementHidden();
+      document.getElementById('hidden-count').textContent = count;
+
+      // Render
+      renderTasks();
+
+      // Countdown
+      updateCountdown();
+      setInterval(updateCountdown, 1000);
+    })();
+  </script>
+
+</body>
+</html>
