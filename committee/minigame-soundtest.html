@@ -11,6 +11,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/fonts.css">
+  <script src="https://www.youtube.com/iframe_api"></script>
   <style>
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
     :root {
@@ -328,6 +329,7 @@
           <div class="error-panel-icon">&#9888;</div>
           <div class="error-panel-title">Audio system offline.</div>
           <div class="error-panel-text">The Committee is investigating. Ensure network connectivity and reload the page. If the problem persists, the audio engineer has been dispatched.</div>
+          <button onclick="location.reload()" style="margin-top:1.5rem;padding:0.6rem 1.8rem;background:transparent;border:1px solid rgba(225,75,135,0.4);color:#E14B87;font-family:var(--sans);font-size:0.75rem;letter-spacing:0.18em;text-transform:uppercase;cursor:pointer;">Reload</button>
         </div>
       </div>
 
@@ -771,7 +773,7 @@
         showPanel('st-loading');
         apiErrorTimeout = setTimeout(function() {
           if (!apiReady) { showPanel('st-error'); }
-        }, 15000);
+        }, 25000);
       } else {
         startRound();
       }
@@ -781,6 +783,5 @@
     document.getElementById('st-retry-btn').addEventListener('click', function() { startRound(); });
   </script>
 
-  <script src="https://www.youtube.com/iframe_api"></script>
 </body>
 </html>
