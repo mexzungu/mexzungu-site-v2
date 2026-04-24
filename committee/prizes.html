@@ -1,0 +1,849 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#080809">
+  <title>The Committee — Intergalactic Prize Catalog</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/fonts.css">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --pink:      #E14B87;
+      --pink-glow: rgba(225,75,135,0.25);
+      --pink-dim:  rgba(225,75,135,0.07);
+      --bg:        #080809;
+      --text:      #ddd5cc;
+      --mid:       #7a7068;
+      --dim:       #3d3835;
+      --border:    #181614;
+      --heading:   'RocknRoll One', sans-serif;
+      --sans:      'Space Grotesk', -apple-system, sans-serif;
+      --green:     #3dbd6e;
+      --green-dim: rgba(61,189,110,0.07);
+      --gold:      #c9a84c;
+      --gold-dim:  rgba(201,168,76,0.08);
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--sans);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      pointer-events: none; z-index: 999;
+      opacity: 0.025;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      background-size: 256px 256px;
+    }
+
+    .wrap { max-width: 680px; margin: 0 auto; padding: 0 20px; }
+
+    /* ── PHASE STATUS BANNER ── */
+    .phase-banner {
+      text-align: center;
+      padding: 0.55rem 1rem;
+      font-size: 0.56rem;
+      letter-spacing: 0.32em;
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+    .phase-banner.scheduled {
+      background: rgba(40,120,80,0.08);
+      color: rgba(61,189,110,0.8);
+      border-bottom: 1px solid rgba(61,189,110,0.15);
+    }
+
+    /* ── NAV ── */
+    .site-nav {
+      padding: 1.25rem 1.5rem;
+      text-align: center;
+      border-bottom: 1px solid var(--border);
+    }
+    .site-nav a {
+      font-family: var(--heading);
+      font-size: 0.95rem;
+      color: var(--mid);
+      text-decoration: none;
+    }
+    .site-nav-sub {
+      font-size: 0.6rem;
+      color: var(--dim);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      margin-top: 0.2rem;
+    }
+    .site-nav-back {
+      font-size: 0.56rem;
+      color: var(--dim);
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      margin-top: 0.4rem;
+    }
+    .site-nav-back a { font-family: var(--sans); font-size: 0.56rem; color: var(--dim); text-decoration: none; }
+    .site-nav-back a:hover { color: var(--pink); }
+
+    /* ── HERO ── */
+    .hero {
+      background: var(--bg);
+      text-align: center;
+      padding: 4rem 1.5rem 3rem;
+      border-bottom: 1px solid var(--border);
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; inset: 0; pointer-events: none; opacity: 0.07;
+      background-image:
+        radial-gradient(2px 2px at 4% 9%,   #fff 100%,transparent),
+        radial-gradient(1px 1px at 10% 34%,  #E14B87 100%,transparent),
+        radial-gradient(2px 2px at 16% 61%,  #fff 100%,transparent),
+        radial-gradient(3px 2px at 23% 19%,  #E14B87 100%,transparent),
+        radial-gradient(1px 2px at 31% 47%,  #fff 100%,transparent),
+        radial-gradient(2px 1px at 39% 77%,  #E14B87 100%,transparent),
+        radial-gradient(2px 2px at 47% 11%,  #fff 100%,transparent),
+        radial-gradient(3px 2px at 54% 39%,  #E14B87 100%,transparent),
+        radial-gradient(1px 2px at 62% 67%,  #fff 100%,transparent),
+        radial-gradient(2px 1px at 69% 23%,  #E14B87 100%,transparent),
+        radial-gradient(2px 2px at 76% 51%,  #fff 100%,transparent),
+        radial-gradient(4px 2px at 82% 13%,  #E14B87 100%,transparent),
+        radial-gradient(2px 2px at 7%  83%,  #fff 100%,transparent),
+        radial-gradient(1px 2px at 51% 91%,  #E14B87 100%,transparent),
+        radial-gradient(2px 1px at 72% 87%,  #fff 100%,transparent);
+      background-size: 110px 90px;
+    }
+    .hero::after {
+      content: '';
+      position: absolute;
+      width: 520px; height: 150px;
+      border: 1px solid rgba(225,75,135,0.07);
+      border-radius: 50%;
+      top: 50%; left: 50%;
+      transform: translate(-50%,-50%) rotate(-7deg);
+      pointer-events: none;
+    }
+    .hero-inner { position: relative; z-index: 1; }
+
+    .seal {
+      position: relative;
+      width: 96px; height: 96px;
+      margin: 0 auto 1.75rem;
+    }
+    .seal-ring {
+      position: absolute; inset: 0;
+      border: 1px dashed rgba(225,75,135,0.3);
+      border-radius: 50%;
+      animation: sealSpin 22s linear infinite;
+    }
+    .seal-ring2 {
+      position: absolute; inset: 7px;
+      border: 1px solid rgba(225,75,135,0.12);
+      border-radius: 50%;
+    }
+    .seal-core {
+      position: absolute; inset: 14px;
+      border: 1.5px solid var(--pink);
+      border-radius: 50%;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      background: var(--pink-dim);
+      box-shadow: 0 0 24px rgba(225,75,135,0.1);
+    }
+    .seal-id {
+      font-family: var(--heading);
+      font-size: 0.9rem; color: var(--pink);
+      letter-spacing: 0.1em; line-height: 1;
+    }
+    .seal-yr {
+      font-size: 0.48rem; color: var(--dim);
+      letter-spacing: 0.2em; margin-top: 2px;
+    }
+    @keyframes sealSpin { to { transform: rotate(360deg); } }
+
+    .hero-over {
+      font-size: 0.6rem; letter-spacing: 0.4em;
+      text-transform: uppercase; color: var(--pink);
+      margin-bottom: 0.75rem;
+    }
+    .hero-stars { opacity: 0.38; }
+    .hero-title {
+      font-family: var(--heading);
+      font-size: clamp(1.9rem,5vw,2.9rem);
+      color: #fafafa; margin-bottom: 0.4rem;
+    }
+    .hero-sub {
+      font-family: var(--heading);
+      font-size: clamp(1rem,2.5vw,1.45rem);
+      color: var(--pink); font-weight: 400;
+      letter-spacing: 0.04em; margin-bottom: 0.65rem;
+    }
+    .hero-meta {
+      font-size: 0.7rem; color: var(--dim);
+      letter-spacing: 0.1em;
+    }
+    .hero-ref {
+      display: inline-block;
+      margin-top: 1.25rem;
+      padding: 0.35rem 0.9rem;
+      border: 1px solid var(--border);
+      font-size: 0.6rem; letter-spacing: 0.12em;
+      color: var(--dim); font-family: 'Courier New', monospace;
+    }
+
+    /* ── SECTION ── */
+    .section { padding: 2.75rem 0; border-bottom: 1px solid var(--border); }
+    .sec-label {
+      font-size: 0.58rem; letter-spacing: 0.35em;
+      text-transform: uppercase; color: var(--dim);
+      margin-bottom: 1.5rem;
+    }
+
+    /* ── NOTICE BOX ── */
+    .notice-box {
+      padding: 1.5rem 1.25rem;
+      border: 1px solid var(--border);
+      background: rgba(225,75,135,0.025);
+    }
+    .notice-box-title {
+      font-size: 0.58rem; letter-spacing: 0.25em;
+      text-transform: uppercase; color: var(--pink); margin-bottom: 0.65rem;
+    }
+    .notice-box p {
+      font-size: 0.82rem; line-height: 1.8; color: var(--mid);
+    }
+
+    /* ── PRIZE CATALOG ── */
+    .cat-block { margin-bottom: 2.5rem; }
+
+    .cat-header {
+      display: flex; align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 1px;
+      padding: 0.6rem 1rem;
+      background: rgba(225,75,135,0.04);
+      border-top: 2px solid var(--pink);
+      border-left: 1px solid var(--border);
+      border-right: 1px solid var(--border);
+    }
+    .cat-header-title {
+      font-size: 0.58rem; letter-spacing: 0.32em;
+      text-transform: uppercase; color: var(--pink);
+      font-weight: 600;
+    }
+    .cat-header-count {
+      font-size: 0.5rem; letter-spacing: 0.14em;
+      color: var(--dim); margin-left: auto;
+    }
+
+    .cat-grid {
+      display: flex; flex-direction: column; gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-top: none;
+      margin-bottom: 0;
+    }
+
+    .prize-row {
+      background: var(--bg);
+      display: grid;
+      grid-template-columns: 2.5rem 1fr auto;
+      gap: 1rem; align-items: start;
+      padding: 1rem 1rem;
+    }
+    .prize-row.legendary {
+      background: rgba(201,168,76,0.03);
+    }
+
+    .prize-num {
+      font-family: var(--heading);
+      font-size: 0.68rem; letter-spacing: 0.14em;
+      color: var(--dim); padding-top: 3px;
+      text-align: center; line-height: 1;
+    }
+    .prize-num.legendary-num {
+      color: var(--gold);
+    }
+
+    .prize-name {
+      font-size: 0.82rem; font-weight: 500;
+      color: var(--text); margin-bottom: 0.25rem; line-height: 1.4;
+    }
+    .prize-name.legendary-name { color: var(--gold); }
+
+    .prize-desc {
+      font-size: 0.7rem; color: var(--dim); line-height: 1.6;
+    }
+
+    .prize-token {
+      font-family: var(--heading);
+      font-size: 0.78rem;
+      padding: 0.22rem 0.55rem;
+      border-radius: 3px;
+      white-space: nowrap; align-self: start; margin-top: 2px;
+      background: rgba(225,75,135,0.1);
+      color: var(--pink);
+      border: 1px solid rgba(225,75,135,0.22);
+      letter-spacing: 0.04em;
+    }
+    .prize-token.legendary-token {
+      background: rgba(201,168,76,0.1);
+      color: var(--gold);
+      border: 1px solid rgba(201,168,76,0.3);
+      box-shadow: 0 0 12px rgba(201,168,76,0.08);
+    }
+    .prize-token-unit {
+      font-family: var(--sans);
+      font-size: 0.46rem; letter-spacing: 0.1em;
+      display: block; margin-top: 1px;
+      color: var(--dim); text-align: center;
+    }
+    .prize-token.legendary-token .prize-token-unit {
+      color: rgba(201,168,76,0.5);
+    }
+
+    /* ── FOOTER ── */
+    .site-footer {
+      text-align: center; padding: 2rem 1.5rem;
+      border-top: 1px solid var(--border);
+      font-size: 0.65rem; color: var(--dim); letter-spacing: 0.08em; line-height: 1.9;
+    }
+    .site-footer a { color: var(--dim); text-decoration: none; }
+
+    @media (max-width: 480px) {
+      .prize-row { grid-template-columns: 2rem 1fr auto; gap: 0.65rem; }
+      .prize-token { font-size: 0.7rem; padding: 0.18rem 0.4rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- PHASE STATUS BANNER -->
+  <div class="phase-banner scheduled">&#9711; &nbsp; PHASE 4 &nbsp; · &nbsp; PRIZE CATALOG &nbsp; · &nbsp; CASE AC-2026-04 &nbsp; &#9711;</div>
+
+  <nav class="site-nav">
+    <a href="/">Intergalactic Pepe 🚀</a>
+    <div class="site-nav-sub">An independent, free-spirited cosmic travel company</div>
+    <div class="site-nav-back"><a href="/committee">← Committee Files &nbsp;·&nbsp; Case AC-2026-04</a></div>
+  </nav>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-inner">
+      <div class="seal">
+        <div class="seal-ring"></div>
+        <div class="seal-ring2"></div>
+        <div class="seal-core">
+          <div class="seal-id">IPSC</div>
+          <div class="seal-yr">2026</div>
+        </div>
+      </div>
+      <p class="hero-over">
+        <span class="hero-stars">✦ &nbsp;</span>Intergalactic Partnership Selection Committee<span class="hero-stars">&nbsp; ✦</span>
+      </p>
+      <h1 class="hero-title">The Prize Catalog</h1>
+      <p class="hero-sub">Intergalactic Tokens — Redemption Registry</p>
+      <p class="hero-meta">Case AC-2026-04 · Phase 4 · Barcelona Sector, Third Orbit</p>
+      <span class="hero-ref">Ref: IPSC-PRIZES-001 &nbsp;|&nbsp; Phase 4 &nbsp;|&nbsp; Restricted</span>
+    </div>
+  </div>
+
+  <!-- TOKEN ECONOMY INTRO -->
+  <section class="section">
+    <div class="wrap">
+      <div class="notice-box">
+        <div class="notice-box-title">Intergalactic Token Economy</div>
+        <p>Tokens are earned through mini games during the Final Session and through other mechanisms determined by the Committee. They can be redeemed against the catalog below at any time after the Final Session. The Committee reserves the right to introduce new prizes. No prize can be refunded once redeemed. No prize expires.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRIZE CATALOG -->
+  <section class="section">
+    <div class="wrap">
+      <div class="sec-label">Prize Registry — 50 Items Across 5 Categories</div>
+
+      <!-- CATEGORY 1: CHORES & DOMESTIC -->
+      <div class="cat-block">
+        <div class="cat-header">
+          <div class="cat-header-title">Chores &amp; Domestic</div>
+          <div class="cat-header-count">Items 01 – 10</div>
+        </div>
+        <div class="cat-grid">
+          <div class="prize-row">
+            <div class="prize-num">01</div>
+            <div>
+              <div class="prize-name">Grocery Run</div>
+              <div class="prize-desc">Her list, his legs. Full shop, delivered.</div>
+            </div>
+            <div class="prize-token">10<span class="prize-token-unit">tokens</span></div>
+          </div>
+          <div class="prize-row">
+            <div class="prize-num">02</div>
+            <div>
+              <div class="prize-name">Cook Any Meal She Requests</div>
+              <div class="prize-desc">Any dish, any cuisine, from scratch. No substitutions.</div>
+            </div>
+            <div class="prize-token">10<span class="prize-token-unit">tokens</span></div>
+          </div>
+          <div class="prize-row">
+            <div class="prize-num">03</div>
+            <div>
+              <div class="prize-name">Pick Up from Airport or Station</div>
+              <div class="prize-desc">Door-to-door retrieval, any time, any arrival.</div>
+            </div>
+            <div class="prize-token">15<span class="prize-token-unit">tokens</span></div>
+          </div>
+          <div class="prize-row">
+            <div class="prize-num">04</div>
+            <div>
+              <div class="prize-name">Breakfast in Bed</div>
+              <div class="prize-desc">Full preparation, proper tray, nothing left out.</div>
+            </div>
+            <div class="prize-token">15<span class="prize-token-unit">tokens</span></div>
+          </div>
+          <div class="prize-row">
+            <div class="prize-num">05</div>
+            <div>
+              <div class="prize-name">Help Pack for a Trip</div>
+              <div class="prize-desc">Strategic packing assistance. Luggage closed on first attempt.</div>
+            </div>
+            <div class="prize-token">15<span class="prize-token-unit">tokens</span></div>
+          </div>
+          <div class="prize-row">
+            <div class="prize-num">06</div>
+            <div>
+              <div class="prize-name">Drop Off Anywhere in the City</div>
+              <div class="prize-desc">One-way urban transport, on demand.</div>
+            </div>
+            <div class="prize-token">10<span class="prize-token-unit">tokens</span></div>
+          </div>
+          <div class="prize-row">
+            <div class="prize-num">07</div>
+            <div>
+              <div class="prize-name">Research and Book a Restaurant</div>
+              <div class="prize-desc">He finds the place, he makes the reservation, she shows up.</div>
+            </div>
+            <div class="prize-token">10<span class="prize-token-unit">tokens</span></div>
+          </div>
+          <div class="prize-row">
+            <div class="prize-num">08</div>
+            <div>
+              <div class="prize-name">Assemble or Fix Something at Her Place</div>
+              <div class="prize-desc">One household task requiring tools, patience, or both.</div>
+            </div>
+            <div class="prize-token">20<span class="prize-token-unit">tokens</span></div>
+          </div>
+          <div class="prize-row">
+            <div class="prize-num">09</div>
+            <div>
+              <div class="prize-name">Do Her Laundry</div>
+              <div class="prize-desc">Wash, fold, return. Sorted by her system, not his.</div>
+            </div>
+            <div class="prize-token">20<span class="prize-token-unit">tokens</span></div>
+          </div>
+          <div class="prize-row">
+            <div class="prize-num">10</div>
+            <div>
+              <div class="prize-name">Clean Her Apartment</div>
+              <div class="prize-desc">Full clean. Her standards. No negotiation on scope.</div>
+            </div>
+            <div class="prize-token">30<span class="prize-token-unit">tokens</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CATEGORY 2: ACTS OF SERVICE -->
+      <div class="cat-block">
+        <div class="cat-header">
+          <div class="cat-header-title">Acts of Service</div>
+          <div class="cat-header-count">Items 11 – 20</div>
+        </div>
+        <div class="cat-grid">
+          <div class="prize-row">
+            <div class="prize-num">11</div>
+            <div>
+              <div class="prize-name">Curated Playlist for Her Week</div>
+              <div class="prize-desc">Researched, sequenced, delivered. No repeats. No apologies for the jazz.</div>
+            </div>
+            <div class="prize-token">15<span class="prize-token-unit">tokens</span></div>
+          </div>
+          <div class="prize-row">
+            <div class="prize-num">12</div>
+            <div>
+              <div class="prize-name">Read Something Out Loud to Her</div>
+              <div class="prize-desc">Anything she chooses. One sitting. No stopping early.</div>
+            </div>
+            <div class="prize-token">20<span class="prize-token-unit">tokens</span></div>
+          </div>
+          <div class="prize-row">
+            <div class="prize-num">13</div>
+            <div>
+              <div class="prize-name">30-Min Foot Massage</div>
+              <div class="prize-desc">Proper technique. Full duration. She does not have to ask twice.</div>
+            </div>
+            <div class="prize-token">25<span class="prize-token-unit">tokens</span></div>
+          </div>
+          <div class="prize-row">
+            <div class="prize-num">14</div>
+            <div>
+              <div class="prize-name">Teach Her Something She Wants to Learn</div>
+              <div class="prize-desc">Her subject, his preparation. She decides when she has learned enough.</div>
+            </div>
+            <div class="prize-token">25<span class="prize-token-unit">tokens</span></div>
+          </div>
+          <div class="prize-row">
+            <div class="prize-num">15</div>
+            <div>
+              <div class="prize-name">Write Her a Letter</div>
+              <div class="prize-desc">Handwritten. Sealed. Delivered. Not typed. Not corrected.</div>
+            </div>
+            <div class="prize-token">30<span class="prize-token-unit">tokens</span></div>
+          </div>
+          <div class="prize-row">
+            <div class="prize-num">16</div>
+            <div>
+              <div class="prize-name">Handle One Life Admin Task She Hates</div>
+              <div class="prize-desc">One task from her list. Completed in full. No updates requested.</div>
+            </div>
+            <div class="prize-token">30<span class="prize-token-unit">tokens</span></div>
+          </div>
+          <div class="prize-row">
+            <div class="prize-num">17</div>
+            <div>
+              <div class="prize-name">Answer Any 10 Questions Honestly</div>
+              <div class="prize-desc">No limits. No redirects. No "that's complicated." 10 real answers.</div>
+            </div>
+            <div class="prize-token">40<span class="prize-token-unit">tokens</span></div>
+          </div>
+          <div class="prize-row">
+            <div class="prize-num">18</div>
+            <div>
+              <div class="prize-name">60-Min Full Body Massage</div>
+              <div class="prize-desc">Full duration. Proper pressure. Her direction throughout.</div>
+            </div>
+            <div class="prize-token">50<span class="prize-token-unit">tokens</span></div>
+          </div>
+          <div class="prize-row">
+            <div class="prize-num">19</div>
+            <div>
+              <div class="prize-name">One Day as Her Personal Driver</div>
+              <div class="prize-desc">Full day. Her agenda. He does not suggest routes.</div>
+            </div>
+            <div class="prize-token">50<span class="prize-token-unit">tokens</span></div>
+          </div>
+          <div class="prize-row">
+            <div class="prize-num">20</div>
+            <div>
+              <div class="prize-name">Plan and Execute a Surprise</div>
+              <div class="prize-desc">She states only a mood or a vibe. He does the rest. She discovers on arrival.</div>
+            </div>
+            <div class="prize-token">75<span class="prize-token-unit">tokens</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CATEGORY 3: EXPERIENCES -->
+      <div class="cat-block">
+        <div class="cat-header">
+          <div class="cat-header-title">Experiences</div>
+          <div class="cat-header-count">Items 21 – 30</div>
+        </div>
+        <div class="cat-grid">
+          <div class="prize-row">
+            <div class="prize-num">21</div>
+            <div>
+              <div class="prize-name">Curated Date Night</div>
+              <div class="prize-desc">She gives a theme. He executes everything. No input requested beyond the theme.</div>
+            </div>
+            <div class="prize-token">50<span class="prize-token-unit">tokens</span></div>
+          </div>
+          <div class="prize-row">
+            <div class="prize-num">22</div>
+            <div>
+              <div class="prize-name">Sunrise or Sunset</div>
+              <div class="prize-desc">He picks the location. She discovers it on arrival. She does not look it up in advance.</div>
+            </div>
+            <div class="prize-token">40<span class="prize-token-unit">tokens</span></div>
+          </div>
+          <div class="prize-row">
+            <div class="prize-num">23</div>
+            <div>
+              <div class="prize-name">Dance Class of Her Choice</div>
+              <div class="prize-desc">She picks the style. He shows up and follows her lead.</div>
+            </div>
+            <div class="prize-token">35<span class="prize-token-unit">tokens</span></div>
+          </div>
+          <div class="prize-row">
+            <div class="prize-num">24</div>
+            <div>
+              <div class="prize-name">Art Gallery Visit</div>
+              <div class="prize-desc">He researches the show. He narrates. She is not required to pretend she likes everything.</div>
+            </div>
+            <div class="prize-token">40<span class="prize-token-unit">tokens</span></div>
+          </div>
+          <div class="prize-row">
+            <div class="prize-num">25</div>
+            <div>
+              <div class="prize-name">Outdoor Adventure</div>
+              <div class="prize-desc">Hike, climb, or kayak — her call. He organises. He does not complain about the altitude.</div>
+            </div>
+            <div class="prize-token">45<span class="prize-token-unit">tokens</span></div>
+          </div>
+          <div class="prize-row">
+            <div class="prize-num">26</div>
+            <div>
+              <div class="prize-name">Live Music or Event of Her Choice</div>
+              <div class="prize-desc">She picks. He books. He does not make faces during the setlist.</div>
+            </div>
+            <div class="prize-token">50<span class="prize-token-unit">tokens</span></div>
+          </div>
+          <div class="prize-row">
+            <div class="prize-num">27</div>
+            <div>
+              <div class="prize-name">Cooking Class Together</div>
+              <div class="prize-desc">Booked by him, chosen by her. They eat what they make. He cleans up.</div>
+            </div>
+            <div class="prize-token">60<span class="prize-token-unit">tokens</span></div>
+          </div>
+          <div class="prize-row">
+            <div class="prize-num">28</div>
+            <div>
+              <div class="prize-name">Spa Day</div>
+              <div class="prize-desc">He books it. He pays. She goes. He does not ask how it was until she brings it up.</div>
+            </div>
+            <div class="prize-token">75<span class="prize-token-unit">tokens</span></div>
+          </div>
+          <div class="prize-row">
+            <div class="prize-num">29</div>
+            <div>
+              <div class="prize-name">One Full Day, No Agenda</div>
+              <div class="prize-desc">She decides in real time. He follows without suggesting alternatives.</div>
+            </div>
+            <div class="prize-token">100<span class="prize-token-unit">tokens</span></div>
+          </div>
+          <div class="prize-row">
+            <div class="prize-num">30</div>
+            <div>
+              <div class="prize-name">Overnight Trip</div>
+              <div class="prize-desc">Destination to be determined together. He books and organises everything else.</div>
+            </div>
+            <div class="prize-token">150<span class="prize-token-unit">tokens</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CATEGORY 4: ATTENTION & PRESENCE -->
+      <div class="cat-block">
+        <div class="cat-header">
+          <div class="cat-header-title">Attention &amp; Presence</div>
+          <div class="cat-header-count">Items 31 – 37</div>
+        </div>
+        <div class="cat-grid">
+          <div class="prize-row">
+            <div class="prize-num">31</div>
+            <div>
+              <div class="prize-name">2 Hours Phone-Free, Fully Present</div>
+              <div class="prize-desc">No exceptions. Phone off. Her time, her pace.</div>
+            </div>
+            <div class="prize-token">20<span class="prize-token-unit">tokens</span></div>
+          </div>
+          <div class="prize-row">
+            <div class="prize-num">32</div>
+            <div>
+              <div class="prize-name">One Question Answered in Full</div>
+              <div class="prize-desc">Any question she has always wanted to ask. Answered completely and honestly. No deflection.</div>
+            </div>
+            <div class="prize-token">25<span class="prize-token-unit">tokens</span></div>
+          </div>
+          <div class="prize-row">
+            <div class="prize-num">33</div>
+            <div>
+              <div class="prize-name">A Private Reflection About Her</div>
+              <div class="prize-desc">He writes it. She reads it. He does not explain it further unless asked.</div>
+            </div>
+            <div class="prize-token">35<span class="prize-token-unit">tokens</span></div>
+          </div>
+          <div class="prize-row">
+            <div class="prize-num">34</div>
+            <div>
+              <div class="prize-name">Honest Feedback on Something She Created</div>
+              <div class="prize-desc">He reads it, watches it, or listens to it fully. Then gives real feedback. Not comfort.</div>
+            </div>
+            <div class="prize-token">30<span class="prize-token-unit">tokens</span></div>
+          </div>
+          <div class="prize-row">
+            <div class="prize-num">35</div>
+            <div>
+              <div class="prize-name">One Hour of Undivided Advice</div>
+              <div class="prize-desc">Any subject she is navigating. He does not offer solutions unless she asks for them.</div>
+            </div>
+            <div class="prize-token">40<span class="prize-token-unit">tokens</span></div>
+          </div>
+          <div class="prize-row">
+            <div class="prize-num">36</div>
+            <div>
+              <div class="prize-name">One Veto</div>
+              <div class="prize-desc">She cancels any plan he has. No questions asked. No rescheduling negotiated in the same breath.</div>
+            </div>
+            <div class="prize-token">50<span class="prize-token-unit">tokens</span></div>
+          </div>
+          <div class="prize-row">
+            <div class="prize-num">37</div>
+            <div>
+              <div class="prize-name">Committee Acknowledgment of a Mistake</div>
+              <div class="prize-desc">Formal. Specific. In writing. Entered into the case record. No conditions attached.</div>
+            </div>
+            <div class="prize-token">60<span class="prize-token-unit">tokens</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CATEGORY 5: KINK & INTIMATE -->
+      <div class="cat-block">
+        <div class="cat-header">
+          <div class="cat-header-title">Kink &amp; Intimate</div>
+          <div class="cat-header-count">Items 38 – 47</div>
+        </div>
+        <div class="cat-grid">
+          <div class="prize-row">
+            <div class="prize-num">38</div>
+            <div>
+              <div class="prize-name">Chosen Outfit</div>
+              <div class="prize-desc">He selects what she wears for one evening. From her wardrobe. His judgment, her wearing it.</div>
+            </div>
+            <div class="prize-token">50<span class="prize-token-unit">tokens</span></div>
+          </div>
+          <div class="prize-row">
+            <div class="prize-num">39</div>
+            <div>
+              <div class="prize-name">Full Host and Service Mode</div>
+              <div class="prize-desc">He cooks, serves, and attends the full dinner in host/service mode. She does not lift anything.</div>
+            </div>
+            <div class="prize-token">60<span class="prize-token-unit">tokens</span></div>
+          </div>
+          <div class="prize-row">
+            <div class="prize-num">40</div>
+            <div>
+              <div class="prize-name">One Act of Submission She Defines</div>
+              <div class="prize-desc">Within negotiated limits. She writes the brief. The Committee does not need to know the details.</div>
+            </div>
+            <div class="prize-token">75<span class="prize-token-unit">tokens</span></div>
+          </div>
+          <div class="prize-row">
+            <div class="prize-num">41</div>
+            <div>
+              <div class="prize-name">Extended Sensory Experience</div>
+              <div class="prize-desc">Blindfold, touch, duration negotiated in advance. She controls the pacing throughout.</div>
+            </div>
+            <div class="prize-token">100<span class="prize-token-unit">tokens</span></div>
+          </div>
+          <div class="prize-row">
+            <div class="prize-num">42</div>
+            <div>
+              <div class="prize-name">One Scene of Her Design</div>
+              <div class="prize-desc">She writes the brief. He executes it. The Committee notes that brevity in the brief is not required.</div>
+            </div>
+            <div class="prize-token">100<span class="prize-token-unit">tokens</span></div>
+          </div>
+          <div class="prize-row">
+            <div class="prize-num">43</div>
+            <div>
+              <div class="prize-name">One Night, Roles Reversed</div>
+              <div class="prize-desc">She leads everything. He follows. No suggestions volunteered. Full compliance.</div>
+            </div>
+            <div class="prize-token">125<span class="prize-token-unit">tokens</span></div>
+          </div>
+          <div class="prize-row">
+            <div class="prize-num">44</div>
+            <div>
+              <div class="prize-name">Shibari Session Arranged by the Committee</div>
+              <div class="prize-desc">Properly arranged. External examiner if preferred. Duration and setting agreed in advance.</div>
+            </div>
+            <div class="prize-token">150<span class="prize-token-unit">tokens</span></div>
+          </div>
+          <div class="prize-row">
+            <div class="prize-num">45</div>
+            <div>
+              <div class="prize-name">The Locked Envelope</div>
+              <div class="prize-desc">Contents unknown. Sealed at redemption, opened together on a date she selects. The Committee knows what is inside.</div>
+            </div>
+            <div class="prize-token">150<span class="prize-token-unit">tokens</span></div>
+          </div>
+          <div class="prize-row">
+            <div class="prize-num">46</div>
+            <div>
+              <div class="prize-name">Fantasy Scenario of Her Choice</div>
+              <div class="prize-desc">Written and enacted. She sets the scene, the cast, and the rules. The Committee enforces compliance.</div>
+            </div>
+            <div class="prize-token">200<span class="prize-token-unit">tokens</span></div>
+          </div>
+          <div class="prize-row">
+            <div class="prize-num">47</div>
+            <div>
+              <div class="prize-name">The Captain's Choice</div>
+              <div class="prize-desc">He decides everything. She says yes. Duration, location, and format at his discretion. She does not ask in advance.</div>
+            </div>
+            <div class="prize-token">300<span class="prize-token-unit">tokens</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CATEGORY 6: RARE & LEGENDARY -->
+      <div class="cat-block">
+        <div class="cat-header" style="border-top-color: var(--gold); background: rgba(201,168,76,0.04);">
+          <div class="cat-header-title" style="color: var(--gold);">Rare &amp; Legendary</div>
+          <div class="cat-header-count" style="color: rgba(201,168,76,0.4);">Items 48 – 50 · Handle with care</div>
+        </div>
+        <div class="cat-grid" style="border-color: rgba(201,168,76,0.15);">
+          <div class="prize-row legendary">
+            <div class="prize-num legendary-num">48</div>
+            <div>
+              <div class="prize-name legendary-name">The Committee Suspension</div>
+              <div class="prize-desc">She pauses any active Committee protocol for 72 hours. No questions asked. No documentation required. The Committee stands down and says nothing.</div>
+            </div>
+            <div class="prize-token legendary-token">250<span class="prize-token-unit">tokens</span></div>
+          </div>
+          <div class="prize-row legendary">
+            <div class="prize-num legendary-num">49</div>
+            <div>
+              <div class="prize-name legendary-name">The Intergalactic Journey</div>
+              <div class="prize-desc">A trip. His destination. Her timing. No budget stated. The Committee confirms only that it will not be cancelled for work.</div>
+            </div>
+            <div class="prize-token legendary-token">500<span class="prize-token-unit">tokens</span></div>
+          </div>
+          <div class="prize-row legendary">
+            <div class="prize-num legendary-num">50</div>
+            <div>
+              <div class="prize-name legendary-name">One Clause Added to Partnership Terms</div>
+              <div class="prize-desc">She proposes. He accepts without negotiation. The clause is drafted, witnessed, and entered into the permanent case record. No amendments permitted after acceptance.</div>
+            </div>
+            <div class="prize-token legendary-token">750<span class="prize-token-unit">tokens</span></div>
+          </div>
+        </div>
+      </div>
+
+      <p style="font-size:0.72rem;font-style:italic;color:var(--dim);line-height:1.75;margin-top:0.5rem;">The Committee reserves the right to introduce additional prizes at any time. No existing prize can be revoked. Token costs are fixed at the time of issuance and are not subject to inflation. The Committee has reviewed this catalog and endorses its contents.</p>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    The Intergalactic Partnership Selection Committee · Proceedings Confidential · Case AC-2026-04<br>
+    <a href="/committee">← Back to Committee Files</a> &nbsp;|&nbsp;
+    <a href="/committee/final">Final Session →</a> &nbsp;|&nbsp;
+    <span style="color:var(--border)">Operated by <a href="/">Intergalactic Pepe</a>. Incorporated under the laws of Mars.</span>
+  </footer>
+
+</body>
+</html>

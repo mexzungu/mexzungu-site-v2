@@ -327,6 +327,82 @@
       font-size: 0.82rem; line-height: 1.8; color: var(--dim);
     }
 
+    /* ── MINI GAMES ── */
+    .games-grid {
+      display: flex; flex-direction: column; gap: 1px;
+      background: var(--border); border: 1px solid var(--border);
+      margin-bottom: 1.5rem;
+    }
+    .game-row {
+      background: var(--bg);
+      padding: 1.25rem 1.25rem 1.25rem 0;
+      display: grid;
+      grid-template-columns: 3rem 1fr;
+      gap: 0;
+    }
+    .game-num {
+      font-family: var(--heading);
+      font-size: 1.1rem; color: var(--pink);
+      opacity: 0.5; padding-top: 2px;
+      text-align: center;
+    }
+    .game-title {
+      font-size: 0.78rem; font-weight: 600;
+      color: var(--text); letter-spacing: 0.04em;
+      margin-bottom: 0.4rem;
+    }
+    .game-desc {
+      font-size: 0.8rem; color: var(--mid);
+      line-height: 1.75;
+    }
+    .game-tag {
+      display: inline-block; margin-top: 0.5rem;
+      font-size: 0.52rem; letter-spacing: 0.16em;
+      text-transform: uppercase; color: var(--pink);
+      border: 1px solid rgba(225,75,135,0.22);
+      padding: 2px 7px;
+    }
+    .games-note {
+      font-size: 0.75rem; font-style: italic;
+      color: var(--dim); line-height: 1.75;
+      margin-top: 0.5rem;
+    }
+
+    /* ── PRIZES ── */
+    .prizes-grid {
+      display: flex; flex-direction: column; gap: 1px;
+      background: var(--border); border: 1px solid var(--border);
+      margin-bottom: 1.5rem;
+    }
+    .prize-row {
+      background: var(--bg);
+      display: grid;
+      grid-template-columns: 3.5rem 1fr auto;
+      gap: 1rem; align-items: start;
+      padding: 1.1rem 1rem;
+    }
+    .prize-rank {
+      font-family: var(--heading);
+      font-size: 0.62rem; letter-spacing: 0.18em;
+      color: var(--pink); padding-top: 2px;
+      text-transform: uppercase;
+    }
+    .prize-name {
+      font-size: 0.82rem; font-weight: 500;
+      color: var(--text); margin-bottom: 0.3rem;
+    }
+    .prize-desc {
+      font-size: 0.72rem; color: var(--dim); line-height: 1.6;
+    }
+    .prize-badge {
+      font-size: 0.52rem; letter-spacing: 0.14em;
+      text-transform: uppercase; padding: 2px 7px;
+      white-space: nowrap; align-self: start;
+      background: rgba(225,75,135,0.08);
+      color: var(--pink);
+      border: 1px solid rgba(225,75,135,0.18);
+    }
+
     /* ── FOOTER ── */
     .site-footer {
       text-align: center; padding: 2rem 1.5rem;
@@ -338,6 +414,8 @@
     @media (max-width: 480px) {
       .t-step { grid-template-columns: 24px 1fr auto; gap: 10px; }
       .cd-wrap { gap: 4px; }
+      .prize-row { grid-template-columns: 3rem 1fr; }
+      .prize-badge { display: none; }
     }
   </style>
 </head>
@@ -456,6 +534,78 @@
         <div class="notice-box-title">Notice from the Committee</div>
         <p>Phase 1 and Phase 2 are closed. The Committee has reviewed both phases and entered the results into the permanent case record. Phase 3 has been suspended. The case advances directly to Phase 4: the Final Session.<br><br>The Final Session is not a formality. It is the Committee's in-person review of all material gathered across the preceding phases. The agenda will not be published in advance. The Candidate should bring her full operational capacity. The Committee will bring popcorn.</p>
       </div>
+    </div>
+  </section>
+
+  <!-- MINI GAMES -->
+  <section class="section">
+    <div class="wrap">
+      <div class="sec-label">Mini Games — Phase 4 Protocol</div>
+      <p style="font-size:0.82rem;color:var(--mid);line-height:1.8;margin-bottom:1.75rem;">The Final Session includes five mini games. Each one earns Intergalactic Tokens, redeemable against the Prize Catalog. Tokens are tracked in real time. The Committee keeps the ledger. No token is issued without confirmation.</p>
+      <div class="games-grid">
+
+        <div class="game-row">
+          <div class="game-num">I</div>
+          <div>
+            <div class="game-title">The Extended Quiz</div>
+            <div class="game-desc">100 questions drawn from the full case file. 11-hour lockout per wrong answer. Earns 2 tokens per correct answer, up to 200 tokens maximum. The Committee does not accept preparation as an excuse. The quiz is administered live, alternating questions, no notes.</div>
+            <span class="game-tag">Knowledge · Up to 200 tokens</span>
+          </div>
+        </div>
+
+        <div class="game-row">
+          <div class="game-num">II</div>
+          <div>
+            <div class="game-title">The Negotiation Table</div>
+            <div class="game-desc">10 prizes from the catalog are put on auction. Each player receives 100 tokens to bid. He may also bid to keep prizes off the table. Highest bid wins each item. 30 minutes, fast and ruthless. Items won are added to the redeemable balance immediately.</div>
+            <span class="game-tag">Auction · 30 min</span>
+          </div>
+        </div>
+
+        <div class="game-row">
+          <div class="game-num">III</div>
+          <div>
+            <div class="game-title">The Oracle</div>
+            <div class="game-desc">She submits 5 questions about the future to the Committee. Any question, no restrictions. He answers as the Committee with full creative authority. Answers are binding and entered into the record. Follow-up questions cost 10 tokens each, payable from the catalog balance.</div>
+            <span class="game-tag">Prophecy · Unlimited questions at cost</span>
+          </div>
+        </div>
+
+        <div class="game-row">
+          <div class="game-num">IV</div>
+          <div>
+            <div class="game-title">The Archive</div>
+            <div class="game-desc">Rapid-fire memory game. 20 rounds, 30 seconds per round. A date or moment from the case file is stated. First player to correctly name what happened wins 5 tokens. The player with the most tokens after 20 rounds wins a bonus prize from the catalog at the Committee's discretion.</div>
+            <span class="game-tag">Memory · Up to 100 tokens</span>
+          </div>
+        </div>
+
+        <div class="game-row">
+          <div class="game-num">V</div>
+          <div>
+            <div class="game-title">The Protocol Duel</div>
+            <div class="game-desc">Each player writes 3 rules to add to the partnership operating system. Each rule is argued for 2 minutes. The other player votes accept or reject. Each accepted rule earns 25 tokens and is formally added to the case record. Rejected rules are burned. Maximum 150 tokens available.</div>
+            <span class="game-tag">Legislation · Up to 150 tokens</span>
+          </div>
+        </div>
+
+      </div>
+      <p class="games-note">Tokens earned in all five games are added to the same balance. That balance is redeemable immediately after the session against the Prize Catalog. The Committee tracks everything. No token is ever lost.</p>
+    </div>
+  </section>
+
+  <!-- PRIZES -->
+  <section class="section">
+    <div class="wrap">
+      <div class="sec-label">Prize Catalog — Redeemable After Session End</div>
+      <div class="notice-box" style="margin-bottom:1.5rem;">
+        <div class="notice-box-title">Token Redemption</div>
+        <p>Full prize catalog available at <a href="/committee/prizes" style="color:var(--pink);text-decoration:none;">mexzungu.com/committee/prizes</a>. 50 items, priced in Intergalactic Tokens. All prizes earned during the Final Session are redeemable immediately.</p>
+      </div>
+      <div style="text-align:center;">
+        <a href="/committee/prizes" style="display:inline-block;padding:0.65rem 1.75rem;background:rgba(225,75,135,0.1);border:1px solid rgba(225,75,135,0.3);color:var(--pink);font-family:var(--sans);font-size:0.75rem;letter-spacing:0.16em;text-transform:uppercase;text-decoration:none;font-weight:500;">View Prize Catalog →</a>
+      </div>
+      <p style="font-size:0.72rem;font-style:italic;color:var(--dim);line-height:1.75;margin-top:1.5rem;">No prize expires. No prize can be refunded once redeemed. The Committee reserves the right to introduce new prizes at any time. Token costs are fixed and not subject to renegotiation.</p>
     </div>
   </section>
 
