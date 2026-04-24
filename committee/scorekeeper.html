@@ -202,6 +202,11 @@
             <td class="earned-num" id="bd-negotiation">0</td>
           </tr>
           <tr>
+            <td>Compliance Engine</td>
+            <td class="max-col">195</td>
+            <td class="earned-num" id="bd-compliance">0</td>
+          </tr>
+          <tr>
             <td>Committee Awards</td>
             <td class="max-col">—</td>
             <td class="earned-num" id="bd-awards">0</td>
@@ -299,6 +304,12 @@
             <div class="game-link-tag">75 tokens max</div>
           </div>
         </a>
+        <a href="/committee/compliance.html" style="text-decoration:none;">
+          <div class="game-link-row">
+            <div class="game-link-name">Compliance Engine</div>
+            <div class="game-link-tag">195 tokens max</div>
+          </div>
+        </a>
       </div>
     </div>
   </section>
@@ -390,6 +401,7 @@
       setEarned('bd-archive', bd.archive || 0);
       setEarned('bd-protocol', bd.protocol || 0);
       setEarned('bd-negotiation', bd.negotiation || 0);
+      setEarned('bd-compliance', bd.compliance || 0);
       setEarned('bd-awards', bd.awards || 0);
 
       renderClaimedList();
