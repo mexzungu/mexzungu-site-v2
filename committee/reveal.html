@@ -849,7 +849,12 @@
     function reveal() {
       if (revealed) return;
       revealed = true;
-      document.getElementById('countdown-section').style.display = 'none';
+      // Freeze timer at 00:00:00 instead of hiding it
+      document.getElementById('cdh').textContent = '00';
+      document.getElementById('cdm').textContent = '00';
+      document.getElementById('cds').textContent = '00';
+      var cdLabel = document.querySelector('.cd-label');
+      if (cdLabel) cdLabel.textContent = 'The ruling was published';
       document.getElementById('flash').classList.add('go');
       setTimeout(function() {
         var r = document.getElementById('ruling');
@@ -890,7 +895,12 @@
 
     // Init — target date has passed, show ruling immediately
     if (new Date() >= TARGET) {
-      document.getElementById('countdown-section').style.display = 'none';
+      // Freeze timer at 00:00:00
+      document.getElementById('cdh').textContent = '00';
+      document.getElementById('cdm').textContent = '00';
+      document.getElementById('cds').textContent = '00';
+      var cdLabel = document.querySelector('.cd-label');
+      if (cdLabel) cdLabel.textContent = 'The ruling was published';
       document.getElementById('ruling').classList.add('revealed');
       revealed = true;
     } else {

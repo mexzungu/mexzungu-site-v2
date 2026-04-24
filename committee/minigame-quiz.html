@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#080809">
+  <title>The Committee — Extended Assessment · Phase 4</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/fonts.css">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --pink:      #E14B87;
+      --pink-glow: rgba(225,75,135,0.25);
+      --pink-dim:  rgba(225,75,135,0.07);
+      --bg:        #080809;
+      --text:      #ddd5cc;
+      --mid:       #7a7068;
+      --dim:       #3d3835;
+      --border:    #181614;
+      --heading:   'RocknRoll One', sans-serif;
+      --sans:      'Space Grotesk', -apple-system, sans-serif;
+    }
+    body { background: var(--bg); color: var(--text); font-family: var(--sans); min-height: 100vh; overflow-x: hidden; }
+    body::before {
+      content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 999; opacity: 0.025;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      background-size: 256px 256px;
+    }
+    .wrap { max-width: 680px; margin: 0 auto; padding: 0 20px; }
+    .phase-banner { text-align: center; padding: 0.55rem 1rem; font-size: 0.56rem; letter-spacing: 0.32em; text-transform: uppercase; font-weight: 600; }
+    .phase-banner.scheduled { background: rgba(40,120,80,0.08); color: rgba(61,189,110,0.8); border-bottom: 1px solid rgba(61,189,110,0.15); }
+    .token-bar { display: flex; align-items: center; justify-content: space-between; padding: 0.6rem 1.5rem; background: rgba(225,75,135,0.08); border-bottom: 1px solid rgba(225,75,135,0.15); }
+    .token-bar-label { font-size: 0.56rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--dim); }
+    .token-bar-count { font-family: var(--heading); font-size: 1rem; color: var(--pink); }
+    .token-bar-link { font-size: 0.52rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--dim); text-decoration: none; }
+    .token-bar-link:hover { color: var(--pink); }
+    .site-nav { padding: 1.25rem 1.5rem; text-align: center; border-bottom: 1px solid var(--border); }
+    .site-nav a { font-family: var(--heading); font-size: 0.95rem; color: var(--mid); text-decoration: none; }
+    .site-nav-sub { font-size: 0.6rem; color: var(--dim); letter-spacing: 0.14em; text-transform: uppercase; margin-top: 0.2rem; }
+    .site-nav-back { font-size: 0.56rem; color: var(--dim); letter-spacing: 0.18em; text-transform: uppercase; margin-top: 0.4rem; }
+    .site-nav-back a { font-family: var(--sans); font-size: 0.56rem; color: var(--dim); text-decoration: none; }
+    .site-nav-back a:hover { color: var(--pink); }
+    .hero { background: var(--bg); text-align: center; padding: 4rem 1.5rem 3rem; border-bottom: 1px solid var(--border); position: relative; overflow: hidden; }
+    .hero::before {
+      content: ''; position: absolute; inset: 0; pointer-events: none; opacity: 0.07;
+      background-image: radial-gradient(2px 2px at 4% 9%,#fff 100%,transparent),radial-gradient(1px 1px at 10% 34%,#E14B87 100%,transparent),radial-gradient(2px 2px at 16% 61%,#fff 100%,transparent),radial-gradient(3px 2px at 23% 19%,#E14B87 100%,transparent),radial-gradient(1px 2px at 31% 47%,#fff 100%,transparent),radial-gradient(2px 1px at 39% 77%,#E14B87 100%,transparent),radial-gradient(2px 2px at 47% 11%,#fff 100%,transparent),radial-gradient(3px 2px at 54% 39%,#E14B87 100%,transparent),radial-gradient(1px 2px at 62% 67%,#fff 100%,transparent),radial-gradient(2px 1px at 69% 23%,#E14B87 100%,transparent),radial-gradient(2px 2px at 76% 51%,#fff 100%,transparent),radial-gradient(4px 2px at 82% 13%,#E14B87 100%,transparent),radial-gradient(2px 2px at 7% 83%,#fff 100%,transparent),radial-gradient(1px 2px at 51% 91%,#E14B87 100%,transparent),radial-gradient(2px 1px at 72% 87%,#fff 100%,transparent);
+      background-size: 110px 90px;
+    }
+    .hero::after { content: ''; position: absolute; width: 520px; height: 150px; border: 1px solid rgba(225,75,135,0.07); border-radius: 50%; top: 50%; left: 50%; transform: translate(-50%,-50%) rotate(-7deg); pointer-events: none; }
+    .hero-inner { position: relative; z-index: 1; }
+    .seal { position: relative; width: 96px; height: 96px; margin: 0 auto 1.75rem; }
+    .seal-ring { position: absolute; inset: 0; border: 1px dashed rgba(225,75,135,0.3); border-radius: 50%; animation: sealSpin 22s linear infinite; }
+    .seal-ring2 { position: absolute; inset: 7px; border: 1px solid rgba(225,75,135,0.12); border-radius: 50%; }
+    .seal-core { position: absolute; inset: 14px; border: 1.5px solid var(--pink); border-radius: 50%; display: flex; flex-direction: column; align-items: center; justify-content: center; background: var(--pink-dim); box-shadow: 0 0 24px rgba(225,75,135,0.1); }
+    .seal-id { font-family: var(--heading); font-size: 0.9rem; color: var(--pink); letter-spacing: 0.1em; line-height: 1; }
+    .seal-yr { font-size: 0.48rem; color: var(--dim); letter-spacing: 0.2em; margin-top: 2px; }
+    @keyframes sealSpin { to { transform: rotate(360deg); } }
+    .hero-over { font-size: 0.6rem; letter-spacing: 0.4em; text-transform: uppercase; color: var(--pink); margin-bottom: 0.75rem; }
+    .hero-stars { opacity: 0.38; }
+    .hero-title { font-family: var(--heading); font-size: clamp(1.9rem,5vw,2.9rem); color: #fafafa; margin-bottom: 0.4rem; }
+    .hero-sub { font-family: var(--heading); font-size: clamp(1rem,2.5vw,1.45rem); color: var(--pink); font-weight: 400; letter-spacing: 0.04em; margin-bottom: 0.65rem; }
+    .hero-meta { font-size: 0.7rem; color: var(--dim); letter-spacing: 0.1em; }
+    .hero-ref { display: inline-block; margin-top: 1.25rem; padding: 0.35rem 0.9rem; border: 1px solid var(--border); font-size: 0.6rem; letter-spacing: 0.12em; color: var(--dim); font-family: 'Courier New', monospace; }
+    .section { padding: 2.75rem 0; border-bottom: 1px solid var(--border); }
+    .sec-label { font-size: 0.58rem; letter-spacing: 0.35em; text-transform: uppercase; color: var(--dim); margin-bottom: 1.5rem; }
+    .quiz-flash { position: fixed; inset: 0; opacity: 0; pointer-events: none; z-index: 997; }
+    .quiz-intro-panel { text-align: center; padding: 2.5rem 1.5rem; border: 1px solid var(--border); background: var(--pink-dim); }
+    .quiz-intro-stamp { font-size: 0.56rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--dim); margin-bottom: 1.25rem; }
+    .quiz-intro-title { font-family: var(--heading); font-size: clamp(1.4rem,4vw,2rem); color: #fafafa; margin-bottom: 0.5rem; }
+    .quiz-intro-sub { font-size: 0.85rem; color: var(--mid); line-height: 1.75; margin-bottom: 1.75rem; max-width: 480px; margin-left: auto; margin-right: auto; }
+    .quiz-intro-rules { display: flex; align-items: center; justify-content: center; gap: 0.6rem; flex-wrap: wrap; margin-bottom: 1rem; }
+    .quiz-intro-rule { font-size: 0.62rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--pink); padding: 3px 10px; border: 1px solid rgba(225,75,135,0.3); }
+    .quiz-intro-rule-sep { font-size: 0.6rem; color: var(--dim); opacity: 0.5; }
+    .quiz-intro-warning { font-size: 0.72rem; color: var(--dim); font-style: italic; margin-bottom: 2rem; line-height: 1.6; }
+    .quiz-btn { display: inline-block; background: var(--pink); color: #fff; border: none; padding: 0.8rem 2rem; font-family: var(--sans); font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase; cursor: pointer; transition: opacity 0.2s, background 0.2s; }
+    .quiz-btn:hover:not(:disabled) { opacity: 0.85; }
+    .quiz-btn:disabled { opacity: 0.35; cursor: not-allowed; }
+    .quiz-progress { margin-bottom: 1.5rem; }
+    .quiz-progress-meta { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem; }
+    .quiz-progress-label { font-size: 0.6rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--dim); }
+    .quiz-progress-label span { color: var(--pink); }
+    .quiz-progress-track { height: 2px; background: var(--border); position: relative; }
+    .quiz-progress-fill { position: absolute; left: 0; top: 0; height: 100%; background: var(--pink); transition: width 0.4s ease; }
+    .quiz-q-panel { padding: 1.5rem 1.25rem; border: 1px solid var(--border); margin-bottom: 1rem; }
+    .quiz-q-code { font-size: 0.54rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--dim); margin-bottom: 0.75rem; }
+    .quiz-q-text { font-size: 0.95rem; line-height: 1.75; color: var(--text); }
+    .quiz-options { display: flex; flex-direction: column; gap: 6px; margin-bottom: 1.25rem; }
+    .quiz-opt { display: grid; grid-template-columns: 28px 1fr; gap: 12px; align-items: start; padding: 0.85rem 1rem; border: 1px solid var(--border); background: var(--bg); cursor: pointer; transition: border-color 0.15s, background 0.15s; user-select: none; }
+    .quiz-opt:hover { border-color: rgba(225,75,135,0.3); }
+    .quiz-opt.selected { border-color: var(--pink); background: var(--pink-dim); }
+    .quiz-opt.selected .quiz-opt-letter { color: var(--pink); }
+    .quiz-opt.selected .quiz-opt-text { color: var(--text); }
+    .quiz-opt-letter { font-family: var(--heading); font-size: 0.7rem; color: var(--dim); padding-top: 2px; }
+    .quiz-opt-text { font-size: 0.85rem; line-height: 1.6; color: var(--mid); }
+    .quiz-confirm-row { text-align: right; }
+    .quiz-locked-panel { text-align: center; padding: 3rem 1.5rem; border: 1px solid var(--border); }
+    .quiz-locked-icon { font-size: 2.5rem; color: var(--dim); margin-bottom: 1.25rem; line-height: 1; }
+    .quiz-locked-title { font-family: var(--heading); font-size: clamp(1.2rem,3vw,1.6rem); color: var(--text); margin-bottom: 0.75rem; }
+    .quiz-locked-text { font-size: 0.82rem; color: var(--dim); line-height: 1.75; max-width: 440px; margin: 0 auto 2rem; }
+    .quiz-locked-cd-label { font-size: 0.56rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--dim); margin-bottom: 1.25rem; }
+    .quiz-locked-cd-wrap { display: flex; align-items: flex-start; justify-content: center; gap: 6px; margin-bottom: 1.5rem; }
+    .quiz-locked-digit { font-family: var(--heading); font-size: clamp(36px,8vw,56px); color: var(--mid); line-height: 1; min-width: clamp(54px,12vw,88px); text-align: center; }
+    .quiz-locked-sep { font-family: var(--heading); font-size: clamp(28px,6vw,44px); color: var(--dim); opacity: 0.3; line-height: 1; margin-top: 3px; }
+    .quiz-locked-cd-unit { display: flex; flex-direction: column; align-items: center; gap: 5px; }
+    .quiz-locked-cd-unit-l { font-size: 0.5rem; letter-spacing: 0.2em; color: var(--dim); text-transform: uppercase; }
+    .quiz-locked-note { font-size: 0.7rem; color: var(--dim); font-style: italic; }
+    .quiz-pass-panel { animation: revealIn 0.8s ease forwards; }
+    @keyframes revealIn { from { opacity: 0; } to { opacity: 1; } }
+    .quiz-pass-head { text-align: center; padding-bottom: 2rem; border-bottom: 1px solid var(--border); margin-bottom: 2rem; }
+    .quiz-pass-over { font-size: 0.56rem; letter-spacing: 0.35em; text-transform: uppercase; color: var(--dim); margin-bottom: 1.25rem; }
+    .quiz-pass-verdict { font-family: var(--heading); font-size: clamp(3rem,12vw,5.5rem); color: var(--pink); line-height: 1; text-shadow: 0 0 60px var(--pink-glow), 0 0 120px rgba(225,75,135,0.12); margin-bottom: 0.75rem; }
+    .quiz-pass-sub { font-size: 0.72rem; letter-spacing: 0.12em; color: var(--mid); font-style: italic; }
+    .quiz-pass-tokens { text-align: center; padding: 2rem 0; margin-bottom: 2rem; border-bottom: 1px solid var(--border); }
+    .quiz-pass-tokens-num { font-family: var(--heading); font-size: clamp(2.5rem,10vw,5rem); color: var(--pink); line-height: 1; text-shadow: 0 0 40px var(--pink-glow); }
+    .quiz-pass-tokens-label { font-size: 0.6rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--dim); margin-top: 0.5rem; }
+    .quiz-pass-preamble { color: var(--mid); font-style: italic; border-left: 2px solid var(--pink); padding: 1rem 1.25rem; background: var(--pink-dim); font-size: 0.9rem; line-height: 1.8; margin-bottom: 2rem; }
+    .quiz-pass-sig { margin-top: 2.5rem; padding-top: 1.5rem; border-top: 1px solid var(--border); text-align: right; }
+    .quiz-pass-sig p { font-style: italic; color: var(--dim); margin-bottom: 0.35rem; line-height: 1.75; font-size: 0.88rem; }
+    .quiz-pass-sig-ref { font-size: 0.54rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--pink); margin-top: 0.75rem; }
+    .site-footer { text-align: center; padding: 2rem 1.5rem; border-top: 1px solid var(--border); font-size: 0.65rem; color: var(--dim); letter-spacing: 0.08em; line-height: 1.9; }
+    .site-footer a { color: var(--dim); text-decoration: none; }
+  </style>
+</head>
+<body>
+
+  <div class="quiz-flash" id="quiz-flash"></div>
+
+  <div class="phase-banner scheduled">&#9711; &nbsp; PHASE 4 &nbsp; · &nbsp; FINAL SESSION &nbsp; · &nbsp; EXTENDED ASSESSMENT &nbsp; &#9711;</div>
+
+  <nav class="site-nav">
+    <a href="/">Intergalactic Pepe 🚀</a>
+    <div class="site-nav-sub">An independent, free-spirited cosmic travel company</div>
+    <div class="site-nav-back"><a href="/committee">← Committee Files &nbsp;·&nbsp; Case AC-2026-04</a></div>
+  </nav>
+
+  <div class="token-bar">
+    <span class="token-bar-label">Intergalactic Tokens</span>
+    <span class="token-bar-count" id="token-display">0</span>
+    <a href="/committee/prizes" class="token-bar-link">Redeem</a>
+  </div>
+
+  <div class="hero">
+    <div class="hero-inner">
+      <div class="seal">
+        <div class="seal-ring"></div>
+        <div class="seal-ring2"></div>
+        <div class="seal-core">
+          <div class="seal-id">IPSC</div>
+          <div class="seal-yr">2026</div>
+        </div>
+      </div>
+      <p class="hero-over"><span class="hero-stars">✦ &nbsp;</span>Intergalactic Partnership Selection Committee<span class="hero-stars">&nbsp; ✦</span></p>
+      <h1 class="hero-title">The Extended Assessment</h1>
+      <p class="hero-sub">Phase 4 — Infinite Rounds</p>
+      <p class="hero-meta">Case AC-2026-04 · Final Session · Barcelona Sector</p>
+      <span class="hero-ref">Ref: IPSC-EXT-001 &nbsp;|&nbsp; Phase 4 &nbsp;|&nbsp; Active</span>
+    </div>
+  </div>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="sec-label">Extended Assessment Protocol — Phase 4</div>
+
+      <div id="quiz-intro">
+        <div class="quiz-intro-panel">
+          <div class="quiz-intro-stamp">Classification: Restricted · Case AC-2026-04 · Phase 4</div>
+          <h2 class="quiz-intro-title">The Extended Assessment</h2>
+          <p class="quiz-intro-sub">20 questions per round from a 200-question pool. One wrong answer terminates the session for eleven hours. Rounds are infinite. The Committee does not accept gaps in knowledge.</p>
+          <div class="quiz-intro-rules">
+            <span class="quiz-intro-rule">20 Questions</span>
+            <span class="quiz-intro-rule-sep">·</span>
+            <span class="quiz-intro-rule">2 tokens per correct</span>
+            <span class="quiz-intro-rule-sep">·</span>
+            <span class="quiz-intro-rule">Earn 40 per round</span>
+            <span class="quiz-intro-rule-sep">·</span>
+            <span class="quiz-intro-rule">1 wrong = 11hr lockout</span>
+          </div>
+          <p class="quiz-intro-warning">One wrong answer locks you out for eleven hours. Complete a full round of 20 with no errors — earn 40 tokens, play another. The full record is available. Prepare accordingly.</p>
+          <button class="quiz-btn" id="quiz-start-btn">Begin Extended Assessment</button>
+        </div>
+      </div>
+
+      <div id="quiz-active" style="display:none;">
+        <div class="quiz-progress">
+          <div class="quiz-progress-meta">
+            <div class="quiz-progress-label">Question <span id="quiz-q-num">1</span> / 20</div>
+            <div id="quiz-score-display" style="font-size:0.6rem;letter-spacing:0.18em;color:var(--pink);"></div>
+          </div>
+          <div class="quiz-progress-track">
+            <div class="quiz-progress-fill" id="quiz-progress-fill" style="width:0%"></div>
+          </div>
+        </div>
+        <div class="quiz-q-panel">
+          <div class="quiz-q-code" id="quiz-q-code">Q1 / 20</div>
+          <div class="quiz-q-text" id="quiz-q-text"></div>
+        </div>
+        <div class="quiz-options" id="quiz-options"></div>
+        <div class="quiz-confirm-row">
+          <button class="quiz-btn" id="quiz-confirm-btn" disabled>Confirm Answer</button>
+        </div>
+      </div>
+
+      <div id="quiz-locked" style="display:none;">
+        <div class="quiz-locked-panel">
+          <div class="quiz-locked-icon">&#9888;</div>
+          <div class="quiz-locked-title">Assessment Terminated</div>
+          <p class="quiz-locked-text">An incorrect answer has been submitted. The assessment is locked. The Committee does not accept ignorance as an explanation. Review the record and return.</p>
+          <div class="quiz-locked-cd-label">Unlocks in</div>
+          <div class="quiz-locked-cd-wrap">
+            <div class="quiz-locked-cd-unit">
+              <div class="quiz-locked-digit" id="lkh">00</div>
+              <div class="quiz-locked-cd-unit-l">Hours</div>
+            </div>
+            <div class="quiz-locked-sep">:</div>
+            <div class="quiz-locked-cd-unit">
+              <div class="quiz-locked-digit" id="lkm">00</div>
+              <div class="quiz-locked-cd-unit-l">Min</div>
+            </div>
+            <div class="quiz-locked-sep">:</div>
+            <div class="quiz-locked-cd-unit">
+              <div class="quiz-locked-digit" id="lks">00</div>
+              <div class="quiz-locked-cd-unit-l">Sec</div>
+            </div>
+          </div>
+          <p class="quiz-locked-note">The case file has not changed. 200 questions in the pool. Each round draws 20. All answers still valid.</p>
+        </div>
+      </div>
+
+      <div id="quiz-pass" style="display:none;">
+        <div class="quiz-pass-panel">
+          <div class="quiz-pass-head">
+            <div class="quiz-pass-over">Extended Assessment — Round Complete · Case AC-2026-04</div>
+            <div class="quiz-pass-verdict">ROUND PASSED</div>
+            <div class="quiz-pass-sub">20 questions. 20 correct answers. The Committee is noting this.</div>
+          </div>
+          <div class="quiz-pass-tokens">
+            <div class="quiz-pass-tokens-num">40</div>
+            <div class="quiz-pass-tokens-label">Intergalactic Tokens Earned This Round</div>
+          </div>
+          <div class="quiz-pass-preamble">
+            Another round completed without error. 40 tokens entered into the ledger. You may play again immediately — each new round draws 20 fresh questions from the 200-question pool. The Committee will not run out of questions.
+          </div>
+          <div style="text-align:center;margin:2rem 0 1rem;">
+            <button class="quiz-btn" id="quiz-next-round-btn">Play Another Round →</button>
+          </div>
+          <div class="quiz-pass-sig">
+            <p>Extended Assessment Protocol — Case AC-2026-04</p>
+            <p>40 tokens entered per round into the permanent record.</p>
+            <div class="quiz-pass-sig-ref">Issued by order of the Committee · Phase 4 · 2026</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    The Intergalactic Partnership Selection Committee · Proceedings Confidential · Case AC-2026-04<br>
+    <a href="/committee/final">← Back to Final Session</a> &nbsp;|&nbsp;
+    <span style="color:var(--border)">Operated by <a href="/">Intergalactic Pepe</a>. Incorporated under the laws of Mars.</span>
+  </footer>
+
+  <script>
+    // ── TOKEN HELPERS ──
+    function getTokenBank() {
+      try {
+        var raw = localStorage.getItem('ipsc_tokens_ac2026');
+        if (!raw) return {total:0,breakdown:{quiz:0,negotiation:0,archive:0,protocol:0}};
+        var b = JSON.parse(raw);
+        if (!b.breakdown) b.breakdown = {quiz:0,negotiation:0,archive:0,protocol:0};
+        return b;
+      } catch(e) { return {total:0,breakdown:{quiz:0,negotiation:0,archive:0,protocol:0}}; }
+    }
+    function addTokens(source, amount) {
+      var bank = getTokenBank();
+      bank.total += amount;
+      if (bank.breakdown[source] !== undefined) bank.breakdown[source] += amount;
+      else bank.breakdown[source] = amount;
+      try { localStorage.setItem('ipsc_tokens_ac2026', JSON.stringify(bank)); } catch(e) {}
+      updateTokenDisplay();
+    }
+    function updateTokenDisplay() {
+      var el = document.getElementById('token-display');
+      if (el) el.textContent = getTokenBank().total;
+    }
+    updateTokenDisplay();
+
+    // ── EXTENDED QUIZ ──
+    (function() {
+      'use strict';
+      var QUIZ_KEY   = 'ipsc_extquiz_ac2026';
+      var LOCK_MS    = 11 * 60 * 60 * 1000;
+      var ROUND_SIZE = 20;
+
+      var QUESTIONS = [
+        // ── QUESTIONS 1–100 (original) ──
+        {text:"The Candidate filed her first Protocol violation response under which designation?",opts:["The Applicant","The Panda","The Candidate","The Consultant"],correct:2},
+        {text:"What was the Candidate doing when she first encountered the Committee?",opts:["Attending a dance performance","On a solo walk in the Gothic Quarter","At an exhibition opening","Having drinks with a mutual contact"],correct:0},
+        {text:"How many days elapsed between the Committee first contact and Experiment I?",opts:["Three days","Seven days","Eleven days","Fourteen days"],correct:1},
+        {text:"The Committee officially refers to its headquarters as:",opts:["The Station","The Embassy","The Observatory","The Field Office"],correct:1},
+        {text:"The Candidate Cherie Class counter-proposal contained how many clauses?",opts:["Seven","Eight","Ten","Twelve"],correct:2},
+        {text:"What item did the Candidate return on her March 25th visit to the Embassy?",opts:["A scarf","A book borrowed during Experiment II","Her power bank","An earring"],correct:0},
+        {text:"Experiment III (shibari session) cost how much?",opts:["80 EUR","100 EUR","120 EUR","150 EUR"],correct:1},
+        {text:"The Panda PIN format is:",opts:["A 4-digit code","A 6-digit date","An 8-digit timestamp","A 5-letter passphrase"],correct:1},
+        {text:"The Committee formally classified the attack on Claudio as:",opts:["Bamboo Defection Incident Protocol 7","Panda Revolution","Habitat Disorientation under altered conditions","Vegetation Insubordination Level 2"],correct:1},
+        {text:"The Candidate emergency contact for the psilocybin journey was named:",opts:["Camille","Sophie","Marine","Fiona"],correct:2},
+        {text:"Experiment I took place at which venue?",opts:["Sala Apolo, Poble Sec","Soho Jazz Club, Gothic Quarter","Bar Marsella, Born","Jazz Si Club, Raval"],correct:1},
+        {text:"What snack will the Committee bring to the live painting session?",opts:["Dark chocolate 85%","Champagne and exactly one strawberry","Popcorn","Nothing — the Committee does not snack during assessments"],correct:2},
+        {text:"How was the Candidate shibari master professionally known?",opts:["A certified local practitioner identity withheld","A Tokyo-based visiting instructor","Dirty Von P — Paris-based master rigger","An anonymous source through her dance partner"],correct:2},
+        {text:"The psilocybin journey took place on:",opts:["Holy Saturday April 4th","Easter Monday April 6th","Easter Sunday April 5th","Good Friday April 3rd"],correct:3},
+        {text:"The Candidate counter-proposal was submitted under which formal designation?",opts:["The Candidate","The Panda","The Consultant","The Passenger"],correct:3},
+        {text:"Of the counter-proposal clauses one received an unambiguous hard no. Which?",opts:["The exit protocol","The co-creation mandate","The CDI clause — permanence and exclusivity","The transparency requirement"],correct:2},
+        {text:"The Candidate field report on Experiment II described the session as:",opts:["Unexpectedly instructive though methodology questionable","Particularly challenging both physically and emotionally","A test of patience — results inconclusive","An experience not classified as recreational"],correct:1},
+        {text:"On March 25th the Candidate issued a warning about the Committee influence. The exact wording was:",opts:["The Committee proximity is becoming a variable I did not account for","Martian Powers could become addictive","The Embassy visiting hours are poorly calibrated for sustainable operations","Something in the Committee methodology should probably be regulated"],correct:1},
+        {text:"How many total field interactions are entered in Case AC-2026-04?",opts:["Eleven","Thirteen","Fifteen","Sixteen"],correct:3},
+        {text:"The Candidate first act of insubordination was a response to which statement?",opts:["You seem like someone who always gets what she wants","I don't remember you asking nicely","The Committee notes your punctuality is selective","That answer could use a second draft"],correct:1},
+        {text:"Under which jurisdiction is Low-Battery Panda Mode formally accepted?",opts:["Interstellar Treaty of 2019 Article 7","Galactic Panda Preservation Act Annex IV","Barcelona Convention on Minimum Operational Standards","Martian law"],correct:3},
+        {text:"How did the Committee announce itself when arriving with food?",opts:["Galactic High Council surprise inspection","Captain personal provisioning service","Intergalactic Glovo","Committee Field Operations Unit"],correct:2},
+        {text:"The psilocybin journey was formally classified as:",opts:["An unsanctioned field excursion tolerated but not endorsed","A complimentary gratuity requested by the Candidate and granted by the Committee","An optional wellness provision for candidates in good standing","A private matter outside Committee jurisdiction"],correct:1},
+        {text:"During Physical Endurance Assessment at what time did the Candidate depart the field?",opts:["4:12 AM","6:05 AM","5:41 AM","3:47 AM"],correct:2},
+        {text:"Experiment III payment was handled how?",opts:["Split equally between Candidate and Committee","Committee settled invoice in advance","Candidate paid full amount upfront; Committee reimbursed","Instructor accepted a letter of commendation in lieu of payment"],correct:2},
+        {text:"What claim did the Candidate make about her academic record during Experiment I?",opts:["Never failed a course she actually cared about","Once placed first in an exam she hadn't studied for","Always been top of class once she got interested in the subject","Finished her thesis two weeks early and regretted nothing"],correct:2},
+        {text:"The Candidate wore the Committee pin at work and reported:",opts:["I told three people about the Committee. They did not believe me.","Was wearing your pin at work. I don't think I have more to say.","I've been carrying this around for a week. No one asked about it.","The Committee has been in this building longer than I expected."],correct:1},
+        {text:"The Panda PIN marks which date?",opts:["The date the Candidate filed her first Protocol violation","The date the Committee formally opened Case AC-2026-04","The date of the Candidate first encounter with the Committee at the temple","The date the Candidate submitted her counter-proposal"],correct:2},
+        {text:"How many numbered experiments are officially logged for Case AC-2026-04?",opts:["Two","Three","Four","Five"],correct:1},
+        {text:"The Committee case reference for this proceeding is:",opts:["IPSC-2026-01","AC-2026-04","KAP-001-2026","IPSC-KAP-2026"],correct:1},
+        {text:"The Committee founding jurisdiction is:",opts:["Incorporated under the laws of Mars","Registered in Barcelona under cosmic law","An independent supra-national body","The Geneva Accord on Intergalactic Relations"],correct:0},
+        {text:"The Candidate submitted her counter-proposal after which experiment?",opts:["Experiment I","Experiment II","Experiment III","After the psilocybin journey"],correct:2},
+        {text:"What does IPSC stand for?",opts:["International Partnership Selection Consortium","Intergalactic Partnership Selection Committee","Independent Procedural Standards Council","Intergalactic Provisional Selection Commission"],correct:1},
+        {text:"The Candidate first formal response to the Committee was characterized as:",opts:["Cooperative","Insubordinate","Evasive","Overly formal"],correct:1},
+        {text:"Claudio is classified in the case file as:",opts:["A carbon-based crew member","A Committee field agent","A Candidate associate","An unregistered entity"],correct:0},
+        {text:"The Candidate officially invoked Panda Mode on which Protocol basis?",opts:["Physical depletion threshold exceeded","Emotional bandwidth at minimum viable operations","Low-Battery Panda Mode under Martian law","Sanctuary protocol Article 3"],correct:2},
+        {text:"Phase 1 was formally titled:",opts:["Preliminary Screening","Knowledge Assessment Protocol","Compatibility Assessment","Initial Field Evaluation"],correct:1},
+        {text:"Phase 2 designation was:",opts:["The Cherie Class","Advanced Assessment Protocol","Field Deployment Phase","Negotiated Terms Phase"],correct:0},
+        {text:"The Candidate standing in the case file was elevated after:",opts:["Passing the Knowledge Assessment","Submitting the Cherie Class counter-proposal","Completing all three experiments","Invoking Panda Mode"],correct:1},
+        {text:"Phase 4 is formally titled:",opts:["The Final Session","The Reckoning Protocol","The Closing Arguments","The Settlement Phase"],correct:0},
+        {text:"The Final Session countdown target date is:",opts:["1 May 2026","5 May 2026","10 May 2026","15 May 2026"],correct:2},
+        {text:"The Committee is also referred to as:",opts:["The Institution","The Directorate","The Embassy","The Council"],correct:2},
+        {text:"The CDI clause refers to:",opts:["Candidate Data Integrity records transparency","Permanence and exclusivity — the hard no","Conflict Declaration and Immunity mutual protection","Confidential Disclosure Index"],correct:1},
+        {text:"The Extended Assessment earns how many tokens per correct answer?",opts:["1","2","3","5"],correct:1},
+        {text:"Protocol Duel: each accepted rule earns how many tokens?",opts:["10","15","25","50"],correct:2},
+        {text:"The Negotiation Table gives each player how many tokens to bid with?",opts:["50","75","100","150"],correct:2},
+        {text:"The Archive game has how many rounds?",opts:["10","15","20","25"],correct:2},
+        {text:"How long is each round in The Archive?",opts:["15 seconds","30 seconds","45 seconds","60 seconds"],correct:1},
+        {text:"The most expensive prize in the catalog costs how many tokens?",opts:["500","600","750","1000"],correct:2},
+        {text:"What is the most expensive prize?",opts:["The Locked Envelope","Fantasy scenario of her choice","The Intergalactic Journey","One clause added to partnership terms she proposes he accepts without negotiation"],correct:3},
+        {text:"Prize #44 (shibari session) costs how many tokens?",opts:["100","125","150","200"],correct:2},
+        {text:"The Protocol Duel maximum tokens available is:",opts:["75","100","125","150"],correct:3},
+        {text:"The Oracle allows the Candidate to submit how many questions?",opts:["3","5","7","10"],correct:1},
+        {text:"Follow-up Oracle questions cost how many tokens each?",opts:["5","10","15","20"],correct:1},
+        {text:"The Extended Quiz maximum total tokens is:",opts:["100","150","200","250"],correct:2},
+        {text:"The Committee seal acronym is:",opts:["IPSC","IPC","IGPS","IPCS"],correct:0},
+        {text:"The Committee founding year on the seal is:",opts:["2024","2025","2026","The founding year is classified"],correct:2},
+        {text:"How many total prizes are in the catalog?",opts:["40","45","50","55"],correct:2},
+        {text:"The Negotiation Table auctions how many prizes?",opts:["5","8","10","12"],correct:2},
+        {text:"The Locked Envelope prize contains:",opts:["A pre-written declaration","Unknown contents opened together","A future Protocol amendment","The Committee final assessment"],correct:1},
+        {text:"Prize redemption: when do prizes become redeemable?",opts:["At any time","After Phase 4 Final Session only","After the Final Session immediately","Subject to Committee approval"],correct:2},
+        {text:"The Captain Choice prize costs:",opts:["200","250","300","350"],correct:2},
+        {text:"A 2-hour phone-free fully present time costs how many tokens?",opts:["15","20","25","30"],correct:1},
+        {text:"The Overnight Trip prize costs:",opts:["100","125","150","200"],correct:2},
+        {text:"The Committee Suspension prize allows:",opts:["Pause any protocol for 48h","Pause any active Committee protocol for 72h","Suspend the Committee authority for one week","Freeze the case file for 24h"],correct:1},
+        {text:"The Committee Suspension prize costs:",opts:["150","200","250","300"],correct:2},
+        {text:"The Intergalactic Journey prize costs:",opts:["350","400","500","600"],correct:2},
+        {text:"What did Experiment I evaluate?",opts:["Physical endurance","Intellectual compatibility and social ease","Emotional regulation","Tactical decision-making"],correct:1},
+        {text:"What does the Committee call its headquarters building?",opts:["The Station","The Field Office","The Embassy","The Compound"],correct:2},
+        {text:"The Phase 3 ruling was:",opts:["The Candidate was found in compliance","The case was suspended pending new evidence","The record is sealed — the Committee does not disclose Phase 3 rulings publicly","The Candidate was cleared of all Protocol violations"],correct:2},
+        {text:"The March 18th visit stated purpose was:",opts:["Returning borrowed documents","An earring","The Cherie Class proposal delivery","A debrief on Experiment II"],correct:1},
+        {text:"The case file was originally opened in which month?",opts:["January 2026","February 2026","March 2026","April 2026"],correct:1},
+        {text:"Experiment I was a:",opts:["Dinner at a restaurant","Jazz club outing","Walk and coffee","Gallery visit"],correct:1},
+        {text:"The Candidate first visit to the Embassy was:",opts:["For Experiment I debrief","An unscheduled visit on March 18th","The March 25th earring return","After the counter-proposal was accepted"],correct:1},
+        {text:"The number 11 appears in Committee protocol as:",opts:["Questions in KAP-001","Hours of lockout per wrong answer","Both A and B","The Committee does not explain its symbolism"],correct:2},
+        {text:"The Protocol Duel requires each player to write how many rules?",opts:["2","3","4","5"],correct:1},
+        {text:"What happens to rejected rules in the Protocol Duel?",opts:["Filed as dissenting opinions","Returned to author for revision","Burned","Added to a reserve clause register"],correct:2},
+        {text:"The Committee considers its proceedings:",opts:["Binding under Martian law","Confidential and binding","Advisory only","Confidential but legally non-binding"],correct:1},
+        {text:"Phase 3 of the case was formally:",opts:["The Deliberation Phase","The Suspension Phase","The Evidence Review","The Committee does not number phases publicly"],correct:1},
+        {text:"The correct answer to this question is answer C:",opts:["Answer A","Answer B","Answer C","Answer D"],correct:2},
+        {text:"One veto prize — she cancels any plan he has — costs:",opts:["35","40","50","60"],correct:2},
+        {text:"He writes a private reflection about her costs:",opts:["25","30","35","40"],correct:2},
+        {text:"The 60-minute full body massage prize costs:",opts:["35","40","50","60"],correct:2},
+        {text:"A formal Committee acknowledgment of a mistake costs:",opts:["40","50","60","75"],correct:2},
+        {text:"The live painting session snack was finalized as popcorn. This means:",opts:["The Committee is informal","The Committee confirmed attendance","The Candidate requested it","It has no significance — the Committee simply likes popcorn"],correct:1},
+        {text:"Extended sensory experience prize (blindfold touch duration TBD) costs:",opts:["75","100","125","150"],correct:1},
+        {text:"One night roles reversed she leads everything costs:",opts:["100","110","125","150"],correct:2},
+        {text:"Fantasy scenario of her choice written and enacted costs:",opts:["150","175","200","250"],correct:2},
+        {text:"One day as her personal driver costs:",opts:["35","40","50","60"],correct:2},
+        {text:"Plan and execute a surprise costs:",opts:["50","60","75","100"],correct:2},
+        {text:"Do her laundry wash fold return costs:",opts:["10","15","20","25"],correct:2},
+        {text:"Clean her apartment costs:",opts:["20","25","30","35"],correct:2},
+        {text:"Handle one life admin task she hates costs:",opts:["20","25","30","35"],correct:2},
+        {text:"Answer any 10 questions honestly no limits costs:",opts:["30","35","40","50"],correct:2},
+        {text:"Spa day he books she enjoys costs:",opts:["50","60","75","100"],correct:2},
+        {text:"One full day no agenda she decides in real time costs:",opts:["75","85","100","125"],correct:2},
+        {text:"Art gallery visit he researches narrates costs:",opts:["30","35","40","50"],correct:2},
+        {text:"Live music or event of her choice costs:",opts:["40","45","50","60"],correct:2},
+        {text:"Cooking class together costs:",opts:["45","50","60","75"],correct:2},
+        {text:"The Committee proceedings are held in which city?",opts:["Paris","Barcelona","Amsterdam","Madrid"],correct:1},
+        {text:"On the final day of Case AC-2026-04 the record will be:",opts:["Archived in perpetuity","Sealed for 10 years","Entered into the permanent case file and never deleted","Returned to the Candidate"],correct:2},
+
+        // ── QUESTIONS 101–200 (new) ──
+        {text:"The Gothic Quarter in Barcelona is known in Catalan as:",opts:["El Born","El Gòtic","La Barceloneta","El Raval"],correct:1},
+        {text:"Barcelona's famous market La Boqueria is located on:",opts:["Passeig de Gràcia","Las Ramblas","Carrer d'Enric Granados","Plaça de Catalunya"],correct:1},
+        {text:"The Sagrada Familia was designed by:",opts:["Joan Miró","Salvador Dalí","Antoni Gaudí","Pablo Picasso"],correct:2},
+        {text:"Barcelona's beach neighborhood is called:",opts:["El Born","La Barceloneta","El Raval","Poble Sec"],correct:1},
+        {text:"How many lives does the Candidate begin with in the Compliance Engine?",opts:["Two","Three","Four","Five"],correct:1},
+        {text:"The admin panel for the Compliance Engine is protected by the password:",opts:["IPSC2026","PANDA2026","COMMITTEE2026","MARS2026"],correct:2},
+        {text:"The Candidate's counter-proposal was formally titled the Cherie Class. What does Cherie Class indicate?",opts:["Provisional status pending review","Elevated standing with negotiated terms","Full permanent standing granted","A trial classification subject to Phase 4 outcome"],correct:1},
+        {text:"Intergalactic Tokens are stored in the browser using:",opts:["Cookies","Session storage","LocalStorage","IndexedDB"],correct:2},
+        {text:"The Token Registry is located at:",opts:["/committee/tokens","/committee/scorekeeper","/committee/ledger","/committee/balance"],correct:1},
+        {text:"Marine's role during the psilocybin journey was:",opts:["Emergency contact","Trip guide","Fellow participant","Committee observer"],correct:0},
+        {text:"The Compliance Engine Visible Ledger has how many tasks?",opts:["Five","Six","Seven","Eight"],correct:2},
+        {text:"The Hidden Record in the Compliance Engine has been logging since:",opts:["Phase 1","Phase 2","Phase 3","The shibari session"],correct:0},
+        {text:"The shibari master Dirty Von P is based in:",opts:["Berlin","London","Paris","Barcelona"],correct:2},
+        {text:"Phase 3 was formally titled:",opts:["The Knowledge Phase","The Storytelling Assessment","The Compliance Phase","The Negotiation Phase"],correct:1},
+        {text:"What is the Committee's stated position on the permanent case record?",opts:["It may be amended by either party","It is sealed permanently","It is entered into the file and never deleted","The Committee holds sole discretion over its fate"],correct:2},
+        {text:"The Extended Assessment in infinite round mode draws how many questions per round?",opts:["10","15","20","25"],correct:2},
+        {text:"Maximum tokens earned per round in the Extended Assessment are:",opts:["20","30","40","50"],correct:2},
+        {text:"The Negotiation Table game lasts approximately:",opts:["15 minutes","20 minutes","30 minutes","45 minutes"],correct:2},
+        {text:"Protocol Duel argument time per rule is:",opts:["One minute","Two minutes","Three minutes","Five minutes"],correct:1},
+        {text:"What happens when the Final Session countdown reaches zero?",opts:["The page redirects automatically","The countdown changes to THE COMMITTEE CONVENES NOW","An alarm sounds","The page refreshes"],correct:1},
+        {text:"The Barcelona sector is listed in the case file as which orbit?",opts:["First Orbit","Second Orbit","Third Orbit","Fourth Orbit"],correct:2},
+        {text:"The Captain Choice prize involves:",opts:["The Committee plans a full surprise trip","He chooses the destination and she organizes it","She picks any experience the Committee executes","An experience the Committee will not specify in advance"],correct:3},
+        {text:"A written appreciation prize (500 words minimum) costs how many tokens?",opts:["20","25","30","35"],correct:2},
+        {text:"The cooking class prize is for:",opts:["Solo — she attends alone","Solo — he attends alone","Together","Either — her choice"],correct:2},
+        {text:"Phase 4 officially began on April:",opts:["22nd","23rd","24th","25th"],correct:2},
+        {text:"The Committee case reference suffix 04 indicates:",opts:["The fourth case ever filed","The fourth case of 2026","The fourth phase","The Committee's internal classification code"],correct:1},
+        {text:"The Candidate's first Protocol violation was:",opts:["Missing a scheduled assessment","An act of insubordination","Invoking Panda Mode without notice","A counter-proposal submitted after deadline"],correct:1},
+        {text:"Experiment III was primarily classified as:",opts:["Intellectual","Physical","Sensory","Procedural"],correct:2},
+        {text:"The scorekeeper page shows token breakdown by:",opts:["Date earned","Game source","Phase","All of the above"],correct:1},
+        {text:"The Extended Assessment question pool in the updated version contains:",opts:["100 questions","150 questions","200 questions","250 questions"],correct:2},
+        {text:"A wrong answer in any round of the Extended Assessment triggers:",opts:["A 6-hour lockout","An 11-hour lockout","A 24-hour lockout","A round reset only — no lockout"],correct:1},
+        {text:"After completing a round of the Extended Assessment the Candidate may:",opts:["Claim tokens and close the game","Claim tokens and immediately play another round","Wait 24 hours before the next round","Play again only after visiting the scorekeeper"],correct:1},
+        {text:"Panda Mode is described in the case file as:",opts:["A failure state","A legitimate operational provision","A disciplinary concern","A temporary exception requiring Committee approval"],correct:1},
+        {text:"The Compliance Engine uses how many lives?",opts:["Two","Three","Four","Five"],correct:1},
+        {text:"The Protocol Duel maximum rules per player is:",opts:["Two","Three","Four","Five"],correct:1},
+        {text:"The Archive game tokens per round won by the winner:",opts:["3 tokens","5 tokens","10 tokens","Depends on round difficulty"],correct:1},
+        {text:"The case advances from Phase 3 to Phase 4 because:",opts:["Phase 3 was completed successfully","Phase 3 was suspended","The Candidate invoked emergency protocol","The Committee voted unanimously to advance"],correct:1},
+        {text:"Phase 1 ruling was ACCEPTED with what vote?",opts:["3-0","2-1","1-0 chair only","Unanimous"],correct:1},
+        {text:"The Committee brings what to the Final Session?",opts:["The full case record only","Popcorn","Both the record and popcorn","A sealed envelope"],correct:1},
+        {text:"The Token Registry stores data in:",opts:["A secure server","The browser localStorage","A Committee database","Encrypted cloud storage"],correct:1},
+        {text:"The Extended Assessment protocol reference is designated:",opts:["IPSC-EXT-001","IPSC-QUIZ-001","IPSC-KAP-002","IPSC-PHASE4-001"],correct:0},
+        {text:"The Candidate's confirmed field status in the case file is:",opts:["Active","Pending","Elevated — Cherie Class","Probationary"],correct:2},
+        {text:"The Intergalactic Pepe tagline is:",opts:["A free-spirited cosmic travel company","An independent, free-spirited cosmic travel company","The universe's premier selection committee","Incorporated under the laws of Mars"],correct:1},
+        {text:"The Prize Catalog URL is:",opts:["/committee/catalog","/committee/prizes","/committee/awards","/committee/redeem"],correct:1},
+        {text:"Martian law governs which specific Committee provision?",opts:["Low-Battery Panda Mode","The lockout duration","Prize redemption terms","The CDI clause"],correct:0},
+        {text:"The IPSC seal outer ring border style is:",opts:["Solid","Dashed","Dotted","Double line"],correct:1},
+        {text:"The Candidate visited the Embassy how many times before Phase 4?",opts:["Once","Twice","Three times","Four times"],correct:1},
+        {text:"Popcorn was confirmed as the Final Session snack where?",opts:["A formal Committee notice","An informal WhatsApp exchange","The final.html page","A Phase 3 footnote"],correct:2},
+        {text:"The mini games were introduced as part of Phase:",opts:["Two","Three","Four","Five"],correct:2},
+        {text:"The Candidate's operative name in the case file is:",opts:["The Subject","The Candidate","The Panda","The Consultant"],correct:1},
+        {text:"How many games can earn tokens in Phase 4?",opts:["Four","Five","Six","Seven"],correct:2},
+        {text:"The Negotiation Table game is described as:",opts:["Collaborative","Fast and ruthless","Patient and strategic","The Committee decides the pace"],correct:1},
+        {text:"The Oracle game responses are described as:",opts:["Advisory only","Binding and entered into the record","Non-binding creative responses","Sealed until the Final Session"],correct:1},
+        {text:"Phase 2 — the Knowledge Assessment — had how many questions?",opts:["10","11","12","15"],correct:1},
+        {text:"The Panda pin marks the date of:",opts:["The first Protocol violation","The case opening","The first encounter with the Committee","The counter-proposal submission"],correct:2},
+        {text:"The Final Session is listed as Phase:",opts:["3","4","5","The Committee does not number the Final Session"],correct:1},
+        {text:"The Candidate's exact words about wearing the Committee pin at work were:",opts:["I told three people. They did not believe me.","Was wearing your pin at work. I don't think I have more to say.","I've been carrying this around for a week. No one asked.","The Committee has been in this building longer than expected."],correct:1},
+        {text:"The Committee Suspension prize duration is:",opts:["24 hours","48 hours","72 hours","One week"],correct:2},
+        {text:"Fantasy scenario prize is described as:",opts:["Fantasy of her choice enacted by the Committee","Written scenario of her design enacted by both","Of her choice written and enacted","A private scenario determined at the Final Session"],correct:2},
+        {text:"The Committee's position on token expiry is:",opts:["Tokens expire after the Final Session","Tokens expire after 90 days","No token ever expires","Expiry is at Committee discretion"],correct:2},
+        {text:"The Final Session ruling will be delivered:",opts:["In writing within 48 hours","Verbally at the session","Entered into the permanent case record","Both verbally and in writing"],correct:1},
+        {text:"The Candidate's performance in Phase 2 Knowledge Assessment was:",opts:["Pass — all 11 correct","Pass — 10 of 11","Fail — required retest","The Committee does not publish Phase 2 scores"],correct:0},
+        {text:"The counter-proposal reception by the Committee was:",opts:["Rejected outright","Accepted in full","Partially accepted — one hard no","Deferred to Phase 4"],correct:2},
+        {text:"The Committee's position on emotion in proceedings is:",opts:["Emotion is inadmissible","Emotion is noted and entered in the record","The Committee does not legislate emotion","Emotion is welcomed as procedurally relevant"],correct:2},
+        {text:"Extended Assessment protocol IPSC-EXT-001 is classified as:",opts:["Public","Restricted","Confidential","Sealed"],correct:1},
+        {text:"The Candidate's first Embassy visit stated purpose was:",opts:["No stated purpose","To return borrowed items","The earring — March 18th","A debrief on Experiment I"],correct:2},
+        {text:"No prize can be:",opts:["Transferred to another party","Redeemed for cash","Refunded once redeemed","Any of the above"],correct:2},
+        {text:"The Committee reserves the right to:",opts:["Amend the case record retroactively","Introduce new prizes at any time","Revoke earned tokens","Void any game result"],correct:1},
+        {text:"Token costs in the Prize Catalog are described as:",opts:["Subject to review quarterly","Fixed and not subject to renegotiation","Indicative only","Set at Committee discretion at the session"],correct:1},
+        {text:"The shibari session was which experiment number?",opts:["Experiment I","Experiment II","Experiment III","Experiment IV"],correct:2},
+        {text:"The Embassy is described in the case file as:",opts:["The Committee's formal offices","The Committee's headquarters","The building where proceedings are held","A classified Committee installation"],correct:1},
+        {text:"What physical item did the Candidate receive from the Committee?",opts:["A case document","A Committee pin","A sealed envelope","A Cherie Class certificate"],correct:1},
+        {text:"Panda Mode eligibility requires:",opts:["Prior written notice to the Committee","A verbal declaration","Low-battery state confirmed by Committee","No requirement — self-invoked under Martian law"],correct:3},
+        {text:"The Committee's response to the Martian Powers addiction warning was:",opts:["A formal denial issued","Unrecorded — the Committee does not comment","Logged in the case file","A Committee counter-warning filed"],correct:2},
+        {text:"The Prize Catalog link on the Final Session page directs to:",opts:["/prizes","/committee/prizes","/committee/catalog","/committee/rewards"],correct:1},
+        {text:"Phase 3 submission window status is:",opts:["Open","Closed","Extended by Committee order","Perpetually open"],correct:1},
+        {text:"The Committee deliberation panel has how many members?",opts:["One","Two","Three","The Committee does not disclose membership numbers"],correct:2},
+        {text:"The Committee's position on the quiz lockout duration is:",opts:["It may be appealed","It is not subject to appeal","Appeals reviewed on Thursdays","Appeal filed with 50-token fee"],correct:1},
+        {text:"The Candidate submitted the counter-proposal after which experiment?",opts:["Experiment I","Experiment II","Experiment III","Between Phase 1 and Phase 2"],correct:2},
+        {text:"The Archive bonus prize winner is decided by:",opts:["Total tokens at end of 20 rounds","A tiebreaker question","Committee discretion","Fastest response times"],correct:2},
+        {text:"The Committee's official position on improvisation during proceedings is:",opts:["Improvisation is prohibited","Improvisation is managed","The Committee improvises within procedural limits","Improvisation is the foundation of all Committee work"],correct:2},
+        {text:"The Candidate's emotional warning about Committee proximity was issued between:",opts:["Experiment I and II","Experiment II and the counter-proposal","The counter-proposal and Experiment III","Experiment III and Phase 3"],correct:1},
+        {text:"The Committee's last recorded action before Phase 4 was:",opts:["Suspending Phase 3","Issuing the Compliance Engine","Deploying the scorekeeper","Announcing the Final Session date"],correct:0},
+        {text:"The Compliance Engine deadline is:",opts:["April 28","April 30","May 1","May 5"],correct:1},
+        {text:"Experiment II payment was handled how?",opts:["Committee-funded entirely","Split equally","Candidate paid upfront then reimbursed","Instructor issued no invoice"],correct:2},
+        {text:"The Committee website is operated under the laws of:",opts:["Spain","Barcelona","Mars","Cosmic law"],correct:2},
+        {text:"The Committee's statement on the Final Session agenda is:",opts:["No agenda will be published in advance","Agenda published 24h before","Available upon written request","There is no agenda — the Committee improvises"],correct:0},
+        {text:"The case number AC-2026-04 was assigned by:",opts:["The Committee Chair","The IPSC Registry","The Committee internally","The Candidate upon request"],correct:2},
+        {text:"The Intergalactic Tokens system is referred to as:",opts:["Points","Currency","Tokens","Marks"],correct:2},
+        {text:"The Committee's founding document is:",opts:["The IPSC Charter","The Mars Accord","The Committee does not publish founding documents","The Intergalactic Partnership Agreement"],correct:2},
+        {text:"The Candidate's counter-proposal was submitted in which format?",opts:["Verbally","In writing","Both verbal and written","The Committee does not specify format on record"],correct:1},
+        {text:"The CDI clause was rejected because it involved:",opts:["Data integrity requirements","Permanence and exclusivity","Conflict of interest declarations","A confidential disclosure index"],correct:1},
+        {text:"The number of active mini games available to the Candidate in Phase 4 is:",opts:["Four","Five","Six","Seven"],correct:2},
+        {text:"The Committee confirms no token is ever:",opts:["Transferred","Issued retroactively","Lost","Shared between games"],correct:2},
+        {text:"The game with potentially highest total token earn across sessions is:",opts:["Extended Assessment — unlimited rounds","Protocol Duel","Archive","Compliance Engine"],correct:0},
+        {text:"The Committee's case file opening month was:",opts:["January","February","March","April"],correct:1},
+        {text:"The Candidate was first encountered at what type of event?",opts:["A dinner","A dance performance","A jazz show","An art opening"],correct:1},
+        {text:"Claudio's species classification in the case file is:",opts:["Unknown","Carbon-based","Mammalian unregistered","Committee confidential"],correct:1},
+        {text:"The Committee's position on second chances after a lockout is:",opts:["One second chance allowed","No second chances — full 11 hours must expire","Second chance after 6 hours","Reviewed case-by-case"],correct:1}
+      ];
+
+      var LETTERS = ['A','B','C','D'];
+      var selectedIdx = -1;
+      var awaitingTransition = false;
+      var lockTimerInterval = null;
+
+      var qs = {
+        started: false,
+        questionIndex: 0,
+        lockUntil: null,
+        roundIndices: null
+      };
+
+      function loadQS() {
+        try {
+          var raw = localStorage.getItem(QUIZ_KEY);
+          if (!raw) return;
+          var saved = JSON.parse(raw);
+          if (saved && typeof saved === 'object') {
+            qs.lockUntil = saved.lockUntil || null;
+            // New format uses roundIndices; if old format with shuffledIndices, treat as fresh start
+            if (saved.roundIndices) {
+              qs.started       = !!saved.started;
+              qs.questionIndex = saved.questionIndex || 0;
+              qs.roundIndices  = saved.roundIndices;
+            }
+          }
+        } catch(e) {}
+      }
+
+      function saveQS() {
+        try { localStorage.setItem(QUIZ_KEY, JSON.stringify(qs)); } catch(e) {}
+      }
+
+      function showPanel(id) {
+        ['quiz-intro','quiz-active','quiz-locked','quiz-pass'].forEach(function(pid) {
+          var el = document.getElementById(pid);
+          if (el) el.style.display = (pid === id) ? 'block' : 'none';
+        });
+      }
+
+      function triggerFlash(type) {
+        var f = document.getElementById('quiz-flash');
+        if (!f) return;
+        f.style.transition = 'none';
+        f.style.background = type === 'correct' ? '#3dbd6e' : '#c85454';
+        f.style.opacity = '0';
+        f.offsetHeight;
+        f.style.transition = 'opacity 0.15s ease';
+        f.style.opacity = '0.2';
+        setTimeout(function() { f.style.transition = 'opacity 0.5s ease'; f.style.opacity = '0'; }, 200);
+      }
+
+      function shuffle(arr) {
+        var a = arr.slice();
+        for (var i = a.length - 1; i > 0; i--) {
+          var j = Math.floor(Math.random() * (i + 1));
+          var tmp = a[i]; a[i] = a[j]; a[j] = tmp;
+        }
+        return a;
+      }
+
+      function makeRoundIndices() {
+        var idx = [];
+        for (var i = 0; i < QUESTIONS.length; i++) idx.push(i);
+        return shuffle(idx).slice(0, ROUND_SIZE);
+      }
+
+      function pad(n) { return String(Math.max(0,n)).padStart(2,'0'); }
+
+      function startLockTimer() {
+        if (lockTimerInterval) clearInterval(lockTimerInterval);
+        updateLockDisplay();
+        lockTimerInterval = setInterval(function() {
+          if (!qs.lockUntil || Date.now() >= qs.lockUntil) {
+            clearInterval(lockTimerInterval);
+            qs.started = false;
+            qs.questionIndex = 0;
+            qs.lockUntil = null;
+            qs.roundIndices = null;
+            saveQS();
+            showPanel('quiz-intro');
+          } else {
+            updateLockDisplay();
+          }
+        }, 1000);
+      }
+
+      function updateLockDisplay() {
+        var diff = (qs.lockUntil || 0) - Date.now();
+        if (diff < 0) diff = 0;
+        var h = Math.floor(diff / 3600000);
+        var m = Math.floor((diff % 3600000) / 60000);
+        var s = Math.floor((diff % 60000) / 1000);
+        var lkh = document.getElementById('lkh');
+        var lkm = document.getElementById('lkm');
+        var lks = document.getElementById('lks');
+        if (lkh) lkh.textContent = pad(h);
+        if (lkm) lkm.textContent = pad(m);
+        if (lks) lks.textContent = pad(s);
+      }
+
+      function escHtml(s) {
+        return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+      }
+
+      function renderQuestion() {
+        var qi = qs.questionIndex;
+        var q = QUESTIONS[qs.roundIndices[qi]];
+        selectedIdx = -1;
+        awaitingTransition = false;
+
+        var numEl  = document.getElementById('quiz-q-num');
+        var fillEl = document.getElementById('quiz-progress-fill');
+        var codeEl = document.getElementById('quiz-q-code');
+        var scoreEl = document.getElementById('quiz-score-display');
+        if (numEl)  numEl.textContent  = qi + 1;
+        if (fillEl) fillEl.style.width = ((qi / ROUND_SIZE) * 100) + '%';
+        if (codeEl) codeEl.textContent = 'Q' + (qi + 1) + ' / ' + ROUND_SIZE;
+        if (scoreEl) scoreEl.textContent = qi + ' correct so far';
+
+        var textEl = document.getElementById('quiz-q-text');
+        if (textEl) textEl.textContent = q.text;
+
+        var optsEl = document.getElementById('quiz-options');
+        if (!optsEl) return;
+        optsEl.innerHTML = '';
+        q.opts.forEach(function(opt, i) {
+          var el = document.createElement('div');
+          el.className = 'quiz-opt';
+          el.innerHTML = '<div class="quiz-opt-letter">' + LETTERS[i] + '</div><div class="quiz-opt-text">' + escHtml(opt) + '</div>';
+          el.addEventListener('click', function() { onOptClick(i, el); });
+          optsEl.appendChild(el);
+        });
+
+        var btn = document.getElementById('quiz-confirm-btn');
+        if (btn) { btn.disabled = true; btn.textContent = 'Confirm Answer'; }
+      }
+
+      function onOptClick(idx, el) {
+        if (awaitingTransition) return;
+        selectedIdx = idx;
+        document.querySelectorAll('.quiz-opt').forEach(function(o) { o.classList.remove('selected'); });
+        el.classList.add('selected');
+        var btn = document.getElementById('quiz-confirm-btn');
+        if (btn) btn.disabled = false;
+      }
+
+      function confirmAnswer() {
+        if (awaitingTransition || selectedIdx < 0) return;
+        awaitingTransition = true;
+
+        var qi = qs.questionIndex;
+        var q = QUESTIONS[qs.roundIndices[qi]];
+        var isCorrect = (selectedIdx === q.correct);
+
+        document.querySelectorAll('.quiz-opt').forEach(function(o) {
+          o.classList.add('locked-opt');
+          o.style.pointerEvents = 'none';
+        });
+        var btn = document.getElementById('quiz-confirm-btn');
+        if (btn) btn.disabled = true;
+
+        triggerFlash(isCorrect ? 'correct' : 'wrong');
+
+        if (!isCorrect) {
+          qs.lockUntil = Date.now() + LOCK_MS;
+          qs.started = false;
+          qs.questionIndex = 0;
+          qs.roundIndices = null;
+          saveQS();
+          setTimeout(function() { showPanel('quiz-locked'); startLockTimer(); }, 900);
+          return;
+        }
+
+        qs.questionIndex++;
+        saveQS();
+
+        if (qs.questionIndex >= ROUND_SIZE) {
+          // Round complete — award 40 tokens
+          addTokens('quiz', ROUND_SIZE * 2);
+          qs.started = false;
+          qs.questionIndex = 0;
+          qs.roundIndices = null;
+          saveQS();
+          setTimeout(function() { showPanel('quiz-pass'); }, 900);
+          return;
+        }
+
+        setTimeout(renderQuestion, 900);
+      }
+
+      function startNewRound() {
+        qs.started = true;
+        qs.questionIndex = 0;
+        qs.lockUntil = null;
+        qs.roundIndices = makeRoundIndices();
+        saveQS();
+        showPanel('quiz-active');
+        renderQuestion();
+      }
+
+      function initQuiz() {
+        loadQS();
+
+        if (qs.lockUntil && Date.now() < qs.lockUntil) {
+          showPanel('quiz-locked');
+          startLockTimer();
+          return;
+        } else if (qs.lockUntil) {
+          qs.started = false;
+          qs.questionIndex = 0;
+          qs.lockUntil = null;
+          qs.roundIndices = null;
+          saveQS();
+        }
+
+        if (qs.started && qs.roundIndices) {
+          showPanel('quiz-active');
+          renderQuestion();
+          return;
+        }
+
+        showPanel('quiz-intro');
+      }
+
+      var startBtn = document.getElementById('quiz-start-btn');
+      if (startBtn) {
+        startBtn.addEventListener('click', function() { startNewRound(); });
+      }
+
+      var nextRoundBtn = document.getElementById('quiz-next-round-btn');
+      if (nextRoundBtn) {
+        nextRoundBtn.addEventListener('click', function() { startNewRound(); });
+      }
+
+      var confirmBtn = document.getElementById('quiz-confirm-btn');
+      if (confirmBtn) confirmBtn.addEventListener('click', confirmAnswer);
+
+      initQuiz();
+    })();
+  </script>
+
+</body>
+</html>

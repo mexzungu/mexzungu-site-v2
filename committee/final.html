@@ -327,44 +327,103 @@
       font-size: 0.82rem; line-height: 1.8; color: var(--dim);
     }
 
-    /* ── MINI GAMES ── */
-    .games-grid {
-      display: flex; flex-direction: column; gap: 1px;
-      background: var(--border); border: 1px solid var(--border);
+    /* ── GAME CARDS ── */
+    .game-cards-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
       margin-bottom: 1.5rem;
     }
-    .game-row {
-      background: var(--bg);
-      padding: 1.25rem 1.25rem 1.25rem 0;
-      display: grid;
-      grid-template-columns: 3rem 1fr;
-      gap: 0;
+    .game-card {
+      display: flex;
+      flex-direction: column;
+      min-height: 140px;
+      background: #0d0c0b;
+      border: 1px solid rgba(255,255,255,0.08);
+      padding: 1.25rem;
+      text-decoration: none;
+      color: inherit;
+      transition: border-color 0.2s ease;
     }
-    .game-num {
-      font-family: var(--heading);
-      font-size: 1.1rem; color: var(--pink);
-      opacity: 0.5; padding-top: 2px;
-      text-align: center;
+    .game-card:hover { border-color: var(--pink); }
+    .game-card-num {
+      font-size: 0.5rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--pink);
+      margin-bottom: 0.5rem;
     }
-    .game-title {
-      font-size: 0.78rem; font-weight: 600;
-      color: var(--text); letter-spacing: 0.04em;
-      margin-bottom: 0.4rem;
+    .game-card-name {
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: #fafafa;
+      margin-bottom: 0.45rem;
+      line-height: 1.25;
+      flex: 1;
     }
-    .game-desc {
-      font-size: 0.8rem; color: var(--mid);
-      line-height: 1.75;
+    .game-card-desc {
+      font-size: 0.7rem;
+      color: var(--mid);
+      line-height: 1.5;
+      margin-bottom: 1rem;
     }
-    .game-tag {
-      display: inline-block; margin-top: 0.5rem;
-      font-size: 0.52rem; letter-spacing: 0.16em;
-      text-transform: uppercase; color: var(--pink);
-      border: 1px solid rgba(225,75,135,0.22);
-      padding: 2px 7px;
+    .game-card-play {
+      display: inline-block;
+      padding: 0.45rem 1.1rem;
+      background: var(--pink);
+      color: #fff;
+      font-size: 0.58rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      font-weight: 600;
+      align-self: flex-start;
+    }
+    .token-registry-card {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #0d0c0b;
+      border: 1px solid rgba(195,155,40,0.3);
+      padding: 1.1rem 1.25rem;
+      text-decoration: none;
+      color: inherit;
+      transition: border-color 0.2s ease;
+      margin-bottom: 1.5rem;
+    }
+    .token-registry-card:hover { border-color: rgba(195,155,40,0.7); }
+    .token-registry-label {
+      font-size: 0.5rem;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: rgba(195,155,40,0.7);
+      margin-bottom: 0.3rem;
+    }
+    .token-registry-name {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: #fafafa;
+      margin-bottom: 0.25rem;
+    }
+    .token-registry-desc {
+      font-size: 0.68rem;
+      color: var(--mid);
+    }
+    .token-registry-cta {
+      padding: 0.45rem 1.1rem;
+      background: rgba(195,155,40,0.12);
+      border: 1px solid rgba(195,155,40,0.3);
+      color: rgba(195,155,40,0.9);
+      font-size: 0.58rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      font-weight: 600;
+      white-space: nowrap;
     }
     .games-note {
-      font-size: 0.75rem; font-style: italic;
-      color: var(--dim); line-height: 1.75;
+      font-size: 0.75rem;
+      font-style: italic;
+      color: var(--dim);
+      line-height: 1.75;
       margin-top: 0.5rem;
     }
 
@@ -411,6 +470,10 @@
     }
     .site-footer a { color: var(--dim); text-decoration: none; }
 
+    @media (max-width: 580px) {
+      .game-cards-grid { grid-template-columns: 1fr; }
+      .token-registry-card { flex-direction: column; align-items: flex-start; gap: 0.75rem; }
+    }
     @media (max-width: 480px) {
       .t-step { grid-template-columns: 24px 1fr auto; gap: 10px; }
       .cd-wrap { gap: 4px; }
@@ -541,72 +604,64 @@
   <section class="section">
     <div class="wrap">
       <div class="sec-label">Mini Games — Phase 4 Protocol</div>
-      <p style="font-size:0.82rem;color:var(--mid);line-height:1.8;margin-bottom:1.75rem;">The Final Session includes five mini games. Each one earns Intergalactic Tokens, redeemable against the Prize Catalog. Tokens are tracked in real time. The Committee keeps the ledger. No token is issued without confirmation.</p>
-      <div class="games-grid">
+      <p style="font-size:0.82rem;color:var(--mid);line-height:1.8;margin-bottom:1.75rem;">Six games. Each earns Intergalactic Tokens, redeemable against the Prize Catalog. The Committee keeps the ledger live. No token is ever lost.</p>
 
-        <div class="game-row">
-          <div class="game-num">I</div>
-          <div>
-            <div class="game-title">The Extended Quiz</div>
-            <div class="game-desc">100 questions drawn from the full case file. 11-hour lockout per wrong answer. Earns 2 tokens per correct answer, up to 200 tokens maximum. The Committee does not accept preparation as an excuse. The quiz is administered live, alternating questions, no notes.</div>
-            <span class="game-tag">Knowledge · Up to 200 tokens</span>
-            <div style="margin-top:0.65rem;"><a href="/committee/minigame-quiz.html" style="display:inline-block;padding:0.35rem 0.9rem;background:rgba(225,75,135,0.1);border:1px solid rgba(225,75,135,0.3);color:var(--pink);font-family:var(--sans);font-size:0.6rem;letter-spacing:0.16em;text-transform:uppercase;text-decoration:none;">Play →</a></div>
-          </div>
-        </div>
+      <div class="game-cards-grid">
 
-        <div class="game-row">
-          <div class="game-num">II</div>
-          <div>
-            <div class="game-title">The Negotiation Table</div>
-            <div class="game-desc">10 prizes from the catalog are put on auction. Each player receives 100 tokens to bid. He may also bid to keep prizes off the table. Highest bid wins each item. 30 minutes, fast and ruthless. Items won are added to the redeemable balance immediately.</div>
-            <span class="game-tag">Auction · 30 min</span>
-            <div style="margin-top:0.65rem;"><a href="/committee/minigame-negotiation.html" style="display:inline-block;padding:0.35rem 0.9rem;background:rgba(225,75,135,0.1);border:1px solid rgba(225,75,135,0.3);color:var(--pink);font-family:var(--sans);font-size:0.6rem;letter-spacing:0.16em;text-transform:uppercase;text-decoration:none;">Play →</a></div>
-          </div>
-        </div>
+        <a href="/committee/minigame-quiz.html" class="game-card">
+          <div class="game-card-num">GAME I</div>
+          <div class="game-card-name">Extended Assessment</div>
+          <div class="game-card-desc">100 questions. Token-earning. 11-hour lockout.</div>
+          <span class="game-card-play">Play →</span>
+        </a>
 
-        <div class="game-row">
-          <div class="game-num">III</div>
-          <div>
-            <div class="game-title">The Oracle</div>
-            <div class="game-desc">She submits 5 questions about the future to the Committee. Any question, no restrictions. He answers as the Committee with full creative authority. Answers are binding and entered into the record. Follow-up questions cost 10 tokens each, payable from the catalog balance.</div>
-            <span class="game-tag">Prophecy · Unlimited questions at cost</span>
-            <div style="margin-top:0.65rem;"><a href="/committee/minigame-oracle.html" style="display:inline-block;padding:0.35rem 0.9rem;background:rgba(225,75,135,0.1);border:1px solid rgba(225,75,135,0.3);color:var(--pink);font-family:var(--sans);font-size:0.6rem;letter-spacing:0.16em;text-transform:uppercase;text-decoration:none;">Play →</a></div>
-          </div>
-        </div>
+        <a href="/committee/minigame-negotiation.html" class="game-card">
+          <div class="game-card-num">GAME II</div>
+          <div class="game-card-name">Negotiation Table</div>
+          <div class="game-card-desc">Bid on prizes. Outmaneuver the Committee.</div>
+          <span class="game-card-play">Play →</span>
+        </a>
 
-        <div class="game-row">
-          <div class="game-num">IV</div>
-          <div>
-            <div class="game-title">The Archive</div>
-            <div class="game-desc">Rapid-fire memory game. 20 rounds, 30 seconds per round. A date or moment from the case file is stated. First player to correctly name what happened wins 5 tokens. The player with the most tokens after 20 rounds wins a bonus prize from the catalog at the Committee's discretion.</div>
-            <span class="game-tag">Memory · Up to 100 tokens</span>
-            <div style="margin-top:0.65rem;"><a href="/committee/minigame-archive.html" style="display:inline-block;padding:0.35rem 0.9rem;background:rgba(225,75,135,0.1);border:1px solid rgba(225,75,135,0.3);color:var(--pink);font-family:var(--sans);font-size:0.6rem;letter-spacing:0.16em;text-transform:uppercase;text-decoration:none;">Play →</a></div>
-          </div>
-        </div>
+        <a href="/committee/minigame-oracle.html" class="game-card">
+          <div class="game-card-num">GAME III</div>
+          <div class="game-card-name">The Oracle</div>
+          <div class="game-card-desc">Submit your questions. The Committee responds.</div>
+          <span class="game-card-play">Play →</span>
+        </a>
 
-        <div class="game-row">
-          <div class="game-num">V</div>
-          <div>
-            <div class="game-title">The Protocol Duel</div>
-            <div class="game-desc">Each player writes 3 rules to add to the partnership operating system. Each rule is argued for 2 minutes. The other player votes accept or reject. Each accepted rule earns 25 tokens and is formally added to the case record. Rejected rules are burned. Maximum 75 tokens available.</div>
-            <span class="game-tag">Legislation · Up to 75 tokens</span>
-            <div style="margin-top:0.65rem;"><a href="/committee/minigame-protocol.html" style="display:inline-block;padding:0.35rem 0.9rem;background:rgba(225,75,135,0.1);border:1px solid rgba(225,75,135,0.3);color:var(--pink);font-family:var(--sans);font-size:0.6rem;letter-spacing:0.16em;text-transform:uppercase;text-decoration:none;">Play →</a></div>
-          </div>
-        </div>
+        <a href="/committee/minigame-archive.html" class="game-card">
+          <div class="game-card-num">GAME IV</div>
+          <div class="game-card-name">The Archive</div>
+          <div class="game-card-desc">Reconstruct the record. 20 rounds.</div>
+          <span class="game-card-play">Play →</span>
+        </a>
 
-        <div class="game-row">
-          <div class="game-num">VI</div>
-          <div>
-            <div class="game-title">The Compliance Engine</div>
-            <div class="game-desc">A pre-session behavioural protocol. The Committee has set 7 tasks, each earning tokens on completion. A double ledger runs in parallel: the Visible Ledger she can see and complete, and the Hidden Record — observations the Committee has been logging since Phase 1. The Hidden Record is revealed at the Final Session. Uncompleted tasks cost lives.</div>
-            <span class="game-tag">Compliance · Up to 195 tokens</span>
-            <div style="margin-top:0.65rem;"><a href="/committee/compliance.html" style="display:inline-block;padding:0.35rem 0.9rem;background:rgba(225,75,135,0.1);border:1px solid rgba(225,75,135,0.3);color:var(--pink);font-family:var(--sans);font-size:0.6rem;letter-spacing:0.16em;text-transform:uppercase;text-decoration:none;">Play →</a></div>
-          </div>
-        </div>
+        <a href="/committee/minigame-protocol.html" class="game-card">
+          <div class="game-card-num">GAME V</div>
+          <div class="game-card-name">Protocol Duel</div>
+          <div class="game-card-desc">Write 3 rules. The Committee deliberates.</div>
+          <span class="game-card-play">Play →</span>
+        </a>
+
+        <a href="/committee/compliance.html" class="game-card">
+          <div class="game-card-num">GAME VI</div>
+          <div class="game-card-name">Compliance Engine</div>
+          <div class="game-card-desc">The Double Ledger. Observed until April 30.</div>
+          <span class="game-card-play">Play →</span>
+        </a>
 
       </div>
-      <p class="games-note">Tokens earned in all five games are added to the same balance. That balance is redeemable immediately after the session against the Prize Catalog. The Committee tracks everything. No token is ever lost.</p>
-      <p class="games-note" style="margin-top:0.75rem;">Tokens are tracked at the <a href="/committee/scorekeeper" style="color:var(--pink);text-decoration:none;">Token Registry</a>. The Committee keeps the ledger live during the session.</p>
+
+      <a href="/committee/scorekeeper.html" class="token-registry-card">
+        <div>
+          <div class="token-registry-label">Registry</div>
+          <div class="token-registry-name">Token Registry</div>
+          <div class="token-registry-desc">View your balance. All sources tracked.</div>
+        </div>
+        <span class="token-registry-cta">View →</span>
+      </a>
+
+      <p class="games-note">Tokens earned across all six games are added to the same balance. Redeemable immediately after the Final Session against the Prize Catalog. The Committee tracks everything. No token is ever lost.</p>
     </div>
   </section>
 

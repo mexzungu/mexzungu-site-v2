@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#080809">
+  <title>The Committee — Negotiation Table · Phase 4</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/fonts.css">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --pink:      #E14B87;
+      --pink-glow: rgba(225,75,135,0.25);
+      --pink-dim:  rgba(225,75,135,0.07);
+      --bg:        #080809;
+      --text:      #ddd5cc;
+      --mid:       #7a7068;
+      --dim:       #3d3835;
+      --border:    #181614;
+      --heading:   'RocknRoll One', sans-serif;
+      --sans:      'Space Grotesk', -apple-system, sans-serif;
+      --green:     #3dbd6e;
+      --green-dim: rgba(61,189,110,0.07);
+    }
+    body { background: var(--bg); color: var(--text); font-family: var(--sans); min-height: 100vh; overflow-x: hidden; }
+    body::before {
+      content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 999; opacity: 0.025;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      background-size: 256px 256px;
+    }
+    .wrap { max-width: 680px; margin: 0 auto; padding: 0 20px; }
+    .phase-banner { text-align: center; padding: 0.55rem 1rem; font-size: 0.56rem; letter-spacing: 0.32em; text-transform: uppercase; font-weight: 600; }
+    .phase-banner.scheduled { background: rgba(40,120,80,0.08); color: rgba(61,189,110,0.8); border-bottom: 1px solid rgba(61,189,110,0.15); }
+    .token-bar { display: flex; align-items: center; justify-content: space-between; padding: 0.6rem 1.5rem; background: rgba(225,75,135,0.08); border-bottom: 1px solid rgba(225,75,135,0.15); }
+    .token-bar-label { font-size: 0.56rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--dim); }
+    .token-bar-count { font-family: var(--heading); font-size: 1rem; color: var(--pink); }
+    .token-bar-link { font-size: 0.52rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--dim); text-decoration: none; }
+    .token-bar-link:hover { color: var(--pink); }
+    .site-nav { padding: 1.25rem 1.5rem; text-align: center; border-bottom: 1px solid var(--border); }
+    .site-nav a { font-family: var(--heading); font-size: 0.95rem; color: var(--mid); text-decoration: none; }
+    .site-nav-sub { font-size: 0.6rem; color: var(--dim); letter-spacing: 0.14em; text-transform: uppercase; margin-top: 0.2rem; }
+    .site-nav-back { font-size: 0.56rem; color: var(--dim); letter-spacing: 0.18em; text-transform: uppercase; margin-top: 0.4rem; }
+    .site-nav-back a { font-family: var(--sans); font-size: 0.56rem; color: var(--dim); text-decoration: none; }
+    .site-nav-back a:hover { color: var(--pink); }
+    .hero { background: var(--bg); text-align: center; padding: 4rem 1.5rem 3rem; border-bottom: 1px solid var(--border); position: relative; overflow: hidden; }
+    .hero::before {
+      content: ''; position: absolute; inset: 0; pointer-events: none; opacity: 0.07;
+      background-image: radial-gradient(2px 2px at 4% 9%,#fff 100%,transparent),radial-gradient(1px 1px at 10% 34%,#E14B87 100%,transparent),radial-gradient(2px 2px at 16% 61%,#fff 100%,transparent),radial-gradient(3px 2px at 23% 19%,#E14B87 100%,transparent),radial-gradient(1px 2px at 31% 47%,#fff 100%,transparent),radial-gradient(2px 1px at 39% 77%,#E14B87 100%,transparent),radial-gradient(2px 2px at 47% 11%,#fff 100%,transparent),radial-gradient(3px 2px at 54% 39%,#E14B87 100%,transparent),radial-gradient(1px 2px at 62% 67%,#fff 100%,transparent),radial-gradient(2px 1px at 69% 23%,#E14B87 100%,transparent),radial-gradient(2px 2px at 76% 51%,#fff 100%,transparent),radial-gradient(4px 2px at 82% 13%,#E14B87 100%,transparent),radial-gradient(2px 2px at 7% 83%,#fff 100%,transparent),radial-gradient(1px 2px at 51% 91%,#E14B87 100%,transparent),radial-gradient(2px 1px at 72% 87%,#fff 100%,transparent);
+      background-size: 110px 90px;
+    }
+    .hero::after { content: ''; position: absolute; width: 520px; height: 150px; border: 1px solid rgba(225,75,135,0.07); border-radius: 50%; top: 50%; left: 50%; transform: translate(-50%,-50%) rotate(-7deg); pointer-events: none; }
+    .hero-inner { position: relative; z-index: 1; }
+    .seal { position: relative; width: 96px; height: 96px; margin: 0 auto 1.75rem; }
+    .seal-ring { position: absolute; inset: 0; border: 1px dashed rgba(225,75,135,0.3); border-radius: 50%; animation: sealSpin 22s linear infinite; }
+    .seal-ring2 { position: absolute; inset: 7px; border: 1px solid rgba(225,75,135,0.12); border-radius: 50%; }
+    .seal-core { position: absolute; inset: 14px; border: 1.5px solid var(--pink); border-radius: 50%; display: flex; flex-direction: column; align-items: center; justify-content: center; background: var(--pink-dim); box-shadow: 0 0 24px rgba(225,75,135,0.1); }
+    .seal-id { font-family: var(--heading); font-size: 0.9rem; color: var(--pink); letter-spacing: 0.1em; line-height: 1; }
+    .seal-yr { font-size: 0.48rem; color: var(--dim); letter-spacing: 0.2em; margin-top: 2px; }
+    @keyframes sealSpin { to { transform: rotate(360deg); } }
+    .hero-over { font-size: 0.6rem; letter-spacing: 0.4em; text-transform: uppercase; color: var(--pink); margin-bottom: 0.75rem; }
+    .hero-stars { opacity: 0.38; }
+    .hero-title { font-family: var(--heading); font-size: clamp(1.9rem,5vw,2.9rem); color: #fafafa; margin-bottom: 0.4rem; }
+    .hero-sub { font-family: var(--heading); font-size: clamp(1rem,2.5vw,1.45rem); color: var(--pink); font-weight: 400; letter-spacing: 0.04em; margin-bottom: 0.65rem; }
+    .hero-meta { font-size: 0.7rem; color: var(--dim); letter-spacing: 0.1em; }
+    .hero-ref { display: inline-block; margin-top: 1.25rem; padding: 0.35rem 0.9rem; border: 1px solid var(--border); font-size: 0.6rem; letter-spacing: 0.12em; color: var(--dim); font-family: 'Courier New', monospace; }
+    .section { padding: 2.75rem 0; border-bottom: 1px solid var(--border); }
+    .sec-label { font-size: 0.58rem; letter-spacing: 0.35em; text-transform: uppercase; color: var(--dim); margin-bottom: 1.5rem; }
+
+    /* Timer bar */
+    .timer-bar-wrap { margin-bottom: 2rem; }
+    .timer-bar-meta { display: flex; justify-content: space-between; margin-bottom: 0.5rem; }
+    .timer-bar-label { font-size: 0.56rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--dim); }
+    .timer-bar-time { font-family: var(--heading); font-size: 0.9rem; color: var(--pink); }
+    .timer-bar-track { height: 3px; background: var(--border); position: relative; }
+    .timer-bar-fill { position: absolute; left: 0; top: 0; height: 100%; background: var(--pink); transition: width 1s linear; }
+
+    /* Intro */
+    .intro-panel { text-align: center; padding: 2.5rem 1.5rem; border: 1px solid var(--border); background: var(--pink-dim); }
+    .intro-stamp { font-size: 0.56rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--dim); margin-bottom: 1.25rem; }
+    .intro-title { font-family: var(--heading); font-size: clamp(1.4rem,4vw,2rem); color: #fafafa; margin-bottom: 0.5rem; }
+    .intro-sub { font-size: 0.85rem; color: var(--mid); line-height: 1.75; margin-bottom: 1.75rem; max-width: 480px; margin-left: auto; margin-right: auto; }
+    .intro-rules { display: flex; align-items: center; justify-content: center; gap: 0.6rem; flex-wrap: wrap; margin-bottom: 1.5rem; }
+    .intro-rule { font-size: 0.62rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--pink); padding: 3px 10px; border: 1px solid rgba(225,75,135,0.3); }
+
+    /* Prize card */
+    .prize-card { border: 1px solid var(--border); background: var(--bg); padding: 1.5rem; margin-bottom: 1rem; }
+    .prize-card-num { font-size: 0.52rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--dim); margin-bottom: 0.5rem; }
+    .prize-card-name { font-family: var(--heading); font-size: 1.2rem; color: var(--text); margin-bottom: 0.4rem; }
+    .prize-card-desc { font-size: 0.8rem; color: var(--mid); line-height: 1.7; margin-bottom: 1rem; }
+    .prize-card-base { font-size: 0.62rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--pink); display: inline-block; border: 1px solid rgba(225,75,135,0.2); padding: 2px 8px; }
+
+    /* Tokens display */
+    .tokens-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--border); border: 1px solid var(--border); margin-bottom: 1.5rem; }
+    .tokens-cell { background: var(--bg); padding: 1rem; text-align: center; }
+    .tokens-cell-label { font-size: 0.52rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--dim); margin-bottom: 0.3rem; }
+    .tokens-cell-num { font-family: var(--heading); font-size: 1.6rem; color: var(--text); }
+    .tokens-cell-num.pink { color: var(--pink); }
+
+    /* Bid row */
+    .bid-row { display: flex; gap: 0.75rem; align-items: stretch; margin-bottom: 1rem; }
+    .bid-input { flex: 1; background: var(--bg); border: 1px solid var(--dim); color: var(--text); font-family: var(--sans); font-size: 1rem; padding: 0.7rem 1rem; outline: none; }
+    .bid-input:focus { border-color: var(--pink); }
+    .bid-input::placeholder { color: var(--dim); }
+    .bid-btn { background: var(--pink); color: #fff; border: none; padding: 0.7rem 1.5rem; font-family: var(--sans); font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; cursor: pointer; transition: opacity 0.15s; white-space: nowrap; }
+    .bid-btn:hover:not(:disabled) { opacity: 0.85; }
+    .bid-btn:disabled { opacity: 0.35; cursor: not-allowed; }
+    .pass-btn { background: transparent; color: var(--dim); border: 1px solid var(--dim); padding: 0.7rem 1rem; font-family: var(--sans); font-size: 0.68rem; letter-spacing: 0.12em; text-transform: uppercase; cursor: pointer; transition: border-color 0.15s, color 0.15s; white-space: nowrap; }
+    .pass-btn:hover:not(:disabled) { border-color: var(--mid); color: var(--mid); }
+    .pass-btn:disabled { opacity: 0.35; cursor: not-allowed; }
+    .bid-error { font-size: 0.72rem; color: #c85454; margin-bottom: 0.75rem; min-height: 1.2em; }
+
+    /* Response area */
+    .response-area { padding: 1.25rem; border: 1px solid var(--border); background: rgba(0,0,0,0.3); min-height: 80px; display: flex; align-items: center; justify-content: center; text-align: center; font-size: 0.85rem; color: var(--mid); font-style: italic; line-height: 1.7; transition: all 0.3s; }
+    .response-area.won { border-color: var(--green); color: var(--green); font-style: normal; }
+    .response-area.lost { border-color: rgba(225,75,135,0.3); color: var(--dim); }
+
+    .action-btn { display: inline-block; background: var(--pink); color: #fff; border: none; padding: 0.8rem 2rem; font-family: var(--sans); font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase; cursor: pointer; transition: opacity 0.2s; }
+    .action-btn:hover { opacity: 0.85; }
+    .action-btn.secondary { background: transparent; border: 1px solid rgba(225,75,135,0.4); color: var(--pink); }
+
+    /* Summary */
+    .summary-head { text-align: center; margin-bottom: 2rem; }
+    .summary-verdict { font-family: var(--heading); font-size: clamp(2rem,8vw,4rem); color: var(--pink); line-height: 1; text-shadow: 0 0 60px var(--pink-glow); margin-bottom: 0.5rem; }
+    .summary-tokens { font-family: var(--heading); font-size: clamp(1.5rem,5vw,2.5rem); color: var(--text); }
+    .summary-sub { font-size: 0.72rem; color: var(--dim); letter-spacing: 0.1em; }
+    .summary-list { display: flex; flex-direction: column; gap: 1px; background: var(--border); border: 1px solid var(--border); margin-bottom: 1.5rem; }
+    .summary-item { background: var(--bg); padding: 0.85rem 1rem; display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 1rem; }
+    .summary-item-name { font-size: 0.8rem; color: var(--text); }
+    .summary-item-result { font-size: 0.6rem; letter-spacing: 0.14em; text-transform: uppercase; padding: 2px 8px; }
+    .summary-item-result.won { background: var(--green-dim); color: var(--green); border: 1px solid rgba(61,189,110,0.3); }
+    .summary-item-result.lost { background: rgba(180,40,80,0.08); color: rgba(225,75,135,0.5); border: 1px solid rgba(225,75,135,0.15); }
+
+    .site-footer { text-align: center; padding: 2rem 1.5rem; border-top: 1px solid var(--border); font-size: 0.65rem; color: var(--dim); letter-spacing: 0.08em; line-height: 1.9; }
+    .site-footer a { color: var(--dim); text-decoration: none; }
+    @media (max-width: 480px) { .bid-row { flex-wrap: wrap; } }
+  </style>
+</head>
+<body>
+
+  <div class="phase-banner scheduled">&#9711; &nbsp; PHASE 4 &nbsp; · &nbsp; NEGOTIATION TABLE &nbsp; · &nbsp; CASE AC-2026-04 &nbsp; &#9711;</div>
+
+  <nav class="site-nav">
+    <a href="/">Intergalactic Pepe 🚀</a>
+    <div class="site-nav-sub">An independent, free-spirited cosmic travel company</div>
+    <div class="site-nav-back"><a href="/committee">← Committee Files &nbsp;·&nbsp; Case AC-2026-04</a></div>
+  </nav>
+
+  <div class="token-bar">
+    <span class="token-bar-label">Intergalactic Tokens</span>
+    <span class="token-bar-count" id="token-display">0</span>
+    <a href="/committee/prizes" class="token-bar-link">Redeem</a>
+  </div>
+
+  <div class="hero">
+    <div class="hero-inner">
+      <div class="seal">
+        <div class="seal-ring"></div>
+        <div class="seal-ring2"></div>
+        <div class="seal-core">
+          <div class="seal-id">IPSC</div>
+          <div class="seal-yr">2026</div>
+        </div>
+      </div>
+      <p class="hero-over"><span class="hero-stars">✦ &nbsp;</span>Intergalactic Partnership Selection Committee<span class="hero-stars">&nbsp; ✦</span></p>
+      <h1 class="hero-title">The Negotiation Table</h1>
+      <p class="hero-sub">Phase 4 — Prize Auction</p>
+      <p class="hero-meta">Case AC-2026-04 · Final Session · Barcelona Sector</p>
+      <span class="hero-ref">Ref: IPSC-NEG-001 &nbsp;|&nbsp; Phase 4 &nbsp;|&nbsp; Active</span>
+    </div>
+  </div>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="sec-label">Negotiation Protocol — Phase 4</div>
+
+      <div id="ng-intro">
+        <div class="intro-panel">
+          <div class="intro-stamp">Classification: Restricted · Case AC-2026-04 · Phase 4</div>
+          <h2 class="intro-title">The Negotiation Table</h2>
+          <p class="intro-sub">10 prizes are on auction. You receive 100 tokens. The Committee also has 100 tokens. You bid first on each item. Highest bid wins. 30 minutes total. No extensions.</p>
+          <div class="intro-rules">
+            <span class="intro-rule">10 Prizes</span>
+            <span class="intro-rule">100 tokens each</span>
+            <span class="intro-rule">30 minutes</span>
+            <span class="intro-rule">15 tokens per win</span>
+          </div>
+          <p style="font-size:0.72rem;color:var(--dim);font-style:italic;margin-bottom:2rem;line-height:1.6;">The Committee bids ruthlessly. High bids may win. Low bids will not. The timer does not pause for hesitation.</p>
+          <button class="action-btn" id="ng-start-btn">Begin Negotiations</button>
+        </div>
+      </div>
+
+      <div id="ng-game" style="display:none;">
+        <div class="timer-bar-wrap">
+          <div class="timer-bar-meta">
+            <span class="timer-bar-label">Session time remaining</span>
+            <span class="timer-bar-time" id="ng-timer">30:00</span>
+          </div>
+          <div class="timer-bar-track">
+            <div class="timer-bar-fill" id="ng-timer-fill" style="width:100%"></div>
+          </div>
+        </div>
+
+        <div id="ng-prize-area">
+          <div class="prize-card" id="ng-prize-card">
+            <div class="prize-card-num" id="ng-prize-num">Prize 1 of 10</div>
+            <div class="prize-card-name" id="ng-prize-name"></div>
+            <div class="prize-card-desc" id="ng-prize-desc"></div>
+            <div><span class="prize-card-base" id="ng-prize-base"></span></div>
+          </div>
+
+          <div class="tokens-row">
+            <div class="tokens-cell">
+              <div class="tokens-cell-label">Your tokens</div>
+              <div class="tokens-cell-num pink" id="ng-her-tokens">100</div>
+            </div>
+            <div class="tokens-cell">
+              <div class="tokens-cell-label">Committee tokens</div>
+              <div class="tokens-cell-num" id="ng-com-tokens">100</div>
+            </div>
+          </div>
+
+          <div class="bid-error" id="ng-bid-error"></div>
+          <div class="bid-row">
+            <input type="number" class="bid-input" id="ng-bid-input" placeholder="Your bid (tokens)" min="1" max="100">
+            <button class="bid-btn" id="ng-bid-btn">Bid</button>
+            <button class="pass-btn" id="ng-pass-btn">Pass</button>
+          </div>
+
+          <div class="response-area" id="ng-response">The Committee is reviewing the item.</div>
+        </div>
+      </div>
+
+      <div id="ng-summary" style="display:none;">
+        <div class="summary-head">
+          <div class="summary-verdict" id="ng-summary-won">0 Won</div>
+          <div class="summary-tokens" id="ng-summary-tokens">0 tokens earned</div>
+          <div class="summary-sub" style="margin-top:0.75rem;">Entered into the permanent record.</div>
+        </div>
+        <div class="summary-list" id="ng-summary-list"></div>
+        <div style="text-align:center;margin-top:1.5rem;">
+          <a href="/committee/final" class="action-btn secondary">← Return to Final Session</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    The Intergalactic Partnership Selection Committee · Proceedings Confidential · Case AC-2026-04<br>
+    <a href="/committee/final">← Back to Final Session</a> &nbsp;|&nbsp;
+    <span style="color:var(--border)">Operated by <a href="/">Intergalactic Pepe</a>. Incorporated under the laws of Mars.</span>
+  </footer>
+
+  <script>
+    function getTokenBank() {
+      try { var b = JSON.parse(localStorage.getItem('ipsc_tokens_ac2026')||'{}'); if(!b.breakdown) b.breakdown={quiz:0,negotiation:0,archive:0,protocol:0}; if(!b.total) b.total=0; return b; } catch(e) { return {total:0,breakdown:{quiz:0,negotiation:0,archive:0,protocol:0}}; }
+    }
+    function addTokens(source, amount) {
+      var bank = getTokenBank(); bank.total += amount;
+      if (bank.breakdown[source] !== undefined) bank.breakdown[source] += amount; else bank.breakdown[source] = amount;
+      try { localStorage.setItem('ipsc_tokens_ac2026', JSON.stringify(bank)); } catch(e) {}
+      updateTokenDisplay();
+    }
+    function updateTokenDisplay() { var el = document.getElementById('token-display'); if (el) el.textContent = getTokenBank().total; }
+    updateTokenDisplay();
+
+    (function() {
+      'use strict';
+      var GAME_KEY = 'ipsc_negotiation_ac2026';
+      var PRIZES = [
+        {name:"30-Minute Foot Massage", desc:"She designates the time. He executes without complaint or commentary.", base:25},
+        {name:"Curated Date Night", desc:"He plans, books, and executes a complete evening to her stated preferences. No input during planning.", base:50},
+        {name:"Overnight Trip", desc:"One night away. She chooses the city. He handles logistics.", base:150},
+        {name:"Private Reflection", desc:"He writes a sincere, unedited reflection about her. No word count minimum. No word count maximum.", base:35},
+        {name:"One Veto", desc:"She cancels any plan he has. No reason required. He complies without discussion.", base:50},
+        {name:"Extended Sensory Experience", desc:"Blindfold. Touch. Duration: to be determined at time of redemption. No preview provided.", base:100},
+        {name:"The Locked Envelope", desc:"An envelope, sealed at the time of the Final Session. Opened together at a moment of her choosing. Contents unknown in advance.", base:150},
+        {name:"Fantasy Scenario", desc:"She writes the scenario. He enacts it. One revision permitted. No substitutions.", base:200},
+        {name:"One Full Day — No Agenda", desc:"He clears the calendar. She decides everything in real time. 6am to midnight minimum.", base:100},
+        {name:"Committee Suspension", desc:"She pauses any active Committee protocol for 72 hours. No questions asked. No conditions attached.", base:250}
+      ];
+
+      var state = {
+        phase: 'intro',
+        currentPrize: 0,
+        herTokens: 100,
+        committeeTokens: 100,
+        results: [],
+        timerStart: null,
+        tokensEarned: 0,
+        tokensAwarded: false,
+        bidding: false
+      };
+
+      function loadState() {
+        try {
+          var raw = localStorage.getItem(GAME_KEY);
+          if (!raw) return;
+          var s = JSON.parse(raw);
+          if (s && typeof s === 'object') Object.assign(state, s);
+        } catch(e) {}
+      }
+
+      function saveState() {
+        try { localStorage.setItem(GAME_KEY, JSON.stringify(state)); } catch(e) {}
+      }
+
+      function showPanel(id) {
+        ['ng-intro','ng-game','ng-summary'].forEach(function(pid) {
+          var el = document.getElementById(pid);
+          if (el) el.style.display = (pid === id) ? 'block' : 'none';
+        });
+      }
+
+      var timerInterval = null;
+      var TOTAL_MS = 30 * 60 * 1000;
+
+      function startTimer() {
+        if (!state.timerStart) { state.timerStart = Date.now(); saveState(); }
+        updateTimer();
+        timerInterval = setInterval(function() {
+          updateTimer();
+          var elapsed = Date.now() - state.timerStart;
+          if (elapsed >= TOTAL_MS) { clearInterval(timerInterval); endGame(); }
+        }, 1000);
+      }
+
+      function updateTimer() {
+        var elapsed = Date.now() - (state.timerStart || Date.now());
+        var remaining = Math.max(0, TOTAL_MS - elapsed);
+        var m = Math.floor(remaining / 60000);
+        var s = Math.floor((remaining % 60000) / 1000);
+        var el = document.getElementById('ng-timer');
+        if (el) el.textContent = pad(m) + ':' + pad(s);
+        var fill = document.getElementById('ng-timer-fill');
+        if (fill) fill.style.width = ((remaining / TOTAL_MS) * 100) + '%';
+      }
+
+      function pad(n) { return String(Math.max(0,n)).padStart(2,'0'); }
+
+      function renderPrize() {
+        if (state.currentPrize >= PRIZES.length) { endGame(); return; }
+        var p = PRIZES[state.currentPrize];
+        var el = function(id) { return document.getElementById(id); };
+        el('ng-prize-num').textContent = 'Prize ' + (state.currentPrize + 1) + ' of ' + PRIZES.length;
+        el('ng-prize-name').textContent = p.name;
+        el('ng-prize-desc').textContent = p.desc;
+        el('ng-prize-base').textContent = 'Catalog value: ' + p.base + ' tokens';
+        el('ng-her-tokens').textContent = state.herTokens;
+        el('ng-com-tokens').textContent = state.committeeTokens;
+        el('ng-bid-error').textContent = '';
+        el('ng-bid-input').value = '';
+        el('ng-bid-input').max = state.herTokens;
+        el('ng-response').textContent = 'The Committee is ready to bid.';
+        el('ng-response').className = 'response-area';
+        el('ng-bid-btn').disabled = state.herTokens === 0;
+        el('ng-pass-btn').disabled = false;
+        el('ng-bid-input').disabled = false;
+        state.bidding = false;
+      }
+
+      function submitBid(isPass) {
+        if (state.bidding) return;
+        var errEl = document.getElementById('ng-bid-error');
+        var amount = 0;
+
+        if (!isPass) {
+          amount = parseInt(document.getElementById('ng-bid-input').value, 10);
+          if (isNaN(amount) || amount < 1) { errEl.textContent = 'Enter a bid of at least 1 token.'; return; }
+          if (amount > state.herTokens) { errEl.textContent = 'You only have ' + state.herTokens + ' tokens.'; return; }
+        }
+
+        errEl.textContent = '';
+        state.bidding = true;
+        document.getElementById('ng-bid-btn').disabled = true;
+        document.getElementById('ng-pass-btn').disabled = true;
+        document.getElementById('ng-bid-input').disabled = true;
+
+        var responseEl = document.getElementById('ng-response');
+        responseEl.textContent = 'The Committee deliberates...';
+        responseEl.className = 'response-area';
+
+        setTimeout(function() {
+          if (isPass) {
+            // She passes — Committee wins automatically
+            state.results.push({name: PRIZES[state.currentPrize].name, won: false, note: 'Passed'});
+            responseEl.textContent = 'You passed. The Committee claims this item.';
+            responseEl.className = 'response-area lost';
+          } else {
+            var committeeResult = getCommitteeBid(amount);
+            if (committeeResult === null) {
+              // Committee folds
+              state.herTokens -= amount;
+              state.results.push({name: PRIZES[state.currentPrize].name, won: true, bid: amount});
+              responseEl.textContent = 'The Committee withdraws. This prize is yours. (' + amount + ' tokens spent)';
+              responseEl.className = 'response-area won';
+            } else {
+              // Committee wins
+              state.committeeTokens -= committeeResult;
+              state.results.push({name: PRIZES[state.currentPrize].name, won: false, bid: amount, committeeBid: committeeResult});
+              responseEl.textContent = 'The Committee counters with ' + committeeResult + ' tokens. Prize goes to the Committee.';
+              responseEl.className = 'response-area lost';
+            }
+          }
+
+          document.getElementById('ng-her-tokens').textContent = state.herTokens;
+          document.getElementById('ng-com-tokens').textContent = state.committeeTokens;
+          state.currentPrize++;
+          saveState();
+
+          if (state.currentPrize >= PRIZES.length) {
+            setTimeout(endGame, 1500);
+          } else {
+            setTimeout(renderPrize, 1800);
+          }
+        }, 1200);
+      }
+
+      function getCommitteeBid(herBid) {
+        // 35% chance Committee folds
+        if (Math.random() < 0.35) return null;
+        // Committee can't outbid if not enough tokens
+        if (state.committeeTokens <= herBid) return null;
+        var minBid = herBid + 5;
+        var maxBid = Math.min(herBid + 20, state.committeeTokens);
+        if (minBid > state.committeeTokens) return null;
+        return Math.floor(Math.random() * (maxBid - minBid + 1)) + minBid;
+      }
+
+      function endGame() {
+        if (timerInterval) clearInterval(timerInterval);
+        state.phase = 'complete';
+        var wonCount = state.results.filter(function(r) { return r.won; }).length;
+        var tokensEarned = wonCount * 15;
+        state.tokensEarned = tokensEarned;
+
+        if (!state.tokensAwarded) {
+          addTokens('negotiation', tokensEarned);
+          state.tokensAwarded = true;
+        }
+        saveState();
+
+        document.getElementById('ng-summary-won').textContent = wonCount + ' Won';
+        document.getElementById('ng-summary-tokens').textContent = tokensEarned + ' tokens earned';
+
+        var listEl = document.getElementById('ng-summary-list');
+        listEl.innerHTML = '';
+        state.results.forEach(function(r) {
+          var div = document.createElement('div');
+          div.className = 'summary-item';
+          div.innerHTML = '<span class="summary-item-name">' + r.name + '</span><span class="summary-item-result ' + (r.won ? 'won' : 'lost') + '">' + (r.won ? 'Won' : 'Lost') + '</span>';
+          listEl.appendChild(div);
+        });
+
+        showPanel('ng-summary');
+      }
+
+      function initGame() {
+        loadState();
+
+        if (state.phase === 'complete') {
+          // Restore summary
+          var wonCount = state.results.filter(function(r) { return r.won; }).length;
+          document.getElementById('ng-summary-won').textContent = wonCount + ' Won';
+          document.getElementById('ng-summary-tokens').textContent = state.tokensEarned + ' tokens earned';
+          var listEl = document.getElementById('ng-summary-list');
+          listEl.innerHTML = '';
+          state.results.forEach(function(r) {
+            var div = document.createElement('div');
+            div.className = 'summary-item';
+            div.innerHTML = '<span class="summary-item-name">' + r.name + '</span><span class="summary-item-result ' + (r.won ? 'won' : 'lost') + '">' + (r.won ? 'Won' : 'Lost') + '</span>';
+            listEl.appendChild(div);
+          });
+          showPanel('ng-summary');
+          return;
+        }
+
+        if (state.phase === 'playing') {
+          showPanel('ng-game');
+          renderPrize();
+          startTimer();
+          return;
+        }
+
+        showPanel('ng-intro');
+      }
+
+      document.getElementById('ng-start-btn').addEventListener('click', function() {
+        state.phase = 'playing';
+        state.currentPrize = 0;
+        state.herTokens = 100;
+        state.committeeTokens = 100;
+        state.results = [];
+        state.timerStart = null;
+        state.tokensEarned = 0;
+        state.tokensAwarded = false;
+        saveState();
+        showPanel('ng-game');
+        renderPrize();
+        startTimer();
+      });
+
+      document.getElementById('ng-bid-btn').addEventListener('click', function() { submitBid(false); });
+      document.getElementById('ng-pass-btn').addEventListener('click', function() { submitBid(true); });
+      document.getElementById('ng-bid-input').addEventListener('keydown', function(e) {
+        if (e.key === 'Enter') submitBid(false);
+      });
+
+      initGame();
+    })();
+  </script>
+
+</body>
+</html>

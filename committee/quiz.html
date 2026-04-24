@@ -503,6 +503,43 @@
       margin-top: 0.75rem;
     }
 
+    /* ── RESULTS PANEL ── */
+    .results-panel {
+      background: rgba(225,75,135,0.04);
+      border-bottom: 1px solid rgba(225,75,135,0.12);
+      padding: 2.5rem 1.5rem;
+      text-align: center;
+    }
+    .rp-label-top {
+      font-size: 0.54rem; letter-spacing: 0.32em;
+      text-transform: uppercase; color: var(--dim);
+      margin-bottom: 1.25rem;
+    }
+    .rp-score-wrap {
+      display: flex; align-items: center; justify-content: center;
+      gap: 1.25rem; margin-bottom: 0.5rem; flex-wrap: wrap;
+    }
+    .rp-score {
+      font-family: var(--heading);
+      font-size: clamp(2.8rem,10vw,4.5rem);
+      color: var(--text); line-height: 1;
+    }
+    .rp-score span { color: var(--dim); font-size: 0.65em; }
+    .rp-verdict-badge {
+      display: inline-block;
+      font-family: var(--heading);
+      font-size: clamp(1.6rem,5vw,2.5rem);
+      color: var(--pink); letter-spacing: 0.18em;
+      border: 2px solid rgba(225,75,135,0.5);
+      padding: 0.2rem 0.8rem;
+      text-shadow: 0 0 30px var(--pink-glow);
+    }
+    .rp-sub {
+      font-size: 0.68rem; color: var(--dim);
+      letter-spacing: 0.14em; margin-top: 0.75rem;
+      font-style: italic;
+    }
+
     /* ── FOOTER ── */
     .site-footer {
       text-align: center; padding: 2rem 1.5rem;
@@ -522,6 +559,16 @@
 
   <!-- PHASE STATUS BANNER -->
   <div class="phase-banner expired">&#10005; &nbsp; ASSESSMENT CLOSED &nbsp; · &nbsp; PHASE 1 EXPIRED &nbsp; · &nbsp; RESULTS LOCKED &nbsp; · &nbsp; 23 APRIL 2026 &nbsp; &#10005;</div>
+
+  <!-- RESULTS PANEL -->
+  <div class="results-panel">
+    <div class="rp-label-top">Assessment Result · Case AC-2026-04 · 23 April 2026</div>
+    <div class="rp-score-wrap">
+      <div class="rp-score">11<span> / 11</span></div>
+      <div class="rp-verdict-badge">PASSED</div>
+    </div>
+    <div class="rp-sub">Perfect recall confirmed. The Committee noted this. It did not say anything further.</div>
+  </div>
 
   <nav class="site-nav">
     <a href="/">Intergalactic Pepe 🚀</a>

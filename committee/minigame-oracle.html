@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#080809">
+  <title>The Committee — The Oracle · Phase 4</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/fonts.css">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --pink:      #E14B87;
+      --pink-glow: rgba(225,75,135,0.25);
+      --pink-dim:  rgba(225,75,135,0.07);
+      --bg:        #080809;
+      --text:      #ddd5cc;
+      --mid:       #7a7068;
+      --dim:       #3d3835;
+      --border:    #181614;
+      --heading:   'RocknRoll One', sans-serif;
+      --sans:      'Space Grotesk', -apple-system, sans-serif;
+    }
+    body { background: var(--bg); color: var(--text); font-family: var(--sans); min-height: 100vh; overflow-x: hidden; }
+    body::before {
+      content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 999; opacity: 0.025;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      background-size: 256px 256px;
+    }
+    .wrap { max-width: 680px; margin: 0 auto; padding: 0 20px; }
+    .phase-banner { text-align: center; padding: 0.55rem 1rem; font-size: 0.56rem; letter-spacing: 0.32em; text-transform: uppercase; font-weight: 600; }
+    .phase-banner.scheduled { background: rgba(40,120,80,0.08); color: rgba(61,189,110,0.8); border-bottom: 1px solid rgba(61,189,110,0.15); }
+    .token-bar { display: flex; align-items: center; justify-content: space-between; padding: 0.6rem 1.5rem; background: rgba(225,75,135,0.08); border-bottom: 1px solid rgba(225,75,135,0.15); }
+    .token-bar-label { font-size: 0.56rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--dim); }
+    .token-bar-count { font-family: var(--heading); font-size: 1rem; color: var(--pink); }
+    .token-bar-link { font-size: 0.52rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--dim); text-decoration: none; }
+    .token-bar-link:hover { color: var(--pink); }
+    .site-nav { padding: 1.25rem 1.5rem; text-align: center; border-bottom: 1px solid var(--border); }
+    .site-nav a { font-family: var(--heading); font-size: 0.95rem; color: var(--mid); text-decoration: none; }
+    .site-nav-sub { font-size: 0.6rem; color: var(--dim); letter-spacing: 0.14em; text-transform: uppercase; margin-top: 0.2rem; }
+    .site-nav-back { font-size: 0.56rem; color: var(--dim); letter-spacing: 0.18em; text-transform: uppercase; margin-top: 0.4rem; }
+    .site-nav-back a { font-family: var(--sans); font-size: 0.56rem; color: var(--dim); text-decoration: none; }
+    .site-nav-back a:hover { color: var(--pink); }
+    .hero { background: var(--bg); text-align: center; padding: 4rem 1.5rem 3rem; border-bottom: 1px solid var(--border); position: relative; overflow: hidden; }
+    .hero::before {
+      content: ''; position: absolute; inset: 0; pointer-events: none; opacity: 0.07;
+      background-image: radial-gradient(2px 2px at 4% 9%,#fff 100%,transparent),radial-gradient(1px 1px at 10% 34%,#E14B87 100%,transparent),radial-gradient(2px 2px at 16% 61%,#fff 100%,transparent),radial-gradient(3px 2px at 23% 19%,#E14B87 100%,transparent),radial-gradient(1px 2px at 31% 47%,#fff 100%,transparent),radial-gradient(2px 1px at 39% 77%,#E14B87 100%,transparent),radial-gradient(2px 2px at 47% 11%,#fff 100%,transparent),radial-gradient(3px 2px at 54% 39%,#E14B87 100%,transparent),radial-gradient(1px 2px at 62% 67%,#fff 100%,transparent),radial-gradient(2px 1px at 69% 23%,#E14B87 100%,transparent),radial-gradient(2px 2px at 76% 51%,#fff 100%,transparent),radial-gradient(4px 2px at 82% 13%,#E14B87 100%,transparent),radial-gradient(2px 2px at 7% 83%,#fff 100%,transparent),radial-gradient(1px 2px at 51% 91%,#E14B87 100%,transparent),radial-gradient(2px 1px at 72% 87%,#fff 100%,transparent);
+      background-size: 110px 90px;
+    }
+    .hero::after { content: ''; position: absolute; width: 520px; height: 150px; border: 1px solid rgba(225,75,135,0.07); border-radius: 50%; top: 50%; left: 50%; transform: translate(-50%,-50%) rotate(-7deg); pointer-events: none; }
+    .hero-inner { position: relative; z-index: 1; }
+    .seal { position: relative; width: 96px; height: 96px; margin: 0 auto 1.75rem; }
+    .seal-ring { position: absolute; inset: 0; border: 1px dashed rgba(225,75,135,0.3); border-radius: 50%; animation: sealSpin 22s linear infinite; }
+    .seal-ring2 { position: absolute; inset: 7px; border: 1px solid rgba(225,75,135,0.12); border-radius: 50%; }
+    .seal-core { position: absolute; inset: 14px; border: 1.5px solid var(--pink); border-radius: 50%; display: flex; flex-direction: column; align-items: center; justify-content: center; background: var(--pink-dim); box-shadow: 0 0 24px rgba(225,75,135,0.1); }
+    .seal-id { font-family: var(--heading); font-size: 0.9rem; color: var(--pink); letter-spacing: 0.1em; line-height: 1; }
+    .seal-yr { font-size: 0.48rem; color: var(--dim); letter-spacing: 0.2em; margin-top: 2px; }
+    @keyframes sealSpin { to { transform: rotate(360deg); } }
+    .hero-over { font-size: 0.6rem; letter-spacing: 0.4em; text-transform: uppercase; color: var(--pink); margin-bottom: 0.75rem; }
+    .hero-stars { opacity: 0.38; }
+    .hero-title { font-family: var(--heading); font-size: clamp(1.9rem,5vw,2.9rem); color: #fafafa; margin-bottom: 0.4rem; }
+    .hero-sub { font-family: var(--heading); font-size: clamp(1rem,2.5vw,1.45rem); color: var(--pink); font-weight: 400; letter-spacing: 0.04em; margin-bottom: 0.65rem; }
+    .hero-meta { font-size: 0.7rem; color: var(--dim); letter-spacing: 0.1em; }
+    .hero-ref { display: inline-block; margin-top: 1.25rem; padding: 0.35rem 0.9rem; border: 1px solid var(--border); font-size: 0.6rem; letter-spacing: 0.12em; color: var(--dim); font-family: 'Courier New', monospace; }
+    .section { padding: 2.75rem 0; border-bottom: 1px solid var(--border); }
+    .sec-label { font-size: 0.58rem; letter-spacing: 0.35em; text-transform: uppercase; color: var(--dim); margin-bottom: 1.5rem; }
+
+    .intro-panel { text-align: center; padding: 2.5rem 1.5rem; border: 1px solid var(--border); background: var(--pink-dim); }
+    .intro-stamp { font-size: 0.56rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--dim); margin-bottom: 1.25rem; }
+    .intro-title { font-family: var(--heading); font-size: clamp(1.4rem,4vw,2rem); color: #fafafa; margin-bottom: 0.5rem; }
+    .intro-sub { font-size: 0.85rem; color: var(--mid); line-height: 1.75; margin-bottom: 1.75rem; max-width: 480px; margin-left: auto; margin-right: auto; }
+    .intro-rules { display: flex; align-items: center; justify-content: center; gap: 0.6rem; flex-wrap: wrap; margin-bottom: 1.5rem; }
+    .intro-rule { font-size: 0.62rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--pink); padding: 3px 10px; border: 1px solid rgba(225,75,135,0.3); }
+    .action-btn { display: inline-block; background: var(--pink); color: #fff; border: none; padding: 0.8rem 2rem; font-family: var(--sans); font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase; cursor: pointer; transition: opacity 0.2s; }
+    .action-btn:hover { opacity: 0.85; }
+    .action-btn.secondary { background: transparent; border: 1px solid rgba(225,75,135,0.4); color: var(--pink); }
+    .action-btn:disabled { opacity: 0.35; cursor: not-allowed; }
+
+    /* Oracle UI */
+    .oracle-status { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; padding: 0.75rem 1rem; border: 1px solid var(--border); background: rgba(0,0,0,0.2); }
+    .oracle-status-item { text-align: center; }
+    .oracle-status-num { font-family: var(--heading); font-size: 1.2rem; color: var(--pink); }
+    .oracle-status-label { font-size: 0.5rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--dim); margin-top: 2px; }
+
+    .oracle-input-wrap { margin-bottom: 1.5rem; }
+    .oracle-textarea { width: 100%; background: var(--bg); border: 1px solid var(--dim); color: var(--text); font-family: var(--sans); font-size: 0.9rem; padding: 1rem; outline: none; resize: vertical; min-height: 80px; line-height: 1.6; }
+    .oracle-textarea:focus { border-color: var(--pink); }
+    .oracle-textarea::placeholder { color: var(--dim); }
+    .oracle-textarea:disabled { opacity: 0.4; }
+    .oracle-submit-row { display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+    .oracle-cost-note { font-size: 0.68rem; color: var(--dim); font-style: italic; }
+
+    /* Answer card */
+    .answer-card { border: 1px solid rgba(225,75,135,0.3); background: var(--pink-dim); padding: 1.5rem; margin-bottom: 1.5rem; animation: oracleReveal 0.8s ease forwards; opacity: 0; }
+    @keyframes oracleReveal { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+    .answer-card-label { font-size: 0.52rem; letter-spacing: 0.28em; text-transform: uppercase; color: var(--pink); margin-bottom: 0.75rem; }
+    .answer-card-q { font-size: 0.8rem; color: var(--mid); font-style: italic; margin-bottom: 0.75rem; border-left: 2px solid var(--dim); padding-left: 0.75rem; line-height: 1.6; }
+    .answer-card-a { font-size: 0.92rem; color: var(--text); line-height: 1.8; }
+
+    /* History */
+    .history-wrap { margin-top: 2rem; }
+    .history-label { font-size: 0.56rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--dim); margin-bottom: 1rem; }
+    .history-list { display: flex; flex-direction: column; gap: 1px; background: var(--border); border: 1px solid var(--border); }
+    .history-item { background: var(--bg); padding: 1rem; }
+    .history-q { font-size: 0.78rem; color: var(--mid); font-style: italic; margin-bottom: 0.5rem; }
+    .history-a { font-size: 0.82rem; color: var(--text); line-height: 1.7; }
+
+    /* Complete screen */
+    .oracle-complete { text-align: center; padding: 3rem 1.5rem; border: 1px solid rgba(225,75,135,0.3); background: var(--pink-dim); }
+    .oracle-complete-title { font-family: var(--heading); font-size: clamp(1.5rem,5vw,2.5rem); color: var(--pink); margin-bottom: 0.75rem; }
+    .oracle-complete-sub { font-size: 0.85rem; color: var(--mid); line-height: 1.75; margin-bottom: 2rem; }
+
+    .site-footer { text-align: center; padding: 2rem 1.5rem; border-top: 1px solid var(--border); font-size: 0.65rem; color: var(--dim); letter-spacing: 0.08em; line-height: 1.9; }
+    .site-footer a { color: var(--dim); text-decoration: none; }
+  </style>
+</head>
+<body>
+
+  <div class="phase-banner scheduled">&#9711; &nbsp; PHASE 4 &nbsp; · &nbsp; THE ORACLE &nbsp; · &nbsp; CASE AC-2026-04 &nbsp; &#9711;</div>
+
+  <nav class="site-nav">
+    <a href="/">Intergalactic Pepe 🚀</a>
+    <div class="site-nav-sub">An independent, free-spirited cosmic travel company</div>
+    <div class="site-nav-back"><a href="/committee">← Committee Files &nbsp;·&nbsp; Case AC-2026-04</a></div>
+  </nav>
+
+  <div class="token-bar">
+    <span class="token-bar-label">Intergalactic Tokens</span>
+    <span class="token-bar-count" id="token-display">0</span>
+    <a href="/committee/prizes" class="token-bar-link">Redeem</a>
+  </div>
+
+  <div class="hero">
+    <div class="hero-inner">
+      <div class="seal">
+        <div class="seal-ring"></div>
+        <div class="seal-ring2"></div>
+        <div class="seal-core">
+          <div class="seal-id">IPSC</div>
+          <div class="seal-yr">2026</div>
+        </div>
+      </div>
+      <p class="hero-over"><span class="hero-stars">✦ &nbsp;</span>Intergalactic Partnership Selection Committee<span class="hero-stars">&nbsp; ✦</span></p>
+      <h1 class="hero-title">The Oracle</h1>
+      <p class="hero-sub">Phase 4 — Questions About the Future</p>
+      <p class="hero-meta">Case AC-2026-04 · Final Session · Barcelona Sector</p>
+      <span class="hero-ref">Ref: IPSC-ORC-001 &nbsp;|&nbsp; Phase 4 &nbsp;|&nbsp; Active</span>
+    </div>
+  </div>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="sec-label">Oracle Protocol — Phase 4</div>
+
+      <div id="or-intro">
+        <div class="intro-panel">
+          <div class="intro-stamp">Classification: Restricted · Case AC-2026-04 · Phase 4</div>
+          <h2 class="intro-title">The Oracle</h2>
+          <p class="intro-sub">Submit up to 5 questions about the future. Any question. No restrictions. The Committee will answer with full authority. All answers are binding and entered into the record.</p>
+          <div class="intro-rules">
+            <span class="intro-rule">5 free questions</span>
+            <span class="intro-rule">Extra questions: 10 tokens</span>
+            <span class="intro-rule">All answers binding</span>
+          </div>
+          <p style="font-size:0.72rem;color:var(--dim);font-style:italic;margin-bottom:2rem;line-height:1.6;">The Committee does not speculate. It classifies. Choose your questions carefully. The answers will remain in the record long after this session concludes.</p>
+          <button class="action-btn" id="or-start-btn">Open the Oracle</button>
+        </div>
+      </div>
+
+      <div id="or-game" style="display:none;">
+        <div class="oracle-status">
+          <div class="oracle-status-item">
+            <div class="oracle-status-num" id="or-free-left">5</div>
+            <div class="oracle-status-label">Free questions left</div>
+          </div>
+          <div class="oracle-status-item">
+            <div class="oracle-status-num" id="or-total-asked">0</div>
+            <div class="oracle-status-label">Total asked</div>
+          </div>
+          <div class="oracle-status-item">
+            <div class="oracle-status-num" id="or-tokens-here">0</div>
+            <div class="oracle-status-label">Your tokens</div>
+          </div>
+        </div>
+
+        <div id="or-answer-area"></div>
+
+        <div class="oracle-input-wrap">
+          <textarea class="oracle-textarea" id="or-question" placeholder="Submit your question to the Committee..." rows="3"></textarea>
+          <div class="oracle-submit-row" style="margin-top:0.75rem;">
+            <span class="oracle-cost-note" id="or-cost-note">Free</span>
+            <button class="action-btn" id="or-submit-btn">Submit to the Committee</button>
+          </div>
+          <div style="font-size:0.68rem;color:#c85454;margin-top:0.5rem;min-height:1.2em;" id="or-error"></div>
+        </div>
+
+        <div class="history-wrap" id="or-history-wrap" style="display:none;">
+          <div class="history-label">◆ Questions on the record</div>
+          <div class="history-list" id="or-history-list"></div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    The Intergalactic Partnership Selection Committee · Proceedings Confidential · Case AC-2026-04<br>
+    <a href="/committee/final">← Back to Final Session</a> &nbsp;|&nbsp;
+    <span style="color:var(--border)">Operated by <a href="/">Intergalactic Pepe</a>. Incorporated under the laws of Mars.</span>
+  </footer>
+
+  <script>
+    function getTokenBank() {
+      try { var b = JSON.parse(localStorage.getItem('ipsc_tokens_ac2026')||'{}'); if(!b.breakdown) b.breakdown={quiz:0,negotiation:0,archive:0,protocol:0}; if(!b.total) b.total=0; return b; } catch(e) { return {total:0,breakdown:{quiz:0,negotiation:0,archive:0,protocol:0}}; }
+    }
+    function deductTokens(amount) {
+      var bank = getTokenBank();
+      if (bank.total < amount) return false;
+      bank.total -= amount;
+      try { localStorage.setItem('ipsc_tokens_ac2026', JSON.stringify(bank)); } catch(e) {}
+      updateTokenDisplay();
+      return true;
+    }
+    function updateTokenDisplay() {
+      var el = document.getElementById('token-display');
+      if (el) el.textContent = getTokenBank().total;
+      var el2 = document.getElementById('or-tokens-here');
+      if (el2) el2.textContent = getTokenBank().total;
+    }
+    updateTokenDisplay();
+
+    (function() {
+      'use strict';
+      var GAME_KEY = 'ipsc_oracle_ac2026';
+      var FREE_Q = 5;
+      var EXTRA_COST = 10;
+
+      var ROMANTIC = [
+        "The Committee has reviewed the available data. The trajectory is confirmed. The destination is not in question.",
+        "The record has been open since the first session. The Committee added nothing since. The answer was already there.",
+        "The Committee does not predict. It observes. What it has observed has been entered into the permanent record.",
+        "This question was anticipated. The Committee prepared the answer in advance. It reads: yes.",
+        "The Committee has reviewed 47 possible futures. In 44 of them this question does not need to be asked."
+      ];
+      var TEMPORAL = [
+        "The Committee does not operate on human timelines. The correct answer is: when it is ready.",
+        "Phase 4 ends on 10 May 2026. After that the record contains only what was built, not what was planned.",
+        "The Committee has noted the question. The answer is stored in the Locked Envelope.",
+        "Timing is the only variable the Committee does not control. Everything else is already determined.",
+        "The Committee notes the urgency in this question. The answer is the same regardless of urgency: when the conditions are correct."
+      ];
+      var DECLARATIVE = [
+        "The Committee rules: yes. This decision is entered into the permanent record and cannot be appealed.",
+        "The Committee has deliberated. The verdict is sealed. The Candidate is informed.",
+        "Ruling: affirmative. Case file updated. No further submissions on this matter will be accepted.",
+        "The Committee confirms. This is not a prediction. It is a classification of existing conditions.",
+        "Motion carried. Filed under Case AC-2026-04 Subsection: Future Operations. Effective immediately."
+      ];
+      var GENERAL = [
+        "The Committee has studied this question across 11 prior sessions. The answer has not changed.",
+        "The record is sealed on this point. The Candidate is invited to ask again at the Final Session.",
+        "The Committee does not speculate. It classifies. This has been classified.",
+        "Filed. The answer exists. It was filed under your name on the date this case opened.",
+        "The Committee notes the question. The Committee already knew you would ask it."
+      ];
+
+      function pick(pool) { return pool[Math.floor(Math.random() * pool.length)]; }
+
+      function getAnswer(q) {
+        var lower = q.toLowerCase();
+        if (/love|stay|forever|\bus\b|together/.test(lower)) return pick(ROMANTIC);
+        if (/\bwhen\b|how long|timeline|\bsoon\b|\bdate\b/.test(lower)) return pick(TEMPORAL);
+        if (/\bwill\b|\bshall\b|\bmust\b|going to/.test(lower)) return pick(DECLARATIVE);
+        return pick(GENERAL);
+      }
+
+      var state = { started: false, freeUsed: 0, history: [] };
+
+      function loadState() {
+        try {
+          var raw = localStorage.getItem(GAME_KEY);
+          if (!raw) return;
+          var s = JSON.parse(raw);
+          if (s) { state.started = !!s.started; state.freeUsed = s.freeUsed || 0; state.history = s.history || []; }
+        } catch(e) {}
+      }
+
+      function saveState() { try { localStorage.setItem(GAME_KEY, JSON.stringify(state)); } catch(e) {} }
+
+      function updateStatus() {
+        var freeLeft = Math.max(0, FREE_Q - state.freeUsed);
+        var costNote = freeLeft > 0 ? 'Free (' + freeLeft + ' remaining)' : 'Cost: ' + EXTRA_COST + ' tokens';
+        var el = function(id) { return document.getElementById(id); };
+        if (el('or-free-left')) el('or-free-left').textContent = freeLeft;
+        if (el('or-total-asked')) el('or-total-asked').textContent = state.history.length;
+        if (el('or-cost-note')) el('or-cost-note').textContent = costNote;
+        updateTokenDisplay();
+      }
+
+      function renderHistory() {
+        var wrap = document.getElementById('or-history-wrap');
+        var list = document.getElementById('or-history-list');
+        if (!list) return;
+        if (state.history.length === 0) { if (wrap) wrap.style.display = 'none'; return; }
+        if (wrap) wrap.style.display = 'block';
+        list.innerHTML = '';
+        state.history.slice().reverse().forEach(function(item, i) {
+          var div = document.createElement('div');
+          div.className = 'history-item';
+          div.innerHTML = '<div class="history-q">' + escHtml(item.q) + '</div><div class="history-a">' + escHtml(item.a) + '</div>';
+          list.appendChild(div);
+        });
+      }
+
+      function escHtml(s) { return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+      function submitQuestion() {
+        var textarea = document.getElementById('or-question');
+        var errEl = document.getElementById('or-error');
+        var q = textarea.value.trim();
+
+        if (!q) { errEl.textContent = 'The Committee requires a question before it will respond.'; return; }
+        if (q.length < 5) { errEl.textContent = 'The Committee considers this too brief to classify.'; return; }
+        errEl.textContent = '';
+
+        var freeLeft = Math.max(0, FREE_Q - state.freeUsed);
+        if (freeLeft === 0) {
+          // Extra question — costs 10 tokens
+          if (!deductTokens(EXTRA_COST)) {
+            errEl.textContent = 'Insufficient tokens. Additional questions cost ' + EXTRA_COST + ' tokens each.';
+            return;
+          }
+        } else {
+          state.freeUsed++;
+        }
+
+        textarea.disabled = true;
+        document.getElementById('or-submit-btn').disabled = true;
+
+        // Show deliberation in answer area
+        var answerArea = document.getElementById('or-answer-area');
+        answerArea.innerHTML = '<div style="padding:1.5rem;text-align:center;font-size:0.8rem;color:var(--dim);font-style:italic;border:1px solid var(--border);">The Committee deliberates...</div>';
+
+        setTimeout(function() {
+          var answer = getAnswer(q);
+          var qa = {q: q, a: answer};
+          state.history.push(qa);
+          saveState();
+
+          answerArea.innerHTML = '';
+          var card = document.createElement('div');
+          card.className = 'answer-card';
+          card.innerHTML = '<div class="answer-card-label">Committee Ruling · Case AC-2026-04</div><div class="answer-card-q">' + escHtml(q) + '</div><div class="answer-card-a">' + escHtml(answer) + '</div>';
+          answerArea.appendChild(card);
+
+          textarea.value = '';
+          textarea.disabled = false;
+          document.getElementById('or-submit-btn').disabled = false;
+          updateStatus();
+          renderHistory();
+          textarea.focus();
+        }, 1600);
+      }
+
+      function initOracle() {
+        loadState();
+        if (state.started) {
+          document.getElementById('or-intro').style.display = 'none';
+          document.getElementById('or-game').style.display = 'block';
+          updateStatus();
+          renderHistory();
+        }
+      }
+
+      document.getElementById('or-start-btn').addEventListener('click', function() {
+        state.started = true;
+        saveState();
+        document.getElementById('or-intro').style.display = 'none';
+        document.getElementById('or-game').style.display = 'block';
+        updateStatus();
+      });
+
+      document.getElementById('or-submit-btn').addEventListener('click', submitQuestion);
+      document.getElementById('or-question').addEventListener('keydown', function(e) {
+        if (e.key === 'Enter' && (e.ctrlKey || e.metaKey)) submitQuestion();
+      });
+
+      initOracle();
+    })();
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#080809">
+  <title>The Committee — The Archive · Phase 4</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/fonts.css">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --pink:      #E14B87;
+      --pink-glow: rgba(225,75,135,0.25);
+      --pink-dim:  rgba(225,75,135,0.07);
+      --bg:        #080809;
+      --text:      #ddd5cc;
+      --mid:       #7a7068;
+      --dim:       #3d3835;
+      --border:    #181614;
+      --heading:   'RocknRoll One', sans-serif;
+      --sans:      'Space Grotesk', -apple-system, sans-serif;
+      --green:     #3dbd6e;
+      --green-dim: rgba(61,189,110,0.07);
+    }
+    body { background: var(--bg); color: var(--text); font-family: var(--sans); min-height: 100vh; overflow-x: hidden; }
+    body::before {
+      content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 999; opacity: 0.025;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      background-size: 256px 256px;
+    }
+    .wrap { max-width: 680px; margin: 0 auto; padding: 0 20px; }
+    .phase-banner { text-align: center; padding: 0.55rem 1rem; font-size: 0.56rem; letter-spacing: 0.32em; text-transform: uppercase; font-weight: 600; }
+    .phase-banner.scheduled { background: rgba(40,120,80,0.08); color: rgba(61,189,110,0.8); border-bottom: 1px solid rgba(61,189,110,0.15); }
+    .token-bar { display: flex; align-items: center; justify-content: space-between; padding: 0.6rem 1.5rem; background: rgba(225,75,135,0.08); border-bottom: 1px solid rgba(225,75,135,0.15); }
+    .token-bar-label { font-size: 0.56rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--dim); }
+    .token-bar-count { font-family: var(--heading); font-size: 1rem; color: var(--pink); }
+    .token-bar-link { font-size: 0.52rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--dim); text-decoration: none; }
+    .token-bar-link:hover { color: var(--pink); }
+    .site-nav { padding: 1.25rem 1.5rem; text-align: center; border-bottom: 1px solid var(--border); }
+    .site-nav a { font-family: var(--heading); font-size: 0.95rem; color: var(--mid); text-decoration: none; }
+    .site-nav-sub { font-size: 0.6rem; color: var(--dim); letter-spacing: 0.14em; text-transform: uppercase; margin-top: 0.2rem; }
+    .site-nav-back { font-size: 0.56rem; color: var(--dim); letter-spacing: 0.18em; text-transform: uppercase; margin-top: 0.4rem; }
+    .site-nav-back a { font-family: var(--sans); font-size: 0.56rem; color: var(--dim); text-decoration: none; }
+    .site-nav-back a:hover { color: var(--pink); }
+    .hero { background: var(--bg); text-align: center; padding: 4rem 1.5rem 3rem; border-bottom: 1px solid var(--border); position: relative; overflow: hidden; }
+    .hero::before {
+      content: ''; position: absolute; inset: 0; pointer-events: none; opacity: 0.07;
+      background-image: radial-gradient(2px 2px at 4% 9%,#fff 100%,transparent),radial-gradient(1px 1px at 10% 34%,#E14B87 100%,transparent),radial-gradient(2px 2px at 16% 61%,#fff 100%,transparent),radial-gradient(3px 2px at 23% 19%,#E14B87 100%,transparent),radial-gradient(1px 2px at 31% 47%,#fff 100%,transparent),radial-gradient(2px 1px at 39% 77%,#E14B87 100%,transparent),radial-gradient(2px 2px at 47% 11%,#fff 100%,transparent),radial-gradient(3px 2px at 54% 39%,#E14B87 100%,transparent),radial-gradient(1px 2px at 62% 67%,#fff 100%,transparent),radial-gradient(2px 1px at 69% 23%,#E14B87 100%,transparent),radial-gradient(2px 2px at 76% 51%,#fff 100%,transparent),radial-gradient(4px 2px at 82% 13%,#E14B87 100%,transparent),radial-gradient(2px 2px at 7% 83%,#fff 100%,transparent),radial-gradient(1px 2px at 51% 91%,#E14B87 100%,transparent),radial-gradient(2px 1px at 72% 87%,#fff 100%,transparent);
+      background-size: 110px 90px;
+    }
+    .hero::after { content: ''; position: absolute; width: 520px; height: 150px; border: 1px solid rgba(225,75,135,0.07); border-radius: 50%; top: 50%; left: 50%; transform: translate(-50%,-50%) rotate(-7deg); pointer-events: none; }
+    .hero-inner { position: relative; z-index: 1; }
+    .seal { position: relative; width: 96px; height: 96px; margin: 0 auto 1.75rem; }
+    .seal-ring { position: absolute; inset: 0; border: 1px dashed rgba(225,75,135,0.3); border-radius: 50%; animation: sealSpin 22s linear infinite; }
+    .seal-ring2 { position: absolute; inset: 7px; border: 1px solid rgba(225,75,135,0.12); border-radius: 50%; }
+    .seal-core { position: absolute; inset: 14px; border: 1.5px solid var(--pink); border-radius: 50%; display: flex; flex-direction: column; align-items: center; justify-content: center; background: var(--pink-dim); box-shadow: 0 0 24px rgba(225,75,135,0.1); }
+    .seal-id { font-family: var(--heading); font-size: 0.9rem; color: var(--pink); letter-spacing: 0.1em; line-height: 1; }
+    .seal-yr { font-size: 0.48rem; color: var(--dim); letter-spacing: 0.2em; margin-top: 2px; }
+    @keyframes sealSpin { to { transform: rotate(360deg); } }
+    .hero-over { font-size: 0.6rem; letter-spacing: 0.4em; text-transform: uppercase; color: var(--pink); margin-bottom: 0.75rem; }
+    .hero-stars { opacity: 0.38; }
+    .hero-title { font-family: var(--heading); font-size: clamp(1.9rem,5vw,2.9rem); color: #fafafa; margin-bottom: 0.4rem; }
+    .hero-sub { font-family: var(--heading); font-size: clamp(1rem,2.5vw,1.45rem); color: var(--pink); font-weight: 400; letter-spacing: 0.04em; margin-bottom: 0.65rem; }
+    .hero-meta { font-size: 0.7rem; color: var(--dim); letter-spacing: 0.1em; }
+    .hero-ref { display: inline-block; margin-top: 1.25rem; padding: 0.35rem 0.9rem; border: 1px solid var(--border); font-size: 0.6rem; letter-spacing: 0.12em; color: var(--dim); font-family: 'Courier New', monospace; }
+    .section { padding: 2.75rem 0; border-bottom: 1px solid var(--border); }
+    .sec-label { font-size: 0.58rem; letter-spacing: 0.35em; text-transform: uppercase; color: var(--dim); margin-bottom: 1.5rem; }
+
+    .intro-panel { text-align: center; padding: 2.5rem 1.5rem; border: 1px solid var(--border); background: var(--pink-dim); }
+    .intro-stamp { font-size: 0.56rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--dim); margin-bottom: 1.25rem; }
+    .intro-title { font-family: var(--heading); font-size: clamp(1.4rem,4vw,2rem); color: #fafafa; margin-bottom: 0.5rem; }
+    .intro-sub { font-size: 0.85rem; color: var(--mid); line-height: 1.75; margin-bottom: 1.75rem; max-width: 480px; margin-left: auto; margin-right: auto; }
+    .intro-rules { display: flex; align-items: center; justify-content: center; gap: 0.6rem; flex-wrap: wrap; margin-bottom: 1.5rem; }
+    .intro-rule { font-size: 0.62rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--pink); padding: 3px 10px; border: 1px solid rgba(225,75,135,0.3); }
+    .action-btn { display: inline-block; background: var(--pink); color: #fff; border: none; padding: 0.8rem 2rem; font-family: var(--sans); font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase; cursor: pointer; transition: opacity 0.2s; }
+    .action-btn:hover { opacity: 0.85; }
+    .action-btn.secondary { background: transparent; border: 1px solid rgba(225,75,135,0.4); color: var(--pink); }
+
+    /* Round timer */
+    .round-timer-wrap { margin-bottom: 1.5rem; }
+    .round-timer-meta { display: flex; justify-content: space-between; margin-bottom: 0.4rem; }
+    .round-timer-info { font-size: 0.56rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--dim); }
+    .round-timer-time { font-family: var(--heading); font-size: 1.1rem; color: var(--pink); }
+    .round-timer-track { height: 4px; background: var(--border); position: relative; border-radius: 2px; }
+    .round-timer-fill { position: absolute; left: 0; top: 0; height: 100%; background: var(--pink); border-radius: 2px; transition: width 1s linear; }
+    .round-timer-fill.urgent { background: #c85454; }
+
+    /* Round header */
+    .round-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; }
+    .round-num { font-size: 0.6rem; letter-spacing: 0.28em; text-transform: uppercase; color: var(--dim); }
+    .round-score { font-family: var(--heading); font-size: 0.9rem; color: var(--pink); }
+
+    /* Prompt */
+    .prompt-card { border: 1px solid rgba(225,75,135,0.25); background: var(--pink-dim); padding: 1.5rem 1.25rem; margin-bottom: 1.25rem; text-align: center; }
+    .prompt-card-label { font-size: 0.52rem; letter-spacing: 0.28em; text-transform: uppercase; color: var(--dim); margin-bottom: 0.75rem; }
+    .prompt-card-text { font-size: 1.05rem; color: var(--text); line-height: 1.6; }
+
+    /* Input */
+    .archive-input-row { display: flex; gap: 0.75rem; }
+    .archive-input { flex: 1; background: var(--bg); border: 1px solid var(--dim); color: var(--text); font-family: var(--sans); font-size: 0.95rem; padding: 0.75rem 1rem; outline: none; }
+    .archive-input:focus { border-color: var(--pink); }
+    .archive-input::placeholder { color: var(--dim); }
+    .archive-input:disabled { opacity: 0.4; }
+    .archive-submit-btn { background: var(--pink); color: #fff; border: none; padding: 0.75rem 1.5rem; font-family: var(--sans); font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; cursor: pointer; transition: opacity 0.15s; white-space: nowrap; }
+    .archive-submit-btn:hover:not(:disabled) { opacity: 0.85; }
+    .archive-submit-btn:disabled { opacity: 0.35; cursor: not-allowed; }
+
+    /* Feedback */
+    .round-feedback { text-align: center; padding: 1rem; margin-top: 1rem; font-size: 0.88rem; font-weight: 500; min-height: 50px; display: flex; align-items: center; justify-content: center; }
+    .round-feedback.correct { color: var(--green); border: 1px solid rgba(61,189,110,0.3); background: var(--green-dim); }
+    .round-feedback.wrong { color: var(--dim); border: 1px solid var(--border); }
+    .round-feedback.timeout { color: rgba(200,124,46,0.8); border: 1px solid rgba(200,124,46,0.2); background: rgba(200,124,46,0.04); }
+
+    /* Summary */
+    .summary-panel { text-align: center; animation: revealIn 0.8s ease forwards; }
+    @keyframes revealIn { from { opacity: 0; } to { opacity: 1; } }
+    .summary-verdict { font-family: var(--heading); font-size: clamp(3rem,12vw,5.5rem); color: var(--pink); line-height: 1; text-shadow: 0 0 60px var(--pink-glow); margin-bottom: 0.5rem; }
+    .summary-tokens-num { font-family: var(--heading); font-size: clamp(2rem,8vw,4rem); color: var(--text); }
+    .summary-sub { font-size: 0.72rem; color: var(--dim); letter-spacing: 0.1em; margin-top: 0.5rem; font-style: italic; }
+    .summary-breakdown { margin: 2rem 0; text-align: left; }
+    .summary-breakdown-label { font-size: 0.56rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--dim); margin-bottom: 0.75rem; }
+    .summary-stat { display: flex; justify-content: space-between; padding: 0.6rem 0; border-bottom: 1px solid var(--border); font-size: 0.8rem; color: var(--mid); }
+    .summary-stat span { color: var(--text); }
+
+    .site-footer { text-align: center; padding: 2rem 1.5rem; border-top: 1px solid var(--border); font-size: 0.65rem; color: var(--dim); letter-spacing: 0.08em; line-height: 1.9; }
+    .site-footer a { color: var(--dim); text-decoration: none; }
+    @media (max-width: 480px) { .archive-input-row { flex-direction: column; } }
+  </style>
+</head>
+<body>
+
+  <div class="phase-banner scheduled">&#9711; &nbsp; PHASE 4 &nbsp; · &nbsp; THE ARCHIVE &nbsp; · &nbsp; CASE AC-2026-04 &nbsp; &#9711;</div>
+
+  <nav class="site-nav">
+    <a href="/">Intergalactic Pepe 🚀</a>
+    <div class="site-nav-sub">An independent, free-spirited cosmic travel company</div>
+    <div class="site-nav-back"><a href="/committee">← Committee Files &nbsp;·&nbsp; Case AC-2026-04</a></div>
+  </nav>
+
+  <div class="token-bar">
+    <span class="token-bar-label">Intergalactic Tokens</span>
+    <span class="token-bar-count" id="token-display">0</span>
+    <a href="/committee/prizes" class="token-bar-link">Redeem</a>
+  </div>
+
+  <div class="hero">
+    <div class="hero-inner">
+      <div class="seal">
+        <div class="seal-ring"></div>
+        <div class="seal-ring2"></div>
+        <div class="seal-core">
+          <div class="seal-id">IPSC</div>
+          <div class="seal-yr">2026</div>
+        </div>
+      </div>
+      <p class="hero-over"><span class="hero-stars">✦ &nbsp;</span>Intergalactic Partnership Selection Committee<span class="hero-stars">&nbsp; ✦</span></p>
+      <h1 class="hero-title">The Archive</h1>
+      <p class="hero-sub">Phase 4 — Rapid Memory Assessment</p>
+      <p class="hero-meta">Case AC-2026-04 · Final Session · Barcelona Sector</p>
+      <span class="hero-ref">Ref: IPSC-ARC-001 &nbsp;|&nbsp; Phase 4 &nbsp;|&nbsp; Active</span>
+    </div>
+  </div>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="sec-label">Archive Protocol — Phase 4</div>
+
+      <div id="ar-intro">
+        <div class="intro-panel">
+          <div class="intro-stamp">Classification: Restricted · Case AC-2026-04 · Phase 4</div>
+          <h2 class="intro-title">The Archive</h2>
+          <p class="intro-sub">20 rounds. 30 seconds each. A date or moment from the case file is stated. Type the answer. Correct within time: 5 tokens. Time out or wrong: nothing. Max 100 tokens.</p>
+          <div class="intro-rules">
+            <span class="intro-rule">20 rounds</span>
+            <span class="intro-rule">30 seconds per round</span>
+            <span class="intro-rule">5 tokens correct</span>
+            <span class="intro-rule">100 tokens max</span>
+          </div>
+          <p style="font-size:0.72rem;color:var(--dim);font-style:italic;margin-bottom:2rem;line-height:1.6;">The Committee does not reveal correct answers after wrong or expired submissions. Review the record before starting. The clock does not wait.</p>
+          <button class="action-btn" id="ar-start-btn">Open the Archive</button>
+        </div>
+      </div>
+
+      <div id="ar-game" style="display:none;">
+        <div class="round-header">
+          <span class="round-num" id="ar-round-num">Round 1 of 20</span>
+          <span class="round-score" id="ar-score-display">0 tokens</span>
+        </div>
+
+        <div class="round-timer-wrap">
+          <div class="round-timer-meta">
+            <span class="round-timer-info">Time remaining</span>
+            <span class="round-timer-time" id="ar-timer">30</span>
+          </div>
+          <div class="round-timer-track">
+            <div class="round-timer-fill" id="ar-timer-fill" style="width:100%"></div>
+          </div>
+        </div>
+
+        <div class="prompt-card">
+          <div class="prompt-card-label">Archive Prompt</div>
+          <div class="prompt-card-text" id="ar-prompt"></div>
+        </div>
+
+        <div class="archive-input-row">
+          <input type="text" class="archive-input" id="ar-answer" placeholder="Your answer..." autocomplete="off" autocorrect="off" spellcheck="false">
+          <button class="archive-submit-btn" id="ar-submit-btn">Submit</button>
+        </div>
+        <div class="round-feedback" id="ar-feedback" style="display:none;"></div>
+      </div>
+
+      <div id="ar-summary" style="display:none;">
+        <div class="summary-panel">
+          <div style="font-size:0.56rem;letter-spacing:0.35em;text-transform:uppercase;color:var(--dim);margin-bottom:1.25rem;">Archive Complete · Case AC-2026-04</div>
+          <div class="summary-verdict">FILED</div>
+          <div class="summary-tokens-num" id="ar-final-tokens">0</div>
+          <div class="summary-sub" id="ar-final-sub">tokens earned · entered into the record</div>
+          <div class="summary-breakdown">
+            <div class="summary-breakdown-label">Session breakdown</div>
+            <div class="summary-stat">Rounds completed <span>20</span></div>
+            <div class="summary-stat">Correct answers <span id="ar-correct-count">0</span></div>
+            <div class="summary-stat">Tokens earned <span id="ar-tokens-final">0</span></div>
+          </div>
+          <a href="/committee/final" class="action-btn secondary">← Return to Final Session</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    The Intergalactic Partnership Selection Committee · Proceedings Confidential · Case AC-2026-04<br>
+    <a href="/committee/final">← Back to Final Session</a> &nbsp;|&nbsp;
+    <span style="color:var(--border)">Operated by <a href="/">Intergalactic Pepe</a>. Incorporated under the laws of Mars.</span>
+  </footer>
+
+  <script>
+    function getTokenBank() {
+      try { var b = JSON.parse(localStorage.getItem('ipsc_tokens_ac2026')||'{}'); if(!b.breakdown) b.breakdown={quiz:0,negotiation:0,archive:0,protocol:0}; if(!b.total) b.total=0; return b; } catch(e) { return {total:0,breakdown:{quiz:0,negotiation:0,archive:0,protocol:0}}; }
+    }
+    function addTokens(source, amount) {
+      var bank = getTokenBank(); bank.total += amount;
+      if (bank.breakdown[source] !== undefined) bank.breakdown[source] += amount; else bank.breakdown[source] = amount;
+      try { localStorage.setItem('ipsc_tokens_ac2026', JSON.stringify(bank)); } catch(e) {}
+      updateTokenDisplay();
+    }
+    function updateTokenDisplay() { var el = document.getElementById('token-display'); if (el) el.textContent = getTokenBank().total; }
+    updateTokenDisplay();
+
+    (function() {
+      'use strict';
+      var GAME_KEY = 'ipsc_archive_ac2026';
+      var ROUND_SEC = 30;
+
+      var ROUNDS = [
+        {prompt:"The venue for Experiment I", answers:["soho","jazz","gothic"]},
+        {prompt:"The Candidate's shibari master", answers:["dirty von p","dirty","paris"]},
+        {prompt:"The date of the psilocybin journey", answers:["good friday","april 3","3rd"]},
+        {prompt:"The Candidate emergency contact name", answers:["fiona","marine","sophie","camille"]},
+        {prompt:"The Candidate's Cherie Class designation", answers:["passenger"]},
+        {prompt:"Cost of Experiment III (number only)", answers:["100"]},
+        {prompt:"Item returned by Candidate on March 25th", answers:["scarf"]},
+        {prompt:"What CDI stands for (key word)", answers:["permanence","exclusivity","cdi"]},
+        {prompt:"The Committee's food delivery alias", answers:["glovo","intergalactic glovo"]},
+        {prompt:"Claudio's case file classification", answers:["carbon","crew member"]},
+        {prompt:"The Panda PIN format", answers:["6","date"]},
+        {prompt:"Number of clauses in the counter-proposal", answers:["10","ten"]},
+        {prompt:"Lockout duration per wrong answer (hours)", answers:["11","eleven"]},
+        {prompt:"The Committee's founding jurisdiction", answers:["mars","martian"]},
+        {prompt:"Total field interactions in Case AC-2026-04", answers:["16","sixteen"]},
+        {prompt:"Time Candidate departed Physical Endurance Assessment", answers:["5:41","541"]},
+        {prompt:"Candidate's academic claim during Experiment I (key word)", answers:["top","first","class"]},
+        {prompt:"Tokens earned per accepted rule in Protocol Duel", answers:["25"]},
+        {prompt:"Cost of Prize #48 in tokens", answers:["750"]},
+        {prompt:"Phase 4 Final Session date", answers:["10","may","10 may"]}
+      ];
+
+      function normalize(s) {
+        return s.toLowerCase().trim().replace(/[^\w\s]/g,'').replace(/\s+/g,' ');
+      }
+
+      function checkAnswer(input, acceptables) {
+        var n = normalize(input);
+        return acceptables.some(function(a) { return n.indexOf(normalize(a)) !== -1; });
+      }
+
+      var state = { phase:'intro', round:0, score:0, correctCount:0, tokensAwarded:false };
+      var roundTimerInterval = null;
+      var timeLeft = ROUND_SEC;
+      var roundActive = false;
+
+      function loadState() {
+        try {
+          var raw = localStorage.getItem(GAME_KEY);
+          if (!raw) return;
+          var s = JSON.parse(raw);
+          if (s) Object.assign(state, s);
+        } catch(e) {}
+      }
+
+      function saveState() { try { localStorage.setItem(GAME_KEY, JSON.stringify(state)); } catch(e) {} }
+
+      function pad(n) { return String(Math.max(0,n)).padStart(2,'0'); }
+
+      function showPanel(id) {
+        ['ar-intro','ar-game','ar-summary'].forEach(function(pid) {
+          var el = document.getElementById(pid);
+          if (el) el.style.display = (pid === id) ? 'block' : 'none';
+        });
+      }
+
+      function startRound() {
+        if (state.round >= ROUNDS.length) { endGame(); return; }
+        roundActive = true;
+        timeLeft = ROUND_SEC;
+        var el = function(id) { return document.getElementById(id); };
+        el('ar-round-num').textContent = 'Round ' + (state.round + 1) + ' of ' + ROUNDS.length;
+        el('ar-score-display').textContent = state.score + ' tokens';
+        el('ar-prompt').textContent = ROUNDS[state.round].prompt;
+        el('ar-answer').value = '';
+        el('ar-answer').disabled = false;
+        el('ar-answer').focus();
+        el('ar-submit-btn').disabled = false;
+        el('ar-feedback').style.display = 'none';
+        el('ar-timer').textContent = ROUND_SEC;
+        el('ar-timer-fill').style.width = '100%';
+        el('ar-timer-fill').classList.remove('urgent');
+        el('ar-timer-fill').style.transition = 'width 1s linear';
+
+        if (roundTimerInterval) clearInterval(roundTimerInterval);
+        roundTimerInterval = setInterval(function() {
+          timeLeft--;
+          var pct = (timeLeft / ROUND_SEC) * 100;
+          el('ar-timer').textContent = timeLeft;
+          el('ar-timer-fill').style.width = pct + '%';
+          if (timeLeft <= 10) el('ar-timer-fill').classList.add('urgent');
+          if (timeLeft <= 0) {
+            clearInterval(roundTimerInterval);
+            onTimeout();
+          }
+        }, 1000);
+      }
+
+      function onSubmit() {
+        if (!roundActive) return;
+        var input = document.getElementById('ar-answer').value.trim();
+        if (!input) return;
+        clearInterval(roundTimerInterval);
+        roundActive = false;
+        document.getElementById('ar-answer').disabled = true;
+        document.getElementById('ar-submit-btn').disabled = true;
+
+        var correct = checkAnswer(input, ROUNDS[state.round].answers);
+        var feedbackEl = document.getElementById('ar-feedback');
+
+        if (correct) {
+          state.score += 5;
+          state.correctCount++;
+          feedbackEl.className = 'round-feedback correct';
+          feedbackEl.textContent = '+5 tokens. Confirmed.';
+        } else {
+          feedbackEl.className = 'round-feedback wrong';
+          feedbackEl.textContent = 'Not confirmed. The record stands.';
+        }
+        feedbackEl.style.display = 'flex';
+        document.getElementById('ar-score-display').textContent = state.score + ' tokens';
+
+        state.round++;
+        saveState();
+        setTimeout(function() {
+          if (state.round >= ROUNDS.length) endGame();
+          else startRound();
+        }, 1400);
+      }
+
+      function onTimeout() {
+        roundActive = false;
+        document.getElementById('ar-answer').disabled = true;
+        document.getElementById('ar-submit-btn').disabled = true;
+        var feedbackEl = document.getElementById('ar-feedback');
+        feedbackEl.className = 'round-feedback timeout';
+        feedbackEl.textContent = 'Time expired. The Committee moved on.';
+        feedbackEl.style.display = 'flex';
+        state.round++;
+        saveState();
+        setTimeout(function() {
+          if (state.round >= ROUNDS.length) endGame();
+          else startRound();
+        }, 1400);
+      }
+
+      function endGame() {
+        if (roundTimerInterval) clearInterval(roundTimerInterval);
+        state.phase = 'complete';
+        if (!state.tokensAwarded) {
+          addTokens('archive', state.score);
+          state.tokensAwarded = true;
+        }
+        saveState();
+
+        var el = function(id) { return document.getElementById(id); };
+        el('ar-final-tokens').textContent = state.score;
+        el('ar-correct-count').textContent = state.correctCount;
+        el('ar-tokens-final').textContent = state.score;
+        showPanel('ar-summary');
+      }
+
+      function initGame() {
+        loadState();
+        if (state.phase === 'complete') {
+          var el = function(id) { return document.getElementById(id); };
+          el('ar-final-tokens').textContent = state.score;
+          el('ar-correct-count').textContent = state.correctCount;
+          el('ar-tokens-final').textContent = state.score;
+          showPanel('ar-summary');
+          return;
+        }
+        if (state.phase === 'playing') {
+          showPanel('ar-game');
+          startRound();
+          return;
+        }
+        showPanel('ar-intro');
+      }
+
+      document.getElementById('ar-start-btn').addEventListener('click', function() {
+        state.phase = 'playing';
+        state.round = 0;
+        state.score = 0;
+        state.correctCount = 0;
+        state.tokensAwarded = false;
+        saveState();
+        showPanel('ar-game');
+        startRound();
+      });
+
+      document.getElementById('ar-submit-btn').addEventListener('click', onSubmit);
+      document.getElementById('ar-answer').addEventListener('keydown', function(e) {
+        if (e.key === 'Enter') onSubmit();
+      });
+
+      initGame();
+    })();
+  </script>
+
+</body>
+</html>
