@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#080809">
+  <title>The Committee — Protocol Duel · Phase 4</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/fonts.css">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --pink:      #E14B87;
+      --pink-glow: rgba(225,75,135,0.25);
+      --pink-dim:  rgba(225,75,135,0.07);
+      --bg:        #080809;
+      --text:      #ddd5cc;
+      --mid:       #7a7068;
+      --dim:       #3d3835;
+      --border:    #181614;
+      --heading:   'RocknRoll One', sans-serif;
+      --sans:      'Space Grotesk', -apple-system, sans-serif;
+      --green:     #3dbd6e;
+      --green-dim: rgba(61,189,110,0.07);
+      --red:       #c85454;
+    }
+    body { background: var(--bg); color: var(--text); font-family: var(--sans); min-height: 100vh; overflow-x: hidden; }
+    body::before {
+      content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 999; opacity: 0.025;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      background-size: 256px 256px;
+    }
+    .wrap { max-width: 680px; margin: 0 auto; padding: 0 20px; }
+    .phase-banner { text-align: center; padding: 0.55rem 1rem; font-size: 0.56rem; letter-spacing: 0.32em; text-transform: uppercase; font-weight: 600; }
+    .phase-banner.scheduled { background: rgba(40,120,80,0.08); color: rgba(61,189,110,0.8); border-bottom: 1px solid rgba(61,189,110,0.15); }
+    .token-bar { display: flex; align-items: center; justify-content: space-between; padding: 0.6rem 1.5rem; background: rgba(225,75,135,0.08); border-bottom: 1px solid rgba(225,75,135,0.15); }
+    .token-bar-label { font-size: 0.56rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--dim); }
+    .token-bar-count { font-family: var(--heading); font-size: 1rem; color: var(--pink); }
+    .token-bar-link { font-size: 0.52rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--dim); text-decoration: none; }
+    .token-bar-link:hover { color: var(--pink); }
+    .site-nav { padding: 1.25rem 1.5rem; text-align: center; border-bottom: 1px solid var(--border); }
+    .site-nav a { font-family: var(--heading); font-size: 0.95rem; color: var(--mid); text-decoration: none; }
+    .site-nav-sub { font-size: 0.6rem; color: var(--dim); letter-spacing: 0.14em; text-transform: uppercase; margin-top: 0.2rem; }
+    .site-nav-back { font-size: 0.56rem; color: var(--dim); letter-spacing: 0.18em; text-transform: uppercase; margin-top: 0.4rem; }
+    .site-nav-back a { font-family: var(--sans); font-size: 0.56rem; color: var(--dim); text-decoration: none; }
+    .site-nav-back a:hover { color: var(--pink); }
+    .hero { background: var(--bg); text-align: center; padding: 4rem 1.5rem 3rem; border-bottom: 1px solid var(--border); position: relative; overflow: hidden; }
+    .hero::before {
+      content: ''; position: absolute; inset: 0; pointer-events: none; opacity: 0.07;
+      background-image: radial-gradient(2px 2px at 4% 9%,#fff 100%,transparent),radial-gradient(1px 1px at 10% 34%,#E14B87 100%,transparent),radial-gradient(2px 2px at 16% 61%,#fff 100%,transparent),radial-gradient(3px 2px at 23% 19%,#E14B87 100%,transparent),radial-gradient(1px 2px at 31% 47%,#fff 100%,transparent),radial-gradient(2px 1px at 39% 77%,#E14B87 100%,transparent),radial-gradient(2px 2px at 47% 11%,#fff 100%,transparent),radial-gradient(3px 2px at 54% 39%,#E14B87 100%,transparent),radial-gradient(1px 2px at 62% 67%,#fff 100%,transparent),radial-gradient(2px 1px at 69% 23%,#E14B87 100%,transparent),radial-gradient(2px 2px at 76% 51%,#fff 100%,transparent),radial-gradient(4px 2px at 82% 13%,#E14B87 100%,transparent),radial-gradient(2px 2px at 7% 83%,#fff 100%,transparent),radial-gradient(1px 2px at 51% 91%,#E14B87 100%,transparent),radial-gradient(2px 1px at 72% 87%,#fff 100%,transparent);
+      background-size: 110px 90px;
+    }
+    .hero::after { content: ''; position: absolute; width: 520px; height: 150px; border: 1px solid rgba(225,75,135,0.07); border-radius: 50%; top: 50%; left: 50%; transform: translate(-50%,-50%) rotate(-7deg); pointer-events: none; }
+    .hero-inner { position: relative; z-index: 1; }
+    .seal { position: relative; width: 96px; height: 96px; margin: 0 auto 1.75rem; }
+    .seal-ring { position: absolute; inset: 0; border: 1px dashed rgba(225,75,135,0.3); border-radius: 50%; animation: sealSpin 22s linear infinite; }
+    .seal-ring2 { position: absolute; inset: 7px; border: 1px solid rgba(225,75,135,0.12); border-radius: 50%; }
+    .seal-core { position: absolute; inset: 14px; border: 1.5px solid var(--pink); border-radius: 50%; display: flex; flex-direction: column; align-items: center; justify-content: center; background: var(--pink-dim); box-shadow: 0 0 24px rgba(225,75,135,0.1); }
+    .seal-id { font-family: var(--heading); font-size: 0.9rem; color: var(--pink); letter-spacing: 0.1em; line-height: 1; }
+    .seal-yr { font-size: 0.48rem; color: var(--dim); letter-spacing: 0.2em; margin-top: 2px; }
+    @keyframes sealSpin { to { transform: rotate(360deg); } }
+    .hero-over { font-size: 0.6rem; letter-spacing: 0.4em; text-transform: uppercase; color: var(--pink); margin-bottom: 0.75rem; }
+    .hero-stars { opacity: 0.38; }
+    .hero-title { font-family: var(--heading); font-size: clamp(1.9rem,5vw,2.9rem); color: #fafafa; margin-bottom: 0.4rem; }
+    .hero-sub { font-family: var(--heading); font-size: clamp(1rem,2.5vw,1.45rem); color: var(--pink); font-weight: 400; letter-spacing: 0.04em; margin-bottom: 0.65rem; }
+    .hero-meta { font-size: 0.7rem; color: var(--dim); letter-spacing: 0.1em; }
+    .hero-ref { display: inline-block; margin-top: 1.25rem; padding: 0.35rem 0.9rem; border: 1px solid var(--border); font-size: 0.6rem; letter-spacing: 0.12em; color: var(--dim); font-family: 'Courier New', monospace; }
+    .section { padding: 2.75rem 0; border-bottom: 1px solid var(--border); }
+    .sec-label { font-size: 0.58rem; letter-spacing: 0.35em; text-transform: uppercase; color: var(--dim); margin-bottom: 1.5rem; }
+    /* ── PANELS ── */
+    .panel { display: none; }
+    .panel.active { display: block; }
+    /* ── INTRO ── */
+    .intro-box { text-align: center; padding: 2.5rem 1.5rem; border: 1px solid var(--border); background: var(--pink-dim); }
+    .intro-stamp { font-size: 0.56rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--dim); margin-bottom: 1.25rem; }
+    .intro-title { font-family: var(--heading); font-size: clamp(1.4rem,4vw,2rem); color: #fafafa; margin-bottom: 0.5rem; }
+    .intro-sub { font-size: 0.85rem; color: var(--mid); line-height: 1.75; margin-bottom: 1.25rem; max-width: 480px; margin-left: auto; margin-right: auto; }
+    .intro-rules { display: flex; align-items: center; justify-content: center; gap: 0.6rem; flex-wrap: wrap; margin-bottom: 1.5rem; }
+    .intro-rule { font-size: 0.62rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--pink); padding: 3px 10px; border: 1px solid rgba(225,75,135,0.3); }
+    .intro-rule-sep { font-size: 0.6rem; color: var(--dim); opacity: 0.5; }
+    /* ── BUTTONS ── */
+    .btn { display: inline-block; background: var(--pink); color: #fff; border: none; padding: 0.8rem 2rem; font-family: var(--sans); font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase; cursor: pointer; transition: opacity 0.2s; }
+    .btn:hover { opacity: 0.85; }
+    .btn:disabled { opacity: 0.35; cursor: not-allowed; }
+    .btn-outline { background: transparent; border: 1px solid rgba(225,75,135,0.35); color: var(--pink); padding: 0.65rem 1.5rem; font-family: var(--sans); font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; cursor: pointer; transition: background 0.2s, border-color 0.2s; }
+    .btn-outline:hover { background: var(--pink-dim); border-color: var(--pink); }
+    /* ── RULE ENTRY ── */
+    .rule-entry { margin-bottom: 1.25rem; }
+    .rule-label { font-size: 0.6rem; letter-spacing: 0.28em; text-transform: uppercase; color: var(--dim); margin-bottom: 0.5rem; }
+    .rule-textarea { width: 100%; background: rgba(255,255,255,0.025); border: 1px solid var(--border); color: var(--text); font-family: var(--sans); font-size: 0.88rem; line-height: 1.65; padding: 0.9rem 1rem; resize: vertical; min-height: 90px; transition: border-color 0.15s; }
+    .rule-textarea:focus { outline: none; border-color: rgba(225,75,135,0.4); }
+    .rule-textarea::placeholder { color: var(--dim); font-style: italic; }
+    .submit-row { text-align: right; margin-top: 1.5rem; }
+    /* ── DELIBERATION ── */
+    .deli-header { margin-bottom: 1.5rem; }
+    .deli-progress { font-size: 0.58rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--dim); margin-bottom: 0.75rem; }
+    .deli-progress span { color: var(--pink); }
+    .deli-rule-panel { padding: 1.25rem 1.25rem 1.25rem; border: 1px solid var(--border); background: rgba(255,255,255,0.018); margin-bottom: 1.25rem; }
+    .deli-rule-label { font-size: 0.54rem; letter-spacing: 0.28em; text-transform: uppercase; color: var(--dim); margin-bottom: 0.6rem; }
+    .deli-rule-text { font-size: 0.95rem; line-height: 1.7; color: var(--text); font-style: italic; }
+    .deli-timer-wrap { text-align: center; margin-bottom: 1.5rem; }
+    .deli-timer-label { font-size: 0.56rem; letter-spacing: 0.28em; text-transform: uppercase; color: var(--dim); margin-bottom: 0.75rem; }
+    .deli-timer { font-family: var(--heading); font-size: clamp(3rem,10vw,5rem); color: var(--pink); line-height: 1; text-shadow: 0 0 40px var(--pink-glow); letter-spacing: 0.05em; }
+    .deli-timer.ticking { animation: timerPulse 1s ease-in-out infinite; }
+    @keyframes timerPulse { 0%,100% { opacity: 1; } 50% { opacity: 0.7; } }
+    .deli-actions { display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+    .deli-status { font-size: 0.62rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--dim); }
+    /* ── VERDICT ── */
+    .verdict-wrap { animation: revealIn 0.6s ease forwards; }
+    @keyframes revealIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+    .verdict-title { font-family: var(--heading); font-size: clamp(2.5rem,10vw,4.5rem); line-height: 1; margin-bottom: 0.75rem; text-shadow: 0 0 60px; }
+    .verdict-title.accepted { color: var(--pink); text-shadow: 0 0 60px var(--pink-glow); }
+    .verdict-title.rejected { color: var(--red); text-shadow: 0 0 60px rgba(200,84,84,0.3); }
+    .verdict-text { font-size: 0.88rem; color: var(--mid); line-height: 1.75; font-style: italic; margin-bottom: 0.5rem; padding: 1rem 1.25rem; border-left: 2px solid; }
+    .verdict-text.accepted { border-color: var(--pink); background: var(--pink-dim); }
+    .verdict-text.rejected { border-color: var(--red); background: rgba(200,84,84,0.05); }
+    .verdict-note { font-size: 0.72rem; color: var(--dim); font-style: italic; margin-bottom: 1.5rem; }
+    .verdict-next { text-align: right; margin-top: 1rem; }
+    /* ── SUMMARY ── */
+    .summary-head { text-align: center; padding-bottom: 2rem; border-bottom: 1px solid var(--border); margin-bottom: 2rem; }
+    .summary-over { font-size: 0.56rem; letter-spacing: 0.35em; text-transform: uppercase; color: var(--dim); margin-bottom: 1.25rem; }
+    .summary-score { font-family: var(--heading); font-size: clamp(2.5rem,10vw,5rem); color: var(--pink); line-height: 1; text-shadow: 0 0 60px var(--pink-glow); margin-bottom: 0.5rem; }
+    .summary-score-label { font-size: 0.6rem; letter-spacing: 0.28em; text-transform: uppercase; color: var(--dim); }
+    .summary-tokens { text-align: center; padding: 1.75rem 0; margin-bottom: 2rem; border-bottom: 1px solid var(--border); }
+    .summary-tokens-num { font-family: var(--heading); font-size: clamp(2rem,8vw,4rem); color: var(--pink); line-height: 1; text-shadow: 0 0 40px var(--pink-glow); }
+    .summary-tokens-label { font-size: 0.6rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--dim); margin-top: 0.5rem; }
+    .summary-rules { display: flex; flex-direction: column; gap: 1px; background: var(--border); border: 1px solid var(--border); margin-bottom: 2rem; }
+    .summary-rule-row { background: var(--bg); padding: 1.1rem 1.1rem; display: grid; grid-template-columns: 1fr auto; gap: 1rem; align-items: start; }
+    .summary-rule-text { font-size: 0.82rem; color: var(--mid); line-height: 1.6; font-style: italic; }
+    .summary-rule-verdict { font-size: 0.6rem; letter-spacing: 0.14em; text-transform: uppercase; padding: 2px 8px; white-space: nowrap; }
+    .summary-rule-verdict.accepted { background: rgba(225,75,135,0.1); color: var(--pink); border: 1px solid rgba(225,75,135,0.25); }
+    .summary-rule-verdict.rejected { background: rgba(200,84,84,0.08); color: var(--red); border: 1px solid rgba(200,84,84,0.2); }
+    .summary-cta { text-align: center; padding-top: 0.5rem; }
+    .summary-cta a { display: inline-block; padding: 0.8rem 2rem; background: rgba(225,75,135,0.1); border: 1px solid rgba(225,75,135,0.3); color: var(--pink); font-family: var(--sans); font-size: 0.78rem; letter-spacing: 0.14em; text-transform: uppercase; text-decoration: none; transition: background 0.2s; }
+    .summary-cta a:hover { background: rgba(225,75,135,0.18); }
+    /* ── FOOTER ── */
+    .site-footer { text-align: center; padding: 2rem 1.5rem; border-top: 1px solid var(--border); font-size: 0.65rem; color: var(--dim); letter-spacing: 0.08em; line-height: 1.9; }
+    .site-footer a { color: var(--dim); text-decoration: none; }
+  </style>
+</head>
+<body>
+
+  <div class="phase-banner scheduled">&#9711; &nbsp; PHASE 4 &nbsp; · &nbsp; PROTOCOL DUEL &nbsp; · &nbsp; CASE AC-2026-04 &nbsp; &#9711;</div>
+
+  <nav class="site-nav">
+    <a href="/">Intergalactic Pepe 🚀</a>
+    <div class="site-nav-sub">An independent, free-spirited cosmic travel company</div>
+    <div class="site-nav-back"><a href="/committee/final">← Final Session &nbsp;·&nbsp; Case AC-2026-04</a></div>
+  </nav>
+
+  <div class="token-bar">
+    <span class="token-bar-label">Intergalactic Tokens</span>
+    <span class="token-bar-count" id="token-display">0</span>
+    <a href="/committee/prizes" class="token-bar-link">Redeem</a>
+  </div>
+
+  <div class="hero">
+    <div class="hero-inner">
+      <div class="seal">
+        <div class="seal-ring"></div>
+        <div class="seal-ring2"></div>
+        <div class="seal-core">
+          <div class="seal-id">IPSC</div>
+          <div class="seal-yr">2026</div>
+        </div>
+      </div>
+      <p class="hero-over"><span class="hero-stars">✦ &nbsp;</span>Intergalactic Partnership Selection Committee<span class="hero-stars">&nbsp; ✦</span></p>
+      <h1 class="hero-title">Protocol Duel</h1>
+      <p class="hero-sub">Phase 4 — Legislation</p>
+      <p class="hero-meta">Case AC-2026-04 · Final Session · Barcelona Sector</p>
+      <span class="hero-ref">Ref: IPSC-DUEL-001 &nbsp;|&nbsp; Phase 4 &nbsp;|&nbsp; Active</span>
+    </div>
+  </div>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="sec-label">Protocol Duel — Phase 4</div>
+
+      <!-- STEP 1: INTRO -->
+      <div id="panel-intro" class="panel active">
+        <div class="intro-box">
+          <div class="intro-stamp">Classification: Restricted · Case AC-2026-04 · Phase 4</div>
+          <h2 class="intro-title">Protocol Duel</h2>
+          <p class="intro-sub">Each player writes 3 rules to add to the partnership operating system. The Committee deliberates on each. Accepted rules enter the case record. Rejected rules are burned. Maximum 75 tokens available.</p>
+          <div class="intro-rules">
+            <span class="intro-rule">3 Rules</span>
+            <span class="intro-rule-sep">·</span>
+            <span class="intro-rule">25 tokens each</span>
+            <span class="intro-rule-sep">·</span>
+            <span class="intro-rule">75 tokens max</span>
+            <span class="intro-rule-sep">·</span>
+            <span class="intro-rule">2-min deliberation</span>
+          </div>
+          <button class="btn" id="btn-begin">Begin the Duel</button>
+        </div>
+      </div>
+
+      <!-- STEP 2: RULE ENTRY -->
+      <div id="panel-entry" class="panel">
+        <div class="sec-label" style="margin-bottom:1rem;">Submit Your Rules to the Committee</div>
+        <p style="font-size:0.82rem;color:var(--mid);line-height:1.75;margin-bottom:1.75rem;">Write 3 rules you propose be added to the partnership operating system. Be specific. Vague rules are vulnerable. The Committee will deliberate on each in turn.</p>
+        <div class="rule-entry">
+          <div class="rule-label">Rule 1</div>
+          <textarea class="rule-textarea" id="rule-1" placeholder="Write your rule here. Be specific."></textarea>
+        </div>
+        <div class="rule-entry">
+          <div class="rule-label">Rule 2</div>
+          <textarea class="rule-textarea" id="rule-2" placeholder="Write your rule here. Be specific."></textarea>
+        </div>
+        <div class="rule-entry">
+          <div class="rule-label">Rule 3</div>
+          <textarea class="rule-textarea" id="rule-3" placeholder="Write your rule here. Be specific."></textarea>
+        </div>
+        <div class="submit-row">
+          <button class="btn" id="btn-submit">Present to the Committee</button>
+        </div>
+      </div>
+
+      <!-- STEP 3: DELIBERATION -->
+      <div id="panel-deliberation" class="panel">
+        <div class="deli-header">
+          <div class="deli-progress">Deliberating Rule <span id="deli-rule-num">1</span> of 3</div>
+        </div>
+        <div class="deli-rule-panel">
+          <div class="deli-rule-label">The Rule</div>
+          <div class="deli-rule-text" id="deli-rule-text"></div>
+        </div>
+        <div class="deli-timer-wrap">
+          <div class="deli-timer-label">Committee Deliberation Period</div>
+          <div class="deli-timer ticking" id="deli-timer">02:00</div>
+        </div>
+        <div class="deli-actions">
+          <div class="deli-status" id="deli-status">Awaiting verdict...</div>
+          <button class="btn-outline" id="btn-skip">Skip to Verdict</button>
+        </div>
+      </div>
+
+      <!-- STEP 3b: VERDICT -->
+      <div id="panel-verdict" class="panel">
+        <div class="verdict-wrap">
+          <div class="verdict-title" id="verdict-title"></div>
+          <div class="verdict-text" id="verdict-text"></div>
+          <div class="verdict-note" id="verdict-note" style="display:none;"></div>
+          <div class="verdict-next">
+            <button class="btn" id="btn-next-rule">Continue</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- STEP 4: SUMMARY -->
+      <div id="panel-summary" class="panel">
+        <div class="summary-head">
+          <div class="summary-over">Protocol Duel Complete · Case AC-2026-04</div>
+          <div class="summary-score" id="summary-score"></div>
+          <div class="summary-score-label">rules accepted</div>
+        </div>
+        <div class="summary-tokens">
+          <div class="summary-tokens-num" id="summary-tokens"></div>
+          <div class="summary-tokens-label">Intergalactic Tokens Earned</div>
+        </div>
+        <div class="summary-rules" id="summary-rules"></div>
+        <div class="summary-cta">
+          <a href="/committee/prizes">View Prize Catalog →</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    The Intergalactic Partnership Selection Committee · Proceedings Confidential · Case AC-2026-04<br>
+    <a href="/committee/final">← Back to Final Session</a> &nbsp;|&nbsp;
+    <a href="/committee/scorekeeper">Token Registry</a> &nbsp;|&nbsp;
+    <span style="color:var(--border)">Operated by <a href="/">Intergalactic Pepe</a>. Incorporated under the laws of Mars.</span>
+  </footer>
+
+  <script>
+    // ── TOKEN HELPERS ──
+    function getTokenBank() {
+      try {
+        var raw = localStorage.getItem('ipsc_tokens_ac2026');
+        if (!raw) return {total:0,breakdown:{quiz:0,negotiation:0,archive:0,protocol:0,awards:0}};
+        var b = JSON.parse(raw);
+        if (!b.breakdown) b.breakdown = {quiz:0,negotiation:0,archive:0,protocol:0,awards:0};
+        if (!b.breakdown.awards) b.breakdown.awards = 0;
+        return b;
+      } catch(e) { return {total:0,breakdown:{quiz:0,negotiation:0,archive:0,protocol:0,awards:0}}; }
+    }
+    function addTokens(source, amount) {
+      var bank = getTokenBank();
+      bank.breakdown[source] = (bank.breakdown[source] || 0) + amount;
+      bank.total = Object.values(bank.breakdown).reduce(function(a,b){return a+b;},0);
+      try { localStorage.setItem('ipsc_tokens_ac2026', JSON.stringify(bank)); } catch(e) {}
+      updateTokenDisplay();
+    }
+    function updateTokenDisplay() {
+      var el = document.getElementById('token-display');
+      if (el) el.textContent = getTokenBank().total;
+    }
+    updateTokenDisplay();
+
+    // ── PROTOCOL STATE ──
+    var PROTO_KEY = 'ipsc_protocol_ac2026';
+    function getState() {
+      try {
+        var raw = localStorage.getItem(PROTO_KEY);
+        return raw ? JSON.parse(raw) : {submitted:false,rules:[],verdicts:[],done:false,tokensAwarded:false};
+      } catch(e) { return {submitted:false,rules:[],verdicts:[],done:false,tokensAwarded:false}; }
+    }
+    function saveState(s) {
+      try { localStorage.setItem(PROTO_KEY, JSON.stringify(s)); } catch(e) {}
+    }
+
+    // ── PANELS ──
+    function showPanel(id) {
+      ['panel-intro','panel-entry','panel-deliberation','panel-verdict','panel-summary'].forEach(function(pid){
+        var el = document.getElementById(pid);
+        if (el) el.className = 'panel' + (pid === id ? ' active' : '');
+      });
+    }
+
+    // ── VERDICT LOGIC ──
+    var ACCEPTED_VERDICTS = [
+      "Motion carried. Filed under Case AC-2026-04 Standing Orders. In effect immediately.",
+      "The Committee accepts. This rule is now part of the operating system. No further amendment permitted without majority vote.",
+      "Accepted. The Committee considers this overdue. It should have been self-evident.",
+      "Ruling: accepted. The Committee notes the Candidate has good instincts."
+    ];
+    var REJECTED_VERDICTS = [
+      "The Committee rejects this motion. The rule is burned. No record will be kept.",
+      "Rejected. The Committee finds the scope ambiguous. Burned.",
+      "The Committee is not persuaded. Motion fails. The rule does not enter the record."
+    ];
+
+    function computeVerdict(ruleText) {
+      var text = ruleText.toLowerCase();
+      var words = ruleText.trim().split(/\s+/).length;
+      var extraNote = '';
+
+      if (words < 8) {
+        return {
+          accepted: false,
+          verdict: "The Committee rejects this motion. The rule is burned. No record will be kept.",
+          reason: "The Committee requires specificity. Rules of fewer than eight words are insufficient for the record.",
+          note: ''
+        };
+      }
+      var p;
+      if (/always|never|must|shall/.test(text)) {
+        p = 0.70;
+      } else if (/care|honest|present|listen/.test(text)) {
+        p = 0.90;
+      } else if (/freedom|alone|independent|space/.test(text)) {
+        p = 0.60;
+        extraNote = "The Committee accepts with the following observation: autonomy is already implicit in the operating system.";
+      } else {
+        p = 0.75;
+      }
+
+      var accepted = Math.random() < p;
+      return {
+        accepted: accepted,
+        verdict: accepted
+          ? ACCEPTED_VERDICTS[Math.floor(Math.random() * ACCEPTED_VERDICTS.length)]
+          : REJECTED_VERDICTS[Math.floor(Math.random() * REJECTED_VERDICTS.length)],
+        reason: '',
+        note: accepted ? extraNote : ''
+      };
+    }
+
+    // ── DELIBERATION TIMER ──
+    var timerInterval = null;
+    var timerSeconds = 120;
+    var currentRuleIndex = 0;
+    var rules = [];
+    var verdicts = [];
+
+    function padTwo(n) { return String(n).padStart(2,'0'); }
+
+    function formatTimer(s) {
+      var m = Math.floor(s / 60);
+      var sec = s % 60;
+      return padTwo(m) + ':' + padTwo(sec);
+    }
+
+    function startDeliberation(ruleIdx) {
+      currentRuleIndex = ruleIdx;
+      timerSeconds = 120;
+      var rule = rules[ruleIdx];
+
+      document.getElementById('deli-rule-num').textContent = ruleIdx + 1;
+      document.getElementById('deli-rule-text').textContent = rule;
+      document.getElementById('deli-timer').textContent = formatTimer(timerSeconds);
+      document.getElementById('deli-timer').className = 'deli-timer ticking';
+      document.getElementById('deli-status').textContent = 'Deliberating...';
+      document.getElementById('btn-skip').disabled = false;
+
+      showPanel('panel-deliberation');
+
+      if (timerInterval) clearInterval(timerInterval);
+      timerInterval = setInterval(function() {
+        timerSeconds--;
+        document.getElementById('deli-timer').textContent = formatTimer(Math.max(0, timerSeconds));
+        if (timerSeconds <= 0) {
+          clearInterval(timerInterval);
+          document.getElementById('deli-timer').className = 'deli-timer';
+          document.getElementById('deli-status').textContent = 'Deliberation complete.';
+          document.getElementById('btn-skip').disabled = true;
+          setTimeout(showVerdict, 600);
+        }
+      }, 1000);
+    }
+
+    function showVerdict() {
+      if (timerInterval) { clearInterval(timerInterval); timerInterval = null; }
+      var rule = rules[currentRuleIndex];
+      var v = computeVerdict(rule);
+      verdicts[currentRuleIndex] = v;
+
+      var titleEl = document.getElementById('verdict-title');
+      var textEl = document.getElementById('verdict-text');
+      var noteEl = document.getElementById('verdict-note');
+      var nextBtn = document.getElementById('btn-next-rule');
+
+      titleEl.textContent = v.accepted ? 'ACCEPTED' : 'REJECTED';
+      titleEl.className = 'verdict-title ' + (v.accepted ? 'accepted' : 'rejected');
+
+      var displayText = v.verdict;
+      if (v.reason) displayText = v.reason;
+      textEl.textContent = displayText;
+      textEl.className = 'verdict-text ' + (v.accepted ? 'accepted' : 'rejected');
+
+      if (v.note) {
+        noteEl.textContent = v.note;
+        noteEl.style.display = 'block';
+      } else {
+        noteEl.style.display = 'none';
+      }
+
+      if (currentRuleIndex < rules.length - 1) {
+        nextBtn.textContent = 'Next Rule';
+      } else {
+        nextBtn.textContent = 'View Results';
+      }
+
+      showPanel('panel-verdict');
+    }
+
+    function showSummary() {
+      var state = getState();
+      var acceptedCount = verdicts.filter(function(v){return v.accepted;}).length;
+      var tokensEarned = acceptedCount * 25;
+
+      if (!state.tokensAwarded) {
+        addTokens('protocol', tokensEarned);
+        state.submitted = true;
+        state.rules = rules;
+        state.verdicts = verdicts;
+        state.done = true;
+        state.tokensAwarded = true;
+        saveState(state);
+      }
+
+      document.getElementById('summary-score').textContent = acceptedCount + ' / 3';
+      document.getElementById('summary-tokens').textContent = tokensEarned;
+
+      var rulesEl = document.getElementById('summary-rules');
+      rulesEl.innerHTML = '';
+      rules.forEach(function(rule, i) {
+        var v = verdicts[i];
+        var row = document.createElement('div');
+        row.className = 'summary-rule-row';
+        row.innerHTML =
+          '<div class="summary-rule-text">' + escHtml(rule) + '</div>' +
+          '<div class="summary-rule-verdict ' + (v.accepted ? 'accepted' : 'rejected') + '">' +
+          (v.accepted ? 'Accepted' : 'Rejected') + '</div>';
+        rulesEl.appendChild(row);
+      });
+
+      showPanel('panel-summary');
+    }
+
+    function escHtml(s) {
+      return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+    }
+
+    // ── CHECK SAVED STATE ──
+    (function() {
+      var state = getState();
+      if (state.done && state.tokensAwarded) {
+        rules = state.rules || [];
+        verdicts = state.verdicts || [];
+        showPanel('panel-summary');
+        document.getElementById('summary-score').textContent =
+          verdicts.filter(function(v){return v.accepted;}).length + ' / 3';
+        document.getElementById('summary-tokens').textContent =
+          verdicts.filter(function(v){return v.accepted;}).length * 25;
+        var rulesEl = document.getElementById('summary-rules');
+        rulesEl.innerHTML = '';
+        rules.forEach(function(rule, i) {
+          var v = verdicts[i] || {accepted:false};
+          var row = document.createElement('div');
+          row.className = 'summary-rule-row';
+          row.innerHTML =
+            '<div class="summary-rule-text">' + escHtml(rule) + '</div>' +
+            '<div class="summary-rule-verdict ' + (v.accepted ? 'accepted' : 'rejected') + '">' +
+            (v.accepted ? 'Accepted' : 'Rejected') + '</div>';
+          rulesEl.appendChild(row);
+        });
+        return;
+      }
+      showPanel('panel-intro');
+    })();
+
+    // ── EVENT LISTENERS ──
+    document.getElementById('btn-begin').addEventListener('click', function() {
+      var state = getState();
+      state.submitted = false; state.rules = []; state.verdicts = []; state.done = false; state.tokensAwarded = false;
+      saveState(state);
+      rules = []; verdicts = [];
+      showPanel('panel-entry');
+    });
+
+    document.getElementById('btn-submit').addEventListener('click', function() {
+      var r1 = document.getElementById('rule-1').value.trim();
+      var r2 = document.getElementById('rule-2').value.trim();
+      var r3 = document.getElementById('rule-3').value.trim();
+      if (!r1 || !r2 || !r3) {
+        alert('All three rules must be written before presenting to the Committee.');
+        return;
+      }
+      rules = [r1, r2, r3];
+      verdicts = [];
+      startDeliberation(0);
+    });
+
+    document.getElementById('btn-skip').addEventListener('click', function() {
+      if (timerInterval) { clearInterval(timerInterval); timerInterval = null; }
+      document.getElementById('deli-timer').className = 'deli-timer';
+      showVerdict();
+    });
+
+    document.getElementById('btn-next-rule').addEventListener('click', function() {
+      if (currentRuleIndex < rules.length - 1) {
+        startDeliberation(currentRuleIndex + 1);
+      } else {
+        showSummary();
+      }
+    });
+  </script>
+
+</body>
+</html>

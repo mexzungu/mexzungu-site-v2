@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#080809">
+  <title>The Committee — Token Registry · Phase 4</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/fonts.css">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --pink:      #E14B87;
+      --pink-glow: rgba(225,75,135,0.25);
+      --pink-dim:  rgba(225,75,135,0.07);
+      --bg:        #080809;
+      --text:      #ddd5cc;
+      --mid:       #7a7068;
+      --dim:       #3d3835;
+      --border:    #181614;
+      --heading:   'RocknRoll One', sans-serif;
+      --sans:      'Space Grotesk', -apple-system, sans-serif;
+      --green:     #3dbd6e;
+      --green-dim: rgba(61,189,110,0.07);
+    }
+    body { background: var(--bg); color: var(--text); font-family: var(--sans); min-height: 100vh; overflow-x: hidden; }
+    body::before {
+      content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 999; opacity: 0.025;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      background-size: 256px 256px;
+    }
+    .wrap { max-width: 680px; margin: 0 auto; padding: 0 20px; }
+    .phase-banner { text-align: center; padding: 0.55rem 1rem; font-size: 0.56rem; letter-spacing: 0.32em; text-transform: uppercase; font-weight: 600; }
+    .phase-banner.scheduled { background: rgba(40,120,80,0.08); color: rgba(61,189,110,0.8); border-bottom: 1px solid rgba(61,189,110,0.15); }
+    .site-nav { padding: 1.25rem 1.5rem; text-align: center; border-bottom: 1px solid var(--border); }
+    .site-nav a { font-family: var(--heading); font-size: 0.95rem; color: var(--mid); text-decoration: none; }
+    .site-nav-sub { font-size: 0.6rem; color: var(--dim); letter-spacing: 0.14em; text-transform: uppercase; margin-top: 0.2rem; }
+    .site-nav-back { font-size: 0.56rem; color: var(--dim); letter-spacing: 0.18em; text-transform: uppercase; margin-top: 0.4rem; }
+    .site-nav-back a { font-family: var(--sans); font-size: 0.56rem; color: var(--dim); text-decoration: none; }
+    .site-nav-back a:hover { color: var(--pink); }
+    /* ── HERO ── */
+    .hero { background: var(--bg); text-align: center; padding: 4rem 1.5rem 3rem; border-bottom: 1px solid var(--border); position: relative; overflow: hidden; }
+    .hero::before {
+      content: ''; position: absolute; inset: 0; pointer-events: none; opacity: 0.07;
+      background-image: radial-gradient(2px 2px at 4% 9%,#fff 100%,transparent),radial-gradient(1px 1px at 10% 34%,#E14B87 100%,transparent),radial-gradient(2px 2px at 16% 61%,#fff 100%,transparent),radial-gradient(3px 2px at 23% 19%,#E14B87 100%,transparent),radial-gradient(1px 2px at 31% 47%,#fff 100%,transparent),radial-gradient(2px 1px at 39% 77%,#E14B87 100%,transparent),radial-gradient(2px 2px at 47% 11%,#fff 100%,transparent),radial-gradient(3px 2px at 54% 39%,#E14B87 100%,transparent),radial-gradient(1px 2px at 62% 67%,#fff 100%,transparent),radial-gradient(2px 1px at 69% 23%,#E14B87 100%,transparent),radial-gradient(2px 2px at 76% 51%,#fff 100%,transparent),radial-gradient(4px 2px at 82% 13%,#E14B87 100%,transparent),radial-gradient(2px 2px at 7% 83%,#fff 100%,transparent),radial-gradient(1px 2px at 51% 91%,#E14B87 100%,transparent),radial-gradient(2px 1px at 72% 87%,#fff 100%,transparent);
+      background-size: 110px 90px;
+    }
+    .hero::after { content: ''; position: absolute; width: 520px; height: 150px; border: 1px solid rgba(225,75,135,0.07); border-radius: 50%; top: 50%; left: 50%; transform: translate(-50%,-50%) rotate(-7deg); pointer-events: none; }
+    .hero-inner { position: relative; z-index: 1; }
+    .seal { position: relative; width: 96px; height: 96px; margin: 0 auto 1.75rem; }
+    .seal-ring { position: absolute; inset: 0; border: 1px dashed rgba(225,75,135,0.3); border-radius: 50%; animation: sealSpin 22s linear infinite; }
+    .seal-ring2 { position: absolute; inset: 7px; border: 1px solid rgba(225,75,135,0.12); border-radius: 50%; }
+    .seal-core { position: absolute; inset: 14px; border: 1.5px solid var(--pink); border-radius: 50%; display: flex; flex-direction: column; align-items: center; justify-content: center; background: var(--pink-dim); box-shadow: 0 0 24px rgba(225,75,135,0.1); }
+    .seal-id { font-family: var(--heading); font-size: 0.9rem; color: var(--pink); letter-spacing: 0.1em; line-height: 1; }
+    .seal-yr { font-size: 0.48rem; color: var(--dim); letter-spacing: 0.2em; margin-top: 2px; }
+    @keyframes sealSpin { to { transform: rotate(360deg); } }
+    .hero-over { font-size: 0.6rem; letter-spacing: 0.4em; text-transform: uppercase; color: var(--pink); margin-bottom: 0.75rem; }
+    .hero-stars { opacity: 0.38; }
+    .hero-title { font-family: var(--heading); font-size: clamp(1.9rem,5vw,2.9rem); color: #fafafa; margin-bottom: 0.4rem; }
+    .hero-sub { font-family: var(--heading); font-size: clamp(1rem,2.5vw,1.45rem); color: var(--pink); font-weight: 400; letter-spacing: 0.04em; margin-bottom: 0.65rem; }
+    .hero-meta { font-size: 0.7rem; color: var(--dim); letter-spacing: 0.1em; }
+    .hero-ref { display: inline-block; margin-top: 1.25rem; padding: 0.35rem 0.9rem; border: 1px solid var(--border); font-size: 0.6rem; letter-spacing: 0.12em; color: var(--dim); font-family: 'Courier New', monospace; }
+    /* ── SECTIONS ── */
+    .section { padding: 2.75rem 0; border-bottom: 1px solid var(--border); }
+    .sec-label { font-size: 0.58rem; letter-spacing: 0.35em; text-transform: uppercase; color: var(--dim); margin-bottom: 1.5rem; }
+    /* ── TOTAL BALANCE ── */
+    .balance-display { text-align: center; padding: 2.5rem 1.5rem; border: 1px solid var(--border); background: var(--pink-dim); }
+    .balance-label { font-size: 0.56rem; letter-spacing: 0.35em; text-transform: uppercase; color: var(--dim); margin-bottom: 0.75rem; }
+    .balance-num { font-family: var(--heading); font-size: clamp(4rem,15vw,7rem); color: var(--pink); line-height: 1; text-shadow: 0 0 80px var(--pink-glow), 0 0 160px rgba(225,75,135,0.12); }
+    .balance-unit { font-size: 0.6rem; letter-spacing: 0.28em; text-transform: uppercase; color: rgba(225,75,135,0.6); margin-top: 0.4rem; }
+    /* ── BREAKDOWN TABLE ── */
+    .breakdown-table { width: 100%; border-collapse: collapse; margin-bottom: 0.5rem; }
+    .breakdown-table th { font-size: 0.54rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--dim); text-align: left; padding: 0.5rem 0.75rem; border-bottom: 1px solid var(--border); }
+    .breakdown-table th:last-child { text-align: right; }
+    .breakdown-table td { font-size: 0.82rem; color: var(--mid); padding: 0.75rem 0.75rem; border-bottom: 1px solid var(--border); line-height: 1.4; }
+    .breakdown-table td:last-child { text-align: right; font-family: var(--heading); color: var(--pink); font-size: 0.88rem; }
+    .breakdown-table td.earned-zero { color: var(--dim); }
+    .breakdown-table .max-col { font-size: 0.68rem; color: var(--dim); text-align: right; }
+    /* ── AWARDS ── */
+    .awards-form { display: flex; flex-direction: column; gap: 0.75rem; margin-bottom: 1rem; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; }
+    .form-input-wrap { display: flex; flex-direction: column; gap: 0.3rem; }
+    .form-label { font-size: 0.54rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--dim); }
+    .form-input { background: rgba(255,255,255,0.025); border: 1px solid var(--border); color: var(--text); font-family: var(--sans); font-size: 0.85rem; padding: 0.65rem 0.85rem; width: 100%; transition: border-color 0.15s; }
+    .form-input:focus { outline: none; border-color: rgba(225,75,135,0.4); }
+    .form-input::placeholder { color: var(--dim); font-style: italic; font-size: 0.78rem; }
+    .btn { background: var(--pink); color: #fff; border: none; padding: 0.7rem 1.5rem; font-family: var(--sans); font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; cursor: pointer; transition: opacity 0.2s; }
+    .btn:hover { opacity: 0.85; }
+    .btn-sm { padding: 0.5rem 1.1rem; font-size: 0.68rem; }
+    .awards-confirm { font-size: 0.78rem; color: var(--green); font-style: italic; min-height: 1.2em; margin-top: 0.25rem; }
+    /* ── PRIZE REDEMPTION ── */
+    .claimed-list { display: flex; flex-direction: column; gap: 1px; background: var(--border); border: 1px solid var(--border); margin-bottom: 1.25rem; }
+    .claimed-row { background: var(--bg); padding: 0.85rem 1rem; display: grid; grid-template-columns: 1fr auto auto; gap: 0.75rem; align-items: center; }
+    .claimed-name { font-size: 0.82rem; color: var(--text); }
+    .claimed-date { font-size: 0.6rem; color: var(--dim); letter-spacing: 0.08em; }
+    .claimed-cost { font-family: var(--heading); font-size: 0.78rem; color: var(--pink); white-space: nowrap; }
+    .claimed-empty { font-size: 0.78rem; color: var(--dim); font-style: italic; padding: 1rem 1rem; }
+    .redeem-form { display: grid; grid-template-columns: 1fr auto 120px; gap: 0.65rem; align-items: end; margin-top: 0.75rem; }
+    .redeem-confirm { font-size: 0.78rem; color: var(--green); font-style: italic; min-height: 1.2em; margin-top: 0.5rem; }
+    /* ── GAME LINKS ── */
+    .game-links { display: flex; flex-direction: column; gap: 1px; background: var(--border); border: 1px solid var(--border); }
+    .game-link-row { background: var(--bg); display: grid; grid-template-columns: 1fr auto; align-items: center; padding: 0.9rem 1rem; gap: 1rem; transition: background 0.15s; }
+    .game-link-row:hover { background: rgba(225,75,135,0.025); }
+    .game-link-name { font-size: 0.82rem; color: var(--text); }
+    .game-link-tag { font-size: 0.52rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--pink); border: 1px solid rgba(225,75,135,0.22); padding: 2px 7px; }
+    .game-link-row a { text-decoration: none; display: contents; }
+    /* ── RESET ── */
+    .reset-section { padding: 1.5rem 1.25rem; border: 1px solid var(--border); background: rgba(255,255,255,0.01); opacity: 0.5; transition: opacity 0.2s; }
+    .reset-section:hover { opacity: 0.8; }
+    .reset-label { font-size: 0.54rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--dim); margin-bottom: 0.75rem; }
+    .reset-row { display: grid; grid-template-columns: 1fr auto; gap: 0.65rem; align-items: end; }
+    .reset-input { background: rgba(255,255,255,0.02); border: 1px solid var(--border); color: var(--text); font-family: var(--sans); font-size: 0.8rem; padding: 0.55rem 0.75rem; width: 100%; }
+    .reset-input:focus { outline: none; border-color: rgba(200,84,84,0.4); }
+    .btn-danger { background: rgba(200,84,84,0.12); color: rgba(200,84,84,0.7); border: 1px solid rgba(200,84,84,0.2); padding: 0.55rem 1.1rem; font-family: var(--sans); font-size: 0.68rem; letter-spacing: 0.12em; text-transform: uppercase; cursor: pointer; transition: background 0.2s; }
+    .btn-danger:hover { background: rgba(200,84,84,0.2); }
+    /* ── FOOTER ── */
+    .site-footer { text-align: center; padding: 2rem 1.5rem; border-top: 1px solid var(--border); font-size: 0.65rem; color: var(--dim); letter-spacing: 0.08em; line-height: 1.9; }
+    .site-footer a { color: var(--dim); text-decoration: none; }
+    @media (max-width: 520px) {
+      .form-row { grid-template-columns: 1fr; }
+      .redeem-form { grid-template-columns: 1fr 80px; }
+      .redeem-form .btn { grid-column: 1 / -1; }
+      .breakdown-table .max-col { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="phase-banner scheduled">&#9711; &nbsp; PHASE 4 &nbsp; · &nbsp; TOKEN REGISTRY &nbsp; · &nbsp; CASE AC-2026-04 &nbsp; &#9711;</div>
+
+  <nav class="site-nav">
+    <a href="/">Intergalactic Pepe 🚀</a>
+    <div class="site-nav-sub">An independent, free-spirited cosmic travel company</div>
+    <div class="site-nav-back"><a href="/committee/final">← Final Session &nbsp;·&nbsp; Case AC-2026-04</a></div>
+  </nav>
+
+  <div class="hero">
+    <div class="hero-inner">
+      <div class="seal">
+        <div class="seal-ring"></div>
+        <div class="seal-ring2"></div>
+        <div class="seal-core">
+          <div class="seal-id">IPSC</div>
+          <div class="seal-yr">2026</div>
+        </div>
+      </div>
+      <p class="hero-over"><span class="hero-stars">✦ &nbsp;</span>Intergalactic Partnership Selection Committee<span class="hero-stars">&nbsp; ✦</span></p>
+      <h1 class="hero-title">Token Registry</h1>
+      <p class="hero-sub">Intergalactic Token Ledger — Final Session</p>
+      <p class="hero-meta">Case AC-2026-04 · Phase 4 · Barcelona Sector</p>
+      <span class="hero-ref">Ref: IPSC-TOKENS-001 &nbsp;|&nbsp; Phase 4 &nbsp;|&nbsp; Live</span>
+    </div>
+  </div>
+
+  <!-- TOTAL BALANCE -->
+  <section class="section">
+    <div class="wrap">
+      <div class="sec-label">Total Balance</div>
+      <div class="balance-display">
+        <div class="balance-label">Current Token Balance</div>
+        <div class="balance-num" id="balance-total">0</div>
+        <div class="balance-unit">Intergalactic Tokens</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BREAKDOWN BY GAME -->
+  <section class="section">
+    <div class="wrap">
+      <div class="sec-label">Breakdown by Game</div>
+      <table class="breakdown-table">
+        <thead>
+          <tr>
+            <th>Source</th>
+            <th class="max-col">Max</th>
+            <th>Earned</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Extended Assessment</td>
+            <td class="max-col">200</td>
+            <td class="earned-num" id="bd-quiz">0</td>
+          </tr>
+          <tr>
+            <td>The Archive</td>
+            <td class="max-col">100</td>
+            <td class="earned-num" id="bd-archive">0</td>
+          </tr>
+          <tr>
+            <td>Protocol Duel</td>
+            <td class="max-col">75</td>
+            <td class="earned-num" id="bd-protocol">0</td>
+          </tr>
+          <tr>
+            <td>Negotiation Table</td>
+            <td class="max-col">150</td>
+            <td class="earned-num" id="bd-negotiation">0</td>
+          </tr>
+          <tr>
+            <td>Committee Awards</td>
+            <td class="max-col">—</td>
+            <td class="earned-num" id="bd-awards">0</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- COMMITTEE AWARDS -->
+  <section class="section">
+    <div class="wrap">
+      <div class="sec-label">Committee Awards</div>
+      <p style="font-size:0.8rem;color:var(--dim);line-height:1.75;margin-bottom:1.25rem;">For in-person games and bonus tokens issued directly by the Committee.</p>
+      <div class="awards-form">
+        <div class="form-row">
+          <div class="form-input-wrap">
+            <label class="form-label" for="award-amount">Amount (tokens)</label>
+            <input class="form-input" type="number" id="award-amount" min="1" placeholder="e.g. 50">
+          </div>
+          <div class="form-input-wrap">
+            <label class="form-label" for="award-reason">Reason</label>
+            <input class="form-input" type="text" id="award-reason" placeholder="e.g. Outstanding Negotiation performance">
+          </div>
+        </div>
+        <div>
+          <button class="btn" id="btn-award">Award Tokens</button>
+        </div>
+      </div>
+      <div class="awards-confirm" id="awards-confirm"></div>
+    </div>
+  </section>
+
+  <!-- PRIZE REDEMPTION -->
+  <section class="section">
+    <div class="wrap">
+      <div class="sec-label">Prize Redemption</div>
+      <p style="font-size:0.8rem;color:var(--dim);line-height:1.75;margin-bottom:1.25rem;">Prizes claimed during the Final Session. Tokens are deducted from the balance on redemption.</p>
+      <div class="claimed-list" id="claimed-list">
+        <div class="claimed-empty" id="claimed-empty">No prizes claimed yet.</div>
+      </div>
+      <div style="margin-top:0.5rem;margin-bottom:0.25rem;">
+        <div class="form-label" style="margin-bottom:0.4rem;">Redeem a Prize</div>
+      </div>
+      <div class="redeem-form">
+        <div class="form-input-wrap">
+          <label class="form-label" for="redeem-name">Prize Name</label>
+          <input class="form-input" type="text" id="redeem-name" placeholder="e.g. 60-Min Full Body Massage">
+        </div>
+        <div class="form-input-wrap">
+          <label class="form-label" for="redeem-cost">Token Cost</label>
+          <input class="form-input" type="number" id="redeem-cost" min="1" placeholder="50">
+        </div>
+        <button class="btn btn-sm" id="btn-redeem">Redeem</button>
+      </div>
+      <div class="redeem-confirm" id="redeem-confirm"></div>
+      <div style="margin-top:1.5rem;text-align:center;">
+        <a href="/committee/prizes" style="display:inline-block;padding:0.6rem 1.5rem;background:rgba(225,75,135,0.08);border:1px solid rgba(225,75,135,0.25);color:var(--pink);font-family:var(--sans);font-size:0.72rem;letter-spacing:0.14em;text-transform:uppercase;text-decoration:none;">Browse Prize Catalog →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- GAME LINKS -->
+  <section class="section">
+    <div class="wrap">
+      <div class="sec-label">Mini Games — Quick Access</div>
+      <div class="game-links">
+        <a href="/committee/minigame-quiz.html" style="text-decoration:none;">
+          <div class="game-link-row">
+            <div class="game-link-name">Extended Assessment</div>
+            <div class="game-link-tag">200 tokens max</div>
+          </div>
+        </a>
+        <a href="/committee/minigame-negotiation.html" style="text-decoration:none;">
+          <div class="game-link-row">
+            <div class="game-link-name">Negotiation Table</div>
+            <div class="game-link-tag">150 tokens max</div>
+          </div>
+        </a>
+        <a href="/committee/minigame-oracle.html" style="text-decoration:none;">
+          <div class="game-link-row">
+            <div class="game-link-name">The Oracle</div>
+            <div class="game-link-tag">Prophecy</div>
+          </div>
+        </a>
+        <a href="/committee/minigame-archive.html" style="text-decoration:none;">
+          <div class="game-link-row">
+            <div class="game-link-name">The Archive</div>
+            <div class="game-link-tag">100 tokens max</div>
+          </div>
+        </a>
+        <a href="/committee/minigame-protocol.html" style="text-decoration:none;">
+          <div class="game-link-row">
+            <div class="game-link-name">Protocol Duel</div>
+            <div class="game-link-tag">75 tokens max</div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- RESET -->
+  <section class="section">
+    <div class="wrap">
+      <div class="reset-section">
+        <div class="reset-label">Danger Zone — Reset</div>
+        <p style="font-size:0.72rem;color:var(--dim);line-height:1.65;margin-bottom:1rem;">Type RESET COMMITTEE to confirm. This clears all token data and claimed prizes. This action cannot be undone.</p>
+        <div class="reset-row">
+          <input class="reset-input" type="text" id="reset-confirm" placeholder="Type RESET COMMITTEE to confirm">
+          <button class="btn-danger" id="btn-reset">Reset</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    The Intergalactic Partnership Selection Committee · Proceedings Confidential · Case AC-2026-04<br>
+    <a href="/committee/final">← Back to Final Session</a> &nbsp;|&nbsp;
+    <a href="/committee/prizes">Prize Catalog</a> &nbsp;|&nbsp;
+    <span style="color:var(--border)">Operated by <a href="/">Intergalactic Pepe</a>. Incorporated under the laws of Mars.</span>
+  </footer>
+
+  <script>
+    // ── TOKEN HELPERS ──
+    function getTokenBank() {
+      try {
+        var raw = localStorage.getItem('ipsc_tokens_ac2026');
+        if (!raw) return {total:0,breakdown:{quiz:0,negotiation:0,archive:0,protocol:0,awards:0,redeemed:0}};
+        var b = JSON.parse(raw);
+        if (!b.breakdown) b.breakdown = {quiz:0,negotiation:0,archive:0,protocol:0,awards:0,redeemed:0};
+        if (b.breakdown.awards === undefined) b.breakdown.awards = 0;
+        if (b.breakdown.redeemed === undefined) b.breakdown.redeemed = 0;
+        return b;
+      } catch(e) { return {total:0,breakdown:{quiz:0,negotiation:0,archive:0,protocol:0,awards:0,redeemed:0}}; }
+    }
+    function saveTokenBank(bank) {
+      try { localStorage.setItem('ipsc_tokens_ac2026', JSON.stringify(bank)); } catch(e) {}
+    }
+    function addTokens(source, amount) {
+      var bank = getTokenBank();
+      bank.breakdown[source] = (bank.breakdown[source] || 0) + amount;
+      bank.total = 0;
+      Object.keys(bank.breakdown).forEach(function(k) {
+        if (k !== 'redeemed') bank.total += (bank.breakdown[k] || 0);
+      });
+      saveTokenBank(bank);
+      updateAll();
+    }
+    function deductTokens(amount) {
+      var bank = getTokenBank();
+      bank.total = Math.max(0, bank.total - amount);
+      bank.breakdown.redeemed = (bank.breakdown.redeemed || 0) + amount;
+      saveTokenBank(bank);
+      updateAll();
+    }
+
+    // ── CLAIMED PRIZES ──
+    function getClaimedPrizes() {
+      try {
+        var raw = localStorage.getItem('ipsc_claimed_prizes');
+        return raw ? JSON.parse(raw) : [];
+      } catch(e) { return []; }
+    }
+    function saveClaimedPrizes(list) {
+      try { localStorage.setItem('ipsc_claimed_prizes', JSON.stringify(list)); } catch(e) {}
+    }
+    function addClaimedPrize(name, cost) {
+      var list = getClaimedPrizes();
+      list.push({name: name, cost: cost, date: new Date().toLocaleDateString('en-GB')});
+      saveClaimedPrizes(list);
+    }
+
+    // ── UPDATE UI ──
+    function updateAll() {
+      var bank = getTokenBank();
+      document.getElementById('balance-total').textContent = bank.total;
+
+      var bd = bank.breakdown;
+      function setEarned(id, val) {
+        var el = document.getElementById(id);
+        if (!el) return;
+        el.textContent = val || 0;
+        el.className = 'earned-num' + ((!val || val === 0) ? ' earned-zero' : '');
+      }
+      setEarned('bd-quiz', bd.quiz || 0);
+      setEarned('bd-archive', bd.archive || 0);
+      setEarned('bd-protocol', bd.protocol || 0);
+      setEarned('bd-negotiation', bd.negotiation || 0);
+      setEarned('bd-awards', bd.awards || 0);
+
+      renderClaimedList();
+    }
+
+    function renderClaimedList() {
+      var list = getClaimedPrizes();
+      var container = document.getElementById('claimed-list');
+      var emptyEl = document.getElementById('claimed-empty');
+      if (list.length === 0) {
+        container.innerHTML = '<div class="claimed-empty" id="claimed-empty">No prizes claimed yet.</div>';
+        return;
+      }
+      container.innerHTML = '';
+      list.forEach(function(prize) {
+        var row = document.createElement('div');
+        row.className = 'claimed-row';
+        row.innerHTML =
+          '<div class="claimed-name">' + escHtml(prize.name) + '</div>' +
+          '<div class="claimed-date">' + escHtml(prize.date || '') + '</div>' +
+          '<div class="claimed-cost">' + (prize.cost || 0) + ' <span style="font-family:var(--sans);font-size:0.52rem;letter-spacing:0.1em;color:var(--dim);">tokens</span></div>';
+        container.appendChild(row);
+      });
+    }
+
+    function escHtml(s) {
+      if (!s) return '';
+      return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+    }
+
+    // ── AWARD TOKENS ──
+    document.getElementById('btn-award').addEventListener('click', function() {
+      var amount = parseInt(document.getElementById('award-amount').value, 10);
+      var reason = document.getElementById('award-reason').value.trim();
+      var confirm = document.getElementById('awards-confirm');
+      if (!amount || amount < 1) {
+        confirm.style.color = '#c85454';
+        confirm.textContent = 'Enter a valid token amount.';
+        return;
+      }
+      addTokens('awards', amount);
+      document.getElementById('award-amount').value = '';
+      document.getElementById('award-reason').value = '';
+      confirm.style.color = 'var(--green)';
+      confirm.textContent = amount + ' tokens awarded' + (reason ? ' — ' + reason : '') + '. Balance updated.';
+      setTimeout(function() { confirm.textContent = ''; }, 4000);
+    });
+
+    // ── REDEEM PRIZE ──
+    document.getElementById('btn-redeem').addEventListener('click', function() {
+      var name = document.getElementById('redeem-name').value.trim();
+      var cost = parseInt(document.getElementById('redeem-cost').value, 10);
+      var confirm = document.getElementById('redeem-confirm');
+      if (!name) {
+        confirm.style.color = '#c85454';
+        confirm.textContent = 'Enter the prize name.';
+        return;
+      }
+      if (!cost || cost < 1) {
+        confirm.style.color = '#c85454';
+        confirm.textContent = 'Enter a valid token cost.';
+        return;
+      }
+      var bank = getTokenBank();
+      if (cost > bank.total) {
+        confirm.style.color = '#c85454';
+        confirm.textContent = 'Insufficient tokens. Balance: ' + bank.total + '.';
+        return;
+      }
+      addClaimedPrize(name, cost);
+      deductTokens(cost);
+      document.getElementById('redeem-name').value = '';
+      document.getElementById('redeem-cost').value = '';
+      confirm.style.color = 'var(--green)';
+      confirm.textContent = '"' + name + '" redeemed for ' + cost + ' tokens. Balance updated.';
+      setTimeout(function() { confirm.textContent = ''; }, 5000);
+    });
+
+    // ── RESET ──
+    document.getElementById('btn-reset').addEventListener('click', function() {
+      var val = document.getElementById('reset-confirm').value.trim();
+      if (val !== 'RESET COMMITTEE') {
+        alert('Type exactly: RESET COMMITTEE');
+        return;
+      }
+      try { localStorage.removeItem('ipsc_tokens_ac2026'); } catch(e) {}
+      try { localStorage.removeItem('ipsc_claimed_prizes'); } catch(e) {}
+      document.getElementById('reset-confirm').value = '';
+      updateAll();
+      alert('Scorekeeper reset. All token data cleared.');
+    });
+
+    // ── INIT ──
+    updateAll();
+
+    // Live refresh every 5 seconds in case another game tab updates tokens
+    setInterval(updateAll, 5000);
+  </script>
+
+</body>
+</html>
