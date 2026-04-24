@@ -200,7 +200,7 @@
         <div class="quiz-intro-panel">
           <div class="quiz-intro-stamp">Classification: Restricted · Case AC-2026-04 · Phase 4</div>
           <h2 class="quiz-intro-title">The Extended Assessment</h2>
-          <p class="quiz-intro-sub">20 questions per round from a pool of 200. Rounds are endless. The Committee does not accept gaps in knowledge.</p>
+          <p class="quiz-intro-sub">20 questions per round from an infinite pool. Rounds are endless. The Committee does not accept gaps in knowledge.</p>
           <div class="quiz-intro-rules">
             <span class="quiz-intro-rule">20 Questions</span>
             <span class="quiz-intro-rule-sep">·</span>
@@ -291,7 +291,7 @@
               <div class="quiz-locked-cd-unit-l">Sec</div>
             </div>
           </div>
-          <p class="quiz-locked-note">The case file has not changed. 200 questions in the pool. Each round draws 20. All answers still valid.</p>
+          <p class="quiz-locked-note">The case file has not changed. The pool grows continuously. Each round draws 20 fresh questions. All answers still valid.</p>
         </div>
       </div>
 
@@ -307,7 +307,7 @@
             <div class="quiz-pass-tokens-label">Intergalactic Tokens Earned This Round</div>
           </div>
           <div class="quiz-pass-preamble">
-            Another round completed without error. 40 tokens entered into the ledger. You may play again immediately — each new round draws 20 fresh questions from the 200-question pool. The Committee will not run out of questions.
+            Another round completed without error. 40 tokens entered into the ledger. You may play again immediately — each new round draws 20 fresh questions from the ever-growing pool. The Committee will not run out of questions.
           </div>
           <div style="text-align:center;margin:2rem 0 1rem;">
             <button class="quiz-btn" id="quiz-next-round-btn">Play Another Round →</button>
@@ -626,6 +626,30 @@
         {text:"The wager question pool for the Extended Assessment contains how many questions?",opts:["10","15","20","25"],correct:2}
       ];
 
+      // ── AI QUESTION FETCHING (infinite pool) ──
+      var QUESTIONS_API = 'https://panda.mexzungu.com/committee/questions';
+      var generatedQuestions = [];
+      var fetchingQuestions = false;
+
+      async function fetchMoreQuestions() {
+        if (fetchingQuestions) return;
+        fetchingQuestions = true;
+        try {
+          var res = await fetch(QUESTIONS_API + '?count=30');
+          if (res.ok) {
+            var data = await res.json();
+            if (data.questions && data.questions.length > 0) {
+              generatedQuestions = generatedQuestions.concat(data.questions);
+            }
+          }
+        } catch(e) {}
+        fetchingQuestions = false;
+      }
+
+      function getQuestionPool() {
+        return QUESTIONS.concat(generatedQuestions);
+      }
+
       var LETTERS = ['A','B','C','D'];
       var selectedIdx = -1;
       var awaitingTransition = false;
@@ -696,8 +720,11 @@
       }
 
       function makeRoundIndices() {
+        var pool = getQuestionPool();
+        // Prefetch when AI pool is thin (fewer than 40 generated questions ready)
+        if (generatedQuestions.length < 40) { fetchMoreQuestions(); }
         var idx = [];
-        for (var i = 0; i < QUESTIONS.length; i++) idx.push(i);
+        for (var i = 0; i < pool.length; i++) idx.push(i);
         return shuffle(idx).slice(0, ROUND_SIZE);
       }
 
@@ -741,7 +768,7 @@
 
       function renderQuestion() {
         var qi = qs.questionIndex;
-        var q = QUESTIONS[qs.roundIndices[qi]];
+        var q = getQuestionPool()[qs.roundIndices[qi]];
         selectedIdx = -1;
         awaitingTransition = false;
 
@@ -785,7 +812,7 @@
         if (available.length === 0) {
           // Fallback: random from main pool
           var fallbackIdx = qs.roundIndices[Math.floor(Math.random() * qs.roundIndices.length)];
-          wq = QUESTIONS[fallbackIdx];
+          wq = getQuestionPool()[fallbackIdx];
         } else {
           var pick = Math.floor(Math.random() * available.length);
           wagerState.wagerQUsed.push(available[pick]);
@@ -936,7 +963,7 @@
 
         // ── NORMAL QUESTION BRANCH ──
         var qi = qs.questionIndex;
-        var q = QUESTIONS[qs.roundIndices[qi]];
+        var q = getQuestionPool()[qs.roundIndices[qi]];
         var isCorrect = (selectedIdx === q.correct);
 
         triggerFlash(isCorrect ? 'correct' : 'wrong');
@@ -990,6 +1017,7 @@
       }
 
       function initQuiz() {
+        fetchMoreQuestions(); // pre-warm AI question pool on page load
         loadQS();
 
         if (qs.lockUntil && Date.now() < qs.lockUntil) {
