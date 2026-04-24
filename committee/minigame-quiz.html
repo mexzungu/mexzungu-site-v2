@@ -349,6 +349,7 @@
       else bank.breakdown[source] = amount;
       try { localStorage.setItem('ipsc_tokens_ac2026', JSON.stringify(bank)); } catch(e) {}
       updateTokenDisplay();
+      syncTokensToServer(bank);
     }
     function subtractTokens(source, amount) {
       var bank = getTokenBank();
@@ -356,12 +357,39 @@
       if (bank.breakdown[source] !== undefined) bank.breakdown[source] = Math.max(0, bank.breakdown[source] - amount);
       try { localStorage.setItem('ipsc_tokens_ac2026', JSON.stringify(bank)); } catch(e) {}
       updateTokenDisplay();
+      syncTokensToServer(bank);
     }
     function updateTokenDisplay() {
       var el = document.getElementById('token-display');
       if (el) el.textContent = getTokenBank().total;
     }
     updateTokenDisplay();
+
+    // ── SERVER SYNC ──
+    var COMMITTEE_SYNC_URL = "https://panda.mexzungu.com/committee/tokens";
+    var COMMITTEE_PIN = "AC2026";
+    function syncTokensToServer(bank) {
+      try {
+        fetch(COMMITTEE_SYNC_URL, {
+          method: "POST",
+          headers: {"Content-Type": "application/json"},
+          body: JSON.stringify({pin: COMMITTEE_PIN, tokens: bank})
+        }).catch(function() {});
+      } catch(e) {}
+    }
+    async function loadTokensFromServer() {
+      try {
+        var res = await fetch(COMMITTEE_SYNC_URL);
+        if (!res.ok) return;
+        var serverBank = await res.json();
+        var localBank = getTokenBank();
+        if ((serverBank.total || 0) > (localBank.total || 0)) {
+          localStorage.setItem("ipsc_tokens_ac2026", JSON.stringify(serverBank));
+          updateTokenDisplay();
+        }
+      } catch(e) {}
+    }
+    loadTokensFromServer();
 
     // ── EXTENDED QUIZ ──
     (function() {

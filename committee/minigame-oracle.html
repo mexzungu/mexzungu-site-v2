@@ -160,10 +160,10 @@
         <div class="intro-panel">
           <div class="intro-stamp">Classification: Restricted · Case AC-2026-04 · Phase 4</div>
           <h2 class="intro-title">The Oracle</h2>
-          <p class="intro-sub">Submit up to 5 questions about the future. Any question. No restrictions. The Committee will answer with full authority. All answers are binding and entered into the record.</p>
+          <p class="intro-sub">Submit questions about the future. Any question. No restrictions. The Committee will answer with full authority. All answers are binding and entered into the record.</p>
           <div class="intro-rules">
-            <span class="intro-rule">5 free questions</span>
-            <span class="intro-rule">Extra questions: 10 tokens</span>
+            <span class="intro-rule">1 free question per day</span>
+            <span class="intro-rule">Additional questions: 10 tokens</span>
             <span class="intro-rule">All answers binding</span>
           </div>
           <p style="font-size:0.72rem;color:var(--dim);font-style:italic;margin-bottom:2rem;line-height:1.6;">The Committee does not speculate. It classifies. Choose your questions carefully. The answers will remain in the record long after this session concludes.</p>
@@ -174,8 +174,8 @@
       <div id="or-game" style="display:none;">
         <div class="oracle-status">
           <div class="oracle-status-item">
-            <div class="oracle-status-num" id="or-free-left">5</div>
-            <div class="oracle-status-label">Free questions left</div>
+            <div class="oracle-status-num" id="or-free-left">1</div>
+            <div class="oracle-status-label">Free today</div>
           </div>
           <div class="oracle-status-item">
             <div class="oracle-status-num" id="or-total-asked">0</div>
@@ -222,6 +222,7 @@
       if (bank.total < amount) return false;
       bank.total -= amount;
       try { localStorage.setItem('ipsc_tokens_ac2026', JSON.stringify(bank)); } catch(e) {}
+      syncTokensToServer(bank);
       updateTokenDisplay();
       return true;
     }
@@ -233,11 +234,41 @@
     }
     updateTokenDisplay();
 
+    // ── SERVER SYNC ──
+    var COMMITTEE_SYNC_URL = "https://panda.mexzungu.com/committee/tokens";
+    var COMMITTEE_PIN = "AC2026";
+    function syncTokensToServer(bank) {
+      try {
+        fetch(COMMITTEE_SYNC_URL, {
+          method: "POST",
+          headers: {"Content-Type": "application/json"},
+          body: JSON.stringify({pin: COMMITTEE_PIN, tokens: bank})
+        }).catch(function() {});
+      } catch(e) {}
+    }
+    async function loadTokensFromServer() {
+      try {
+        var res = await fetch(COMMITTEE_SYNC_URL);
+        if (!res.ok) return;
+        var serverBank = await res.json();
+        var localBank = getTokenBank();
+        if ((serverBank.total || 0) > (localBank.total || 0)) {
+          localStorage.setItem("ipsc_tokens_ac2026", JSON.stringify(serverBank));
+          updateTokenDisplay();
+        }
+      } catch(e) {}
+    }
+    loadTokensFromServer();
+
     (function() {
       'use strict';
       var GAME_KEY = 'ipsc_oracle_ac2026';
-      var FREE_Q = 5;
+      var FREE_Q = 1;
       var EXTRA_COST = 10;
+
+      function todayStr() {
+        var d = new Date(); return d.getFullYear() + '-' + (d.getMonth()+1) + '-' + d.getDate();
+      }
 
       var ROMANTIC = [
         "The Committee has reviewed the available data. The trajectory is confirmed. The destination is not in question.",
@@ -278,14 +309,25 @@
         return pick(GENERAL);
       }
 
-      var state = { started: false, freeUsed: 0, history: [] };
+      var state = { started: false, freeUsed: 0, lastFreeDate: '', history: [] };
 
       function loadState() {
         try {
           var raw = localStorage.getItem(GAME_KEY);
           if (!raw) return;
           var s = JSON.parse(raw);
-          if (s) { state.started = !!s.started; state.freeUsed = s.freeUsed || 0; state.history = s.history || []; }
+          if (s) {
+            state.started = !!s.started;
+            state.lastFreeDate = s.lastFreeDate || '';
+            state.history = s.history || [];
+            // Reset daily free question if it's a new day
+            if (state.lastFreeDate !== todayStr()) {
+              state.freeUsed = 0;
+              state.lastFreeDate = todayStr();
+            } else {
+              state.freeUsed = s.freeUsed || 0;
+            }
+          }
         } catch(e) {}
       }
 
@@ -336,6 +378,7 @@
           }
         } else {
           state.freeUsed++;
+          state.lastFreeDate = todayStr();
         }
 
         textarea.disabled = true;

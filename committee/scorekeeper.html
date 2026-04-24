@@ -359,6 +359,7 @@
         if (k !== 'redeemed') bank.total += (bank.breakdown[k] || 0);
       });
       saveTokenBank(bank);
+      syncTokensToServer(bank);
       updateAll();
     }
     function deductTokens(amount) {
@@ -366,6 +367,7 @@
       bank.total = Math.max(0, bank.total - amount);
       bank.breakdown.redeemed = (bank.breakdown.redeemed || 0) + amount;
       saveTokenBank(bank);
+      syncTokensToServer(bank);
       updateAll();
     }
 
@@ -494,8 +496,34 @@
       alert('Scorekeeper reset. All token data cleared.');
     });
 
+    // ── SERVER SYNC ──
+    var COMMITTEE_SYNC_URL = "https://panda.mexzungu.com/committee/tokens";
+    var COMMITTEE_PIN = "AC2026";
+    function syncTokensToServer(bank) {
+      try {
+        fetch(COMMITTEE_SYNC_URL, {
+          method: "POST",
+          headers: {"Content-Type": "application/json"},
+          body: JSON.stringify({pin: COMMITTEE_PIN, tokens: bank})
+        }).catch(function() {});
+      } catch(e) {}
+    }
+    async function loadTokensFromServer() {
+      try {
+        var res = await fetch(COMMITTEE_SYNC_URL);
+        if (!res.ok) return;
+        var serverBank = await res.json();
+        var localBank = getTokenBank();
+        if ((serverBank.total || 0) > (localBank.total || 0)) {
+          localStorage.setItem("ipsc_tokens_ac2026", JSON.stringify(serverBank));
+          updateAll();
+        }
+      } catch(e) {}
+    }
+
     // ── INIT ──
     updateAll();
+    loadTokensFromServer();
 
     // Live refresh every 5 seconds in case another game tab updates tokens
     setInterval(updateAll, 5000);
