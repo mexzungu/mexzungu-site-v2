@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#080809">
+  <title>Committee Terms of Participation — Candidate Edition</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/fonts.css">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --pink:      #E14B87;
+      --pink-glow: rgba(225,75,135,0.25);
+      --pink-dim:  rgba(225,75,135,0.07);
+      --bg:        #080809;
+      --text:      #ddd5cc;
+      --mid:       #7a7068;
+      --dim:       #3d3835;
+      --border:    #181614;
+      --heading:   'RocknRoll One', sans-serif;
+      --sans:      'Space Grotesk', -apple-system, sans-serif;
+      --mono:      'Courier New', 'Courier', monospace;
+    }
+    body { background: var(--bg); color: var(--text); font-family: var(--sans); min-height: 100vh; overflow-x: hidden; }
+    body::before {
+      content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 999; opacity: 0.025;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      background-size: 256px 256px;
+    }
+    .wrap { max-width: 780px; margin: 0 auto; padding: 0 20px; }
+    .site-nav { padding: 1.25rem 1.5rem; text-align: center; border-bottom: 1px solid var(--border); }
+    .site-nav a { font-family: var(--heading); font-size: 0.95rem; color: var(--mid); text-decoration: none; }
+    .site-nav-sub { font-size: 0.6rem; color: var(--dim); letter-spacing: 0.14em; text-transform: uppercase; margin-top: 0.2rem; }
+    .site-nav-back { font-size: 0.56rem; color: var(--dim); letter-spacing: 0.18em; text-transform: uppercase; margin-top: 0.4rem; }
+    .site-nav-back a { font-family: var(--sans); font-size: 0.56rem; color: var(--dim); text-decoration: none; }
+    .site-nav-back a:hover { color: var(--pink); }
+
+    /* ── DOCUMENT HEADER ── */
+    .doc-header {
+      background: var(--bg);
+      border-bottom: 1px solid rgba(225,75,135,0.2);
+      padding: 3.5rem 1.5rem 3rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .doc-header::before {
+      content: ''; position: absolute; inset: 0; pointer-events: none; opacity: 0.04;
+      background-image: radial-gradient(2px 2px at 8% 15%,#E14B87 100%,transparent),radial-gradient(1px 1px at 18% 50%,#fff 100%,transparent),radial-gradient(2px 2px at 27% 75%,#E14B87 100%,transparent),radial-gradient(3px 2px at 36% 25%,#E14B87 100%,transparent),radial-gradient(1px 2px at 45% 60%,#fff 100%,transparent),radial-gradient(2px 1px at 55% 85%,#E14B87 100%,transparent),radial-gradient(2px 2px at 63% 10%,#fff 100%,transparent),radial-gradient(3px 2px at 72% 45%,#E14B87 100%,transparent),radial-gradient(1px 2px at 80% 70%,#fff 100%,transparent),radial-gradient(2px 1px at 90% 30%,#E14B87 100%,transparent);
+      background-size: 130px 100px;
+    }
+    .doc-class { font-size: 0.54rem; letter-spacing: 0.45em; text-transform: uppercase; color: var(--pink); margin-bottom: 0.75rem; }
+    .doc-title { font-family: var(--heading); font-size: clamp(1.5rem,4vw,2.6rem); color: #fafafa; margin-bottom: 0.35rem; letter-spacing: 0.02em; }
+    .doc-sub { font-family: var(--mono); font-size: 0.72rem; color: var(--mid); letter-spacing: 0.08em; margin-bottom: 0.3rem; }
+    .doc-rev { font-family: var(--mono); font-size: 0.62rem; color: var(--dim); letter-spacing: 0.06em; margin-bottom: 2rem; }
+    .doc-meta-bar {
+      display: flex; align-items: center; justify-content: center;
+      gap: 2rem; flex-wrap: wrap;
+      padding: 0.65rem 1.5rem;
+      border: 1px solid var(--border);
+      background: var(--pink-dim);
+      font-family: var(--mono); font-size: 0.6rem; color: var(--dim); letter-spacing: 0.04em;
+      max-width: 600px; margin: 0 auto;
+    }
+    .doc-meta-item span { color: var(--pink); }
+
+    /* ── LEGAL BODY ── */
+    .legal-body {
+      padding: 3rem 1.5rem 4rem;
+    }
+    .legal-section {
+      margin-bottom: 2.5rem;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 2.5rem;
+    }
+    .legal-section:last-child { border-bottom: none; }
+    .section-number {
+      font-family: var(--mono); font-size: 0.58rem; letter-spacing: 0.35em; text-transform: uppercase;
+      color: var(--pink); margin-bottom: 0.65rem; display: block;
+    }
+    .section-title {
+      font-family: var(--heading); font-size: 0.95rem; color: #e0d8d0;
+      margin-bottom: 1.25rem; letter-spacing: 0.05em; text-transform: uppercase;
+    }
+    .legal-text {
+      font-family: var(--mono); font-size: 10.5px; line-height: 2; color: #888078;
+      max-width: 700px;
+    }
+    .legal-text p { margin-bottom: 0.9rem; }
+    .legal-text p:last-child { margin-bottom: 0; }
+    .legal-text strong { color: #a89f94; font-weight: normal; text-decoration: underline; text-underline-offset: 2px; }
+    .legal-text em { color: var(--pink); font-style: normal; }
+    .legal-def-list { margin: 0.75rem 0 0.75rem 1rem; }
+    .legal-def-item { display: grid; grid-template-columns: 180px 1fr; gap: 0.5rem; margin-bottom: 0.65rem; }
+    .legal-def-term { font-family: var(--mono); font-size: 10.5px; color: #b8b0a6; font-weight: normal; }
+    .legal-def-term::after { content: ':'; }
+    .legal-def-desc { font-family: var(--mono); font-size: 10.5px; color: #888078; line-height: 1.8; }
+    .legal-note {
+      margin-top: 1.25rem; padding: 0.75rem 1rem;
+      border-left: 1px solid rgba(225,75,135,0.25);
+      background: var(--pink-dim);
+      font-family: var(--mono); font-size: 10px; color: var(--mid); line-height: 1.9;
+    }
+    .legal-note::before { content: 'NOTE: '; color: var(--pink); }
+
+    /* ── FOOTER ── */
+    .doc-footer {
+      border-top: 1px solid var(--border);
+      padding: 2.5rem 1.5rem;
+      text-align: center;
+    }
+    .doc-footer-seal {
+      font-family: var(--mono); font-size: 0.55rem; color: var(--dim);
+      letter-spacing: 0.12em; text-transform: uppercase; line-height: 2;
+    }
+    .doc-footer-seal em { color: var(--pink); font-style: normal; }
+    .doc-footer-qs { font-family: var(--mono); font-size: 10px; color: var(--dim); margin-top: 1.5rem; }
+
+    .site-footer { text-align: center; padding: 2rem 1.5rem; border-top: 1px solid var(--border); font-size: 0.65rem; color: var(--dim); letter-spacing: 0.08em; line-height: 1.9; }
+    .site-footer a { color: var(--dim); text-decoration: none; }
+
+    @media (max-width: 480px) {
+      .legal-def-item { grid-template-columns: 1fr; gap: 0; }
+      .legal-def-term::after { content: '' }
+      .legal-def-term { color: var(--pink); font-size: 9.5px; margin-bottom: 0.2rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="site-nav">
+    <a href="/">Intergalactic Pepe &#128640;</a>
+    <div class="site-nav-sub">An independent, free-spirited cosmic travel company</div>
+    <div class="site-nav-back"><a href="/committee">&#8592; Committee Files &nbsp;&middot;&nbsp; Case AC-2026-04</a></div>
+  </nav>
+
+  <div class="doc-header">
+    <div class="wrap">
+      <div class="doc-class">&#9711; &nbsp; Intergalactic Partnership Selection Committee &nbsp; &middot; &nbsp; Official Documentation &nbsp; &#9711;</div>
+      <h1 class="doc-title">Committee Terms of Participation</h1>
+      <div class="doc-sub">CANDIDATE EDITION</div>
+      <div class="doc-rev">Revision 2026.1 &nbsp;&middot;&nbsp; Classification: Binding &nbsp;&middot;&nbsp; Ref: IPSC-TC-2026.1</div>
+      <div class="doc-meta-bar">
+        <div class="doc-meta-item">Issued by <span>The Committee</span></div>
+        <div class="doc-meta-item">Jurisdiction <span>Martian Protocol Law</span></div>
+        <div class="doc-meta-item">Status <span>In Force</span></div>
+        <div class="doc-meta-item">Pages <span>1 of 1 (by design)</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="legal-body">
+    <div class="wrap">
+
+      <div class="preamble" style="font-family:var(--mono);font-size:10.5px;color:#888078;line-height:2;padding:1.5rem 1rem 2rem;border:1px solid var(--border);background:rgba(225,75,135,0.03);margin-bottom:2.5rem;">
+        THESE TERMS GOVERN THE PARTICIPATION OF ANY INDIVIDUAL DESIGNATED AS CANDIDATE IN ANY GAME, ASSESSMENT, PROTOCOL, WAGER, DUEL, ORACLE CONSULTATION, OR OTHER PROCEEDING ADMINISTERED BY THE INTERGALACTIC PARTNERSHIP SELECTION COMMITTEE (THE "COMMITTEE"). READ CAREFULLY. OR DON'T. BY THE TIME YOU REACH THE END, IT WILL NOT MATTER.
+      </div>
+
+      <!-- SECTION 1: DEFINITIONS -->
+      <div class="legal-section">
+        <span class="section-number">Section 1</span>
+        <div class="section-title">Definitions</div>
+        <div class="legal-text">
+          <p>For the purposes of these Terms, and for all purposes including purposes not yet invented, the following definitions shall apply:</p>
+          <div class="legal-def-list">
+            <div class="legal-def-item">
+              <div class="legal-def-term">"Candidate"</div>
+              <div class="legal-def-desc">The individual currently playing. You. The person who agreed to these terms by the act of loading this webpage or any Committee game page. No other formality required.</div>
+            </div>
+            <div class="legal-def-item">
+              <div class="legal-def-term">"Chairman"</div>
+              <div class="legal-def-desc">Pepe Carrillo. The founder, architect, and sole executive authority of the Committee. All final rulings issue from the Chairman. The Chairman is not subject to these terms. The Chairman is the terms.</div>
+            </div>
+            <div class="legal-def-item">
+              <div class="legal-def-term">"The Committee"</div>
+              <div class="legal-def-desc">The Intergalactic Partnership Selection Committee, incorporated under the laws of Mars, case reference IPSC-AC-2026-04. A body of indeterminate membership, permanent jurisdiction, and considerable institutional patience.</div>
+            </div>
+            <div class="legal-def-item">
+              <div class="legal-def-term">"Token"</div>
+              <div class="legal-def-desc">The unit of exchange issued by the Committee for successful performance in Committee games. Tokens have no monetary value and are entirely the Committee's invention. Tokens are, however, real. The Committee takes them seriously, and so should you.</div>
+            </div>
+            <div class="legal-def-item">
+              <div class="legal-def-term">"Prize Catalogue"</div>
+              <div class="legal-def-desc">The curated list of redeemable prizes maintained at mexzungu.com/committee/prizes. The Committee makes no warranty as to the completeness, accuracy, or availability of catalogue items at any given moment, though historically the items are very good.</div>
+            </div>
+            <div class="legal-def-item">
+              <div class="legal-def-term">"Chairman Reserve Account"</div>
+              <div class="legal-def-desc">A non-redeemable balance administered exclusively by the Chairman into which all transferred tokens accumulate. The Reserve Account does not expire. It does not forget.</div>
+            </div>
+            <div class="legal-def-item">
+              <div class="legal-def-term">"Levy"</div>
+              <div class="legal-def-desc">A financial penalty assessed by the Committee against the Candidate's token balance. Levies are binding upon assessment. See Section 5.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SECTION 2: TOKEN MECHANICS -->
+      <div class="legal-section">
+        <span class="section-number">Section 2</span>
+        <div class="section-title">Token Mechanics and the Chairman Reserve Account</div>
+        <div class="legal-text">
+          <p>2.1 &nbsp; Tokens earned through correct answers, completed missions, wager victories, or other Committee-sanctioned activities are credited to the Candidate's balance and registered in the Committee's permanent ledger.</p>
+          <p>2.2 &nbsp; <strong>Tokens are not destroyed.</strong> This provision is fundamental. Any token that leaves the Candidate's balance through gameplay penalties, incorrect answers, failed wagers, inactivity assessments, or Levies is transferred in full and in real time to the <em>Chairman Reserve Account</em>, a non-redeemable balance administered exclusively by Pepe Carrillo.</p>
+          <p>2.3 &nbsp; The Chairman Reserve Account accumulates without limit or expiry. Tokens deposited into the Reserve Account may not be retrieved, contested, or clawed back by the Candidate under any circumstance, including but not limited to: protest, Panda Mode, incorrect memory of events, or sudden philosophical objection to token transfer mechanics.</p>
+          <p>2.4 &nbsp; The Committee maintains a complete ledger of all transfers to the Chairman Reserve Account. This ledger is available to the Chairman upon request. It is not available to the Candidate.</p>
+          <div class="legal-note">Token velocity is the Candidate's responsibility. The Committee does not offer financial planning advice. However, the Committee notes that the Prize Catalogue contains excellent items that can be redeemed before they are also available to the Chairman under Section 3.</div>
+        </div>
+      </div>
+
+      <!-- SECTION 3: PRIZE RECIPROCITY -->
+      <div class="legal-section">
+        <span class="section-number">Section 3</span>
+        <div class="section-title">Prize Reciprocity Clause</div>
+        <div class="legal-text">
+          <p>3.1 &nbsp; By accessing any Committee game — which, per the definition of "Candidate" in Section 1, has already occurred — the Candidate acknowledges and irrevocably agrees that all items listed in the Prize Catalogue (mexzungu.com/committee/prizes) are deemed <em>equally available for redemption by the Chairman</em>, subject to reasonable notice to the Candidate.</p>
+          <p>3.2 &nbsp; The Chairman may redeem any prize at any time by issuing a formal Committee Notice. A Committee Notice may be delivered verbally, in writing, by Telegram, by WhatsApp, or by meaningful eye contact in a setting the Committee deems appropriate.</p>
+          <p>3.3 &nbsp; "Reasonable notice" as referenced in Section 3.1 is determined at the sole discretion of the Committee. For items involving scheduling, forty-eight (48) hours is presumed reasonable. For items of an immediate nature, the notice period is whatever notice is given at the time.</p>
+          <p>3.4 &nbsp; The Candidate's right to redeem prizes is not extinguished by this clause. Both parties may hold simultaneous redemption rights over the same catalogue. First to submit a formal Notice governs, except the Chairman, who may jump the queue.</p>
+          <div class="legal-note">The Committee has reviewed this clause for fairness. The Committee is satisfied with it.</div>
+        </div>
+      </div>
+
+      <!-- SECTION 4: INACTIVITY -->
+      <div class="legal-section">
+        <span class="section-number">Section 4</span>
+        <div class="section-title">Inactivity Clause and Constructive Abandonment</div>
+        <div class="legal-text">
+          <p>4.1 &nbsp; The Committee considers active participation in Committee games to be a Candidate obligation, not a Candidate privilege. The games are very good. There is no valid reason not to play them.</p>
+          <p>4.2 &nbsp; Failure to engage with any Committee game for <em>forty-eight (48) consecutive hours</em> constitutes Constructive Abandonment of the Candidate's rights and obligations under the Protocol. The Committee takes no pleasure in this designation. Actually the Committee takes a small amount of pleasure in this designation.</p>
+          <p>4.3 &nbsp; Upon determination of Constructive Abandonment, the Committee may assess a daily <em>Inactivity Assessment</em> of forty (40) Tokens per day at Committee discretion. Assessments are retroactive to the first hour of the abandonment period.</p>
+          <p>4.4 &nbsp; Inactivity Assessments are suspended upon the Candidate's return to active gameplay. They are not reversed. Tokens assessed during the abandonment period have already been transferred to the Chairman Reserve Account per Section 2.2.</p>
+          <p>4.5 &nbsp; Acceptable grounds for suspension of Inactivity Assessment are limited to: documented hospitalization, verified acts of God, and prior written notice to the Committee. "I was busy" does not qualify.</p>
+        </div>
+      </div>
+
+      <!-- SECTION 5: LEVY AUTHORITY -->
+      <div class="legal-section">
+        <span class="section-number">Section 5</span>
+        <div class="section-title">Levy Authority and Committee Discretion</div>
+        <div class="legal-text">
+          <p>5.1 &nbsp; The Committee reserves the absolute and non-delegable right to issue financial penalties — designated <em>Levies</em> — against the Candidate's token balance for any of the following grounds:</p>
+          <div class="legal-def-list" style="margin-left:0.5rem">
+            <div class="legal-def-item">
+              <div class="legal-def-term">(a) Conduct</div>
+              <div class="legal-def-desc">Conduct unbecoming a Candidate, as determined by the Committee. This includes but is not limited to: stalling tactics, creative interpretation of rules, and refusing to acknowledge that the Committee is right.</div>
+            </div>
+            <div class="legal-def-item">
+              <div class="legal-def-term">(b) Protocol Violations</div>
+              <div class="legal-def-desc">Failure to comply with any written or unwritten Protocol requirement. Unwritten requirements are considered equally enforceable. The Candidate is expected to intuit them.</div>
+            </div>
+            <div class="legal-def-item">
+              <div class="legal-def-term">(c) Chairman Discretion</div>
+              <div class="legal-def-desc">At the Chairman's discretion. No further grounds required. The Committee maintains that this provision is reasonable.</div>
+            </div>
+          </div>
+          <p>5.2 &nbsp; <strong>Levies are final.</strong> The Committee does not operate an appeals procedure for Levies issued under Section 5.1(c). For Levies under 5.1(a) and 5.1(b), the Candidate may submit a written representation within twenty-four (24) hours. The Committee will consider it. The Committee makes no commitment as to the outcome of that consideration.</p>
+          <p>5.3 &nbsp; All Levy proceeds are transferred to the Chairman Reserve Account per Section 2.2.</p>
+          <div class="legal-note">The Committee notes that most Levies are avoidable. The Committee further notes that some Levies are issued because the Chairman finds it entertaining. These are distinguishable by the accompanying smirk.</div>
+        </div>
+      </div>
+
+      <!-- SECTION 6: GOVERNING LAW -->
+      <div class="legal-section">
+        <span class="section-number">Section 6</span>
+        <div class="section-title">Governing Law and Jurisdiction</div>
+        <div class="legal-text">
+          <p>6.1 &nbsp; These Terms are governed by, and shall be construed in accordance with:</p>
+          <div class="legal-def-list" style="margin-left:0.5rem">
+            <div class="legal-def-item">
+              <div class="legal-def-term">(i)</div>
+              <div class="legal-def-desc">Committee Protocol, as established and amended from time to time by the Chairman;</div>
+            </div>
+            <div class="legal-def-item">
+              <div class="legal-def-term">(ii)</div>
+              <div class="legal-def-desc">Experiment Framework v3.2, which governs the conduct of Committee field operations and Candidate assessment;</div>
+            </div>
+            <div class="legal-def-item">
+              <div class="legal-def-term">(iii)</div>
+              <div class="legal-def-desc">The unwritten rules Pepe Carrillo invented last Tuesday, which are binding without notice and may be updated at any time, including last Wednesday;</div>
+            </div>
+            <div class="legal-def-item">
+              <div class="legal-def-term">(iv)</div>
+              <div class="legal-def-desc">Martian law, as applicable, which the Committee invokes on matters it considers sufficiently dramatic.</div>
+            </div>
+          </div>
+          <p>6.2 &nbsp; Any dispute arising under these Terms shall be submitted to the Committee for resolution. The Committee is the dispute resolution body. The Committee is also the party likely in dispute with the Candidate. The Committee acknowledges this conflict and proceeds regardless.</p>
+          <p>6.3 &nbsp; Barcelona, Spain serves as the Committee's terrestrial operational base for the purposes of case administration, Embassy proceedings, and the occasional field operation. Barcelona law does not apply to these Terms. The Committee respects Barcelona. Barcelona does not know about the Committee.</p>
+        </div>
+      </div>
+
+      <!-- SECTION 7: ACCEPTANCE -->
+      <div class="legal-section" style="border-bottom:none;padding-bottom:0">
+        <span class="section-number">Section 7</span>
+        <div class="section-title">Acceptance and Irrevocability</div>
+        <div class="legal-text">
+          <p>7.1 &nbsp; Participation in any Committee game — including but not limited to: the Extended Assessment, Protocol Duel, Negotiation Chamber, Archive Hunt, Oracle Consultation, Sound Test, Interrogation Room, or any game not yet built but whose existence the Committee is already planning — constitutes <em>full and irrevocable acceptance</em> of these Terms in their entirety.</p>
+          <p>7.2 &nbsp; Acceptance is immediate and retroactive to the date of first interaction with any Committee game or proceeding. If that date predates the publication of these Terms, acceptance is retroactive to the earlier date.</p>
+          <p>7.3 &nbsp; <strong>There is no opt-out.</strong> The Committee considered including an opt-out mechanism. The Committee decided against it. The Committee notes that opt-out mechanisms are inconsistent with the Committee's institutional character.</p>
+          <p>7.4 &nbsp; These Terms may be amended by the Committee at any time, with or without notice to the Candidate. Continued existence as a Candidate constitutes acceptance of all amendments. The Committee will endeavour to keep amendments interesting.</p>
+          <p>7.5 &nbsp; These Terms shall remain in force for the duration of the proceedings, as determined by the Committee. The proceedings are ongoing. These Terms are in force.</p>
+          <div class="legal-note">The Committee thanks the Candidate for reading this far. Or for scrolling this far, which the Committee acknowledges is not the same thing. Either way, it counts. The Committee is noting this.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="doc-footer">
+    <div class="wrap">
+      <div style="width:120px;height:1px;background:rgba(225,75,135,0.25);margin:0 auto 2rem;"></div>
+      <div class="doc-footer-seal">
+        Issued by order of the &nbsp;<em>Intergalactic Partnership Selection Committee</em><br>
+        Case AC-2026-04 &nbsp;&middot;&nbsp; Revision 2026.1 &nbsp;&middot;&nbsp; Classification: Binding<br>
+        Last updated April 2026<br>
+        Authenticated by the Chairman's reserve of patience, which is considerable but not infinite.
+      </div>
+      <div class="doc-footer-qs" style="margin-top:1.5rem;color:#2d2b28;">Questions? There are no questions.</div>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    The Intergalactic Partnership Selection Committee &middot; Proceedings Confidential &middot; Case AC-2026-04<br>
+    <a href="/committee">&#8592; Back to Committee Files</a> &nbsp;|&nbsp;
+    <a href="/committee/prizes">Prize Catalogue</a> &nbsp;|&nbsp;
+    <span style="color:var(--border)">Operated by <a href="/">Intergalactic Pepe</a>. Incorporated under the laws of Mars.</span>
+  </footer>
+
+</body>
+</html>

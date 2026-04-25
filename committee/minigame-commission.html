@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#080809">
+  <title>The Commission — A Special Assignment</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/fonts.css">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --pink:      #E14B87;
+      --pink-glow: rgba(225,75,135,0.25);
+      --pink-dim:  rgba(225,75,135,0.07);
+      --bg:        #080809;
+      --text:      #ddd5cc;
+      --mid:       #7a7068;
+      --dim:       #3d3835;
+      --border:    #181614;
+      --heading:   'RocknRoll One', sans-serif;
+      --sans:      'Space Grotesk', -apple-system, sans-serif;
+      --mono:      'Courier New', 'Courier', monospace;
+    }
+    body { background: var(--bg); color: var(--text); font-family: var(--sans); min-height: 100vh; overflow-x: hidden; }
+    body::before {
+      content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 999; opacity: 0.025;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      background-size: 256px 256px;
+    }
+    .wrap { max-width: 720px; margin: 0 auto; padding: 0 20px; }
+
+    /* ── TOKEN BAR ── */
+    .token-bar { display: flex; align-items: center; justify-content: space-between; padding: 0.6rem 1.5rem; background: rgba(225,75,135,0.08); border-bottom: 1px solid rgba(225,75,135,0.15); }
+    .token-bar-label { font-size: 0.56rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--dim); }
+    .token-bar-count { font-family: var(--heading); font-size: 1rem; color: var(--pink); }
+    .token-bar-link { font-size: 0.52rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--dim); text-decoration: none; }
+    .token-bar-link:hover { color: var(--pink); }
+
+    /* ── NAV ── */
+    .site-nav { padding: 1.25rem 1.5rem; text-align: center; border-bottom: 1px solid var(--border); }
+    .site-nav a { font-family: var(--heading); font-size: 0.95rem; color: var(--mid); text-decoration: none; }
+    .site-nav-sub { font-size: 0.6rem; color: var(--dim); letter-spacing: 0.14em; text-transform: uppercase; margin-top: 0.2rem; }
+    .site-nav-back { font-size: 0.56rem; color: var(--dim); letter-spacing: 0.18em; text-transform: uppercase; margin-top: 0.4rem; }
+    .site-nav-back a { font-family: var(--sans); font-size: 0.56rem; color: var(--dim); text-decoration: none; }
+    .site-nav-back a:hover { color: var(--pink); }
+
+    /* ── HERO ── */
+    .hero {
+      background: var(--bg); text-align: center; padding: 4rem 1.5rem 3rem;
+      border-bottom: 1px solid var(--border); position: relative; overflow: hidden;
+    }
+    .hero::before {
+      content: ''; position: absolute; inset: 0; pointer-events: none; opacity: 0.06;
+      background-image: radial-gradient(2px 2px at 5% 10%,#fff 100%,transparent),radial-gradient(1px 1px at 12% 38%,#E14B87 100%,transparent),radial-gradient(2px 2px at 20% 65%,#fff 100%,transparent),radial-gradient(3px 2px at 28% 22%,#E14B87 100%,transparent),radial-gradient(1px 2px at 37% 50%,#fff 100%,transparent),radial-gradient(2px 1px at 45% 80%,#E14B87 100%,transparent),radial-gradient(2px 2px at 53% 13%,#fff 100%,transparent),radial-gradient(3px 2px at 61% 42%,#E14B87 100%,transparent),radial-gradient(1px 2px at 70% 70%,#fff 100%,transparent),radial-gradient(2px 1px at 78% 27%,#E14B87 100%,transparent),radial-gradient(2px 2px at 85% 55%,#fff 100%,transparent),radial-gradient(1px 1px at 92% 88%,#E14B87 100%,transparent);
+      background-size: 120px 95px;
+    }
+    .hero::after { content: ''; position: absolute; width: 480px; height: 130px; border: 1px solid rgba(225,75,135,0.06); border-radius: 50%; top: 50%; left: 50%; transform: translate(-50%,-50%) rotate(-5deg); pointer-events: none; }
+    .hero-inner { position: relative; z-index: 1; }
+    .seal { position: relative; width: 88px; height: 88px; margin: 0 auto 1.5rem; }
+    .seal-ring { position: absolute; inset: 0; border: 1px dashed rgba(225,75,135,0.3); border-radius: 50%; animation: sealSpin 28s linear infinite; }
+    .seal-ring2 { position: absolute; inset: 7px; border: 1px solid rgba(225,75,135,0.1); border-radius: 50%; }
+    .seal-core { position: absolute; inset: 14px; border: 1.5px solid var(--pink); border-radius: 50%; display: flex; flex-direction: column; align-items: center; justify-content: center; background: var(--pink-dim); box-shadow: 0 0 24px rgba(225,75,135,0.1); }
+    .seal-id { font-family: var(--heading); font-size: 0.75rem; color: var(--pink); letter-spacing: 0.08em; line-height: 1; }
+    .seal-yr { font-size: 0.42rem; color: var(--dim); letter-spacing: 0.18em; margin-top: 2px; }
+    @keyframes sealSpin { to { transform: rotate(360deg); } }
+    .hero-over { font-size: 0.58rem; letter-spacing: 0.38em; text-transform: uppercase; color: var(--pink); margin-bottom: 0.7rem; }
+    .hero-title { font-family: var(--heading); font-size: clamp(2rem,6vw,3.2rem); color: #fafafa; margin-bottom: 0.4rem; }
+    .hero-sub { font-size: 0.78rem; color: var(--mid); line-height: 1.7; max-width: 480px; margin: 0 auto 0.6rem; }
+    .hero-expiry { font-family: var(--mono); font-size: 0.6rem; color: var(--dim); letter-spacing: 0.1em; margin-top: 0.75rem; }
+    .hero-expiry span { color: var(--pink); }
+
+    /* ── SECTION ── */
+    .section { padding: 2.75rem 0; border-bottom: 1px solid var(--border); }
+    .sec-label { font-size: 0.58rem; letter-spacing: 0.35em; text-transform: uppercase; color: var(--dim); margin-bottom: 1.5rem; }
+
+    /* ── COMMISSION INTRO ── */
+    .commission-brief {
+      padding: 1.75rem 1.5rem; border: 1px solid var(--border);
+      background: var(--pink-dim); margin-bottom: 2rem;
+    }
+    .commission-brief-title { font-family: var(--heading); font-size: 0.9rem; color: #fafafa; margin-bottom: 0.75rem; letter-spacing: 0.04em; }
+    .commission-brief-body { font-size: 0.88rem; color: var(--mid); line-height: 1.85; }
+    .commission-brief-body p { margin-bottom: 0.5rem; }
+    .commission-brief-body p:last-child { margin-bottom: 0; }
+    .commission-warning {
+      margin-top: 1.25rem; padding: 0.65rem 1rem;
+      border-left: 2px solid var(--pink); font-family: var(--mono);
+      font-size: 0.7rem; color: var(--mid); line-height: 1.8;
+    }
+
+    /* ── TIER CARDS ── */
+    .tier-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-bottom: 2rem; }
+    @media (max-width: 520px) { .tier-grid { grid-template-columns: 1fr; } }
+    .tier-card {
+      border: 1px solid var(--border); padding: 1.75rem 1.25rem 1.5rem;
+      text-align: center; cursor: pointer; position: relative; overflow: hidden;
+      transition: border-color 0.2s, background 0.2s;
+      background: var(--bg);
+    }
+    .tier-card:hover { border-color: rgba(225,75,135,0.4); background: rgba(225,75,135,0.04); }
+    .tier-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+      background: var(--pink); opacity: 0; transition: opacity 0.2s;
+    }
+    .tier-card:hover::before { opacity: 1; }
+    .tier-number { font-size: 0.52rem; letter-spacing: 0.4em; text-transform: uppercase; color: var(--dim); margin-bottom: 0.75rem; }
+    .tier-label { font-family: var(--heading); font-size: clamp(1rem,3vw,1.4rem); color: var(--mid); margin-bottom: 0.4rem; }
+    .tier-stake { font-family: var(--heading); font-size: clamp(2rem,6vw,3rem); color: var(--pink); line-height: 1; margin-bottom: 0.35rem; text-shadow: 0 0 30px rgba(225,75,135,0.2); }
+    .tier-stake-label { font-size: 0.55rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--dim); margin-bottom: 1.25rem; }
+    .tier-mystery { font-family: var(--mono); font-size: 0.7rem; color: var(--dim); font-style: italic; margin-bottom: 1.5rem; min-height: 2.4em; line-height: 1.6; }
+    .tier-btn {
+      display: inline-block; padding: 0.6rem 1.25rem;
+      border: 1px solid rgba(225,75,135,0.4); background: transparent;
+      color: var(--pink); font-family: var(--sans); font-size: 0.65rem;
+      letter-spacing: 0.18em; text-transform: uppercase; cursor: pointer;
+      transition: background 0.15s, color 0.15s;
+    }
+    .tier-btn:hover { background: var(--pink); color: #fff; }
+    .tier-viewing-fee { font-size: 0.56rem; color: var(--dim); margin-top: 0.65rem; letter-spacing: 0.04em; }
+
+    /* ── REVEAL MODAL ── */
+    .modal-overlay {
+      position: fixed; inset: 0; z-index: 1000;
+      background: rgba(8,8,9,0.92); display: flex; align-items: center; justify-content: center;
+      padding: 1.5rem; opacity: 0; pointer-events: none; transition: opacity 0.25s ease;
+    }
+    .modal-overlay.visible { opacity: 1; pointer-events: auto; }
+    .modal-box {
+      background: var(--bg); border: 1px solid rgba(225,75,135,0.4);
+      padding: 2.5rem; max-width: 520px; width: 100%;
+      box-shadow: 0 0 80px rgba(225,75,135,0.12);
+      position: relative; max-height: 90vh; overflow-y: auto;
+    }
+    .modal-box::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+      background: var(--pink);
+    }
+    .modal-tier-badge { font-size: 0.52rem; letter-spacing: 0.4em; text-transform: uppercase; color: var(--pink); margin-bottom: 1rem; }
+    .modal-title { font-family: var(--heading); font-size: clamp(1.3rem,4vw,1.8rem); color: #fafafa; margin-bottom: 0.5rem; }
+    .modal-stake-info { font-size: 0.75rem; color: var(--mid); margin-bottom: 1.5rem; line-height: 1.6; }
+    .modal-assignment-sealed {
+      padding: 1.5rem; border: 1px dashed rgba(225,75,135,0.3);
+      background: var(--pink-dim); text-align: center; margin-bottom: 1.5rem;
+    }
+    .modal-assignment-sealed-icon { font-size: 2rem; color: var(--dim); margin-bottom: 0.75rem; line-height: 1; }
+    .modal-assignment-sealed-text { font-family: var(--mono); font-size: 0.7rem; color: var(--dim); letter-spacing: 0.06em; line-height: 1.8; }
+    .modal-assignment-revealed {
+      display: none; padding: 1.5rem; border: 1px solid rgba(225,75,135,0.3);
+      background: var(--pink-dim); margin-bottom: 1.5rem;
+    }
+    .modal-assignment-label { font-size: 0.52rem; letter-spacing: 0.35em; text-transform: uppercase; color: var(--pink); margin-bottom: 0.75rem; }
+    .modal-assignment-text { font-size: 0.95rem; color: #fafafa; line-height: 1.8; font-family: var(--sans); }
+    .modal-fee-note { font-family: var(--mono); font-size: 0.65rem; color: var(--dim); margin-bottom: 1.5rem; line-height: 1.7; }
+    .modal-fee-note strong { color: var(--mid); }
+    .modal-btns { display: flex; gap: 10px; flex-wrap: wrap; }
+    .modal-btn-accept {
+      flex: 1; min-width: 140px; padding: 0.85rem 1rem;
+      background: var(--pink); color: #fff; border: none;
+      font-family: var(--sans); font-size: 0.7rem; letter-spacing: 0.14em; text-transform: uppercase;
+      cursor: pointer; transition: opacity 0.2s;
+    }
+    .modal-btn-accept:hover { opacity: 0.85; }
+    .modal-btn-accept:disabled { opacity: 0.35; cursor: not-allowed; }
+    .modal-btn-decline {
+      flex: 1; min-width: 140px; padding: 0.85rem 1rem;
+      background: transparent; color: var(--mid); border: 1px solid var(--border);
+      font-family: var(--sans); font-size: 0.7rem; letter-spacing: 0.14em; text-transform: uppercase;
+      cursor: pointer; transition: border-color 0.15s, color 0.15s;
+    }
+    .modal-btn-decline:hover { border-color: var(--mid); color: var(--text); }
+    .modal-btn-decline:disabled { opacity: 0.35; cursor: not-allowed; }
+    .modal-btn-reveal {
+      width: 100%; padding: 0.9rem;
+      background: transparent; color: var(--pink); border: 1px solid rgba(225,75,135,0.5);
+      font-family: var(--sans); font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase;
+      cursor: pointer; transition: background 0.15s, color 0.15s;
+      margin-bottom: 0.75rem;
+    }
+    .modal-btn-reveal:hover { background: var(--pink); color: #fff; }
+    .modal-close {
+      position: absolute; top: 1rem; right: 1rem; background: none; border: none;
+      color: var(--dim); font-size: 1.1rem; cursor: pointer; line-height: 1; padding: 0.25rem;
+    }
+    .modal-close:hover { color: var(--mid); }
+
+    /* ── ACCEPTED STATE ── */
+    .commission-accepted {
+      display: none; padding: 2.5rem 1.5rem; border: 1px solid rgba(225,75,135,0.3);
+      background: var(--pink-dim); text-align: center;
+    }
+    .commission-accepted-over { font-size: 0.56rem; letter-spacing: 0.35em; text-transform: uppercase; color: var(--pink); margin-bottom: 1rem; }
+    .commission-accepted-title { font-family: var(--heading); font-size: clamp(1.5rem,5vw,2.5rem); color: #fafafa; margin-bottom: 0.5rem; }
+    .commission-accepted-sub { font-size: 0.85rem; color: var(--mid); line-height: 1.75; margin-bottom: 1.5rem; }
+    .commission-accepted-assignment { padding: 1.25rem; border: 1px solid rgba(225,75,135,0.25); background: rgba(8,8,9,0.6); margin-bottom: 1.75rem; text-align: left; }
+    .commission-accepted-assignment-label { font-size: 0.52rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--dim); margin-bottom: 0.6rem; }
+    .commission-accepted-assignment-text { font-size: 0.92rem; color: var(--text); line-height: 1.8; }
+    .commission-timer-label { font-size: 0.56rem; letter-spacing: 0.28em; text-transform: uppercase; color: var(--dim); margin-bottom: 1rem; }
+    .commission-timer { display: flex; align-items: flex-start; justify-content: center; gap: 6px; margin-bottom: 1.5rem; }
+    .commission-timer-digit { font-family: var(--heading); font-size: clamp(2.5rem,8vw,4.5rem); color: var(--pink); line-height: 1; min-width: clamp(60px,12vw,90px); text-align: center; text-shadow: 0 0 30px var(--pink-glow); }
+    .commission-timer-sep { font-family: var(--heading); font-size: clamp(2rem,6vw,3.5rem); color: var(--dim); opacity: 0.4; line-height: 1; margin-top: 3px; }
+    .commission-timer-unit { display: flex; flex-direction: column; align-items: center; gap: 4px; }
+    .commission-timer-unit-label { font-size: 0.48rem; letter-spacing: 0.2em; color: var(--dim); text-transform: uppercase; }
+    .commission-note { font-family: var(--mono); font-size: 0.7rem; color: var(--dim); line-height: 1.8; font-style: italic; }
+    .commission-expired { font-family: var(--heading); font-size: 1.4rem; color: #c85454; margin-bottom: 0.75rem; }
+
+    /* ── DECLINED STATE ── */
+    .commission-declined {
+      display: none; padding: 2rem 1.5rem; border: 1px solid var(--border);
+      text-align: center;
+    }
+    .commission-declined-title { font-family: var(--heading); font-size: 1.4rem; color: var(--mid); margin-bottom: 0.75rem; }
+    .commission-declined-text { font-size: 0.82rem; color: var(--dim); line-height: 1.75; }
+
+    /* ── FOOTER NOTE ── */
+    .commission-footer-note {
+      padding: 1.5rem 0; border-top: 1px solid var(--border);
+      font-family: var(--mono); font-size: 0.65rem; color: var(--dim); line-height: 1.9; text-align: center;
+    }
+
+    /* ── SITE FOOTER ── */
+    .site-footer { text-align: center; padding: 2rem 1.5rem; border-top: 1px solid var(--border); font-size: 0.65rem; color: var(--dim); letter-spacing: 0.08em; line-height: 1.9; }
+    .site-footer a { color: var(--dim); text-decoration: none; }
+  </style>
+</head>
+<body>
+
+  <!-- REVEAL MODAL -->
+  <div class="modal-overlay" id="modal-overlay">
+    <div class="modal-box">
+      <button class="modal-close" id="modal-close" aria-label="Close">&times;</button>
+      <div class="modal-tier-badge" id="modal-tier-badge">TIER I &nbsp;&middot;&nbsp; 250 TOKENS</div>
+      <h2 class="modal-title">Assignment Pending Acceptance</h2>
+      <p class="modal-stake-info" id="modal-stake-info">
+        You are about to request the assignment for this tier. Once revealed, you must Accept or Decline.
+        Declining after viewing is not free.
+      </p>
+
+      <!-- Sealed view (before reveal) -->
+      <div id="modal-assignment-sealed" class="modal-assignment-sealed">
+        <div class="modal-assignment-sealed-icon">&#9632;</div>
+        <div class="modal-assignment-sealed-text">
+          Assignment is sealed.<br>
+          Click REVEAL ASSIGNMENT to see what the Committee requires.<br>
+          Once revealed, you must accept or decline.
+        </div>
+      </div>
+
+      <!-- Revealed view -->
+      <div id="modal-assignment-revealed" class="modal-assignment-revealed">
+        <div class="modal-assignment-label">Your Assignment</div>
+        <div class="modal-assignment-text" id="modal-assignment-text"></div>
+      </div>
+
+      <div class="modal-fee-note" id="modal-fee-note"></div>
+
+      <!-- Before reveal: only Reveal button -->
+      <div id="modal-pre-reveal">
+        <button class="modal-btn-reveal" id="modal-btn-reveal">Reveal Assignment</button>
+        <div style="text-align:center">
+          <button class="modal-btn-decline" id="modal-btn-cancel-pre" style="width:auto;padding:0.5rem 1.25rem;font-size:0.6rem">Cancel (no charge)</button>
+        </div>
+      </div>
+
+      <!-- After reveal: Accept or Decline -->
+      <div id="modal-post-reveal" style="display:none">
+        <div class="modal-btns">
+          <button class="modal-btn-accept" id="modal-btn-accept">Accept the Assignment</button>
+          <button class="modal-btn-decline" id="modal-btn-decline-post">Decline</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <nav class="site-nav">
+    <a href="/">Intergalactic Pepe &#128640;</a>
+    <div class="site-nav-sub">An independent, free-spirited cosmic travel company</div>
+    <div class="site-nav-back"><a href="/committee">&#8592; Committee Files &nbsp;&middot;&nbsp; Case AC-2026-04</a></div>
+  </nav>
+
+  <div class="token-bar">
+    <span class="token-bar-label">Intergalactic Tokens</span>
+    <span class="token-bar-count" id="token-display">0</span>
+    <a href="/committee/prizes" class="token-bar-link">Redeem</a>
+  </div>
+
+  <div class="hero">
+    <div class="hero-inner">
+      <div class="seal">
+        <div class="seal-ring"></div>
+        <div class="seal-ring2"></div>
+        <div class="seal-core">
+          <div class="seal-id">IPSC</div>
+          <div class="seal-yr">2026</div>
+        </div>
+      </div>
+      <p class="hero-over">&#9711; &nbsp; Special Assignment Protocol &nbsp; &middot; &nbsp; Limited Issue &nbsp; &#9711;</p>
+      <h1 class="hero-title">The Commission</h1>
+      <p class="hero-sub">This is not a game. This is a request. You will stake tokens. The assignment will be revealed. You will have 48 hours to deliver.</p>
+      <div class="hero-expiry" id="hero-expiry">
+        Available until <span id="expiry-display">--</span>
+      </div>
+    </div>
+  </div>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="sec-label">Special Assignment Protocol &mdash; Case AC-2026-04</div>
+
+      <!-- Main content view -->
+      <div id="commission-main">
+        <div class="commission-brief">
+          <div class="commission-brief-title">Committee Notice to Candidate</div>
+          <div class="commission-brief-body">
+            <p>The Committee has prepared a special assignment. This is not optional in the way you might hope it is optional.</p>
+            <p>You will choose a tier. You will stake the corresponding number of tokens. The assignment will be revealed. You will have forty-eight hours to deliver. Upon delivery, contact the Chairman to confirm completion and collect your bonus.</p>
+            <p>If you decline after seeing the assignment, a viewing fee applies. The Committee is aware this feels unfair. The Committee does not have feelings about this.</p>
+          </div>
+          <div class="commission-warning">
+            Time-limited. Once accepted, cannot be undone. You have 48 hours from acceptance. Delivery confirmation is manual — contact the Chairman.
+          </div>
+        </div>
+
+        <div class="tier-grid" id="tier-grid">
+          <!-- TIER I -->
+          <div class="tier-card" data-tier="1">
+            <div class="tier-number">Tier I</div>
+            <div class="tier-label">The Ask</div>
+            <div class="tier-stake">250</div>
+            <div class="tier-stake-label">Tokens at stake</div>
+            <div class="tier-mystery">Something within reach. Something you could do but haven't yet. The Committee has been thinking about it.</div>
+            <button class="tier-btn" data-tier="1">Reveal Assignment</button>
+            <div class="tier-viewing-fee">Viewing fee if declined: 50 tokens</div>
+          </div>
+
+          <!-- TIER II -->
+          <div class="tier-card" data-tier="2">
+            <div class="tier-number">Tier II</div>
+            <div class="tier-label">The Request</div>
+            <div class="tier-stake">500</div>
+            <div class="tier-stake-label">Tokens at stake</div>
+            <div class="tier-mystery">A little more. A little bolder. The Committee has considered what you might hesitate at. It went with that.</div>
+            <button class="tier-btn" data-tier="2">Reveal Assignment</button>
+            <div class="tier-viewing-fee">Viewing fee if declined: 100 tokens</div>
+          </div>
+
+          <!-- TIER III -->
+          <div class="tier-card" data-tier="3">
+            <div class="tier-number">Tier III</div>
+            <div class="tier-label">The Challenge</div>
+            <div class="tier-stake">750</div>
+            <div class="tier-stake-label">Tokens at stake</div>
+            <div class="tier-mystery">You could do this. You probably won't want to. The Committee finds the probably very interesting.</div>
+            <button class="tier-btn" data-tier="3">Reveal Assignment</button>
+            <div class="tier-viewing-fee">Viewing fee if declined: 150 tokens</div>
+          </div>
+
+          <!-- TIER IV -->
+          <div class="tier-card" data-tier="4">
+            <div class="tier-number">Tier IV</div>
+            <div class="tier-label">The Commission</div>
+            <div class="tier-stake">1000</div>
+            <div class="tier-stake-label">Tokens at stake</div>
+            <div class="tier-mystery">The Committee saved the most interesting one for last. The Committee will not describe it in advance.</div>
+            <button class="tier-btn" data-tier="4">Reveal Assignment</button>
+            <div class="tier-viewing-fee">Viewing fee if declined: 200 tokens</div>
+          </div>
+        </div>
+
+        <div class="commission-footer-note">
+          Delivery confirmation is manual. Contact the Chairman to confirm completion and receive your bonus.<br>
+          The Committee is watching. The Committee is always watching.
+        </div>
+      </div>
+
+      <!-- Accepted state -->
+      <div class="commission-accepted" id="commission-accepted">
+        <div class="commission-accepted-over">Assignment Accepted &middot; Case AC-2026-04</div>
+        <h2 class="commission-accepted-title">Mission Active</h2>
+        <p class="commission-accepted-sub">Tokens deducted. Assignment logged. The clock is running.</p>
+        <div class="commission-accepted-assignment">
+          <div class="commission-accepted-assignment-label">Your Assignment</div>
+          <div class="commission-accepted-assignment-text" id="accepted-assignment-text"></div>
+        </div>
+        <div class="commission-timer-label">Time remaining to deliver</div>
+        <div class="commission-timer">
+          <div class="commission-timer-unit">
+            <div class="commission-timer-digit" id="cd-h">48</div>
+            <div class="commission-timer-unit-label">Hours</div>
+          </div>
+          <div class="commission-timer-sep">:</div>
+          <div class="commission-timer-unit">
+            <div class="commission-timer-digit" id="cd-m">00</div>
+            <div class="commission-timer-unit-label">Min</div>
+          </div>
+          <div class="commission-timer-sep">:</div>
+          <div class="commission-timer-unit">
+            <div class="commission-timer-digit" id="cd-s">00</div>
+            <div class="commission-timer-unit-label">Sec</div>
+          </div>
+        </div>
+        <div class="commission-note" id="commission-accepted-note">
+          Contact the Chairman to confirm completion and receive your bonus.<br>
+          Deadline logged. The record is permanent.
+        </div>
+      </div>
+
+      <!-- Declined state -->
+      <div class="commission-declined" id="commission-declined">
+        <div class="commission-declined-title">Assignment Declined</div>
+        <div class="commission-declined-text" id="commission-declined-text">
+          The viewing fee has been deducted. The Committee notes the hesitation.<br>
+          The assignment remains available. The Committee will not remind you of this. More than once.
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    The Intergalactic Partnership Selection Committee &middot; Proceedings Confidential &middot; Case AC-2026-04<br>
+    <a href="/committee/final">&#8592; Back to Final Session</a> &nbsp;|&nbsp;
+    <a href="/committee/prizes">Prize Catalogue</a> &nbsp;|&nbsp;
+    <span style="color:var(--border)">Operated by <a href="/">Intergalactic Pepe</a>. Incorporated under the laws of Mars.</span>
+    <p style="font-size:9px;color:#444;text-align:center;margin-top:40px">By playing, you agree to the <a href="/committee/terms" style="color:#666">Committee Terms of Participation</a>.</p>
+  </footer>
+
+  <script>
+    // ── CONFIGURATION ──
+    var COMMISSION_EXPIRY_DATE = null; // Set to ISO date string when game is made live, e.g. "2026-04-28T23:59:00+02:00"
+    var COMMITTEE_SYNC_URL = "https://panda.mexzungu.com/committee/tokens";
+    var COMMITTEE_PIN = "AC2026";
+    var COMMISSION_KEY = "ipsc_commission_ac2026";
+
+    // ── ASSIGNMENTS (placeholders — fill before reveal) ──
+    var ASSIGNMENTS = {
+      1: "[ASSIGNMENT_TIER_1]",
+      2: "[ASSIGNMENT_TIER_2]",
+      3: "[ASSIGNMENT_TIER_3]",
+      4: "[ASSIGNMENT_TIER_4]"
+    };
+
+    var STAKES    = { 1: 250, 2: 500, 3: 750, 4: 1000 };
+    var VIEW_FEES = { 1: 50,  2: 100, 3: 150, 4: 200  };
+
+    // ── TOKEN HELPERS ──
+    function getTokenBank() {
+      try {
+        var raw = localStorage.getItem('ipsc_tokens_ac2026');
+        if (!raw) return { total: 0, breakdown: { quiz: 0, negotiation: 0, archive: 0, protocol: 0 } };
+        var b = JSON.parse(raw);
+        if (!b.breakdown) b.breakdown = { quiz: 0, negotiation: 0, archive: 0, protocol: 0 };
+        return b;
+      } catch(e) { return { total: 0, breakdown: {} }; }
+    }
+    function addTokens(source, amount) {
+      var bank = getTokenBank();
+      bank.total += amount;
+      if (bank.breakdown[source] !== undefined) bank.breakdown[source] += amount;
+      else bank.breakdown[source] = amount;
+      try { localStorage.setItem('ipsc_tokens_ac2026', JSON.stringify(bank)); } catch(e) {}
+      updateTokenDisplay();
+      syncTokensToServer(bank);
+    }
+    function subtractTokens(source, amount) {
+      var bank = getTokenBank();
+      bank.total = Math.max(0, bank.total - amount);
+      if (bank.breakdown[source] !== undefined) bank.breakdown[source] = Math.max(0, bank.breakdown[source] - amount);
+      else bank.breakdown[source] = 0;
+      try { localStorage.setItem('ipsc_tokens_ac2026', JSON.stringify(bank)); } catch(e) {}
+      updateTokenDisplay();
+      syncTokensToServer(bank);
+    }
+    function updateTokenDisplay() {
+      var el = document.getElementById('token-display');
+      if (el) el.textContent = getTokenBank().total;
+    }
+    updateTokenDisplay();
+
+    function syncTokensToServer(bank) {
+      try {
+        fetch(COMMITTEE_SYNC_URL, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ pin: COMMITTEE_PIN, tokens: bank })
+        }).catch(function() {});
+      } catch(e) {}
+    }
+    async function loadTokensFromServer() {
+      try {
+        var res = await fetch(COMMITTEE_SYNC_URL);
+        if (!res.ok) return;
+        var serverBank = await res.json();
+        var localBank = getTokenBank();
+        if ((serverBank.total || 0) > (localBank.total || 0)) {
+          localStorage.setItem("ipsc_tokens_ac2026", JSON.stringify(serverBank));
+          updateTokenDisplay();
+        }
+      } catch(e) {}
+    }
+    loadTokensFromServer();
+
+    // ── EXPIRY DISPLAY ──
+    (function() {
+      var expiryEl = document.getElementById('expiry-display');
+      var heroExpiry = document.getElementById('hero-expiry');
+      if (!COMMISSION_EXPIRY_DATE) {
+        if (heroExpiry) heroExpiry.style.display = 'none';
+        return;
+      }
+      var end = new Date(COMMISSION_EXPIRY_DATE);
+      var opts = { weekday: 'long', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit', timeZoneName: 'short' };
+      if (expiryEl) expiryEl.textContent = end.toLocaleString('en-GB', opts);
+
+      // If expired, disable game
+      if (Date.now() > end.getTime()) {
+        var grid = document.getElementById('tier-grid');
+        if (grid) {
+          grid.innerHTML = '<div style="text-align:center;padding:3rem 1rem;border:1px solid var(--border);grid-column:1/-1"><p style="font-family:var(--heading);font-size:1.4rem;color:var(--mid);margin-bottom:0.75rem">Commission Closed</p><p style="font-size:0.82rem;color:var(--dim);line-height:1.75">This assignment window has closed. The Committee may issue another. The Committee has not said when.</p></div>';
+        }
+      }
+    })();
+
+    // ── COMMISSION STATE ──
+    var activeState = null; // loaded from localStorage
+    (function() {
+      try {
+        var raw = localStorage.getItem(COMMISSION_KEY);
+        if (raw) activeState = JSON.parse(raw);
+      } catch(e) {}
+    })();
+
+    // If there's an active accepted commission, show it
+    if (activeState && activeState.status === 'pending') {
+      showAcceptedState(activeState);
+    }
+
+    // ── MODAL STATE ──
+    var currentTier = null;
+    var revealed = false;
+
+    function openModal(tier) {
+      // Check if already accepted
+      if (activeState && activeState.status === 'pending') {
+        showAcceptedState(activeState);
+        return;
+      }
+
+      currentTier = tier;
+      revealed = false;
+
+      // Reset modal UI
+      document.getElementById('modal-assignment-sealed').style.display = 'block';
+      document.getElementById('modal-assignment-revealed').style.display = 'none';
+      document.getElementById('modal-pre-reveal').style.display = 'block';
+      document.getElementById('modal-post-reveal').style.display = 'none';
+      document.getElementById('modal-btn-accept').disabled = false;
+      document.getElementById('modal-btn-decline-post').disabled = false;
+
+      var stake = STAKES[tier];
+      var fee = VIEW_FEES[tier];
+      var tierNames = { 1: 'TIER I', 2: 'TIER II', 3: 'TIER III', 4: 'TIER IV' };
+
+      document.getElementById('modal-tier-badge').textContent = tierNames[tier] + ' \u00B7 ' + stake + ' TOKENS';
+      document.getElementById('modal-stake-info').textContent =
+        'Stake: ' + stake + ' tokens. Viewing fee if declined: ' + fee + ' tokens. ' +
+        'Once you accept, the full stake is deducted and the 48-hour clock starts.';
+      document.getElementById('modal-fee-note').innerHTML =
+        '<strong>Before you reveal:</strong> viewing the assignment is not free if you decline. ' +
+        'Declining after seeing costs ' + fee + ' tokens. Accepting costs ' + stake + ' tokens. ' +
+        'Cancelling now costs nothing.';
+
+      document.getElementById('modal-assignment-text').textContent = ASSIGNMENTS[tier];
+
+      document.getElementById('modal-overlay').classList.add('visible');
+    }
+
+    function closeModal() {
+      document.getElementById('modal-overlay').classList.remove('visible');
+      currentTier = null;
+      revealed = false;
+    }
+
+    function doReveal() {
+      if (!currentTier) return;
+      revealed = true;
+      document.getElementById('modal-assignment-sealed').style.display = 'none';
+      document.getElementById('modal-assignment-revealed').style.display = 'block';
+      document.getElementById('modal-pre-reveal').style.display = 'none';
+      document.getElementById('modal-post-reveal').style.display = 'block';
+    }
+
+    function doAccept() {
+      if (!currentTier) return;
+      var tier = currentTier;
+      var stake = STAKES[tier];
+      var assignment = ASSIGNMENTS[tier];
+      var now = Date.now();
+      var deadline = now + (48 * 60 * 60 * 1000);
+
+      subtractTokens('commission', stake);
+
+      var entry = {
+        tier: tier,
+        assignment: assignment,
+        accepted_at: new Date(now).toISOString(),
+        deadline: new Date(deadline).toISOString(),
+        status: 'pending'
+      };
+      try { localStorage.setItem(COMMISSION_KEY, JSON.stringify(entry)); } catch(e) {}
+      activeState = entry;
+
+      closeModal();
+      showAcceptedState(entry);
+    }
+
+    function doDecline() {
+      if (!currentTier) return;
+      var tier = currentTier;
+      var fee = VIEW_FEES[tier];
+
+      subtractTokens('commission', fee);
+
+      closeModal();
+      showDeclinedState(fee, tier);
+    }
+
+    function showAcceptedState(entry) {
+      var main = document.getElementById('commission-main');
+      var accepted = document.getElementById('commission-accepted');
+      var declined = document.getElementById('commission-declined');
+      if (main) main.style.display = 'none';
+      if (declined) declined.style.display = 'none';
+      if (accepted) accepted.style.display = 'block';
+
+      var textEl = document.getElementById('accepted-assignment-text');
+      if (textEl) textEl.textContent = entry.assignment;
+
+      var deadline = new Date(entry.deadline).getTime();
+      startCountdown(deadline);
+    }
+
+    function showDeclinedState(fee, tier) {
+      var main = document.getElementById('commission-main');
+      var accepted = document.getElementById('commission-accepted');
+      var declined = document.getElementById('commission-declined');
+      if (main) main.style.display = 'none';
+      if (accepted) accepted.style.display = 'none';
+      if (declined) declined.style.display = 'block';
+
+      var el = document.getElementById('commission-declined-text');
+      if (el) {
+        el.textContent = fee + ' tokens deducted as viewing fee. The Committee notes the hesitation. ' +
+          'The assignment remains available. The Committee will not remind you of this. More than once.';
+      }
+
+      // Re-show main after 5 seconds so they can try another tier
+      setTimeout(function() {
+        if (declined) declined.style.display = 'none';
+        if (main) main.style.display = 'block';
+      }, 5000);
+    }
+
+    // ── COUNTDOWN TIMER ──
+    var countdownInterval = null;
+    function startCountdown(deadlineMs) {
+      if (countdownInterval) clearInterval(countdownInterval);
+
+      function update() {
+        var diff = deadlineMs - Date.now();
+        var hEl = document.getElementById('cd-h');
+        var mEl = document.getElementById('cd-m');
+        var sEl = document.getElementById('cd-s');
+        var noteEl = document.getElementById('commission-accepted-note');
+
+        if (diff <= 0) {
+          clearInterval(countdownInterval);
+          if (hEl) hEl.textContent = '00';
+          if (mEl) mEl.textContent = '00';
+          if (sEl) sEl.textContent = '00';
+          var expiredDiv = document.createElement('div');
+          expiredDiv.className = 'commission-expired';
+          expiredDiv.textContent = 'TIME EXPIRED';
+          var timer = document.querySelector('.commission-timer');
+          if (timer) timer.insertAdjacentElement('beforebegin', expiredDiv);
+          if (noteEl) noteEl.textContent = 'The window has closed. Contact the Chairman to explain. The Committee is listening.';
+          return;
+        }
+
+        var h = Math.floor(diff / 3600000);
+        var m = Math.floor((diff % 3600000) / 60000);
+        var s = Math.floor((diff % 60000) / 1000);
+
+        if (hEl) hEl.textContent = String(h).padStart(2, '0');
+        if (mEl) mEl.textContent = String(m).padStart(2, '0');
+        if (sEl) sEl.textContent = String(s).padStart(2, '0');
+
+        // Dynamic color: red when under 6 hours
+        var timerDigits = document.querySelectorAll('.commission-timer-digit');
+        timerDigits.forEach(function(d) {
+          d.style.color = diff < 6 * 3600000 ? '#c85454' : 'var(--pink)';
+        });
+      }
+
+      update();
+      countdownInterval = setInterval(update, 1000);
+    }
+
+    // ── EVENT LISTENERS ──
+    document.querySelectorAll('.tier-btn').forEach(function(btn) {
+      btn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        var tier = parseInt(this.getAttribute('data-tier'), 10);
+        openModal(tier);
+      });
+    });
+    document.querySelectorAll('.tier-card').forEach(function(card) {
+      card.addEventListener('click', function() {
+        var tier = parseInt(this.getAttribute('data-tier'), 10);
+        openModal(tier);
+      });
+    });
+
+    document.getElementById('modal-close').addEventListener('click', closeModal);
+    document.getElementById('modal-btn-cancel-pre').addEventListener('click', closeModal);
+    document.getElementById('modal-btn-reveal').addEventListener('click', doReveal);
+    document.getElementById('modal-btn-accept').addEventListener('click', doAccept);
+    document.getElementById('modal-btn-decline-post').addEventListener('click', doDecline);
+
+    // Close on overlay click
+    document.getElementById('modal-overlay').addEventListener('click', function(e) {
+      if (e.target === this) closeModal();
+    });
+  </script>
+
+  <!-- Promo Banner -->
+  <style>
+    #committee-promo-banner { display:none; position:fixed; top:0; left:0; width:100%; z-index:9999; background:#E14B87; color:#fff; font-family:'Space Grotesk',-apple-system,sans-serif; font-weight:700; font-size:0.95rem; letter-spacing:0.02em; text-align:center; padding:10px 48px 10px 16px; box-shadow:0 2px 12px rgba(225,75,135,0.45); line-height:1.4; }
+    #committee-promo-banner.visible { display:block; }
+    #committee-promo-close { position:absolute; right:14px; top:50%; transform:translateY(-50%); background:none; border:none; color:#fff; font-size:1.2rem; cursor:pointer; line-height:1; padding:0 4px; opacity:0.8; }
+    #committee-promo-close:hover { opacity:1; }
+    body.has-promo-banner { padding-top:48px; }
+  </style>
+  <div id="committee-promo-banner" role="alert">
+    <span id="committee-promo-text"></span>
+    <span id="committee-promo-countdown"></span>
+    <button id="committee-promo-close" aria-label="Dismiss">&times;</button>
+  </div>
+  <script>
+    (function() {
+      var PROMO_URL='https://panda.mexzungu.com/committee/promo';
+      var banner=document.getElementById('committee-promo-banner');
+      var textEl=document.getElementById('committee-promo-text');
+      var cdEl=document.getElementById('committee-promo-countdown');
+      var closeBtn=document.getElementById('committee-promo-close');
+      var dismissed=false; var cdInterval=null;
+      closeBtn.addEventListener('click',function(){dismissed=true;hideBanner();});
+      function hideBanner(){banner.classList.remove('visible');document.body.classList.remove('has-promo-banner');if(cdInterval){clearInterval(cdInterval);cdInterval=null;}}
+      function showBanner(text,expiresAt){if(dismissed)return;textEl.textContent=text+' ';banner.classList.add('visible');document.body.classList.add('has-promo-banner');if(cdInterval){clearInterval(cdInterval);cdInterval=null;}if(expiresAt){function updateCd(){var now=Date.now();var end=new Date(expiresAt).getTime();var diff=Math.max(0,Math.floor((end-now)/1000));if(diff<=0){cdEl.textContent='';hideBanner();return;}var h=Math.floor(diff/3600);var m=Math.floor((diff%3600)/60);var s=diff%60;var parts=[];if(h>0)parts.push(h+'h');if(m>0||h>0)parts.push(m+'m');parts.push(s+'s');cdEl.textContent='('+parts.join(' ')+' remaining)';}updateCd();cdInterval=setInterval(updateCd,1000);}else{cdEl.textContent='';}}
+      function checkPromo(){fetch(PROMO_URL,{cache:'no-store'}).then(function(r){return r.json();}).then(function(data){if(!data.active){hideBanner();return;}if(data.expires_at){var end=new Date(data.expires_at).getTime();if(Date.now()>=end){hideBanner();return;}}showBanner(data.text,data.expires_at||null);}).catch(function(){});}
+      checkPromo();setInterval(checkPromo,15000);
+    })();
+  </script>
+
+</body>
+</html>

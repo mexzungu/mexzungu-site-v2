@@ -198,15 +198,15 @@
           <div class="quiz-intro-rules">
             <span class="quiz-intro-rule">6 songs per round</span>
             <span class="quiz-intro-rule-sep">&middot;</span>
-            <span class="quiz-intro-rule">Under 5s &rarr; 30 tokens</span>
+            <span class="quiz-intro-rule">Under 5s &rarr; 60 tokens</span>
             <span class="quiz-intro-rule-sep">&middot;</span>
-            <span class="quiz-intro-rule">5&ndash;8s &rarr; 20 tokens</span>
+            <span class="quiz-intro-rule">5&ndash;8s &rarr; 45 tokens</span>
             <span class="quiz-intro-rule-sep">&middot;</span>
-            <span class="quiz-intro-rule">8&ndash;10s &rarr; 15 tokens</span>
+            <span class="quiz-intro-rule">8&ndash;10s &rarr; 35 tokens</span>
             <span class="quiz-intro-rule-sep">&middot;</span>
-            <span class="quiz-intro-rule">After clip &rarr; 10 tokens</span>
+            <span class="quiz-intro-rule">After clip &rarr; 25 tokens</span>
             <span class="quiz-intro-rule-sep">&middot;</span>
-            <span class="quiz-intro-rule">3 lives</span>
+            <span class="quiz-intro-rule">3 lives &middot; 4h ban on game over</span>
           </div>
           <button class="quiz-btn" id="st-start-btn">Begin</button>
         </div>
@@ -281,8 +281,17 @@
               <div class="result-stat-label">Total tokens</div>
             </div>
           </div>
-          <div class="result-panel-note">Tokens earned before the terminal event are entered into the ledger.</div>
-          <button class="quiz-btn" id="st-retry-btn">Try Again &rarr;</button>
+          <div class="result-panel-note">Lives replenish in 4 hours. Tokens earned are entered into the ledger.</div>
+        </div>
+      </div>
+
+      <!-- BANNED / LIVES ON COOLDOWN -->
+      <div id="st-banned" style="display:none;">
+        <div class="gameover-panel" style="border-color:rgba(225,75,135,0.3);background:rgba(225,75,135,0.04);">
+          <div class="gameover-title" style="color:var(--pink)">LOCKED OUT</div>
+          <div class="gameover-sub">Lives exhausted. The Committee requires a cooling-off period.</div>
+          <div style="margin:1.5rem 0;font-family:var(--heading);font-size:clamp(2rem,6vw,3rem);color:#fafafa;letter-spacing:0.04em;" id="ban-countdown">4:00:00</div>
+          <div style="font-size:0.62rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--dim);">Lives available in</div>
         </div>
       </div>
 
@@ -293,6 +302,7 @@
     The Intergalactic Partnership Selection Committee &middot; Proceedings Confidential &middot; Case AC-2026-04<br>
     <a href="/committee/final.html">&larr; Back to Final Session</a> &nbsp;|&nbsp;
     <span style="color:var(--border)">Operated by <a href="/">Intergalactic Pepe</a>. Incorporated under the laws of Mars.</span>
+    <p style="font-size:9px;color:#444;text-align:center;margin-top:40px">By playing, you agree to the <a href="/committee/terms" style="color:#666">Committee Terms of Participation</a>.</p>
   </footer>
 
   <script>
@@ -321,14 +331,22 @@
     }
     updateTokenDisplay();
 
-    // ── SONG POOL ──
+    // ── SONG POOL (all rock / metal) ──
+    var BAN_MS = 4 * 60 * 60 * 1000; // 4 hours
+
     var SONGS = [
-      { notes: [196, 220, 247, 262, 294, 330, 349, 330], title: "Perfect Crime",   artist: "Guns N\u2019 Roses" },
-      { notes: [262, 294, 330, 349, 330, 294, 262, 247], title: "Ch\u00e9rie",     artist: "Khaled" },
-      { notes: [220, 247, 262, 294, 262, 247, 220, 196], title: "Time After Time", artist: "Cyndi Lauper" },
-      { notes: [294, 330, 349, 392, 349, 330, 294, 262], title: "Starlight",       artist: "Muse" },
-      { notes: [262, 294, 330, 392, 349, 330, 294, 262], title: "La Vie en Rose",  artist: "\u00c9dith Piaf" },
-      { notes: [196, 220, 262, 294, 330, 294, 262, 220], title: "The One",         artist: "Elton John" }
+      { notes: [196, 233, 262, 196, 233, 277, 262, 196], title: "Smoke on the Water",    artist: "Deep Purple" },
+      { notes: [330, 330, 330, 294, 262, 330, 294, 262], title: "Eye of the Tiger",      artist: "Survivor" },
+      { notes: [330, 247, 196, 165, 196, 247, 330, 247], title: "Nothing Else Matters",  artist: "Metallica" },
+      { notes: [247, 294, 330, 349, 330, 294, 247, 220], title: "Iron Man",              artist: "Black Sabbath" },
+      { notes: [294, 330, 349, 392, 349, 330, 262, 294], title: "Starlight",             artist: "Muse" },
+      { notes: [440, 415, 392, 370, 349, 330, 294, 262], title: "Stairway to Heaven",   artist: "Led Zeppelin" },
+      { notes: [659, 587, 392, 294, 330, 392, 440, 392], title: "Welcome to the Jungle", artist: "Guns N\u2019 Roses" },
+      { notes: [220, 220, 294, 220, 165, 247, 220, 196], title: "Back in Black",         artist: "AC/DC" },
+      { notes: [392, 392, 349, 330, 294, 262, 294, 330], title: "Pour Some Sugar on Me", artist: "Def Leppard" },
+      { notes: [294, 330, 294, 262, 294, 330, 262, 220], title: "Livin\u2019 on a Prayer", artist: "Bon Jovi" },
+      { notes: [196, 220, 247, 262, 247, 220, 196, 220], title: "Perfect Crime",         artist: "Guns N\u2019 Roses" },
+      { notes: [330, 330, 247, 262, 330, 294, 247, 220], title: "Paranoid",              artist: "Black Sabbath" }
     ];
 
     // ── GAME STATE ──
@@ -435,7 +453,7 @@
     }
 
     function showPanel(id) {
-      ['st-intro','st-active','st-complete','st-gameover'].forEach(function(pid) {
+      ['st-intro','st-active','st-complete','st-gameover','st-banned'].forEach(function(pid) {
         var el = document.getElementById(pid);
         if (el) el.style.display = (pid === id) ? 'block' : 'none';
       });
@@ -587,10 +605,10 @@
       var tokens    = 0;
 
       if (isCorrect) {
-        if (elapsed < 5000)       tokens = 30;
-        else if (elapsed < 8000)  tokens = 20;
-        else if (elapsed < 10000) tokens = 15;
-        else                      tokens = 10;
+        if (elapsed < 5000)       tokens = 60;
+        else if (elapsed < 8000)  tokens = 45;
+        else if (elapsed < 10000) tokens = 35;
+        else                      tokens = 25;
       }
 
       // Reveal answers
@@ -639,6 +657,47 @@
       showPanel('st-complete');
     }
 
+    // ── BAN HELPERS ──
+    var BAN_KEY = 'ipsc_soundtest_ban_until';
+    var banCountdownInterval = null;
+
+    function getBanUntil() {
+      try { return parseInt(localStorage.getItem(BAN_KEY) || '0', 10); } catch(e) { return 0; }
+    }
+    function setBan() {
+      var until = Date.now() + BAN_MS;
+      try { localStorage.setItem(BAN_KEY, String(until)); } catch(e) {}
+      return until;
+    }
+    function clearBan() {
+      try { localStorage.removeItem(BAN_KEY); } catch(e) {}
+    }
+    function formatCountdown(ms) {
+      if (ms <= 0) return '0:00:00';
+      var s = Math.floor(ms / 1000);
+      var h = Math.floor(s / 3600);
+      var m = Math.floor((s % 3600) / 60);
+      var sec = s % 60;
+      return h + ':' + (m < 10 ? '0' : '') + m + ':' + (sec < 10 ? '0' : '') + sec;
+    }
+    function startBanCountdown(until) {
+      if (banCountdownInterval) clearInterval(banCountdownInterval);
+      var el = document.getElementById('ban-countdown');
+      function tick() {
+        var remaining = until - Date.now();
+        if (remaining <= 0) {
+          clearInterval(banCountdownInterval);
+          banCountdownInterval = null;
+          clearBan();
+          showPanel('st-intro');
+          return;
+        }
+        if (el) el.textContent = formatCountdown(remaining);
+      }
+      tick();
+      banCountdownInterval = setInterval(tick, 1000);
+    }
+
     function showGameOver() {
       stopAudio();
       var ec = document.getElementById('gameover-correct');
@@ -648,18 +707,35 @@
       if (er) er.textContent = gs.tokensThisRound;
       if (et) et.textContent = getTokenBank().total;
       showPanel('st-gameover');
+      // Set 4-hour ban
+      var until = setBan();
+      setTimeout(function() {
+        showPanel('st-banned');
+        startBanCountdown(until);
+      }, 3000);
     }
+
+    // ── CHECK BAN ON LOAD ──
+    (function() {
+      var until = getBanUntil();
+      if (until && Date.now() < until) {
+        showPanel('st-banned');
+        startBanCountdown(until);
+      }
+    })();
 
     // ── EVENT LISTENERS ──
     document.getElementById('st-start-btn').addEventListener('click', function() {
+      var until = getBanUntil();
+      if (until && Date.now() < until) {
+        showPanel('st-banned');
+        startBanCountdown(until);
+        return;
+      }
       initAudio();
       startRound();
     });
     document.getElementById('st-again-btn').addEventListener('click', function() {
-      initAudio();
-      startRound();
-    });
-    document.getElementById('st-retry-btn').addEventListener('click', function() {
       initAudio();
       startRound();
     });
