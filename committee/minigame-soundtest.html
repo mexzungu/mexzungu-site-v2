@@ -11,7 +11,6 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/fonts.css">
-  <script src="https://www.youtube.com/iframe_api"></script>
   <style>
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
     :root {
@@ -84,12 +83,6 @@
     .quiz-btn:hover:not(:disabled) { opacity: 0.85; }
     .quiz-btn:disabled { opacity: 0.35; cursor: not-allowed; }
 
-    /* Loading */
-    .yt-loading { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 3rem 1.5rem; gap: 1rem; }
-    .yt-loading-ring { width: 32px; height: 32px; border: 2px solid var(--border); border-top-color: var(--pink); border-radius: 50%; animation: spin 0.8s linear infinite; }
-    .yt-loading-text { font-size: 0.62rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--dim); }
-    @keyframes spin { to { transform: rotate(360deg); } }
-
     /* Game status bar */
     .game-status-bar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; }
     .song-progress { font-size: 0.62rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--dim); }
@@ -117,7 +110,6 @@
     .clip-status { text-align: center; padding: 0.55rem 1rem; font-size: 0.62rem; letter-spacing: 0.18em; text-transform: uppercase; border: 1px solid var(--border); color: var(--dim); margin-bottom: 1rem; transition: color 0.2s, border-color 0.2s; }
     .clip-status.playing { color: var(--pink); border-color: rgba(225,75,135,0.3); }
     .clip-status.ended { color: var(--dim); }
-    .clip-status.skipped { color: rgba(200,124,46,0.9); border-color: rgba(200,124,46,0.35); }
 
     /* Feedback badge */
     .feedback-badge { text-align: center; padding: 0.65rem 1rem; margin-bottom: 0.75rem; font-family: var(--heading); font-size: 1.1rem; letter-spacing: 0.08em; display: none; animation: fadeInBadge 0.2s ease; }
@@ -152,17 +144,6 @@
     .gameover-sub { font-size: 0.75rem; color: var(--mid); margin-bottom: 2rem; letter-spacing: 0.06em; }
     @keyframes revealIn { from { opacity: 0; } to { opacity: 1; } }
 
-    /* Error panel */
-    .error-panel { text-align: center; padding: 2.5rem 1.5rem; border: 1px solid var(--border); }
-    .error-panel-icon { font-size: 2rem; color: var(--dim); margin-bottom: 1rem; }
-    .error-panel-title { font-family: var(--heading); font-size: 1.4rem; color: var(--mid); margin-bottom: 0.75rem; }
-    .error-panel-text { font-size: 0.82rem; color: var(--dim); line-height: 1.75; font-style: italic; max-width: 440px; margin: 0 auto; }
-
-    /* Mobile overlay */
-    .mobile-overlay { position: fixed; inset: 0; z-index: 998; background: rgba(8,8,9,0.96); display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 1.5rem; padding: 2rem; }
-    .mobile-overlay-title { font-family: var(--heading); font-size: clamp(1.4rem,5vw,2rem); color: var(--pink); text-align: center; }
-    .mobile-overlay-sub { font-size: 0.8rem; color: var(--mid); text-align: center; max-width: 320px; line-height: 1.7; }
-
     /* Footer */
     .site-footer { text-align: center; padding: 2rem 1.5rem; border-top: 1px solid var(--border); font-size: 0.65rem; color: var(--dim); letter-spacing: 0.08em; line-height: 1.9; }
     .site-footer a { color: var(--dim); text-decoration: none; }
@@ -171,16 +152,6 @@
 <body>
 
   <div class="st-flash" id="st-flash"></div>
-
-  <!-- Off-screen YouTube player -->
-  <div id="yt-player" style="position:fixed;left:-9999px;top:-9999px;width:1px;height:1px;overflow:hidden;pointer-events:none;"></div>
-
-  <!-- Mobile autoplay overlay -->
-  <div class="mobile-overlay" id="mobile-overlay" style="display:none;">
-    <div class="mobile-overlay-title">Tap to Start Audio</div>
-    <p class="mobile-overlay-sub">The Committee requires your attention. Tap to authorize audio playback.</p>
-    <button class="quiz-btn" onclick="resumeAfterGesture()">Start Audio</button>
-  </div>
 
   <div class="phase-banner scheduled">&#9711; &nbsp; GAME II &nbsp; &middot; &nbsp; SOUND TEST &nbsp; &middot; &nbsp; CASE AC-2026-04 &nbsp; &#9711;</div>
 
@@ -225,7 +196,7 @@
           <h2 class="quiz-intro-title">The Sound Test</h2>
           <p class="quiz-intro-sub">10 seconds. 4 choices. No mercy.<br>The Committee plays a clip. You identify the track. Speed earns more tokens. Errors cost lives.</p>
           <div class="quiz-intro-rules">
-            <span class="quiz-intro-rule">10 songs per round</span>
+            <span class="quiz-intro-rule">6 songs per round</span>
             <span class="quiz-intro-rule-sep">&middot;</span>
             <span class="quiz-intro-rule">Under 5s &rarr; 30 tokens</span>
             <span class="quiz-intro-rule-sep">&middot;</span>
@@ -241,18 +212,10 @@
         </div>
       </div>
 
-      <!-- API LOADING -->
-      <div id="st-loading" style="display:none;">
-        <div class="yt-loading">
-          <div class="yt-loading-ring"></div>
-          <div class="yt-loading-text">Audio system initialising</div>
-        </div>
-      </div>
-
       <!-- ACTIVE GAME -->
       <div id="st-active" style="display:none;">
         <div class="game-status-bar">
-          <div class="song-progress">Song <span id="song-num">1</span> / 10</div>
+          <div class="song-progress">Song <span id="song-num">1</span> / <span id="song-total">6</span></div>
           <div class="lives-bar">
             <span class="lives-label">Lives</span>
             <span class="life-seal alive">&#9679;</span>
@@ -270,7 +233,7 @@
             <div class="timer-fill" id="timer-fill"></div>
           </div>
         </div>
-        <div class="clip-status" id="clip-status">Loading clip...</div>
+        <div class="clip-status" id="clip-status">Ready</div>
         <div class="feedback-badge" id="feedback-badge"></div>
         <div class="quiz-options" id="st-options"></div>
       </div>
@@ -294,7 +257,7 @@
               <div class="result-stat-label">Total tokens</div>
             </div>
           </div>
-          <div class="result-panel-note">10 new songs from the pool. The Committee reshuffles.</div>
+          <div class="result-panel-note">6 songs from the pool. The Committee reshuffles.</div>
           <button class="quiz-btn" id="st-again-btn">Play Again &rarr;</button>
         </div>
       </div>
@@ -320,16 +283,6 @@
           </div>
           <div class="result-panel-note">Tokens earned before the terminal event are entered into the ledger.</div>
           <button class="quiz-btn" id="st-retry-btn">Try Again &rarr;</button>
-        </div>
-      </div>
-
-      <!-- ERROR -->
-      <div id="st-error" style="display:none;">
-        <div class="error-panel">
-          <div class="error-panel-icon">&#9888;</div>
-          <div class="error-panel-title">Audio system offline.</div>
-          <div class="error-panel-text">The Committee is investigating. Ensure network connectivity and reload the page. If the problem persists, the audio engineer has been dispatched.</div>
-          <button onclick="location.reload()" style="margin-top:1.5rem;padding:0.6rem 1.8rem;background:transparent;border:1px solid rgba(225,75,135,0.4);color:#E14B87;font-family:var(--sans);font-size:0.75rem;letter-spacing:0.18em;text-transform:uppercase;cursor:pointer;">Reload</button>
         </div>
       </div>
 
@@ -370,26 +323,12 @@
 
     // ── SONG POOL ──
     var SONGS = [
-      { id: "hTWKbfoikeg", title: "Smells Like Teen Spirit", artist: "Nirvana", start: 3 },
-      { id: "fJ9rUzIMcZQ", title: "Bohemian Rhapsody", artist: "Queen", start: 0 },
-      { id: "1w7OgIMMRc4", title: "Sweet Child O' Mine", artist: "Guns N' Roses", start: 0 },
-      { id: "pAgnJDJN4VA", title: "Back in Black", artist: "AC/DC", start: 3 },
-      { id: "0J2QdDbelmY", title: "Seven Nation Army", artist: "The White Stripes", start: 12 },
-      { id: "HgzGwKwLmgM", title: "Don't Stop Me Now", artist: "Queen", start: 7 },
-      { id: "btPJPFnesV4", title: "Eye of the Tiger", artist: "Survivor", start: 0 },
-      { id: "CD-E4bIaIkU", title: "Enter Sandman", artist: "Metallica", start: 12 },
-      { id: "XFkzRNyygfk", title: "Creep", artist: "Radiohead", start: 40 },
-      { id: "3T1c7GkzRQQ", title: "Roxanne", artist: "The Police", start: 0 },
-      { id: "vabnZ9-ex7o", title: "Come As You Are", artist: "Nirvana", start: 0 },
-      { id: "lDK9QqIzhwk", title: "Living on a Prayer", artist: "Bon Jovi", start: 17 },
-      { id: "BN1WwnEDWAM", title: "Should I Stay or Should I Go", artist: "The Clash", start: 4 },
-      { id: "o1tj2zJ2Wvg", title: "Welcome to the Jungle", artist: "Guns N' Roses", start: 0 },
-      { id: "gGdGFtwCNBE", title: "Mr. Brightside", artist: "The Killers", start: 0 },
-      { id: "l482T0yNkeo", title: "Highway to Hell", artist: "AC/DC", start: 0 },
-      { id: "SwYN7mTi6HM", title: "Jump", artist: "Van Halen", start: 0 },
-      { id: "XmSdTa9kaiQ", title: "With or Without You", artist: "U2", start: 76 },
-      { id: "aXjFDmDnDQo", title: "Heroes", artist: "David Bowie", start: 38 },
-      { id: "QQB28sVALEs", title: "Pour Some Sugar on Me", artist: "Def Leppard", start: 0 }
+      { notes: [196, 220, 247, 262, 294, 330, 349, 330], title: "Perfect Crime",   artist: "Guns N\u2019 Roses" },
+      { notes: [262, 294, 330, 349, 330, 294, 262, 247], title: "Ch\u00e9rie",     artist: "Khaled" },
+      { notes: [220, 247, 262, 294, 262, 247, 220, 196], title: "Time After Time", artist: "Cyndi Lauper" },
+      { notes: [294, 330, 349, 392, 349, 330, 294, 262], title: "Starlight",       artist: "Muse" },
+      { notes: [262, 294, 330, 392, 349, 330, 294, 262], title: "La Vie en Rose",  artist: "\u00c9dith Piaf" },
+      { notes: [196, 220, 262, 294, 330, 294, 262, 220], title: "The One",         artist: "Elton John" }
     ];
 
     // ── GAME STATE ──
@@ -401,71 +340,70 @@
       correctThisRound: 0,
       clipStartTime: null,
       timerInterval: null,
-      safetyTimeout: null,
-      mobileCheckTimeout: null,
       hasAnswered: false,
       clipEnded: false,
-      clipStarted: false,
       correctAnswerIdx: -1
     };
 
-    // ── YOUTUBE PLAYER ──
-    var player = null;
-    var apiReady = false;
-    var gameWaiting = false;
-    var apiErrorTimeout = null;
+    // ── WEB AUDIO ENGINE ──
+    var audioCtx = null;
+    var currentOscillators = [];
+    var loopTimeout = null;
 
-    window.onYouTubeIframeAPIReady = function() {
-      if (apiErrorTimeout) { clearTimeout(apiErrorTimeout); apiErrorTimeout = null; }
-      try {
-        player = new YT.Player('yt-player', {
-          height: '1', width: '1', videoId: '',
-          playerVars: { autoplay: 1, controls: 0, disablekb: 1, fs: 0, iv_load_policy: 3, modestbranding: 1, playsinline: 1, rel: 0 },
-          events: { onReady: onPlayerReady, onStateChange: onPlayerStateChange, onError: onPlayerError }
-        });
-      } catch(e) { showPanel('st-error'); }
-    };
-
-    function onPlayerReady() {
-      apiReady = true;
-      if (gameWaiting) {
-        gameWaiting = false;
-        showPanel('st-intro');
-        startRound();
+    function initAudio() {
+      if (!audioCtx) {
+        try {
+          audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        } catch(e) { console.warn('Web Audio API not supported'); }
+      }
+      if (audioCtx && audioCtx.state === 'suspended') {
+        audioCtx.resume();
       }
     }
 
-    function onPlayerStateChange(event) {
-      if (event.data === YT.PlayerState.PLAYING) {
-        if (!gs.clipStarted) {
-          gs.clipStarted = true;
-          hideMobileOverlay();
-          startTimer();
-          setClipStatus('playing', '\u25B6 Playing \u2014 identify the track');
-          // Safety stop at 11s after PLAYING
-          if (gs.safetyTimeout) clearTimeout(gs.safetyTimeout);
-          gs.safetyTimeout = setTimeout(function() {
-            if (!gs.hasAnswered && player) {
-              try { player.stopVideo(); } catch(e) {}
-              if (!gs.clipEnded) {
-                gs.clipEnded = true;
-                updateTimerToZero();
-                setClipStatus('ended', '\u2014 Clip ended \u2014 answer now for 10 tokens');
-              }
-            }
-          }, 11000);
-        }
-      } else if (event.data === YT.PlayerState.ENDED) {
-        if (!gs.hasAnswered && !gs.clipEnded) {
-          gs.clipEnded = true;
-          updateTimerToZero();
-          setClipStatus('ended', '\u2014 Clip ended \u2014 answer now for 10 tokens');
-        }
-      }
+    function stopAudio() {
+      if (loopTimeout) { clearTimeout(loopTimeout); loopTimeout = null; }
+      currentOscillators.forEach(function(osc) {
+        try { osc.stop(0); } catch(e) {}
+      });
+      currentOscillators = [];
     }
 
-    function onPlayerError() {
-      skipUnavailable();
+    function playNote(freq, startTime) {
+      if (!audioCtx) return;
+      var osc  = audioCtx.createOscillator();
+      var gain = audioCtx.createGain();
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(freq, startTime);
+      var peak     = 0.32;
+      var noteEnd  = startTime + 0.4;
+      var atkEnd   = startTime + 0.02;
+      var decEnd   = startTime + 0.07;
+      var relStart = startTime + 0.25;
+      gain.gain.setValueAtTime(0, startTime);
+      gain.gain.linearRampToValueAtTime(peak,        atkEnd);
+      gain.gain.linearRampToValueAtTime(peak * 0.7,  decEnd);
+      gain.gain.setValueAtTime(peak * 0.7,           relStart);
+      gain.gain.linearRampToValueAtTime(0,           noteEnd);
+      osc.start(startTime);
+      osc.stop(noteEnd + 0.01);
+      currentOscillators.push(osc);
+    }
+
+    function playSongSequence(notes) {
+      if (loopTimeout) { clearTimeout(loopTimeout); loopTimeout = null; }
+      if (!audioCtx) return;
+      currentOscillators = [];
+      function playLoop() {
+        if (!audioCtx) return;
+        var step = 0.45; // 0.4s note + 0.05s gap
+        var t    = audioCtx.currentTime + 0.05;
+        notes.forEach(function(freq, i) { playNote(freq, t + i * step); });
+        loopTimeout = setTimeout(playLoop, (notes.length * step + 0.4) * 1000);
+      }
+      playLoop();
     }
 
     // ── HELPERS ──
@@ -479,16 +417,15 @@
     }
 
     function makeRoundSongs() {
-      var idx = SONGS.map(function(_, i) { return i; });
-      return shuffle(idx).slice(0, 10).map(function(i) { return SONGS[i]; });
+      return shuffle(SONGS.slice());
     }
 
     function makeOptions(correctSong) {
-      var wrong = SONGS.filter(function(s) { return s.id !== correctSong.id; });
+      var wrong = SONGS.filter(function(s) { return s.title !== correctSong.title; });
       wrong = shuffle(wrong).slice(0, 3);
       var all = shuffle([correctSong].concat(wrong));
       return {
-        options: all.map(function(s) { return s.title + ' \u2014 ' + s.artist; }),
+        options:    all.map(function(s) { return s.title + ' \u2014 ' + s.artist; }),
         correctIdx: all.indexOf(correctSong)
       };
     }
@@ -498,7 +435,7 @@
     }
 
     function showPanel(id) {
-      ['st-intro','st-loading','st-active','st-complete','st-gameover','st-error'].forEach(function(pid) {
+      ['st-intro','st-active','st-complete','st-gameover'].forEach(function(pid) {
         var el = document.getElementById(pid);
         if (el) el.style.display = (pid === id) ? 'block' : 'none';
       });
@@ -553,9 +490,9 @@
 
     function tickTimerNum() {
       if (!gs.clipStartTime) return;
-      var elapsed = Date.now() - gs.clipStartTime;
+      var elapsed   = Date.now() - gs.clipStartTime;
       var remaining = Math.max(0, 10000 - elapsed);
-      var num = document.getElementById('timer-num');
+      var num  = document.getElementById('timer-num');
       var fill = document.getElementById('timer-fill');
       if (num) {
         num.textContent = Math.ceil(remaining / 1000);
@@ -564,6 +501,7 @@
       if (fill && remaining < 3000) fill.classList.add('danger');
       if (remaining === 0) {
         clearTimerInterval();
+        stopAudio();
         if (!gs.hasAnswered && !gs.clipEnded) {
           gs.clipEnded = true;
           setClipStatus('ended', '\u2014 Clip ended \u2014 answer now for 10 tokens');
@@ -571,69 +509,43 @@
       }
     }
 
-    function updateTimerToZero() {
-      clearTimerInterval();
-      var fill = document.getElementById('timer-fill');
-      var num = document.getElementById('timer-num');
-      if (fill) { fill.style.transition = 'none'; fill.style.width = '0%'; fill.classList.add('danger'); }
-      if (num) { num.textContent = '0'; num.className = 'timer-num expired'; }
-    }
-
     function clearTimerInterval() {
       if (gs.timerInterval) { clearInterval(gs.timerInterval); gs.timerInterval = null; }
     }
 
-    function clearAllTimeouts() {
-      if (gs.safetyTimeout) { clearTimeout(gs.safetyTimeout); gs.safetyTimeout = null; }
-      if (gs.mobileCheckTimeout) { clearTimeout(gs.mobileCheckTimeout); gs.mobileCheckTimeout = null; }
-    }
-
-    // ── MOBILE OVERLAY ──
-    function hideMobileOverlay() {
-      var el = document.getElementById('mobile-overlay');
-      if (el) el.style.display = 'none';
-      if (gs.mobileCheckTimeout) { clearTimeout(gs.mobileCheckTimeout); gs.mobileCheckTimeout = null; }
-    }
-
-    window.resumeAfterGesture = function() {
-      hideMobileOverlay();
-      if (player) { try { player.playVideo(); } catch(e) {} }
-    };
-
     // ── GAME FLOW ──
     function startRound() {
-      gs.lives = 3;
-      gs.roundSongs = makeRoundSongs();
-      gs.currentSongIdx = 0;
+      gs.lives           = 3;
+      gs.roundSongs      = makeRoundSongs();
+      gs.currentSongIdx  = 0;
       gs.tokensThisRound = 0;
       gs.correctThisRound = 0;
       updateLivesDisplay();
       updateRoundTokensLine();
+      var totalEl = document.getElementById('song-total');
+      if (totalEl) totalEl.textContent = gs.roundSongs.length;
       showPanel('st-active');
       loadSong();
     }
 
     function loadSong() {
       clearTimerInterval();
-      clearAllTimeouts();
+      stopAudio();
 
-      gs.hasAnswered = false;
-      gs.clipEnded = false;
-      gs.clipStarted = false;
-      gs.clipStartTime = null;
+      gs.hasAnswered     = false;
+      gs.clipEnded       = false;
+      gs.clipStartTime   = null;
       gs.correctAnswerIdx = -1;
 
-      var song = gs.roundSongs[gs.currentSongIdx];
+      var song  = gs.roundSongs[gs.currentSongIdx];
       var numEl = document.getElementById('song-num');
       if (numEl) numEl.textContent = gs.currentSongIdx + 1;
 
       // Reset timer bar
       var fill = document.getElementById('timer-fill');
-      var num = document.getElementById('timer-num');
+      var num  = document.getElementById('timer-num');
       if (fill) { fill.style.transition = 'none'; fill.style.width = '100%'; fill.classList.remove('danger'); }
-      if (num) { num.textContent = '10'; num.className = 'timer-num'; }
-
-      setClipStatus('loading', 'Loading clip...');
+      if (num)  { num.textContent = '10'; num.className = 'timer-num'; }
 
       // Hide feedback badge
       var badge = document.getElementById('feedback-badge');
@@ -644,21 +556,10 @@
       gs.correctAnswerIdx = optData.correctIdx;
       renderOptions(optData.options);
 
-      // Load and play clip
-      if (player && apiReady) {
-        try {
-          player.loadVideoById({ videoId: song.id, startSeconds: song.start, endSeconds: song.start + 10 });
-        } catch(e) { skipUnavailable(); return; }
-        // Mobile check: show overlay if not playing after 2.5s
-        gs.mobileCheckTimeout = setTimeout(function() {
-          if (!gs.clipStarted && !gs.hasAnswered) { showMobileOverlay(); }
-        }, 2500);
-      }
-    }
-
-    function showMobileOverlay() {
-      var el = document.getElementById('mobile-overlay');
-      if (el) el.style.display = 'flex';
+      // Start audio and timer immediately — no external API dependency
+      playSongSequence(song.notes);
+      startTimer();
+      setClipStatus('playing', '\u25b6 Playing \u2014 identify the track');
     }
 
     function renderOptions(options) {
@@ -679,13 +580,11 @@
       if (gs.hasAnswered) return;
       gs.hasAnswered = true;
       clearTimerInterval();
-      clearAllTimeouts();
-      hideMobileOverlay();
-      if (player) { try { player.stopVideo(); } catch(e) {} }
+      stopAudio();
 
-      var elapsed = gs.clipStartTime ? (Date.now() - gs.clipStartTime) : 99999;
+      var elapsed   = gs.clipStartTime ? (Date.now() - gs.clipStartTime) : 99999;
       var isCorrect = (selectedIdx === gs.correctAnswerIdx);
-      var tokens = 0;
+      var tokens    = 0;
 
       if (isCorrect) {
         if (elapsed < 5000)       tokens = 30;
@@ -706,13 +605,13 @@
 
       var badge = document.getElementById('feedback-badge');
       if (badge) {
-        badge.textContent = isCorrect ? ('+' + tokens + ' tokens') : '-1 life';
-        badge.className = 'feedback-badge ' + (isCorrect ? 'correct' : 'wrong');
+        badge.textContent  = isCorrect ? ('+' + tokens + ' tokens') : '-1 life';
+        badge.className    = 'feedback-badge ' + (isCorrect ? 'correct' : 'wrong');
         badge.style.display = 'block';
       }
 
       if (isCorrect) {
-        gs.tokensThisRound += tokens;
+        gs.tokensThisRound  += tokens;
         gs.correctThisRound++;
         addTokens('soundtest', tokens);
         updateRoundTokensLine();
@@ -724,28 +623,13 @@
       setTimeout(function() {
         if (gs.lives <= 0) { showGameOver(); return; }
         gs.currentSongIdx++;
-        if (gs.currentSongIdx >= 10) { showRoundComplete(); return; }
+        if (gs.currentSongIdx >= gs.roundSongs.length) { showRoundComplete(); return; }
         loadSong();
       }, 1600);
     }
 
-    function skipUnavailable() {
-      if (gs.hasAnswered) return;
-      clearTimerInterval();
-      clearAllTimeouts();
-      if (player) { try { player.stopVideo(); } catch(e) {} }
-      setClipStatus('skipped', 'Track unavailable \u2014 skipping');
-      var opts = document.querySelectorAll('.quiz-opt');
-      opts.forEach(function(opt) { opt.classList.add('locked'); });
-      setTimeout(function() {
-        gs.currentSongIdx++;
-        if (gs.currentSongIdx >= 10) { showRoundComplete(); return; }
-        loadSong();
-      }, 1500);
-    }
-
     function showRoundComplete() {
-      if (player) { try { player.stopVideo(); } catch(e) {} }
+      stopAudio();
       var el = document.getElementById('complete-correct');
       var er = document.getElementById('complete-round-tokens');
       var et = document.getElementById('complete-total-tokens');
@@ -756,7 +640,7 @@
     }
 
     function showGameOver() {
-      if (player) { try { player.stopVideo(); } catch(e) {} }
+      stopAudio();
       var ec = document.getElementById('gameover-correct');
       var er = document.getElementById('gameover-round-tokens');
       var et = document.getElementById('gameover-total-tokens');
@@ -768,19 +652,17 @@
 
     // ── EVENT LISTENERS ──
     document.getElementById('st-start-btn').addEventListener('click', function() {
-      if (!apiReady) {
-        gameWaiting = true;
-        showPanel('st-loading');
-        apiErrorTimeout = setTimeout(function() {
-          if (!apiReady) { showPanel('st-error'); }
-        }, 25000);
-      } else {
-        startRound();
-      }
+      initAudio();
+      startRound();
     });
-
-    document.getElementById('st-again-btn').addEventListener('click', function() { startRound(); });
-    document.getElementById('st-retry-btn').addEventListener('click', function() { startRound(); });
+    document.getElementById('st-again-btn').addEventListener('click', function() {
+      initAudio();
+      startRound();
+    });
+    document.getElementById('st-retry-btn').addEventListener('click', function() {
+      initAudio();
+      startRound();
+    });
   </script>
 
 </body>
