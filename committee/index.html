@@ -408,5 +408,122 @@
   </script>
 
 
+  <!-- Committee Promo Banner -->
+  <style>
+    #committee-promo-banner {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 9999;
+      background: #E14B87;
+      color: #fff;
+      font-family: 'Space Grotesk', -apple-system, sans-serif;
+      font-weight: 700;
+      font-size: 0.95rem;
+      letter-spacing: 0.02em;
+      text-align: center;
+      padding: 10px 48px 10px 16px;
+      box-shadow: 0 2px 12px rgba(225,75,135,0.45);
+      line-height: 1.4;
+    }
+    #committee-promo-banner.visible { display: block; }
+    #committee-promo-close {
+      position: absolute;
+      right: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      color: #fff;
+      font-size: 1.2rem;
+      cursor: pointer;
+      line-height: 1;
+      padding: 0 4px;
+      opacity: 0.8;
+    }
+    #committee-promo-close:hover { opacity: 1; }
+    body.has-promo-banner { padding-top: 48px; }
+  </style>
+  <div id="committee-promo-banner" role="alert">
+    <span id="committee-promo-text"></span>
+    <span id="committee-promo-countdown"></span>
+    <button id="committee-promo-close" aria-label="Dismiss">&times;</button>
+  </div>
+  <script>
+    (function() {
+      var PROMO_URL = 'https://panda.mexzungu.com/committee/promo';
+      var POLL_MS   = 15000;
+      var banner    = document.getElementById('committee-promo-banner');
+      var textEl    = document.getElementById('committee-promo-text');
+      var cdEl      = document.getElementById('committee-promo-countdown');
+      var closeBtn  = document.getElementById('committee-promo-close');
+      var dismissed = false;
+      var cdInterval = null;
+
+      closeBtn.addEventListener('click', function() {
+        dismissed = true;
+        hideBanner();
+      });
+
+      function hideBanner() {
+        banner.classList.remove('visible');
+        document.body.classList.remove('has-promo-banner');
+        if (cdInterval) { clearInterval(cdInterval); cdInterval = null; }
+      }
+
+      function showBanner(text, expiresAt) {
+        if (dismissed) return;
+        textEl.textContent = text + ' ';
+        banner.classList.add('visible');
+        document.body.classList.add('has-promo-banner');
+
+        if (cdInterval) { clearInterval(cdInterval); cdInterval = null; }
+
+        if (expiresAt) {
+          function updateCountdown() {
+            var now = Date.now();
+            var end = new Date(expiresAt).getTime();
+            var diff = Math.max(0, Math.floor((end - now) / 1000));
+            if (diff <= 0) {
+              cdEl.textContent = '';
+              hideBanner();
+              return;
+            }
+            var h = Math.floor(diff / 3600);
+            var m = Math.floor((diff % 3600) / 60);
+            var s = diff % 60;
+            var parts = [];
+            if (h > 0) parts.push(h + 'h');
+            if (m > 0 || h > 0) parts.push(m + 'm');
+            parts.push(s + 's');
+            cdEl.textContent = '(' + parts.join(' ') + ' remaining)';
+          }
+          updateCountdown();
+          cdInterval = setInterval(updateCountdown, 1000);
+        } else {
+          cdEl.textContent = '';
+        }
+      }
+
+      function checkPromo() {
+        fetch(PROMO_URL, { cache: 'no-store' })
+          .then(function(r) { return r.json(); })
+          .then(function(data) {
+            if (!data.active) { hideBanner(); return; }
+            if (data.expires_at) {
+              var end = new Date(data.expires_at).getTime();
+              if (Date.now() >= end) { hideBanner(); return; }
+            }
+            showBanner(data.text, data.expires_at || null);
+          })
+          .catch(function() {});
+      }
+
+      checkPromo();
+      setInterval(checkPromo, POLL_MS);
+    })();
+  </script>
 </body>
 </html>
