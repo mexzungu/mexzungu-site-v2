@@ -244,6 +244,39 @@
       color: #fff; background: #c85454; padding: 2px 5px;
       pointer-events: none; z-index: 2;
     }
+
+    /* ── PEEK COUNTDOWN TIMER (inside tier card) ── */
+    .tier-peek-timer {
+      margin-top: 0.75rem; padding: 0.45rem 0.75rem;
+      border: 1px solid rgba(225,75,135,0.2); background: rgba(225,75,135,0.04);
+      text-align: center;
+    }
+    .tier-peek-timer-label {
+      font-size: 0.46rem; letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--dim); margin-bottom: 0.2rem;
+    }
+    .tier-peek-timer-value {
+      font-family: var(--mono); font-size: 0.82rem; letter-spacing: 0.1em;
+      color: var(--pink);
+    }
+
+    /* ── PER-TIER STATUS BADGES ── */
+    .tier-status-badge {
+      display: inline-block; font-size: 0.46rem; letter-spacing: 0.2em;
+      text-transform: uppercase; padding: 2px 7px; margin-top: 0.6rem; white-space: nowrap;
+    }
+    .tier-status-badge.completed {
+      background: rgba(61,189,110,0.08); color: rgba(61,189,110,0.85);
+      border: 1px solid rgba(61,189,110,0.2);
+    }
+    .tier-status-badge.expired {
+      background: rgba(60,60,60,0.12); color: #555;
+      border: 1px solid #2a2a2a;
+    }
+
+    /* ── TIER CARD STATE CLASSES ── */
+    .tier-card.tier-completed { opacity: 0.65; }
+    .tier-card.tier-expired   { opacity: 0.45; pointer-events: none; }
   </style>
 </head>
 <body>
@@ -475,15 +508,42 @@
 
     // ── GAME EVENT TRACKING ──
     var GAME_EVENT_URL = "https://panda.mexzungu.com/committee/game-event";
+    var PENDING_EVENTS_KEY = "pendingGameEvents";
+
     function trackGameEvent(tier, eventType, tokensSpent) {
-      try {
-        fetch(GAME_EVENT_URL, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ tier: tier, event_type: eventType, tokens_spent: tokensSpent })
-        }).catch(function() {});
-      } catch(e) {}
+      fetch(GAME_EVENT_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ tier: tier, event_type: eventType, tokens_spent: tokensSpent })
+      }).catch(function() {
+        try {
+          var pending = JSON.parse(localStorage.getItem(PENDING_EVENTS_KEY) || '[]');
+          pending.push({ tier: tier, eventType: eventType, tokensSpent: tokensSpent, ts: Date.now() });
+          localStorage.setItem(PENDING_EVENTS_KEY, JSON.stringify(pending));
+        } catch(e) {}
+      });
     }
+
+    // Retry any events that failed to POST during a previous session
+    (function retryPendingEvents() {
+      try {
+        var pending = JSON.parse(localStorage.getItem(PENDING_EVENTS_KEY) || '[]');
+        if (!pending.length) return;
+        var stillPending = [];
+        var promises = pending.map(function(ev) {
+          return fetch(GAME_EVENT_URL, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ tier: ev.tier, event_type: ev.eventType, tokens_spent: ev.tokensSpent })
+          }).then(function(r) {
+            if (!r.ok) stillPending.push(ev);
+          }).catch(function() { stillPending.push(ev); });
+        });
+        Promise.all(promises).then(function() {
+          try { localStorage.setItem(PENDING_EVENTS_KEY, JSON.stringify(stillPending)); } catch(e) {}
+        });
+      } catch(e) {}
+    })();
 
     // ── TOKEN HELPERS ──
     function getTokenBank() {
@@ -647,7 +707,11 @@
       var prize = STAKES[tier];
       var assignment = ASSIGNMENTS[tier];
       var now = Date.now();
-      var deadline = now + (48 * 60 * 60 * 1000);
+      // Tier IV: 30-day window for the Captain to issue the instruction.
+      // The 48h delivery clock only starts when that instruction arrives.
+      var deadline = tier === 4
+        ? now + (30 * 24 * 60 * 60 * 1000)
+        : now + (48 * 60 * 60 * 1000);
 
       // Peek fee was already charged in doReveal() — no additional deduction here
 
@@ -692,10 +756,22 @@
 
       var prize = entry.prize || STAKES[entry.tier] || '?';
       var noteEl = document.getElementById('commission-accepted-note');
-      if (noteEl) noteEl.innerHTML = 'Contact the Captain to confirm completion and earn ' + prize + ' tokens.<br>Deadline logged. The record is permanent.';
 
-      var deadline = new Date(entry.deadline).getTime();
-      startCountdown(deadline);
+      var timerLabel = accepted.querySelector('.commission-timer-label');
+      var timerBlock = accepted.querySelector('.commission-timer');
+
+      if (entry.tier === 4) {
+        // Tier IV: no countdown. The 48h clock starts when the Captain issues the instruction.
+        if (timerLabel) timerLabel.style.display = 'none';
+        if (timerBlock) timerBlock.style.display = 'none';
+        if (noteEl) noteEl.innerHTML = 'The Captain will issue an instruction within 30 days. You will have 48 hours to deliver from the moment it arrives. Stay ready.';
+      } else {
+        if (timerLabel) timerLabel.style.display = '';
+        if (timerBlock) timerBlock.style.display = '';
+        if (noteEl) noteEl.innerHTML = 'Contact the Captain to confirm completion and earn ' + prize + ' tokens.<br>Deadline logged. The record is permanent.';
+        var deadline = new Date(entry.deadline).getTime();
+        startCountdown(deadline);
+      }
     }
 
     function showDeclinedState(fee, tier) {
@@ -882,6 +958,112 @@
       function checkPromo(){fetch(PROMO_URL,{cache:'no-store'}).then(function(r){return r.json();}).then(function(data){if(!data.active){hideBanner();return;}if(data.expires_at){var end=new Date(data.expires_at).getTime();if(Date.now()>=end){hideBanner();return;}}showBanner(data.text,data.expires_at||null);}).catch(function(){});}
       checkPromo();setInterval(checkPromo,15000);
     })();
+  </script>
+
+  <script>
+  // ── PEEK STATUS — 24h WINDOW TIMERS ──
+  (function() {
+    var PEEK_STATUS_URL = 'https://panda.mexzungu.com/committee/peek-status';
+    var tickIntervals = {};  // tier -> setInterval id
+
+    function pad2(n) { return String(Math.floor(n)).padStart(2, '0'); }
+
+    function fmtRemaining(ms) {
+      if (ms <= 0) return '00:00:00';
+      var h = Math.floor(ms / 3600000);
+      var m = Math.floor((ms % 3600000) / 60000);
+      var s = Math.floor((ms % 60000) / 1000);
+      return pad2(h) + ':' + pad2(m) + ':' + pad2(s);
+    }
+
+    function timerColor(ms) {
+      if (ms > 6 * 3600000) return 'var(--pink)';
+      if (ms > 1 * 3600000) return '#c87c2e';
+      return '#c85454';
+    }
+
+    function applyStatus(status) {
+      [1, 2, 3, 4].forEach(function(tier) {
+        var ts = status[String(tier)];
+        if (!ts) return;
+
+        var card = document.querySelector('.tier-card[data-tier="' + tier + '"]');
+        if (!card) return;
+
+        // Clear previous injected elements and intervals
+        var prev = card.querySelectorAll('.tier-peek-timer, .tier-status-badge');
+        prev.forEach(function(el) { el.remove(); });
+        if (tickIntervals[tier]) { clearInterval(tickIntervals[tier]); tickIntervals[tier] = null; }
+        card.classList.remove('tier-completed', 'tier-expired');
+
+        if (ts.completed) {
+          card.classList.add('tier-completed');
+          var b = document.createElement('div');
+          b.className = 'tier-status-badge completed';
+          b.textContent = 'COMPLETED';
+          card.appendChild(b);
+          // Disable button interaction
+          var btn = card.querySelector('.tier-btn');
+          if (btn) { btn.disabled = true; btn.style.opacity = '0.3'; btn.style.pointerEvents = 'none'; }
+          return;
+        }
+
+        if (ts.expired) {
+          card.classList.add('tier-expired');
+          var b = document.createElement('div');
+          b.className = 'tier-status-badge expired';
+          b.textContent = 'EXPIRED';
+          card.appendChild(b);
+          return;
+        }
+
+        if (!ts.first_peek) return; // Never peeked — nothing to show
+
+        // Peeked, not completed, not yet expired — show live countdown
+        var expiryMs = new Date(ts.first_peek).getTime() + 24 * 3600 * 1000;
+
+        var timerEl = document.createElement('div');
+        timerEl.className = 'tier-peek-timer';
+        timerEl.innerHTML =
+          '<div class="tier-peek-timer-label">Window closes in</div>' +
+          '<div class="tier-peek-timer-value"></div>';
+        card.appendChild(timerEl);
+
+        var valEl = timerEl.querySelector('.tier-peek-timer-value');
+
+        function tick() {
+          var rem = expiryMs - Date.now();
+          if (rem <= 0) {
+            clearInterval(tickIntervals[tier]);
+            valEl.textContent = 'EXPIRED';
+            valEl.style.color = '#c85454';
+            card.classList.add('tier-expired');
+            timerEl.remove();
+            var b2 = document.createElement('div');
+            b2.className = 'tier-status-badge expired';
+            b2.textContent = 'EXPIRED';
+            card.appendChild(b2);
+            return;
+          }
+          valEl.textContent = fmtRemaining(rem);
+          valEl.style.color = timerColor(rem);
+        }
+
+        tick();
+        tickIntervals[tier] = setInterval(tick, 1000);
+      });
+    }
+
+    function loadStatus() {
+      fetch(PEEK_STATUS_URL, { cache: 'no-store' })
+        .then(function(r) { return r.json(); })
+        .then(applyStatus)
+        .catch(function() {});
+    }
+
+    loadStatus();
+    setInterval(loadStatus, 60000);
+  })();
   </script>
 
 </body>
