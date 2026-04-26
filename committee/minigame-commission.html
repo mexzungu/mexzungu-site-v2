@@ -444,8 +444,17 @@
           <div class="commission-accepted-assignment-label">Your Assignment</div>
           <div class="commission-accepted-assignment-text" id="accepted-assignment-text"></div>
         </div>
+        <div id="tier4-instruction-display" style="display:none;padding:1.25rem;border:1px solid rgba(225,75,135,0.25);background:rgba(8,8,9,0.6);margin-bottom:1.25rem;text-align:left;">
+          <div style="font-size:0.52rem;letter-spacing:0.3em;text-transform:uppercase;color:var(--dim);margin-bottom:0.6rem;">The Instruction</div>
+          <div id="tier4-instruction-text" style="font-size:0.92rem;color:var(--text);line-height:1.8;"></div>
+        </div>
         <div class="commission-timer-label">Time remaining to deliver</div>
         <div class="commission-timer">
+          <div class="commission-timer-unit" id="cd-days-unit" style="display:none">
+            <div class="commission-timer-digit" id="cd-d">30</div>
+            <div class="commission-timer-unit-label">Days</div>
+          </div>
+          <div class="commission-timer-sep" id="cd-days-sep" style="display:none">:</div>
           <div class="commission-timer-unit">
             <div class="commission-timer-digit" id="cd-h">48</div>
             <div class="commission-timer-unit-label">Hours</div>
@@ -510,22 +519,33 @@
     var GAME_EVENT_URL = "https://panda.mexzungu.com/committee/game-event";
     var PENDING_EVENTS_KEY = "pendingGameEvents";
 
+    function _queueEvent(tier, eventType, tokensSpent) {
+      try {
+        var pending = JSON.parse(localStorage.getItem(PENDING_EVENTS_KEY) || '[]');
+        pending.push({ tier: tier, eventType: eventType, tokensSpent: tokensSpent, ts: Date.now() });
+        localStorage.setItem(PENDING_EVENTS_KEY, JSON.stringify(pending));
+        console.warn('[Committee] game-event queued for retry: tier ' + tier + ' ' + eventType);
+      } catch(e) {}
+    }
+
     function trackGameEvent(tier, eventType, tokensSpent) {
       fetch(GAME_EVENT_URL, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ tier: tier, event_type: eventType, tokens_spent: tokensSpent })
-      }).catch(function() {
-        try {
-          var pending = JSON.parse(localStorage.getItem(PENDING_EVENTS_KEY) || '[]');
-          pending.push({ tier: tier, eventType: eventType, tokensSpent: tokensSpent, ts: Date.now() });
-          localStorage.setItem(PENDING_EVENTS_KEY, JSON.stringify(pending));
-        } catch(e) {}
+      }).then(function(r) {
+        if (!r.ok) {
+          console.error('[Committee] game-event POST failed HTTP ' + r.status + ' — tier ' + tier + ' ' + eventType + ' queued for retry');
+          _queueEvent(tier, eventType, tokensSpent);
+        }
+      }).catch(function(err) {
+        console.error('[Committee] game-event network error — tier ' + tier + ' ' + eventType + ' queued for retry:', err);
+        _queueEvent(tier, eventType, tokensSpent);
       });
     }
 
-    // Retry any events that failed to POST during a previous session
-    (function retryPendingEvents() {
+    // Retry any events that failed to POST — runs on page load and every 30 seconds
+    function retryPendingEvents() {
       try {
         var pending = JSON.parse(localStorage.getItem(PENDING_EVENTS_KEY) || '[]');
         if (!pending.length) return;
@@ -536,14 +556,26 @@
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ tier: ev.tier, event_type: ev.eventType, tokens_spent: ev.tokensSpent })
           }).then(function(r) {
-            if (!r.ok) stillPending.push(ev);
-          }).catch(function() { stillPending.push(ev); });
+            if (!r.ok) {
+              console.error('[Committee] retry failed HTTP ' + r.status + ' — tier ' + ev.tier + ' ' + ev.eventType);
+              stillPending.push(ev);
+            }
+          }).catch(function(err) {
+            console.error('[Committee] retry network error — tier ' + ev.tier + ' ' + ev.eventType + ':', err);
+            stillPending.push(ev);
+          });
         });
         Promise.all(promises).then(function() {
           try { localStorage.setItem(PENDING_EVENTS_KEY, JSON.stringify(stillPending)); } catch(e) {}
         });
-      } catch(e) {}
-    })();
+      } catch(e) {
+        console.error('[Committee] retryPendingEvents error:', e);
+      }
+    }
+
+    // Run on load, then every 30 seconds regardless of page reloads
+    retryPendingEvents();
+    setInterval(retryPendingEvents, 30000);
 
     // ── TOKEN HELPERS ──
     function getTokenBank() {
@@ -761,10 +793,9 @@
       var timerBlock = accepted.querySelector('.commission-timer');
 
       if (entry.tier === 4) {
-        // Tier IV: no countdown. The 48h clock starts when the Captain issues the instruction.
-        if (timerLabel) timerLabel.style.display = 'none';
-        if (timerBlock) timerBlock.style.display = 'none';
-        if (noteEl) noteEl.innerHTML = 'The Captain will issue an instruction within 30 days. You will have 48 hours to deliver from the moment it arrives. Stay ready.';
+        if (timerLabel) timerLabel.style.display = '';
+        if (timerBlock) timerBlock.style.display = '';
+        startTier4Countdown(entry);
       } else {
         if (timerLabel) timerLabel.style.display = '';
         if (timerBlock) timerBlock.style.display = '';
@@ -834,6 +865,107 @@
         timerDigits.forEach(function(d) {
           d.style.color = diff < 6 * 3600000 ? '#c85454' : 'var(--pink)';
         });
+      }
+
+      update();
+      countdownInterval = setInterval(update, 1000);
+    }
+
+    // ── TIER IV TWO-PHASE COUNTDOWN ──
+    function startTier4Countdown(entry) {
+      if (countdownInterval) clearInterval(countdownInterval);
+
+      var dDaysUnit    = document.getElementById('cd-days-unit');
+      var dDaysSep     = document.getElementById('cd-days-sep');
+      var timerLabel   = document.querySelector('.commission-timer-label');
+      var noteEl       = document.getElementById('commission-accepted-note');
+      var instrDisplay = document.getElementById('tier4-instruction-display');
+      var instrText    = document.getElementById('tier4-instruction-text');
+      var dEl = document.getElementById('cd-d');
+      var hEl = document.getElementById('cd-h');
+      var mEl = document.getElementById('cd-m');
+      var sEl = document.getElementById('cd-s');
+      var prize = entry.prize || 500;
+
+      function update() {
+        var instrRaw = null;
+        var instrData = null;
+        try {
+          instrRaw = localStorage.getItem('ipsc_tier4_instruction');
+          if (instrRaw) instrData = JSON.parse(instrRaw);
+        } catch(e) {}
+
+        if (instrData && instrData.issuedAt) {
+          // ── Phase 2: instruction received, 48h delivery clock ──
+          var deadline48 = new Date(instrData.issuedAt).getTime() + (48 * 3600000);
+          var diff = deadline48 - Date.now();
+
+          if (timerLabel) timerLabel.textContent = 'Time to deliver';
+          if (dDaysUnit)  dDaysUnit.style.display  = 'none';
+          if (dDaysSep)   dDaysSep.style.display   = 'none';
+          if (instrDisplay) instrDisplay.style.display = 'block';
+          if (instrText)    instrText.innerHTML = instrData.text || '';
+          if (noteEl) noteEl.innerHTML = 'Contact the Captain to confirm completion and earn ' + prize + ' tokens.<br>Deadline logged. The record is permanent.';
+
+          if (diff <= 0) {
+            clearInterval(countdownInterval);
+            if (hEl) hEl.textContent = '00';
+            if (mEl) mEl.textContent = '00';
+            if (sEl) sEl.textContent = '00';
+            if (!document.querySelector('.commission-expired')) {
+              var expiredDiv = document.createElement('div');
+              expiredDiv.className = 'commission-expired';
+              expiredDiv.textContent = 'TIME EXPIRED';
+              var timer = document.querySelector('.commission-timer');
+              if (timer) timer.insertAdjacentElement('beforebegin', expiredDiv);
+            }
+            if (noteEl) noteEl.textContent = 'The window has closed. Contact the Captain to explain. The Committee is listening.';
+            return;
+          }
+
+          var h = Math.floor(diff / 3600000);
+          var m = Math.floor((diff % 3600000) / 60000);
+          var s = Math.floor((diff % 60000) / 1000);
+          if (hEl) hEl.textContent = String(h).padStart(2, '0');
+          if (mEl) mEl.textContent = String(m).padStart(2, '0');
+          if (sEl) sEl.textContent = String(s).padStart(2, '0');
+          document.querySelectorAll('.commission-timer-digit').forEach(function(d) {
+            d.style.color = diff < 6 * 3600000 ? '#c85454' : 'var(--pink)';
+          });
+
+        } else {
+          // ── Phase 1: waiting for Captain's instruction, 30-day window ──
+          var deadline30 = new Date(entry.deadline).getTime();
+          var diff = deadline30 - Date.now();
+
+          if (timerLabel) timerLabel.textContent = "Captain's window to issue an instruction";
+          if (dDaysUnit)  dDaysUnit.style.display  = '';
+          if (dDaysSep)   dDaysSep.style.display   = '';
+          if (instrDisplay) instrDisplay.style.display = 'none';
+          if (noteEl) noteEl.innerHTML = 'Your 48-hour delivery clock starts the moment the instruction arrives. Stay ready.';
+
+          if (diff <= 0) {
+            clearInterval(countdownInterval);
+            if (dEl) dEl.textContent = '00';
+            if (hEl) hEl.textContent = '00';
+            if (mEl) mEl.textContent = '00';
+            if (sEl) sEl.textContent = '00';
+            if (noteEl) noteEl.textContent = "The Captain's window has closed.";
+            return;
+          }
+
+          var days = Math.floor(diff / 86400000);
+          var h    = Math.floor((diff % 86400000) / 3600000);
+          var m    = Math.floor((diff % 3600000)  / 60000);
+          var s    = Math.floor((diff % 60000)    / 1000);
+          if (dEl) dEl.textContent = String(days).padStart(2, '0');
+          if (hEl) hEl.textContent = String(h).padStart(2, '0');
+          if (mEl) mEl.textContent = String(m).padStart(2, '0');
+          if (sEl) sEl.textContent = String(s).padStart(2, '0');
+          document.querySelectorAll('.commission-timer-digit').forEach(function(d) {
+            d.style.color = 'var(--pink)';
+          });
+        }
       }
 
       update();
