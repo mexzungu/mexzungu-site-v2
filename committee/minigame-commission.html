@@ -5,7 +5,7 @@
   <link rel="icon" href="/favicon.ico" type="image/x-icon">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#080809">
-  <title>The Commission — A Special Assignment</title>
+  <title>Mystery Wager — A Special Assignment</title>
   <meta name="robots" content="noindex, nofollow">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -92,6 +92,10 @@
       border-left: 2px solid var(--pink); font-family: var(--mono);
       font-size: 0.7rem; color: var(--mid); line-height: 1.8;
     }
+
+    /* ── ENVELOPE HERO IMAGE ── */
+    .envelope-hero { text-align: center; margin: 0 auto 2rem; max-width: 340px; }
+    .envelope-hero img { width: 100%; border-radius: 4px; box-shadow: 0 0 40px rgba(225,75,135,0.15); }
 
     /* ── TIER CARDS ── */
     .tier-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-bottom: 2rem; }
@@ -225,6 +229,21 @@
     /* ── SITE FOOTER ── */
     .site-footer { text-align: center; padding: 2rem 1.5rem; border-top: 1px solid var(--border); font-size: 0.65rem; color: var(--dim); letter-spacing: 0.08em; line-height: 1.9; }
     .site-footer a { color: var(--dim); text-decoration: none; }
+
+    /* ── OPTIONAL LINE + DEAL TIMER ── */
+    .hero-optional { font-family: var(--mono); font-size: 0.6rem; color: var(--dim); letter-spacing: 0.1em; margin-top: 0.75rem; }
+    #deal-timer { font-family: var(--mono); font-size: 0.6rem; color: var(--dim); letter-spacing: 0.12em; text-transform: uppercase; margin-top: 0.4rem; }
+    #deal-timer #timer-hms { color: var(--pink); }
+
+    /* ── DEALS EXPIRED STATE ── */
+    body.deals-expired .tier-card { opacity: 0.4; pointer-events: none; }
+    body.deals-expired .tier-card::after {
+      content: 'EXPIRED';
+      position: absolute; top: 0.5rem; right: 0.5rem;
+      font-family: var(--mono); font-size: 0.44rem; letter-spacing: 0.2em;
+      color: #fff; background: #c85454; padding: 2px 5px;
+      pointer-events: none; z-index: 2;
+    }
   </style>
 </head>
 <body>
@@ -299,8 +318,10 @@
         </div>
       </div>
       <p class="hero-over">&#9711; &nbsp; Special Assignment Protocol &nbsp; &middot; &nbsp; Limited Issue &nbsp; &#9711;</p>
-      <h1 class="hero-title">The Commission</h1>
+      <h1 class="hero-title">Mystery Wager</h1>
       <p class="hero-sub">This is not a game. This is a request. You will stake tokens. The assignment will be revealed. You will have 48 hours to deliver.</p>
+      <p class="hero-optional">Playing is optional. Each wager is live for 24 hours.</p>
+      <div id="deal-timer">DEALS RESET IN &nbsp;<span id="timer-hms">23:59:59</span></div>
       <div class="hero-expiry" id="hero-expiry">
         Available until <span id="expiry-display">--</span>
       </div>
@@ -317,19 +338,23 @@
           <div class="commission-brief-title">Committee Notice to Candidate</div>
           <div class="commission-brief-body">
             <p>The Committee has prepared a special assignment. This is not optional in the way you might hope it is optional.</p>
-            <p>You will choose a tier. You will stake the corresponding number of tokens. The assignment will be revealed. You will have forty-eight hours to deliver. Upon delivery, contact the Chairman to confirm completion and collect your bonus.</p>
+            <p>You will choose a tier. You will stake the corresponding number of tokens. The assignment will be revealed. You will have forty-eight hours to deliver. Upon delivery, contact the Captain to confirm completion and collect your bonus.</p>
             <p>If you decline after seeing the assignment, a viewing fee applies. The Committee is aware this feels unfair. The Committee does not have feelings about this.</p>
           </div>
           <div class="commission-warning">
-            Time-limited. Once accepted, cannot be undone. You have 48 hours from acceptance. Delivery confirmation is manual — contact the Chairman.
+            Time-limited. Once accepted, cannot be undone. You have 48 hours from acceptance. Delivery confirmation is manual — contact the Captain.
           </div>
+        </div>
+
+        <div class="envelope-hero">
+          <img src="https://mexzungu.com/img/social/mystery-wager-flyer.png" alt="Mystery Wager" />
         </div>
 
         <div class="tier-grid" id="tier-grid">
           <!-- TIER I -->
           <div class="tier-card" data-tier="1">
             <div class="tier-number">Tier I</div>
-            <div class="tier-label">The Ask</div>
+            <div class="tier-label">Hesitant</div>
             <div class="tier-stake">50</div>
             <div class="tier-stake-label">Prize on delivery</div>
             <div class="tier-mystery">Something within reach. Something you could do but haven't yet. The Committee has been thinking about it.</div>
@@ -340,7 +365,7 @@
           <!-- TIER II -->
           <div class="tier-card" data-tier="2">
             <div class="tier-number">Tier II</div>
-            <div class="tier-label">The Request</div>
+            <div class="tier-label">Willing</div>
             <div class="tier-stake">100</div>
             <div class="tier-stake-label">Prize on delivery</div>
             <div class="tier-mystery">A little more. A little bolder. The Committee has considered what you might hesitate at. It went with that.</div>
@@ -351,7 +376,7 @@
           <!-- TIER III -->
           <div class="tier-card" data-tier="3">
             <div class="tier-number">Tier III</div>
-            <div class="tier-label">The Challenge</div>
+            <div class="tier-label">Bold</div>
             <div class="tier-stake">200</div>
             <div class="tier-stake-label">Prize on delivery</div>
             <div class="tier-mystery">Someone you have been avoiding. He picks. You reach out. No script, no warning. The Committee has a list.</div>
@@ -362,7 +387,7 @@
           <!-- TIER IV -->
           <div class="tier-card" data-tier="4">
             <div class="tier-number">Tier IV</div>
-            <div class="tier-label">The Commission</div>
+            <div class="tier-label">Reckless</div>
             <div class="tier-stake">500</div>
             <div class="tier-stake-label">Prize on delivery</div>
             <div class="tier-mystery">You are not buying a challenge. You are buying a blank cheque. The Committee will fill it in. Within 30 days.</div>
@@ -372,7 +397,7 @@
         </div>
 
         <div class="commission-footer-note">
-          Delivery confirmation is manual. Contact the Chairman to confirm completion and receive your bonus.<br>
+          Delivery confirmation is manual. Contact the Captain to confirm completion and receive your bonus.<br>
           The Committee is watching. The Committee is always watching.
         </div>
       </div>
@@ -404,7 +429,7 @@
           </div>
         </div>
         <div class="commission-note" id="commission-accepted-note">
-          Contact the Chairman to confirm completion and receive your bonus.<br>
+          Contact the Captain to confirm completion and receive your bonus.<br>
           Deadline logged. The record is permanent.
         </div>
       </div>
@@ -447,6 +472,18 @@
     // PRIZES[tier] = tokens earned on delivery. VIEW_FEES[tier] = peek cost charged at reveal.
     var STAKES    = { 1: 50,  2: 100, 3: 200, 4: 500  };
     var VIEW_FEES = { 1: 25,  2: 50,  3: 100, 4: 250  };
+
+    // ── GAME EVENT TRACKING ──
+    var GAME_EVENT_URL = "https://panda.mexzungu.com/committee/game-event";
+    function trackGameEvent(tier, eventType, tokensSpent) {
+      try {
+        fetch(GAME_EVENT_URL, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ tier: tier, event_type: eventType, tokens_spent: tokensSpent })
+        }).catch(function() {});
+      } catch(e) {}
+    }
 
     // ── TOKEN HELPERS ──
     function getTokenBank() {
@@ -521,7 +558,7 @@
       if (Date.now() > end.getTime()) {
         var grid = document.getElementById('tier-grid');
         if (grid) {
-          grid.innerHTML = '<div style="text-align:center;padding:3rem 1rem;border:1px solid var(--border);grid-column:1/-1"><p style="font-family:var(--heading);font-size:1.4rem;color:var(--mid);margin-bottom:0.75rem">Commission Closed</p><p style="font-size:0.82rem;color:var(--dim);line-height:1.75">This assignment window has closed. The Committee may issue another. The Committee has not said when.</p></div>';
+          grid.innerHTML = '<div style="text-align:center;padding:3rem 1rem;border:1px solid var(--border);grid-column:1/-1"><p style="font-family:var(--heading);font-size:1.4rem;color:var(--mid);margin-bottom:0.75rem">Mystery Wager Closed</p><p style="font-size:0.82rem;color:var(--dim);line-height:1.75">This assignment window has closed. The Committee may issue another. The Committee has not said when.</p></div>';
         }
       }
     })();
@@ -593,6 +630,7 @@
       var fee = VIEW_FEES[currentTier];
       var prize = STAKES[currentTier];
       subtractTokens('commission', fee); // peek fee charged at reveal
+      trackGameEvent(currentTier, 'peek', fee);
       document.getElementById('modal-assignment-sealed').style.display = 'none';
       document.getElementById('modal-assignment-revealed').style.display = 'block';
       document.getElementById('modal-pre-reveal').style.display = 'none';
@@ -623,6 +661,7 @@
       };
       try { localStorage.setItem(COMMISSION_KEY, JSON.stringify(entry)); } catch(e) {}
       activeState = entry;
+      trackGameEvent(tier, 'complete', 0);
 
       closeModal();
       showAcceptedState(entry);
@@ -634,6 +673,7 @@
       var fee = VIEW_FEES[tier];
 
       // Peek fee was already charged in doReveal() — no additional deduction here
+      trackGameEvent(tier, 'reject', 0);
 
       closeModal();
       showDeclinedState(fee, tier);
@@ -652,7 +692,7 @@
 
       var prize = entry.prize || STAKES[entry.tier] || '?';
       var noteEl = document.getElementById('commission-accepted-note');
-      if (noteEl) noteEl.innerHTML = 'Contact the Chairman to confirm completion and earn ' + prize + ' tokens.<br>Deadline logged. The record is permanent.';
+      if (noteEl) noteEl.innerHTML = 'Contact the Captain to confirm completion and earn ' + prize + ' tokens.<br>Deadline logged. The record is permanent.';
 
       var deadline = new Date(entry.deadline).getTime();
       startCountdown(deadline);
@@ -701,7 +741,7 @@
           expiredDiv.textContent = 'TIME EXPIRED';
           var timer = document.querySelector('.commission-timer');
           if (timer) timer.insertAdjacentElement('beforebegin', expiredDiv);
-          if (noteEl) noteEl.textContent = 'The window has closed. Contact the Chairman to explain. The Committee is listening.';
+          if (noteEl) noteEl.textContent = 'The window has closed. Contact the Captain to explain. The Committee is listening.';
           return;
         }
 
@@ -749,6 +789,70 @@
     document.getElementById('modal-overlay').addEventListener('click', function(e) {
       if (e.target === this) closeModal();
     });
+  </script>
+
+  <script>
+  // ── DEAL RESET COUNTDOWN (midnight Barcelona / Europe/Madrid) ──
+  (function() {
+    var timerEl = document.getElementById('timer-hms');
+    if (!timerEl) return;
+
+    function getMadridOffsetMs(date) {
+      var madridStr = new Date(date).toLocaleString('en-US', { timeZone: 'Europe/Madrid' });
+      var utcStr    = new Date(date).toLocaleString('en-US', { timeZone: 'UTC' });
+      return new Date(madridStr).getTime() - new Date(utcStr).getTime();
+    }
+
+    function getNextMidnightMadrid() {
+      var now = new Date();
+      var offsetMs = getMadridOffsetMs(now);
+      var madridDate = new Intl.DateTimeFormat('en-CA', {
+        timeZone: 'Europe/Madrid',
+        year: 'numeric', month: '2-digit', day: '2-digit'
+      }).format(now);
+      var ymd = madridDate.split('-').map(Number);
+      var midnightUTC = Date.UTC(ymd[0], ymd[1] - 1, ymd[2]) - offsetMs;
+      if (now.getTime() >= midnightUTC) { midnightUTC += 86400000; }
+      return midnightUTC;
+    }
+
+    function pad(n) { return String(n).padStart(2, '0'); }
+
+    var target = getNextMidnightMadrid();
+    var expiredFlag = false;
+    var resetScheduled = false;
+
+    function tick() {
+      var now = Date.now();
+      var diff = target - now;
+
+      if (diff <= 0) {
+        if (!expiredFlag) {
+          expiredFlag = true;
+          document.body.classList.add('deals-expired');
+          timerEl.textContent = '00:00:00';
+        }
+        if (!resetScheduled) {
+          resetScheduled = true;
+          setTimeout(function() {
+            expiredFlag = false;
+            resetScheduled = false;
+            document.body.classList.remove('deals-expired');
+            target = getNextMidnightMadrid();
+          }, 5000);
+        }
+        return;
+      }
+
+      var h = Math.floor(diff / 3600000);
+      var m = Math.floor((diff % 3600000) / 60000);
+      var s = Math.floor((diff % 60000) / 1000);
+      timerEl.textContent = pad(h) + ':' + pad(m) + ':' + pad(s);
+    }
+
+    tick();
+    setInterval(tick, 1000);
+  })();
   </script>
 
   <!-- Promo Banner -->
