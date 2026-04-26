@@ -440,8 +440,8 @@
     var ASSIGNMENTS = {
       1: "Send one full-body photo within 15 minutes of accepting. No preparation. No filter. Full body — not a selfie. Clock starts the moment you tap ACCEPT.",
       2: "Record yourself singing a full song, a cappella, on video. Your choice of song. One take only — no edits, no cuts. Sent within 24 hours of accepting.",
-      3: "Give Pepe a shortlist of 3 people you have been avoiding. He picks one. You have 48 hours to reach out — voice note, call, or in person. No script. Proof of delivery required. If you forfeit after peeking, you lose the 100-token viewing fee.",
-      4: "You are buying a blank cheque. Pepe will assign you one task — any category, any difficulty — within the next 30 days. You will not know what it is until he issues it. You have 48 hours to complete it once assigned. By opening this assignment, you have already agreed to the terms. If you forfeit, you lose the 250-token viewing fee. If you deliver, you earn 500 tokens."
+      3: "Give Pepe a shortlist of 3 people you have been meaning to cut from your life but haven't. People you have been in active contact with in the last 3 months. For each name, one line on why you haven't cut them yet. He picks one. You have 48 hours to end it — text, voice note, or in person. Permanent. No soft exits. Proof of delivery required. Pepe can reject the shortlist if it doesn't qualify and you have 12 hours to resubmit.",
+      4: "You already agreed.<br><br>The moment you opened this, the terms were set. There is nothing left to accept. That happened when you spent your 250 tokens to get here.<br><br>Sometime in the next 30 days, Pepe will issue one instruction. He decides what. He decides when. You will not know either until it arrives.<br><br>48 hours to deliver. One attempt. No extensions. No negotiation.<br><br>Complete it: 500 tokens, yours.<br>Do not: the 250 you paid to read this is the smaller of your losses."
     };
 
     // PRIZES[tier] = tokens earned on delivery. VIEW_FEES[tier] = peek cost charged at reveal.
@@ -576,7 +576,7 @@
         'You may then accept or decline at no further cost. ' +
         'Accept and deliver within 48 hours to earn ' + stake + ' tokens.';
 
-      document.getElementById('modal-assignment-text').textContent = ASSIGNMENTS[tier];
+      document.getElementById('modal-assignment-text').innerHTML = ASSIGNMENTS[tier];
 
       document.getElementById('modal-overlay').classList.add('visible');
     }
@@ -648,7 +648,7 @@
       if (accepted) accepted.style.display = 'block';
 
       var textEl = document.getElementById('accepted-assignment-text');
-      if (textEl) textEl.textContent = entry.assignment;
+      if (textEl) textEl.innerHTML = entry.assignment;
 
       var prize = entry.prize || STAKES[entry.tier] || '?';
       var noteEl = document.getElementById('commission-accepted-note');
