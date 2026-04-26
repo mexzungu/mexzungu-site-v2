@@ -370,6 +370,7 @@
     </div>
   </div>
 
+  <script src="identity.js"></script>
   <script>
     'use strict';
 
@@ -387,7 +388,7 @@
     // ── STORAGE KEYS ──
     var COMP_KEY   = 'ipsc_compliance_ac2026';
     var HIDDEN_KEY = 'ipsc_hidden_record';
-    var TOKEN_KEY  = 'ipsc_tokens_ac2026';
+    function TOKEN_KEY() { return window.CommitteeIdentity ? window.CommitteeIdentity.getStorageKey() : 'ipsc_tokens_ac2026'; }
 
     // ── SESSION DEADLINE ──
     var SESSION_END = new Date('2026-04-30T20:00:00+02:00');
@@ -395,7 +396,7 @@
     // ── TOKEN HELPERS (from spec) ──
     function getTokenBank() {
       try {
-        return JSON.parse(localStorage.getItem(TOKEN_KEY)) || { total: 0, breakdown: {} };
+        return JSON.parse(localStorage.getItem(TOKEN_KEY())) || { total: 0, breakdown: {} };
       } catch(e) { return { total: 0, breakdown: {} }; }
     }
     function addTokens(source, amount) {
@@ -403,7 +404,7 @@
       bank.breakdown[source] = (bank.breakdown[source] || 0) + amount;
       bank.total = 0;
       Object.values(bank.breakdown).forEach(function(v){ bank.total += (typeof v === "number" ? v : 0); });
-      localStorage.setItem(TOKEN_KEY, JSON.stringify(bank));
+      localStorage.setItem(TOKEN_KEY(), JSON.stringify(bank));
       var el = document.getElementById("token-display");
       if(el) el.textContent = bank.total;
     }

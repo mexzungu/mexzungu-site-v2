@@ -315,11 +315,15 @@
     <p style="font-size:9px;color:#444;text-align:center;margin-top:40px">By playing, you agree to the <a href="/committee/terms" style="color:#666">Committee Terms of Participation</a>.</p>
   </footer>
 
+  <script src="identity.js"></script>
   <script>
+    // ── IDENTITY HELPERS ──
+    function getCommitteeKey() { return window.CommitteeIdentity ? window.CommitteeIdentity.getStorageKey() : "ipsc_tokens_ac2026"; }
+
     // ── TOKEN HELPERS ──
     function getTokenBank() {
       try {
-        var raw = localStorage.getItem('ipsc_tokens_ac2026');
+        var raw = localStorage.getItem(getCommitteeKey());
         if (!raw) return { total: 0, breakdown: { interrogation: 0 } };
         var b = JSON.parse(raw);
         if (!b.breakdown) b.breakdown = {};
@@ -334,7 +338,7 @@
       if (!bank.breakdown) bank.breakdown = {};
       if (bank.breakdown.interrogation === undefined) bank.breakdown.interrogation = 0;
       bank.breakdown.interrogation += delta;
-      try { localStorage.setItem('ipsc_tokens_ac2026', JSON.stringify(bank)); } catch(e) {}
+      try { localStorage.setItem(getCommitteeKey(), JSON.stringify(bank)); } catch(e) {}
       updateTokenDisplay();
     }
 

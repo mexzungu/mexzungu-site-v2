@@ -257,14 +257,18 @@
     <p style="font-size:9px;color:#444;text-align:center;margin-top:40px">By playing, you agree to the <a href="/committee/terms" style="color:#666">Committee Terms of Participation</a>.</p>
   </footer>
 
+  <script src="identity.js"></script>
   <script>
+    function getActivePin() { return window.CommitteeIdentity ? window.CommitteeIdentity.getPin() : "AC2026"; }
+    function getCommitteeKey() { return window.CommitteeIdentity ? window.CommitteeIdentity.getStorageKey() : "ipsc_tokens_ac2026"; }
+
     function getTokenBank() {
-      try { var b = JSON.parse(localStorage.getItem('ipsc_tokens_ac2026')||'{}'); if(!b.breakdown) b.breakdown={quiz:0,negotiation:0,archive:0,protocol:0}; if(!b.total) b.total=0; return b; } catch(e) { return {total:0,breakdown:{quiz:0,negotiation:0,archive:0,protocol:0}}; }
+      try { var b = JSON.parse(localStorage.getItem(getCommitteeKey())||'{}'); if(!b.breakdown) b.breakdown={quiz:0,negotiation:0,archive:0,protocol:0}; if(!b.total) b.total=0; return b; } catch(e) { return {total:0,breakdown:{quiz:0,negotiation:0,archive:0,protocol:0}}; }
     }
     function addTokens(source, amount) {
       var bank = getTokenBank(); bank.total += amount;
       if (bank.breakdown[source] !== undefined) bank.breakdown[source] += amount; else bank.breakdown[source] = amount;
-      try { localStorage.setItem('ipsc_tokens_ac2026', JSON.stringify(bank)); } catch(e) {}
+      try { localStorage.setItem(getCommitteeKey(), JSON.stringify(bank)); } catch(e) {}
       updateTokenDisplay();
       syncTokensToServer(bank);
     }
@@ -273,26 +277,25 @@
 
     // ── SERVER SYNC ──
     var COMMITTEE_SYNC_URL = "https://panda.mexzungu.com/committee/tokens";
-    var COMMITTEE_PIN = "AC2026";
     function syncTokensToServer(bank) {
       try {
         fetch(COMMITTEE_SYNC_URL, {
           method: "POST",
           headers: {"Content-Type": "application/json"},
-          body: JSON.stringify({pin: COMMITTEE_PIN, tokens: bank})
+          body: JSON.stringify({pin: getActivePin(), tokens: bank})
         }).catch(function() {});
       } catch(e) {}
     }
     async function loadTokensFromServer() {
       try {
-        var res = await fetch(COMMITTEE_SYNC_URL);
+        var res = await fetch(COMMITTEE_SYNC_URL + "?pin=" + getActivePin());
         if (!res.ok) return;
         var serverBank = await res.json();
-        localStorage.setItem("ipsc_tokens_ac2026", JSON.stringify(serverBank));
+        localStorage.setItem(getCommitteeKey(), JSON.stringify(serverBank));
         updateTokenDisplay();
       } catch(e) {}
     }
-    loadTokensFromServer();
+    window.CommitteeIdentity.whenReady(function() { loadTokensFromServer(); });
 
     (function() {
       'use strict';
