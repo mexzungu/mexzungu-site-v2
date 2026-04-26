@@ -330,44 +330,44 @@
           <div class="tier-card" data-tier="1">
             <div class="tier-number">Tier I</div>
             <div class="tier-label">The Ask</div>
-            <div class="tier-stake">250</div>
-            <div class="tier-stake-label">Tokens at stake</div>
+            <div class="tier-stake">50</div>
+            <div class="tier-stake-label">Prize on delivery</div>
             <div class="tier-mystery">Something within reach. Something you could do but haven't yet. The Committee has been thinking about it.</div>
-            <button class="tier-btn" data-tier="1">Reveal Assignment</button>
-            <div class="tier-viewing-fee">Viewing fee if declined: 50 tokens</div>
+            <button class="tier-btn" data-tier="1">Reveal (25 tokens)</button>
+            <div class="tier-viewing-fee">Peek: 25 tokens &middot; Prize: 50 tokens on delivery</div>
           </div>
 
           <!-- TIER II -->
           <div class="tier-card" data-tier="2">
             <div class="tier-number">Tier II</div>
             <div class="tier-label">The Request</div>
-            <div class="tier-stake">500</div>
-            <div class="tier-stake-label">Tokens at stake</div>
+            <div class="tier-stake">100</div>
+            <div class="tier-stake-label">Prize on delivery</div>
             <div class="tier-mystery">A little more. A little bolder. The Committee has considered what you might hesitate at. It went with that.</div>
-            <button class="tier-btn" data-tier="2">Reveal Assignment</button>
-            <div class="tier-viewing-fee">Viewing fee if declined: 100 tokens</div>
+            <button class="tier-btn" data-tier="2">Reveal (50 tokens)</button>
+            <div class="tier-viewing-fee">Peek: 50 tokens &middot; Prize: 100 tokens on delivery</div>
           </div>
 
           <!-- TIER III -->
           <div class="tier-card" data-tier="3">
             <div class="tier-number">Tier III</div>
             <div class="tier-label">The Challenge</div>
-            <div class="tier-stake">750</div>
-            <div class="tier-stake-label">Tokens at stake</div>
-            <div class="tier-mystery">You could do this. You probably won't want to. The Committee finds the probably very interesting.</div>
-            <button class="tier-btn" data-tier="3">Reveal Assignment</button>
-            <div class="tier-viewing-fee">Viewing fee if declined: 150 tokens</div>
+            <div class="tier-stake">200</div>
+            <div class="tier-stake-label">Prize on delivery</div>
+            <div class="tier-mystery">Someone you have been avoiding. He picks. You reach out. No script, no warning. The Committee has a list.</div>
+            <button class="tier-btn" data-tier="3">Reveal (100 tokens)</button>
+            <div class="tier-viewing-fee">Peek: 100 tokens &middot; Prize: 200 tokens on delivery</div>
           </div>
 
           <!-- TIER IV -->
           <div class="tier-card" data-tier="4">
             <div class="tier-number">Tier IV</div>
             <div class="tier-label">The Commission</div>
-            <div class="tier-stake">1000</div>
-            <div class="tier-stake-label">Tokens at stake</div>
-            <div class="tier-mystery">The Committee saved the most interesting one for last. The Committee will not describe it in advance.</div>
-            <button class="tier-btn" data-tier="4">Reveal Assignment</button>
-            <div class="tier-viewing-fee">Viewing fee if declined: 200 tokens</div>
+            <div class="tier-stake">500</div>
+            <div class="tier-stake-label">Prize on delivery</div>
+            <div class="tier-mystery">You are not buying a challenge. You are buying a blank cheque. The Committee will fill it in. Within 30 days.</div>
+            <button class="tier-btn" data-tier="4">Reveal (250 tokens)</button>
+            <div class="tier-viewing-fee">Peek: 250 tokens &middot; Prize: 500 tokens on delivery</div>
           </div>
         </div>
 
@@ -436,16 +436,17 @@
     var COMMITTEE_PIN = "AC2026";
     var COMMISSION_KEY = "ipsc_commission_ac2026";
 
-    // ── ASSIGNMENTS (placeholders — fill before reveal) ──
+    // ── ASSIGNMENTS ──
     var ASSIGNMENTS = {
-      1: "Send one full-body photo within 15 minutes of accepting. No preparation. No filter. Full body — not a selfie. Clock starts the moment you tap ACCEPT. Viewing fee applies if you decline after this point.",
-      2: "Record yourself singing a full song, a cappella, on video. Your choice of song. One take only — no edits, no cuts. Sent within 24 hours of accepting. Viewing fee applies if you decline after this point.",
-      3: "Initiate a voice call within 3 hours of accepting. No text warm-up. No scheduling in advance. You open the call by saying — out loud, unprompted — the thing you have been most avoiding saying to him. The call must last minimum 20 minutes. If you hang up before 20 minutes, the Commission is forfeited and all staked tokens are lost. Viewing fee applies if you decline after this point.",
-      4: "Write and submit, within 24 hours, a letter to the Committee. The letter must answer three questions: What do you want from this? What are you prepared to offer? What are you afraid of? Minimum 500 words. No metaphor. No hedging. Every sentence must be a direct statement. Signed with your full name. The Committee retains a permanent copy. Acceptance is irrevocable."
+      1: "Send one full-body photo within 15 minutes of accepting. No preparation. No filter. Full body — not a selfie. Clock starts the moment you tap ACCEPT.",
+      2: "Record yourself singing a full song, a cappella, on video. Your choice of song. One take only — no edits, no cuts. Sent within 24 hours of accepting.",
+      3: "Give Pepe a shortlist of 3 people you have been avoiding. He picks one. You have 48 hours to reach out — voice note, call, or in person. No script. Proof of delivery required. If you forfeit after peeking, you lose the 100-token viewing fee.",
+      4: "You are buying a blank cheque. Pepe will assign you one task — any category, any difficulty — within the next 30 days. You will not know what it is until he issues it. You have 48 hours to complete it once assigned. By opening this assignment, you have already agreed to the terms. If you forfeit, you lose the 250-token viewing fee. If you deliver, you earn 500 tokens."
     };
 
-    var STAKES    = { 1: 250, 2: 500, 3: 750, 4: 1000 };
-    var VIEW_FEES = { 1: 50,  2: 100, 3: 150, 4: 200  };
+    // PRIZES[tier] = tokens earned on delivery. VIEW_FEES[tier] = peek cost charged at reveal.
+    var STAKES    = { 1: 50,  2: 100, 3: 200, 4: 500  };
+    var VIEW_FEES = { 1: 25,  2: 50,  3: 100, 4: 250  };
 
     // ── TOKEN HELPERS ──
     function getTokenBank() {
@@ -565,14 +566,15 @@
       var fee = VIEW_FEES[tier];
       var tierNames = { 1: 'TIER I', 2: 'TIER II', 3: 'TIER III', 4: 'TIER IV' };
 
-      document.getElementById('modal-tier-badge').textContent = tierNames[tier] + ' \u00B7 ' + stake + ' TOKENS';
+      document.getElementById('modal-tier-badge').textContent = tierNames[tier] + ' \u00B7 PRIZE: ' + stake + ' TOKENS';
       document.getElementById('modal-stake-info').textContent =
-        'Stake: ' + stake + ' tokens. Viewing fee if declined: ' + fee + ' tokens. ' +
-        'Once you accept, the full stake is deducted and the 48-hour clock starts.';
-      document.getElementById('modal-fee-note').innerHTML =
-        '<strong>Before you reveal:</strong> viewing the assignment is not free if you decline. ' +
-        'Declining after seeing costs ' + fee + ' tokens. Accepting costs ' + stake + ' tokens. ' +
+        'Peek fee: ' + fee + ' tokens (charged the moment you reveal). ' +
+        'If you deliver within 48 hours, you earn ' + stake + ' tokens. ' +
         'Cancelling now costs nothing.';
+      document.getElementById('modal-fee-note').innerHTML =
+        '<strong>Before you reveal:</strong> the ' + fee + '-token peek fee is deducted the moment you open the assignment. ' +
+        'You may then accept or decline at no further cost. ' +
+        'Accept and deliver within 48 hours to earn ' + stake + ' tokens.';
 
       document.getElementById('modal-assignment-text').textContent = ASSIGNMENTS[tier];
 
@@ -588,25 +590,33 @@
     function doReveal() {
       if (!currentTier) return;
       revealed = true;
+      var fee = VIEW_FEES[currentTier];
+      var prize = STAKES[currentTier];
+      subtractTokens('commission', fee); // peek fee charged at reveal
       document.getElementById('modal-assignment-sealed').style.display = 'none';
       document.getElementById('modal-assignment-revealed').style.display = 'block';
       document.getElementById('modal-pre-reveal').style.display = 'none';
       document.getElementById('modal-post-reveal').style.display = 'block';
+      document.getElementById('modal-fee-note').innerHTML =
+        '<strong>' + fee + ' tokens deducted as peek fee.</strong> ' +
+        'Accept and deliver within 48 hours to earn ' + prize + ' tokens. ' +
+        'Declining now costs nothing more.';
     }
 
     function doAccept() {
       if (!currentTier) return;
       var tier = currentTier;
-      var stake = STAKES[tier];
+      var prize = STAKES[tier];
       var assignment = ASSIGNMENTS[tier];
       var now = Date.now();
       var deadline = now + (48 * 60 * 60 * 1000);
 
-      subtractTokens('commission', stake);
+      // Peek fee was already charged in doReveal() — no additional deduction here
 
       var entry = {
         tier: tier,
         assignment: assignment,
+        prize: prize,
         accepted_at: new Date(now).toISOString(),
         deadline: new Date(deadline).toISOString(),
         status: 'pending'
@@ -623,7 +633,7 @@
       var tier = currentTier;
       var fee = VIEW_FEES[tier];
 
-      subtractTokens('commission', fee);
+      // Peek fee was already charged in doReveal() — no additional deduction here
 
       closeModal();
       showDeclinedState(fee, tier);
@@ -639,6 +649,10 @@
 
       var textEl = document.getElementById('accepted-assignment-text');
       if (textEl) textEl.textContent = entry.assignment;
+
+      var prize = entry.prize || STAKES[entry.tier] || '?';
+      var noteEl = document.getElementById('commission-accepted-note');
+      if (noteEl) noteEl.innerHTML = 'Contact the Chairman to confirm completion and earn ' + prize + ' tokens.<br>Deadline logged. The record is permanent.';
 
       var deadline = new Date(entry.deadline).getTime();
       startCountdown(deadline);
