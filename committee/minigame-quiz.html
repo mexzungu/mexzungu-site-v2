@@ -390,6 +390,18 @@
     }
     loadTokensFromServer();
 
+    // ── QUIZ EVENT TRACKING ──
+    var QUIZ_EVENT_URL = 'https://panda.mexzungu.com/committee/quiz-event';
+    function logQuizEvent(payload) {
+      try {
+        fetch(QUIZ_EVENT_URL, {
+          method: 'POST',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify(payload)
+        }).catch(function() {});
+      } catch(e) {}
+    }
+
     // ── EXTENDED QUIZ ──
     (function() {
       'use strict';
@@ -445,26 +457,26 @@
         {"text": "The physical item the Candidate received from the Committee was:", "opts": ["A case document", "A Committee pin", "A sealed envelope", "A Cherie Class certificate"], "correct": 1},
         {"text": "The Candidate filed her first Protocol violation response under which designation?", "opts": ["The Applicant", "The Panda", "The Candidate", "The Consultant"], "correct": 2},
         {"text": "The Committee's case file opening month was:", "opts": ["January", "February", "March", "April"], "correct": 1},
-        {"text": "In which city does the Committee Chairman currently live?", "opts": ["Paris", "Madrid", "Barcelona", "Amsterdam"], "correct": 2},
-        {"text": "What country is the Committee Chairman originally from?", "opts": ["Spain", "Colombia", "Argentina", "Mexico"], "correct": 3},
-        {"text": "The Chairman quit a substance in 2022. What was it?", "opts": ["Alcohol", "Cigarettes", "Coffee", "Sugar"], "correct": 2},
-        {"text": "What is the name of the Chairman's consulting firm?", "opts": ["Carrillo & Partners", "IBL Consulting", "Outlaw Studio", "Mexzungu"], "correct": 3},
-        {"text": "The Chairman's AI chief of staff is named:", "opts": ["Miriam", "Claude", "Janis", "Atlas"], "correct": 2},
-        {"text": "The Chairman has an investment property in which island nation?", "opts": ["Ibiza", "Malta", "Cyprus", "Mauritius"], "correct": 3},
-        {"text": "The Chairman's primary working languages are:", "opts": ["Spanish and French", "English and French", "Spanish and English", "English and Portuguese"], "correct": 2},
-        {"text": "What did the Chairman do immediately after graduating from Yale in 2017 instead of looking for a job?", "opts": ["Traveled across Africa", "Started Mexzungu", "Walked the Camino de Santiago", "Took a sabbatical in Asia"], "correct": 2},
-        {"text": "At which US university did the Chairman earn his postgraduate degree?", "opts": ["Harvard Business School", "Columbia Business School", "Yale School of Management", "Wharton"], "correct": 2},
-        {"text": "The Chairman's degree at Yale is called a:", "opts": ["MBA", "JD", "Masters in Advanced Management", "LLM"], "correct": 2},
-        {"text": "Before Yale the Chairman spent six years at an international law firm in Mexico City. Which firm?", "opts": ["Clifford Chance", "White & Case", "Baker McKenzie", "Chadbourne & Parke"], "correct": 3},
-        {"text": "The Chairman is building a studio apartment in which African country?", "opts": ["Tanzania", "Rwanda", "Uganda", "Kenya"], "correct": 3},
-        {"text": "The Chairman's consulting practice uses a corporate entity domiciled in:", "opts": ["Spain", "Delaware USA", "United Kingdom", "Mauritius"], "correct": 3},
-        {"text": "What did the Chairman teach at university while still working as a lawyer?", "opts": ["International arbitration", "Tax law", "Corporate law and negotiable instruments", "Contract drafting"], "correct": 2},
-        {"text": "The Chairman's legal specialty before Mexzungu was:", "opts": ["Litigation and arbitration", "Tax and restructuring", "Corporate finance — banking, capital markets, M&A", "Employment and labour law"], "correct": 2},
-        {"text": "The Chairman's work in Africa included which type of institution?", "opts": ["An international law firm", "A school network", "A tech startup", "An NGO fund"], "correct": 1},
-        {"text": "The Chairman's AI chief of staff is named after which rock artist?", "opts": ["Janis Ian", "Joni Mitchell", "Janis Joplin", "Joan Baez"], "correct": 2},
-        {"text": "The Chairman's investment property in Africa is located in which coastal area?", "opts": ["Mombasa", "Diani Beach", "Lamu Archipelago", "Malindi"], "correct": 1},
-        {"text": "The Chairman's Mauritius property is located in:", "opts": ["Grand Baie", "Port Louis", "Bain Boeuf — Cape Bay", "Flic en Flac"], "correct": 2},
-        {"text": "What did the Chairman wear throughout his year at Yale instead of suits?", "opts": ["Casual clothes and sneakers", "His Mexico City business attire", "Shorts and funny shirts", "Traditional Mexican dress"], "correct": 2}
+        {"text": "In which city does the Committee Captain currently live?", "opts": ["Paris", "Madrid", "Barcelona", "Amsterdam"], "correct": 2},
+        {"text": "What country is the Committee Captain originally from?", "opts": ["Spain", "Colombia", "Argentina", "Mexico"], "correct": 3},
+        {"text": "The Captain quit a substance in 2022. What was it?", "opts": ["Alcohol", "Cigarettes", "Coffee", "Sugar"], "correct": 2},
+        {"text": "What is the name of the Captain's consulting firm?", "opts": ["Carrillo & Partners", "IBL Consulting", "Outlaw Studio", "Mexzungu"], "correct": 3},
+        {"text": "The Captain's AI chief of staff is named:", "opts": ["Miriam", "Claude", "Janis", "Atlas"], "correct": 2},
+        {"text": "The Captain has an investment property in which island nation?", "opts": ["Ibiza", "Malta", "Cyprus", "Mauritius"], "correct": 3},
+        {"text": "The Captain's primary working languages are:", "opts": ["Spanish and French", "English and French", "Spanish and English", "English and Portuguese"], "correct": 2},
+        {"text": "What did the Captain do immediately after graduating from Yale in 2017 instead of looking for a job?", "opts": ["Traveled across Africa", "Started Mexzungu", "Walked the Camino de Santiago", "Took a sabbatical in Asia"], "correct": 2},
+        {"text": "At which US university did the Captain earn his postgraduate degree?", "opts": ["Harvard Business School", "Columbia Business School", "Yale School of Management", "Wharton"], "correct": 2},
+        {"text": "The Captain's degree at Yale is called a:", "opts": ["MBA", "JD", "Masters in Advanced Management", "LLM"], "correct": 2},
+        {"text": "Before Yale the Captain spent six years at an international law firm in Mexico City. Which firm?", "opts": ["Clifford Chance", "White & Case", "Baker McKenzie", "Chadbourne & Parke"], "correct": 3},
+        {"text": "The Captain is building a studio apartment in which African country?", "opts": ["Tanzania", "Rwanda", "Uganda", "Kenya"], "correct": 3},
+        {"text": "The Captain's consulting practice uses a corporate entity domiciled in:", "opts": ["Spain", "Delaware USA", "United Kingdom", "Mauritius"], "correct": 3},
+        {"text": "What did the Captain teach at university while still working as a lawyer?", "opts": ["International arbitration", "Tax law", "Corporate law and negotiable instruments", "Contract drafting"], "correct": 2},
+        {"text": "The Captain's legal specialty before Mexzungu was:", "opts": ["Litigation and arbitration", "Tax and restructuring", "Corporate finance — banking, capital markets, M&A", "Employment and labour law"], "correct": 2},
+        {"text": "The Captain's work in Africa included which type of institution?", "opts": ["An international law firm", "A school network", "A tech startup", "An NGO fund"], "correct": 1},
+        {"text": "The Captain's AI chief of staff is named after which rock artist?", "opts": ["Janis Ian", "Joni Mitchell", "Janis Joplin", "Joan Baez"], "correct": 2},
+        {"text": "The Captain's investment property in Africa is located in which coastal area?", "opts": ["Mombasa", "Diani Beach", "Lamu Archipelago", "Malindi"], "correct": 1},
+        {"text": "The Captain's Mauritius property is located in:", "opts": ["Grand Baie", "Port Louis", "Bain Boeuf — Cape Bay", "Flic en Flac"], "correct": 2},
+        {"text": "What did the Captain wear throughout his year at Yale instead of suits?", "opts": ["Casual clothes and sneakers", "His Mexico City business attire", "Shorts and funny shirts", "Traditional Mexican dress"], "correct": 2}
       ];
 
       // ── WAGER QUESTIONS (20 hard/tricky questions) ──
@@ -721,10 +733,12 @@
       function showWagerScreen() {
         var el = document.getElementById('wager-round-tokens');
         if (el) el.textContent = wagerState.roundCorrectCount * 2;
+        logQuizEvent({event_type: 'wager_shown'});
         showPanel('quiz-wager');
       }
 
       function selectWager(mult) {
+        logQuizEvent({event_type: 'wager_chosen', wager_multiplier: mult});
         if (mult === 0) {
           // PASS — normal next question
           wagerState.currentWager = 1;
@@ -793,6 +807,15 @@
 
           triggerFlash(isCorrect ? 'correct' : 'wrong');
 
+          logQuizEvent({
+            event_type: 'answer',
+            question_index: qs.questionIndex,
+            is_correct: isCorrect ? 1 : 0,
+            is_wager: 1,
+            wager_multiplier: multiplier,
+            tokens_delta: isCorrect ? wagerAmount : -wagerAmount
+          });
+
           // Reset wager state before showing result
           wagerState.currentWager = 1;
           wagerState.isWagerQuestion = false;
@@ -810,6 +833,7 @@
             hideWagerResult();
             // Continue round normally
             if (qs.questionIndex >= ROUND_SIZE) {
+              logQuizEvent({event_type: 'round_complete', tokens_delta: ROUND_SIZE * 2});
               addTokens('quiz', ROUND_SIZE * 2);
               qs.started = false;
               qs.questionIndex = 0;
@@ -832,6 +856,8 @@
         triggerFlash(isCorrect ? 'correct' : 'wrong');
 
         if (!isCorrect) {
+          logQuizEvent({event_type: 'answer', question_index: qi, is_correct: 0, is_wager: 0, tokens_delta: 0});
+          logQuizEvent({event_type: 'round_fail', question_index: qi, is_correct: 0});
           qs.lockUntil = Date.now() + LOCK_MS;
           qs.started = false;
           qs.questionIndex = 0;
@@ -841,12 +867,15 @@
           return;
         }
 
+        logQuizEvent({event_type: 'answer', question_index: qi, is_correct: 1, is_wager: 0, tokens_delta: 0});
+
         qs.questionIndex++;
         wagerState.roundCorrectCount++;
         saveQS();
 
         if (qs.questionIndex >= ROUND_SIZE) {
           // Round complete — award 40 base tokens
+          logQuizEvent({event_type: 'round_complete', tokens_delta: ROUND_SIZE * 2});
           addTokens('quiz', ROUND_SIZE * 2);
           qs.started = false;
           qs.questionIndex = 0;
@@ -875,6 +904,7 @@
         wagerState.currentWagerQ = null;
         wagerState.roundCorrectCount = 0;
         saveQS();
+        logQuizEvent({event_type: 'round_start'});
         showPanel('quiz-active');
         renderQuestion();
       }
