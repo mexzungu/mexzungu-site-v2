@@ -255,13 +255,43 @@
       margin-bottom: 0;
     }
 
+    /* ── TOKEN BAR ── */
+    .token-bar {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0.6rem 1.5rem;
+      background: rgba(225,75,135,0.08);
+      border-bottom: 1px solid rgba(225,75,135,0.15);
+    }
+    .token-bar-label { font-size: 0.56rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--dim); }
+    .token-bar-count { font-family: var(--heading); font-size: 1rem; color: var(--pink); }
+
     .prize-row {
       background: var(--bg);
       display: grid;
-      grid-template-columns: 2.5rem 1fr auto;
-      gap: 1rem; align-items: start;
+      grid-template-columns: 2.5rem 1fr auto auto;
+      gap: 1rem; align-items: center;
       padding: 1rem 1rem;
     }
+
+    /* ── REDEEM BUTTON ── */
+    .redeem-btn {
+      display: inline-block;
+      padding: 0.28rem 0.6rem;
+      background: transparent;
+      border: 1px solid rgba(225,75,135,0.3);
+      color: var(--pink);
+      font-family: var(--sans);
+      font-size: 0.55rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background 0.15s, border-color 0.15s;
+      white-space: nowrap;
+      align-self: center;
+    }
+    .redeem-btn:hover:not(:disabled) { background: rgba(225,75,135,0.1); border-color: var(--pink); }
+    .redeem-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+    .redeem-btn.redeemed { border-color: var(--green); color: var(--green); }
     .prize-row.legendary {
       background: rgba(201,168,76,0.03);
     }
@@ -322,8 +352,9 @@
     .site-footer a { color: var(--dim); text-decoration: none; }
 
     @media (max-width: 480px) {
-      .prize-row { grid-template-columns: 2rem 1fr auto; gap: 0.65rem; }
+      .prize-row { grid-template-columns: 2rem 1fr auto auto; gap: 0.65rem; }
       .prize-token { font-size: 0.7rem; padding: 0.18rem 0.4rem; }
+      .redeem-btn { font-size: 0.5rem; padding: 0.22rem 0.45rem; }
     }
   </style>
 </head>
@@ -337,6 +368,12 @@
     <div class="site-nav-sub">An independent, free-spirited cosmic travel company</div>
     <div class="site-nav-back"><a href="/committee">← Committee Files &nbsp;·&nbsp; Case AC-2026-04</a></div>
   </nav>
+
+  <!-- TOKEN BAR -->
+  <div class="token-bar">
+    <span class="token-bar-label">Intergalactic Tokens</span>
+    <span id="token-display" class="token-bar-count">—</span>
+  </div>
 
   <!-- HERO -->
   <div class="hero">
@@ -848,7 +885,124 @@
     <a href="/committee/final">Final Session →</a> &nbsp;|&nbsp;
     <span style="color:var(--border)">Operated by <a href="/">Intergalactic Pepe</a>. Incorporated under the laws of Mars.</span>
     <p style="font-size:9px;color:#444;text-align:center;margin-top:40px">By playing, you agree to the <a href="/committee/terms" style="color:#666">Committee Terms of Participation</a>.</p>
-  </footer>  <script>
+  </footer>
+
+  <script>
+    // ── TOKEN SYSTEM & REDEEM ──
+    var COMMITTEE_SYNC_URL = "https://panda.mexzungu.com/committee/tokens";
+    var COMMITTEE_PIN = "AC2026";
+
+    function getTokenBank() {
+      try {
+        var raw = localStorage.getItem('ipsc_tokens_ac2026');
+        if (!raw) return {total:0, breakdown:{}};
+        var b = JSON.parse(raw);
+        if (!b.breakdown) b.breakdown = {};
+        return b;
+      } catch(e) { return {total:0, breakdown:{}}; }
+    }
+
+    function updateTokenDisplay() {
+      var el = document.getElementById('token-display');
+      if (el) el.textContent = getTokenBank().total;
+    }
+
+    async function loadTokensFromServer() {
+      try {
+        var res = await fetch(COMMITTEE_SYNC_URL);
+        if (!res.ok) return;
+        var serverBank = await res.json();
+        localStorage.setItem("ipsc_tokens_ac2026", JSON.stringify(serverBank));
+        updateTokenDisplay();
+      } catch(e) {}
+    }
+
+    // ── REDEEM HANDLER ──
+    async function handleRedeem(prizeName, tokenCost, btn) {
+      btn.disabled = true;
+      btn.textContent = '...';
+      try {
+        // 1. Fetch current balance from server (always canonical)
+        var res = await fetch(COMMITTEE_SYNC_URL);
+        if (!res.ok) throw new Error('Could not load balance');
+        var bank = await res.json();
+        var total = bank.total || 0;
+
+        // 2. Sync to localStorage
+        localStorage.setItem('ipsc_tokens_ac2026', JSON.stringify(bank));
+        updateTokenDisplay();
+
+        // 3. Check balance
+        if (total < tokenCost) {
+          alert('Insufficient tokens.\n\nYou have: ' + total + '\nRequired: ' + tokenCost + '\n\nEarn more tokens through the minigames.');
+          btn.textContent = 'Redeem';
+          btn.disabled = false;
+          return;
+        }
+
+        // 4. Confirm redemption
+        var confirmed = confirm(
+          'Redeem "' + prizeName + '"?\n\n' +
+          'Cost: ' + tokenCost + ' tokens\n' +
+          'Current balance: ' + total + '\n' +
+          'Remaining after: ' + (total - tokenCost) + '\n\n' +
+          'This cannot be undone.'
+        );
+        if (!confirmed) {
+          btn.textContent = 'Redeem';
+          btn.disabled = false;
+          return;
+        }
+
+        // 5. Deduct and POST to server
+        bank.total = total - tokenCost;
+        bank.breakdown = bank.breakdown || {};
+        bank.breakdown.redeemed = (bank.breakdown.redeemed || 0) + tokenCost;
+
+        var postRes = await fetch(COMMITTEE_SYNC_URL, {
+          method: 'POST',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify({pin: COMMITTEE_PIN, tokens: bank})
+        });
+        if (!postRes.ok) throw new Error('Server error saving redemption');
+
+        // 6. Update localStorage and display
+        localStorage.setItem('ipsc_tokens_ac2026', JSON.stringify(bank));
+        updateTokenDisplay();
+
+        // 7. Show confirmation
+        btn.textContent = 'Redeemed';
+        btn.classList.add('redeemed');
+        alert('Redeemed.\n\n"' + prizeName + '" has been logged.\nRemaining balance: ' + bank.total + ' tokens.');
+      } catch(err) {
+        btn.textContent = 'Redeem';
+        btn.disabled = false;
+        alert('Error: ' + (err.message || 'Unknown error'));
+      }
+    }
+
+    // ── INJECT REDEEM BUTTONS ──
+    document.querySelectorAll('.prize-row').forEach(function(row) {
+      var nameEl  = row.querySelector('.prize-name');
+      var tokenEl = row.querySelector('.prize-token');
+      if (!nameEl || !tokenEl) return;
+      var prizeName = nameEl.textContent.trim();
+      var tokenText = tokenEl.childNodes[0] ? tokenEl.childNodes[0].textContent.trim() : '';
+      var tokenCost = parseInt(tokenText, 10);
+      if (isNaN(tokenCost) || tokenCost <= 0) return;
+      var btn = document.createElement('button');
+      btn.className = 'redeem-btn';
+      btn.textContent = 'Redeem';
+      btn.addEventListener('click', function() { handleRedeem(prizeName, tokenCost, btn); });
+      row.appendChild(btn);
+    });
+
+    // Load balance on page load
+    updateTokenDisplay();
+    loadTokensFromServer();
+  </script>
+
+  <script>
     (function() {
       var PING_URL = 'https://panda.mexzungu.com/committee/visit/ping';
       var PING_INTERVAL = 10000;

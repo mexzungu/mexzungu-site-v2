@@ -271,11 +271,8 @@
         var res = await fetch(COMMITTEE_SYNC_URL);
         if (!res.ok) return;
         var serverBank = await res.json();
-        var localBank = getTokenBank();
-        if ((serverBank.total || 0) > (localBank.total || 0)) {
-          localStorage.setItem("ipsc_tokens_ac2026", JSON.stringify(serverBank));
-          updateTokenDisplay();
-        }
+        localStorage.setItem("ipsc_tokens_ac2026", JSON.stringify(serverBank));
+        updateTokenDisplay();
       } catch(e) {}
     }
     loadTokensFromServer();

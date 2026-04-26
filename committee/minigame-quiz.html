@@ -206,7 +206,9 @@
             <span class="quiz-intro-rule-sep">·</span>
             <span class="quiz-intro-rule">2 tokens per correct</span>
             <span class="quiz-intro-rule-sep">·</span>
-            <span class="quiz-intro-rule">Earn 40 per round</span>
+            <span class="quiz-intro-rule">Earn 20 per round</span>
+            <span class="quiz-intro-rule-sep">·</span>
+            <span class="quiz-intro-rule">30 min between rounds</span>
             <span class="quiz-intro-rule-sep">·</span>
             <span class="quiz-intro-rule">Wager at Q10</span>
           </div>
@@ -272,9 +274,9 @@
       <div id="quiz-locked" style="display:none;">
         <div class="quiz-locked-panel">
           <div class="quiz-locked-icon">&#9888;</div>
-          <div class="quiz-locked-title">Assessment Terminated</div>
-          <p class="quiz-locked-text">An incorrect answer has been submitted. The assessment is locked. The Committee does not accept ignorance as an explanation. Review the record and return.</p>
-          <div class="quiz-locked-cd-label">Unlocks in</div>
+          <div class="quiz-locked-title" id="quiz-locked-title">Assessment Terminated</div>
+          <p class="quiz-locked-text" id="quiz-locked-text">An incorrect answer has been submitted. The assessment is locked. The Committee does not accept ignorance as an explanation. Review the record and return.</p>
+          <div class="quiz-locked-cd-label" id="quiz-locked-cd-label">Unlocks in</div>
           <div class="quiz-locked-cd-wrap">
             <div class="quiz-locked-cd-unit">
               <div class="quiz-locked-digit" id="lkh">00</div>
@@ -291,7 +293,7 @@
               <div class="quiz-locked-cd-unit-l">Sec</div>
             </div>
           </div>
-          <p class="quiz-locked-note">The case file has not changed. The pool grows continuously. Each round draws 20 fresh questions. All answers still valid.</p>
+          <p class="quiz-locked-note" id="quiz-locked-note">The case file has not changed. The pool grows continuously. Each round draws 20 fresh questions. All answers still valid.</p>
         </div>
       </div>
 
@@ -303,18 +305,18 @@
             <div class="quiz-pass-sub">20 questions. 20 correct answers. The Committee is noting this.</div>
           </div>
           <div class="quiz-pass-tokens">
-            <div class="quiz-pass-tokens-num">40</div>
+            <div class="quiz-pass-tokens-num">20</div>
             <div class="quiz-pass-tokens-label">Intergalactic Tokens Earned This Round</div>
           </div>
           <div class="quiz-pass-preamble">
-            Another round completed without error. 40 tokens entered into the ledger. You may play again immediately — each new round draws 20 fresh questions from the ever-growing pool. The Committee will not run out of questions.
+            Another round completed without error. 20 tokens entered into the ledger. A 30-minute cooldown is now active — each new round draws 20 fresh questions from the ever-growing pool. The Committee will not run out of questions.
           </div>
           <div style="text-align:center;margin:2rem 0 1rem;">
             <button class="quiz-btn" id="quiz-next-round-btn">Play Another Round →</button>
           </div>
           <div class="quiz-pass-sig">
             <p>Extended Assessment Protocol — Case AC-2026-04</p>
-            <p>40 tokens entered per round into the permanent record.</p>
+            <p>20 tokens entered per round into the permanent record. 30-minute cooldown between rounds enforced.</p>
             <div class="quiz-pass-sig-ref">Issued by order of the Committee · Phase 4 · 2026</div>
           </div>
         </div>
@@ -381,11 +383,8 @@
         var res = await fetch(COMMITTEE_SYNC_URL);
         if (!res.ok) return;
         var serverBank = await res.json();
-        var localBank = getTokenBank();
-        if ((serverBank.total || 0) > (localBank.total || 0)) {
-          localStorage.setItem("ipsc_tokens_ac2026", JSON.stringify(serverBank));
-          updateTokenDisplay();
-        }
+        localStorage.setItem("ipsc_tokens_ac2026", JSON.stringify(serverBank));
+        updateTokenDisplay();
       } catch(e) {}
     }
     loadTokensFromServer();
@@ -405,9 +404,10 @@
     // ── EXTENDED QUIZ ──
     (function() {
       'use strict';
-      var QUIZ_KEY   = 'ipsc_extquiz_ac2026';
-      var LOCK_MS    = 4 * 60 * 60 * 1000;
-      var ROUND_SIZE = 20;
+      var QUIZ_KEY    = 'ipsc_extquiz_ac2026';
+      var LOCK_MS     = 4 * 60 * 60 * 1000;
+      var COOLDOWN_MS = 30 * 60 * 1000;
+      var ROUND_SIZE  = 20;
 
       var QUESTIONS = [
         {"text": "What was the Candidate doing when she first encountered the Committee?", "opts": ["Attending a dance performance", "On a solo walk in the Gothic Quarter", "At an exhibition opening", "Having drinks with a mutual contact"], "correct": 0},
@@ -534,6 +534,7 @@
         started: false,
         questionIndex: 0,
         lockUntil: null,
+        lockReason: null,
         roundIndices: null
       };
 
@@ -553,6 +554,7 @@
           var saved = JSON.parse(raw);
           if (saved && typeof saved === 'object') {
             qs.lockUntil = saved.lockUntil || null;
+            qs.lockReason = saved.lockReason || null;
             if (saved.roundIndices) {
               qs.started       = !!saved.started;
               qs.questionIndex = saved.questionIndex || 0;
@@ -605,6 +607,24 @@
 
       function pad(n) { return String(Math.max(0,n)).padStart(2,'0'); }
 
+      function setLockMessage(reason) {
+        var titleEl  = document.getElementById('quiz-locked-title');
+        var textEl   = document.getElementById('quiz-locked-text');
+        var labelEl  = document.getElementById('quiz-locked-cd-label');
+        var noteEl   = document.getElementById('quiz-locked-note');
+        if (reason === 'cooldown') {
+          if (titleEl)  titleEl.textContent  = 'Round Cooldown Active';
+          if (textEl)   textEl.textContent   = 'A round has been completed. The Committee enforces a 30-minute interval between rounds. Use the time to review the record. Return when the countdown expires.';
+          if (labelEl)  labelEl.textContent  = 'Next round available in';
+          if (noteEl)   noteEl.textContent   = 'Your score has been recorded. The pool grows continuously — each new round draws 20 fresh questions. All previous answers remain valid.';
+        } else {
+          if (titleEl)  titleEl.textContent  = 'Assessment Terminated';
+          if (textEl)   textEl.textContent   = 'An incorrect answer has been submitted. The assessment is locked. The Committee does not accept ignorance as an explanation. Review the record and return.';
+          if (labelEl)  labelEl.textContent  = 'Unlocks in';
+          if (noteEl)   noteEl.textContent   = 'The case file has not changed. The pool grows continuously. Each round draws 20 fresh questions. All answers still valid.';
+        }
+      }
+
       function startLockTimer() {
         if (lockTimerInterval) clearInterval(lockTimerInterval);
         updateLockDisplay();
@@ -614,6 +634,7 @@
             qs.started = false;
             qs.questionIndex = 0;
             qs.lockUntil = null;
+            qs.lockReason = null;
             qs.roundIndices = null;
             saveQS();
             showPanel('quiz-intro');
@@ -833,11 +854,13 @@
             hideWagerResult();
             // Continue round normally
             if (qs.questionIndex >= ROUND_SIZE) {
-              logQuizEvent({event_type: 'round_complete', tokens_delta: ROUND_SIZE * 2});
-              addTokens('quiz', ROUND_SIZE * 2);
+              logQuizEvent({event_type: 'round_complete', tokens_delta: ROUND_SIZE * 1});
+              addTokens('quiz', ROUND_SIZE * 1);
               qs.started = false;
               qs.questionIndex = 0;
               qs.roundIndices = null;
+              qs.lockUntil = Date.now() + COOLDOWN_MS;
+              qs.lockReason = 'cooldown';
               saveQS();
               showPanel('quiz-pass');
             } else {
@@ -859,11 +882,12 @@
           logQuizEvent({event_type: 'answer', question_index: qi, is_correct: 0, is_wager: 0, tokens_delta: 0});
           logQuizEvent({event_type: 'round_fail', question_index: qi, is_correct: 0});
           qs.lockUntil = Date.now() + LOCK_MS;
+          qs.lockReason = 'wrong_answer';
           qs.started = false;
           qs.questionIndex = 0;
           qs.roundIndices = null;
           saveQS();
-          setTimeout(function() { showPanel('quiz-locked'); startLockTimer(); }, 900);
+          setTimeout(function() { setLockMessage('wrong_answer'); showPanel('quiz-locked'); startLockTimer(); }, 900);
           return;
         }
 
@@ -874,12 +898,14 @@
         saveQS();
 
         if (qs.questionIndex >= ROUND_SIZE) {
-          // Round complete — award 40 base tokens
-          logQuizEvent({event_type: 'round_complete', tokens_delta: ROUND_SIZE * 2});
-          addTokens('quiz', ROUND_SIZE * 2);
+          // Round complete — award 20 base tokens + enforce 30-min cooldown
+          logQuizEvent({event_type: 'round_complete', tokens_delta: ROUND_SIZE * 1});
+          addTokens('quiz', ROUND_SIZE * 1);
           qs.started = false;
           qs.questionIndex = 0;
           qs.roundIndices = null;
+          qs.lockUntil = Date.now() + COOLDOWN_MS;
+          qs.lockReason = 'cooldown';
           saveQS();
           setTimeout(function() { showPanel('quiz-pass'); }, 900);
           return;
@@ -895,9 +921,16 @@
       }
 
       function startNewRound() {
+        if (qs.lockUntil && Date.now() < qs.lockUntil) {
+          setLockMessage(qs.lockReason || 'wrong_answer');
+          showPanel('quiz-locked');
+          startLockTimer();
+          return;
+        }
         qs.started = true;
         qs.questionIndex = 0;
         qs.lockUntil = null;
+        qs.lockReason = null;
         qs.roundIndices = makeRoundIndices();
         wagerState.currentWager = 1;
         wagerState.isWagerQuestion = false;
@@ -914,6 +947,7 @@
         loadQS();
 
         if (qs.lockUntil && Date.now() < qs.lockUntil) {
+          setLockMessage(qs.lockReason || 'wrong_answer');
           showPanel('quiz-locked');
           startLockTimer();
           return;
@@ -921,6 +955,7 @@
           qs.started = false;
           qs.questionIndex = 0;
           qs.lockUntil = null;
+          qs.lockReason = null;
           qs.roundIndices = null;
           saveQS();
         }
