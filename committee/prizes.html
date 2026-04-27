@@ -356,6 +356,151 @@
       .prize-token { font-size: 0.7rem; padding: 0.18rem 0.4rem; }
       .redeem-btn { font-size: 0.5rem; padding: 0.22rem 0.45rem; }
     }
+
+    /* ── LOGIN BAR ── */
+    .login-bar {
+      display: flex; align-items: center; gap: 0.5rem;
+    }
+    .login-bar-btn {
+      background: transparent;
+      border: 1px solid rgba(225,75,135,0.25);
+      color: var(--dim);
+      font-family: var(--sans);
+      font-size: 0.5rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      padding: 0.22rem 0.55rem;
+      cursor: pointer;
+      transition: border-color 0.15s, color 0.15s;
+    }
+    .login-bar-btn:hover { border-color: var(--pink); color: var(--pink); }
+    .login-bar-btn.logged-in { color: var(--green); border-color: rgba(61,189,110,0.25); }
+
+    /* ── OVERLAY MODALS ── */
+    .overlay-modal {
+      display: none;
+      position: fixed; inset: 0; z-index: 2000;
+      background: rgba(8,8,9,0.93);
+      align-items: flex-start; justify-content: center;
+      backdrop-filter: blur(5px);
+      overflow-y: auto;
+      padding: 3rem 1rem;
+    }
+    .overlay-modal.open { display: flex; }
+
+    .modal-box {
+      width: 100%; max-width: 460px;
+      background: #0e0c0b;
+      border: 1px solid rgba(225,75,135,0.18);
+      box-shadow: 0 0 80px rgba(225,75,135,0.06);
+      margin: auto;
+    }
+    .modal-hdr {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0.85rem 1.25rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .modal-hdr-label {
+      font-size: 0.54rem; letter-spacing: 0.34em;
+      text-transform: uppercase; color: var(--pink);
+    }
+    .modal-hdr-close {
+      background: none; border: none; color: var(--dim);
+      cursor: pointer; font-size: 0.85rem; line-height: 1; padding: 0;
+    }
+    .modal-hdr-close:hover { color: var(--text); }
+    .modal-body { padding: 1.4rem 1.25rem; }
+
+    /* pin input */
+    .pin-input {
+      width: 100%;
+      background: rgba(255,255,255,0.02);
+      border: 1px solid var(--border);
+      color: var(--text);
+      font-family: var(--sans);
+      font-size: 0.9rem;
+      padding: 0.65rem 0.85rem;
+      outline: none;
+      letter-spacing: 0.12em;
+    }
+    .pin-input:focus { border-color: rgba(225,75,135,0.35); }
+    .modal-error { font-size: 0.65rem; color: #e44; margin-top: 0.4rem; min-height: 1em; }
+    .modal-submit {
+      display: block; width: 100%; margin-top: 1.25rem;
+      padding: 0.72rem 1rem;
+      background: transparent;
+      border: 1px solid var(--pink);
+      color: var(--pink);
+      font-family: var(--sans);
+      font-size: 0.62rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+    .modal-submit:hover:not(:disabled) { background: rgba(225,75,135,0.1); }
+    .modal-submit:disabled { opacity: 0.35; cursor: not-allowed; }
+
+    /* booking modal specifics */
+    .modal-prize-name {
+      font-family: var(--heading);
+      font-size: 1.05rem; color: var(--text);
+      margin-bottom: 0.3rem; line-height: 1.35;
+    }
+    .modal-prize-cost { font-size: 0.65rem; color: var(--pink); letter-spacing: 0.07em; }
+    .modal-sec-label {
+      font-size: 0.52rem; letter-spacing: 0.3em;
+      text-transform: uppercase; color: var(--dim);
+      margin: 1.1rem 0 0.6rem;
+    }
+    .date-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 3px;
+      max-height: 188px;
+      overflow-y: auto;
+    }
+    .date-btn {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--mid);
+      font-family: var(--sans);
+      font-size: 0.58rem;
+      padding: 0.38rem 0.15rem;
+      cursor: pointer;
+      text-align: center;
+      transition: border-color 0.1s, color 0.1s, background 0.1s;
+      line-height: 1.4;
+    }
+    .date-btn:hover { border-color: rgba(225,75,135,0.35); color: var(--text); }
+    .date-btn.selected { background: rgba(225,75,135,0.1); border-color: var(--pink); color: var(--pink); }
+
+    .time-slot-grid { display: flex; flex-direction: column; gap: 5px; }
+    .time-slot-btn {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text);
+      font-family: var(--sans);
+      font-size: 0.74rem;
+      padding: 0.65rem 1rem;
+      cursor: pointer;
+      text-align: left;
+      transition: background 0.1s, border-color 0.1s;
+      letter-spacing: 0.03em;
+    }
+    .time-slot-btn:hover:not(:disabled) { background: rgba(225,75,135,0.05); border-color: rgba(225,75,135,0.28); }
+    .time-slot-btn.selected { background: rgba(225,75,135,0.1); border-color: var(--pink); color: var(--pink); }
+    .time-slot-btn.unavailable { opacity: 0.3; cursor: not-allowed; text-decoration: line-through; }
+
+    .modal-status { font-size: 0.65rem; color: var(--dim); margin-top: 0.65rem; min-height: 1em; text-align: center; }
+
+    /* success state */
+    .modal-success-inner { text-align: center; padding: 0.5rem 0 0.25rem; }
+    .modal-success-icon { font-size: 1.75rem; color: var(--pink); margin-bottom: 0.9rem; }
+    .modal-success-title {
+      font-family: var(--heading); font-size: 1rem;
+      color: var(--pink); margin-bottom: 0.6rem;
+    }
   </style>
 </head>
 <body>
@@ -372,7 +517,10 @@
   <!-- TOKEN BAR -->
   <div class="token-bar">
     <span class="token-bar-label">Intergalactic Tokens</span>
-    <span id="token-display" class="token-bar-count">—</span>
+    <div class="login-bar">
+      <span id="token-display" class="token-bar-count">—</span>
+      <button id="login-bar-btn" class="login-bar-btn" onclick="handleAuthBtn()">Login</button>
+    </div>
   </div>
 
   <!-- HERO -->
@@ -888,118 +1036,295 @@
   </footer>
 
   <script>
-    // ── TOKEN SYSTEM & REDEEM ──
-    var COMMITTEE_SYNC_URL = "https://panda.mexzungu.com/committee/tokens";
-    var COMMITTEE_PIN = "AC2026";
+    // ── COMMITTEE PRIZE CATALOG — REDEMPTION SYSTEM ──────────────────────────
+    var PANDA_URL = 'https://panda.mexzungu.com';
+    var CANDIDATE_PIN = 'PANDA2026';
+    var CAPTAIN_PIN = 'AC2026';
+    var SESSION_KEY = 'ipsc_prize_session';
 
-    function getTokenBank() {
+    // ── AUTH ──────────────────────────────────────────────────────────────────
+    function getPin() { try { return sessionStorage.getItem(SESSION_KEY) || null; } catch(e) { return null; } }
+    function setPin(p) { try { sessionStorage.setItem(SESSION_KEY, p); } catch(e) {} }
+    function clearPin() { try { sessionStorage.removeItem(SESSION_KEY); } catch(e) {} }
+    function isLoggedIn() { var p = getPin(); return p === CANDIDATE_PIN || p === CAPTAIN_PIN; }
+
+    // ── TOKEN DISPLAY ─────────────────────────────────────────────────────────
+    var _balance = null;
+
+    async function fetchBalance() {
       try {
-        var raw = localStorage.getItem('ipsc_tokens_ac2026');
-        if (!raw) return {total:0, breakdown:{}};
-        var b = JSON.parse(raw);
-        if (!b.breakdown) b.breakdown = {};
-        return b;
-      } catch(e) { return {total:0, breakdown:{}}; }
+        var res = await fetch(PANDA_URL + '/committee/agathe-balance');
+        if (!res.ok) return 0;
+        var data = await res.json();
+        _balance = data.total || 0;
+        return _balance;
+      } catch(e) { return 0; }
     }
 
-    function updateTokenDisplay() {
+    function setTokenDisplay(val) {
       var el = document.getElementById('token-display');
-      if (el) el.textContent = getTokenBank().total;
+      if (el) el.textContent = val !== undefined && val !== null ? val : '—';
     }
 
-    async function loadTokensFromServer() {
-      try {
-        var res = await fetch(COMMITTEE_SYNC_URL);
-        if (!res.ok) return;
-        var serverBank = await res.json();
-        localStorage.setItem("ipsc_tokens_ac2026", JSON.stringify(serverBank));
-        updateTokenDisplay();
-      } catch(e) {}
-    }
-
-    // ── REDEEM HANDLER ──
-    async function handleRedeem(prizeName, tokenCost, btn) {
-      btn.disabled = true;
-      btn.textContent = '...';
-      try {
-        // 1. Fetch current balance from server (always canonical)
-        var res = await fetch(COMMITTEE_SYNC_URL);
-        if (!res.ok) throw new Error('Could not load balance');
-        var bank = await res.json();
-        var total = bank.total || 0;
-
-        // 2. Sync to localStorage
-        localStorage.setItem('ipsc_tokens_ac2026', JSON.stringify(bank));
-        updateTokenDisplay();
-
-        // 3. Check balance
-        if (total < tokenCost) {
-          alert('Insufficient tokens.\n\nYou have: ' + total + '\nRequired: ' + tokenCost + '\n\nEarn more tokens through the minigames.');
-          btn.textContent = 'Redeem';
-          btn.disabled = false;
-          return;
-        }
-
-        // 4. Confirm redemption
-        var confirmed = confirm(
-          'Redeem "' + prizeName + '"?\n\n' +
-          'Cost: ' + tokenCost + ' tokens\n' +
-          'Current balance: ' + total + '\n' +
-          'Remaining after: ' + (total - tokenCost) + '\n\n' +
-          'This cannot be undone.'
-        );
-        if (!confirmed) {
-          btn.textContent = 'Redeem';
-          btn.disabled = false;
-          return;
-        }
-
-        // 5. Deduct and POST to server
-        bank.total = total - tokenCost;
-        bank.breakdown = bank.breakdown || {};
-        bank.breakdown.redeemed = (bank.breakdown.redeemed || 0) + tokenCost;
-
-        var postRes = await fetch(COMMITTEE_SYNC_URL, {
-          method: 'POST',
-          headers: {'Content-Type': 'application/json'},
-          body: JSON.stringify({pin: COMMITTEE_PIN, tokens: bank})
-        });
-        if (!postRes.ok) throw new Error('Server error saving redemption');
-
-        // 6. Update localStorage and display
-        localStorage.setItem('ipsc_tokens_ac2026', JSON.stringify(bank));
-        updateTokenDisplay();
-
-        // 7. Show confirmation
-        btn.textContent = 'Redeemed';
-        btn.classList.add('redeemed');
-        alert('Redeemed.\n\n"' + prizeName + '" has been logged.\nRemaining balance: ' + bank.total + ' tokens.');
-      } catch(err) {
-        btn.textContent = 'Redeem';
-        btn.disabled = false;
-        alert('Error: ' + (err.message || 'Unknown error'));
+    function updateLoginBtn() {
+      var btn = document.getElementById('login-bar-btn');
+      if (!btn) return;
+      if (isLoggedIn()) {
+        btn.textContent = 'Logout';
+        btn.classList.add('logged-in');
+      } else {
+        btn.textContent = 'Login';
+        btn.classList.remove('logged-in');
       }
     }
 
-    // ── INJECT REDEEM BUTTONS ──
-    document.querySelectorAll('.prize-row').forEach(function(row) {
-      var nameEl  = row.querySelector('.prize-name');
-      var tokenEl = row.querySelector('.prize-token');
-      if (!nameEl || !tokenEl) return;
-      var prizeName = nameEl.textContent.trim();
-      var tokenText = tokenEl.childNodes[0] ? tokenEl.childNodes[0].textContent.trim() : '';
-      var tokenCost = parseInt(tokenText, 10);
-      if (isNaN(tokenCost) || tokenCost <= 0) return;
-      var btn = document.createElement('button');
-      btn.className = 'redeem-btn';
-      btn.textContent = 'Redeem';
-      btn.addEventListener('click', function() { handleRedeem(prizeName, tokenCost, btn); });
-      row.appendChild(btn);
+    function handleAuthBtn() {
+      if (isLoggedIn()) {
+        clearPin();
+        setTokenDisplay('—');
+        updateLoginBtn();
+        // Remove injected buttons and replace with login prompts
+        document.querySelectorAll('.redeem-injected').forEach(function(b) { b.remove(); });
+        injectLoginButtons();
+      } else {
+        openLoginModal();
+      }
+    }
+
+    // ── INIT ─────────────────────────────────────────────────────────────────
+    async function init() {
+      updateLoginBtn();
+      if (isLoggedIn()) {
+        var bal = await fetchBalance();
+        setTokenDisplay(bal);
+        injectRedeemButtons(bal);
+      } else {
+        setTokenDisplay('—');
+        injectLoginButtons();
+      }
+    }
+
+    // ── BUTTON INJECTION ──────────────────────────────────────────────────────
+    function injectLoginButtons() {
+      document.querySelectorAll('.prize-row').forEach(function(row) {
+        if (row.querySelector('.redeem-injected')) return;
+        var nameEl = row.querySelector('.prize-name');
+        var tokenEl = row.querySelector('.prize-token');
+        if (!nameEl || !tokenEl) return;
+        var btn = document.createElement('button');
+        btn.className = 'redeem-btn redeem-injected';
+        btn.textContent = 'Login';
+        btn.addEventListener('click', openLoginModal);
+        row.appendChild(btn);
+      });
+    }
+
+    function injectRedeemButtons(balance) {
+      document.querySelectorAll('.prize-row').forEach(function(row) {
+        if (row.querySelector('.redeem-injected')) return;
+        var nameEl = row.querySelector('.prize-name');
+        var numEl = row.querySelector('.prize-num');
+        var tokenEl = row.querySelector('.prize-token');
+        if (!nameEl || !tokenEl) return;
+        var prizeName = nameEl.textContent.trim();
+        var prizeNum = numEl ? numEl.textContent.trim() : '';
+        var tokenText = tokenEl.childNodes[0] ? tokenEl.childNodes[0].textContent.trim() : '';
+        var tokenCost = parseInt(tokenText, 10);
+        if (isNaN(tokenCost) || tokenCost <= 0) return;
+        var btn = document.createElement('button');
+        btn.className = 'redeem-btn redeem-injected';
+        if (balance < tokenCost) {
+          btn.textContent = tokenCost + ' tkn';
+          btn.disabled = true;
+          btn.title = 'Need ' + tokenCost + ' tokens (you have ' + balance + ')';
+        } else {
+          btn.textContent = 'Redeem';
+          btn.addEventListener('click', (function(id, name, cost) {
+            return function() { openBookingModal(id, name, cost); };
+          })(prizeNum, prizeName, tokenCost));
+        }
+        row.appendChild(btn);
+      });
+    }
+
+    // ── LOGIN MODAL ───────────────────────────────────────────────────────────
+    function openLoginModal() {
+      document.getElementById('login-modal').classList.add('open');
+      document.getElementById('login-pin').value = '';
+      document.getElementById('login-err').textContent = '';
+      setTimeout(function() { document.getElementById('login-pin').focus(); }, 60);
+    }
+
+    function closeLoginModal() {
+      document.getElementById('login-modal').classList.remove('open');
+    }
+
+    async function submitLogin() {
+      var pin = document.getElementById('login-pin').value.trim();
+      if (pin !== CANDIDATE_PIN && pin !== CAPTAIN_PIN) {
+        document.getElementById('login-err').textContent = 'Invalid PIN. Try again.';
+        return;
+      }
+      setPin(pin);
+      closeLoginModal();
+      updateLoginBtn();
+      document.querySelectorAll('.redeem-injected').forEach(function(b) { b.remove(); });
+      var bal = await fetchBalance();
+      setTokenDisplay(bal);
+      injectRedeemButtons(bal);
+    }
+
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') { closeLoginModal(); closeBookingModal(); }
     });
 
-    // Load balance on page load
-    updateTokenDisplay();
-    loadTokensFromServer();
+    // ── BOOKING MODAL ─────────────────────────────────────────────────────────
+    var _prize = null;
+    var _selDate = null;
+    var _selTime = null;
+
+    function openBookingModal(prizeId, prizeName, tokenCost) {
+      _prize = { id: prizeId, name: prizeName, cost: tokenCost };
+      _selDate = null;
+      _selTime = null;
+      document.getElementById('bm-prize-name').textContent = prizeName;
+      document.getElementById('bm-token-cost').textContent = tokenCost + ' tokens';
+      document.getElementById('bm-confirm').disabled = true;
+      document.getElementById('bm-status').textContent = '';
+      document.getElementById('bm-form').style.display = '';
+      document.getElementById('bm-success').style.display = 'none';
+      buildDateGrid();
+      renderTimeSlots([]);
+      document.getElementById('booking-modal').classList.add('open');
+    }
+
+    function closeBookingModal() {
+      document.getElementById('booking-modal').classList.remove('open');
+      _prize = null; _selDate = null; _selTime = null;
+    }
+
+    function buildDateGrid() {
+      var grid = document.getElementById('bm-date-grid');
+      grid.innerHTML = '';
+      var today = new Date();
+      for (var i = 1; i <= 30; i++) {
+        var d = new Date(today);
+        d.setDate(today.getDate() + i);
+        var ds = d.toISOString().slice(0, 10);
+        var lbl = d.toLocaleDateString('en-GB', { weekday: 'short', day: 'numeric', month: 'short' });
+        var btn = document.createElement('button');
+        btn.className = 'date-btn';
+        btn.textContent = lbl;
+        btn.dataset.date = ds;
+        btn.addEventListener('click', (function(dateStr) {
+          return function() { selectDate(dateStr); };
+        })(ds));
+        grid.appendChild(btn);
+      }
+    }
+
+    function selectDate(ds) {
+      _selDate = ds;
+      _selTime = null;
+      document.querySelectorAll('.date-btn').forEach(function(b) {
+        b.classList.toggle('selected', b.dataset.date === ds);
+      });
+      document.getElementById('bm-confirm').disabled = true;
+      document.getElementById('bm-status').textContent = 'Checking availability...';
+      renderTimeSlots([]);
+      fetch(PANDA_URL + '/committee/available-slots?date=' + ds)
+        .then(function(r) { return r.json(); })
+        .then(function(data) {
+          document.getElementById('bm-status').textContent = '';
+          renderTimeSlots(data.slots || _defaultSlots());
+        })
+        .catch(function() {
+          document.getElementById('bm-status').textContent = '';
+          renderTimeSlots(_defaultSlots());
+        });
+    }
+
+    function _defaultSlots() {
+      return [
+        { time: '10:00', label: 'Morning', available: true },
+        { time: '15:00', label: 'Afternoon', available: true },
+        { time: '19:00', label: 'Evening', available: true },
+      ];
+    }
+
+    function renderTimeSlots(slots) {
+      var c = document.getElementById('bm-time-slots');
+      c.innerHTML = '';
+      if (!slots || !slots.length) {
+        c.innerHTML = '<div style="color:var(--dim);font-size:0.7rem;text-align:center;padding:0.85rem 0">' +
+          (_selDate ? 'Loading...' : 'Select a date above') + '</div>';
+        return;
+      }
+      slots.forEach(function(slot) {
+        var btn = document.createElement('button');
+        btn.className = 'time-slot-btn' + (!slot.available ? ' unavailable' : '');
+        btn.disabled = !slot.available;
+        btn.innerHTML = '<strong>' + slot.label + '</strong> &nbsp;&middot;&nbsp; ' + slot.time;
+        if (slot.available) {
+          btn.addEventListener('click', (function(t) {
+            return function() {
+              _selTime = t;
+              document.querySelectorAll('.time-slot-btn').forEach(function(b) { b.classList.remove('selected'); });
+              btn.classList.add('selected');
+              document.getElementById('bm-confirm').disabled = false;
+            };
+          })(slot.time));
+        } else {
+          btn.title = 'Already booked';
+        }
+        c.appendChild(btn);
+      });
+    }
+
+    async function submitRedemption() {
+      if (!_prize || !_selDate || !_selTime) return;
+      var btn = document.getElementById('bm-confirm');
+      btn.disabled = true;
+      document.getElementById('bm-status').textContent = 'Submitting...';
+      try {
+        var res = await fetch(PANDA_URL + '/committee/redeem', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            pin: getPin(),
+            prize_id: _prize.id,
+            prize_name: _prize.name,
+            token_cost: _prize.cost,
+            requested_date: _selDate,
+            requested_time: _selTime,
+          })
+        });
+        var data = await res.json();
+        if (data.success) {
+          _balance = data.new_balance;
+          setTokenDisplay(_balance);
+          // Show success state
+          document.getElementById('bm-form').style.display = 'none';
+          document.getElementById('bm-success').style.display = '';
+          document.getElementById('bm-success-name').textContent = _prize.name;
+          var dateLabel = new Date(_selDate + 'T12:00:00').toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'long' });
+          document.getElementById('bm-success-date').textContent = dateLabel + ' at ' + _selTime;
+          document.getElementById('bm-success-bal').textContent = _balance;
+        } else {
+          var msg = data.error === 'insufficient_tokens'
+            ? 'Not enough tokens (have ' + data.balance + ', need ' + data.required + ')'
+            : (data.error || 'Submission failed');
+          document.getElementById('bm-status').textContent = msg;
+          btn.disabled = false;
+        }
+      } catch(e) {
+        document.getElementById('bm-status').textContent = 'Network error. Try again.';
+        btn.disabled = false;
+      }
+    }
+
+    // ── START ─────────────────────────────────────────────────────────────────
+    init();
   </script>
 
   <script>
@@ -1036,6 +1361,72 @@
     })();
   </script>
 
+
+  <!-- ── LOGIN MODAL ────────────────────────────────────────────────────── -->
+  <div id="login-modal" class="overlay-modal" onclick="if(event.target===this)closeLoginModal()">
+    <div class="modal-box">
+      <div class="modal-hdr">
+        <div class="modal-hdr-label">Candidate Access</div>
+        <button class="modal-hdr-close" onclick="closeLoginModal()">✕</button>
+      </div>
+      <div class="modal-body">
+        <p style="font-size:0.76rem;color:var(--mid);line-height:1.75;margin-bottom:1.2rem">
+          Enter your PIN to access the Prize Catalog. Candidate PIN required to redeem tokens.
+        </p>
+        <input id="login-pin" type="password" class="pin-input" placeholder="PIN..." autocomplete="off"
+          onkeydown="if(event.key==='Enter')submitLogin()">
+        <p id="login-err" class="modal-error"></p>
+        <button class="modal-submit" onclick="submitLogin()">Confirm Identity</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── BOOKING MODAL ──────────────────────────────────────────────────── -->
+  <div id="booking-modal" class="overlay-modal" onclick="if(event.target===this)closeBookingModal()">
+    <div class="modal-box">
+      <div class="modal-hdr">
+        <div class="modal-hdr-label">Prize Redemption</div>
+        <button class="modal-hdr-close" onclick="closeBookingModal()">✕</button>
+      </div>
+
+      <!-- Booking form -->
+      <div id="bm-form" class="modal-body">
+        <div style="margin-bottom:1.1rem">
+          <div class="modal-prize-name" id="bm-prize-name"></div>
+          <div class="modal-prize-cost">Cost: <span id="bm-token-cost"></span></div>
+        </div>
+
+        <div class="modal-sec-label">Select Date</div>
+        <div id="bm-date-grid" class="date-grid"></div>
+
+        <div class="modal-sec-label">Select Time</div>
+        <div id="bm-time-slots" class="time-slot-grid"></div>
+
+        <p id="bm-status" class="modal-status"></p>
+        <button id="bm-confirm" class="modal-submit" disabled onclick="submitRedemption()">
+          Submit Redemption Request
+        </button>
+      </div>
+
+      <!-- Success state -->
+      <div id="bm-success" class="modal-body" style="display:none">
+        <div class="modal-success-inner">
+          <div class="modal-success-icon">✦</div>
+          <div class="modal-success-title">Redemption Confirmed</div>
+          <p style="font-size:0.76rem;color:var(--mid);line-height:1.8;margin-bottom:1rem">
+            <strong id="bm-success-name"></strong> has been logged.<br>
+            Requested for <strong id="bm-success-date"></strong>.<br>
+            Remaining balance: <strong id="bm-success-bal"></strong> tokens.
+          </p>
+          <p style="font-size:0.62rem;color:var(--dim);line-height:1.65">
+            The Committee has received your request.<br>A calendar hold has been placed on Pepe's calendar.<br>
+            The Candidate is not required to confirm separately.
+          </p>
+          <button class="modal-submit" style="margin-top:1.5rem" onclick="closeBookingModal()">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <!-- Committee Promo Banner -->
   <style>
