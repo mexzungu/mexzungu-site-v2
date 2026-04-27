@@ -86,7 +86,14 @@
     .quiz-progress-label span { color: var(--pink); }
     .quiz-progress-track { height: 2px; background: var(--border); position: relative; }
     .quiz-progress-fill { position: absolute; left: 0; top: 0; height: 100%; background: var(--pink); transition: width 0.4s ease; }
-    .quiz-q-panel { padding: 1.5rem 1.25rem; border: 1px solid var(--border); margin-bottom: 1rem; }
+    .quiz-q-panel { padding: 1.5rem 1.25rem; border: 1px solid var(--border); margin-bottom: 1rem; position: relative; }
+    /* ── QUESTION TIMER ── */
+    .quiz-timer-num { position: absolute; top: 1rem; right: 1rem; font-family: var(--heading); font-size: 2.2rem; color: var(--pink); line-height: 1; min-width: 2rem; text-align: right; transition: color 0.3s; opacity: 0.85; pointer-events: none; }
+    .quiz-timer-num.timer-urgent { color: #c85454; animation: timerPulse 0.4s ease infinite alternate; }
+    @keyframes timerPulse { from { opacity: 0.85; transform: scale(1); } to { opacity: 1; transform: scale(1.12); } }
+    .quiz-timer-bar { height: 3px; background: var(--dim); margin-top: 1.25rem; overflow: hidden; }
+    .quiz-timer-bar-fill { height: 100%; background: var(--pink); transition: width 1s linear, background 0.3s; width: 100%; }
+    .quiz-timer-bar-fill.timer-urgent { background: #c85454; }
     .quiz-q-code { font-size: 0.54rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--dim); margin-bottom: 0.75rem; }
     .quiz-q-code.wager-active-code { color: var(--pink); }
     .quiz-q-text { font-size: 0.95rem; line-height: 1.75; color: var(--text); }
@@ -200,7 +207,7 @@
         <div class="quiz-intro-panel">
           <div class="quiz-intro-stamp">Classification: Restricted · Case AC-2026-04 · Phase 4</div>
           <h2 class="quiz-intro-title">The Extended Assessment</h2>
-          <p class="quiz-intro-sub">20 questions per round from an infinite pool. Rounds are endless. The Committee does not accept gaps in knowledge.</p>
+          <p class="quiz-intro-sub">20 questions per round drawn from the server pool. One round per day. The Committee does not accept gaps in knowledge.</p>
           <div class="quiz-intro-rules">
             <span class="quiz-intro-rule">20 Questions</span>
             <span class="quiz-intro-rule-sep">·</span>
@@ -208,11 +215,11 @@
             <span class="quiz-intro-rule-sep">·</span>
             <span class="quiz-intro-rule">Earn 20 per round</span>
             <span class="quiz-intro-rule-sep">·</span>
-            <span class="quiz-intro-rule">30 min between rounds</span>
+            <span class="quiz-intro-rule">1 round per day</span>
             <span class="quiz-intro-rule-sep">·</span>
             <span class="quiz-intro-rule">Wager at Q10</span>
           </div>
-          <p class="quiz-intro-warning">After question 10, the Committee offers a wager — bet a multiplier on a harder question. The full record is available. Prepare accordingly.</p>
+          <p class="quiz-intro-warning">After question 10, the Committee offers a wager. One round per calendar day (CET). The full record is available. Prepare accordingly.</p>
           <button class="quiz-btn" id="quiz-start-btn">Begin Extended Assessment</button>
         </div>
       </div>
@@ -228,8 +235,10 @@
           </div>
         </div>
         <div class="quiz-q-panel">
+          <div class="quiz-timer-num" id="quiz-timer-num">10</div>
           <div class="quiz-q-code" id="quiz-q-code">Q1 / 20</div>
           <div class="quiz-q-text" id="quiz-q-text"></div>
+          <div class="quiz-timer-bar"><div class="quiz-timer-bar-fill" id="quiz-timer-bar-fill"></div></div>
         </div>
         <div class="quiz-options" id="quiz-options"></div>
         <div class="quiz-confirm-row">
@@ -309,14 +318,14 @@
             <div class="quiz-pass-tokens-label">Intergalactic Tokens Earned This Round</div>
           </div>
           <div class="quiz-pass-preamble">
-            Another round completed without error. 20 tokens entered into the ledger. A 30-minute cooldown is now active — each new round draws 20 fresh questions from the ever-growing pool. The Committee will not run out of questions.
+            Daily assessment complete. 20 tokens entered into the ledger. Return tomorrow for a fresh round of 20 questions drawn from the ever-growing server pool. The Committee does not run out of questions.
           </div>
           <div style="text-align:center;margin:2rem 0 1rem;">
-            <button class="quiz-btn" id="quiz-next-round-btn">Play Another Round →</button>
+            <div id="quiz-daily-reset-info" style="font-size:0.72rem;color:var(--dim);letter-spacing:0.1em;margin-bottom:1rem;"></div>
           </div>
           <div class="quiz-pass-sig">
             <p>Extended Assessment Protocol — Case AC-2026-04</p>
-            <p>20 tokens entered per round into the permanent record. 30-minute cooldown between rounds enforced.</p>
+            <p>Daily assessment complete. Return tomorrow.</p>
             <div class="quiz-pass-sig-ref">Issued by order of the Committee · Phase 4 · 2026</div>
           </div>
         </div>
@@ -409,78 +418,66 @@
     (function() {
       'use strict';
       var QUIZ_KEY    = 'ipsc_extquiz_ac2026';
+      var DAILY_KEY   = 'ipsc_quiz_last_round_date';
       var LOCK_MS     = 4 * 60 * 60 * 1000;
-      var COOLDOWN_MS = 30 * 60 * 1000;
       var ROUND_SIZE  = 20;
 
-      var QUESTIONS = [
-        {"text": "What was the Candidate doing when she first encountered the Committee?", "opts": ["Attending a dance performance", "On a solo walk in the Gothic Quarter", "At an exhibition opening", "Having drinks with a mutual contact"], "correct": 0},
-        {"text": "How many days elapsed between the Committee first contact and Experiment I?", "opts": ["Three days", "Seven days", "Eleven days", "Fourteen days"], "correct": 1},
-        {"text": "The Committee officially refers to its headquarters as:", "opts": ["The Station", "The Embassy", "The Observatory", "The Field Office"], "correct": 1},
-        {"text": "The Candidate Cherie Class counter-proposal contained how many clauses?", "opts": ["Seven", "Eight", "Ten", "Twelve"], "correct": 2},
-        {"text": "The Panda PIN format is:", "opts": ["A 4-digit code", "A 6-digit date", "An 8-digit timestamp", "A 5-letter passphrase"], "correct": 1},
-        {"text": "The Committee formally classified the attack on Claudio as:", "opts": ["Bamboo Defection Incident Protocol 7", "Panda Revolution", "Habitat Disorientation under altered conditions", "Vegetation Insubordination Level 2"], "correct": 1},
-        {"text": "Experiment I took place at which venue?", "opts": ["Sala Apolo, Poble Sec", "Soho Jazz Club, Gothic Quarter", "Bar Marsella, Born", "Jazz Si Club, Raval"], "correct": 1},
-        {"text": "What snack will the Committee bring to the live painting session?", "opts": ["Dark chocolate 85%", "Champagne and exactly one strawberry", "Popcorn", "Nothing — the Committee does not snack during assessments"], "correct": 2},
-        {"text": "The Candidate counter-proposal was submitted under which formal designation?", "opts": ["The Candidate", "The Panda", "The Consultant", "The Passenger"], "correct": 3},
-        {"text": "Of the counter-proposal clauses one received an unambiguous hard no. Which?", "opts": ["The exit protocol", "The co-creation mandate", "The CDI clause — permanence and exclusivity", "The transparency requirement"], "correct": 2},
-        {"text": "How many total field interactions are entered in Case AC-2026-04?", "opts": ["Eleven", "Thirteen", "Fifteen", "Sixteen"], "correct": 3},
-        {"text": "Under which jurisdiction is Low-Battery Panda Mode formally accepted?", "opts": ["Interstellar Treaty of 2019 Article 7", "Galactic Panda Preservation Act Annex IV", "Barcelona Convention on Minimum Operational Standards", "Martian law"], "correct": 3},
-        {"text": "How did the Committee announce itself when arriving with food?", "opts": ["Galactic High Council surprise inspection", "Captain personal provisioning service", "Intergalactic Glovo", "Committee Field Operations Unit"], "correct": 2},
-        {"text": "The psilocybin journey was formally classified as:", "opts": ["An unsanctioned field excursion tolerated but not endorsed", "A complimentary gratuity requested by the Candidate and granted by the Committee", "An optional wellness provision for candidates in good standing", "A private matter outside Committee jurisdiction"], "correct": 1},
-        {"text": "The Panda PIN marks which date?", "opts": ["The date the Candidate filed her first Protocol violation", "The date the Committee formally opened Case AC-2026-04", "The date of the Candidate first encounter with the Committee", "The date the Candidate submitted her counter-proposal"], "correct": 2},
-        {"text": "How many numbered experiments are officially logged for Case AC-2026-04?", "opts": ["Two", "Three", "Four", "Five"], "correct": 1},
-        {"text": "The Committee case reference for this proceeding is:", "opts": ["IPSC-2026-01", "AC-2026-04", "KAP-001-2026", "IPSC-KAP-2026"], "correct": 1},
-        {"text": "The Committee founding jurisdiction is:", "opts": ["Incorporated under the laws of Mars", "Registered in Barcelona under cosmic law", "An independent supra-national body", "The Geneva Accord on Intergalactic Relations"], "correct": 0},
-        {"text": "The Candidate submitted her counter-proposal after which experiment?", "opts": ["Experiment I", "Experiment II", "Experiment III", "After the psilocybin journey"], "correct": 2},
-        {"text": "Claudio is classified in the case file as:", "opts": ["A carbon-based crew member", "A Committee field agent", "A Candidate associate", "An unregistered entity"], "correct": 0},
-        {"text": "The Candidate officially invoked Panda Mode on which Protocol basis?", "opts": ["Physical depletion threshold exceeded", "Emotional bandwidth at minimum viable operations", "Low-Battery Panda Mode under Martian law", "Sanctuary protocol Article 3"], "correct": 2},
-        {"text": "Phase 1 was formally titled:", "opts": ["Preliminary Screening", "Knowledge Assessment Protocol", "Compatibility Assessment", "Initial Field Evaluation"], "correct": 1},
-        {"text": "Phase 2 designation was:", "opts": ["The Cherie Class", "Advanced Assessment Protocol", "Field Deployment Phase", "Negotiated Terms Phase"], "correct": 0},
-        {"text": "Phase 4 is formally titled:", "opts": ["The Final Session", "The Reckoning Protocol", "The Closing Arguments", "The Settlement Phase"], "correct": 0},
-        {"text": "The Final Session countdown target date is:", "opts": ["1 May 2026", "5 May 2026", "10 May 2026", "15 May 2026"], "correct": 2},
-        {"text": "The CDI clause refers to:", "opts": ["Candidate Data Integrity records transparency", "Permanence and exclusivity — the hard no", "Conflict Declaration and Immunity mutual protection", "Confidential Disclosure Index"], "correct": 1},
-        {"text": "The case file was originally opened in which month?", "opts": ["January 2026", "February 2026", "March 2026", "April 2026"], "correct": 1},
-        {"text": "Experiment I was a:", "opts": ["Dinner at a restaurant", "Jazz club outing", "Walk and coffee", "Gallery visit"], "correct": 1},
-        {"text": "The Protocol Duel requires each player to write how many rules?", "opts": ["2", "3", "4", "5"], "correct": 1},
-        {"text": "The Committee considers its proceedings:", "opts": ["Binding under Martian law", "Confidential and binding", "Advisory only", "Confidential but legally non-binding"], "correct": 1},
-        {"text": "The Candidate's confirmed field status in the case file is:", "opts": ["Active", "Pending", "Elevated — Cherie Class", "Probationary"], "correct": 2},
-        {"text": "The Candidate visited the Embassy twice before Phase 4. What was the stated purpose of the second visit?", "opts": ["Delivering the Cherie Class counter-proposal", "Returning a borrowed scarf", "Returning an earring", "Collecting the Committee pin"], "correct": 2},
-        {"text": "Panda Mode eligibility requires:", "opts": ["Prior written notice to the Committee", "A verbal declaration", "Low-battery state confirmed by Committee", "No requirement — self-invoked under Martian law"], "correct": 3},
-        {"text": "Experiment III was primarily classified as:", "opts": ["Intellectual", "Physical", "Sensory", "Procedural"], "correct": 2},
-        {"text": "During the Physical Endurance Assessment, at what time did the Candidate depart the field?", "opts": ["4:12 AM", "5:41 AM", "6:05 AM", "3:47 AM"], "correct": 1},
-        {"text": "The psilocybin journey took place on:", "opts": ["Holy Saturday April 4th", "Easter Monday April 6th", "Easter Sunday April 5th", "Good Friday April 3rd"], "correct": 3},
-        {"text": "The Candidate's counter-proposal reception by the Committee was:", "opts": ["Rejected outright", "Accepted in full", "Partially accepted — one hard no", "Deferred to Phase 4"], "correct": 2},
-        {"text": "The Committee proceedings are held in which city?", "opts": ["Paris", "Barcelona", "Amsterdam", "Madrid"], "correct": 1},
-        {"text": "The Candidate was first encountered at what type of event?", "opts": ["A dinner", "A dance performance", "A jazz show", "An art opening"], "correct": 1},
-        {"text": "Claudio's species classification in the case file is:", "opts": ["Unknown", "Carbon-based", "Mammalian unregistered", "Committee confidential"], "correct": 1},
-        {"text": "Phase 3 was formally titled:", "opts": ["The Knowledge Phase", "The Storytelling Assessment", "The Compliance Phase", "The Negotiation Phase"], "correct": 1},
-        {"text": "The Committee's position on the permanent case record is:", "opts": ["It may be amended by either party", "It is sealed permanently", "It is entered into the file and never deleted", "The Committee holds sole discretion"], "correct": 2},
-        {"text": "The Candidate's first visit to the Embassy was:", "opts": ["For Experiment I debrief", "An unscheduled visit on March 18th", "The March 25th earring return", "After the counter-proposal was accepted"], "correct": 1},
-        {"text": "The Candidate's first Protocol violation was:", "opts": ["Missing a scheduled assessment", "An act of insubordination", "Invoking Panda Mode without notice", "A counter-proposal submitted after deadline"], "correct": 1},
-        {"text": "The physical item the Candidate received from the Committee was:", "opts": ["A case document", "A Committee pin", "A sealed envelope", "A Cherie Class certificate"], "correct": 1},
-        {"text": "The Candidate filed her first Protocol violation response under which designation?", "opts": ["The Applicant", "The Panda", "The Candidate", "The Consultant"], "correct": 2},
-        {"text": "The Committee's case file opening month was:", "opts": ["January", "February", "March", "April"], "correct": 1},
-        {"text": "In which city does the Committee Captain currently live?", "opts": ["Paris", "Madrid", "Barcelona", "Amsterdam"], "correct": 2},
-        {"text": "What country is the Committee Captain originally from?", "opts": ["Spain", "Colombia", "Argentina", "Mexico"], "correct": 3},
-        {"text": "The Captain quit a substance in 2022. What was it?", "opts": ["Alcohol", "Cigarettes", "Coffee", "Sugar"], "correct": 2},
-        {"text": "What is the name of the Captain's consulting firm?", "opts": ["Carrillo & Partners", "IBL Consulting", "Outlaw Studio", "Mexzungu"], "correct": 3},
-        {"text": "The Captain's AI chief of staff is named:", "opts": ["Miriam", "Claude", "Janis", "Atlas"], "correct": 2},
-        {"text": "The Captain has an investment property in which island nation?", "opts": ["Ibiza", "Malta", "Cyprus", "Mauritius"], "correct": 3},
-        {"text": "The Captain's primary working languages are:", "opts": ["Spanish and French", "English and French", "Spanish and English", "English and Portuguese"], "correct": 2},
-        {"text": "What did the Captain do immediately after graduating from Yale in 2017 instead of looking for a job?", "opts": ["Traveled across Africa", "Started Mexzungu", "Walked the Camino de Santiago", "Took a sabbatical in Asia"], "correct": 2},
-        {"text": "At which US university did the Captain earn his postgraduate degree?", "opts": ["Harvard Business School", "Columbia Business School", "Yale School of Management", "Wharton"], "correct": 2},
-        {"text": "The Captain's degree at Yale is called a:", "opts": ["MBA", "JD", "Masters in Advanced Management", "LLM"], "correct": 2},
-        {"text": "Before Yale the Captain spent six years at an international law firm in Mexico City. Which firm?", "opts": ["Clifford Chance", "White & Case", "Baker McKenzie", "Chadbourne & Parke"], "correct": 3},
-        {"text": "The Captain is building a studio apartment in which African country?", "opts": ["Tanzania", "Rwanda", "Uganda", "Kenya"], "correct": 3},
-        {"text": "The Captain's consulting practice uses a corporate entity domiciled in:", "opts": ["Spain", "Delaware USA", "United Kingdom", "Mauritius"], "correct": 3},
-        {"text": "What did the Captain teach at university while still working as a lawyer?", "opts": ["International arbitration", "Tax law", "Corporate law and negotiable instruments", "Contract drafting"], "correct": 2},
-        {"text": "The Captain's legal specialty before Mexzungu was:", "opts": ["Litigation and arbitration", "Tax and restructuring", "Corporate finance — banking, capital markets, M&A", "Employment and labour law"], "correct": 2},
-        {"text": "The Captain's work in Africa included which type of institution?", "opts": ["An international law firm", "A school network", "A tech startup", "An NGO fund"], "correct": 1},
-        {"text": "The Captain's AI chief of staff is named after which rock artist?", "opts": ["Janis Ian", "Joni Mitchell", "Janis Joplin", "Joan Baez"], "correct": 2},
-        {"text": "The Captain's investment property in Africa is located in which coastal area?", "opts": ["Mombasa", "Diani Beach", "Lamu Archipelago", "Malindi"], "correct": 1},
-        {"text": "The Captain's Mauritius property is located in:", "opts": ["Grand Baie", "Port Louis", "Bain Boeuf — Cape Bay", "Flic en Flac"], "correct": 2},
-        {"text": "What did the Captain wear throughout his year at Yale instead of suits?", "opts": ["Casual clothes and sneakers", "His Mexico City business attire", "Shorts and funny shirts", "Traditional Mexican dress"], "correct": 2}
+      // ── CET DATE HELPER ──
+      function getCETDateString() {
+        var now = new Date();
+        var utc = now.getTime() + now.getTimezoneOffset() * 60000;
+        // CET is UTC+1, CEST is UTC+2 (last Sunday March to last Sunday October)
+        var jan = new Date(now.getFullYear(), 0, 1);
+        var jul = new Date(now.getFullYear(), 6, 1);
+        var stdOff = Math.max(jan.getTimezoneOffset(), jul.getTimezoneOffset());
+        var isDST = now.getTimezoneOffset() < stdOff;
+        // For CET calculation, use fixed offset: +1 winter, +2 summer
+        var cetMs = utc + (isDST ? 2 : 1) * 3600000;
+        // Actually simpler: just format in Europe/Madrid timezone
+        try {
+          return new Date().toLocaleDateString('en-CA', {timeZone: 'Europe/Madrid'});
+        } catch(e) {
+          // Fallback: manual CET offset
+          var d = new Date(cetMs);
+          return d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0');
+        }
+      }
+
+      function getCETMidnightMs() {
+        // Returns ms until next midnight CET
+        try {
+          var nowCET = new Date(new Date().toLocaleString('en-US', {timeZone: 'Europe/Madrid'}));
+          var midnight = new Date(nowCET);
+          midnight.setHours(24, 0, 0, 0);
+          return midnight.getTime() - nowCET.getTime();
+        } catch(e) {
+          return 0;
+        }
+      }
+
+      function isDailyRoundUsed() {
+        try {
+          var last = localStorage.getItem(DAILY_KEY);
+          return last === getCETDateString();
+        } catch(e) { return false; }
+      }
+
+      function markDailyRoundUsed() {
+        try { localStorage.setItem(DAILY_KEY, getCETDateString()); } catch(e) {}
+      }
+
+      // ── EMERGENCY BACKUP QUESTIONS (10 hardest from original pool) ──
+      var BACKUP_QUESTIONS = [
+        {"text": "The Compliance Engine hidden record counter is capped at what number?", "opts": ["11","14","17","21"], "correct": 2},
+        {"text": "The Candidate's first act of insubordination was a response to which specific Committee statement?", "opts": ["You seem like someone who always gets what she wants","You don't understand what you've agreed to here","The Committee has seen more cooperative candidates","The record suggests your punctuality is selective"], "correct": 0},
+        {"text": "The Committee deliberation panel has three members. Which vote threshold produces a ruling?", "opts": ["One member alone","Two members simple majority","All three unanimous","Two members but Chair counts double"], "correct": 1},
+        {"text": "Phase 3 was suspended rather than completed. Which explanation appears in the case file?", "opts": ["Candidate failed to appear","Committee voted to advance to Phase 4","Record is sealed","Candidate invoked emergency provision"], "correct": 1},
+        {"text": "According to Committee precedent, a Protocol Duel rule containing the word 'always' has what probability of acceptance?", "opts": ["30%","50%","70%","90%"], "correct": 2},
+        {"text": "The CDI clause was the one hard no. The case file records the Committee's reasoning as:", "opts": ["Conflicted with Martian framework","Outside procedural scope of Phase 2","No reasoning entered","Contradicted Phase 1 ruling"], "correct": 2},
+        {"text": "The Candidate's exact words when warning about Martian Powers were:", "opts": ["Committee proximity is a variable I did not account for","Martian Powers could become addictive","Your methodology feels irreversible","Something should probably be regulated"], "correct": 1},
+        {"text": "The psilocybin journey was classified as a complimentary gratuity. Whose request triggered it?", "opts": ["Committee offered unilaterally","Candidate requested and Committee granted","Written into counter-proposal","Part of Phase 3 suspension ruling"], "correct": 1},
+        {"text": "Which of these prizes does NOT appear in the Prize Catalog?", "opts": ["60-minute full body massage","Written private reflection about her","One clause she proposes he accepts","Committee-witnessed session with no rules"], "correct": 3},
+        {"text": "During the Physical Endurance Assessment, at what time exactly did the Candidate depart?", "opts": ["4:12 AM","5:41 AM","6:05 AM","3:47 AM"], "correct": 1}
       ];
 
       // ── WAGER QUESTIONS (20 hard/tricky questions) ──
@@ -500,39 +497,108 @@
         {text:"The Candidate visited the Embassy exactly twice before Phase 4. What was the purpose of the second visit?",opts:["Delivering the Cherie Class counter-proposal","Returning a borrowed scarf","The earring — on March 18th","Collecting the Committee pin"],correct:1},
         {text:"The Candidate's exact words when warning about Martian Powers were:",opts:["The Committee proximity is becoming a variable I did not account for","Martian Powers could become addictive","Your methodology is beginning to feel irreversible","Something in this process should probably be regulated"],correct:1},
         {text:"The Committee's position on appeals to the 4-hour lockout is:",opts:["Appeals may be filed within 2 hours of the wrong answer","Appeals are reviewed on Thursdays only","The lockout is not subject to appeal","An appeal requires a 50-token processing fee"],correct:2},
-        {text:"After the Cherie Class counter-proposal was partially accepted, the Candidate's operative standing became:",opts:["Full standing — all clauses accepted","Provisional standing pending Phase 4","Elevated — Cherie Class — with negotiated terms","Active status, subject to Phase 4 final ruling"],correct:2},
+        {text:"After the Cherie Class counter-proposal was partially accepted, the Candidate's operative standing became:",opts:["Full standing — all clauses accepted","Provisional standing pending Phase 4","Elevated ��� Cherie Class — with negotiated terms","Active status, subject to Phase 4 final ruling"],correct:2},
         {text:"The CDI clause was the one hard no. The case file records the Committee's reasoning as:",opts:["It conflicted with the Martian jurisdictional framework","It was outside the procedural scope of Phase 2","No reasoning was entered — the Committee simply refused","It contradicted a prior ruling from Phase 1"],correct:2},
         {text:"The wager question pool for the Extended Assessment contains how many questions?",opts:["10","15","20","25"],correct:2}
       ];
 
-      // ── AI QUESTION FETCHING (infinite pool) ──
-      var QUESTIONS_API = 'https://panda.mexzungu.com/committee/questions';
-      var generatedQuestions = [];
-      var fetchingQuestions = false;
+      // ── SERVER QUESTION FETCHING ──
+      var QUIZ_POOL_API = 'https://panda.mexzungu.com/committee/quiz-pool';
+      var serverQuestions = null; // null = not yet fetched
 
-      async function fetchMoreQuestions() {
-        if (fetchingQuestions) return;
-        fetchingQuestions = true;
+      async function fetchServerQuestions() {
         try {
-          var res = await fetch(QUESTIONS_API + '?count=30');
+          var res = await fetch(QUIZ_POOL_API);
           if (res.ok) {
             var data = await res.json();
             if (data.questions && data.questions.length > 0) {
-              generatedQuestions = generatedQuestions.concat(data.questions);
+              serverQuestions = data.questions;
+              return true;
             }
           }
         } catch(e) {}
-        fetchingQuestions = false;
+        return false;
       }
 
       function getQuestionPool() {
-        return QUESTIONS.concat(generatedQuestions);
+        if (serverQuestions && serverQuestions.length > 0) return serverQuestions;
+        return BACKUP_QUESTIONS;
       }
 
       var LETTERS = ['A','B','C','D'];
       var selectedIdx = -1;
       var awaitingTransition = false;
       var lockTimerInterval = null;
+
+      // ── QUESTION TIMER ──
+      var QUESTION_TIME = 10;
+      var questionTimer = null;
+      var questionTimeLeft = QUESTION_TIME;
+      var questionTimerRunning = false;
+
+      function startQuestionTimer() {
+        stopQuestionTimer();
+        questionTimeLeft = QUESTION_TIME;
+        questionTimerRunning = true;
+        updateTimerDisplay();
+        questionTimer = setInterval(function() {
+          if (!questionTimerRunning) return;
+          questionTimeLeft--;
+          updateTimerDisplay();
+          if (questionTimeLeft <= 0) {
+            stopQuestionTimer();
+            onTimerExpired();
+          }
+        }, 1000);
+      }
+
+      function stopQuestionTimer() {
+        if (questionTimer) { clearInterval(questionTimer); questionTimer = null; }
+        questionTimerRunning = false;
+      }
+
+      function updateTimerDisplay() {
+        var numEl  = document.getElementById('quiz-timer-num');
+        var fillEl = document.getElementById('quiz-timer-bar-fill');
+        var urgent = questionTimeLeft <= 3;
+        if (numEl) {
+          numEl.textContent = Math.max(0, questionTimeLeft);
+          if (urgent) numEl.classList.add('timer-urgent');
+          else numEl.classList.remove('timer-urgent');
+        }
+        if (fillEl) {
+          fillEl.style.width = (Math.max(0, questionTimeLeft) / QUESTION_TIME * 100) + '%';
+          if (urgent) fillEl.classList.add('timer-urgent');
+          else fillEl.classList.remove('timer-urgent');
+        }
+      }
+
+      function onTimerExpired() {
+        if (awaitingTransition) return;
+        awaitingTransition = true;
+        // Disable all options
+        document.querySelectorAll('.quiz-opt').forEach(function(o) {
+          o.style.pointerEvents = 'none';
+          o.style.opacity = '0.4';
+        });
+        var btn = document.getElementById('quiz-confirm-btn');
+        if (btn) btn.disabled = true;
+        // Show timeout message in the question area
+        var textEl = document.getElementById('quiz-q-text');
+        var codeEl = document.getElementById('quiz-q-code');
+        if (textEl) textEl.textContent = 'Time elapsed. Assessment terminated.';
+        if (codeEl) { codeEl.textContent = 'TIMEOUT — 4-HOUR LOCKOUT APPLIED'; codeEl.style.color = '#c85454'; }
+        // Log and apply lockout
+        logQuizEvent({event_type: 'timeout', question_index: qs.questionIndex});
+        logQuizEvent({event_type: 'round_fail', question_index: qs.questionIndex, is_correct: 0, timeout: 1});
+        qs.lockUntil  = Date.now() + LOCK_MS;
+        qs.lockReason = 'wrong_answer';
+        qs.started    = false;
+        qs.questionIndex = 0;
+        qs.roundIndices  = null;
+        saveQS();
+        setTimeout(function() { setLockMessage('wrong_answer'); showPanel('quiz-locked'); startLockTimer(); }, 2200);
+      }
 
       var qs = {
         started: false,
@@ -602,8 +668,6 @@
 
       function makeRoundIndices() {
         var pool = getQuestionPool();
-        // Prefetch when AI pool is thin (fewer than 40 generated questions ready)
-        if (generatedQuestions.length < 40) { fetchMoreQuestions(); }
         var idx = [];
         for (var i = 0; i < pool.length; i++) idx.push(i);
         return shuffle(idx).slice(0, ROUND_SIZE);
@@ -616,11 +680,11 @@
         var textEl   = document.getElementById('quiz-locked-text');
         var labelEl  = document.getElementById('quiz-locked-cd-label');
         var noteEl   = document.getElementById('quiz-locked-note');
-        if (reason === 'cooldown') {
-          if (titleEl)  titleEl.textContent  = 'Round Cooldown Active';
-          if (textEl)   textEl.textContent   = 'A round has been completed. The Committee enforces a 30-minute interval between rounds. Use the time to review the record. Return when the countdown expires.';
-          if (labelEl)  labelEl.textContent  = 'Next round available in';
-          if (noteEl)   noteEl.textContent   = 'Your score has been recorded. The pool grows continuously — each new round draws 20 fresh questions. All previous answers remain valid.';
+        if (reason === 'daily_cap') {
+          if (titleEl)  titleEl.textContent  = 'Daily Round Complete';
+          if (textEl)   textEl.textContent   = 'The Committee permits one assessment per calendar day (CET). Your daily round has been completed. Return tomorrow for a fresh set of 20 questions.';
+          if (labelEl)  labelEl.textContent  = 'Next round available at midnight CET';
+          if (noteEl)   noteEl.textContent   = 'Your score has been recorded. The pool grows continuously. All previous answers remain valid. The Committee does not negotiate on daily limits.';
         } else {
           if (titleEl)  titleEl.textContent  = 'Assessment Terminated';
           if (textEl)   textEl.textContent   = 'An incorrect answer has been submitted. The assessment is locked. The Committee does not accept ignorance as an explanation. Review the record and return.';
@@ -700,6 +764,7 @@
 
         var btn = document.getElementById('quiz-confirm-btn');
         if (btn) { btn.disabled = true; btn.textContent = 'Confirm Answer'; }
+        startQuestionTimer();
       }
 
       function renderWagerQuestion() {
@@ -753,9 +818,11 @@
 
         var btn = document.getElementById('quiz-confirm-btn');
         if (btn) { btn.disabled = true; btn.textContent = 'Confirm Answer'; }
+        startQuestionTimer();
       }
 
       function showWagerScreen() {
+        stopQuestionTimer();
         var el = document.getElementById('wager-round-tokens');
         if (el) el.textContent = wagerState.roundCorrectCount * 2;
         logQuizEvent({event_type: 'wager_shown'});
@@ -814,6 +881,7 @@
 
       function confirmAnswer() {
         if (awaitingTransition || selectedIdx < 0) return;
+        stopQuestionTimer();
         awaitingTransition = true;
 
         document.querySelectorAll('.quiz-opt').forEach(function(o) {
@@ -860,12 +928,14 @@
             if (qs.questionIndex >= ROUND_SIZE) {
               logQuizEvent({event_type: 'round_complete', tokens_delta: ROUND_SIZE * 1});
               addTokens('quiz', ROUND_SIZE * 1);
+              markDailyRoundUsed();
               qs.started = false;
               qs.questionIndex = 0;
               qs.roundIndices = null;
-              qs.lockUntil = Date.now() + COOLDOWN_MS;
-              qs.lockReason = 'cooldown';
+              qs.lockUntil = null;
+              qs.lockReason = null;
               saveQS();
+              showDailyResetInfo();
               showPanel('quiz-pass');
             } else {
               showPanel('quiz-active');
@@ -924,13 +994,47 @@
         setTimeout(renderQuestion, 900);
       }
 
-      function startNewRound() {
+      function showDailyResetInfo() {
+        var el = document.getElementById('quiz-daily-reset-info');
+        if (!el) return;
+        var ms = getCETMidnightMs();
+        if (ms <= 0) { el.textContent = ''; return; }
+        var h = Math.floor(ms / 3600000);
+        var m = Math.floor((ms % 3600000) / 60000);
+        el.textContent = 'Next round available in ' + h + 'h ' + m + 'm (midnight CET).';
+      }
+
+      async function startNewRound() {
+        // Check daily cap first
+        if (isDailyRoundUsed()) {
+          setLockMessage('daily_cap');
+          showPanel('quiz-locked');
+          // Show countdown to midnight CET
+          var ms = getCETMidnightMs();
+          qs.lockUntil = Date.now() + ms;
+          qs.lockReason = 'daily_cap';
+          saveQS();
+          startLockTimer();
+          return;
+        }
+        // Check 4-hour lockout
         if (qs.lockUntil && Date.now() < qs.lockUntil) {
           setLockMessage(qs.lockReason || 'wrong_answer');
           showPanel('quiz-locked');
           startLockTimer();
           return;
         }
+        // Show loading state while fetching questions
+        var startBtn = document.getElementById('quiz-start-btn');
+        if (startBtn) { startBtn.disabled = true; startBtn.textContent = 'Loading questions...'; }
+        // Fetch from server
+        var ok = await fetchServerQuestions();
+        if (startBtn) { startBtn.disabled = false; startBtn.textContent = 'Begin Extended Assessment'; }
+        if (!ok && !serverQuestions) {
+          // Fall back to backup questions
+          serverQuestions = null;
+        }
+
         qs.started = true;
         qs.questionIndex = 0;
         qs.lockUntil = null;
@@ -947,15 +1051,27 @@
       }
 
       function initQuiz() {
-        fetchMoreQuestions(); // pre-warm AI question pool on page load
         loadQS();
 
-        if (qs.lockUntil && Date.now() < qs.lockUntil) {
+        // Check daily cap first
+        if (isDailyRoundUsed() && !qs.started) {
+          setLockMessage('daily_cap');
+          var ms = getCETMidnightMs();
+          qs.lockUntil = Date.now() + ms;
+          qs.lockReason = 'daily_cap';
+          saveQS();
+          showPanel('quiz-locked');
+          startLockTimer();
+          return;
+        }
+
+        // Check 4-hour lockout
+        if (qs.lockUntil && Date.now() < qs.lockUntil && qs.lockReason !== 'daily_cap') {
           setLockMessage(qs.lockReason || 'wrong_answer');
           showPanel('quiz-locked');
           startLockTimer();
           return;
-        } else if (qs.lockUntil) {
+        } else if (qs.lockUntil && (Date.now() >= qs.lockUntil || qs.lockReason === 'daily_cap')) {
           qs.started = false;
           qs.questionIndex = 0;
           qs.lockUntil = null;
@@ -977,8 +1093,7 @@
       var startBtn = document.getElementById('quiz-start-btn');
       if (startBtn) startBtn.addEventListener('click', function() { startNewRound(); });
 
-      var nextRoundBtn = document.getElementById('quiz-next-round-btn');
-      if (nextRoundBtn) nextRoundBtn.addEventListener('click', function() { startNewRound(); });
+      // No next-round button with daily cap
 
       var confirmBtn = document.getElementById('quiz-confirm-btn');
       if (confirmBtn) confirmBtn.addEventListener('click', confirmAnswer);
