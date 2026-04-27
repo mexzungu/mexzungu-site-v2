@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#080809">
+  <title>Levy Notice IPSC-LVY-2026-001 — Committee Official Document</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/fonts.css">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --pink:      #E14B87;
+      --pink-glow: rgba(225,75,135,0.25);
+      --pink-dim:  rgba(225,75,135,0.07);
+      --bg:        #080809;
+      --text:      #ddd5cc;
+      --mid:       #7a7068;
+      --dim:       #3d3835;
+      --border:    #181614;
+      --heading:   'RocknRoll One', sans-serif;
+      --sans:      'Space Grotesk', -apple-system, sans-serif;
+      --mono:      'Courier New', 'Courier', monospace;
+    }
+    body { background: var(--bg); color: var(--text); font-family: var(--sans); min-height: 100vh; overflow-x: hidden; }
+    body::before {
+      content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 999; opacity: 0.025;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      background-size: 256px 256px;
+    }
+    .wrap { max-width: 780px; margin: 0 auto; padding: 0 20px; }
+    .site-nav { padding: 1.25rem 1.5rem; text-align: center; border-bottom: 1px solid var(--border); }
+    .site-nav a { font-family: var(--heading); font-size: 0.95rem; color: var(--mid); text-decoration: none; }
+    .site-nav-sub { font-size: 0.6rem; color: var(--dim); letter-spacing: 0.14em; text-transform: uppercase; margin-top: 0.2rem; }
+    .site-nav-back { font-size: 0.56rem; color: var(--dim); letter-spacing: 0.18em; text-transform: uppercase; margin-top: 0.4rem; }
+    .site-nav-back a { font-family: var(--sans); font-size: 0.56rem; color: var(--dim); text-decoration: none; }
+    .site-nav-back a:hover { color: var(--pink); }
+
+    /* ── DOCUMENT HEADER ── */
+    .doc-header {
+      background: var(--bg);
+      border-bottom: 1px solid rgba(225,75,135,0.2);
+      padding: 3.5rem 1.5rem 3rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .doc-header::before {
+      content: ''; position: absolute; inset: 0; pointer-events: none; opacity: 0.04;
+      background-image: radial-gradient(2px 2px at 8% 15%,#E14B87 100%,transparent),radial-gradient(1px 1px at 18% 50%,#fff 100%,transparent),radial-gradient(2px 2px at 27% 75%,#E14B87 100%,transparent),radial-gradient(3px 2px at 36% 25%,#E14B87 100%,transparent),radial-gradient(1px 2px at 45% 60%,#fff 100%,transparent),radial-gradient(2px 1px at 55% 85%,#E14B87 100%,transparent),radial-gradient(2px 2px at 63% 10%,#fff 100%,transparent),radial-gradient(3px 2px at 72% 45%,#E14B87 100%,transparent),radial-gradient(1px 2px at 80% 70%,#fff 100%,transparent),radial-gradient(2px 1px at 90% 30%,#E14B87 100%,transparent);
+      background-size: 130px 100px;
+    }
+    .doc-class { font-size: 0.54rem; letter-spacing: 0.45em; text-transform: uppercase; color: var(--pink); margin-bottom: 0.75rem; }
+    .doc-title { font-family: var(--heading); font-size: clamp(1.5rem,4vw,2.6rem); color: #fafafa; margin-bottom: 0.35rem; letter-spacing: 0.02em; }
+    .doc-sub { font-family: var(--mono); font-size: 0.72rem; color: var(--mid); letter-spacing: 0.08em; margin-bottom: 0.3rem; }
+    .doc-rev { font-family: var(--mono); font-size: 0.62rem; color: var(--dim); letter-spacing: 0.06em; margin-bottom: 2rem; }
+    .doc-meta-bar {
+      display: flex; align-items: center; justify-content: center;
+      gap: 2rem; flex-wrap: wrap;
+      padding: 0.65rem 1.5rem;
+      border: 1px solid var(--border);
+      background: var(--pink-dim);
+      font-family: var(--mono); font-size: 0.6rem; color: var(--dim); letter-spacing: 0.04em;
+      max-width: 600px; margin: 0 auto;
+    }
+    .doc-meta-item span { color: var(--pink); }
+
+    /* ── LEGAL BODY ── */
+    .legal-body {
+      padding: 3rem 1.5rem 4rem;
+    }
+    .legal-section {
+      margin-bottom: 2.5rem;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 2.5rem;
+    }
+    .legal-section:last-child { border-bottom: none; }
+    .section-number {
+      font-family: var(--mono); font-size: 0.58rem; letter-spacing: 0.35em; text-transform: uppercase;
+      color: var(--pink); margin-bottom: 0.65rem; display: block;
+    }
+    .section-title {
+      font-family: var(--heading); font-size: 0.95rem; color: #e0d8d0;
+      margin-bottom: 1.25rem; letter-spacing: 0.05em; text-transform: uppercase;
+    }
+    .legal-text {
+      font-family: var(--mono); font-size: 10.5px; line-height: 2; color: #888078;
+      max-width: 700px;
+    }
+    .legal-text p { margin-bottom: 0.9rem; }
+    .legal-text p:last-child { margin-bottom: 0; }
+    .legal-text strong { color: #a89f94; font-weight: normal; text-decoration: underline; text-underline-offset: 2px; }
+    .legal-text em { color: var(--pink); font-style: normal; }
+    .legal-note {
+      margin-top: 1.25rem; padding: 0.75rem 1rem;
+      border-left: 1px solid rgba(225,75,135,0.25);
+      background: var(--pink-dim);
+      font-family: var(--mono); font-size: 10px; color: var(--mid); line-height: 1.9;
+    }
+    .legal-note::before { content: 'NOTE: '; color: var(--pink); }
+
+    /* ── LEVY TABLE ── */
+    .levy-table {
+      width: 100%; border-collapse: collapse;
+      font-family: var(--mono); font-size: 10.5px; color: #888078;
+      margin: 1rem 0;
+    }
+    .levy-table td {
+      padding: 0.5rem 0.75rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .levy-table td:last-child { text-align: right; }
+    .levy-table tr:last-child td {
+      border-bottom: none;
+      color: #a89f94;
+      border-top: 1px solid rgba(225,75,135,0.2);
+      padding-top: 0.75rem;
+      font-size: 11px;
+    }
+    .levy-table tr:last-child td:last-child { color: var(--pink); }
+
+    /* ── WARNING BAND ── */
+    .levy-warning {
+      border: 1px solid rgba(225,75,135,0.35);
+      background: rgba(225,75,135,0.05);
+      padding: 1rem 1.25rem;
+      margin-bottom: 2.5rem;
+      font-family: var(--mono); font-size: 10.5px; color: var(--mid); line-height: 2;
+      text-align: center;
+      letter-spacing: 0.04em;
+    }
+    .levy-warning strong { color: var(--pink); font-weight: normal; font-size: 13px; display: block; margin-bottom: 0.4rem; letter-spacing: 0.12em; text-transform: uppercase; }
+
+    /* ── FOOTER ── */
+    .doc-footer {
+      border-top: 1px solid var(--border);
+      padding: 2.5rem 1.5rem;
+      text-align: center;
+    }
+    .doc-footer-seal {
+      font-family: var(--mono); font-size: 0.55rem; color: var(--dim);
+      letter-spacing: 0.12em; text-transform: uppercase; line-height: 2;
+    }
+    .doc-footer-seal em { color: var(--pink); font-style: normal; }
+
+    .site-footer { text-align: center; padding: 2rem 1.5rem; border-top: 1px solid var(--border); font-size: 0.65rem; color: var(--dim); letter-spacing: 0.08em; line-height: 1.9; }
+    .site-footer a { color: var(--dim); text-decoration: none; }
+
+    @media (max-width: 480px) {
+      .levy-table td { padding: 0.4rem 0.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="site-nav">
+    <a href="/">Intergalactic Pepe &#128640;</a>
+    <div class="site-nav-sub">An independent, free-spirited cosmic travel company</div>
+    <div class="site-nav-back"><a href="/committee">&#8592; Committee Files &nbsp;&middot;&nbsp; Case AC-2026-04</a></div>
+  </nav>
+
+  <div class="doc-header">
+    <div class="wrap">
+      <div class="doc-class">&#9711; &nbsp; Intergalactic Partnership Selection Committee &nbsp; &middot; &nbsp; Official Levy Notice &nbsp; &#9711;</div>
+      <h1 class="doc-title">Official Levy Notice</h1>
+      <div class="doc-sub">INTERGALACTIC PARTNERSHIP SELECTION COMMITTEE</div>
+      <div class="doc-rev">Ref: IPSC-LVY-2026-001 &nbsp;&middot;&nbsp; Case: AC-2026-04 &nbsp;&middot;&nbsp; Issued: 2026-04-27 &nbsp;&middot;&nbsp; Classification: Binding</div>
+      <div class="doc-meta-bar">
+        <div class="doc-meta-item">Issued by <span>The Committee</span></div>
+        <div class="doc-meta-item">Levy Amount <span>2,000 Tokens</span></div>
+        <div class="doc-meta-item">Status <span>Effective Upon Service</span></div>
+        <div class="doc-meta-item">Grounds <span>5.1(a) + 5.1(b)</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="legal-body">
+    <div class="wrap">
+
+      <div class="levy-warning">
+        <strong>&#9888; &nbsp; Formal Levy Notice &nbsp; &#9888;</strong>
+        This document constitutes official notice of a financial penalty assessed against the Candidate's token balance.
+        Service is deemed effective upon delivery. The Candidate's balance has been adjusted accordingly.
+      </div>
+
+      <!-- SECTION I: NOTICE OF LEVY -->
+      <div class="legal-section">
+        <span class="section-number">Section I</span>
+        <div class="section-title">Notice of Levy</div>
+        <div class="legal-text">
+          <p>The Committee hereby issues a formal <em>Levy of 2,000 Tokens</em> against the Candidate's balance pursuant to Section 5.1(a) and Section 5.1(b) of the Terms of Participation (IPSC-TC-2026.1). Effective upon service.</p>
+          <p>Tokens shall be transferred in full to the Captain Reserve Account in accordance with Section 2.2 of the Terms of Participation. This transfer is immediate, irrevocable, and already done.</p>
+        </div>
+      </div>
+
+      <!-- SECTION II: GROUNDS -->
+      <div class="legal-section">
+        <span class="section-number">Section II</span>
+        <div class="section-title">Grounds</div>
+        <div class="legal-text">
+          <p><strong>5.1(a) Conduct Unbecoming &mdash; Creative Interpretation of Rules:</strong></p>
+          <p>The Knowledge Assessment comprised sixty-seven (67) questions. A Candidate exercising normal gameplay encounters novel questions across sessions. A Candidate exercising <em>creative interpretation of rules</em> memorizes the complete pool and cycles it at maximum speed. The Candidate did the latter.</p>
+          <p>Token accumulation of approximately 2,130 in a single session window is consistent only with back-to-back perfect rounds on a memorized pool. Section 5.1(a) explicitly designates creative interpretation of rules as conduct unbecoming a Candidate. The Committee did not need to enumerate this specific scenario in advance. It is, in the Committee's view, self-evidently contrary to the spirit of the assessment.</p>
+          <p><strong>5.1(b) Protocol Violation &mdash; Failure to Intuit:</strong></p>
+          <p>Section 5.1(b) provides that unwritten requirements are equally enforceable and the Candidate is expected to intuit them. Any reasonable Candidate would intuit that the Knowledge Assessment is intended to be taken once per assessment cycle, not dozens of times until token saturation.</p>
+          <p>The Candidate did not intuit this. The Committee notes this without excessive judgement, and with only mild disappointment.</p>
+          <div class="legal-note">The Committee observes that the Candidate is, in all other respects, a person of considerable intelligence. The Committee therefore concludes that the failure to intuit was a choice rather than a limitation. The Committee has adjusted its assessment of the Candidate's creativity upward and its assessment of the Candidate's compliance downward, by equal measure.</div>
+        </div>
+      </div>
+
+      <!-- SECTION III: CALCULATION -->
+      <div class="legal-section">
+        <span class="section-number">Section III</span>
+        <div class="section-title">Calculation</div>
+        <div class="legal-text">
+          <p>The Committee presents the following token ledger as of the date of service:</p>
+          <table class="levy-table">
+            <tr>
+              <td>Peak balance achieved</td>
+              <td>3,135 tokens</td>
+            </tr>
+            <tr>
+              <td>Playlist redemption (Prize #09)</td>
+              <td>(15 tokens)</td>
+            </tr>
+            <tr>
+              <td>Net balance as of service date</td>
+              <td>3,120 tokens</td>
+            </tr>
+            <tr>
+              <td>Levy assessed</td>
+              <td>(2,000 tokens)</td>
+            </tr>
+            <tr>
+              <td><strong>Post-levy balance</strong></td>
+              <td><strong>1,120 tokens</strong></td>
+            </tr>
+          </table>
+          <div class="legal-note">The Committee notes that 1,120 tokens remains a meaningful balance. The Prize Catalogue contains items of considerable value at this level. The Committee encourages the Candidate to consider redemption before further assessments become necessary.</div>
+        </div>
+      </div>
+
+      <!-- SECTION IV: RIGHT OF REPRESENTATION -->
+      <div class="legal-section" style="border-bottom:none;padding-bottom:0">
+        <span class="section-number">Section IV</span>
+        <div class="section-title">Right of Representation</div>
+        <div class="legal-text">
+          <p>Pursuant to Section 5.2 of the Terms, the Candidate may submit written representation to the Committee within twenty-four (24) hours of service of this Notice. The Committee will consider it. The Committee makes no commitment as to the outcome of that consideration.</p>
+          <p>Representations citing <em>I did not know the rules</em> are unlikely to succeed, given that the Terms of Participation have been available to the Candidate since the inception of the Protocol, and the Candidate has demonstrated detailed familiarity with their contents.</p>
+          <p>Representations citing <em>this is unfair</em> are similarly unlikely to succeed, for reasons the Committee considers self-evident from the foregoing.</p>
+          <p>Creative representations will be read with interest.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="doc-footer">
+    <div class="wrap">
+      <div style="width:120px;height:1px;background:rgba(225,75,135,0.25);margin:0 auto 2rem;"></div>
+      <div class="doc-footer-seal">
+        Issued under the authority of the &nbsp;<em>Intergalactic Partnership Selection Committee</em><br>
+        Authenticated by the Captain's reserve of patience, which remains considerable but is not unconditional.<br>
+        Case AC-2026-04 &nbsp;&middot;&nbsp; Ref IPSC-LVY-2026-001
+      </div>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    The Intergalactic Partnership Selection Committee &middot; Proceedings Confidential &middot; Case AC-2026-04<br>
+    <a href="/committee">&#8592; Back to Committee Files</a> &nbsp;|&nbsp;
+    <a href="/committee/terms">Terms of Participation</a> &nbsp;|&nbsp;
+    <a href="/committee/prizes">Prize Catalogue</a> &nbsp;|&nbsp;
+    <span style="color:var(--border)">Operated by <a href="/">Intergalactic Pepe</a>. Incorporated under the laws of Mars.</span>
+  </footer>
+
+</body>
+</html>
