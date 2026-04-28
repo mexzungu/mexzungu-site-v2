@@ -339,18 +339,69 @@
     var BAN_MS = 4 * 60 * 60 * 1000; // 4 hours
 
     var SONGS = [
-      { notes: [196, 233, 262, 196, 233, 277, 262, 196], title: "Smoke on the Water",    artist: "Deep Purple" },
-      { notes: [330, 330, 330, 294, 262, 330, 294, 262], title: "Eye of the Tiger",      artist: "Survivor" },
-      { notes: [330, 247, 196, 165, 196, 247, 330, 247], title: "Nothing Else Matters",  artist: "Metallica" },
-      { notes: [247, 294, 330, 349, 330, 294, 247, 220], title: "Iron Man",              artist: "Black Sabbath" },
-      { notes: [294, 330, 349, 392, 349, 330, 262, 294], title: "Starlight",             artist: "Muse" },
-      { notes: [440, 415, 392, 370, 349, 330, 294, 262], title: "Stairway to Heaven",   artist: "Led Zeppelin" },
-      { notes: [659, 587, 392, 294, 330, 392, 440, 392], title: "Welcome to the Jungle", artist: "Guns N\u2019 Roses" },
-      { notes: [220, 220, 294, 220, 165, 247, 220, 196], title: "Back in Black",         artist: "AC/DC" },
-      { notes: [392, 392, 349, 330, 294, 262, 294, 330], title: "Pour Some Sugar on Me", artist: "Def Leppard" },
-      { notes: [294, 330, 294, 262, 294, 330, 262, 220], title: "Livin\u2019 on a Prayer", artist: "Bon Jovi" },
-      { notes: [196, 220, 247, 262, 247, 220, 196, 220], title: "Perfect Crime",         artist: "Guns N\u2019 Roses" },
-      { notes: [330, 330, 247, 262, 330, 294, 247, 220], title: "Paranoid",              artist: "Black Sabbath" }
+      { title: "Smoke on the Water", artist: "Deep Purple", notes: [
+        {f:196,d:0.35},{f:233,d:0.35},{f:262,d:0.65},{f:0,d:0.35},
+        {f:196,d:0.35},{f:233,d:0.35},{f:277,d:0.2},{f:262,d:0.65},{f:0,d:0.35},
+        {f:196,d:0.35},{f:233,d:0.35},{f:262,d:0.65},{f:233,d:0.35},{f:196,d:0.75}
+      ]},
+      { title: "Eye of the Tiger", artist: "Survivor", notes: [
+        {f:262,d:0.12},{f:262,d:0.12},{f:262,d:0.12},{f:0,d:0.2},
+        {f:233,d:0.15},{f:262,d:0.35},{f:0,d:0.25},
+        {f:262,d:0.12},{f:262,d:0.12},{f:262,d:0.12},{f:0,d:0.2},
+        {f:233,d:0.15},{f:262,d:0.2},{f:311,d:0.55}
+      ]},
+      { title: "Nothing Else Matters", artist: "Metallica", notes: [
+        {f:165,d:0.32},{f:196,d:0.32},{f:247,d:0.32},{f:330,d:0.32},{f:247,d:0.32},{f:196,d:0.32},
+        {f:165,d:0.32},{f:196,d:0.32},{f:247,d:0.32},{f:330,d:0.32},{f:247,d:0.32},{f:196,d:0.32}
+      ]},
+      { title: "Iron Man", artist: "Black Sabbath", notes: [
+        {f:247,d:0.55},{f:247,d:0.55},{f:294,d:0.55},{f:294,d:0.55},
+        {f:294,d:0.25},{f:330,d:0.55},{f:330,d:0.25},
+        {f:392,d:0.2},{f:370,d:0.2},{f:392,d:0.2},{f:370,d:0.2},{f:294,d:0.55},{f:294,d:0.45}
+      ]},
+      { title: "Back in Black", artist: "AC/DC", notes: [
+        {f:330,d:0.15},{f:294,d:0.2},{f:220,d:0.45},{f:0,d:0.2},
+        {f:220,d:0.12},{f:330,d:0.15},{f:294,d:0.2},{f:247,d:0.2},{f:220,d:0.45},{f:0,d:0.2},
+        {f:330,d:0.15},{f:294,d:0.2},{f:220,d:0.45}
+      ]},
+      { title: "Welcome to the Jungle", artist: "Guns N\u2019 Roses", notes: [
+        {f:988,d:0.65},{f:880,d:0.2},{f:784,d:0.2},{f:659,d:0.2},{f:587,d:0.2},
+        {f:494,d:0.2},{f:440,d:0.2},{f:392,d:0.2},{f:330,d:0.45},{f:0,d:0.25},
+        {f:330,d:0.15},{f:370,d:0.15},{f:392,d:0.15},{f:370,d:0.15},{f:330,d:0.5}
+      ]},
+      { title: "Stairway to Heaven", artist: "Led Zeppelin", notes: [
+        {f:220,d:0.32},{f:262,d:0.32},{f:330,d:0.32},{f:440,d:0.32},{f:494,d:0.45},{f:0,d:0.1},
+        {f:415,d:0.32},{f:440,d:0.32},{f:330,d:0.32},{f:262,d:0.32},
+        {f:220,d:0.32},{f:208,d:0.32},{f:247,d:0.32},{f:330,d:0.32},{f:208,d:0.5}
+      ]},
+      { title: "Seven Nation Army", artist: "The White Stripes", notes: [
+        {f:330,d:0.5},{f:0,d:0.15},{f:330,d:0.5},{f:0,d:0.15},
+        {f:392,d:0.35},{f:0,d:0.1},{f:330,d:0.35},{f:0,d:0.1},
+        {f:294,d:0.35},{f:262,d:0.65},{f:247,d:0.8}
+      ]},
+      { title: "Sweet Home Alabama", artist: "Lynyrd Skynyrd", notes: [
+        {f:587,d:0.2},{f:554,d:0.12},{f:587,d:0.3},{f:440,d:0.35},{f:0,d:0.15},
+        {f:523,d:0.2},{f:494,d:0.12},{f:523,d:0.3},{f:392,d:0.35},{f:0,d:0.15},
+        {f:392,d:0.2},{f:440,d:0.15},{f:494,d:0.25},{f:440,d:0.2},{f:392,d:0.5}
+      ]},
+      { title: "Another Brick in the Wall", artist: "Pink Floyd", notes: [
+        {f:294,d:0.22},{f:294,d:0.22},{f:294,d:0.22},{f:294,d:0.18},{f:294,d:0.18},
+        {f:349,d:0.32},{f:294,d:0.22},{f:262,d:0.28},{f:220,d:0.55},{f:0,d:0.3},
+        {f:294,d:0.22},{f:294,d:0.22},{f:294,d:0.22},{f:294,d:0.22},
+        {f:349,d:0.28},{f:294,d:0.22},{f:330,d:0.35}
+      ]},
+      { title: "Bohemian Rhapsody", artist: "Queen", notes: [
+        {f:466,d:0.25},{f:466,d:0.25},{f:440,d:0.25},{f:466,d:0.4},{f:349,d:0.6},{f:0,d:0.25},
+        {f:466,d:0.25},{f:466,d:0.25},{f:440,d:0.25},{f:466,d:0.4},{f:392,d:0.3},{f:311,d:0.6},
+        {f:0,d:0.2},{f:349,d:0.3},{f:392,d:0.3},{f:415,d:0.55}
+      ]},
+      { title: "Jump", artist: "Van Halen", notes: [
+        {f:392,d:0.35},{f:523,d:0.5},{f:0,d:0.2},
+        {f:523,d:0.2},{f:523,d:0.2},{f:466,d:0.2},{f:523,d:0.5},{f:0,d:0.2},
+        {f:349,d:0.25},{f:392,d:0.45},{f:0,d:0.2},
+        {f:466,d:0.2},{f:523,d:0.5},{f:0,d:0.15},
+        {f:523,d:0.2},{f:466,d:0.2},{f:392,d:0.2},{f:523,d:0.65}
+      ]}
     ];
 
     // ── GAME STATE ──
@@ -391,26 +442,27 @@
       currentOscillators = [];
     }
 
-    function playNote(freq, startTime) {
-      if (!audioCtx) return;
-      var osc  = audioCtx.createOscillator();
-      var gain = audioCtx.createGain();
-      osc.connect(gain);
-      gain.connect(audioCtx.destination);
-      osc.type = 'sine';
+    function playNote(freq, startTime, duration) {
+      if (!audioCtx || freq <= 0) return;
+      var osc    = audioCtx.createOscillator();
+      var filter = audioCtx.createBiquadFilter();
+      var gain   = audioCtx.createGain();
+      osc.type = 'sawtooth';
       osc.frequency.setValueAtTime(freq, startTime);
-      var peak     = 0.32;
-      var noteEnd  = startTime + 0.4;
-      var atkEnd   = startTime + 0.02;
-      var decEnd   = startTime + 0.07;
-      var relStart = startTime + 0.25;
+      filter.type = 'lowpass';
+      filter.frequency.setValueAtTime(2000, startTime);
+      filter.Q.setValueAtTime(1, startTime);
+      osc.connect(filter);
+      filter.connect(gain);
+      gain.connect(audioCtx.destination);
+      var peak    = 0.3;
+      var noteEnd = startTime + duration;
+      // Plucked envelope: fast attack, exponential decay
       gain.gain.setValueAtTime(0, startTime);
-      gain.gain.linearRampToValueAtTime(peak,        atkEnd);
-      gain.gain.linearRampToValueAtTime(peak * 0.7,  decEnd);
-      gain.gain.setValueAtTime(peak * 0.7,           relStart);
-      gain.gain.linearRampToValueAtTime(0,           noteEnd);
+      gain.gain.linearRampToValueAtTime(peak, startTime + 0.005);
+      gain.gain.setTargetAtTime(0.001, startTime + 0.005, duration * 0.35);
       osc.start(startTime);
-      osc.stop(noteEnd + 0.01);
+      osc.stop(noteEnd + 0.1);
       currentOscillators.push(osc);
     }
 
@@ -418,12 +470,17 @@
       if (loopTimeout) { clearTimeout(loopTimeout); loopTimeout = null; }
       if (!audioCtx) return;
       currentOscillators = [];
+      var totalDur = 0;
+      notes.forEach(function(n) { totalDur += n.d; });
       function playLoop() {
         if (!audioCtx) return;
-        var step = 0.45; // 0.4s note + 0.05s gap
-        var t    = audioCtx.currentTime + 0.05;
-        notes.forEach(function(freq, i) { playNote(freq, t + i * step); });
-        loopTimeout = setTimeout(playLoop, (notes.length * step + 0.4) * 1000);
+        var t = audioCtx.currentTime + 0.05;
+        var offset = 0;
+        notes.forEach(function(n) {
+          if (n.f > 0) playNote(n.f, t + offset, n.d);
+          offset += n.d;
+        });
+        loopTimeout = setTimeout(playLoop, (totalDur + 0.5) * 1000);
       }
       playLoop();
     }
