@@ -155,6 +155,19 @@
     .wager-result-box { text-align: center; padding: 2.5rem 3rem; border: 2px solid var(--pink); background: rgba(8,8,9,0.97); max-width: 420px; width: 90%; box-shadow: 0 0 80px rgba(225,75,135,0.15); }
     .wager-result-verdict { font-family: var(--heading); font-size: clamp(2.2rem,9vw,4rem); line-height: 1; margin-bottom: 0.75rem; }
     .wager-result-detail { font-size: 0.9rem; color: var(--mid); line-height: 1.75; }
+
+    /* ── CAPTAIN GAMBIT ── */
+    .gambit-badge { display: inline-block; background: #c85454; color: #fff; font-family: var(--heading); font-size: 0.62rem; letter-spacing: 0.32em; text-transform: uppercase; padding: 4px 14px; margin-bottom: 1rem; border: 1px solid rgba(200,84,84,0.5); box-shadow: 0 0 20px rgba(200,84,84,0.25); }
+    .gambit-q-panel { border-color: rgba(200,84,84,0.45) !important; background: rgba(200,84,84,0.03) !important; box-shadow: 0 0 40px rgba(200,84,84,0.07); }
+    .gambit-q-panel .quiz-q-text { color: #fafafa; }
+    .captain-verdict-overlay { position: fixed; inset: 0; z-index: 1000; background: rgba(8,8,9,0.97); display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity 0.4s ease; }
+    .captain-verdict-overlay.visible { opacity: 1; pointer-events: auto; }
+    .captain-verdict-box { text-align: center; padding: 3rem 2rem; max-width: 500px; width: 90%; border: 2px solid #c85454; background: rgba(8,8,9,0.99); box-shadow: 0 0 100px rgba(200,84,84,0.18), 0 0 200px rgba(200,84,84,0.05); }
+    .captain-verdict-stamp { font-size: 0.54rem; letter-spacing: 0.4em; text-transform: uppercase; color: #c85454; margin-bottom: 1.75rem; opacity: 0.8; }
+    .captain-verdict-main { font-family: var(--heading); font-size: clamp(3.5rem,14vw,7rem); color: #c85454; line-height: 1; text-shadow: 0 0 60px rgba(200,84,84,0.4), 0 0 120px rgba(200,84,84,0.1); margin-bottom: 0.4rem; }
+    .captain-verdict-sub { font-family: var(--heading); font-size: clamp(0.9rem,3vw,1.35rem); color: var(--mid); margin-bottom: 1.75rem; letter-spacing: 0.06em; }
+    .captain-verdict-detail { font-size: 0.78rem; color: var(--dim); line-height: 1.8; font-style: italic; border-top: 1px solid rgba(200,84,84,0.2); padding-top: 1.25rem; }
+    .captain-verdict-tokens { font-family: var(--heading); font-size: 1.6rem; color: #c85454; margin-top: 0.75rem; letter-spacing: 0.04em; }
   </style>
 </head>
 <body>
@@ -164,6 +177,18 @@
     <div class="wager-result-box">
       <div class="wager-result-verdict" id="wager-result-verdict"></div>
       <div class="wager-result-detail" id="wager-result-detail"></div>
+    </div>
+  </div>
+  <div class="captain-verdict-overlay" id="captain-verdict-overlay">
+    <div class="captain-verdict-box">
+      <div class="captain-verdict-stamp">&#9632; &nbsp; Captain's Verdict &nbsp;·&nbsp; Classified Ruling &nbsp; &#9632;</div>
+      <div class="captain-verdict-main">WRONG.</div>
+      <div class="captain-verdict-sub">The Captain decides.</div>
+      <div class="captain-verdict-detail">
+        This question was classified. No candidate has ever answered correctly.<br>
+        The wager has been burned.
+        <div class="captain-verdict-tokens" id="captain-verdict-tokens"></div>
+      </div>
     </div>
   </div>
 
@@ -421,6 +446,8 @@
       var DAILY_KEY   = 'ipsc_quiz_last_round_date';
       var LOCK_MS     = 4 * 60 * 60 * 1000;
       var ROUND_SIZE  = 20;
+      var GAMBIT_API        = 'https://panda.mexzungu.com/committee/gambit-question';
+      var GAMBIT_ANSWER_API = 'https://panda.mexzungu.com/committee/gambit-answer';
 
       // ── CET DATE HELPER ──
       function getCETDateString() {
@@ -614,7 +641,9 @@
         isWagerQuestion: false,
         currentWagerQ: null,
         wagerQUsed: [],
-        roundCorrectCount: 0
+        roundCorrectCount: 0,
+        isGambitQuestion: false,
+        gambitQ: null
       };
 
       function loadQS() {
@@ -730,7 +759,17 @@
         return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
       }
 
+      function _clearGambitStyling() {
+        var gb = document.getElementById('quiz-gambit-badge');
+        if (gb) gb.remove();
+        var gp = document.querySelector('.quiz-q-panel');
+        if (gp) gp.classList.remove('gambit-q-panel');
+        var gc = document.getElementById('quiz-q-code');
+        if (gc) gc.style.color = '';
+      }
+
       function renderQuestion() {
+        _clearGambitStyling();
         var qi = qs.questionIndex;
         var q = getQuestionPool()[qs.roundIndices[qi]];
         selectedIdx = -1;
@@ -768,6 +807,7 @@
       }
 
       function renderWagerQuestion() {
+        _clearGambitStyling();
         // Pick random unused wager question; fallback to random main pool question
         var available = [];
         for (var i = 0; i < WAGER_QUESTIONS.length; i++) {
@@ -829,17 +869,39 @@
         showPanel('quiz-wager');
       }
 
-      function selectWager(mult) {
+      async function selectWager(mult) {
         logQuizEvent({event_type: 'wager_chosen', wager_multiplier: mult});
         if (mult === 0) {
           // PASS — normal next question
           wagerState.currentWager = 1;
           wagerState.isWagerQuestion = false;
+          wagerState.isGambitQuestion = false;
+          wagerState.gambitQ = null;
           showPanel('quiz-active');
           renderQuestion();
+        } else if (mult === 10 && wagerState.roundCorrectCount >= 3) {
+          // 10x wager with 3+ correct answers — check for Captain Gambit
+          wagerState.currentWager = mult;
+          var gambitQ = await checkGambit();
+          if (gambitQ) {
+            wagerState.isWagerQuestion = true;
+            wagerState.isGambitQuestion = true;
+            wagerState.gambitQ = gambitQ;
+            showPanel('quiz-active');
+            renderGambitQuestion();
+          } else {
+            // No gambit questions in pool — proceed with normal wager question
+            wagerState.isWagerQuestion = true;
+            wagerState.isGambitQuestion = false;
+            wagerState.gambitQ = null;
+            showPanel('quiz-active');
+            renderWagerQuestion();
+          }
         } else {
           wagerState.currentWager = mult;
           wagerState.isWagerQuestion = true;
+          wagerState.isGambitQuestion = false;
+          wagerState.gambitQ = null;
           showPanel('quiz-active');
           renderWagerQuestion();
         }
@@ -870,6 +932,81 @@
         overlay.style.pointerEvents = 'none';
       }
 
+      // ── CAPTAIN GAMBIT ──
+      async function checkGambit() {
+        try {
+          var res = await fetch(GAMBIT_API);
+          if (res.ok) {
+            var data = await res.json();
+            if (data.id && data.question && data.options) return data;
+          }
+        } catch(e) {}
+        return null;
+      }
+
+      function renderGambitQuestion() {
+        _clearGambitStyling();
+        var gq = wagerState.gambitQ;
+        selectedIdx = -1;
+        awaitingTransition = false;
+
+        var qi = qs.questionIndex;
+        var wagerAmount = 2 * wagerState.currentWager;
+        var numEl  = document.getElementById('quiz-q-num');
+        var fillEl = document.getElementById('quiz-progress-fill');
+        var codeEl = document.getElementById('quiz-q-code');
+        var scoreEl = document.getElementById('quiz-score-display');
+        if (numEl)  numEl.textContent  = qi + 1;
+        if (fillEl) fillEl.style.width = ((qi / ROUND_SIZE) * 100) + '%';
+        if (codeEl) {
+          codeEl.innerHTML = '&#9760; CAPTAIN CLASSIFIED &nbsp;&middot;&nbsp; ' + wagerState.currentWager + 'x &nbsp;&middot;&nbsp; ' + wagerAmount + ' TOKENS AT STAKE';
+          codeEl.classList.add('wager-active-code');
+          codeEl.style.color = '#c85454';
+        }
+        if (scoreEl) scoreEl.textContent = '\u26A1 ' + wagerState.currentWager + 'x WAGER ACTIVE';
+
+        var panelEl = document.querySelector('.quiz-q-panel');
+        if (panelEl) panelEl.classList.add('gambit-q-panel');
+
+        var textEl = document.getElementById('quiz-q-text');
+        if (textEl) {
+          textEl.textContent = gq.question;
+          var badge = document.createElement('div');
+          badge.id = 'quiz-gambit-badge';
+          badge.className = 'gambit-badge';
+          badge.textContent = '\u25FC CAPTAIN CLASSIFIED';
+          textEl.parentNode.insertBefore(badge, textEl);
+        }
+
+        var optsEl = document.getElementById('quiz-options');
+        if (!optsEl) return;
+        optsEl.innerHTML = '';
+        gq.options.forEach(function(opt, i) {
+          var el = document.createElement('div');
+          el.className = 'quiz-opt';
+          el.innerHTML = '<div class="quiz-opt-letter">' + LETTERS[i] + '</div><div class="quiz-opt-text">' + escHtml(opt) + '</div>';
+          el.addEventListener('click', function() { onOptClick(i, el); });
+          optsEl.appendChild(el);
+        });
+
+        var btn = document.getElementById('quiz-confirm-btn');
+        if (btn) { btn.disabled = true; btn.textContent = 'Confirm Answer'; }
+        startQuestionTimer();
+      }
+
+      function showCaptainVerdict(wagerAmount) {
+        var overlay = document.getElementById('captain-verdict-overlay');
+        if (overlay) overlay.classList.add('visible');
+        var tokensEl = document.getElementById('captain-verdict-tokens');
+        if (tokensEl) tokensEl.textContent = '-' + wagerAmount + ' tokens';
+      }
+
+      function hideCaptainVerdict() {
+        var overlay = document.getElementById('captain-verdict-overlay');
+        if (overlay) overlay.classList.remove('visible');
+        _clearGambitStyling();
+      }
+
       function onOptClick(idx, el) {
         if (awaitingTransition) return;
         selectedIdx = idx;
@@ -879,7 +1016,7 @@
         if (btn) btn.disabled = false;
       }
 
-      function confirmAnswer() {
+      async function confirmAnswer() {
         if (awaitingTransition || selectedIdx < 0) return;
         stopQuestionTimer();
         awaitingTransition = true;
@@ -890,6 +1027,62 @@
         });
         var btn = document.getElementById('quiz-confirm-btn');
         if (btn) btn.disabled = true;
+
+        // ── CAPTAIN GAMBIT BRANCH ──
+        if (wagerState.isGambitQuestion) {
+          var gq = wagerState.gambitQ;
+          var multiplier = wagerState.currentWager;
+          var wagerAmount = 2 * multiplier;
+
+          triggerFlash('wrong');
+
+          // Submit to server — always returns wrong, but server confirms the verdict
+          try {
+            await fetch(GAMBIT_ANSWER_API, {
+              method: 'POST',
+              headers: {'Content-Type': 'application/json'},
+              body: JSON.stringify({gambit_id: gq.id, answer_index: selectedIdx})
+            });
+          } catch(e) {}
+
+          logQuizEvent({
+            event_type: 'gambit_verdict',
+            gambit_id: gq.id,
+            answer_index: selectedIdx,
+            multiplier: multiplier,
+            tokens_delta: -wagerAmount
+          });
+
+          subtractTokens('quiz', wagerAmount);
+
+          wagerState.currentWager = 1;
+          wagerState.isWagerQuestion = false;
+          wagerState.isGambitQuestion = false;
+          wagerState.gambitQ = null;
+
+          showCaptainVerdict(wagerAmount);
+
+          setTimeout(function() {
+            hideCaptainVerdict();
+            if (qs.questionIndex >= ROUND_SIZE) {
+              logQuizEvent({event_type: 'round_complete', tokens_delta: ROUND_SIZE * 1});
+              addTokens('quiz', ROUND_SIZE * 1);
+              markDailyRoundUsed();
+              qs.started = false;
+              qs.questionIndex = 0;
+              qs.roundIndices = null;
+              qs.lockUntil = null;
+              qs.lockReason = null;
+              saveQS();
+              showDailyResetInfo();
+              showPanel('quiz-pass');
+            } else {
+              showPanel('quiz-active');
+              renderQuestion();
+            }
+          }, 4500);
+          return;
+        }
 
         // ── WAGER QUESTION BRANCH ──
         if (wagerState.isWagerQuestion) {
@@ -972,15 +1165,17 @@
         saveQS();
 
         if (qs.questionIndex >= ROUND_SIZE) {
-          // Round complete — award 20 base tokens + enforce 30-min cooldown
+          // Round complete — award 20 base tokens + mark daily cap
           logQuizEvent({event_type: 'round_complete', tokens_delta: ROUND_SIZE * 1});
           addTokens('quiz', ROUND_SIZE * 1);
+          markDailyRoundUsed();
           qs.started = false;
           qs.questionIndex = 0;
           qs.roundIndices = null;
-          qs.lockUntil = Date.now() + COOLDOWN_MS;
-          qs.lockReason = 'cooldown';
+          qs.lockUntil = null;
+          qs.lockReason = null;
           saveQS();
+          showDailyResetInfo();
           setTimeout(function() { showPanel('quiz-pass'); }, 900);
           return;
         }
@@ -1044,6 +1239,8 @@
         wagerState.isWagerQuestion = false;
         wagerState.currentWagerQ = null;
         wagerState.roundCorrectCount = 0;
+        wagerState.isGambitQuestion = false;
+        wagerState.gambitQ = null;
         saveQS();
         logQuizEvent({event_type: 'round_start'});
         showPanel('quiz-active');
