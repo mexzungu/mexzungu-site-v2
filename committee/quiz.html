@@ -621,15 +621,15 @@
             <div class="quiz-intro-panel">
               <div class="quiz-intro-stamp">Classification: Restricted · Case AC-2026-04 · Phase 1</div>
               <h2 class="quiz-intro-title">Knowledge Assessment Protocol</h2>
-              <p class="quiz-intro-sub">The Committee requires verification of candidate intelligence. Eleven questions drawn from the case file. One wrong answer terminates the session for eleven hours. Perfect recall is expected.</p>
+              <p class="quiz-intro-sub">The Committee requires verification of candidate intelligence. Eleven questions drawn from the case file. One wrong answer terminates the session for four hours. Perfect recall is expected.</p>
               <div class="quiz-intro-rules">
                 <span class="quiz-intro-rule">11 Questions</span>
                 <span class="quiz-intro-rule-sep">·</span>
                 <span class="quiz-intro-rule">Perfect Score Required</span>
                 <span class="quiz-intro-rule-sep">·</span>
-                <span class="quiz-intro-rule">1 Wrong = 11hr Lockout</span>
+                <span class="quiz-intro-rule">1 Wrong = 4hr Lockout</span>
               </div>
-              <p class="quiz-intro-warning">One wrong answer locks you out for eleven hours. The Committee takes the assessment seriously. You should too.</p>
+              <p class="quiz-intro-warning">One wrong answer locks you out for four hours. The Committee takes the assessment seriously. You should too.</p>
               <button class="quiz-btn" id="quiz-start-btn" disabled>Begin Assessment</button>
             </div>
           </div>
@@ -725,7 +725,7 @@
       'use strict';
 
       var QUIZ_KEY = 'ipsc_quiz_ac2026_v1';
-      var LOCK_MS  = 11 * 60 * 60 * 1000; // 11 hours
+      var LOCK_MS  = 4 * 60 * 60 * 1000; // 4 hours
 
       var QUESTIONS = [
         {
@@ -736,7 +736,7 @@
             "The Committee notes your punctuality is selective.",
             "That answer could use a second draft."
           ],
-          correct: 1
+          correct: 1, tier: 2
         },
         {
           text: "During Experiment I, the Candidate made a claim about her academic record. What exactly did she say?",
@@ -746,7 +746,7 @@
             "She had always been top of class once she got interested in the subject.",
             "She finished her thesis two weeks early and regretted nothing."
           ],
-          correct: 2
+          correct: 2, tier: 1
         },
         {
           text: "Physical Endurance Assessment. At what time did the Candidate depart the field?",
@@ -756,7 +756,7 @@
             "5:41 AM",
             "3:47 AM"
           ],
-          correct: 2
+          correct: 2, tier: 3
         },
         {
           text: "In her own field report on Experiment II, the Candidate described the session as:",
@@ -766,7 +766,7 @@
             "\u201cA test of patience more than technique \u2014 results inconclusive.\u201d",
             "\u201cAn experience I would not classify as recreational.\u201d"
           ],
-          correct: 1
+          correct: 1, tier: 2
         },
         {
           text: "When the Candidate invoked Low-Battery Panda Mode, she cited a legal jurisdiction. Under which jurisdiction is this status formally accepted?",
@@ -776,7 +776,7 @@
             "The Barcelona Convention on Minimum Operational Standards",
             "Martian law"
           ],
-          correct: 3
+          correct: 3, tier: 2
         },
         {
           text: "When the Committee arrived at the Candidate\u2019s quarters with food, how did it announce itself?",
@@ -786,7 +786,7 @@
             "As Intergalactic Glovo",
             "As the Committee\u2019s Field Operations Unit"
           ],
-          correct: 2
+          correct: 2, tier: 1
         },
         {
           text: "The psilocybin journey was not an official experiment. How was it formally classified by the Committee?",
@@ -796,7 +796,7 @@
             "An optional wellness provision available to all Candidates in good standing",
             "A private matter outside Committee jurisdiction"
           ],
-          correct: 1
+          correct: 1, tier: 1
         },
         {
           text: "During the Candidate\u2019s first intergalactic mission, she repeatedly assaulted one of the carbon-based crew members, known as Claudio. As a Panda, the Candidate was expected to revere bamboo. The Committee officially classified this behavior as:",
@@ -806,7 +806,7 @@
             "Panda Revolution",
             "Acute Habitat Disorientation under altered conditions"
           ],
-          correct: 2
+          correct: 2, tier: 2
         },
         {
           text: "The Candidate sent a field update from her workplace. What did she say she had been doing that day?",
@@ -816,7 +816,7 @@
             "\u201cI\u2019ve been carrying this around for a week. No one asked about it.\u201d",
             "\u201cThe Committee has been in this building longer than I expected.\u201d"
           ],
-          correct: 1
+          correct: 1, tier: 2
         },
         {
           text: "The Committee has confirmed attendance at the live painting session. What snack will it be bringing?",
@@ -826,7 +826,7 @@
             "Popcorn",
             "Nothing. The Committee does not snack during field assessments."
           ],
-          correct: 2
+          correct: 2, tier: 1
         },
         {
           text: "The Panda PIN is a 6-digit date. What does it mark?",
@@ -836,7 +836,7 @@
             "The date of the Candidate\u2019s first encounter with the Committee, at the temple",
             "The date the Candidate submitted her counter-proposal"
           ],
-          correct: 2
+          correct: 2, tier: 1
         },
         {
           text: "Experiment I — the Committee\u2019s first formal evaluation — was conducted at which venue?",
@@ -846,7 +846,7 @@
             "Bar Marsella, Born \u2014 selected for proximity to the Embassy",
             "Jazz S\u00ed Club, Raval \u2014 chosen for optimal acoustic conditions"
           ],
-          correct: 1
+          correct: 1, tier: 1
         },
         {
           text: "The Candidate\u2019s shibari master, who conducted Experiment III in Barcelona, is known as:",
@@ -856,7 +856,7 @@
             "Dirty Von P \u2014 the Candidate\u2019s Paris-based master rigger",
             "An anonymous instructor sourced through the Candidate\u2019s dance partner"
           ],
-          correct: 2
+          correct: 2, tier: 2
         },
         {
           text: "Experiment III cost 100 EUR. How was payment handled?",
@@ -866,7 +866,7 @@
             "The Candidate paid the full amount upfront; the Committee reimbursed",
             "The instructor accepted a formal letter of commendation in lieu of payment"
           ],
-          correct: 2
+          correct: 2, tier: 1
         },
         {
           text: "Before the psilocybin journey, the Candidate submitted an emergency contact to the Committee. What was the contact\u2019s name?",
@@ -876,7 +876,7 @@
             "Fiona",
             "Marine"
           ],
-          correct: 2
+          correct: 2, tier: 3
         },
         {
           text: "The Candidate submitted her Ch\u00e9rie Class counter-proposal under which formal designation?",
@@ -886,7 +886,7 @@
             "The Consultant \u2014 professional register, bilateral terms",
             "The Passenger \u2014 her chosen designation for Phase 2 proceedings"
           ],
-          correct: 3
+          correct: 3, tier: 2
         },
         {
           text: "Of the 10 clauses in the Candidate\u2019s Ch\u00e9rie Class counter-proposal, one received an unambiguous hard no. Which clause?",
@@ -896,7 +896,7 @@
             "The CDI clause \u2014 permanence and exclusivity were not on the table",
             "The transparency requirement \u2014 she declined to disclose prior proceedings"
           ],
-          correct: 2
+          correct: 2, tier: 2
         },
         {
           text: "On March 25th, the Candidate made a brief unannounced appearance at the Embassy after sport. What did she return?",
@@ -906,7 +906,7 @@
             "An earring, the original stated reason for the March 18th visit",
             "A field report she had failed to submit after Experiment II"
           ],
-          correct: 1
+          correct: 1, tier: 2
         },
         {
           text: "The psilocybin journey was officially logged in the Committee record. On what date did it take place?",
@@ -916,7 +916,7 @@
             "Easter Sunday, April 5th",
             "Good Friday, April 3rd"
           ],
-          correct: 3
+          correct: 3, tier: 3
         },
         {
           text: "On March 25th, before departing, the Candidate issued a formal warning to the Committee about its influence. What was the exact wording?",
@@ -926,7 +926,7 @@
             "\u201cThe Embassy\u2019s visiting hours are poorly calibrated for sustainable operations.\u201d",
             "\u201cSomething in the Committee\u2019s methodology should probably be regulated.\u201d"
           ],
-          correct: 1
+          correct: 1, tier: 3
         },
         {
           text: "According to the Committee\u2019s full case record, how many field interactions \u2014 numbered experiments and informal engagements combined \u2014 are entered into the file for Case AC-2026-04?",
@@ -936,7 +936,7 @@
             "Fifteen",
             "Sixteen"
           ],
-          correct: 4
+          correct: 4, tier: 3
         }
       ];
 
@@ -1007,12 +1007,34 @@
       }
 
       function makeSelection() {
-        var trapIdx = QUESTIONS.length - 1;
-        var pool = [];
-        for (var i = 0; i < QUESTIONS.length - 1; i++) pool.push(i);
-        var picked = shuffle(pool).slice(0, 10);
-        picked.push(trapIdx);
-        return picked;
+        var t1 = [], t2 = [], t3 = [];
+        for (var i = 0; i < QUESTIONS.length; i++) {
+          var tier = QUESTIONS[i].tier || 2;
+          if (tier === 1) t1.push(i);
+          else if (tier === 3) t3.push(i);
+          else t2.push(i);
+        }
+        function pickN(arr, n) {
+          var a = arr.slice();
+          for (var i = a.length - 1; i > 0; i--) {
+            var j = Math.floor(Math.random() * (i + 1));
+            var tmp = a[i]; a[i] = a[j]; a[j] = tmp;
+          }
+          return a.slice(0, n);
+        }
+        var p1 = pickN(t1, 7);
+        var p2 = pickN(t2, 8);
+        var p3 = pickN(t3, 5);
+        // Fallbacks if a tier is thin
+        if (p1.length < 7) {
+          var spare2 = t2.filter(function(x){return p2.indexOf(x)<0;});
+          p1 = p1.concat(pickN(spare2, 7 - p1.length));
+        }
+        if (p3.length < 5) {
+          var spare2b = t2.filter(function(x){return p2.indexOf(x)<0&&p1.indexOf(x)<0;});
+          p3 = p3.concat(pickN(spare2b, 5 - p3.length));
+        }
+        return p1.concat(p2).concat(p3);
       }
 
       function pad(n) { return String(Math.max(0,n)).padStart(2,'0'); }

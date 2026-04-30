@@ -445,7 +445,7 @@
       var QUIZ_KEY    = 'ipsc_extquiz_ac2026';
       var DAILY_KEY   = 'ipsc_quiz_last_round_date';
       var LOCK_MS     = 4 * 60 * 60 * 1000;
-      var ROUND_SIZE  = 20;
+      var ROUND_SIZE  = 11;
       var GAMBIT_API        = 'https://panda.mexzungu.com/committee/gambit-question';
       var GAMBIT_ANSWER_API = 'https://panda.mexzungu.com/committee/gambit-answer';
 
@@ -493,40 +493,42 @@
         try { localStorage.setItem(DAILY_KEY, getCETDateString()); } catch(e) {}
       }
 
-      // ── EMERGENCY BACKUP QUESTIONS (10 hardest from original pool) ──
+      // ── BACKUP QUESTIONS — tiered pool (server fallback) ──
       var BACKUP_QUESTIONS = [
-        {"text": "The Compliance Engine hidden record counter is capped at what number?", "opts": ["11","14","17","21"], "correct": 2},
-        {"text": "The Candidate's first act of insubordination was a response to which specific Committee statement?", "opts": ["You seem like someone who always gets what she wants","You don't understand what you've agreed to here","The Committee has seen more cooperative candidates","The record suggests your punctuality is selective"], "correct": 0},
-        {"text": "The Committee deliberation panel has three members. Which vote threshold produces a ruling?", "opts": ["One member alone","Two members simple majority","All three unanimous","Two members but Chair counts double"], "correct": 1},
-        {"text": "Phase 3 was suspended rather than completed. Which explanation appears in the case file?", "opts": ["Candidate failed to appear","Committee voted to advance to Phase 4","Record is sealed","Candidate invoked emergency provision"], "correct": 1},
-        {"text": "According to Committee precedent, a Protocol Duel rule containing the word 'always' has what probability of acceptance?", "opts": ["30%","50%","70%","90%"], "correct": 2},
-        {"text": "The CDI clause was the one hard no. The case file records the Committee's reasoning as:", "opts": ["Conflicted with Martian framework","Outside procedural scope of Phase 2","No reasoning entered","Contradicted Phase 1 ruling"], "correct": 2},
-        {"text": "The Candidate's exact words when warning about Martian Powers were:", "opts": ["Committee proximity is a variable I did not account for","Martian Powers could become addictive","Your methodology feels irreversible","Something should probably be regulated"], "correct": 1},
-        {"text": "The psilocybin journey was classified as a complimentary gratuity. Whose request triggered it?", "opts": ["Committee offered unilaterally","Candidate requested and Committee granted","Written into counter-proposal","Part of Phase 3 suspension ruling"], "correct": 1},
-        {"text": "Which of these prizes does NOT appear in the Prize Catalog?", "opts": ["60-minute full body massage","Written private reflection about her","One clause she proposes he accepts","Committee-witnessed session with no rules"], "correct": 3},
-        {"text": "During the Physical Endurance Assessment, at what time exactly did the Candidate depart?", "opts": ["4:12 AM","5:41 AM","6:05 AM","3:47 AM"], "correct": 1}
+        // TIER 1 — basic facts
+        {text:"The Committee chairman holds citizenship in which country?",opts:["France","Spain","Mexico","Argentina"],correct:2,tier:1},
+        {text:"The Committee currently operates out of which city?",opts:["Paris","Lisbon","Barcelona","Madrid"],correct:2,tier:1},
+        {text:"By profession, the Committee chairman is:",opts:["A doctor","A lawyer","An architect","An engineer"],correct:1,tier:1},
+        {text:"The Committee does not consume which of the following?",opts:["Tea","Alcohol","Sparkling water","Juice"],correct:1,tier:1},
+        {text:"The Committee chairman does not smoke. True or false — he also does not drink?",opts:["False — he drinks wine occasionally","True — no alcohol at all","True — only on special occasions","False — beer only"],correct:1,tier:1},
+        // TIER 2 — medium detail
+        {text:"The Committee completed postgraduate studies at:",opts:["Harvard Business School","Oxford University","Yale School of Management","London Business School"],correct:2,tier:2},
+        {text:"What did the Committee do immediately after completing its academic studies?",opts:["Returned to law firm practice","Started a startup","Walked the Camino","Moved to Barcelona directly"],correct:2,tier:2},
+        {text:"The Committee consulting practice operates under which name?",opts:["Mexzungu Group","The Embassy Group","Atlas Consulting","Outlaw Studio"],correct:0,tier:2},
+        {text:"Before becoming a consultant, the Committee practiced law in which city?",opts:["New York","London","Mexico City","Bogota"],correct:2,tier:2},
+        {text:"The Committee taught corporate law at which university?",opts:["ITAM","Universidad Iberoamericana","Tec de Monterrey","UNAM"],correct:2,tier:2},
+        {text:"The Candidate's first act of insubordination was a response to which Committee statement?",opts:["You seem like someone who always gets what she wants","You don't understand what you've agreed to here","The Committee has seen more cooperative candidates","The record suggests your punctuality is selective"],correct:0,tier:2},
+        {text:"The psilocybin journey was classified as a complimentary gratuity. Whose request triggered it?",opts:["Committee offered unilaterally","Candidate requested and Committee granted","Written into counter-proposal","Part of Phase 3 suspension ruling"],correct:1,tier:2},
+        {text:"The CDI clause was the one hard no. The Committee's reasoning:",opts:["Conflicted with Martian framework","Outside procedural scope of Phase 2","No reasoning entered","Contradicted Phase 1 ruling"],correct:2,tier:2},
+        // TIER 3 — hard specifics
+        {text:"In which year did the Committee give up coffee?",opts:["2020","2021","2022","2023"],correct:2,tier:3},
+        {text:"The Committee's academic degree from Yale was:",opts:["MBA","LLM","JD","MAM — Masters in Advanced Management"],correct:3,tier:3},
+        {text:"Before Mexzungu, the Committee's legal career was anchored at:",opts:["Sullivan & Cromwell","Chadbourne & Parke","Baker McKenzie","Clifford Chance"],correct:1,tier:3},
+        {text:"During the Physical Endurance Assessment, at what time exactly did the Candidate depart?",opts:["4:12 AM","5:41 AM","6:05 AM","3:47 AM"],correct:1,tier:3},
+        {text:"The Candidate's exact words when warning about Martian Powers were:",opts:["Committee proximity is a variable I did not account for","Martian Powers could become addictive","Your methodology feels irreversible","Something should probably be regulated"],correct:1,tier:3}
       ];
 
-      // ── WAGER QUESTIONS (20 hard/tricky questions) ──
+      // ── WAGER QUESTIONS — relationship specifics only, tiered ──
       var WAGER_QUESTIONS = [
-        {text:"The Compliance Engine hidden record counter is capped at what number?",opts:["11","14","17","21"],correct:2},
-        {text:"According to Committee case precedent, a rule submitted in the Protocol Duel containing the word 'always' has what probability of acceptance?",opts:["30%","50%","70%","90%"],correct:2},
-        {text:"The Candidate once stated she never lies. The Committee's case file records one exception. What is it?",opts:["She lies about being fine when she isn't","She has lied to protect someone she loves","The file is sealed — no exception appears in the record","She admitted lying to the Committee once, in Phase 1"],correct:2},
-        {text:"What was the Candidate's exact position on the first occasion she formally disputed a Committee ruling?",opts:["She filed a written objection citing procedural error","She invoked Panda Mode and refused to engage","She issued a verbal counter-notice and declined to sign","She submitted the Cherie Class counter-proposal"],correct:3},
-        {text:"The Committee deliberation panel has three members. Which vote threshold produces a ruling?",opts:["One member — the Chair holds sole authority","Two members — simple majority","All three — unanimous only","Two members, but the Chair's vote counts double"],correct:1},
-        {text:"Phase 3 was suspended rather than completed. Which explanation appears in the case file?",opts:["The Candidate failed to appear for a scheduled hearing","The Committee voted to advance directly to Phase 4","The record is sealed — Phase 3 rulings are not disclosed publicly","The Candidate invoked an emergency Protocol provision"],correct:2},
-        {text:"The Candidate's first act of insubordination was a response to which specific Committee statement?",opts:["You seem like someone who always gets what she wants","You don't understand what you've agreed to here","The Committee has seen more cooperative candidates","The record suggests your punctuality is selective"],correct:0},
-        {text:"The Compliance Engine Hidden Record logs something the Candidate cannot see. What does it count?",opts:["Times she has opened the Compliance Engine page","Protocol infractions logged from Phase 3","Rule violations detected during the round","Committee observations about field behavior"],correct:0},
-        {text:"The psilocybin journey was classified as a complimentary gratuity. Whose request triggered it?",opts:["The Committee offered it unilaterally as a Phase 3 provision","The Candidate requested it and the Committee granted it","It was written into the Cherie Class counter-proposal","It was ordered as part of the Phase 3 suspension ruling"],correct:1},
-        {text:"Which word in a Protocol Duel rule gives it a 70% acceptance rate by Committee precedent?",opts:["never","always","sometimes","shall"],correct:1},
-        {text:"Which of these prizes does NOT appear anywhere in the Prize Catalog?",opts:["A 60-minute full body massage","A written private reflection about her","One clause she proposes he accepts without negotiation","A Committee-witnessed session with no rules specified"],correct:3},
-        {text:"During the Physical Endurance Assessment, at what time exactly did the Candidate depart the field?",opts:["4:12 AM","5:41 AM","6:05 AM","3:47 AM"],correct:1},
-        {text:"The Candidate visited the Embassy exactly twice before Phase 4. What was the purpose of the second visit?",opts:["Delivering the Cherie Class counter-proposal","Returning a borrowed scarf","The earring — on March 18th","Collecting the Committee pin"],correct:1},
-        {text:"The Candidate's exact words when warning about Martian Powers were:",opts:["The Committee proximity is becoming a variable I did not account for","Martian Powers could become addictive","Your methodology is beginning to feel irreversible","Something in this process should probably be regulated"],correct:1},
-        {text:"The Committee's position on appeals to the 4-hour lockout is:",opts:["Appeals may be filed within 2 hours of the wrong answer","Appeals are reviewed on Thursdays only","The lockout is not subject to appeal","An appeal requires a 50-token processing fee"],correct:2},
-        {text:"After the Cherie Class counter-proposal was partially accepted, the Candidate's operative standing became:",opts:["Full standing — all clauses accepted","Provisional standing pending Phase 4","Elevated ��� Cherie Class — with negotiated terms","Active status, subject to Phase 4 final ruling"],correct:2},
-        {text:"The CDI clause was the one hard no. The case file records the Committee's reasoning as:",opts:["It conflicted with the Martian jurisdictional framework","It was outside the procedural scope of Phase 2","No reasoning was entered — the Committee simply refused","It contradicted a prior ruling from Phase 1"],correct:2},
-        {text:"The wager question pool for the Extended Assessment contains how many questions?",opts:["10","15","20","25"],correct:2}
+        {text:"The Candidate once stated she never lies. The Committee's case file records one exception. What is it?",opts:["She lies about being fine when she isn't","She has lied to protect someone she loves","The file is sealed — no exception appears in the record","She admitted lying to the Committee once, in Phase 1"],correct:2,tier:3},
+        {text:"What was the Candidate's exact position on the first occasion she formally disputed a Committee ruling?",opts:["She filed a written objection citing procedural error","She invoked Panda Mode and refused to engage","She issued a verbal counter-notice and declined to sign","She submitted the Cherie Class counter-proposal"],correct:3,tier:3},
+        {text:"The Candidate's first act of insubordination was a response to which specific Committee statement?",opts:["You seem like someone who always gets what she wants","You don't understand what you've agreed to here","The Committee has seen more cooperative candidates","The record suggests your punctuality is selective"],correct:0,tier:2},
+        {text:"The psilocybin journey was classified as a complimentary gratuity. Whose request triggered it?",opts:["The Committee offered it unilaterally as a Phase 3 provision","The Candidate requested it and the Committee granted it","It was written into the Cherie Class counter-proposal","It was ordered as part of the Phase 3 suspension ruling"],correct:1,tier:2},
+        {text:"During the Physical Endurance Assessment, at what time exactly did the Candidate depart the field?",opts:["4:12 AM","5:41 AM","6:05 AM","3:47 AM"],correct:1,tier:3},
+        {text:"The Candidate visited the Embassy exactly twice before Phase 4. What was the purpose of the second visit?",opts:["Delivering the Cherie Class counter-proposal","Returning a borrowed scarf","The earring — on March 18th","Collecting the Committee pin"],correct:1,tier:3},
+        {text:"The Candidate's exact words when warning about Martian Powers were:",opts:["The Committee proximity is becoming a variable I did not account for","Martian Powers could become addictive","Your methodology is beginning to feel irreversible","Something in this process should probably be regulated"],correct:1,tier:3},
+        {text:"After the Cherie Class counter-proposal was partially accepted, the Candidate's operative standing became:",opts:["Full standing — all clauses accepted","Provisional standing pending Phase 4","Elevated — Cherie Class — with negotiated terms","Active status, subject to Phase 4 final ruling"],correct:2,tier:2},
+        {text:"The CDI clause was the one hard no. The case file records the Committee's reasoning as:",opts:["It conflicted with the Martian jurisdictional framework","It was outside the procedural scope of Phase 2","No reasoning was entered — the Committee simply refused","It contradicted a prior ruling from Phase 1"],correct:2,tier:2}
       ];
 
       // ── SERVER QUESTION FETCHING ──
@@ -697,9 +699,34 @@
 
       function makeRoundIndices() {
         var pool = getQuestionPool();
-        var idx = [];
-        for (var i = 0; i < pool.length; i++) idx.push(i);
-        return shuffle(idx).slice(0, ROUND_SIZE);
+        var t1 = [], t2 = [], t3 = [];
+        for (var i = 0; i < pool.length; i++) {
+          var tier = pool[i].tier || 2;
+          if (tier === 1) t1.push(i);
+          else if (tier === 3) t3.push(i);
+          else t2.push(i);
+        }
+        function pickN(arr, n) {
+          var a = arr.slice();
+          for (var i = a.length - 1; i > 0; i--) {
+            var j = Math.floor(Math.random() * (i + 1));
+            var tmp = a[i]; a[i] = a[j]; a[j] = tmp;
+          }
+          return a.slice(0, n);
+        }
+        var p1 = pickN(t1, 4);
+        var p2 = pickN(t2, 4);
+        var p3 = pickN(t3, 3);
+        // Fallbacks if a tier is thin
+        if (p1.length < 4) {
+          var spare2 = t2.filter(function(x){return p2.indexOf(x)<0;});
+          p1 = p1.concat(pickN(spare2, 4 - p1.length));
+        }
+        if (p3.length < 3) {
+          var spare2b = t2.filter(function(x){return p2.indexOf(x)<0&&p1.indexOf(x)<0;});
+          p3 = p3.concat(pickN(spare2b, 3 - p3.length));
+        }
+        return p1.concat(p2).concat(p3);
       }
 
       function pad(n) { return String(Math.max(0,n)).padStart(2,'0'); }
@@ -711,7 +738,7 @@
         var noteEl   = document.getElementById('quiz-locked-note');
         if (reason === 'daily_cap') {
           if (titleEl)  titleEl.textContent  = 'Daily Round Complete';
-          if (textEl)   textEl.textContent   = 'The Committee permits one assessment per calendar day (CET). Your daily round has been completed. Return tomorrow for a fresh set of 20 questions.';
+          if (textEl)   textEl.textContent   = 'The Committee permits one assessment per calendar day (CET). Your daily round has been completed. Return tomorrow for a fresh set of 11 questions.';
           if (labelEl)  labelEl.textContent  = 'Next round available at midnight CET';
           if (noteEl)   noteEl.textContent   = 'Your score has been recorded. The pool grows continuously. All previous answers remain valid. The Committee does not negotiate on daily limits.';
         } else {
