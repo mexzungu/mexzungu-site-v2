@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0d0d0d">
+    <title>HavenPay — Mexzungu Group Proposal</title>
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="stylesheet" href="/fonts.css">
+    <link rel="stylesheet" href="/style.css?v=10">
+    <style>
+        /* DARK OVERRIDE — this page is always dark */
+        :root {
+            --bg-primary:     #0d0d0d;
+            --bg-card:        #1a1a1a;
+            --bg-dark:        #0d0d0d;
+            --text-primary:   #fafafa;
+            --text-secondary: #9a8f88;
+            --text-muted:     #6b5e57;
+            --text-accent:    #e86fa0;
+            --border:         #2a2a2a;
+            --border-hover:   #e14b87;
+            --card-bg:        #1a1a1a;
+            --card-border:    #2a2a2a;
+            --gray:           #9a8f88;
+            --gray-light:     #9a8f88;
+            --nav-bg:         rgba(13, 13, 13, 0.92);
+            --dropdown-bg:    rgba(26, 26, 26, 0.97);
+        }
+
+        /* PASSWORD GATE */
+        #pw-gate {
+            position: fixed;
+            inset: 0;
+            background: #0d0d0d;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            padding: 2rem;
+        }
+        #pw-gate.hidden { display: none; }
+
+        .pw-card {
+            background: #1a1a1a;
+            border: 1px solid #2a2a2a;
+            border-radius: 12px;
+            padding: 3rem 2.5rem;
+            max-width: 420px;
+            width: 100%;
+            text-align: center;
+        }
+        .pw-logo {
+            height: 52px;
+            margin-bottom: 2rem;
+        }
+        .pw-label {
+            font-size: 0.75rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: #e14b87;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+        .pw-heading {
+            font-family: 'RocknRoll One', 'Space Grotesk', sans-serif;
+            font-size: 1.6rem;
+            font-weight: 400;
+            color: #fafafa;
+            margin-bottom: 0.6rem;
+            line-height: 1.2;
+        }
+        .pw-sub {
+            font-size: 0.9rem;
+            color: #9a8f88;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+        .pw-input {
+            width: 100%;
+            padding: 0.9rem 1rem;
+            background: #0d0d0d;
+            border: 1px solid #2a2a2a;
+            border-radius: 6px;
+            color: #fafafa;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1rem;
+            letter-spacing: 0.05em;
+            margin-bottom: 1rem;
+            transition: border-color 0.2s;
+            text-align: center;
+        }
+        .pw-input:focus {
+            outline: none;
+            border-color: #e14b87;
+            box-shadow: 0 0 0 3px rgba(225, 75, 135, 0.15);
+        }
+        .pw-input.error {
+            border-color: #c93545;
+            animation: shake 0.3s ease;
+        }
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-8px); }
+            75% { transform: translateX(8px); }
+        }
+        .pw-btn {
+            width: 100%;
+            padding: 0.9rem 2rem;
+            background-color: #e14b87;
+            background-image:
+                radial-gradient(ellipse 12px 8px at 20% 40%, rgba(255,255,255,0.2) 0%, transparent 70%),
+                radial-gradient(ellipse 8px 12px at 60% 25%, rgba(255,255,255,0.15) 0%, transparent 70%);
+            color: #fafafa;
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+            font-size: 0.95rem;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s;
+            box-shadow: 0 4px 14px rgba(225, 75, 135, 0.35);
+            letter-spacing: 0.02em;
+        }
+        .pw-btn:hover {
+            background-color: #e86fa0;
+            box-shadow: 0 6px 22px rgba(225, 75, 135, 0.45);
+            transform: scale(1.02);
+        }
+        .pw-error {
+            font-size: 0.85rem;
+            color: #c93545;
+            margin-top: 0.8rem;
+            min-height: 1.2em;
+        }
+        .pw-footer-note {
+            font-size: 0.75rem;
+            color: #4a4a4a;
+            margin-top: 2rem;
+        }
+
+        /* PROPOSAL CONTENT */
+        #proposal-content { display: none; }
+        #proposal-content.visible { display: block; }
+
+        /* HERO — dark with leopard */
+        .proposal-hero {
+            min-height: 65vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 10rem 2rem 5rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .proposal-hero .hero-tag {
+            font-family: 'Rock Salt', cursive;
+            font-size: 0.75rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: #e14b87;
+            margin-bottom: 1.5rem;
+            opacity: 0.85;
+        }
+        .proposal-hero h1 {
+            font-family: 'RocknRoll One', 'Space Grotesk', sans-serif;
+            font-size: clamp(2.8rem, 6vw, 4.8rem);
+            font-weight: 400;
+            line-height: 1.1;
+            letter-spacing: -0.01em;
+            margin-bottom: 1.5rem;
+            color: #fafafa;
+        }
+        .proposal-hero .valid-note {
+            font-size: 0.85rem;
+            color: #6b5e57;
+            letter-spacing: 0.05em;
+        }
+
+        /* SECTION — resets for dark */
+        .prop-section {
+            padding: 5rem 2rem;
+            max-width: 860px;
+            margin: 0 auto;
+        }
+        .prop-section + .prop-section {
+            border-top: 1px solid #1e1e1e;
+        }
+        .prop-label {
+            font-size: 0.72rem;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            color: #e14b87;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+        .prop-heading {
+            font-family: 'RocknRoll One', 'Space Grotesk', sans-serif;
+            font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+            font-weight: 400;
+            color: #fafafa;
+            line-height: 1.15;
+            letter-spacing: -0.01em;
+            margin-bottom: 1.5rem;
+        }
+        .prop-copy {
+            font-size: 1.05rem;
+            color: #9a8f88;
+            line-height: 1.85;
+            max-width: 680px;
+        }
+        .prop-copy strong {
+            color: #c8c0bb;
+            font-weight: 600;
+        }
+
+        /* PRODUCT CARDS */
+        .product-card {
+            background: #111111;
+            border: 1px solid #2a2a2a;
+            border-radius: 12px;
+            padding: 2.5rem;
+            margin-bottom: 2rem;
+            transition: border-color 0.2s;
+        }
+        .product-card:hover { border-color: #e14b87; }
+        .product-card.featured {
+            border-color: #2d1f28;
+            background: linear-gradient(135deg, #111111 0%, #1a0f15 100%);
+        }
+        .product-tag {
+            display: inline-block;
+            font-size: 0.68rem;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: #e14b87;
+            font-weight: 700;
+            border: 1px solid #3d2030;
+            border-radius: 20px;
+            padding: 0.3rem 0.9rem;
+            margin-bottom: 1.2rem;
+        }
+        .product-name {
+            font-family: 'RocknRoll One', 'Space Grotesk', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 400;
+            color: #fafafa;
+            margin-bottom: 0.3rem;
+        }
+        .product-price {
+            font-family: 'RocknRoll One', 'Space Grotesk', sans-serif;
+            font-size: 2.4rem;
+            color: #d4a039;
+            font-weight: 400;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.3rem;
+            line-height: 1;
+        }
+        .product-price-sub {
+            font-size: 0.82rem;
+            color: #6b5e57;
+            margin-bottom: 1.5rem;
+            letter-spacing: 0.03em;
+        }
+        .product-tagline {
+            font-size: 0.92rem;
+            color: #b8b0aa;
+            font-style: italic;
+            margin-bottom: 1.5rem;
+        }
+        .product-list {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        .product-list li {
+            font-size: 0.92rem;
+            color: #9a8f88;
+            padding: 0.65rem 0;
+            border-bottom: 1px solid #1e1e1e;
+            display: flex;
+            align-items: flex-start;
+            gap: 0.8rem;
+            line-height: 1.55;
+        }
+        .product-list li:last-child { border: none; }
+        .product-list li::before {
+            content: '';
+            width: 7px;
+            height: 7px;
+            background: #e14b87;
+            border-radius: 50%;
+            flex-shrink: 0;
+            margin-top: 0.45rem;
+        }
+        .product-list li strong {
+            color: #c8c0bb;
+        }
+        .equity-note {
+            margin-top: 1.5rem;
+            padding: 1rem 1.2rem;
+            background: rgba(212, 160, 57, 0.06);
+            border-left: 3px solid #d4a039;
+            border-radius: 0 6px 6px 0;
+            font-size: 0.85rem;
+            color: #9a8f88;
+            line-height: 1.6;
+        }
+        .equity-note strong { color: #d4a039; }
+
+        /* HOW IT WORKS — numbered */
+        .steps-list {
+            list-style: none;
+            padding: 0;
+            margin: 2rem 0 0;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        .steps-list li {
+            display: flex;
+            gap: 1.2rem;
+            align-items: flex-start;
+        }
+        .step-num {
+            width: 2.2rem;
+            height: 2.2rem;
+            border-radius: 50%;
+            background: #e14b87;
+            color: #fafafa;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'RocknRoll One', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+        .step-text {
+            font-size: 1.05rem;
+            color: #9a8f88;
+            line-height: 1.7;
+            padding-top: 0.25rem;
+        }
+
+        /* DISCLOSURE CARD */
+        .disclosure-card {
+            background: #0f0f0f;
+            border: 1px solid #1e1e1e;
+            border-radius: 10px;
+            padding: 2rem;
+            margin-top: 1.5rem;
+        }
+        .disclosure-card p {
+            font-size: 0.95rem;
+            color: #9a8f88;
+            line-height: 1.8;
+        }
+
+        /* FINE PRINT */
+        .fine-print-list {
+            list-style: none;
+            padding: 0;
+            margin: 1.5rem 0 0;
+        }
+        .fine-print-list li {
+            font-size: 0.88rem;
+            color: #6b5e57;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #1a1a1a;
+            display: flex;
+            align-items: flex-start;
+            gap: 0.7rem;
+            line-height: 1.6;
+        }
+        .fine-print-list li:last-child { border: none; }
+        .fine-print-list li::before {
+            content: '//';
+            color: #2d2d2d;
+            font-family: monospace;
+            font-size: 0.8rem;
+            flex-shrink: 0;
+            margin-top: 0.1rem;
+        }
+
+        /* CTA SECTION */
+        .cta-section {
+            text-align: center;
+            padding: 6rem 2rem 8rem;
+            max-width: 760px;
+            margin: 0 auto;
+        }
+        .cta-section .prop-heading {
+            margin-bottom: 0.8rem;
+        }
+        .cta-sub {
+            font-size: 1rem;
+            color: #6b5e57;
+            margin-bottom: 3rem;
+            line-height: 1.7;
+        }
+        .cta-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            padding: 1.1rem 2.8rem;
+            background-color: #e14b87;
+            background-image:
+                radial-gradient(ellipse 12px 8px at 20% 40%, rgba(255,255,255,0.2) 0%, transparent 70%),
+                radial-gradient(ellipse 8px 12px at 60% 25%, rgba(255,255,255,0.15) 0%, transparent 70%),
+                radial-gradient(ellipse 10px 8px at 80% 65%, rgba(255,255,255,0.18) 0%, transparent 70%),
+                radial-gradient(ellipse 8px 10px at 40% 75%, rgba(255,255,255,0.12) 0%, transparent 70%);
+            color: #fafafa;
+            font-family: 'RocknRoll One', 'Space Grotesk', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 400;
+            border-radius: 6px;
+            text-decoration: none;
+            transition: all 0.2s;
+            letter-spacing: 0.01em;
+            box-shadow: 0 6px 24px rgba(225, 75, 135, 0.4), 0 2px 4px rgba(0,0,0,0.2);
+        }
+        .cta-btn:hover {
+            background-color: #e86fa0;
+            color: #fafafa;
+            box-shadow: 0 8px 30px rgba(225, 75, 135, 0.5), 0 3px 6px rgba(0,0,0,0.2);
+            transform: scale(1.03);
+        }
+        .cta-btn:active {
+            transform: scale(0.98);
+            box-shadow: 0 3px 12px rgba(225, 75, 135, 0.3);
+        }
+        .cta-secondary {
+            margin-top: 2rem;
+            font-size: 0.88rem;
+            color: #4a4a4a;
+        }
+        .cta-secondary a {
+            color: #9a8f88;
+            text-decoration: underline;
+            text-underline-offset: 3px;
+            transition: color 0.2s;
+        }
+        .cta-secondary a:hover { color: #e14b87; }
+
+        /* DIVIDER */
+        .prop-divider {
+            height: 1px;
+            background: #1a1a1a;
+            max-width: 860px;
+            margin: 0 auto;
+        }
+
+        @media (max-width: 768px) {
+            .proposal-hero { padding: 9rem 1.5rem 4rem; }
+            .prop-section { padding: 4rem 1.5rem; }
+            .product-card { padding: 1.8rem; }
+            .cta-section { padding: 4rem 1.5rem 6rem; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- PASSWORD GATE -->
+<div id="pw-gate">
+    <div class="pw-card">
+        <img src="/logo-v3.png" alt="Mexzungu Group" class="pw-logo">
+        <div class="pw-label">Private Proposal</div>
+        <div class="pw-heading">This page is for you.</div>
+        <p class="pw-sub">Enter your access code to read the proposal.</p>
+        <input
+            type="password"
+            id="pw-input"
+            class="pw-input"
+            placeholder="access code"
+            autocomplete="off"
+            autofocus
+        >
+        <button class="pw-btn" onclick="checkPassword()">Open proposal</button>
+        <div class="pw-error" id="pw-error"></div>
+        <p class="pw-footer-note">This proposal is confidential and prepared specifically for HavenPay.</p>
+    </div>
+</div>
+
+<!-- PROPOSAL CONTENT -->
+<div id="proposal-content">
+
+<nav>
+    <a href="/" class="nav-logo"><img src="/logo-v3.png" alt="Mexzungu Group"></a>
+    <button class="menu-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')" aria-label="Menu">
+        <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-links">
+        <li><a href="/">Home</a></li>
+        <li class="nav-dropdown">
+            <a href="/#pillars">What We Do</a>
+            <ul class="nav-dropdown-menu">
+                <li><a href="/venture-architecture">Venture Architecture</a></li>
+                <li><a href="/data-privacy">Data Privacy</a></li>
+                <li><a href="/rebel-capital">Rebel Capital</a></li>
+                <li><a href="/ai-ninja-factory">AI Ninja Factory</a></li>
+            </ul>
+        </li>
+        <li><a href="/outlaw-chronicles">Outlaw Chronicles</a></li>
+        <li><a href="/meet-the-band">Meet the Band</a></li>
+        <li><a href="/lets-jam" class="nav-cta"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:14px;height:14px;vertical-align:-2px;margin-right:4px;"><path d="M15.05 5A5 5 0 0 1 19 8.95M15.05 1A9 9 0 0 1 23 8.94m-1 7.98v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>Let's Jam</a></li>
+    </ul>
+</nav>
+
+<main>
+
+<!-- HERO -->
+<div class="proposal-hero leopard-dense">
+    <div class="hero-tag">For Yoeal Haile &mdash; HavenPay</div>
+    <h1>Here is what we can build together.</h1>
+    <p class="valid-note">This proposal was prepared specifically for HavenPay. It is valid for 30 days from May 1, 2026.</p>
+</div>
+
+<div class="prop-divider"></div>
+
+<!-- SECTION 1: WHERE YOU ARE -->
+<div class="prop-section">
+    <div class="prop-label">01 / Where you are</div>
+    <div class="prop-heading">Where you are.</div>
+    <p class="prop-copy">
+        HavenPay is building financial infrastructure for some of the most underserved people on the planet. The dual-entity model — NGO arm for grants and impact infrastructure, HoldCo for IP, equity, and long-term value — is exactly the right architecture. But it only works if the structure is airtight from day one.
+        <br><br>
+        IP licensing between entities. Data privacy for refugee financial data that actually holds up under Kenyan and GDPR scrutiny. Corporate governance that satisfies both impact investors and equity investors.
+        <br><br>
+        Get this wrong and you spend the next two years fixing it instead of building. We have seen this before. We know how to get it right.
+    </p>
+</div>
+
+<div class="prop-divider"></div>
+
+<!-- SECTION 2: THE PRODUCTS -->
+<div class="prop-section">
+    <div class="prop-label">02 / What we are offering</div>
+    <div class="prop-heading">Two products, one proposal.</div>
+
+    <!-- Product 1: Venture Architecture -->
+    <div class="product-card featured" style="margin-top: 2.5rem;">
+        <div class="product-tag">Venture Architecture</div>
+        <div class="product-name">The complete blueprint.</div>
+        <div class="product-price">$10,000</div>
+        <div class="product-price-sub">Fixed fee. One engagement. Everything you need to build on.</div>
+        <p class="product-tagline">Three memos, one complete blueprint.</p>
+        <ul class="product-list">
+            <li>
+                <div><strong>Corporate Structure and Governance Memo</strong> — NGO and HoldCo architecture, jurisdiction selection, cap table design, governance framework, exit architecture.</div>
+            </li>
+            <li>
+                <div><strong>IP Structure Memo</strong> — IP ownership across entities, NGO-to-HoldCo licensing framework, protection strategy.</div>
+            </li>
+            <li>
+                <div><strong>Privacy Structure Memo</strong> — Data flows, Kenya DPA compliance, GDPR where applicable, processing agreements for refugee financial data.</div>
+            </li>
+            <li>
+                <div>Delivered as secure, password-protected pages. Timeline: 4 weeks from kickoff.</div>
+            </li>
+        </ul>
+        <div class="equity-note">
+            <strong>Equity option.</strong> Up to 40% of fees can be converted into equity in HavenPay Technologies at the next closing price instead of paid in cash.
+        </div>
+    </div>
+
+    <!-- Product 2: Deal Closing -->
+    <div class="product-card">
+        <div class="product-tag">Deal Closing</div>
+        <div class="product-name">In your corner from first call to wire.</div>
+        <div class="product-price" style="font-size: 1.6rem; line-height: 1.3;">$2,500 <span style="font-size: 0.9rem; color: #6b5e57;">onboarding</span> + $1,500<span style="font-size: 0.9rem; color: #6b5e57;">/mo</span> + 2%<span style="font-size: 0.9rem; color: #6b5e57;"> success</span></div>
+        <div class="product-price-sub">Monthly advisory + success fee on equity closed.</div>
+        <p class="product-tagline">We join every high-stakes call. We help you close.</p>
+        <ul class="product-list">
+            <li>We join your first serious investor call, your term sheet negotiation, and your closing call. Always.</li>
+            <li>Available on 48 hours notice for any other high-stakes call.</li>
+            <li>Janis, our AI Chief of Staff, responds same day on anything you send. Pepe weighs in within 4 CET business hours on anything that needs judgment.</li>
+            <li>2% of equity closed, payable within 14 days of money clearing. 20% in cash, 80% in advisory shares at closing price.</li>
+            <li>Monthly advisory fee is not credited against the success fee. The retainer is for the work. The success fee is for the outcome.</li>
+        </ul>
+        <div class="equity-note">
+            <strong>Equity option.</strong> Up to 40% of fees convertible to equity.
+        </div>
+    </div>
+</div>
+
+<div class="prop-divider"></div>
+
+<!-- SECTION 3: HOW IT WORKS -->
+<div class="prop-section">
+    <div class="prop-label">03 / How it works</div>
+    <div class="prop-heading">Simple.</div>
+    <ol class="steps-list">
+        <li>
+            <div class="step-num">1</div>
+            <div class="step-text">Hit the button below.</div>
+        </li>
+        <li>
+            <div class="step-num">2</div>
+            <div class="step-text">We schedule a 30-minute kickoff call.</div>
+        </li>
+        <li>
+            <div class="step-num">3</div>
+            <div class="step-text">We get to work.</div>
+        </li>
+    </ol>
+</div>
+
+<div class="prop-divider"></div>
+
+<!-- SECTION 4: DISCLOSURE -->
+<div class="prop-section">
+    <div class="prop-label">04 / One thing to say upfront</div>
+    <div class="prop-heading">Clean table.</div>
+    <div class="disclosure-card">
+        <p>Pepe holds no equity or prior financial interest in HavenPay. We are telling you because you should know, and because we like clean tables.</p>
+    </div>
+</div>
+
+<div class="prop-divider"></div>
+
+<!-- SECTION 5: FINE PRINT -->
+<div class="prop-section">
+    <div class="prop-label">05 / The fine print</div>
+    <div class="prop-heading">Short version.</div>
+    <ul class="fine-print-list">
+        <li>Mauritius law governs. Mexzungu Group Ltd, Royal Road, Henrietta, 73120, Mauritius.</li>
+        <li>30-day termination notice, either party.</li>
+        <li>Confidential. What happens in this engagement stays in this engagement.</li>
+        <li>This is legal consulting, not legal advice. We are the architects, not the filing lawyers.</li>
+    </ul>
+</div>
+
+<div class="prop-divider"></div>
+
+<!-- CTA -->
+<div class="cta-section">
+    <div class="prop-label">Ready?</div>
+    <div class="prop-heading">Let us build this.</div>
+    <p class="cta-sub">One email. That is all it takes.</p>
+    <a class="cta-btn" href="mailto:pepe@mexzungu.com?subject=HavenPay%20%E2%80%94%20Proposal%20Accepted&body=Hi%20Pepe%2C%20I%20have%20reviewed%20the%20proposal%20and%20I%20am%20in.%20Let%20us%20schedule%20a%20kickoff.">
+        I am in. Let us do this.
+    </a>
+    <p class="cta-secondary">
+        Want to talk through this first?<br>
+        <a href="https://mexzungu.com/lets-jam">Book 30 minutes with Pepe</a>
+    </p>
+</div>
+
+</main>
+
+<footer>
+    <div style="max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; padding: 0 2rem;">
+        <span>&copy; 2026 Mexzungu Group Ltd. All rights reserved.</span>
+        <span style="font-size: 0.85rem;">
+            <a href="https://pepecarrillo.co" style="color: var(--gold);">Pepe's Writing</a> &middot;
+            <a href="/privacy/" style="color: var(--gold);">Privacy Policy</a> &middot;
+            <a href="/terms/" style="color: var(--gold);">Terms of Service</a> &middot;
+            <a href="/ai-policy/" style="color: var(--gold);">AI Policy</a>
+        </span>
+    </div>
+    <div class="footer-disclaimer">Mexzungu Group provides venture architecture, strategic advisory, and structural consulting. This does not constitute legal advice.</div>
+</footer>
+
+</div><!-- /proposal-content -->
+
+<script>
+(function() {
+    var CORRECT = 'havenpay-outlaw-0501';
+    var SESSION_KEY = 'havenpay_auth';
+
+    function unlock() {
+        document.getElementById('pw-gate').classList.add('hidden');
+        document.getElementById('proposal-content').classList.add('visible');
+    }
+
+    // Check sessionStorage on load
+    if (sessionStorage.getItem(SESSION_KEY) === '1') {
+        unlock();
+        return;
+    }
+
+    // Enter key support
+    document.getElementById('pw-input').addEventListener('keydown', function(e) {
+        if (e.key === 'Enter') checkPassword();
+    });
+
+    window.checkPassword = function() {
+        var val = document.getElementById('pw-input').value.trim();
+        var input = document.getElementById('pw-input');
+        var err = document.getElementById('pw-error');
+
+        if (val === CORRECT) {
+            sessionStorage.setItem(SESSION_KEY, '1');
+            unlock();
+        } else {
+            input.classList.add('error');
+            err.textContent = 'Wrong code. Try again.';
+            input.value = '';
+            setTimeout(function() { input.classList.remove('error'); }, 400);
+            setTimeout(function() { err.textContent = ''; }, 3000);
+            input.focus();
+        }
+    };
+})();
+
+// Mobile nav
+document.querySelectorAll('.nav-links a').forEach(function(l) {
+    l.addEventListener('click', function() {
+        document.querySelector('.nav-links').classList.remove('open');
+    });
+});
+</script>
+
+</body>
+</html>
