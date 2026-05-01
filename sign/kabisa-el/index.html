@@ -1,0 +1,1045 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Engagement Letter — Kabisa x Mexzungu Group</title>
+  <link rel="icon" href="/favicon.ico">
+  <link rel="stylesheet" href="/fonts.css">
+  <script src="https://cdn.jsdelivr.net/npm/signature_pad@4.1.7/dist/signature_pad.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --pink:       #e14b87;
+      --pink-dark:  #b83a6b;
+      --navy:       #1a1a2e;
+      --black:      #0d0d0d;
+      --white:      #fafafa;
+      --ash:        #e8e3df;
+      --stone:      #6b5e57;
+      --mist:       #9a8f88;
+      --charcoal:   #3d3533;
+      --success:    #2d8f5e;
+      --heading:    'RocknRoll One', 'Space Grotesk', sans-serif;
+      --sans:       'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    body {
+      font-family: var(--sans);
+      background: #f0ece8;
+      color: var(--black);
+      min-height: 100vh;
+    }
+
+    /* ── HEADER ── */
+    .site-header {
+      background: var(--navy);
+      padding: 1rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.3);
+    }
+
+    .site-header .logo-wrap {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      text-decoration: none;
+    }
+
+    .site-header img {
+      height: 36px;
+      width: auto;
+    }
+
+    .header-meta {
+      text-align: right;
+    }
+
+    .header-meta h1 {
+      font-family: var(--heading);
+      font-size: 1rem;
+      color: #fafafa;
+      letter-spacing: 0.03em;
+    }
+
+    .header-meta p {
+      font-size: 0.78rem;
+      color: var(--mist);
+      margin-top: 2px;
+    }
+
+    /* ── PROGRESS BAR ── */
+    .progress-bar-wrap {
+      background: var(--navy);
+      border-top: 1px solid rgba(255,255,255,0.08);
+      padding: 0.6rem 2rem;
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+    }
+
+    .progress-steps {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .step {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.78rem;
+      color: var(--mist);
+    }
+
+    .step.done { color: var(--success); }
+    .step.done .step-dot { background: var(--success); }
+    .step.pending .step-dot { background: var(--mist); }
+
+    .step-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .step-sep {
+      color: var(--mist);
+      font-size: 0.7rem;
+      opacity: 0.4;
+    }
+
+    .progress-label {
+      margin-left: auto;
+      font-size: 0.78rem;
+      color: var(--mist);
+    }
+
+    .progress-label strong {
+      color: var(--pink);
+    }
+
+    /* ── LAYOUT ── */
+    .page-wrap {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 2.5rem 1.5rem 5rem;
+    }
+
+    /* ── DOCUMENT CARD ── */
+    .doc-card {
+      background: #ffffff;
+      border-radius: 12px;
+      box-shadow: 0 4px 32px rgba(0,0,0,0.10), 0 1px 4px rgba(0,0,0,0.06);
+      overflow: hidden;
+    }
+
+    .doc-top-stripe {
+      background: var(--navy);
+      height: 5px;
+    }
+
+    .doc-inner {
+      padding: 3rem 3.5rem;
+    }
+
+    .doc-wordmark {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 2.5rem;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid var(--ash);
+    }
+
+    .doc-wordmark img { height: 40px; width: auto; }
+
+    .doc-wordmark-text {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .doc-wordmark-text span:first-child {
+      font-family: var(--heading);
+      font-size: 0.95rem;
+      color: var(--navy);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .doc-wordmark-text span:last-child {
+      font-size: 0.75rem;
+      color: var(--mist);
+      margin-top: 2px;
+    }
+
+    .doc-title {
+      font-family: var(--heading);
+      font-size: 1.7rem;
+      color: var(--navy);
+      margin-bottom: 0.3rem;
+    }
+
+    .doc-subtitle {
+      font-size: 0.9rem;
+      color: var(--stone);
+      margin-bottom: 2.5rem;
+    }
+
+    /* Parties block */
+    .parties-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .party-block {
+      background: #f8f6f4;
+      border: 1px solid var(--ash);
+      border-radius: 8px;
+      padding: 1.1rem 1.25rem;
+    }
+
+    .party-block .party-label {
+      font-size: 0.68rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--mist);
+      margin-bottom: 0.4rem;
+    }
+
+    .party-block .party-name {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--navy);
+      margin-bottom: 0.25rem;
+    }
+
+    .party-block .party-detail {
+      font-size: 0.8rem;
+      color: var(--stone);
+      line-height: 1.5;
+    }
+
+    .doc-date-line {
+      font-size: 0.82rem;
+      color: var(--mist);
+      margin-bottom: 2.5rem;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid var(--ash);
+    }
+
+    /* Body content */
+    .doc-body {
+      font-size: 0.95rem;
+      line-height: 1.75;
+      color: #2a2a2a;
+    }
+
+    .doc-body h2 {
+      font-family: var(--heading);
+      font-size: 1rem;
+      color: var(--navy);
+      margin: 2rem 0 0.6rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--ash);
+    }
+
+    .doc-body h2:first-child { border-top: none; padding-top: 0; margin-top: 0; }
+
+    .doc-body p {
+      margin-bottom: 1rem;
+    }
+
+    .doc-body .intro-q {
+      font-style: italic;
+      color: var(--stone);
+      margin-bottom: 0.5rem;
+      font-size: 0.9rem;
+    }
+
+    .doc-body .sub-item {
+      margin: 0.5rem 0 0.5rem 1.25rem;
+      padding-left: 0.75rem;
+      border-left: 2px solid var(--ash);
+      font-size: 0.9rem;
+    }
+
+    .doc-body .sub-item strong {
+      color: var(--navy);
+    }
+
+    .bank-block {
+      background: #f8f6f4;
+      border: 1px solid var(--ash);
+      border-radius: 8px;
+      padding: 1.1rem 1.25rem;
+      margin: 1rem 0;
+      font-size: 0.88rem;
+      line-height: 1.8;
+    }
+
+    .bank-block .bank-row {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .bank-block .bank-label {
+      color: var(--mist);
+      min-width: 140px;
+      font-size: 0.8rem;
+    }
+
+    .bank-block .bank-val {
+      color: var(--navy);
+      font-weight: 500;
+    }
+
+    /* ── SIGNATURE SECTION ── */
+    .sig-section {
+      margin-top: 3rem;
+      padding-top: 2.5rem;
+      border-top: 2px solid var(--ash);
+    }
+
+    .sig-section-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 2rem;
+    }
+
+    .sig-section-header h3 {
+      font-family: var(--heading);
+      font-size: 1.1rem;
+      color: var(--navy);
+    }
+
+    .sig-section-note {
+      font-size: 0.78rem;
+      color: var(--mist);
+    }
+
+    .sig-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+
+    .sig-block {
+      border: 1px solid var(--ash);
+      border-radius: 10px;
+      overflow: hidden;
+      background: #fdfdfd;
+    }
+
+    .sig-block.signed {
+      border-color: rgba(45, 143, 94, 0.35);
+      background: rgba(45, 143, 94, 0.02);
+    }
+
+    .sig-block-head {
+      background: var(--navy);
+      padding: 0.75rem 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .sig-block.signed .sig-block-head {
+      background: var(--success);
+    }
+
+    .sig-block-head .signer-name {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: #fafafa;
+    }
+
+    .sig-block-head .signer-title {
+      font-size: 0.68rem;
+      color: rgba(255,255,255,0.65);
+      margin-top: 1px;
+    }
+
+    .signed-badge {
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+      font-size: 0.68rem;
+      color: #fafafa;
+      background: rgba(255,255,255,0.2);
+      border-radius: 20px;
+      padding: 0.2rem 0.55rem;
+    }
+
+    .signed-badge svg { flex-shrink: 0; }
+
+    .sig-block-body {
+      padding: 1rem;
+    }
+
+    /* Pepe's pre-signed block */
+    .sig-display {
+      height: 90px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px dashed rgba(45, 143, 94, 0.3);
+      border-radius: 6px;
+      background: rgba(45, 143, 94, 0.03);
+      margin-bottom: 0.75rem;
+    }
+
+    .sig-cursive {
+      font-family: 'Lora', Georgia, serif;
+      font-style: italic;
+      font-size: 1.6rem;
+      color: var(--navy);
+      letter-spacing: -0.02em;
+    }
+
+    .sig-meta {
+      font-size: 0.72rem;
+      color: var(--mist);
+    }
+
+    /* Interactive canvas */
+    .sig-canvas-wrap {
+      position: relative;
+      margin-bottom: 0.75rem;
+    }
+
+    canvas.sig-pad {
+      display: block;
+      width: 100%;
+      height: 100px;
+      border: 1px dashed #ccc;
+      border-radius: 6px;
+      background: #fafafa;
+      cursor: crosshair;
+      touch-action: none;
+    }
+
+    .sig-watermark {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 0.75rem;
+      color: #d0cac6;
+      pointer-events: none;
+      user-select: none;
+      white-space: nowrap;
+    }
+
+    .sig-controls {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .sig-clear-btn {
+      background: none;
+      border: none;
+      font-family: var(--sans);
+      font-size: 0.72rem;
+      color: var(--mist);
+      cursor: pointer;
+      text-align: right;
+      padding: 0;
+      text-decoration: underline;
+    }
+
+    .sig-clear-btn:hover { color: var(--stone); }
+
+    .sig-date-wrap {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .sig-date-wrap label {
+      font-size: 0.72rem;
+      color: var(--mist);
+      white-space: nowrap;
+    }
+
+    .sig-date-wrap input {
+      font-family: var(--sans);
+      font-size: 0.78rem;
+      border: 1px solid var(--ash);
+      border-radius: 4px;
+      padding: 0.25rem 0.5rem;
+      color: var(--navy);
+      flex: 1;
+      min-width: 0;
+    }
+
+    .sig-agree-wrap {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.5rem;
+      margin-bottom: 0.6rem;
+    }
+
+    .sig-agree-wrap input[type="checkbox"] {
+      margin-top: 2px;
+      accent-color: var(--pink);
+      flex-shrink: 0;
+    }
+
+    .sig-agree-wrap label {
+      font-size: 0.72rem;
+      color: var(--stone);
+      line-height: 1.4;
+    }
+
+    .sig-apply-btn {
+      width: 100%;
+      background: var(--pink);
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      font-family: var(--sans);
+      font-size: 0.82rem;
+      font-weight: 600;
+      padding: 0.55rem 1rem;
+      cursor: pointer;
+      transition: background 0.2s ease, opacity 0.2s ease;
+    }
+
+    .sig-apply-btn:disabled {
+      opacity: 0.35;
+      cursor: not-allowed;
+    }
+
+    .sig-apply-btn:not(:disabled):hover {
+      background: var(--pink-dark);
+    }
+
+    /* Applied sig state */
+    .sig-block.applied canvas {
+      border-color: rgba(45, 143, 94, 0.4);
+      background: rgba(45, 143, 94, 0.02);
+      cursor: default;
+    }
+
+    .sig-applied-note {
+      display: none;
+      font-size: 0.72rem;
+      color: var(--success);
+      font-weight: 600;
+      text-align: center;
+      padding: 0.4rem 0;
+    }
+
+    .sig-block.applied .sig-applied-note { display: block; }
+    .sig-block.applied .sig-agree-wrap,
+    .sig-block.applied .sig-apply-btn,
+    .sig-block.applied .sig-clear-btn { display: none; }
+
+    /* ── COMPLETION ── */
+    .completion-wrap {
+      display: none;
+      margin-top: 2.5rem;
+      background: linear-gradient(135deg, rgba(45,143,94,0.06) 0%, rgba(45,143,94,0.02) 100%);
+      border: 1px solid rgba(45, 143, 94, 0.3);
+      border-radius: 12px;
+      padding: 2rem;
+      text-align: center;
+    }
+
+    .completion-wrap.visible { display: block; }
+
+    .completion-wrap h3 {
+      font-family: var(--heading);
+      font-size: 1.15rem;
+      color: var(--success);
+      margin-bottom: 0.5rem;
+    }
+
+    .completion-wrap p {
+      font-size: 0.88rem;
+      color: var(--stone);
+      margin-bottom: 1.5rem;
+    }
+
+    .btn-download {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--pink);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-family: var(--sans);
+      font-size: 0.95rem;
+      font-weight: 600;
+      padding: 0.8rem 2rem;
+      cursor: pointer;
+      transition: background 0.2s ease;
+      margin-bottom: 1rem;
+    }
+
+    .btn-download:hover { background: var(--pink-dark); }
+
+    .btn-email {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: none;
+      color: var(--navy);
+      border: 1.5px solid var(--ash);
+      border-radius: 8px;
+      font-family: var(--sans);
+      font-size: 0.88rem;
+      font-weight: 500;
+      padding: 0.65rem 1.5rem;
+      cursor: pointer;
+      text-decoration: none;
+      transition: border-color 0.2s ease;
+      margin-left: 0.75rem;
+    }
+
+    .btn-email:hover { border-color: var(--navy); }
+
+    /* ── FOOTER ── */
+    .doc-footer {
+      margin-top: 3rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--ash);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .doc-footer p {
+      font-size: 0.75rem;
+      color: var(--mist);
+    }
+
+    .doc-footer a { color: var(--pink); text-decoration: none; }
+    .doc-footer a:hover { text-decoration: underline; }
+
+    @media (max-width: 700px) {
+      .doc-inner { padding: 1.5rem; }
+      .sig-grid { grid-template-columns: 1fr; }
+      .parties-grid { grid-template-columns: 1fr; }
+      .site-header { padding: 0.75rem 1rem; }
+      .progress-bar-wrap { padding: 0.5rem 1rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- STICKY HEADER -->
+<header class="site-header">
+  <a href="https://mexzungu.com" class="logo-wrap">
+    <img src="/logo-v3.png" alt="Mexzungu Group">
+  </a>
+  <div class="header-meta">
+    <h1>Engagement Letter</h1>
+    <p>Kabisa x Mexzungu Group &nbsp;|&nbsp; April 29, 2026</p>
+  </div>
+</header>
+
+<!-- PROGRESS BAR -->
+<div class="progress-bar-wrap">
+  <div class="progress-steps">
+    <div class="step done" id="step-pepe">
+      <span class="step-dot"></span>
+      <span>Pepe Carrillo</span>
+    </div>
+    <span class="step-sep">›</span>
+    <div class="step pending" id="step-nick">
+      <span class="step-dot"></span>
+      <span>Nick Hu</span>
+    </div>
+    <span class="step-sep">›</span>
+    <div class="step pending" id="step-lukas">
+      <span class="step-dot"></span>
+      <span>Lukas Lukoschek</span>
+    </div>
+  </div>
+  <div class="progress-label" id="progress-label"><strong>1</strong> of 3 signatures collected</div>
+</div>
+
+<!-- MAIN PAGE -->
+<div class="page-wrap">
+  <div class="doc-card" id="document-root">
+    <div class="doc-top-stripe"></div>
+    <div class="doc-inner">
+
+      <!-- Wordmark -->
+      <div class="doc-wordmark">
+        <img src="/logo-v3.png" alt="Mexzungu Group">
+        <div class="doc-wordmark-text">
+          <span>Mexzungu Venture Architecture</span>
+          <span>Outlaw Studio. Chaos starts companies. Structure builds them.</span>
+        </div>
+      </div>
+
+      <!-- Title -->
+      <h1 class="doc-title">Engagement Letter — Kabisa</h1>
+      <p class="doc-subtitle">Dated 29 April 2026</p>
+
+      <!-- Parties -->
+      <div class="parties-grid">
+        <div class="party-block">
+          <div class="party-label">The Client</div>
+          <div class="party-name">Kabisa Inc.</div>
+          <div class="party-detail">A Delaware corporation, with operations in Rwanda and Kenya.<br>Represented by Nick Hu and Lukas Lukoschek (Co-Founders).</div>
+        </div>
+        <div class="party-block">
+          <div class="party-label">The Studio</div>
+          <div class="party-name">Mexzungu Group Ltd</div>
+          <div class="party-detail">A Mauritius company. Royal Road, Henrietta, 73120, Mauritius.<br>Signing through Pepe Carrillo (Chief Disruption Officer).<br><a href="mailto:pepe@mexzungu.com" style="color:var(--pink);text-decoration:none;">pepe@mexzungu.com</a></div>
+        </div>
+      </div>
+
+      <div class="doc-date-line">Dated: 29 April 2026</div>
+
+      <!-- BODY -->
+      <div class="doc-body">
+
+        <p class="intro-q">Why does this letter exist?</p>
+        <p>Because handshakes are beautiful and engagement letters are how the universe remembers them. We sat in a room in Amsterdam, liked each other, and agreed on the shape of the work. This letter captures that shape: what we are doing, what we are not, what it costs, and how we treat each other if anything ever wobbles. Read it, sign it, and get to work.</p>
+
+        <h2>Where does the Studio sit, geographically and legally?</h2>
+        <p>The Studio is a Mauritius outfit. We work out of our registered office on the island and deliver from there to wherever Kabisa happens to be. Pepe signs as the Studio Chief Disruption Officer. None of what follows means we have set up shop, opened a branch, or started practising law in Delaware, Rwanda, or Kenya. We are the visiting architects, not the local lawyers.</p>
+
+        <h2>1. What are we working on together?</h2>
+        <p>Kabisa is building the EV charging backbone for East Africa, dominant in Rwanda, expanding into Kenya, with a strategic pivot into electric freight on the Dar es Salaam-Kigali and Mombasa-Kigali corridors. You hold a US holdco (Delaware), OpCos in Rwanda and Kenya, and are in active negotiation on an equity round and an infrastructure debt facility.</p>
+        <p>You have asked us to support two active workstreams, with a third sitting on the bench for later:</p>
+        <div class="sub-item"><strong>Workstream 1: Corporate Structure and Governance (on hold).</strong> A full review of your holding structure, cap table, domicile, and exit architecture. We are parking this one until the bigger round is in play. When you are ready to activate it, one of us sends a note and we agree fees at that point.</div>
+        <div class="sub-item"><strong>Workstream 2: Fundraising Strategy and Capital Raise (active).</strong> We are in your corner on the equity round, strategy, documents, term sheet positions, negotiation support all the way through to close.</div>
+        <div class="sub-item"><strong>Workstream 3: SPV Formation and Capital Structure (active).</strong> We help you build the right vehicle for the infrastructure raise, jurisdiction, governance, security package, capital structure. The goal is a structure that works for DFIs, banks, family offices, and institutional investors. External counsel costs come back to you at cost.</div>
+
+        <h2>2. What do you actually walk away with?</h2>
+        <div class="sub-item"><strong>Workstream 2:</strong> (a) A fundraising strategy and investor memorandum. (b) A redline of every term sheet within 48 hours of you sharing it, with our annotated positions. (c) A plain-language memo on what to hold, what to give, and where our walkaway is. (d) Us on the phone and in the room with you until the money clears.</div>
+        <div class="sub-item"><strong>Workstream 3:</strong> (a) An SPV with the right jurisdiction, constitutional documents, and governance. (b) A capital structure that works across instruments, equity, debt, structured finance. (c) A security package built around your assets: the charging infrastructure, revenue streams, or both. (d) Something investor-agnostic, so you are not locked into one type of capital partner.</div>
+
+        <h2>3. What are we assuming going in?</h2>
+        <p>We are building this engagement on a few working assumptions. If anything shifts materially, we talk and adjust. No drama.</p>
+        <div class="sub-item"><strong>(a) On the equity round (WS2):</strong> We are assuming the round is live and at least one term sheet has landed or is about to. Our success fee applies to equity that closes within 9 months of today. If you get to month nine and it is not done, we either agree to extend in writing or we call it a day, no hard feelings, no bill beyond what has been delivered.</div>
+        <div class="sub-item"><strong>(b) On the SPV and debt (WS3):</strong> We are assuming the infrastructure raise is in active structuring. Our success fee applies to debt or equity closed via the SPV within 12 months of today. Same deal on extension.</div>
+        <div class="sub-item"><strong>(c) If we part ways early:</strong> If either of us ends the engagement and a deal closes within 6 months of that, with someone we introduced or worked with during the engagement, our success fee still applies. That is fair, the work was done.</div>
+        <div class="sub-item"><strong>(d) What we need from you:</strong> When we ask for documents, cap table, financials, term sheets, investor materials, we need them within 5 business days. If things come in late, the clock adjusts accordingly.</div>
+        <div class="sub-item"><strong>(e) On exclusivity:</strong> We are not exclusive. You can work with other advisors. Our fee applies to any closing within the timeframes above, regardless of who else is in the room.</div>
+
+        <h2>4. What are we not doing?</h2>
+        <div class="sub-item">(a) Filing anything with any court, registry, notary, or government office, anywhere.</div>
+        <div class="sub-item">(b) Being your lawyer of record in Delaware, Rwanda, Kenya, or anywhere else.</div>
+        <div class="sub-item">(c) Representing you in front of investors or counterparties, unless you give us a written mandate to do so. If you do, we step in for the scope and timeframe you specify.</div>
+        <div class="sub-item">(d) Replacing your local lawyers. For execution in Rwanda and Delaware, you will need qualified local counsel. We can point you toward good people.</div>
+        <div class="sub-item">(e) Anything that is not in section 1.</div>
+
+        <h2>5. Is this legal advice?</h2>
+        <p>No. This is legal consulting. We give you the architecture, the risks, and the playbook. We do not file papers, sign legal opinions, or appear in court. Think of us as the friend who has closed a few billion in deals across a bunch of countries, sitting next to you at the table, telling you what to look out for.</p>
+
+        <h2>6. What does this cost?</h2>
+        <div class="sub-item"><strong>Getting started:</strong> $2,500 to kick things off. Non-refundable, due within 30 days. This comes straight off the first success fee milestone, WS2 or WS3, whichever arrives first.</div>
+        <div class="sub-item"><strong>Workstream 2:</strong> When the round closes, we get 1.5% of the total equity raised. You pay us within 14 days of money clearing. Of that fee, 20% comes to us in cash and 80% comes to us in advisory shares in Kabisa, valued at the closing round price. We are not sourcing your capital. What this fee pays for is making sure you do not give away the company when you raise it.</div>
+        <div class="sub-item"><strong>Workstream 3:</strong> When the SPV closes debt, we get 0.75% of the total debt facility. When it closes equity, we get 1.5% of the total equity raised. Same 14-day payment window, same 20% cash / 80% advisory shares split. External counsel costs come back to you at cost. We will get your sign-off in writing before anything is instructed.</div>
+        <div class="sub-item"><strong>On the advisory shares:</strong> We will put the shares on paper in a separate Advisor Share Agreement, consistent with your existing Delaware equity docs. The share price used to calculate how many shares you owe us is the post-money valuation of the closing event.</div>
+        <p style="margin-top:1rem;">One thing to put on the table: Pepe holds a $25,000 SAFE in Kabisa from April 2024, NAN syndicate, 20% discount, no cap. We are telling you because you should know, and because it means we are already aligned on your success.</p>
+
+        <h2>7. How do you pay?</h2>
+        <p>Bank transfer to:</p>
+        <div class="bank-block">
+          <div class="bank-row"><span class="bank-label">Beneficiary</span><span class="bank-val">Mexzungu Group Ltd</span></div>
+          <div class="bank-row"><span class="bank-label">Bank</span><span class="bank-val">Mauritius Commercial Bank (MCB)</span></div>
+          <div class="bank-row"><span class="bank-label">Account Number</span><span class="bank-val">000448521954</span></div>
+          <div class="bank-row"><span class="bank-label">IBAN</span><span class="bank-val">MU49MCBL0901000448521954000USD</span></div>
+          <div class="bank-row"><span class="bank-label">SWIFT/BIC</span><span class="bank-val">MCBLMUMU</span></div>
+          <div class="bank-row"><span class="bank-label">Bank address</span><span class="bank-val">Sir William Newton Street, Port Louis, Mauritius</span></div>
+        </div>
+        <p>We invoice at each milestone. You have 30 days from invoice date to pay.</p>
+
+        <h2>8. What happens if something goes wrong?</h2>
+        <p>If something goes sideways and you come after us, the most we are on the hook for is the cash you have actually paid us at that point. Not the equity, not hypothetical future fees, not consequential losses. The advisory shares are covered separately by the Advisor Share Agreement. The two things we cannot contractually cap are fraud and willful misconduct. We are not planning on either.</p>
+
+        <h2>9. Who else sees what we discuss?</h2>
+        <p>Nobody. What happens in this engagement stays in this engagement. You do not share our memos, analysis, or thinking outside this engagement without our permission. We do not share your business, cap table, or strategy with anyone. This commitment does not expire when the engagement does.</p>
+
+        <h2>10. Can the Studio talk about this work later?</h2>
+        <p>Yes, in general terms. Once everything is public or done, we might say something like "we helped an East African EV infrastructure company navigate a capital raise and debt structuring." We will never name Kabisa, share your documents, or say anything specific without your written permission.</p>
+
+        <h2>11. How long does this last?</h2>
+        <p>We start on the date at the top and keep going until one of these happens first: (a) All the work is done and all the success fees are settled. (b) Twelve months have passed. (c) One of us tells the other in writing that we are done, for any reason or no reason, with 14 days notice. If we stop early, everything delivered stays delivered. Everything earned stays earned. Confidentiality survives.</p>
+
+        <h2>12. Which law applies if we ever disagree?</h2>
+        <p>Mauritius law. If we cannot sort it out between ourselves, it goes to the Supreme Court of Mauritius (Commercial Division). We are not expecting to need this. It is here so neither of us ever has to wonder.</p>
+
+      </div>
+
+      <!-- SIGNATURE SECTION -->
+      <div class="sig-section" id="sig-section">
+        <div class="sig-section-header">
+          <h3>Signatures</h3>
+          <span class="sig-section-note">All three parties must sign to complete the agreement.</span>
+        </div>
+
+        <div class="sig-grid">
+
+          <!-- PEPE — already signed -->
+          <div class="sig-block signed" id="block-pepe">
+            <div class="sig-block-head">
+              <div>
+                <div class="signer-name">Pepe Carrillo</div>
+                <div class="signer-title">Chief Disruption Officer, Mexzungu Group Ltd</div>
+              </div>
+              <div class="signed-badge">
+                <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M1.5 5L4 7.5L8.5 2.5" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                Signed
+              </div>
+            </div>
+            <div class="sig-block-body">
+              <div class="sig-display">
+                <span class="sig-cursive">Pepe Carrillo</span>
+              </div>
+              <div class="sig-meta">Signed: 29 April 2026</div>
+            </div>
+          </div>
+
+          <!-- NICK HU -->
+          <div class="sig-block" id="block-nick">
+            <div class="sig-block-head">
+              <div>
+                <div class="signer-name">Nick Hu</div>
+                <div class="signer-title">Co-Founder, Kabisa Inc.</div>
+              </div>
+            </div>
+            <div class="sig-block-body">
+              <div class="sig-canvas-wrap">
+                <canvas class="sig-pad" id="canvas-nick"></canvas>
+                <span class="sig-watermark" id="wm-nick">Sign here</span>
+              </div>
+              <div class="sig-controls">
+                <button class="sig-clear-btn" onclick="clearSig('nick')">Clear</button>
+                <div class="sig-date-wrap">
+                  <label for="date-nick">Date</label>
+                  <input type="date" id="date-nick">
+                </div>
+                <div class="sig-agree-wrap">
+                  <input type="checkbox" id="agree-nick" onchange="updateApplyBtn('nick')">
+                  <label for="agree-nick">I have read and agree to all terms above.</label>
+                </div>
+                <button class="sig-apply-btn" id="apply-nick" disabled onclick="applySig('nick')">Apply Signature</button>
+              </div>
+              <div class="sig-applied-note">Signature applied.</div>
+            </div>
+          </div>
+
+          <!-- LUKAS LUKOSCHEK -->
+          <div class="sig-block" id="block-lukas">
+            <div class="sig-block-head">
+              <div>
+                <div class="signer-name">Lukas Lukoschek</div>
+                <div class="signer-title">Co-Founder, Kabisa Inc.</div>
+              </div>
+            </div>
+            <div class="sig-block-body">
+              <div class="sig-canvas-wrap">
+                <canvas class="sig-pad" id="canvas-lukas"></canvas>
+                <span class="sig-watermark" id="wm-lukas">Sign here</span>
+              </div>
+              <div class="sig-controls">
+                <button class="sig-clear-btn" onclick="clearSig('lukas')">Clear</button>
+                <div class="sig-date-wrap">
+                  <label for="date-lukas">Date</label>
+                  <input type="date" id="date-lukas">
+                </div>
+                <div class="sig-agree-wrap">
+                  <input type="checkbox" id="agree-lukas" onchange="updateApplyBtn('lukas')">
+                  <label for="agree-lukas">I have read and agree to all terms above.</label>
+                </div>
+                <button class="sig-apply-btn" id="apply-lukas" disabled onclick="applySig('lukas')">Apply Signature</button>
+              </div>
+              <div class="sig-applied-note">Signature applied.</div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- COMPLETION PANEL -->
+        <div class="completion-wrap" id="completion-panel">
+          <h3>All signatures collected.</h3>
+          <p>Download your signed copy below, then email it to Pepe to complete the record.</p>
+          <button class="btn-download" onclick="downloadPDF()">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 1v9M5 7l3 3 3-3M2 12v1a1 1 0 001 1h10a1 1 0 001-1v-1" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Download Signed PDF
+          </button>
+          <a class="btn-email" href="mailto:pepe@mexzungu.com?subject=Kabisa%20EL%20Signed&body=Hi%20Pepe%2C%20please%20find%20the%20signed%20engagement%20letter%20attached.">
+            <svg width="15" height="15" viewBox="0 0 15 15" fill="none"><rect x="1" y="3" width="13" height="9" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M1 4.5l6.5 4.5L14 4.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+            Email to Pepe
+          </a>
+        </div>
+
+      </div>
+
+      <!-- FOOTER -->
+      <div class="doc-footer">
+        <p>Mexzungu Group Ltd &nbsp;|&nbsp; Royal Road, Henrietta, 73120, Mauritius</p>
+        <p><a href="mailto:pepe@mexzungu.com">pepe@mexzungu.com</a> &nbsp;|&nbsp; <a href="https://mexzungu.com">mexzungu.com</a></p>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+  // ── STATE ──
+  const signed = { nick: false, lukas: false };
+  const pads = {};
+
+  // ── INIT DATE FIELDS ──
+  const today = new Date().toISOString().split('T')[0];
+  document.getElementById('date-nick').value = today;
+  document.getElementById('date-lukas').value = today;
+
+  // ── INIT SIGNATURE PADS ──
+  function initPad(id) {
+    const canvas = document.getElementById('canvas-' + id);
+    const wrap = canvas.parentElement;
+    // Scale canvas for retina
+    const ratio = Math.max(window.devicePixelRatio || 1, 1);
+    canvas.width = canvas.offsetWidth * ratio;
+    canvas.height = canvas.offsetHeight * ratio;
+    canvas.getContext('2d').scale(ratio, ratio);
+
+    const pad = new SignaturePad(canvas, {
+      minWidth: 1,
+      maxWidth: 2.5,
+      penColor: '#1a1a2e',
+    });
+
+    pad.addEventListener('beginStroke', () => {
+      document.getElementById('wm-' + id).style.display = 'none';
+    });
+
+    pads[id] = pad;
+  }
+
+  initPad('nick');
+  initPad('lukas');
+
+  // ── CLEAR ──
+  function clearSig(id) {
+    pads[id].clear();
+    document.getElementById('wm-' + id).style.display = '';
+    updateApplyBtn(id);
+  }
+
+  // ── ENABLE APPLY BUTTON ──
+  function updateApplyBtn(id) {
+    const agreed = document.getElementById('agree-' + id).checked;
+    const hasStroke = !pads[id].isEmpty();
+    document.getElementById('apply-' + id).disabled = !(agreed && hasStroke);
+  }
+
+  // Poll for strokes (signature_pad doesn't fire on empty check easily)
+  setInterval(() => {
+    ['nick', 'lukas'].forEach(id => {
+      if (!signed[id]) updateApplyBtn(id);
+    });
+  }, 400);
+
+  // ── APPLY SIGNATURE ──
+  function applySig(id) {
+    if (pads[id].isEmpty()) return;
+    signed[id] = true;
+
+    // Lock the block
+    const block = document.getElementById('block-' + id);
+    block.classList.add('applied');
+
+    // Update block header
+    const head = block.querySelector('.sig-block-head');
+    head.style.background = 'var(--success)';
+    const badge = document.createElement('div');
+    badge.className = 'signed-badge';
+    badge.innerHTML = '<svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M1.5 5L4 7.5L8.5 2.5" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Signed';
+    head.appendChild(badge);
+
+    // Update progress
+    const step = document.getElementById('step-' + id);
+    step.classList.remove('pending');
+    step.classList.add('done');
+
+    const count = 1 + (signed.nick ? 1 : 0) + (signed.lukas ? 1 : 0);
+    document.getElementById('progress-label').innerHTML = '<strong>' + count + '</strong> of 3 signatures collected';
+
+    // Show completion if both signed
+    if (signed.nick && signed.lukas) {
+      document.getElementById('completion-panel').classList.add('visible');
+      setTimeout(() => {
+        document.getElementById('completion-panel').scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }, 200);
+    }
+  }
+
+  // ── PDF GENERATION ──
+  async function downloadPDF() {
+    const btn = document.querySelector('.btn-download');
+    btn.textContent = 'Generating...';
+    btn.disabled = true;
+
+    try {
+      const el = document.getElementById('document-root');
+      const canvas = await html2canvas(el, {
+        scale: 1.5,
+        useCORS: true,
+        logging: false,
+        backgroundColor: '#ffffff',
+      });
+
+      const imgData = canvas.toDataURL('image/jpeg', 0.92);
+      const { jsPDF } = window.jspdf;
+      const pdf = new jsPDF({
+        orientation: 'portrait',
+        unit: 'px',
+        format: 'a4',
+      });
+
+      const pageW = pdf.internal.pageSize.getWidth();
+      const pageH = pdf.internal.pageSize.getHeight();
+      const imgW = canvas.width;
+      const imgH = canvas.height;
+      const ratio = pageW / imgW;
+      const scaledH = imgH * ratio;
+
+      let y = 0;
+      let remaining = scaledH;
+
+      while (remaining > 0) {
+        pdf.addImage(imgData, 'JPEG', 0, -y, pageW, scaledH);
+        remaining -= pageH;
+        y += pageH;
+        if (remaining > 0) pdf.addPage();
+      }
+
+      pdf.save('Kabisa_MexzunguGroup_EL_Signed_2026-04-29.pdf');
+    } catch (e) {
+      console.error(e);
+      alert('PDF generation failed. Please screenshot the page manually.');
+    }
+
+    btn.innerHTML = '<svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 1v9M5 7l3 3 3-3M2 12v1a1 1 0 001 1h10a1 1 0 001-1v-1" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Download Signed PDF';
+    btn.disabled = false;
+  }
+</script>
+</body>
+</html>
