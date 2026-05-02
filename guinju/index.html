@@ -14,25 +14,25 @@
 
   <style>
     /* ============================================================
-       GUINJU GAIJIN — Design System
-       Vibe: Intimacy in shadow. The moment before the first knot.
-       Dark charcoal + crimson + aged rope gold.
+       GUINJU GAIJIN — Design System V2
+       Vibe: Japanese-minimal, earthy. Tatami + jute + forest.
+       Near-black + forest green + warm jute beige.
     ============================================================ */
     :root {
-      --void:      #0A0808;
-      --deep:      #100D0D;
-      --charcoal:  #1A1515;
-      --ash:       #2A2222;
-      --smoke:     #3D3333;
-      --mist:      #6B5C5C;
-      --linen:     #D4C4B0;
-      --ivory:     #EDE0CF;
-      --crimson:   #8B1A1A;
-      --crimson-2: #A82020;
-      --crimson-3: #C42828;
-      --gold:      #B8956A;
-      --gold-2:    #D4AF7A;
-      --gold-dim:  rgba(184,149,106,0.15);
+      --void:      #0d0d0d;
+      --deep:      #111110;
+      --charcoal:  #1a1a18;
+      --ash:       #252520;
+      --smoke:     #3a3a35;
+      --mist:      #8a7e72;
+      --linen:     #d4c4b0;
+      --ivory:     #f0ebe3;
+      --forest:    #2d4a2d;
+      --forest-2:  #3a5a3a;
+      --forest-3:  #4a6a4a;
+      --jute:      #c4a882;
+      --jute-2:    #d4bf98;
+      --jute-dim:  rgba(196,168,130,0.15);
 
       --serif: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
       --sans:  'Jost', system-ui, -apple-system, sans-serif;
@@ -80,7 +80,7 @@
       font-weight: 400;
       letter-spacing: 0.3em;
       text-transform: uppercase;
-      color: var(--gold);
+      color: var(--jute);
       margin-bottom: 1.2rem;
       display: block;
     }
@@ -96,13 +96,13 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      background: linear-gradient(to bottom, rgba(10,8,8,0.95) 0%, rgba(10,8,8,0) 100%);
+      background: linear-gradient(to bottom, rgba(13,13,13,0.95) 0%, rgba(13,13,13,0) 100%);
       transition: background 0.3s var(--ease);
     }
 
     nav.scrolled {
-      background: rgba(10,8,8,0.97);
-      border-bottom: 1px solid rgba(184,149,106,0.12);
+      background: rgba(13,13,13,0.97);
+      border-bottom: 1px solid rgba(196,168,130,0.12);
     }
 
     .nav-logo {
@@ -115,7 +115,7 @@
     }
 
     .nav-logo span {
-      color: var(--gold);
+      color: var(--jute);
     }
 
     .nav-links {
@@ -134,21 +134,21 @@
       transition: opacity 0.2s, color 0.2s;
     }
 
-    .nav-links a:hover { opacity: 1; color: var(--gold); }
+    .nav-links a:hover { opacity: 1; color: var(--jute); }
 
     .nav-cta {
       font-size: 0.65rem;
       letter-spacing: 0.2em;
       text-transform: uppercase;
       padding: 0.6rem 1.4rem;
-      border: 1px solid var(--gold);
-      color: var(--gold);
+      border: 1px solid var(--jute);
+      color: var(--jute);
       text-decoration: none;
       transition: background 0.25s, color 0.25s;
     }
 
     .nav-cta:hover {
-      background: var(--gold);
+      background: var(--jute);
       color: var(--void);
     }
 
@@ -184,7 +184,7 @@
     .rope-line {
       width: 180px;
       height: 2px;
-      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      background: linear-gradient(90deg, transparent, var(--jute), transparent);
       position: relative;
     }
 
@@ -192,7 +192,7 @@
       width: 8px;
       height: 8px;
       background: none;
-      border: 1px solid var(--gold);
+      border: 1px solid var(--jute);
       border-radius: 50%;
       transform: rotate(45deg);
       position: absolute;
@@ -205,7 +205,7 @@
     .kanji-accent {
       font-family: var(--serif);
       font-size: 5rem;
-      color: rgba(184,149,106,0.06);
+      color: rgba(196,168,130,0.06);
       position: absolute;
       writing-mode: vertical-rl;
       user-select: none;
@@ -232,17 +232,17 @@
       position: absolute;
       inset: 0;
       background:
-        radial-gradient(ellipse 80% 60% at 50% 40%, rgba(139,26,26,0.18) 0%, transparent 70%),
-        radial-gradient(ellipse 50% 80% at 20% 80%, rgba(184,149,106,0.08) 0%, transparent 60%),
-        radial-gradient(ellipse 40% 60% at 80% 20%, rgba(139,26,26,0.1) 0%, transparent 60%);
+        radial-gradient(ellipse 80% 60% at 50% 40%, rgba(45,74,45,0.18) 0%, transparent 70%),
+        radial-gradient(ellipse 50% 80% at 20% 80%, rgba(196,168,130,0.08) 0%, transparent 60%),
+        radial-gradient(ellipse 40% 60% at 80% 20%, rgba(45,74,45,0.1) 0%, transparent 60%);
     }
 
-    /* Rope texture lines — SVG background */
+    /* Rope texture lines */
     #hero::after {
       content: '';
       position: absolute;
       inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='800' viewBox='0 0 800 800'%3E%3Cg stroke='%23B8956A' stroke-width='0.5' fill='none' opacity='0.12'%3E%3Cpath d='M0 200 Q200 180 400 200 T800 200'/%3E%3Cpath d='M0 210 Q200 190 400 210 T800 210'/%3E%3Cpath d='M0 400 Q200 380 400 400 T800 400'/%3E%3Cpath d='M0 410 Q200 390 400 410 T800 410'/%3E%3Cpath d='M0 600 Q200 580 400 600 T800 600'/%3E%3Cpath d='M0 610 Q200 590 400 610 T800 610'/%3E%3Cpath d='M100 0 Q120 200 100 400 T100 800'/%3E%3Cpath d='M110 0 Q130 200 110 400 T110 800'/%3E%3Cpath d='M700 0 Q680 200 700 400 T700 800'/%3E%3Cpath d='M710 0 Q690 200 710 400 T710 800'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='800' viewBox='0 0 800 800'%3E%3Cg stroke='%23c4a882' stroke-width='0.5' fill='none' opacity='0.1'%3E%3Cpath d='M0 200 Q200 180 400 200 T800 200'/%3E%3Cpath d='M0 210 Q200 190 400 210 T800 210'/%3E%3Cpath d='M0 400 Q200 380 400 400 T800 400'/%3E%3Cpath d='M0 410 Q200 390 400 410 T800 410'/%3E%3Cpath d='M0 600 Q200 580 400 600 T800 600'/%3E%3Cpath d='M0 610 Q200 590 400 610 T800 610'/%3E%3Cpath d='M100 0 Q120 200 100 400 T100 800'/%3E%3Cpath d='M110 0 Q130 200 110 400 T110 800'/%3E%3Cpath d='M700 0 Q680 200 700 400 T700 800'/%3E%3Cpath d='M710 0 Q690 200 710 400 T710 800'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
       background-size: cover;
       pointer-events: none;
     }
@@ -258,7 +258,7 @@
       font-size: 0.65rem;
       letter-spacing: 0.5em;
       text-transform: uppercase;
-      color: var(--gold);
+      color: var(--jute);
       margin-bottom: 2rem;
     }
 
@@ -275,7 +275,7 @@
     .hero-name span {
       display: block;
       font-style: italic;
-      color: var(--gold-2);
+      color: var(--jute-2);
       font-size: 0.55em;
       letter-spacing: 0.08em;
     }
@@ -302,7 +302,7 @@
     .btn-primary {
       display: inline-block;
       padding: 1rem 2.5rem;
-      background: var(--crimson);
+      background: var(--forest);
       color: var(--ivory);
       text-decoration: none;
       font-size: 0.7rem;
@@ -310,12 +310,12 @@
       letter-spacing: 0.25em;
       text-transform: uppercase;
       transition: background 0.25s var(--ease), transform 0.2s;
-      border: 1px solid var(--crimson);
+      border: 1px solid var(--forest);
     }
 
     .btn-primary:hover {
-      background: var(--crimson-3);
-      border-color: var(--crimson-3);
+      background: var(--forest-3);
+      border-color: var(--forest-3);
       transform: translateY(-1px);
     }
 
@@ -323,18 +323,18 @@
       display: inline-block;
       padding: 1rem 2.5rem;
       background: transparent;
-      color: var(--gold);
+      color: var(--jute);
       text-decoration: none;
       font-size: 0.7rem;
       font-weight: 400;
       letter-spacing: 0.25em;
       text-transform: uppercase;
-      border: 1px solid var(--gold);
+      border: 1px solid var(--jute);
       transition: background 0.25s var(--ease), color 0.25s, transform 0.2s;
     }
 
     .btn-outline:hover {
-      background: var(--gold-dim);
+      background: var(--jute-dim);
       transform: translateY(-1px);
     }
 
@@ -357,7 +357,7 @@
     .scroll-line {
       width: 1px;
       height: 40px;
-      background: linear-gradient(to bottom, var(--gold), transparent);
+      background: linear-gradient(to bottom, var(--jute), transparent);
       animation: scrollPulse 2s ease-in-out infinite;
     }
 
@@ -382,7 +382,6 @@
       margin: 0 auto;
     }
 
-    /* Alternating section backgrounds */
     .section-alt {
       background: var(--deep);
     }
@@ -404,7 +403,6 @@
       height: 500px;
     }
 
-    /* Abstract rope composition */
     .rope-art {
       position: absolute;
       inset: 0;
@@ -426,7 +424,7 @@
     }
 
     .about-text h2 em {
-      color: var(--gold);
+      color: var(--jute);
       font-style: italic;
     }
 
@@ -442,7 +440,7 @@
       gap: 2.5rem;
       margin-top: 2.5rem;
       padding-top: 2rem;
-      border-top: 1px solid rgba(184,149,106,0.2);
+      border-top: 1px solid rgba(196,168,130,0.2);
     }
 
     .stat-item {
@@ -453,7 +451,7 @@
       font-family: var(--serif);
       font-size: 2.2rem;
       font-weight: 300;
-      color: var(--gold);
+      color: var(--jute);
       display: block;
     }
 
@@ -493,7 +491,7 @@
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 1.5px;
-      background: rgba(184,149,106,0.15);
+      background: rgba(196,168,130,0.15);
     }
 
     .class-card {
@@ -518,21 +516,21 @@
     }
 
     .class-card:hover { background: var(--charcoal); }
-    .class-card:hover::before { background: var(--crimson); }
+    .class-card:hover::before { background: var(--forest); }
 
     .class-card.featured {
       background: var(--charcoal);
     }
 
     .class-card.featured::before {
-      background: var(--gold);
+      background: var(--jute);
     }
 
     .class-level {
       font-size: 0.6rem;
       letter-spacing: 0.35em;
       text-transform: uppercase;
-      color: var(--gold);
+      color: var(--jute);
       margin-bottom: 1rem;
     }
 
@@ -566,7 +564,7 @@
       gap: 1.5rem;
       margin-bottom: 2rem;
       padding-bottom: 1.5rem;
-      border-bottom: 1px solid rgba(184,149,106,0.15);
+      border-bottom: 1px solid rgba(196,168,130,0.15);
     }
 
     .class-meta-item {
@@ -623,7 +621,7 @@
       line-height: 1.2;
     }
 
-    .workshops-text h2 em { color: var(--gold); font-style: italic; }
+    .workshops-text h2 em { color: var(--jute); font-style: italic; }
 
     .workshops-text p {
       font-size: 1rem;
@@ -642,16 +640,16 @@
       align-items: flex-start;
       gap: 1rem;
       padding: 1rem 0;
-      border-bottom: 1px solid rgba(184,149,106,0.12);
+      border-bottom: 1px solid rgba(196,168,130,0.12);
       font-size: 0.9rem;
       color: var(--linen);
       opacity: 0.85;
     }
 
     .workshop-types li::before {
-      content: '縄';
+      content: '\7E04';
       font-family: serif;
-      color: var(--crimson);
+      color: var(--forest-2);
       opacity: 0.6;
       font-size: 1.1rem;
       flex-shrink: 0;
@@ -694,7 +692,7 @@
       margin-bottom: 1rem;
     }
 
-    .photo-content h2 em { color: var(--gold); font-style: italic; }
+    .photo-content h2 em { color: var(--jute); font-style: italic; }
 
     .photo-content p {
       font-size: 1rem;
@@ -706,7 +704,7 @@
       display: grid;
       grid-template-columns: repeat(2, 1fr);
       gap: 1.5px;
-      background: rgba(184,149,106,0.15);
+      background: rgba(196,168,130,0.15);
       max-width: 900px;
       margin: 0 auto 3rem;
     }
@@ -747,9 +745,83 @@
       margin-bottom: 2rem;
     }
 
+    /* ── PRINTS SHOP ── */
+    #prints {
+      background: var(--charcoal);
+    }
+
+    .prints-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+
+    .print-card {
+      background: var(--ash);
+      border: 1px solid rgba(196,168,130,0.1);
+      overflow: hidden;
+      transition: border-color 0.3s var(--ease), transform 0.3s var(--ease);
+    }
+
+    .print-card:hover {
+      border-color: rgba(196,168,130,0.35);
+      transform: translateY(-4px);
+    }
+
+    .print-visual {
+      height: 220px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(135deg, var(--deep) 0%, var(--ash) 100%);
+    }
+
+    .print-body {
+      padding: 1.5rem;
+    }
+
+    .print-name {
+      font-family: var(--serif);
+      font-size: 1.3rem;
+      font-weight: 300;
+      color: var(--ivory);
+      margin-bottom: 0.4rem;
+    }
+
+    .print-desc {
+      font-size: 0.8rem;
+      color: var(--mist);
+      line-height: 1.6;
+      margin-bottom: 1.2rem;
+    }
+
+    .print-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .print-price {
+      font-family: var(--serif);
+      font-size: 1.5rem;
+      font-weight: 300;
+      color: var(--jute);
+    }
+
+    .print-edition {
+      font-size: 0.6rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--forest-2);
+      margin-top: 0.8rem;
+    }
+
     /* ── ROPE SHOP ── */
     #shop {
-      background: var(--charcoal);
+      background: var(--void);
     }
 
     .shop-grid {
@@ -761,13 +833,13 @@
 
     .product-card {
       background: var(--ash);
-      border: 1px solid rgba(184,149,106,0.1);
+      border: 1px solid rgba(196,168,130,0.1);
       overflow: hidden;
       transition: border-color 0.3s var(--ease), transform 0.3s var(--ease);
     }
 
     .product-card:hover {
-      border-color: rgba(184,149,106,0.35);
+      border-color: rgba(196,168,130,0.35);
       transform: translateY(-4px);
     }
 
@@ -809,27 +881,133 @@
       font-family: var(--serif);
       font-size: 1.5rem;
       font-weight: 300;
-      color: var(--gold);
+      color: var(--jute);
     }
 
     .btn-cart {
       display: inline-block;
       padding: 0.55rem 1.2rem;
-      background: var(--crimson);
+      background: var(--forest);
       color: var(--ivory);
       text-decoration: none;
       font-size: 0.65rem;
       font-weight: 400;
       letter-spacing: 0.2em;
       text-transform: uppercase;
-      border: 1px solid var(--crimson);
+      border: 1px solid var(--forest);
       cursor: pointer;
       transition: background 0.2s, border-color 0.2s;
     }
 
     .btn-cart:hover {
-      background: var(--crimson-3);
-      border-color: var(--crimson-3);
+      background: var(--forest-3);
+      border-color: var(--forest-3);
+    }
+
+    /* ── TESTIMONIALS ── */
+    #testimonials {
+      background: var(--charcoal);
+    }
+
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+
+    .testimonial-card {
+      background: var(--ash);
+      border: 1px solid rgba(196,168,130,0.08);
+      padding: 2.5rem 2rem;
+      position: relative;
+    }
+
+    .testimonial-card::before {
+      content: '\201C';
+      font-family: var(--serif);
+      font-size: 4rem;
+      color: var(--forest-2);
+      opacity: 0.4;
+      position: absolute;
+      top: 0.8rem;
+      left: 1.2rem;
+      line-height: 1;
+    }
+
+    .testimonial-text {
+      font-family: var(--serif);
+      font-size: 1.05rem;
+      font-style: italic;
+      color: var(--linen);
+      line-height: 1.8;
+      margin-bottom: 1.5rem;
+      opacity: 0.9;
+    }
+
+    .testimonial-author {
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--mist);
+    }
+
+    /* ── EVENTS ── */
+    #events {
+      background: var(--deep);
+    }
+
+    .events-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+
+    .event-card {
+      background: var(--ash);
+      border: 1px solid rgba(196,168,130,0.1);
+      padding: 2.5rem 2rem;
+      display: flex;
+      flex-direction: column;
+      transition: border-color 0.3s var(--ease);
+    }
+
+    .event-card:hover {
+      border-color: rgba(45,74,45,0.5);
+    }
+
+    .event-date {
+      font-size: 0.6rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--forest-2);
+      margin-bottom: 1rem;
+    }
+
+    .event-card h3 {
+      font-family: var(--serif);
+      font-size: 1.5rem;
+      font-weight: 300;
+      color: var(--ivory);
+      margin-bottom: 0.8rem;
+      line-height: 1.3;
+    }
+
+    .event-card p {
+      font-size: 0.85rem;
+      color: var(--mist);
+      line-height: 1.7;
+      flex-grow: 1;
+      margin-bottom: 2rem;
+    }
+
+    .event-location {
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      color: var(--jute);
+      margin-bottom: 1.5rem;
+      opacity: 0.7;
     }
 
     /* ── CONTACT ── */
@@ -849,7 +1027,7 @@
       margin-bottom: 1rem;
     }
 
-    .contact-inner h2 em { color: var(--gold); font-style: italic; }
+    .contact-inner h2 em { color: var(--jute); font-style: italic; }
 
     .contact-inner p {
       font-size: 1rem;
@@ -862,7 +1040,7 @@
       display: flex;
       flex-direction: column;
       gap: 1px;
-      background: rgba(184,149,106,0.12);
+      background: rgba(196,168,130,0.12);
       margin-bottom: 3rem;
     }
 
@@ -870,7 +1048,7 @@
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 1px;
-      background: rgba(184,149,106,0.12);
+      background: rgba(196,168,130,0.12);
     }
 
     .form-field {
@@ -885,7 +1063,7 @@
       font-size: 0.58rem;
       letter-spacing: 0.2em;
       text-transform: uppercase;
-      color: var(--gold);
+      color: var(--jute);
       padding: 1rem 1.5rem 0;
     }
 
@@ -913,7 +1091,7 @@
     .form-field textarea { height: 120px; }
 
     .contact-form .btn-primary {
-      background: var(--crimson);
+      background: var(--forest);
       width: 100%;
       border: none;
       cursor: pointer;
@@ -923,10 +1101,11 @@
 
     .social-links {
       display: flex;
-      gap: 2rem;
+      gap: 1.5rem;
       justify-content: center;
       align-items: center;
       margin-top: 3rem;
+      flex-wrap: wrap;
     }
 
     .social-links a {
@@ -938,7 +1117,7 @@
       transition: color 0.2s;
     }
 
-    .social-links a:hover { color: var(--gold); }
+    .social-links a:hover { color: var(--jute); }
 
     .social-links .dot {
       width: 3px;
@@ -950,7 +1129,7 @@
     /* ── FOOTER ── */
     footer {
       background: var(--deep);
-      border-top: 1px solid rgba(184,149,106,0.1);
+      border-top: 1px solid rgba(196,168,130,0.1);
       padding: 2rem;
       text-align: center;
     }
@@ -965,7 +1144,7 @@
     /* ── ACCENT BAND ── */
     .band {
       height: 1px;
-      background: linear-gradient(90deg, transparent 0%, var(--gold) 30%, var(--crimson) 70%, transparent 100%);
+      background: linear-gradient(90deg, transparent 0%, var(--jute) 30%, var(--forest) 70%, transparent 100%);
       opacity: 0.4;
     }
 
@@ -979,7 +1158,7 @@
         flex-direction: column;
         position: fixed;
         inset: 0;
-        background: rgba(10,8,8,0.98);
+        background: rgba(13,13,13,0.98);
         align-items: center;
         justify-content: center;
         gap: 2.5rem;
@@ -1001,7 +1180,13 @@
 
       .photo-cards { grid-template-columns: 1fr; }
 
+      .prints-grid { grid-template-columns: 1fr; }
+
       .shop-grid { grid-template-columns: 1fr; }
+
+      .testimonials-grid { grid-template-columns: 1fr; }
+
+      .events-grid { grid-template-columns: 1fr; }
 
       .form-row { grid-template-columns: 1fr; }
     }
@@ -1037,7 +1222,7 @@
       left: 50%;
       transform: translateX(-50%) translateY(4rem);
       background: var(--charcoal);
-      border: 1px solid var(--gold);
+      border: 1px solid var(--jute);
       color: var(--ivory);
       padding: 0.9rem 2rem;
       font-size: 0.8rem;
@@ -1065,7 +1250,8 @@
     <li><a href="#workshops">Workshops</a></li>
     <li><a href="#photo">Sessions</a></li>
     <li><a href="#shop">Shop</a></li>
-    <li><a href="#contact" class="nav-cta" style="border:none;padding:0;color:var(--gold);opacity:0.7">Contact</a></li>
+    <li><a href="#events">Events</a></li>
+    <li><a href="#contact" class="nav-cta" style="border:none;padding:0;color:var(--jute);opacity:0.7">Contact</a></li>
   </ul>
   <a class="nav-cta" href="#contact">Book Now</a>
   <button class="nav-toggle" id="navToggle" aria-label="Menu">
@@ -1101,52 +1287,51 @@
     <div class="about-grid">
       <div class="about-visual">
         <div class="rope-art">
-          <!-- Abstract kinbaku composition in SVG -->
           <svg viewBox="0 0 420 500" fill="none" xmlns="http://www.w3.org/2000/svg">
             <!-- Background circle -->
-            <circle cx="210" cy="250" r="190" stroke="rgba(184,149,106,0.08)" stroke-width="1"/>
-            <circle cx="210" cy="250" r="155" stroke="rgba(184,149,106,0.05)" stroke-width="1"/>
+            <circle cx="210" cy="250" r="190" stroke="rgba(196,168,130,0.08)" stroke-width="1"/>
+            <circle cx="210" cy="250" r="155" stroke="rgba(196,168,130,0.05)" stroke-width="1"/>
 
-            <!-- Rope paths — organic curves suggesting bondage without being explicit -->
+            <!-- Rope paths -->
             <path d="M120 140 C160 100 260 100 300 140 C340 180 340 220 300 260 C260 300 160 300 120 260 C80 220 80 180 120 140Z"
-                  stroke="rgba(184,149,106,0.35)" stroke-width="1.5" fill="none" stroke-dasharray="4 6"/>
+                  stroke="rgba(196,168,130,0.35)" stroke-width="1.5" fill="none" stroke-dasharray="4 6"/>
 
             <path d="M210 80 C280 80 340 140 340 210 C340 280 280 340 210 340 C140 340 80 280 80 210 C80 140 140 80 210 80Z"
-                  stroke="rgba(139,26,26,0.4)" stroke-width="1" fill="none"/>
+                  stroke="rgba(45,74,45,0.4)" stroke-width="1" fill="none"/>
 
             <!-- Rope strands -->
             <path d="M80 160 Q140 120 210 140 Q280 160 340 130"
-                  stroke="rgba(184,149,106,0.5)" stroke-width="2" fill="none" stroke-linecap="round"/>
+                  stroke="rgba(196,168,130,0.5)" stroke-width="2" fill="none" stroke-linecap="round"/>
             <path d="M82 170 Q142 130 212 150 Q282 170 342 140"
-                  stroke="rgba(184,149,106,0.3)" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+                  stroke="rgba(196,168,130,0.3)" stroke-width="1.5" fill="none" stroke-linecap="round"/>
 
             <path d="M80 320 Q140 360 210 340 Q280 320 340 360"
-                  stroke="rgba(184,149,106,0.5)" stroke-width="2" fill="none" stroke-linecap="round"/>
+                  stroke="rgba(196,168,130,0.5)" stroke-width="2" fill="none" stroke-linecap="round"/>
             <path d="M82 330 Q142 370 212 350 Q282 330 342 370"
-                  stroke="rgba(184,149,106,0.3)" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+                  stroke="rgba(196,168,130,0.3)" stroke-width="1.5" fill="none" stroke-linecap="round"/>
 
             <!-- Vertical rope -->
             <path d="M210 80 Q200 165 210 250 Q220 335 210 420"
-                  stroke="rgba(184,149,106,0.45)" stroke-width="2" fill="none" stroke-linecap="round"/>
+                  stroke="rgba(196,168,130,0.45)" stroke-width="2" fill="none" stroke-linecap="round"/>
             <path d="M220 80 Q210 165 220 250 Q230 335 220 420"
-                  stroke="rgba(184,149,106,0.25)" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+                  stroke="rgba(196,168,130,0.25)" stroke-width="1.5" fill="none" stroke-linecap="round"/>
 
             <!-- Knot nodes -->
-            <circle cx="210" cy="250" r="8" stroke="rgba(184,149,106,0.6)" stroke-width="1.5" fill="none"/>
-            <circle cx="210" cy="250" r="3" fill="rgba(184,149,106,0.4)"/>
-            <circle cx="210" cy="140" r="5" stroke="rgba(184,149,106,0.5)" stroke-width="1" fill="none"/>
-            <circle cx="210" cy="360" r="5" stroke="rgba(184,149,106,0.5)" stroke-width="1" fill="none"/>
-            <circle cx="120" cy="250" r="4" stroke="rgba(139,26,26,0.5)" stroke-width="1" fill="none"/>
-            <circle cx="300" cy="250" r="4" stroke="rgba(139,26,26,0.5)" stroke-width="1" fill="none"/>
+            <circle cx="210" cy="250" r="8" stroke="rgba(196,168,130,0.6)" stroke-width="1.5" fill="none"/>
+            <circle cx="210" cy="250" r="3" fill="rgba(196,168,130,0.4)"/>
+            <circle cx="210" cy="140" r="5" stroke="rgba(196,168,130,0.5)" stroke-width="1" fill="none"/>
+            <circle cx="210" cy="360" r="5" stroke="rgba(196,168,130,0.5)" stroke-width="1" fill="none"/>
+            <circle cx="120" cy="250" r="4" stroke="rgba(45,74,45,0.5)" stroke-width="1" fill="none"/>
+            <circle cx="300" cy="250" r="4" stroke="rgba(45,74,45,0.5)" stroke-width="1" fill="none"/>
 
-            <!-- Japanese character — rope/bond -->
-            <text x="150" y="275" font-family="serif" font-size="100" fill="rgba(184,149,106,0.04)" text-anchor="middle">縄</text>
+            <!-- Japanese character -->
+            <text x="150" y="275" font-family="serif" font-size="100" fill="rgba(196,168,130,0.04)" text-anchor="middle">縄</text>
 
             <!-- Corner rope tassels -->
-            <path d="M60 80 L80 100 L70 120 L90 115 L85 135" stroke="rgba(184,149,106,0.3)" stroke-width="1.5" fill="none" stroke-linecap="round"/>
-            <path d="M360 80 L340 100 L350 120 L330 115 L335 135" stroke="rgba(184,149,106,0.3)" stroke-width="1.5" fill="none" stroke-linecap="round"/>
-            <path d="M60 420 L80 400 L70 380 L90 385 L85 365" stroke="rgba(184,149,106,0.3)" stroke-width="1.5" fill="none" stroke-linecap="round"/>
-            <path d="M360 420 L340 400 L350 380 L330 385 L335 365" stroke="rgba(184,149,106,0.3)" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+            <path d="M60 80 L80 100 L70 120 L90 115 L85 135" stroke="rgba(196,168,130,0.3)" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+            <path d="M360 80 L340 100 L350 120 L330 115 L335 135" stroke="rgba(196,168,130,0.3)" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+            <path d="M60 420 L80 400 L70 380 L90 385 L85 365" stroke="rgba(196,168,130,0.3)" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+            <path d="M360 420 L340 400 L350 380 L330 385 L335 365" stroke="rgba(196,168,130,0.3)" stroke-width="1.5" fill="none" stroke-linecap="round"/>
           </svg>
         </div>
       </div>
@@ -1155,13 +1340,13 @@
         <span class="section-label">About</span>
         <h2>Rigger. Model. <em>Teacher.</em></h2>
         <p>
-          Guinju is a Barcelona-based shibari rigger, model, and educator with roots in the traditional Japanese rope arts of kinbaku. His practice sits at the intersection of aesthetics, trust, and physical presence — where constraint becomes communication.
+          Guinju is a Barcelona-based shibari rigger, model, and educator with roots in the traditional Japanese rope arts of kinbaku. His practice sits at the intersection of aesthetics, trust, and physical presence, where constraint becomes communication.
         </p>
         <p>
           Trained in both the technical and the philosophical dimensions of rope, Guinju teaches shibari not as performance, but as dialogue. Each tie is a conversation. Each knot, a question asked and answered in silence.
         </p>
         <p>
-          Whether in private sessions, group workshops, or behind the lens, his work explores what it means to truly see and be seen — bound and free at once.
+          Whether in private sessions, group workshops, or behind the lens, his work explores what it means to truly see and be seen, bound and free at once. Featured in collaborations with studios across Barcelona including La Gabia and Flashe Studio.
         </p>
         <div class="about-stats">
           <div class="stat-item">
@@ -1198,7 +1383,7 @@
         <h3>Introduction to Shibari</h3>
         <p class="class-subtitle">For complete beginners</p>
         <p class="class-description">
-          Where it all begins. Safety, consent, and the fundamentals of rope — materials, tension, care. Your first ties: column tie, single-column, and basic chest harness. The language before the conversation.
+          Where it all begins. Safety, consent, and the fundamentals of rope: materials, tension, care. Your first ties: column tie, single-column, and basic chest harness. The language before the conversation.
         </p>
         <div class="class-meta">
           <div class="class-meta-item">
@@ -1214,16 +1399,16 @@
             <span class="meta-key">Format</span>
           </div>
         </div>
-        <div class="class-price">€175</div>
-        <div class="class-price-note">per month · includes all materials</div>
+        <div class="class-price">&euro;175</div>
+        <div class="class-price-note">per month &middot; includes all materials</div>
         <a href="#contact" class="btn-primary" onclick="prefill('Level 0 — Introduction to Shibari')">Enroll Now</a>
       </div>
 
       <!-- Level 1 -->
       <div class="class-card featured reveal reveal-delay-2">
-        <div class="class-level">Level 1 &nbsp;·&nbsp; Most Popular</div>
+        <div class="class-level">Level 1 &nbsp;&middot;&nbsp; Most Popular</div>
         <h3>Foundations</h3>
-        <p class="class-subtitle">Intermediate · Requires Level 0</p>
+        <p class="class-subtitle">Intermediate &middot; Requires Level 0</p>
         <p class="class-description">
           Deepen the vocabulary. Suspension fundamentals, hip harnesses, and the TK (takate kote). Reading your partner's body, pacing the session, developing your own aesthetic language within the tie.
         </p>
@@ -1241,8 +1426,8 @@
             <span class="meta-key">Format</span>
           </div>
         </div>
-        <div class="class-price">€175</div>
-        <div class="class-price-note">per month · includes all materials</div>
+        <div class="class-price">&euro;175</div>
+        <div class="class-price-note">per month &middot; includes all materials</div>
         <a href="#contact" class="btn-primary" onclick="prefill('Level 1 — Foundations')">Enroll Now</a>
       </div>
 
@@ -1250,7 +1435,7 @@
       <div class="class-card reveal reveal-delay-3">
         <div class="class-level">Level 2</div>
         <h3>Advanced Techniques</h3>
-        <p class="class-subtitle">Advanced · Requires Level 1</p>
+        <p class="class-subtitle">Advanced &middot; Requires Level 1</p>
         <p class="class-description">
           Partial and full suspension. Dynamic rope work. Nerve maps, pressure points, and aftercare protocols for advanced sessions. Building your practice: developing a personal style, photographing your work, teaching others.
         </p>
@@ -1268,8 +1453,8 @@
             <span class="meta-key">Format</span>
           </div>
         </div>
-        <div class="class-price">€175</div>
-        <div class="class-price-note">per month · includes all materials</div>
+        <div class="class-price">&euro;175</div>
+        <div class="class-price-note">per month &middot; includes all materials</div>
         <a href="#contact" class="btn-primary" onclick="prefill('Level 2 — Advanced Techniques')">Enroll Now</a>
       </div>
     </div>
@@ -1284,16 +1469,16 @@
         <span class="section-label">Group Workshops</span>
         <h2>Rope in <em>Community.</em></h2>
         <p>
-          Periodic workshops for small groups — guided, intentional, and held with care. A space where beginners and experienced practitioners share rope and presence.
+          Periodic workshops for small groups, guided, intentional, and held with care. A space where beginners and experienced practitioners share rope and presence.
         </p>
         <p>
           Each workshop has a theme: intro ties, rope as art, the philosophy of kinbaku, or open practice sessions with structured guidance.
         </p>
         <ul class="workshop-types">
-          <li>Intro to Shibari — first knots, first conversations</li>
-          <li>Rope &amp; Photography — collaborative sessions for visual artists</li>
-          <li>Theory &amp; Philosophy — the history and spirit of kinbaku</li>
-          <li>Open Practice — guided free-form sessions for intermediate practitioners</li>
+          <li>Intro to Shibari: first knots, first conversations</li>
+          <li>Rope &amp; Photography: collaborative sessions for visual artists</li>
+          <li>Theory &amp; Philosophy: the history and spirit of kinbaku</li>
+          <li>Open Practice: guided free-form sessions for intermediate practitioners</li>
         </ul>
         <a href="#contact" class="btn-outline" onclick="prefill('Workshop Inquiry')">Inquire About Upcoming Workshops</a>
       </div>
@@ -1301,35 +1486,31 @@
       <div class="workshops-visual reveal reveal-delay-2">
         <div class="circle-art">
           <svg viewBox="0 0 380 380" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <!-- Concentric circles with rope texture -->
-            <circle cx="190" cy="190" r="180" stroke="rgba(184,149,106,0.06)" stroke-width="1"/>
-            <circle cx="190" cy="190" r="150" stroke="rgba(184,149,106,0.1)" stroke-width="1"/>
-            <circle cx="190" cy="190" r="120" stroke="rgba(184,149,106,0.08)" stroke-width="1"/>
-            <circle cx="190" cy="190" r="90" stroke="rgba(139,26,26,0.2)" stroke-width="1.5"/>
-            <circle cx="190" cy="190" r="60" stroke="rgba(184,149,106,0.15)" stroke-width="1"/>
-            <circle cx="190" cy="190" r="30" stroke="rgba(184,149,106,0.2)" stroke-width="1.5" stroke-dasharray="3 5"/>
-            <circle cx="190" cy="190" r="8" fill="rgba(184,149,106,0.25)"/>
-            <circle cx="190" cy="190" r="4" fill="rgba(184,149,106,0.5)"/>
+            <circle cx="190" cy="190" r="180" stroke="rgba(196,168,130,0.06)" stroke-width="1"/>
+            <circle cx="190" cy="190" r="150" stroke="rgba(196,168,130,0.1)" stroke-width="1"/>
+            <circle cx="190" cy="190" r="120" stroke="rgba(196,168,130,0.08)" stroke-width="1"/>
+            <circle cx="190" cy="190" r="90" stroke="rgba(45,74,45,0.25)" stroke-width="1.5"/>
+            <circle cx="190" cy="190" r="60" stroke="rgba(196,168,130,0.15)" stroke-width="1"/>
+            <circle cx="190" cy="190" r="30" stroke="rgba(196,168,130,0.2)" stroke-width="1.5" stroke-dasharray="3 5"/>
+            <circle cx="190" cy="190" r="8" fill="rgba(196,168,130,0.25)"/>
+            <circle cx="190" cy="190" r="4" fill="rgba(196,168,130,0.5)"/>
 
-            <!-- Radial lines like spokes — rope radiating outward -->
-            <line x1="190" y1="10" x2="190" y2="100" stroke="rgba(184,149,106,0.3)" stroke-width="1.5"/>
-            <line x1="190" y1="280" x2="190" y2="370" stroke="rgba(184,149,106,0.3)" stroke-width="1.5"/>
-            <line x1="10" y1="190" x2="100" y2="190" stroke="rgba(184,149,106,0.3)" stroke-width="1.5"/>
-            <line x1="280" y1="190" x2="370" y2="190" stroke="rgba(184,149,106,0.3)" stroke-width="1.5"/>
+            <line x1="190" y1="10" x2="190" y2="100" stroke="rgba(196,168,130,0.3)" stroke-width="1.5"/>
+            <line x1="190" y1="280" x2="190" y2="370" stroke="rgba(196,168,130,0.3)" stroke-width="1.5"/>
+            <line x1="10" y1="190" x2="100" y2="190" stroke="rgba(196,168,130,0.3)" stroke-width="1.5"/>
+            <line x1="280" y1="190" x2="370" y2="190" stroke="rgba(196,168,130,0.3)" stroke-width="1.5"/>
 
-            <line x1="63" y1="63" x2="127" y2="127" stroke="rgba(184,149,106,0.2)" stroke-width="1"/>
-            <line x1="253" y1="253" x2="317" y2="317" stroke="rgba(184,149,106,0.2)" stroke-width="1"/>
-            <line x1="317" y1="63" x2="253" y2="127" stroke="rgba(184,149,106,0.2)" stroke-width="1"/>
-            <line x1="63" y1="317" x2="127" y2="253" stroke="rgba(184,149,106,0.2)" stroke-width="1"/>
+            <line x1="63" y1="63" x2="127" y2="127" stroke="rgba(196,168,130,0.2)" stroke-width="1"/>
+            <line x1="253" y1="253" x2="317" y2="317" stroke="rgba(196,168,130,0.2)" stroke-width="1"/>
+            <line x1="317" y1="63" x2="253" y2="127" stroke="rgba(196,168,130,0.2)" stroke-width="1"/>
+            <line x1="63" y1="317" x2="127" y2="253" stroke="rgba(196,168,130,0.2)" stroke-width="1"/>
 
-            <!-- Outer knot marks -->
-            <circle cx="190" cy="10" r="4" stroke="rgba(184,149,106,0.4)" stroke-width="1" fill="none"/>
-            <circle cx="190" cy="370" r="4" stroke="rgba(184,149,106,0.4)" stroke-width="1" fill="none"/>
-            <circle cx="10" cy="190" r="4" stroke="rgba(184,149,106,0.4)" stroke-width="1" fill="none"/>
-            <circle cx="370" cy="190" r="4" stroke="rgba(184,149,106,0.4)" stroke-width="1" fill="none"/>
+            <circle cx="190" cy="10" r="4" stroke="rgba(196,168,130,0.4)" stroke-width="1" fill="none"/>
+            <circle cx="190" cy="370" r="4" stroke="rgba(196,168,130,0.4)" stroke-width="1" fill="none"/>
+            <circle cx="10" cy="190" r="4" stroke="rgba(196,168,130,0.4)" stroke-width="1" fill="none"/>
+            <circle cx="370" cy="190" r="4" stroke="rgba(196,168,130,0.4)" stroke-width="1" fill="none"/>
 
-            <!-- Kanji -->
-            <text x="190" y="205" font-family="serif" font-size="40" fill="rgba(184,149,106,0.1)" text-anchor="middle">繋</text>
+            <text x="190" y="205" font-family="serif" font-size="40" fill="rgba(196,168,130,0.1)" text-anchor="middle">繋</text>
           </svg>
         </div>
       </div>
@@ -1352,25 +1533,25 @@
       <div class="photo-card reveal reveal-delay-1">
         <div class="photo-card-icon">
           <svg viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg" width="60" height="60">
-            <circle cx="30" cy="30" r="28" stroke="rgba(184,149,106,0.35)" stroke-width="1"/>
-            <path d="M20 30 C20 24 24 20 30 20 C36 20 40 24 40 30" stroke="rgba(184,149,106,0.6)" stroke-width="1.5" fill="none" stroke-linecap="round"/>
-            <path d="M15 35 Q22 25 30 30 Q38 35 45 25" stroke="rgba(139,26,26,0.5)" stroke-width="1.5" fill="none" stroke-linecap="round"/>
-            <circle cx="30" cy="30" r="4" stroke="rgba(184,149,106,0.5)" stroke-width="1" fill="none"/>
+            <circle cx="30" cy="30" r="28" stroke="rgba(196,168,130,0.35)" stroke-width="1"/>
+            <path d="M20 30 C20 24 24 20 30 20 C36 20 40 24 40 30" stroke="rgba(196,168,130,0.6)" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+            <path d="M15 35 Q22 25 30 30 Q38 35 45 25" stroke="rgba(45,74,45,0.5)" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+            <circle cx="30" cy="30" r="4" stroke="rgba(196,168,130,0.5)" stroke-width="1" fill="none"/>
           </svg>
         </div>
         <h3>As Model</h3>
-        <p>Experience shibari from the inside — as the one held. Sessions are private, respectful, and guided entirely by your comfort. You leave with a set of images and something harder to put into words.</p>
+        <p>Experience shibari from the inside, as the one held. Sessions are private, respectful, and guided entirely by your comfort. You leave with a set of images and something harder to put into words.</p>
         <a href="#contact" class="btn-outline" onclick="prefill('Photo Session — As Model')">Book as Model</a>
       </div>
 
       <div class="photo-card reveal reveal-delay-2">
         <div class="photo-card-icon">
           <svg viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg" width="60" height="60">
-            <circle cx="30" cy="30" r="28" stroke="rgba(184,149,106,0.35)" stroke-width="1"/>
-            <path d="M22 38 Q25 28 30 25 Q35 22 38 30" stroke="rgba(184,149,106,0.6)" stroke-width="1.5" fill="none" stroke-linecap="round"/>
-            <path d="M18 32 Q24 18 30 22 Q36 26 42 18" stroke="rgba(139,26,26,0.5)" stroke-width="1.5" fill="none" stroke-linecap="round"/>
-            <circle cx="30" cy="30" r="5" stroke="rgba(184,149,106,0.4)" stroke-width="1" fill="none"/>
-            <circle cx="30" cy="30" r="2" fill="rgba(184,149,106,0.3)"/>
+            <circle cx="30" cy="30" r="28" stroke="rgba(196,168,130,0.35)" stroke-width="1"/>
+            <path d="M22 38 Q25 28 30 25 Q35 22 38 30" stroke="rgba(196,168,130,0.6)" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+            <path d="M18 32 Q24 18 30 22 Q36 26 42 18" stroke="rgba(45,74,45,0.5)" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+            <circle cx="30" cy="30" r="5" stroke="rgba(196,168,130,0.4)" stroke-width="1" fill="none"/>
+            <circle cx="30" cy="30" r="2" fill="rgba(196,168,130,0.3)"/>
           </svg>
         </div>
         <h3>As Rigger</h3>
@@ -1385,96 +1566,234 @@
   </div>
 </section>
 
+<!-- PRINTS / OBRA -->
+<section id="prints">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="section-label">Obra / Prints</span>
+      <h2>Shibari as Art.</h2>
+      <p>Limited edition photographic prints from Guinju's artistic portfolio. Each piece signed and numbered.</p>
+    </div>
+
+    <div class="prints-grid">
+      <!-- Print 1 -->
+      <div class="print-card reveal reveal-delay-1">
+        <div class="print-visual">
+          <svg viewBox="0 0 180 180" fill="none" xmlns="http://www.w3.org/2000/svg" width="120">
+            <rect x="30" y="25" width="120" height="130" stroke="rgba(196,168,130,0.2)" stroke-width="1" fill="rgba(196,168,130,0.03)"/>
+            <rect x="40" y="35" width="100" height="110" stroke="rgba(196,168,130,0.1)" stroke-width="0.5" fill="none"/>
+            <path d="M60 80 Q90 50 120 80 Q105 100 90 95 Q75 90 60 100Z" stroke="rgba(45,74,45,0.3)" stroke-width="1" fill="rgba(45,74,45,0.05)"/>
+            <path d="M70 110 Q90 90 110 110" stroke="rgba(196,168,130,0.4)" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+            <circle cx="90" cy="70" r="12" stroke="rgba(196,168,130,0.25)" stroke-width="1" fill="none"/>
+          </svg>
+        </div>
+        <div class="print-body">
+          <div class="print-name">Fine Art Print</div>
+          <div class="print-desc">30&times;40 cm. Giclée on Hahnemühle Photo Rag 308g. Museum-quality archival paper.</div>
+          <div class="print-footer">
+            <div class="print-price">&euro;85</div>
+            <button class="btn-cart" onclick="addToCart('Fine Art Print 30x40', '€85')">Add to Cart</button>
+          </div>
+          <div class="print-edition">Edición limitada &middot; Firmada y numerada</div>
+        </div>
+      </div>
+
+      <!-- Print 2 -->
+      <div class="print-card reveal reveal-delay-2">
+        <div class="print-visual" style="background: linear-gradient(135deg, var(--ash) 0%, var(--charcoal) 100%);">
+          <svg viewBox="0 0 180 180" fill="none" xmlns="http://www.w3.org/2000/svg" width="120">
+            <rect x="35" y="30" width="110" height="120" stroke="rgba(196,168,130,0.2)" stroke-width="1" fill="rgba(196,168,130,0.03)"/>
+            <rect x="45" y="40" width="90" height="100" stroke="rgba(196,168,130,0.1)" stroke-width="0.5" fill="none"/>
+            <path d="M55 90 Q70 60 90 70 Q110 80 125 60" stroke="rgba(196,168,130,0.5)" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+            <path d="M55 100 Q70 70 90 80 Q110 90 125 70" stroke="rgba(196,168,130,0.3)" stroke-width="1" fill="none" stroke-linecap="round"/>
+            <circle cx="90" cy="90" r="18" stroke="rgba(45,74,45,0.2)" stroke-width="1" fill="none"/>
+          </svg>
+        </div>
+        <div class="print-body">
+          <div class="print-name">A3 Print</div>
+          <div class="print-desc">29.7&times;42 cm. High-quality matte photo paper. Clean, minimal presentation.</div>
+          <div class="print-footer">
+            <div class="print-price">&euro;55</div>
+            <button class="btn-cart" onclick="addToCart('A3 Print', '€55')">Add to Cart</button>
+          </div>
+          <div class="print-edition">Edición limitada &middot; Firmada y numerada</div>
+        </div>
+      </div>
+
+      <!-- Print 3 -->
+      <div class="print-card reveal reveal-delay-3">
+        <div class="print-visual" style="background: linear-gradient(135deg, var(--charcoal) 0%, var(--ash) 100%);">
+          <svg viewBox="0 0 180 180" fill="none" xmlns="http://www.w3.org/2000/svg" width="120">
+            <rect x="40" y="40" width="100" height="100" rx="2" stroke="rgba(196,168,130,0.15)" stroke-width="1" fill="rgba(196,168,130,0.02)"/>
+            <path d="M60 90 Q80 60 100 90 Q120 120 140 90" stroke="rgba(196,168,130,0.4)" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+            <circle cx="90" cy="80" r="6" stroke="rgba(45,74,45,0.3)" stroke-width="1" fill="none"/>
+            <text x="90" y="130" font-family="serif" font-size="14" fill="rgba(196,168,130,0.15)" text-anchor="middle">JPG</text>
+          </svg>
+        </div>
+        <div class="print-body">
+          <div class="print-name">Digital Download</div>
+          <div class="print-desc">High-resolution digital file. Print at home or use for personal projects. 4000px longest edge.</div>
+          <div class="print-footer">
+            <div class="print-price">&euro;15</div>
+            <button class="btn-cart" onclick="addToCart('Digital Download', '€15')">Add to Cart</button>
+          </div>
+          <div class="print-edition">Acceso inmediato tras la compra</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ROPE SHOP -->
 <section id="shop">
   <div class="container">
     <div class="section-header reveal">
       <span class="section-label">Rope Shop</span>
       <h2>Handcrafted Rope.</h2>
-      <p>Natural fiber jute and hemp rope, selected and prepared specifically for shibari practice. Each length is treated, conditioned, and ready to tie.</p>
+      <p>Natural fiber rope, selected and prepared specifically for shibari practice. 90% Jute, 10% Hemp. Made in Italy.</p>
     </div>
 
     <div class="shop-grid">
 
-      <!-- Product 1 -->
+      <!-- Product 1: Single Rope -->
       <div class="product-card reveal reveal-delay-1">
         <div class="product-visual" style="background: linear-gradient(135deg, var(--deep) 0%, var(--ash) 100%);">
           <svg viewBox="0 0 180 160" fill="none" xmlns="http://www.w3.org/2000/svg" width="160">
-            <!-- Rope coil illustration -->
-            <ellipse cx="90" cy="85" rx="60" ry="55" stroke="rgba(184,149,106,0.25)" stroke-width="1"/>
-            <ellipse cx="90" cy="85" rx="45" ry="40" stroke="rgba(184,149,106,0.3)" stroke-width="1.5"/>
-            <ellipse cx="90" cy="85" rx="30" ry="27" stroke="rgba(184,149,106,0.4)" stroke-width="2"/>
-            <ellipse cx="90" cy="85" rx="15" ry="14" stroke="rgba(184,149,106,0.5)" stroke-width="2"/>
-            <circle cx="90" cy="85" r="5" fill="rgba(184,149,106,0.4)"/>
-            <!-- Rope end -->
-            <path d="M135 60 Q148 45 152 30 Q153 22 148 18" stroke="rgba(184,149,106,0.5)" stroke-width="2" fill="none" stroke-linecap="round"/>
-            <path d="M137 62 Q150 47 154 32 Q155 24 150 20" stroke="rgba(184,149,106,0.3)" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+            <ellipse cx="90" cy="85" rx="60" ry="55" stroke="rgba(196,168,130,0.25)" stroke-width="1"/>
+            <ellipse cx="90" cy="85" rx="45" ry="40" stroke="rgba(196,168,130,0.3)" stroke-width="1.5"/>
+            <ellipse cx="90" cy="85" rx="30" ry="27" stroke="rgba(196,168,130,0.4)" stroke-width="2"/>
+            <ellipse cx="90" cy="85" rx="15" ry="14" stroke="rgba(196,168,130,0.5)" stroke-width="2"/>
+            <circle cx="90" cy="85" r="5" fill="rgba(196,168,130,0.4)"/>
+            <path d="M135 60 Q148 45 152 30 Q153 22 148 18" stroke="rgba(196,168,130,0.5)" stroke-width="2" fill="none" stroke-linecap="round"/>
+            <path d="M137 62 Q150 47 154 32 Q155 24 150 20" stroke="rgba(196,168,130,0.3)" stroke-width="1.5" fill="none" stroke-linecap="round"/>
           </svg>
         </div>
         <div class="product-body">
-          <div class="product-name">Natural Jute — 8m</div>
-          <div class="product-desc">6mm treated jute. The classic shibari rope. Warm, forgiving, excellent grip. One 8m length — the standard working piece.</div>
+          <div class="product-name">Cuerda Jute/Hemp &mdash; 7.5m</div>
+          <div class="product-desc">5.7mm, 90% Jute / 10% Hemp. Made in Italy. Warm grip, natural feel. The standard working length for kinbaku practice.</div>
           <div class="product-footer">
-            <div class="product-price">€24</div>
-            <button class="btn-cart" onclick="addToCart('Natural Jute 8m', '€24')">Buy Now</button>
+            <div class="product-price">&euro;35</div>
+            <button class="btn-cart" onclick="addToCart('Cuerda 7.5m', '€35')">Buy Now</button>
           </div>
         </div>
       </div>
 
-      <!-- Product 2 -->
+      <!-- Product 2: Bundle of 4 -->
       <div class="product-card reveal reveal-delay-2">
         <div class="product-visual" style="background: linear-gradient(135deg, var(--ash) 0%, var(--charcoal) 100%);">
           <svg viewBox="0 0 180 160" fill="none" xmlns="http://www.w3.org/2000/svg" width="160">
-            <!-- Bundle of ropes -->
-            <rect x="50" y="40" width="80" height="80" rx="4" stroke="rgba(184,149,106,0.15)" stroke-width="1" fill="rgba(184,149,106,0.03)"/>
-            <!-- Rope strands in bundle -->
-            <path d="M55 55 Q90 50 125 55" stroke="rgba(184,149,106,0.5)" stroke-width="2" stroke-linecap="round"/>
-            <path d="M55 63 Q90 58 125 63" stroke="rgba(184,149,106,0.4)" stroke-width="2" stroke-linecap="round"/>
-            <path d="M55 71 Q90 66 125 71" stroke="rgba(184,149,106,0.5)" stroke-width="2" stroke-linecap="round"/>
-            <path d="M55 79 Q90 74 125 79" stroke="rgba(184,149,106,0.35)" stroke-width="2" stroke-linecap="round"/>
-            <path d="M55 87 Q90 82 125 87" stroke="rgba(184,149,106,0.5)" stroke-width="2" stroke-linecap="round"/>
-            <path d="M55 95 Q90 90 125 95" stroke="rgba(184,149,106,0.4)" stroke-width="2" stroke-linecap="round"/>
-            <path d="M55 103 Q90 98 125 103" stroke="rgba(184,149,106,0.5)" stroke-width="2" stroke-linecap="round"/>
-            <!-- Binding tie -->
-            <path d="M90 38 L90 42 M90 118 L90 122" stroke="rgba(139,26,26,0.6)" stroke-width="3" stroke-linecap="round"/>
-            <rect x="82" y="55" width="16" height="50" rx="2" stroke="rgba(139,26,26,0.5)" stroke-width="1.5" fill="rgba(139,26,26,0.08)"/>
+            <rect x="50" y="40" width="80" height="80" rx="4" stroke="rgba(196,168,130,0.15)" stroke-width="1" fill="rgba(196,168,130,0.03)"/>
+            <path d="M55 55 Q90 50 125 55" stroke="rgba(196,168,130,0.5)" stroke-width="2" stroke-linecap="round"/>
+            <path d="M55 63 Q90 58 125 63" stroke="rgba(196,168,130,0.4)" stroke-width="2" stroke-linecap="round"/>
+            <path d="M55 71 Q90 66 125 71" stroke="rgba(196,168,130,0.5)" stroke-width="2" stroke-linecap="round"/>
+            <path d="M55 79 Q90 74 125 79" stroke="rgba(196,168,130,0.35)" stroke-width="2" stroke-linecap="round"/>
+            <path d="M55 87 Q90 82 125 87" stroke="rgba(196,168,130,0.5)" stroke-width="2" stroke-linecap="round"/>
+            <path d="M55 95 Q90 90 125 95" stroke="rgba(196,168,130,0.4)" stroke-width="2" stroke-linecap="round"/>
+            <path d="M55 103 Q90 98 125 103" stroke="rgba(196,168,130,0.5)" stroke-width="2" stroke-linecap="round"/>
+            <path d="M90 38 L90 42 M90 118 L90 122" stroke="rgba(45,74,45,0.6)" stroke-width="3" stroke-linecap="round"/>
+            <rect x="82" y="55" width="16" height="50" rx="2" stroke="rgba(45,74,45,0.5)" stroke-width="1.5" fill="rgba(45,74,45,0.08)"/>
           </svg>
         </div>
         <div class="product-body">
-          <div class="product-name">Starter Kit — 5×8m</div>
-          <div class="product-desc">Five treated jute lengths — everything you need to begin your Level 0 practice. Bundle saves €15 vs. individual lengths.</div>
+          <div class="product-name">Kit de 4 Cuerdas &mdash; 4&times;7.5m</div>
+          <div class="product-desc">Four treated lengths plus a furoshiki wrapping cloth. Everything you need to begin your Level 0 practice. Bundle saves &euro;20.</div>
           <div class="product-footer">
-            <div class="product-price">€105</div>
-            <button class="btn-cart" onclick="addToCart('Starter Kit 5×8m', '€105')">Buy Now</button>
+            <div class="product-price">&euro;120</div>
+            <button class="btn-cart" onclick="addToCart('Kit 4×7.5m', '€120')">Buy Now</button>
           </div>
         </div>
       </div>
 
-      <!-- Product 3 -->
+      <!-- Product 3: Furoshiki -->
       <div class="product-card reveal reveal-delay-3">
         <div class="product-visual" style="background: linear-gradient(135deg, var(--charcoal) 0%, var(--ash) 100%);">
           <svg viewBox="0 0 180 160" fill="none" xmlns="http://www.w3.org/2000/svg" width="160">
-            <!-- Hemp rope coil — darker texture -->
-            <ellipse cx="90" cy="85" rx="58" ry="52" stroke="rgba(139,26,26,0.2)" stroke-width="1"/>
-            <ellipse cx="90" cy="85" rx="44" ry="38" stroke="rgba(139,26,26,0.25)" stroke-width="1.5"/>
-            <ellipse cx="90" cy="85" rx="30" ry="26" stroke="rgba(139,26,26,0.3)" stroke-width="2"/>
-            <ellipse cx="90" cy="85" rx="16" ry="14" stroke="rgba(184,149,106,0.4)" stroke-width="2"/>
-            <circle cx="90" cy="85" r="5" fill="rgba(184,149,106,0.35)"/>
-            <!-- Rope end -->
-            <path d="M133 58 Q148 40 150 25 Q151 16 145 13" stroke="rgba(139,26,26,0.5)" stroke-width="2" fill="none" stroke-linecap="round"/>
-            <path d="M135 60 Q150 42 152 27 Q153 18 147 15" stroke="rgba(139,26,26,0.3)" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+            <!-- Folded cloth shape -->
+            <path d="M50 90 L90 50 L130 90 L90 130Z" stroke="rgba(45,74,45,0.4)" stroke-width="1.5" fill="rgba(45,74,45,0.06)"/>
+            <path d="M60 90 L90 60 L120 90 L90 120Z" stroke="rgba(196,168,130,0.25)" stroke-width="1" fill="none" stroke-dasharray="3 4"/>
+            <!-- Karakusa pattern hint -->
+            <path d="M80 80 Q85 75 90 80 Q95 85 100 80" stroke="rgba(196,168,130,0.35)" stroke-width="1" fill="none"/>
+            <path d="M75 90 Q80 85 90 88 Q100 85 105 90" stroke="rgba(196,168,130,0.3)" stroke-width="1" fill="none"/>
+            <path d="M80 100 Q85 95 90 100 Q95 105 100 100" stroke="rgba(196,168,130,0.25)" stroke-width="1" fill="none"/>
+            <!-- Small tag -->
+            <rect x="115" y="75" width="8" height="12" rx="1" fill="rgba(45,74,45,0.3)" stroke="rgba(45,74,45,0.5)" stroke-width="0.5"/>
           </svg>
         </div>
         <div class="product-body">
-          <div class="product-name">Black Hemp — 8m</div>
-          <div class="product-desc">6mm blackened hemp. Rich texture, darker aesthetic. For practitioners who want a more dramatic visual in suspension and photo work.</div>
+          <div class="product-name">Furoshiki</div>
+          <div class="product-desc">Traditional Japanese wrapping cloth. Navy with karakusa pattern. Carry and store your rope in the way of the art.</div>
           <div class="product-footer">
-            <div class="product-price">€28</div>
-            <button class="btn-cart" onclick="addToCart('Black Hemp 8m', '€28')">Buy Now</button>
+            <div class="product-price">&euro;25</div>
+            <button class="btn-cart" onclick="addToCart('Furoshiki', '€25')">Buy Now</button>
           </div>
         </div>
       </div>
 
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section id="testimonials">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="section-label">Anécdotas de clase</span>
+      <h2>In Their Words.</h2>
+      <p>Voices from Guinju's classes and workshops.</p>
+    </div>
+
+    <div class="testimonials-grid">
+      <div class="testimonial-card reveal reveal-delay-1">
+        <p class="testimonial-text">Las clases de Guinju me cambiaron la manera de entender el vínculo. No es solo aprender nudos. Es aprender a escuchar con las manos, a estar presente de una forma que no sabía que existía.</p>
+        <div class="testimonial-author">M. &mdash; Level 1 Student, Barcelona</div>
+      </div>
+
+      <div class="testimonial-card reveal reveal-delay-2">
+        <p class="testimonial-text">Entré pensando que el shibari era algo puramente estético. Salí entendiendo que es un diálogo. Guinju tiene esa rara capacidad de crear un espacio donde te sientes segura para explorar sin juicio.</p>
+        <div class="testimonial-author">L. &mdash; Workshop Participant</div>
+      </div>
+
+      <div class="testimonial-card reveal reveal-delay-3">
+        <p class="testimonial-text">Después de seis meses con Guinju, la cuerda dejó de ser un objeto y se convirtió en una extensión de lo que quiero comunicar. Es el mejor profesor que he tenido en cualquier disciplina.</p>
+        <div class="testimonial-author">A. &mdash; Level 2 Student</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- UPCOMING EVENTS -->
+<section id="events">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="section-label">Próximos eventos</span>
+      <h2>What's Next.</h2>
+      <p>Upcoming workshops, jams, and events. Spaces are limited.</p>
+    </div>
+
+    <div class="events-grid">
+      <div class="event-card reveal reveal-delay-1">
+        <div class="event-date">Junio 2026</div>
+        <h3>Taller Introductorio</h3>
+        <div class="event-location">Barcelona</div>
+        <p>First knots, consent frameworks, materials, and the fundamentals of connection through rope. No experience necessary. Partners welcome but not required.</p>
+        <a href="#contact" class="btn-primary" onclick="prefill('Workshop Inquiry')" style="text-align:center;">Inscríbete</a>
+      </div>
+
+      <div class="event-card reveal reveal-delay-2">
+        <div class="event-date">Julio 2026</div>
+        <h3>Sesión de Fotos Colectiva</h3>
+        <div class="event-location">Barcelona</div>
+        <p>A collaborative session where rope and photography intersect. Riggers and models work together under Guinju's direction, with professional photography included.</p>
+        <a href="#contact" class="btn-primary" onclick="prefill('Photo Session — As Model')" style="text-align:center;">Inscríbete</a>
+      </div>
+
+      <div class="event-card reveal reveal-delay-3">
+        <div class="event-date">TBD</div>
+        <h3>Masterclass Avanzada</h3>
+        <div class="event-location">Barcelona</div>
+        <p>Advanced suspension, dynamic transitions, and personal style development. Requires prior training. An intensive day of practice for serious practitioners.</p>
+        <a href="#contact" class="btn-outline" onclick="prefill('Workshop Inquiry')" style="text-align:center;">Notify Me</a>
+      </div>
     </div>
   </div>
 </section>
@@ -1485,7 +1804,7 @@
     <div class="contact-inner">
       <span class="section-label">Get in Touch</span>
       <h2>Start the <em>Conversation.</em></h2>
-      <p>Whether you're looking to enroll in a class, join a workshop, book a session, or simply ask a question — reach out. All inquiries are handled with complete discretion.</p>
+      <p>Whether you're looking to enroll in a class, join a workshop, book a session, or simply ask a question. All inquiries are handled with complete discretion.</p>
 
       <form class="contact-form" onsubmit="handleSubmit(event)">
         <div class="form-row" style="background:none;gap:1px;">
@@ -1508,6 +1827,7 @@
             <option value="Workshop Inquiry">Workshop</option>
             <option value="Photo Session — As Model">Photo Session — As Model</option>
             <option value="Photo Session — As Rigger">Photo Session — As Rigger</option>
+            <option value="Prints / Obra">Prints / Obra</option>
             <option value="Rope Shop">Rope Shop</option>
             <option value="Other">Other</option>
           </select>
@@ -1520,11 +1840,15 @@
       </form>
 
       <div class="social-links reveal">
-        <a href="https://www.instagram.com/guinju.academic" target="_blank" rel="noopener">Instagram</a>
+        <a href="https://www.instagram.com/guinju.gaijin" target="_blank" rel="noopener">@guinju.gaijin</a>
         <div class="dot"></div>
-        <a href="mailto:hola@guinju.com">hola@guinju.com</a>
+        <a href="https://www.instagram.com/guinju.academic" target="_blank" rel="noopener">@guinju.academic</a>
         <div class="dot"></div>
-        <a href="#" onclick="return false;" style="color:var(--mist);cursor:default;">Barcelona</a>
+        <a href="https://www.patreon.com/Guinju" target="_blank" rel="noopener">Patreon</a>
+        <div class="dot"></div>
+        <a href="https://t.me/guinjugaijin" target="_blank" rel="noopener">Telegram</a>
+        <div class="dot"></div>
+        <a href="https://x.com/Guinju_gaijin" target="_blank" rel="noopener">X / Twitter</a>
       </div>
     </div>
   </div>
@@ -1537,7 +1861,7 @@
       <div class="rope-node"></div>
     </div>
   </div>
-  <p>© 2026 Guinju &nbsp;·&nbsp; Barcelona &nbsp;·&nbsp; All sessions held in complete discretion</p>
+  <p>&copy; 2026 Guinju &nbsp;&middot;&nbsp; Barcelona &nbsp;&middot;&nbsp; All sessions held in complete discretion</p>
 </footer>
 
 <!-- Toast notification -->
