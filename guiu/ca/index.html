@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Guiu d'Arts — Urban Kiz & Tarraxo | Barcelona</title>
+  <meta name="description" content="Instructor internacional d'Urban Kiz i Tarraxo. Creador del Mètode M4D — Musicalitat Per al Ball. Classes setmanals a Barcelona. Tallers arreu del món.">
+  <meta property="og:title" content="Guiu d'Arts — Urban Kiz & Tarraxo | Barcelona">
+  <meta property="og:description" content="Instructor internacional i creador del Mètode M4D. Sent la música. Mou-te amb propòsit.">
+  <meta property="og:image" content="https://mexzungu.com/guiu/og.png">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://mexzungu.com/guiu/ca/">
+  <link rel="alternate" hreflang="en" href="https://mexzungu.com/guiu/">
+  <link rel="alternate" hreflang="es" href="https://mexzungu.com/guiu/es/">
+  <link rel="alternate" hreflang="ca" href="https://mexzungu.com/guiu/ca/">
+  <link rel="icon" href="/favicon.ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <style>
+    /* Guiu d'Arts — Design System V1 / Vibe: African soul meets Barcelona streets. Warm charcoal + amber gold + ivory cream. */
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --void:      #0d0a08;
+      --deep:      #161210;
+      --charcoal:  #1e1a16;
+      --ash:       #2a2420;
+      --smoke:     #4a3f35;
+      --mist:      #8a7060;
+      --linen:     #d4bfa8;
+      --ivory:     #f5efe6;
+      --amber:     #c8954a;
+      --amber-2:   #d4a85a;
+      --amber-dim: rgba(200,149,74,0.15);
+
+      --serif: 'Playfair Display', Georgia, serif;
+      --sans:  'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+
+      --pad-h: clamp(20px, 6vw, 100px);
+      --section-v: clamp(80px, 12vw, 140px);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--void);
+      color: var(--linen);
+      font-family: var(--sans);
+      font-weight: 300;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* ─── FILM GRAIN ─── */
+    .grain {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0.035;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+      background-repeat: repeat;
+    }
+
+    /* ─── NAV ─── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 28px var(--pad-h);
+      transition: background 0.4s, padding 0.4s, border-color 0.4s;
+      border-bottom: 1px solid transparent;
+    }
+
+    nav.scrolled {
+      background: rgba(13,10,8,0.95);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      padding-top: 16px;
+      padding-bottom: 16px;
+      border-bottom-color: rgba(200,149,74,0.12);
+    }
+
+    .nav-logo { font-family: var(--serif); font-size: 1.35rem; font-weight: 600; color: var(--ivory); text-decoration: none; letter-spacing: 0.04em; }
+    .nav-logo span { color: var(--amber); }
+
+    .nav-links { display: flex; align-items: center; gap: 36px; list-style: none; }
+
+    .nav-links a { color: var(--mist); text-decoration: none; font-size: 0.78rem; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 400; transition: color 0.3s; }
+    .nav-links a:hover { color: var(--ivory); }
+
+    .nav-lang { display: flex; gap: 12px; align-items: center; }
+    .nav-lang a { font-size: 0.68rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--smoke); text-decoration: none; transition: color 0.3s; }
+    .nav-lang a:hover, .nav-lang a.active { color: var(--amber); }
+
+    .nav-cta {
+      display: inline-flex; align-items: center;
+      padding: 9px 22px; background: var(--amber); color: var(--void) !important;
+      border-radius: 4px; font-weight: 500 !important; font-size: 0.78rem !important;
+      letter-spacing: 0.1em !important; text-transform: uppercase !important;
+      transition: background 0.3s !important;
+    }
+    .nav-cta:hover { background: var(--amber-2) !important; color: var(--void) !important; }
+
+    .nav-right { display: flex; align-items: center; gap: 24px; }
+
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; background: none; border: none; }
+    .hamburger span { display: block; width: 24px; height: 1.5px; background: var(--linen); transition: all 0.3s; }
+    .hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+    .mobile-menu {
+      display: none; position: fixed; inset: 0;
+      background: rgba(13,10,8,0.98); z-index: 999;
+      flex-direction: column; align-items: center; justify-content: center; gap: 40px;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a { font-family: var(--serif); font-size: 2rem; color: var(--ivory); text-decoration: none; transition: color 0.3s; }
+    .mobile-menu a:hover { color: var(--amber); }
+    .mobile-menu .mobile-cta {
+      margin-top: 16px; padding: 14px 40px; background: var(--amber); color: var(--void);
+      border-radius: 4px; font-family: var(--sans); font-size: 0.9rem; font-weight: 500;
+      letter-spacing: 0.1em; text-transform: uppercase;
+    }
+
+    /* ─── SECTION BASE ─── */
+    section { padding: var(--section-v) var(--pad-h); position: relative; }
+
+    .section-label {
+      display: inline-block; font-size: 0.65rem; letter-spacing: 0.42em;
+      text-transform: uppercase; color: var(--amber); margin-bottom: 20px; font-weight: 400;
+    }
+    .section-label::before {
+      content: ''; display: inline-block; width: 20px; height: 1px;
+      background: var(--amber); vertical-align: middle; margin-right: 12px; opacity: 0.7;
+    }
+
+    h2.section-title {
+      font-family: var(--serif); font-size: clamp(2rem, 5vw, 3.6rem);
+      font-weight: 400; color: var(--ivory); line-height: 1.15; margin-bottom: 32px;
+    }
+
+    /* ─── HERO ─── */
+    #hero {
+      position: relative; min-height: 100svh; display: flex;
+      align-items: center; justify-content: center; text-align: center;
+      overflow: hidden; background: var(--void);
+    }
+
+    .hero-bg-gradient {
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 60% 50% at 50% 60%, rgba(200,149,74,0.07) 0%, transparent 70%),
+        radial-gradient(ellipse 100% 80% at 50% 100%, rgba(22,18,16,0.8) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    .hero-pulse { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); pointer-events: none; }
+
+    .hero-pulse-ring {
+      position: absolute; top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      border-radius: 50%; border: 1.5px solid var(--amber);
+      animation: heroRipple 4s ease-out infinite;
+    }
+    .hero-pulse-ring:nth-child(1) { width: 300px; height: 300px; animation-delay: 0s; }
+    .hero-pulse-ring:nth-child(2) { width: 300px; height: 300px; animation-delay: 1.3s; }
+    .hero-pulse-ring:nth-child(3) { width: 300px; height: 300px; animation-delay: 2.6s; }
+
+    @keyframes heroRipple {
+      0%   { width: 100px; height: 100px; opacity: 0.35; }
+      100% { width: 600px; height: 600px; opacity: 0; }
+    }
+
+    .hero-content { position: relative; z-index: 2; max-width: 860px; padding: 0 24px; }
+
+    .hero-eyebrow {
+      display: inline-block; font-size: 0.68rem; letter-spacing: 0.42em;
+      text-transform: uppercase; color: var(--amber); margin-bottom: 40px;
+      opacity: 0; animation: fadeUp 1s ease 0.15s forwards;
+    }
+
+    .hero-title {
+      font-family: var(--serif); font-size: clamp(3.2rem, 9vw, 7rem);
+      font-weight: 400; line-height: 1.08; color: var(--ivory); margin-bottom: 28px;
+      opacity: 0; animation: fadeUp 1.1s cubic-bezier(0.16,1,0.3,1) 0.3s forwards;
+    }
+    .hero-title em { font-style: italic; color: var(--linen); }
+
+    .hero-sub {
+      font-size: clamp(0.9rem, 1.6vw, 1.1rem); font-weight: 300; color: var(--mist);
+      line-height: 1.65; max-width: 580px; margin: 0 auto 52px;
+      opacity: 0; animation: fadeUp 1.1s cubic-bezier(0.16,1,0.3,1) 0.5s forwards;
+    }
+
+    .hero-ctas {
+      display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;
+      opacity: 0; animation: fadeUp 1.1s cubic-bezier(0.16,1,0.3,1) 0.7s forwards;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ─── BUTTONS ─── */
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 14px 32px; background: var(--amber); color: var(--void);
+      border-radius: 4px; font-family: var(--sans); font-size: 0.82rem; font-weight: 500;
+      letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none;
+      border: 1px solid var(--amber); transition: background 0.3s, transform 0.2s; cursor: pointer;
+    }
+    .btn-primary:hover { background: var(--amber-2); transform: translateY(-1px); }
+
+    .btn-ghost {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 14px 32px; background: transparent; color: var(--linen);
+      border-radius: 4px; font-family: var(--sans); font-size: 0.82rem; font-weight: 400;
+      letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none;
+      border: 1px solid rgba(212,191,168,0.25);
+      transition: border-color 0.3s, color 0.3s, transform 0.2s; cursor: pointer;
+    }
+    .btn-ghost:hover { border-color: var(--amber); color: var(--amber); transform: translateY(-1px); }
+
+    /* ─── SCROLL REVEAL ─── */
+    .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+    .reveal-delay-4 { transition-delay: 0.4s; }
+
+    /* ─── ABOUT ─── */
+    #about { background: var(--deep); }
+
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; max-width: 1100px; }
+    .about-text p { font-size: 1.05rem; color: var(--mist); margin-bottom: 24px; line-height: 1.75; }
+    .about-text p:last-child { margin-bottom: 0; }
+    .about-quote { grid-column: 1 / -1; text-align: center; padding: 48px 0 16px; }
+    .about-quote blockquote {
+      font-family: var(--serif); font-style: italic;
+      font-size: clamp(1.5rem, 3.5vw, 2.4rem); font-weight: 400;
+      color: var(--amber); line-height: 1.35; max-width: 820px; margin: 0 auto;
+    }
+
+    /* ─── CLASSES ─── */
+    #classes { background: var(--void); }
+    .classes-intro { font-size: 1.05rem; color: var(--mist); margin-bottom: 52px; max-width: 560px; }
+    .class-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-bottom: 40px; }
+    .class-card { background: var(--charcoal); border: 1px solid rgba(74,63,53,0.5); border-radius: 8px; padding: 36px 28px; transition: border-color 0.3s, transform 0.3s; }
+    .class-card:hover { border-color: rgba(200,149,74,0.4); transform: translateY(-4px); }
+    .class-card-level { font-size: 0.62rem; letter-spacing: 0.38em; text-transform: uppercase; color: var(--amber); margin-bottom: 16px; font-weight: 400; }
+    .class-card h3 { font-family: var(--serif); font-size: 1.6rem; font-weight: 400; color: var(--ivory); margin-bottom: 16px; }
+    .class-card p { font-size: 0.92rem; color: var(--mist); line-height: 1.65; margin-bottom: 28px; }
+    .class-card-meta { border-top: 1px solid rgba(74,63,53,0.5); padding-top: 20px; display: flex; flex-direction: column; gap: 6px; }
+    .class-card-meta span { font-size: 0.8rem; color: var(--linen); opacity: 0.7; }
+    .class-card-price { font-size: 1rem !important; color: var(--amber) !important; opacity: 1 !important; font-weight: 500; margin-top: 6px; }
+    .classes-note { font-size: 0.82rem; color: var(--smoke); margin-bottom: 40px; padding-left: 16px; border-left: 2px solid var(--ash); }
+    .m4d-badge { background: var(--amber-dim); border: 1px solid rgba(200,149,74,0.3); border-radius: 8px; padding: 28px 32px; max-width: 680px; }
+    .m4d-badge-title { font-family: var(--serif); font-size: 1.15rem; font-weight: 600; color: var(--amber); margin-bottom: 12px; }
+    .m4d-badge p { font-size: 0.92rem; color: var(--linen); line-height: 1.65; }
+
+    /* ─── PRIVATE ─── */
+    #private { background: var(--deep); }
+    .private-intro { font-size: 1.05rem; color: var(--mist); max-width: 620px; line-height: 1.75; margin-bottom: 52px; }
+    .private-card { background: var(--charcoal); border: 1px solid rgba(200,149,74,0.2); border-radius: 8px; padding: 40px 36px; max-width: 480px; margin-bottom: 36px; }
+    .private-card-title { font-family: var(--serif); font-size: 1.5rem; color: var(--ivory); margin-bottom: 8px; }
+    .private-card-price { font-size: 0.82rem; color: var(--amber); letter-spacing: 0.1em; margin-bottom: 20px; font-weight: 500; }
+    .private-card p { font-size: 0.9rem; color: var(--mist); line-height: 1.65; }
+
+    /* ─── EVENTS ─── */
+    #events { background: var(--void); }
+    .events-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-bottom: 36px; }
+    .event-card { border: 1px solid rgba(74,63,53,0.4); border-radius: 8px; padding: 32px 26px; position: relative; transition: border-color 0.3s; }
+    .event-card:hover { border-color: rgba(200,149,74,0.35); }
+    .event-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--amber); margin-bottom: 20px; }
+    .event-card-name { font-family: var(--serif); font-size: 1.2rem; color: var(--ivory); margin-bottom: 10px; line-height: 1.3; }
+    .event-card-location { font-size: 0.75rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--amber); margin-bottom: 8px; }
+    .event-card-date { font-size: 0.82rem; color: var(--mist); margin-bottom: 16px; }
+    .event-card p { font-size: 0.88rem; color: var(--smoke); line-height: 1.6; }
+    .events-note { font-size: 0.82rem; color: var(--smoke); }
+    .events-note a { color: var(--amber); text-decoration: none; }
+
+    /* ─── CONTACT ─── */
+    #contact { background: var(--deep); }
+    .contact-intro { font-size: 1.05rem; color: var(--mist); max-width: 500px; line-height: 1.7; margin-bottom: 48px; }
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; max-width: 1000px; }
+    .contact-form { display: flex; flex-direction: column; gap: 20px; }
+    .form-group { display: flex; flex-direction: column; gap: 8px; }
+    .form-group label { font-size: 0.72rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--mist); }
+    .form-group input, .form-group select, .form-group textarea {
+      background: var(--charcoal); border: 1px solid rgba(74,63,53,0.6);
+      border-radius: 4px; padding: 14px 16px; color: var(--ivory);
+      font-family: var(--sans); font-size: 0.92rem; font-weight: 300;
+      transition: border-color 0.3s; outline: none; width: 100%;
+    }
+    .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--amber); }
+    .form-group select {
+      appearance: none; -webkit-appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%238a7060' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat; background-position: right 16px center;
+      padding-right: 40px; cursor: pointer;
+    }
+    .form-group select option { background: var(--charcoal); }
+    .form-group textarea { resize: vertical; min-height: 120px; }
+    .contact-info { padding-top: 8px; }
+    .contact-info-title { font-family: var(--serif); font-size: 1.3rem; color: var(--ivory); margin-bottom: 32px; }
+    .social-links { display: flex; flex-direction: column; gap: 16px; }
+    .social-link { display: flex; align-items: center; gap: 14px; text-decoration: none; color: var(--mist); font-size: 0.92rem; transition: color 0.3s; padding: 12px 0; border-bottom: 1px solid rgba(74,63,53,0.3); }
+    .social-link:last-child { border-bottom: none; }
+    .social-link:hover { color: var(--amber); }
+    .social-link-icon { width: 32px; height: 32px; border-radius: 50%; background: var(--ash); display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 0.7rem; color: var(--linen); letter-spacing: 0.02em; }
+
+    /* ─── TOAST ─── */
+    .toast {
+      position: fixed; bottom: 32px; left: 50%;
+      transform: translateX(-50%) translateY(80px);
+      background: var(--charcoal); border: 1px solid rgba(200,149,74,0.3);
+      border-radius: 8px; padding: 16px 28px; color: var(--ivory);
+      font-size: 0.88rem; z-index: 10000;
+      transition: transform 0.4s cubic-bezier(0.16,1,0.3,1), opacity 0.4s;
+      opacity: 0; white-space: nowrap;
+    }
+    .toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
+
+    /* ─── FOOTER ─── */
+    footer { padding: 40px var(--pad-h); background: var(--void); border-top: 1px solid var(--amber); text-align: center; }
+    footer p { font-size: 0.78rem; color: var(--smoke); letter-spacing: 0.06em; }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 900px) {
+      .class-cards { grid-template-columns: 1fr; }
+      .events-grid { grid-template-columns: 1fr; }
+      .about-grid { grid-template-columns: 1fr; gap: 40px; }
+      .about-quote { grid-column: 1; }
+      .contact-grid { grid-template-columns: 1fr; gap: 48px; }
+    }
+    @media (max-width: 768px) {
+      .nav-links, .nav-right { display: none; }
+      .hamburger { display: flex; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="grain" aria-hidden="true"></div>
+  <div class="toast" id="toast" role="alert" aria-live="polite"></div>
+
+  <nav id="nav" role="navigation" aria-label="Navegació principal">
+    <a href="/guiu/ca/" class="nav-logo">GUIU<span>·</span></a>
+    <ul class="nav-links" role="list">
+      <li><a href="#about">Sobre</a></li>
+      <li><a href="#classes">Classes</a></li>
+      <li><a href="#private">Privades</a></li>
+      <li><a href="#events">Esdeveniments</a></li>
+      <li><a href="#contact">Contacte</a></li>
+    </ul>
+    <div class="nav-right">
+      <div class="nav-lang">
+        <a href="/guiu/">EN</a>
+        <a href="/guiu/es/">ES</a>
+        <a href="/guiu/ca/" class="active" aria-current="page">CA</a>
+      </div>
+      <a href="#contact" class="nav-cta">Reserva una Classe</a>
+    </div>
+    <button class="hamburger" id="hamburger" aria-label="Obre el menú" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <div class="mobile-menu" id="mobile-menu" role="dialog" aria-modal="true" aria-label="Menú de navegació">
+    <a href="#about" class="mobile-nav-link">Sobre</a>
+    <a href="#classes" class="mobile-nav-link">Classes</a>
+    <a href="#private" class="mobile-nav-link">Privades</a>
+    <a href="#events" class="mobile-nav-link">Esdeveniments</a>
+    <a href="#contact" class="mobile-nav-link">Contacte</a>
+    <div class="nav-lang" style="margin-top:8px;">
+      <a href="/guiu/">EN</a>
+      <a href="/guiu/es/">ES</a>
+      <a href="/guiu/ca/" class="active">CA</a>
+    </div>
+    <a href="#contact" class="mobile-cta mobile-nav-link">Reserva una Classe</a>
+  </div>
+
+  <section id="hero" aria-label="Hero">
+    <div class="hero-bg-gradient" aria-hidden="true"></div>
+    <div class="hero-pulse" aria-hidden="true">
+      <div class="hero-pulse-ring"></div>
+      <div class="hero-pulse-ring"></div>
+      <div class="hero-pulse-ring"></div>
+    </div>
+    <div class="hero-content">
+      <div class="hero-eyebrow">Barcelona &nbsp;·&nbsp; Urban Kiz &nbsp;·&nbsp; Tarraxo</div>
+      <h1 class="hero-title">Sent la música.<br><em>Mou-te amb propòsit.</em></h1>
+      <p class="hero-sub">Instructor internacional i creador del Mètode M4D — Musicalitat Per al Ball. Classes setmanals a Barcelona. Tallers arreu del món.</p>
+      <div class="hero-ctas">
+        <a href="#contact" class="btn-primary">Reserva una Classe</a>
+        <a href="#classes" class="btn-ghost">El Mètode M4D ↓</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="about">
+    <div class="section-label reveal">L'Artista</div>
+    <div class="about-grid">
+      <div>
+        <h2 class="section-title reveal reveal-delay-1">El ball no són passos.<br>És una conversa.</h2>
+      </div>
+      <div class="about-text">
+        <p class="reveal reveal-delay-1">Guiu Vilanova va començar a ensenyar Urban Kiz i Tarraxo a Barcelona, desenvolupant un mètode centrat en la musicalitat: com escoltar de veritat la música i deixar que et mogui. El que va començar localment ha crescut fins a convertir-se en alguna cosa més gran: una pràctica, una comunitat i un enfocament que viatja.</p>
+        <p class="reveal reveal-delay-2">El Mètode M4D (Musicalitat Per al Ball) és la seva proposta distintiva. Descompon com funciona la música: ritme, fraseig, accents, i construeix el moviment des d'aquí. No és coreografia. És escolta. Les parelles aprenen a llegir la música juntes, creant converses que cap cançó no repetirà de la mateixa manera.</p>
+        <p class="reveal reveal-delay-3">Imparteix tallers i classes en festivals d'arreu d'Europa i més enllà, portant l'escena de Barcelona al món i tornant l'energia del món a Barcelona. Cada taller té la mateixa base: si ho pots escoltar, ho pots ballar.</p>
+      </div>
+      <div class="about-quote reveal">
+        <blockquote>«La música ja s'està movent.<br>La teva feina és agafar-la.»</blockquote>
+      </div>
+    </div>
+  </section>
+
+  <section id="classes">
+    <div class="section-label reveal">A Barcelona</div>
+    <h2 class="section-title reveal reveal-delay-1">Classes Setmanals</h2>
+    <p class="classes-intro reveal reveal-delay-2">Cada setmana a Barcelona. Tres nivells. Dos dies. Un mètode.</p>
+
+    <div class="class-cards">
+      <div class="class-card reveal reveal-delay-1">
+        <div class="class-card-level">Nivell 01</div>
+        <h3>Fonaments</h3>
+        <p>La base. Com caminar, connectar i sentir la música des del primer dia. No cal experiència prèvia, només ganes d'escoltar.</p>
+        <div class="class-card-meta">
+          <span>Dimarts + Dijous · 19:30</span>
+          <span class="class-card-price">€20 per classe</span>
+        </div>
+      </div>
+      <div class="class-card reveal reveal-delay-2">
+        <div class="class-card-level">Nivell 02</div>
+        <h3>Avançats Inicials</h3>
+        <p>Per a qui ja coneix les bases i vol profunditat. Dinàmiques, musicalitat i com jugar amb la música, no només seguir-la.</p>
+        <div class="class-card-meta">
+          <span>Dimarts + Dijous · nivells alternats</span>
+          <span class="class-card-price">€20 per classe</span>
+        </div>
+      </div>
+      <div class="class-card reveal reveal-delay-3">
+        <div class="class-card-level">Nivell 03</div>
+        <h3>Avançat</h3>
+        <p>Lideratge, seguiment, improvisació i el Mètode M4D complet en pràctica. Per invitació o avaluació de l'instructor.</p>
+        <div class="class-card-meta">
+          <span>Per invitació o avaluació</span>
+          <span class="class-card-price">€20 per classe</span>
+        </div>
+      </div>
+    </div>
+
+    <p class="classes-note reveal">Classes al barri del Clot, Barcelona. Escriviu per WhatsApp per a ubicació exacta i horari → <strong>@guiudarts</strong></p>
+
+    <div class="m4d-badge reveal reveal-delay-1">
+      <div class="m4d-badge-title">El Mètode M4D</div>
+      <p>Tots els nivells utilitzen l'enfocament M4D de musicalitat. No esteu aprenent passos, esteu aprenent a escoltar. Els passos arriben sols quan l'escolta és correcta.</p>
+    </div>
+  </section>
+
+  <section id="private">
+    <div class="section-label reveal">U a U</div>
+    <h2 class="section-title reveal reveal-delay-1">Classes Privades</h2>
+    <p class="private-intro reveal reveal-delay-2">Una classe privada va on una classe de grup no pot arribar. Tant si esteu començant de zero, preparant una actuació, treballant una tècnica concreta o simplement voleu temps enfocat — una hora amb el Guiu us mourà més del que espereu.</p>
+
+    <div class="private-card reveal reveal-delay-2">
+      <div class="private-card-title">Classe Privada</div>
+      <div class="private-card-price">€80 / hora</div>
+      <p>Disponible a Barcelona o en línia. Adaptada completament a on esteu i on voleu anar. Reserveu per WhatsApp o correu electrònic més avall.</p>
+    </div>
+
+    <a href="#contact" class="btn-primary reveal reveal-delay-3" onclick="prefill('Classe Privada')">Reservar Classe Privada</a>
+  </section>
+
+  <section id="events">
+    <div class="section-label reveal">En Ruta</div>
+    <h2 class="section-title reveal reveal-delay-1">Propers Esdeveniments</h2>
+
+    <div class="events-grid">
+      <div class="event-card reveal reveal-delay-1">
+        <div class="event-dot"></div>
+        <div class="event-card-location">Barcelona</div>
+        <div class="event-card-name">Feeling Kizomba Festival 2026</div>
+        <div class="event-card-date">28 d'abril – 3 de maig, 2026</div>
+        <p>Instructor oficial de tallers. Sessions d'Urban Kiz i Tarraxo durant tot el cap de setmana del festival.</p>
+      </div>
+      <div class="event-card reveal reveal-delay-2">
+        <div class="event-dot"></div>
+        <div class="event-card-location">París, França</div>
+        <div class="event-card-name">11è Suave Dance Festival París 2026</div>
+        <div class="event-card-date">23–26 de gener, 2026</div>
+        <p>Instructor de tallers. Feu servir el codi promocional <strong style="color:var(--amber)">GUIU</strong> en registrar-vos.</p>
+      </div>
+      <div class="event-card reveal reveal-delay-3">
+        <div class="event-dot"></div>
+        <div class="event-card-location">Barcelona · Mensual</div>
+        <div class="event-card-name">Makanda Matinee</div>
+        <div class="event-card-date">Social mensual</div>
+        <p>Social d'Urban Kiz a Barcelona. Una pista càlida, bona música i l'esperit M4D.</p>
+      </div>
+    </div>
+
+    <p class="events-note reveal">Per al calendari complet i aparicions en festivals, seguiu <a href="https://www.instagram.com/guiudarts" target="_blank" rel="noopener">@guiudarts</a> a Instagram.</p>
+  </section>
+
+  <section id="contact">
+    <div class="section-label reveal">Connecteu</div>
+    <h2 class="section-title reveal reveal-delay-1">Preparats per moure-us?</h2>
+    <p class="contact-intro reveal reveal-delay-2">Per a reserves de classes, sessions privades, consultes de tallers o invitacions a festivals.</p>
+
+    <div class="contact-grid">
+      <form class="contact-form reveal reveal-delay-2" id="contact-form" novalidate>
+        <div class="form-group">
+          <label for="name">Nom</label>
+          <input type="text" id="name" name="name" placeholder="El teu nom" required autocomplete="name">
+        </div>
+        <div class="form-group">
+          <label for="email">Correu electrònic</label>
+          <input type="email" id="email" name="email" placeholder="tu@correu.com" required autocomplete="email">
+        </div>
+        <div class="form-group">
+          <label for="topic">Tema</label>
+          <select id="topic" name="topic">
+            <option value="">Selecciona un tema...</option>
+            <option value="Classe Grupal">Classe Grupal</option>
+            <option value="Classe Privada">Classe Privada</option>
+            <option value="Taller">Taller</option>
+            <option value="Invitació a Festival">Invitació a Festival</option>
+            <option value="Altre">Altre</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="message">Missatge</label>
+          <textarea id="message" name="message" placeholder="Explica al Guiu què esteu buscant..." rows="5"></textarea>
+        </div>
+        <button type="submit" class="btn-primary">Enviar Missatge</button>
+      </form>
+
+      <div class="contact-info reveal reveal-delay-3">
+        <div class="contact-info-title">Trobeu el Guiu</div>
+        <div class="social-links">
+          <a href="https://www.instagram.com/guiudarts" target="_blank" rel="noopener" class="social-link">
+            <span class="social-link-icon">IG</span>
+            @guiudarts
+          </a>
+          <a href="https://www.instagram.com/bcnkiz" target="_blank" rel="noopener" class="social-link">
+            <span class="social-link-icon">IG</span>
+            @bcnkiz
+          </a>
+          <a href="https://api.whatsapp.com/send?phone=34618775439" target="_blank" rel="noopener" class="social-link">
+            <span class="social-link-icon">WA</span>
+            WhatsApp
+          </a>
+          <a href="mailto:guiudarts@gmail.com" class="social-link">
+            <span class="social-link-icon">✉</span>
+            guiudarts@gmail.com
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2026 Guiu d'Arts &nbsp;·&nbsp; Barcelona &nbsp;·&nbsp; Totes les classes i sessions s'imparteixen amb calidesa i discreció</p>
+  </footer>
+
+  <script>
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 60);
+    }, { passive: true });
+
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobile-menu');
+    hamburger.addEventListener('click', () => {
+      const open = mobileMenu.classList.toggle('open');
+      hamburger.classList.toggle('open', open);
+      hamburger.setAttribute('aria-expanded', open);
+      document.body.style.overflow = open ? 'hidden' : '';
+    });
+    document.querySelectorAll('.mobile-nav-link').forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.remove('open');
+        hamburger.classList.remove('open');
+        hamburger.setAttribute('aria-expanded', false);
+        document.body.style.overflow = '';
+      });
+    });
+
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+    document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+    function showToast(msg) {
+      const toast = document.getElementById('toast');
+      toast.textContent = msg;
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 3200);
+    }
+
+    function prefill(topic) {
+      const select = document.getElementById('topic');
+      if (select) {
+        for (let i = 0; i < select.options.length; i++) {
+          if (select.options[i].value === topic) {
+            select.selectedIndex = i;
+            break;
+          }
+        }
+        setTimeout(() => {
+          const form = document.getElementById('contact-form');
+          if (form) form.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }, 400);
+      }
+    }
+
+    document.getElementById('contact-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim();
+      if (!name || !email) {
+        showToast("Si us plau, ompliu el nom i el correu electrònic.");
+        return;
+      }
+      showToast('Missatge enviat. El Guiu us contactarà aviat.');
+      this.reset();
+    });
+  </script>
+</body>
+</html>
