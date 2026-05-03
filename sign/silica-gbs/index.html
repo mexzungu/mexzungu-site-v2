@@ -1,0 +1,1206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Engagement Letter — Silica GBS x Mexzungu Group</title>
+  <link rel="icon" href="/favicon.ico">
+  <link rel="stylesheet" href="/fonts.css">
+  <script src="https://cdn.jsdelivr.net/npm/signature_pad@4.1.7/dist/signature_pad.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --pink:       #e14b87;
+      --pink-dark:  #b83a6b;
+      --navy:       #1a1a2e;
+      --black:      #0d0d0d;
+      --white:      #fafafa;
+      --ash:        #e8e3df;
+      --stone:      #6b5e57;
+      --mist:       #9a8f88;
+      --charcoal:   #3d3533;
+      --success:    #2d8f5e;
+      --heading:    'RocknRoll One', 'Space Grotesk', sans-serif;
+      --sans:       'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    body {
+      font-family: var(--sans);
+      background: #f0ece8;
+      color: var(--black);
+      min-height: 100vh;
+    }
+
+    /* HEADER */
+    .site-header {
+      background: var(--navy);
+      padding: 1rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.3);
+    }
+
+    .site-header .logo-wrap {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      text-decoration: none;
+    }
+
+    .site-header img { height: 36px; width: auto; }
+
+    .header-meta { text-align: right; }
+
+    .header-meta h1 {
+      font-family: var(--heading);
+      font-size: 0.95rem;
+      color: #fafafa;
+      font-weight: 700;
+    }
+
+    .header-meta p {
+      font-size: 0.72rem;
+      color: rgba(255,255,255,0.55);
+      margin-top: 2px;
+    }
+
+    /* PROGRESS BAR */
+    .progress-bar-wrap {
+      background: var(--charcoal);
+      padding: 0.65rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .progress-steps {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .step {
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+      font-size: 0.75rem;
+      color: rgba(255,255,255,0.45);
+    }
+
+    .step.done { color: #2dce89; }
+    .step.pending { color: rgba(255,255,255,0.65); }
+
+    .step-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: currentColor;
+    }
+
+    .step-sep { color: rgba(255,255,255,0.25); font-size: 0.8rem; }
+    .progress-label { font-size: 0.72rem; color: rgba(255,255,255,0.5); }
+    .progress-label strong { color: #2dce89; }
+
+    /* PAGE */
+    .page-wrap {
+      max-width: 820px;
+      margin: 2.5rem auto;
+      padding: 0 1.5rem 4rem;
+    }
+
+    .doc-card {
+      background: #fff;
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 4px 32px rgba(0,0,0,0.08);
+    }
+
+    .doc-top-stripe {
+      height: 5px;
+      background: linear-gradient(90deg, var(--pink) 0%, #f97316 100%);
+    }
+
+    .doc-inner { padding: 2.5rem 2.5rem 2rem; }
+
+    /* WORDMARK */
+    .doc-wordmark {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 2rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid var(--ash);
+    }
+
+    .doc-wordmark img { height: 40px; width: auto; }
+
+    .doc-wordmark-text {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .doc-wordmark-text span:first-child {
+      font-family: var(--heading);
+      font-size: 0.9rem;
+      color: var(--navy);
+    }
+
+    .doc-wordmark-text span:last-child {
+      font-size: 0.72rem;
+      color: var(--mist);
+    }
+
+    /* TITLE */
+    .doc-title {
+      font-family: var(--heading);
+      font-size: 1.7rem;
+      color: var(--navy);
+      line-height: 1.15;
+      margin-bottom: 0.4rem;
+    }
+
+    .doc-subtitle {
+      font-size: 0.82rem;
+      color: var(--mist);
+      margin-bottom: 2rem;
+    }
+
+    /* PARTIES */
+    .parties-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .party-block {
+      background: #f8f5f2;
+      border: 1px solid var(--ash);
+      border-radius: 10px;
+      padding: 1.1rem 1.25rem;
+    }
+
+    .party-label {
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--mist);
+      margin-bottom: 0.35rem;
+    }
+
+    .party-name {
+      font-family: var(--heading);
+      font-size: 0.95rem;
+      color: var(--navy);
+      margin-bottom: 0.35rem;
+    }
+
+    .party-detail {
+      font-size: 0.78rem;
+      color: var(--stone);
+      line-height: 1.5;
+    }
+
+    .doc-date-line {
+      font-size: 0.82rem;
+      color: var(--mist);
+      margin-bottom: 2rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid var(--ash);
+    }
+
+    /* BODY */
+    .doc-body h2 {
+      font-family: var(--heading);
+      font-size: 0.95rem;
+      color: var(--navy);
+      margin: 1.8rem 0 0.6rem;
+    }
+
+    .doc-body p {
+      font-size: 0.88rem;
+      color: var(--charcoal);
+      line-height: 1.7;
+      margin-bottom: 0.8rem;
+    }
+
+    .intro-q {
+      font-style: italic;
+      color: var(--mist) !important;
+      font-size: 0.82rem !important;
+      margin-bottom: 0.3rem !important;
+    }
+
+    .sub-item {
+      font-size: 0.85rem;
+      color: var(--charcoal);
+      line-height: 1.65;
+      padding: 0.6rem 0 0.6rem 1.2rem;
+      border-left: 2px solid var(--ash);
+      margin-bottom: 0.5rem;
+    }
+
+    .sub-item strong { color: var(--navy); }
+
+    /* BANK BLOCK */
+    .bank-block {
+      background: #f8f5f2;
+      border: 1px solid var(--ash);
+      border-radius: 10px;
+      padding: 1.1rem 1.25rem;
+      margin: 0.8rem 0 1.2rem;
+    }
+
+    .bank-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.35rem 0;
+      border-bottom: 1px solid rgba(0,0,0,0.05);
+      font-size: 0.82rem;
+    }
+
+    .bank-row:last-child { border-bottom: none; }
+
+    .bank-label { color: var(--mist); font-size: 0.8rem; }
+    .bank-val { color: var(--navy); font-weight: 500; }
+
+    /* TIER SELECTION */
+    .tier-section {
+      margin-top: 3rem;
+      padding: 2rem;
+      background: #f8f5f2;
+      border: 1px solid var(--ash);
+      border-radius: 14px;
+    }
+
+    .tier-header {
+      margin-bottom: 1.5rem;
+    }
+
+    .tier-header h3 {
+      font-family: var(--heading);
+      font-size: 1.05rem;
+      color: var(--navy);
+      margin-bottom: 0.3rem;
+    }
+
+    .tier-header p {
+      font-size: 0.8rem;
+      color: var(--mist);
+      margin: 0;
+    }
+
+    .tier-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 1rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .tier-card {
+      border: 2px solid var(--ash);
+      border-radius: 10px;
+      padding: 1.1rem 1.2rem;
+      background: #fff;
+      cursor: pointer;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+      user-select: none;
+      position: relative;
+    }
+
+    .tier-card:hover {
+      border-color: rgba(225,75,135,0.4);
+    }
+
+    .tier-card.active {
+      border-color: var(--pink);
+      box-shadow: 0 0 0 3px rgba(225,75,135,0.1);
+    }
+
+    .tier-card-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      margin-bottom: 0.6rem;
+    }
+
+    .tier-card-label {
+      font-size: 0.65rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--mist);
+      margin-bottom: 0.2rem;
+    }
+
+    .tier-card-name {
+      font-family: var(--heading);
+      font-size: 0.88rem;
+      color: var(--navy);
+    }
+
+    .tier-toggle {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      border: 2px solid var(--ash);
+      flex-shrink: 0;
+      margin-top: 2px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: border-color 0.2s ease, background 0.2s ease;
+    }
+
+    .tier-card.active .tier-toggle {
+      border-color: var(--pink);
+      background: var(--pink);
+    }
+
+    .tier-toggle svg { display: none; }
+    .tier-card.active .tier-toggle svg { display: block; }
+
+    .tier-card-desc {
+      font-size: 0.76rem;
+      color: var(--stone);
+      line-height: 1.55;
+      margin-bottom: 0.75rem;
+    }
+
+    .tier-card-fee {
+      font-family: var(--heading);
+      font-size: 1.05rem;
+      color: var(--pink);
+      margin-top: auto;
+    }
+
+    .tier-card-fee-sub {
+      font-size: 0.68rem;
+      color: var(--mist);
+      margin-top: 2px;
+    }
+
+    .tier-selected-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #fff;
+      border: 1px solid var(--ash);
+      border-radius: 8px;
+      padding: 0.75rem 1rem;
+      font-size: 0.82rem;
+    }
+
+    .tier-selected-label {
+      color: var(--stone);
+    }
+
+    .tier-selected-label strong { color: var(--navy); }
+
+    .tier-selected-fee {
+      font-family: var(--heading);
+      font-size: 0.95rem;
+      color: var(--navy);
+      transition: color 0.2s ease;
+    }
+
+    .tier-selected-fee.active { color: var(--pink); }
+
+    .tier-none-warning {
+      display: none;
+      font-size: 0.75rem;
+      color: #c0392b;
+      margin-top: 0.5rem;
+      text-align: center;
+    }
+
+    .tier-none-warning.visible { display: block; }
+
+    /* SIGNATURE SECTION */
+    .sig-section {
+      margin-top: 3rem;
+      padding-top: 2.5rem;
+      border-top: 2px solid var(--ash);
+    }
+
+    .sig-section-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1rem;
+    }
+
+    .sig-section-header h3 {
+      font-family: var(--heading);
+      font-size: 1.1rem;
+      color: var(--navy);
+    }
+
+    .sig-section-note {
+      font-size: 0.78rem;
+      color: var(--mist);
+    }
+
+    /* Selected tier display in sig section */
+    .sig-tier-display {
+      background: #f8f5f2;
+      border: 1px solid var(--ash);
+      border-radius: 8px;
+      padding: 0.75rem 1rem;
+      margin-bottom: 1.5rem;
+      font-size: 0.82rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .sig-tier-display .tier-label {
+      color: var(--stone);
+    }
+
+    .sig-tier-display .tier-label strong {
+      color: var(--navy);
+    }
+
+    .sig-tier-display .tier-price {
+      font-family: var(--heading);
+      font-size: 1rem;
+      color: var(--pink);
+    }
+
+    .sig-tier-display.none-selected {
+      color: var(--mist);
+      font-style: italic;
+      justify-content: center;
+    }
+
+    .sig-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+
+    .sig-block {
+      border: 1px solid var(--ash);
+      border-radius: 10px;
+      overflow: hidden;
+      background: #fdfdfd;
+    }
+
+    .sig-block.signed {
+      border-color: rgba(45, 143, 94, 0.35);
+      background: rgba(45, 143, 94, 0.02);
+    }
+
+    .sig-block-head {
+      background: var(--navy);
+      padding: 0.75rem 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .sig-block.signed .sig-block-head { background: var(--success); }
+
+    .sig-block-head .signer-name {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: #fafafa;
+    }
+
+    .sig-block-head .signer-title {
+      font-size: 0.68rem;
+      color: rgba(255,255,255,0.65);
+      margin-top: 1px;
+    }
+
+    .signed-badge {
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+      font-size: 0.68rem;
+      color: #fafafa;
+      background: rgba(255,255,255,0.2);
+      border-radius: 20px;
+      padding: 0.2rem 0.55rem;
+    }
+
+    .signed-badge svg { flex-shrink: 0; }
+
+    .sig-block-body { padding: 1rem; }
+
+    .sig-display {
+      height: 90px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px dashed rgba(45, 143, 94, 0.3);
+      border-radius: 6px;
+      background: rgba(45, 143, 94, 0.03);
+      margin-bottom: 0.75rem;
+    }
+
+    .sig-cursive {
+      font-family: 'Lora', Georgia, serif;
+      font-style: italic;
+      font-size: 1.6rem;
+      color: var(--navy);
+      letter-spacing: -0.02em;
+    }
+
+    .sig-meta { font-size: 0.72rem; color: var(--mist); }
+
+    .sig-canvas-wrap {
+      position: relative;
+      margin-bottom: 0.75rem;
+    }
+
+    canvas.sig-pad {
+      display: block;
+      width: 100%;
+      height: 100px;
+      border: 1px dashed #ccc;
+      border-radius: 6px;
+      background: #fafafa;
+      cursor: crosshair;
+      touch-action: none;
+    }
+
+    .sig-watermark {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 0.75rem;
+      color: #d0cac6;
+      pointer-events: none;
+      user-select: none;
+      white-space: nowrap;
+    }
+
+    .sig-controls {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .sig-clear-btn {
+      background: none;
+      border: none;
+      font-family: var(--sans);
+      font-size: 0.72rem;
+      color: var(--mist);
+      cursor: pointer;
+      text-align: right;
+      padding: 0;
+      text-decoration: underline;
+    }
+
+    .sig-clear-btn:hover { color: var(--stone); }
+
+    .sig-date-wrap {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .sig-date-wrap label { font-size: 0.72rem; color: var(--mist); white-space: nowrap; }
+
+    .sig-date-wrap input {
+      font-family: var(--sans);
+      font-size: 0.78rem;
+      border: 1px solid var(--ash);
+      border-radius: 4px;
+      padding: 0.25rem 0.5rem;
+      color: var(--navy);
+      flex: 1;
+      min-width: 0;
+    }
+
+    .sig-agree-wrap {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.5rem;
+      margin-bottom: 0.6rem;
+    }
+
+    .sig-agree-wrap input[type="checkbox"] {
+      margin-top: 2px;
+      accent-color: var(--pink);
+      flex-shrink: 0;
+    }
+
+    .sig-agree-wrap label {
+      font-size: 0.72rem;
+      color: var(--stone);
+      line-height: 1.4;
+    }
+
+    .sig-apply-btn {
+      width: 100%;
+      background: var(--pink);
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      font-family: var(--sans);
+      font-size: 0.82rem;
+      font-weight: 600;
+      padding: 0.55rem 1rem;
+      cursor: pointer;
+      transition: background 0.2s ease, opacity 0.2s ease;
+    }
+
+    .sig-apply-btn:disabled { opacity: 0.35; cursor: not-allowed; }
+    .sig-apply-btn:not(:disabled):hover { background: var(--pink-dark); }
+
+    .sig-block.applied canvas {
+      border-color: rgba(45, 143, 94, 0.4);
+      background: rgba(45, 143, 94, 0.02);
+      cursor: default;
+    }
+
+    .sig-applied-note {
+      display: none;
+      font-size: 0.72rem;
+      color: var(--success);
+      font-weight: 600;
+      text-align: center;
+      padding: 0.4rem 0;
+    }
+
+    .sig-block.applied .sig-applied-note { display: block; }
+    .sig-block.applied .sig-agree-wrap,
+    .sig-block.applied .sig-apply-btn,
+    .sig-block.applied .sig-clear-btn { display: none; }
+
+    /* COMPLETION */
+    .completion-wrap {
+      display: none;
+      margin-top: 2.5rem;
+      background: linear-gradient(135deg, rgba(45,143,94,0.06) 0%, rgba(45,143,94,0.02) 100%);
+      border: 1px solid rgba(45, 143, 94, 0.3);
+      border-radius: 12px;
+      padding: 2rem;
+      text-align: center;
+    }
+
+    .completion-wrap.visible { display: block; }
+
+    .completion-wrap h3 {
+      font-family: var(--heading);
+      font-size: 1.15rem;
+      color: var(--success);
+      margin-bottom: 0.5rem;
+    }
+
+    .completion-wrap p {
+      font-size: 0.88rem;
+      color: var(--stone);
+      margin-bottom: 1.5rem;
+    }
+
+    .btn-download {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--pink);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-family: var(--sans);
+      font-size: 0.95rem;
+      font-weight: 600;
+      padding: 0.8rem 2rem;
+      cursor: pointer;
+      transition: background 0.2s ease;
+      margin-bottom: 1rem;
+    }
+
+    .btn-download:hover { background: var(--pink-dark); }
+
+    .btn-email {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: none;
+      color: var(--navy);
+      border: 1.5px solid var(--ash);
+      border-radius: 8px;
+      font-family: var(--sans);
+      font-size: 0.88rem;
+      font-weight: 500;
+      padding: 0.65rem 1.5rem;
+      cursor: pointer;
+      text-decoration: none;
+      transition: border-color 0.2s ease;
+      margin-left: 0.75rem;
+    }
+
+    .btn-email:hover { border-color: var(--navy); }
+
+    /* FOOTER */
+    .doc-footer {
+      margin-top: 3rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--ash);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .doc-footer p { font-size: 0.75rem; color: var(--mist); }
+    .doc-footer a { color: var(--pink); text-decoration: none; }
+    .doc-footer a:hover { text-decoration: underline; }
+
+    @media (max-width: 700px) {
+      .doc-inner { padding: 1.5rem; }
+      .sig-grid { grid-template-columns: 1fr; }
+      .parties-grid { grid-template-columns: 1fr; }
+      .tier-grid { grid-template-columns: 1fr; }
+      .site-header { padding: 0.75rem 1rem; }
+      .progress-bar-wrap { padding: 0.5rem 1rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- STICKY HEADER -->
+<header class="site-header">
+  <a href="https://mexzungu.com" class="logo-wrap">
+    <img src="/logo-v3.png" alt="Mexzungu Group">
+  </a>
+  <div class="header-meta">
+    <h1>Engagement Letter</h1>
+    <p>Silica GBS x Mexzungu Group &nbsp;|&nbsp; 2026</p>
+  </div>
+</header>
+
+<!-- PROGRESS BAR -->
+<div class="progress-bar-wrap">
+  <div class="progress-steps">
+    <div class="step done" id="step-pepe">
+      <span class="step-dot"></span>
+      <span>Pepe Carrillo</span>
+    </div>
+    <span class="step-sep">›</span>
+    <div class="step pending" id="step-samuel">
+      <span class="step-dot"></span>
+      <span>Samuel Darko</span>
+    </div>
+  </div>
+  <div class="progress-label" id="progress-label"><strong>1</strong> of 2 signatures collected</div>
+</div>
+
+<!-- MAIN PAGE -->
+<div class="page-wrap">
+  <div class="doc-card" id="document-root">
+    <div class="doc-top-stripe"></div>
+    <div class="doc-inner">
+
+      <!-- Wordmark -->
+      <div class="doc-wordmark">
+        <img src="/logo-v3.png" alt="Mexzungu Group">
+        <div class="doc-wordmark-text">
+          <span>Mexzungu Venture Architecture</span>
+          <span>Outlaw Studio. Chaos starts companies. Structure builds them.</span>
+        </div>
+      </div>
+
+      <!-- Title -->
+      <h1 class="doc-title">Engagement Letter — Silica GBS</h1>
+      <p class="doc-subtitle">Dated <span id="el-date">May 2026</span></p>
+
+      <!-- Parties -->
+      <div class="parties-grid">
+        <div class="party-block">
+          <div class="party-label">The Client</div>
+          <div class="party-name">Silica GBS</div>
+          <div class="party-detail">Represented by Samuel Darko (Founder &amp; CEO).<br><a href="mailto:samuel@silicagbs.com" style="color:var(--pink);text-decoration:none;">samuel@silicagbs.com</a></div>
+        </div>
+        <div class="party-block">
+          <div class="party-label">The Studio</div>
+          <div class="party-name">Mexzungu Group Ltd</div>
+          <div class="party-detail">A Mauritius company. Royal Road, Henrietta, 73120, Mauritius.<br>Signing through Pepe Carrillo (Chief Disruption Officer).<br><a href="mailto:pepe@mexzungu.com" style="color:var(--pink);text-decoration:none;">pepe@mexzungu.com</a></div>
+        </div>
+      </div>
+
+      <div class="doc-date-line">Dated: <span id="el-date2">May 2026</span></div>
+
+      <!-- BODY -->
+      <div class="doc-body">
+
+        <p class="intro-q">Why does this letter exist?</p>
+        <p>Because the shape of this engagement is worth getting right in writing. We have talked about the ambition behind Silica GBS, what you are building, and where the Studio fits. This letter captures the terms: what you are getting, at which level, what it costs, how we pay each other, and what happens if anything ever needs to change. Read it, select your tier, sign it, and let us get to work.</p>
+
+        <h2>Where does the Studio sit, geographically and legally?</h2>
+        <p>The Studio is a Mauritius outfit. We work out of our registered office on the island and deliver from there to wherever Silica GBS is operating. Pepe signs as Chief Disruption Officer. None of what follows means we have set up shop, opened a branch, or started practising law in any jurisdiction you operate in. We are the structural architects and strategic operators in your corner, not local lawyers of record.</p>
+
+        <h2>1. What are we working on together?</h2>
+        <p>Silica GBS is building a pan-African business process outsourcing and GBS platform, targeting 30 or more delivery centres and a talent base of 100,000 people. The AI-augmented talent model is the core differentiator. The challenge is that the structural, legal, and commercial architecture needs to scale as fast as the ambition does. That is where the Studio comes in.</p>
+
+        <p>This is a monthly retainer engagement. You select the level that fits where Silica GBS is right now, and we work within that level every month. The level can be upgraded or downgraded with 30 days written notice. The three tiers are described in section 3 below and selected in the activation section before your signature.</p>
+
+        <h2>2. What are we not doing?</h2>
+        <div class="sub-item">(a) Filing anything with any court, registry, notary, or government office, anywhere.</div>
+        <div class="sub-item">(b) Being your lawyer of record in any jurisdiction Silica GBS operates in.</div>
+        <div class="sub-item">(c) Replacing your local lawyers. For filing, litigation, or jurisdiction-specific execution, you will need qualified local counsel. We can point you to good people.</div>
+        <div class="sub-item">(d) Anything outside the scope of the tier you have selected. If a need falls outside your tier, we tell you that clearly and discuss whether to expand scope or upgrade.</div>
+
+        <h2>3. What does each tier cover?</h2>
+        <p>Select the tier that matches where you are. You get exactly what is in the tier, nothing more, nothing less. The tiers are described in the selection section below, but the substance of each is as follows.</p>
+
+        <div class="sub-item"><strong>Tier 1 — On Call ($4,000 / month).</strong> Async structural support via Janis (the Studio's AI-powered Chief of Staff), available 24/7 for questions, drafts, and reviews. One strategic call per month with Pepe (60 minutes). Single-jurisdiction focus. Kellen available for administrative tasks. 30-day written notice to exit. Best for early-stage engagements, specific workstreams, or founders who need a smart back-office without the full weight of a retained advisor.</div>
+
+        <div class="sub-item"><strong>Tier 2 — Structural Partner ($6,000 / month).</strong> Everything in Tier 1. Two-jurisdiction coverage. Bi-weekly 45-minute check-ins with Pepe. Quarterly participation in a board or investor meeting (observer mode). Pepe responds within 4 CET business hours on items flagged urgent. Contract drafting and review included within scope. Best for companies actively structuring across multiple markets or preparing for a capital raise.</div>
+
+        <div class="sub-item"><strong>Tier 3 — In the Room ($8,000 / month).</strong> Everything in Tiers 1 and 2. Multi-jurisdiction coverage with no cap. Weekly 30-minute check-in with Pepe. Monthly participation in a board meeting. Janis responds within the hour on anything. Pepe responds within 4 CET business hours, always. Active deal flow structuring included. Investor preparation materials (decks, term sheet analysis, data room structure) included as part of monthly scope. Best for companies in active deal execution, scaling across multiple jurisdictions simultaneously, or where speed and availability matter.</div>
+
+        <h2>4. Is this legal advice?</h2>
+        <p>No. This is legal consulting and strategic advisory. We give you the architecture, the analysis, the playbook, and the drafts. We do not file papers, sign legal opinions, or appear in court. Think of us as the friend who has closed a few billion in deals across a bunch of countries, sitting next to you at the table, telling you what to look out for and how to structure it cleanly.</p>
+
+        <h2>5. What does this cost and how does payment work?</h2>
+        <p>The monthly fee for your selected tier is confirmed in the activation section below. We invoice on the first of each month. You have 30 days from invoice date to pay. Payment by bank transfer to:</p>
+
+        <div class="bank-block">
+          <div class="bank-row"><span class="bank-label">Beneficiary</span><span class="bank-val">Mexzungu Group Ltd</span></div>
+          <div class="bank-row"><span class="bank-label">Bank</span><span class="bank-val">Mauritius Commercial Bank (MCB)</span></div>
+          <div class="bank-row"><span class="bank-label">Account Number</span><span class="bank-val">000448521954</span></div>
+          <div class="bank-row"><span class="bank-label">IBAN</span><span class="bank-val">MU49MCBL0901000448521954000USD</span></div>
+          <div class="bank-row"><span class="bank-label">SWIFT/BIC</span><span class="bank-val">MCBLMUMU</span></div>
+          <div class="bank-row"><span class="bank-label">Bank address</span><span class="bank-val">Sir William Newton Street, Port Louis, Mauritius</span></div>
+        </div>
+
+        <p>There is no success fee on this engagement. The retainer is the full commercial arrangement.</p>
+
+        <h2>6. What happens if something goes wrong?</h2>
+        <p>If something goes sideways and you come after us, the most we are on the hook for is the cumulative fees you have actually paid us at that point. Not hypothetical future fees, not consequential losses. The two things we cannot contractually cap are fraud and wilful misconduct. We are not planning on either.</p>
+
+        <h2>7. Who else sees what we discuss?</h2>
+        <p>Nobody. What happens in this engagement stays in this engagement. You do not share our memos, analysis, or thinking outside this engagement without our permission. We do not share your business, structure, or strategy with anyone. This commitment does not expire when the engagement does.</p>
+
+        <h2>8. Can the Studio talk about this work later?</h2>
+        <p>Yes, in general terms. Once everything is public or done, we might say something like "we supported a pan-African GBS platform through a major scaling phase." We will never name Silica GBS, share your documents, or say anything specific without your written permission.</p>
+
+        <h2>9. How long does this last?</h2>
+        <p>This is a month-to-month engagement. It starts on the date at the top. Either party may terminate by giving 30 days written notice to the other. No penalties, no clawbacks. Any fees earned and unpaid at termination remain due and payable. Confidentiality survives termination indefinitely.</p>
+
+        <p>The tier level can be upgraded at any time with immediate effect (subject to mutual agreement). Tier downgrades take effect at the start of the next billing month following 30 days written notice.</p>
+
+        <h2>10. Which law applies if we ever disagree?</h2>
+        <p>Mauritius law. If we cannot sort it out between ourselves, it goes to the Supreme Court of Mauritius (Commercial Division). We are not expecting to need this. It is here so neither of us ever has to wonder.</p>
+
+      </div>
+
+      <!-- TIER SELECTION -->
+      <div class="tier-section">
+        <div class="tier-header">
+          <h3>Select your retainer tier</h3>
+          <p>Choose one level. This is the scope and fee you are signing up for. You must select a tier to proceed.</p>
+        </div>
+
+        <div class="tier-grid">
+
+          <div class="tier-card" id="tier-card-1" onclick="selectTier(1)">
+            <div class="tier-card-top">
+              <div>
+                <div class="tier-card-label">Tier 1</div>
+                <div class="tier-card-name">On Call</div>
+              </div>
+              <div class="tier-toggle" id="tier-toggle-1">
+                <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M1.5 5L4 7.5L8.5 2.5" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </div>
+            </div>
+            <p class="tier-card-desc">Async support via Janis 24/7. One 60-min call/month with Pepe. Single jurisdiction. Kellen admin support. 30-day exit.</p>
+            <div class="tier-card-fee">$4,000 / mo</div>
+            <div class="tier-card-fee-sub">Monthly invoice. 30 days to pay.</div>
+          </div>
+
+          <div class="tier-card" id="tier-card-2" onclick="selectTier(2)">
+            <div class="tier-card-top">
+              <div>
+                <div class="tier-card-label">Tier 2</div>
+                <div class="tier-card-name">Structural Partner</div>
+              </div>
+              <div class="tier-toggle" id="tier-toggle-2">
+                <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M1.5 5L4 7.5L8.5 2.5" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </div>
+            </div>
+            <p class="tier-card-desc">Everything in Tier 1. Two jurisdictions. Bi-weekly 45-min check-ins. Quarterly board/investor participation. 4-hour urgent response. Contract drafting included.</p>
+            <div class="tier-card-fee">$6,000 / mo</div>
+            <div class="tier-card-fee-sub">Monthly invoice. 30 days to pay.</div>
+          </div>
+
+          <div class="tier-card" id="tier-card-3" onclick="selectTier(3)">
+            <div class="tier-card-top">
+              <div>
+                <div class="tier-card-label">Tier 3</div>
+                <div class="tier-card-name">In the Room</div>
+              </div>
+              <div class="tier-toggle" id="tier-toggle-3">
+                <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M1.5 5L4 7.5L8.5 2.5" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </div>
+            </div>
+            <p class="tier-card-desc">Everything in Tiers 1-2. Multi-jurisdiction. Weekly 30-min check-in. Monthly board participation. Active deal structuring. Investor materials included.</p>
+            <div class="tier-card-fee">$8,000 / mo</div>
+            <div class="tier-card-fee-sub">Monthly invoice. 30 days to pay.</div>
+          </div>
+
+        </div>
+
+        <div class="tier-selected-bar">
+          <span class="tier-selected-label"><strong>Selected tier</strong></span>
+          <span class="tier-selected-fee" id="tier-selected-fee-display">No tier selected</span>
+        </div>
+        <div class="tier-none-warning" id="tier-none-warning">Please select a tier before signing.</div>
+      </div>
+
+      <!-- SIGNATURE SECTION -->
+      <div class="sig-section" id="sig-section">
+        <div class="sig-section-header">
+          <h3>Signatures</h3>
+          <span class="sig-section-note">Both parties must sign to complete the agreement.</span>
+        </div>
+
+        <!-- Selected tier confirmation -->
+        <div class="sig-tier-display none-selected" id="sig-tier-display">
+          Select a tier above to proceed.
+        </div>
+
+        <div class="sig-grid">
+
+          <!-- PEPE — already signed -->
+          <div class="sig-block signed" id="block-pepe">
+            <div class="sig-block-head">
+              <div>
+                <div class="signer-name">Pepe Carrillo</div>
+                <div class="signer-title">Chief Disruption Officer, Mexzungu Group Ltd</div>
+              </div>
+              <div class="signed-badge">
+                <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M1.5 5L4 7.5L8.5 2.5" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                Signed
+              </div>
+            </div>
+            <div class="sig-block-body">
+              <div class="sig-display">
+                <span class="sig-cursive">Pepe Carrillo</span>
+              </div>
+              <div class="sig-meta">Signed: <span id="pepe-sign-date">May 2026</span></div>
+            </div>
+          </div>
+
+          <!-- SAMUEL DARKO -->
+          <div class="sig-block" id="block-samuel">
+            <div class="sig-block-head">
+              <div>
+                <div class="signer-name">Samuel Darko</div>
+                <div class="signer-title">Founder &amp; CEO, Silica GBS</div>
+              </div>
+            </div>
+            <div class="sig-block-body">
+              <div class="sig-canvas-wrap">
+                <canvas class="sig-pad" id="canvas-samuel"></canvas>
+                <span class="sig-watermark" id="wm-samuel">Sign here</span>
+              </div>
+              <div class="sig-controls">
+                <button class="sig-clear-btn" onclick="clearSig('samuel')">Clear</button>
+                <div class="sig-date-wrap">
+                  <label for="date-samuel">Date</label>
+                  <input type="date" id="date-samuel">
+                </div>
+                <div class="sig-agree-wrap">
+                  <input type="checkbox" id="agree-samuel" onchange="updateApplyBtn('samuel')">
+                  <label for="agree-samuel">I have read and agree to all terms above, including the selected retainer tier.</label>
+                </div>
+                <button class="sig-apply-btn" id="apply-samuel" disabled onclick="applySig('samuel')">Apply Signature</button>
+              </div>
+              <div class="sig-applied-note">Signature applied.</div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- COMPLETION PANEL -->
+        <div class="completion-wrap" id="completion-panel">
+          <h3>Engagement letter signed.</h3>
+          <p>Download your signed copy below, then email it to Pepe to complete the record.</p>
+          <button class="btn-download" onclick="downloadPDF()">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 1v9M5 7l3 3 3-3M2 12v1a1 1 0 001 1h10a1 1 0 001-1v-1" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Download Signed PDF
+          </button>
+          <a class="btn-email" href="mailto:pepe@mexzungu.com?subject=Silica%20GBS%20EL%20Signed&body=Hi%20Pepe%2C%20please%20find%20the%20signed%20engagement%20letter%20attached.">
+            <svg width="15" height="15" viewBox="0 0 15 15" fill="none"><rect x="1" y="3" width="13" height="9" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M1 4.5l6.5 4.5L14 4.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+            Email to Pepe
+          </a>
+        </div>
+
+      </div>
+
+      <!-- FOOTER -->
+      <div class="doc-footer">
+        <p>Mexzungu Group Ltd &nbsp;|&nbsp; Royal Road, Henrietta, 73120, Mauritius</p>
+        <p><a href="mailto:pepe@mexzungu.com">pepe@mexzungu.com</a> &nbsp;|&nbsp; <a href="https://mexzungu.com">mexzungu.com</a></p>
+      </div>
+
+    </div><!-- /doc-inner -->
+  </div><!-- /doc-card -->
+</div><!-- /page-wrap -->
+
+<script>
+  // Set today's date
+  (function() {
+    var today = new Date();
+    var opts = { year: 'numeric', month: 'long', day: 'numeric' };
+    var dateStr = today.toLocaleDateString('en-GB', opts);
+    document.getElementById('el-date').textContent = dateStr;
+    document.getElementById('el-date2').textContent = dateStr;
+    document.getElementById('pepe-sign-date').textContent = dateStr;
+    document.getElementById('date-samuel').valueAsDate = today;
+  })();
+
+  // Tier selection (exclusive — only one at a time)
+  var selectedTier = 0;
+  var tierNames  = { 1: 'Tier 1 — On Call',          2: 'Tier 2 — Structural Partner', 3: 'Tier 3 — In the Room' };
+  var tierPrices = { 1: '$4,000 / month',             2: '$6,000 / month',               3: '$8,000 / month' };
+
+  function selectTier(n) {
+    // Deactivate all cards
+    [1, 2, 3].forEach(function(i) {
+      document.getElementById('tier-card-' + i).classList.remove('active');
+    });
+
+    if (selectedTier === n) {
+      // Clicking the active one deselects it
+      selectedTier = 0;
+    } else {
+      selectedTier = n;
+      document.getElementById('tier-card-' + n).classList.add('active');
+    }
+
+    updateTierDisplay();
+    updateApplyBtn('samuel');
+    document.getElementById('tier-none-warning').classList.remove('visible');
+  }
+
+  function updateTierDisplay() {
+    var feeDisplay  = document.getElementById('tier-selected-fee-display');
+    var sigDisplay  = document.getElementById('sig-tier-display');
+
+    if (selectedTier === 0) {
+      feeDisplay.textContent = 'No tier selected';
+      feeDisplay.classList.remove('active');
+      sigDisplay.innerHTML   = 'Select a tier above to proceed.';
+      sigDisplay.classList.add('none-selected');
+    } else {
+      feeDisplay.textContent = tierNames[selectedTier] + ' — ' + tierPrices[selectedTier];
+      feeDisplay.classList.add('active');
+      sigDisplay.innerHTML   =
+        '<span class="tier-label"><strong>' + tierNames[selectedTier] + '</strong> selected</span>' +
+        '<span class="tier-price">' + tierPrices[selectedTier] + '</span>';
+      sigDisplay.classList.remove('none-selected');
+    }
+  }
+
+  // Signature pad
+  var sigPads = {};
+  var signers = ['samuel'];
+
+  function initPad(name) {
+    var canvas = document.getElementById('canvas-' + name);
+    var pad = new SignaturePad(canvas, { penColor: '#1a1a2e', minWidth: 1.5, maxWidth: 3 });
+    sigPads[name] = pad;
+
+    function resize() {
+      var ratio = Math.max(window.devicePixelRatio || 1, 1);
+      var data = pad.toData();
+      canvas.width = canvas.offsetWidth * ratio;
+      canvas.height = canvas.offsetHeight * ratio;
+      canvas.getContext('2d').scale(ratio, ratio);
+      pad.clear();
+      pad.fromData(data);
+    }
+
+    resize();
+    window.addEventListener('resize', resize);
+
+    pad.addEventListener('beginStroke', function() {
+      var wm = document.getElementById('wm-' + name);
+      if (wm) wm.style.display = 'none';
+    });
+
+    pad.addEventListener('afterUpdateStroke', function() {
+      updateApplyBtn(name);
+    });
+  }
+
+  signers.forEach(initPad);
+
+  function clearSig(name) {
+    sigPads[name].clear();
+    var wm = document.getElementById('wm-' + name);
+    if (wm) wm.style.display = '';
+    updateApplyBtn(name);
+  }
+
+  function updateApplyBtn(name) {
+    var pad      = sigPads[name];
+    var checkbox = document.getElementById('agree-' + name);
+    var btn      = document.getElementById('apply-' + name);
+    btn.disabled = (pad.isEmpty() || !checkbox.checked || selectedTier === 0);
+  }
+
+  function applySig(name) {
+    if (selectedTier === 0) {
+      document.getElementById('tier-none-warning').classList.add('visible');
+      document.querySelector('.tier-section').scrollIntoView({ behavior: 'smooth' });
+      return;
+    }
+    var block = document.getElementById('block-' + name);
+    block.classList.add('applied');
+    sigPads[name].off();
+    checkCompletion();
+  }
+
+  function checkCompletion() {
+    var allDone = signers.every(function(n) {
+      return document.getElementById('block-' + n).classList.contains('applied');
+    });
+    if (allDone) {
+      document.getElementById('completion-panel').classList.add('visible');
+      document.getElementById('progress-label').innerHTML = '<strong>2</strong> of 2 signatures collected';
+      signers.forEach(function(n) {
+        var step = document.getElementById('step-' + n);
+        if (step) step.className = 'step done';
+      });
+    }
+  }
+
+  function downloadPDF() {
+    var el = document.getElementById('document-root');
+    html2canvas(el, { scale: 2, useCORS: true }).then(function(canvas) {
+      var imgData = canvas.toDataURL('image/png');
+      var pdf = new jspdf.jsPDF('p', 'mm', 'a4');
+      var pageW = pdf.internal.pageSize.getWidth();
+      var pageH = pdf.internal.pageSize.getHeight();
+      var imgW = pageW;
+      var imgH = (canvas.height * imgW) / canvas.width;
+      var y = 0;
+      while (y < imgH) {
+        if (y > 0) pdf.addPage();
+        pdf.addImage(imgData, 'PNG', 0, -y, imgW, imgH);
+        y += pageH;
+      }
+      pdf.save('SilicaGBS-Mexzungu-Engagement-Letter.pdf');
+    });
+  }
+</script>
+
+</body>
+</html>

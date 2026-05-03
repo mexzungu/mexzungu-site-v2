@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0d0d0d">
+    <title>Silica GBS — Mexzungu Group Proposal</title>
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="stylesheet" href="/fonts.css">
+    <link rel="stylesheet" href="/style.css?v=10">
+    <style>
+        :root {
+            --bg-primary:     #0d0d0d;
+            --bg-card:        #1a1a1a;
+            --bg-dark:        #0d0d0d;
+            --text-primary:   #fafafa;
+            --text-secondary: #9a8f88;
+            --text-muted:     #6b5e57;
+            --text-accent:    #e86fa0;
+            --border:         #2a2a2a;
+            --border-hover:   #e14b87;
+            --card-bg:        #1a1a1a;
+            --card-border:    #2a2a2a;
+            --gray:           #9a8f88;
+            --gray-light:     #9a8f88;
+            --nav-bg:         rgba(13, 13, 13, 0.92);
+            --dropdown-bg:    rgba(26, 26, 26, 0.97);
+        }
+
+        #pw-gate {
+            position: fixed;
+            inset: 0;
+            background: #0d0d0d;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            padding: 2rem;
+        }
+        #pw-gate.hidden { display: none; }
+        .pw-card {
+            background: #1a1a1a;
+            border: 1px solid #2a2a2a;
+            border-radius: 12px;
+            padding: 3rem 2.5rem;
+            max-width: 420px;
+            width: 100%;
+            text-align: center;
+        }
+        .pw-logo { height: 52px; margin-bottom: 2rem; }
+        .pw-label {
+            font-size: 0.75rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: #e14b87;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+        .pw-heading {
+            font-family: 'RocknRoll One', 'Space Grotesk', sans-serif;
+            font-size: 1.6rem;
+            font-weight: 400;
+            color: #fafafa;
+            margin-bottom: 0.6rem;
+            line-height: 1.2;
+        }
+        .pw-sub { font-size: 0.9rem; color: #9a8f88; margin-bottom: 2rem; line-height: 1.6; }
+        .pw-input {
+            width: 100%;
+            padding: 0.9rem 1rem;
+            background: #0d0d0d;
+            border: 1px solid #2a2a2a;
+            border-radius: 6px;
+            color: #fafafa;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1rem;
+            letter-spacing: 0.05em;
+            margin-bottom: 1rem;
+            transition: border-color 0.2s;
+            text-align: center;
+        }
+        .pw-input:focus { outline: none; border-color: #e14b87; box-shadow: 0 0 0 3px rgba(225,75,135,0.15); }
+        .pw-input.error { border-color: #c93545; animation: shake 0.3s ease; }
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-8px); }
+            75% { transform: translateX(8px); }
+        }
+        .pw-btn {
+            width: 100%;
+            padding: 0.9rem 2rem;
+            background-color: #e14b87;
+            background-image:
+                radial-gradient(ellipse 12px 8px at 20% 40%, rgba(255,255,255,0.2) 0%, transparent 70%),
+                radial-gradient(ellipse 8px 12px at 60% 25%, rgba(255,255,255,0.15) 0%, transparent 70%);
+            color: #fafafa;
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+            font-size: 0.95rem;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s;
+            box-shadow: 0 4px 14px rgba(225,75,135,0.35);
+            letter-spacing: 0.02em;
+        }
+        .pw-btn:hover { background-color: #e86fa0; box-shadow: 0 6px 22px rgba(225,75,135,0.45); transform: scale(1.02); }
+        .pw-error { font-size: 0.85rem; color: #c93545; margin-top: 0.8rem; min-height: 1.2em; }
+        .pw-footer-note { font-size: 0.75rem; color: #4a4a4a; margin-top: 2rem; }
+
+        #proposal-content { display: none; }
+        #proposal-content.visible { display: block; }
+
+        .proposal-hero {
+            min-height: 65vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 10rem 2rem 5rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .proposal-hero .hero-tag {
+            font-family: 'Rock Salt', cursive;
+            font-size: 0.75rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: #e14b87;
+            margin-bottom: 1.5rem;
+            opacity: 0.85;
+        }
+        .proposal-hero h1 {
+            font-family: 'RocknRoll One', 'Space Grotesk', sans-serif;
+            font-size: clamp(2.8rem, 6vw, 4.8rem);
+            font-weight: 400;
+            line-height: 1.1;
+            letter-spacing: -0.01em;
+            margin-bottom: 1.5rem;
+            color: #fafafa;
+        }
+        .proposal-hero .valid-note { font-size: 0.85rem; color: #6b5e57; letter-spacing: 0.05em; }
+
+        .prop-section { padding: 5rem 2rem; max-width: 860px; margin: 0 auto; }
+        .prop-section + .prop-section { border-top: 1px solid #1e1e1e; }
+        .prop-label {
+            font-size: 0.72rem;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            color: #e14b87;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+        .prop-heading {
+            font-family: 'RocknRoll One', 'Space Grotesk', sans-serif;
+            font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+            font-weight: 400;
+            color: #fafafa;
+            line-height: 1.15;
+            letter-spacing: -0.01em;
+            margin-bottom: 1.5rem;
+        }
+        .prop-copy { font-size: 1.05rem; color: #9a8f88; line-height: 1.85; max-width: 680px; }
+        .prop-copy strong { color: #c8c0bb; font-weight: 600; }
+
+        /* ACCESS TIER CARDS */
+        .tier-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            margin-top: 2.5rem;
+        }
+        .tier-card {
+            background: #111111;
+            border: 1px solid #2a2a2a;
+            border-radius: 12px;
+            padding: 2.5rem;
+            transition: border-color 0.2s;
+            position: relative;
+        }
+        .tier-card:hover { border-color: #3d2030; }
+        .tier-card.popular {
+            border-color: #2d1f28;
+            background: linear-gradient(135deg, #111111 0%, #1a0f15 100%);
+        }
+        .tier-popular-badge {
+            position: absolute;
+            top: -1px;
+            right: 2rem;
+            background: #e14b87;
+            color: #fafafa;
+            font-size: 0.68rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            font-weight: 700;
+            padding: 0.3rem 1rem;
+            border-radius: 0 0 8px 8px;
+        }
+        .tier-price {
+            font-family: 'RocknRoll One', 'Space Grotesk', sans-serif;
+            font-size: 2.6rem;
+            color: #d4a039;
+            font-weight: 400;
+            letter-spacing: -0.02em;
+            line-height: 1;
+            margin-bottom: 0.3rem;
+        }
+        .tier-price-sub { font-size: 0.82rem; color: #6b5e57; margin-bottom: 0; letter-spacing: 0.03em; }
+        .tier-headline {
+            font-family: 'RocknRoll One', 'Space Grotesk', sans-serif;
+            font-size: 1.25rem;
+            color: #fafafa;
+            margin-bottom: 0.5rem;
+            font-weight: 400;
+        }
+        .tier-sub { font-size: 0.9rem; color: #9a8f88; margin-bottom: 1.8rem; line-height: 1.6; font-style: italic; }
+        .tier-list {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        .tier-list li {
+            font-size: 0.92rem;
+            color: #9a8f88;
+            padding: 0.65rem 0;
+            border-bottom: 1px solid #1e1e1e;
+            display: flex;
+            align-items: flex-start;
+            gap: 0.8rem;
+            line-height: 1.55;
+        }
+        .tier-list li:last-child { border: none; }
+        .tier-list li::before {
+            content: '';
+            width: 7px;
+            height: 7px;
+            background: #e14b87;
+            border-radius: 50%;
+            flex-shrink: 0;
+            margin-top: 0.45rem;
+        }
+        .tier-list li strong { color: #c8c0bb; }
+
+        /* WHAT ASYNC MEANS */
+        .async-card {
+            background: rgba(212, 160, 57, 0.05);
+            border: 1px solid rgba(212, 160, 57, 0.15);
+            border-radius: 10px;
+            padding: 2rem;
+            margin-top: 2rem;
+        }
+        .async-card p { font-size: 0.95rem; color: #9a8f88; line-height: 1.8; margin: 0; }
+        .async-card strong { color: #d4a039; }
+
+        /* FINE PRINT */
+        .fine-print-list { list-style: none; padding: 0; margin: 1.5rem 0 0; }
+        .fine-print-list li {
+            font-size: 0.88rem;
+            color: #6b5e57;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #1a1a1a;
+            display: flex;
+            align-items: flex-start;
+            gap: 0.7rem;
+            line-height: 1.6;
+        }
+        .fine-print-list li:last-child { border: none; }
+        .fine-print-list li::before {
+            content: '//';
+            color: #2d2d2d;
+            font-family: monospace;
+            font-size: 0.8rem;
+            flex-shrink: 0;
+            margin-top: 0.1rem;
+        }
+
+        .cta-section {
+            text-align: center;
+            padding: 6rem 2rem 8rem;
+            max-width: 760px;
+            margin: 0 auto;
+        }
+        .cta-section .prop-heading { margin-bottom: 0.8rem; }
+        .cta-sub { font-size: 1rem; color: #6b5e57; margin-bottom: 3rem; line-height: 1.7; }
+        .cta-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            padding: 1.1rem 2.8rem;
+            background-color: #e14b87;
+            background-image:
+                radial-gradient(ellipse 12px 8px at 20% 40%, rgba(255,255,255,0.2) 0%, transparent 70%),
+                radial-gradient(ellipse 8px 12px at 60% 25%, rgba(255,255,255,0.15) 0%, transparent 70%),
+                radial-gradient(ellipse 10px 8px at 80% 65%, rgba(255,255,255,0.18) 0%, transparent 70%),
+                radial-gradient(ellipse 8px 10px at 40% 75%, rgba(255,255,255,0.12) 0%, transparent 70%);
+            color: #fafafa;
+            font-family: 'RocknRoll One', 'Space Grotesk', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 400;
+            border-radius: 6px;
+            text-decoration: none;
+            transition: all 0.2s;
+            box-shadow: 0 6px 24px rgba(225,75,135,0.4), 0 2px 4px rgba(0,0,0,0.2);
+        }
+        .cta-btn:hover { background-color: #e86fa0; color: #fafafa; box-shadow: 0 8px 30px rgba(225,75,135,0.5); transform: scale(1.03); }
+        .cta-btn:active { transform: scale(0.98); }
+        .cta-secondary { margin-top: 2rem; font-size: 0.88rem; color: #4a4a4a; }
+        .cta-secondary a { color: #9a8f88; text-decoration: underline; text-underline-offset: 3px; }
+        .cta-secondary a:hover { color: #e14b87; }
+
+        .prop-divider { height: 1px; background: #1a1a1a; max-width: 860px; margin: 0 auto; }
+
+        @media (max-width: 768px) {
+            .proposal-hero { padding: 9rem 1.5rem 4rem; }
+            .prop-section { padding: 4rem 1.5rem; }
+            .tier-card { padding: 1.8rem; }
+            .cta-section { padding: 4rem 1.5rem 6rem; }
+        }
+    </style>
+</head>
+<body>
+
+<div id="pw-gate">
+    <div class="pw-card">
+        <img src="/logo-v3.png" alt="Mexzungu Group" class="pw-logo">
+        <div class="pw-label">Private Proposal</div>
+        <div class="pw-heading">This page is for you.</div>
+        <p class="pw-sub">Enter your access code to read the proposal.</p>
+        <input type="password" id="pw-input" class="pw-input" placeholder="access code" autocomplete="off" autofocus>
+        <button class="pw-btn" onclick="checkPassword()">Open proposal</button>
+        <div class="pw-error" id="pw-error"></div>
+        <p class="pw-footer-note">This proposal is confidential and prepared specifically for Silica GBS.</p>
+    </div>
+</div>
+
+<div id="proposal-content">
+
+<nav>
+    <a href="/" class="nav-logo"><img src="/logo-v3.png" alt="Mexzungu Group"></a>
+    <button class="menu-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')" aria-label="Menu">
+        <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-links">
+        <li><a href="/">Home</a></li>
+        <li class="nav-dropdown">
+            <a href="/#pillars">What We Do</a>
+            <ul class="nav-dropdown-menu">
+                <li><a href="/venture-architecture">Venture Architecture</a></li>
+                <li><a href="/data-privacy">Data Privacy</a></li>
+                <li><a href="/rebel-capital">Rebel Capital</a></li>
+                <li><a href="/ai-ninja-factory">AI Ninja Factory</a></li>
+            </ul>
+        </li>
+        <li><a href="/outlaw-chronicles">Outlaw Chronicles</a></li>
+        <li><a href="/meet-the-band">Meet the Band</a></li>
+        <li><a href="/lets-jam" class="nav-cta"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:14px;height:14px;vertical-align:-2px;margin-right:4px;"><path d="M15.05 5A5 5 0 0 1 19 8.95M15.05 1A9 9 0 0 1 23 8.94m-1 7.98v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>Let's Jam</a></li>
+    </ul>
+</nav>
+
+<main>
+
+<div class="proposal-hero leopard-dense">
+    <div class="hero-tag">For Samuel Darko &mdash; Silica GBS</div>
+    <h1>Always in your corner.<br>When you need it.</h1>
+    <p class="valid-note">This proposal was prepared specifically for Silica GBS. It is valid for 30 days from May 2, 2026.</p>
+</div>
+
+<div class="prop-divider"></div>
+
+<div class="prop-section">
+    <div class="prop-label">01 / What we see</div>
+    <div class="prop-heading">A big bet that needs a structural partner.</div>
+    <p class="prop-copy">
+        Silica GBS is building something genuinely ambitious: the first 100,000-person, pan-African GBS provider, combining AI tools with world-class talent across 30+ delivery centers. That is not an incremental play. That is a category-defining bet.
+        <br><br>
+        A venture at this scale does not need a lawyer you call once a year to file something. It needs someone who knows the business, knows the structure, and is reachable when things come up. Before the board meeting. Before you sign that partnership agreement. Before the investor asks a question you did not see coming.
+        <br><br>
+        That is what this is.
+    </p>
+</div>
+
+<div class="prop-divider"></div>
+
+<div class="prop-section">
+    <div class="prop-label">02 / How we work together</div>
+    <div class="prop-heading">Three levels of access. You pick what fits.</div>
+
+    <p class="prop-copy" style="margin-bottom: 0;">
+        All three levels include the same thing: Pepe in your corner, Janis available around the clock, and no meter running when you send a message. The difference is how deep we go and how fast you get us.
+    </p>
+
+    <div class="tier-grid">
+
+        <!-- TIER 1 -->
+        <div class="tier-card">
+            <div class="tier-headline">On call when you need it.</div>
+            <div class="tier-sub">Async-first. You ping when something comes up. We turn it around fast.</div>
+            <ul class="tier-list">
+                <li>Async structural support — contracts, governance questions, jurisdiction queries, quick-turn advice on anything that comes up</li>
+                <li>One 60-minute strategic call per month — your agenda, your priorities</li>
+                <li><strong>Janis, our AI Chief of Staff, available 24/7</strong> — same-day responses on anything you send</li>
+                <li>Single primary jurisdiction in scope</li>
+                <li>Kellen (business operations) available for admin and coordination tasks</li>
+            </ul>
+            <div class="tier-price">$4,000<span style="font-size: 1.2rem; color: #6b5e57;">/mo</span></div>
+            <div class="tier-price-sub">30-day notice to adjust or exit. No long-term commitment.</div>
+        </div>
+
+        <!-- TIER 2 — POPULAR -->
+        <div class="tier-card popular">
+            <div class="tier-popular-badge">Most popular</div>
+            <div class="tier-headline">A real structural partner.</div>
+            <div class="tier-sub">Async access plus a regular rhythm. Two jurisdictions, two check-ins a month, and a seat at the table when it matters.</div>
+            <ul class="tier-list">
+                <li>Everything in the first level</li>
+                <li>Two jurisdictions in scope — cross-border structural work covered</li>
+                <li>Bi-weekly 45-minute check-in — track what is moving, get ahead of what is not</li>
+                <li>Quarterly board or investor meeting participation</li>
+                <li><strong>Pepe responds within 4 CET business hours</strong> on anything flagged urgent</li>
+                <li>Contract drafting and review included — not just commentary</li>
+            </ul>
+            <div class="tier-price">$6,000<span style="font-size: 1.2rem; color: #6b5e57;">/mo</span></div>
+            <div class="tier-price-sub">30-day notice to adjust or exit. No long-term commitment.</div>
+        </div>
+
+        <!-- TIER 3 -->
+        <div class="tier-card">
+            <div class="tier-headline">In the room.</div>
+            <div class="tier-sub">Full structural leadership. Multi-jurisdiction, active deal flow, monthly board presence, and Pepe on the line when it counts.</div>
+            <ul class="tier-list">
+                <li>Everything in the first two levels</li>
+                <li>Multi-jurisdiction coverage — as many markets as Silica is operating in</li>
+                <li>Weekly 30-minute check-in — no agenda needed, just status and blockers</li>
+                <li>Monthly board meeting participation — in room or on call</li>
+                <li><strong>Janis within the hour. Pepe within 4 CET business hours. Always.</strong></li>
+                <li>Active deal flow structuring — fundraising, partnerships, expansion transactions</li>
+                <li>Investor preparation and materials included</li>
+            </ul>
+            <div class="tier-price">$8,000<span style="font-size: 1.2rem; color: #6b5e57;">/mo</span></div>
+            <div class="tier-price-sub">30-day notice to adjust or exit. No long-term commitment.</div>
+        </div>
+
+    </div>
+
+    <div class="async-card">
+        <p><strong>What async actually means.</strong> You do not need to schedule a call to ask a question. You send a message — WhatsApp, email, whatever you use — and you get a real answer, not a placeholder. Janis handles the fast-turnaround work around the clock. Pepe handles the judgment calls. Between the two, nothing sits in a queue.</p>
+    </div>
+</div>
+
+<div class="prop-divider"></div>
+
+<div class="prop-section">
+    <div class="prop-label">03 / What stays the same at every level</div>
+    <div class="prop-heading">The non-negotiables.</div>
+    <p class="prop-copy" style="margin-bottom: 2rem;">
+        Regardless of which level you choose, these do not change.
+    </p>
+    <ul class="tier-list" style="margin-top: 0;">
+        <li>Direct founder access. No junior associates, no hand-offs between calls.</li>
+        <li>Janis available 24/7 for queries, document lookups, and first-pass analysis.</li>
+        <li>All structural decisions documented. Alignment holds as the team grows.</li>
+        <li>External counsel coordinated where needed. You do not manage three law firms.</li>
+        <li>Tier adjusts with 30-day notice either way. If you need more, we step up. If less, we step down. No awkward conversations.</li>
+    </ul>
+</div>
+
+<div class="prop-divider"></div>
+
+<div class="prop-section">
+    <div class="prop-label">04 / The fine print</div>
+    <div class="prop-heading">Short version.</div>
+    <ul class="fine-print-list">
+        <li>Mauritius law governs. Mexzungu Group Ltd, Royal Road, Henrietta, 73120, Mauritius.</li>
+        <li>30-day termination notice, either party. No penalty, no hard feelings.</li>
+        <li>Confidential. What happens in this engagement stays in this engagement.</li>
+        <li>This is structural and strategic consulting, not legal advice in the regulated sense. We are the architects. Filing lawyers are coordinated separately where required.</li>
+        <li>External counsel costs pass through at cost. No markup.</li>
+    </ul>
+</div>
+
+<div class="prop-divider"></div>
+
+<div class="cta-section">
+    <div class="prop-label">Ready?</div>
+    <div class="prop-heading">Pick a level. Let us start.</div>
+    <p class="cta-sub">Select your tier, sign the engagement letter, and we are working within the week.</p>
+    <a class="cta-btn" href="https://mexzungu.com/sign/silica-gbs">
+        Review and sign the engagement letter
+    </a>
+    <p class="cta-secondary">
+        Want to talk through the options first?<br>
+        <a href="https://mexzungu.com/lets-jam">Book 30 minutes with Pepe</a>
+    </p>
+</div>
+
+</main>
+
+<footer>
+    <div style="max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; padding: 0 2rem;">
+        <span>&copy; 2026 Mexzungu Group Ltd. All rights reserved.</span>
+        <span style="font-size: 0.85rem;">
+            <a href="https://pepecarrillo.co" style="color: var(--gold);">Pepe's Writing</a> &middot;
+            <a href="/privacy/" style="color: var(--gold);">Privacy Policy</a> &middot;
+            <a href="/terms/" style="color: var(--gold);">Terms of Service</a> &middot;
+            <a href="/ai-policy/" style="color: var(--gold);">AI Policy</a>
+        </span>
+    </div>
+    <div class="footer-disclaimer">Mexzungu Group provides venture architecture, strategic advisory, and structural consulting. This does not constitute legal advice.</div>
+</footer>
+
+</div>
+
+<script>
+(function() {
+    var CORRECT = 'silica-outlaw-0502';
+    var SESSION_KEY = 'silica_auth';
+
+    function unlock() {
+        document.getElementById('pw-gate').classList.add('hidden');
+        document.getElementById('proposal-content').classList.add('visible');
+    }
+
+    if (sessionStorage.getItem(SESSION_KEY) === '1') { unlock(); return; }
+
+    document.getElementById('pw-input').addEventListener('keydown', function(e) {
+        if (e.key === 'Enter') checkPassword();
+    });
+
+    window.checkPassword = function() {
+        var val = document.getElementById('pw-input').value.trim();
+        var input = document.getElementById('pw-input');
+        var err = document.getElementById('pw-error');
+        if (val === CORRECT) {
+            sessionStorage.setItem(SESSION_KEY, '1');
+            unlock();
+        } else {
+            input.classList.add('error');
+            err.textContent = 'Wrong code. Try again.';
+            input.value = '';
+            setTimeout(function() { input.classList.remove('error'); }, 400);
+            setTimeout(function() { err.textContent = ''; }, 3000);
+            input.focus();
+        }
+    };
+})();
+
+document.querySelectorAll('.nav-links a').forEach(function(l) {
+    l.addEventListener('click', function() {
+        document.querySelector('.nav-links').classList.remove('open');
+    });
+});
+</script>
+
+</body>
+</html>
