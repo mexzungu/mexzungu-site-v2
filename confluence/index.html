@@ -808,6 +808,54 @@ body { padding-bottom: calc(72px + env(safe-area-inset-bottom)); }
   margin-bottom: 16px;
 }
 
+/* Summary Strip */
+#map-summary-strip {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin-bottom: 40px;
+}
+.summary-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 14px 16px;
+}
+.summary-card-label {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 10px;
+}
+.summary-card-label span.sc-icon { font-size: 13px; }
+.summary-result-row {
+  display: flex;
+  align-items: baseline;
+  gap: 7px;
+  margin-top: 5px;
+}
+.summary-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  margin-top: 3px;
+}
+.summary-result-text {
+  font-size: 12px;
+  line-height: 1.35;
+}
+@media (max-width: 900px) {
+  #map-summary-strip { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 480px) {
+  #map-summary-strip { grid-template-columns: 1fr; }
+}
 
 h1, h2 {
   background: linear-gradient(90deg, var(--pepe), var(--agathe));
@@ -1844,59 +1892,199 @@ h1, h2 {
     <h2>Your Constellation</h2>
     <p style="color:var(--muted);max-width:640px;margin-bottom:24px">Nine instruments. A constellation. Where you each are wired the same, and where the gaps live.</p>
 
-    <!-- SIDE BY SIDE -->
-    <div class="side-by-side-panel">
-      <h3>Side by Side</h3>
-      <div class="map-results-grid">
-      <div class="map-result-col">
-        <h4 style="color:var(--pepe)">Pepe</h4>
-        <div style="font-size:10px;color:#555;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:6px;margin-top:2px">From quizzes</div>
-        <div class="map-result-row"><div class="map-result-label">Attachment Style</div><div class="map-result-value" id="sbs-pepe-attach" style="background:#111;color:#555;border:1px solid #222;border-radius:6px;padding:6px 10px;font-size:13px;min-height:28px;font-style:italic">Not yet taken</div></div>
-        <div class="map-result-row"><div class="map-result-label">Love Language</div><div class="map-result-value" id="sbs-pepe-love" style="background:#111;color:#555;border:1px solid #222;border-radius:6px;padding:6px 10px;font-size:13px;min-height:28px;font-style:italic">Not yet taken</div></div>
-        <div class="map-result-row"><div class="map-result-label">DISC</div><div class="map-result-value" id="sbs-pepe-disc" style="background:#111;color:#555;border:1px solid #222;border-radius:6px;padding:6px 10px;font-size:13px;min-height:28px;font-style:italic">Not yet taken</div></div>
-        <div class="map-result-row"><div class="map-result-label">Enneagram</div><div class="map-result-value" id="sbs-pepe-ennea" style="background:#111;color:#555;border:1px solid #222;border-radius:6px;padding:6px 10px;font-size:13px;min-height:28px;font-style:italic">Not yet taken</div></div>
-        <div class="map-result-row"><div class="map-result-label">Big Five (OCEAN)</div><div class="map-result-value" id="sbs-pepe-ocean" style="background:#111;color:#555;border:1px solid #222;border-radius:6px;padding:6px 10px;font-size:13px;min-height:28px;font-style:italic">Not yet taken</div></div>
-        <div class="map-result-row"><div class="map-result-label">Conflict Style</div><div class="map-result-value" id="sbs-pepe-conflict" style="background:#111;color:#555;border:1px solid #222;border-radius:6px;padding:6px 10px;font-size:13px;min-height:28px;font-style:italic">Not yet taken</div></div>
-        <div class="map-result-row"><div class="map-result-label">Erotic Blueprint</div><div class="map-result-value" id="sbs-pepe-erotic" style="background:#111;color:#555;border:1px solid #222;border-radius:6px;padding:6px 10px;font-size:13px;min-height:28px;font-style:italic">Not yet taken</div></div>
-        <div style="height:1px;background:var(--border);margin:12px 0"></div>
-        <div style="font-size:10px;color:#555;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:6px">From birthdate</div>
-        <div class="map-result-row"><div class="map-result-label">Life Path Number</div><div class="map-result-value" id="sbs-pepe-lpn" style="background:#111;color:#555;border:1px solid #222;border-radius:6px;padding:6px 10px;font-size:13px;min-height:28px;font-style:italic">Enter birthdate</div></div>
-        <div class="map-result-row"><div class="map-result-label">Chinese Zodiac</div><div class="map-result-value" id="sbs-pepe-zodiac" style="background:#111;color:#555;border:1px solid #222;border-radius:6px;padding:6px 10px;font-size:13px;min-height:28px;font-style:italic">Enter birthdate</div></div>
-        <div class="map-result-row"><div class="map-result-label">Moon Phase at Birth</div><div class="map-result-value" id="sbs-pepe-moon" style="background:#111;color:#555;border:1px solid #222;border-radius:6px;padding:6px 10px;font-size:13px;min-height:28px;font-style:italic">Enter birthdate</div></div>
-        <div class="map-result-row"><div class="map-result-label">Tarot Birth Card</div><div class="map-result-value" id="sbs-pepe-tarot" style="background:#111;color:#555;border:1px solid #222;border-radius:6px;padding:6px 10px;font-size:13px;min-height:28px;font-style:italic">Enter birthdate</div></div>
-        <div style="height:1px;background:var(--border);margin:12px 0"></div>
-        <div class="map-result-row"><div class="map-result-label">16Personalities</div><input class="map-result-input" id="sbs-pepe-mbti" placeholder="e.g. ENTP-A" oninput="sbsSaveManual('pepe','mbti',this.value)"/></div>
-        <div class="map-result-row"><div class="map-result-label">Sun / Moon / Rising</div><input class="map-result-input" id="sbs-pepe-astro" placeholder="e.g. Taurus / Scorpio / Gemini" oninput="sbsSaveManual('pepe','astro',this.value)"/></div>
-        <div class="map-result-row"><div class="map-result-label">Human Design</div><input class="map-result-input" id="sbs-pepe-hd" placeholder="e.g. MG 2/4, Emotional Authority" oninput="sbsSaveManual('pepe','hd',this.value)"/></div>
-        <div class="map-result-row"><div class="map-result-label">Vedic / Jyotish</div><input class="map-result-input" id="sbs-pepe-vedic" placeholder="e.g. Scorpio Lagna, Aries Moon" oninput="sbsSaveManual('pepe','vedic',this.value)"/></div>
-        <div class="map-result-row"><div class="map-result-label">Gene Keys</div><input class="map-result-input" id="sbs-pepe-genekeys" placeholder="e.g. Activation: 20, Life Work: 33" oninput="sbsSaveManual('pepe','genekeys',this.value)"/></div>
+    <!-- SUMMARY STRIP -->
+    <div id="map-summary-strip"></div>
+
+    <!-- BEHAVIOR -->
+    <div class="map-category">
+      <div class="map-category-label">Behavior</div>
+      <div class="test-grid">
+        <div class="test-card-wrapper" onclick="if(!event.target.closest('button,a')){this.classList.toggle('flipped')}">
+        <div class="test-card-inner">
+          <div class="test-card-front">
+            <div class="test-icon">○</div>
+            <div class="test-name">Attachment Style</div>
+            <div class="test-category">Relationship Architecture</div>
+          </div>
+          <div class="test-card-back">
+            <p class="test-back-desc">How you seek closeness and respond to distance, shaped by early relationships. Secure, Anxious, Avoidant, or Disorganized. The most clinically validated relationship lens.</p>
+      <div id="quiz_result_attachment_pepe" style="background:rgba(225,75,135,0.08);border:1px solid rgba(225,75,135,0.2);border-radius:8px;padding:10px 12px;font-size:12px;margin-top:4px;display:none"></div>
+      <div id="quiz_result_attachment_agathe" style="background:rgba(45,158,107,0.08);border:1px solid rgba(45,158,107,0.2);border-radius:8px;padding:10px 12px;font-size:12px;margin-top:4px;display:none"></div>
+            <div class="test-links">
+          <button id="quiz_btn_attachment_pepe" class="test-link-btn pepe-btn" onclick="openQuiz('attachment','pepe');event.stopPropagation()">Pepe - retake</button>
+          <button id="quiz_btn_attachment_agathe" class="test-link-btn agathe-btn" onclick="openQuiz('attachment','agathe');event.stopPropagation()">Agathe - retake</button>
+        </div>
+          </div>
+        </div>
       </div>
-      <div class="map-result-col">
-        <h4 style="color:var(--agathe)">Agathe</h4>
-        <div style="font-size:10px;color:#555;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:6px;margin-top:2px">From quizzes</div>
-        <div class="map-result-row"><div class="map-result-label">Attachment Style</div><div class="map-result-value" id="sbs-agathe-attach" style="background:#111;color:#555;border:1px solid #222;border-radius:6px;padding:6px 10px;font-size:13px;min-height:28px;font-style:italic">Not yet taken</div></div>
-        <div class="map-result-row"><div class="map-result-label">Love Language</div><div class="map-result-value" id="sbs-agathe-love" style="background:#111;color:#555;border:1px solid #222;border-radius:6px;padding:6px 10px;font-size:13px;min-height:28px;font-style:italic">Not yet taken</div></div>
-        <div class="map-result-row"><div class="map-result-label">DISC</div><div class="map-result-value" id="sbs-agathe-disc" style="background:#111;color:#555;border:1px solid #222;border-radius:6px;padding:6px 10px;font-size:13px;min-height:28px;font-style:italic">Not yet taken</div></div>
-        <div class="map-result-row"><div class="map-result-label">Enneagram</div><div class="map-result-value" id="sbs-agathe-ennea" style="background:#111;color:#555;border:1px solid #222;border-radius:6px;padding:6px 10px;font-size:13px;min-height:28px;font-style:italic">Not yet taken</div></div>
-        <div class="map-result-row"><div class="map-result-label">Big Five (OCEAN)</div><div class="map-result-value" id="sbs-agathe-ocean" style="background:#111;color:#555;border:1px solid #222;border-radius:6px;padding:6px 10px;font-size:13px;min-height:28px;font-style:italic">Not yet taken</div></div>
-        <div class="map-result-row"><div class="map-result-label">Conflict Style</div><div class="map-result-value" id="sbs-agathe-conflict" style="background:#111;color:#555;border:1px solid #222;border-radius:6px;padding:6px 10px;font-size:13px;min-height:28px;font-style:italic">Not yet taken</div></div>
-        <div class="map-result-row"><div class="map-result-label">Erotic Blueprint</div><div class="map-result-value" id="sbs-agathe-erotic" style="background:#111;color:#555;border:1px solid #222;border-radius:6px;padding:6px 10px;font-size:13px;min-height:28px;font-style:italic">Not yet taken</div></div>
-        <div style="height:1px;background:var(--border);margin:12px 0"></div>
-        <div style="font-size:10px;color:#555;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:6px">From birthdate</div>
-        <div class="map-result-row"><div class="map-result-label">Life Path Number</div><div class="map-result-value" id="sbs-agathe-lpn" style="background:#111;color:#555;border:1px solid #222;border-radius:6px;padding:6px 10px;font-size:13px;min-height:28px;font-style:italic">Enter birthdate</div></div>
-        <div class="map-result-row"><div class="map-result-label">Chinese Zodiac</div><div class="map-result-value" id="sbs-agathe-zodiac" style="background:#111;color:#555;border:1px solid #222;border-radius:6px;padding:6px 10px;font-size:13px;min-height:28px;font-style:italic">Enter birthdate</div></div>
-        <div class="map-result-row"><div class="map-result-label">Moon Phase at Birth</div><div class="map-result-value" id="sbs-agathe-moon" style="background:#111;color:#555;border:1px solid #222;border-radius:6px;padding:6px 10px;font-size:13px;min-height:28px;font-style:italic">Enter birthdate</div></div>
-        <div class="map-result-row"><div class="map-result-label">Tarot Birth Card</div><div class="map-result-value" id="sbs-agathe-tarot" style="background:#111;color:#555;border:1px solid #222;border-radius:6px;padding:6px 10px;font-size:13px;min-height:28px;font-style:italic">Enter birthdate</div></div>
-        <div style="height:1px;background:var(--border);margin:12px 0"></div>
-        <div class="map-result-row"><div class="map-result-label">16Personalities</div><input class="map-result-input" id="sbs-agathe-mbti" placeholder="e.g. INFJ-T" oninput="sbsSaveManual('agathe','mbti',this.value)"/></div>
-        <div class="map-result-row"><div class="map-result-label">Sun / Moon / Rising</div><input class="map-result-input" id="sbs-agathe-astro" placeholder="e.g. Aquarius / Pisces / Virgo" oninput="sbsSaveManual('agathe','astro',this.value)"/></div>
-        <div class="map-result-row"><div class="map-result-label">Human Design</div><input class="map-result-input" id="sbs-agathe-hd" placeholder="e.g. Projector 1/3, Splenic Authority" oninput="sbsSaveManual('agathe','hd',this.value)"/></div>
-        <div class="map-result-row"><div class="map-result-label">Vedic / Jyotish</div><input class="map-result-input" id="sbs-agathe-vedic" placeholder="e.g. Aquarius Lagna, Libra Moon" oninput="sbsSaveManual('agathe','vedic',this.value)"/></div>
-        <div class="map-result-row"><div class="map-result-label">Gene Keys</div><input class="map-result-input" id="sbs-agathe-genekeys" placeholder="e.g. Activation: 13, Life Work: 1" oninput="sbsSaveManual('agathe','genekeys',this.value)"/></div>
+        <div class="test-card-wrapper" onclick="if(!event.target.closest('button,a')){this.classList.toggle('flipped')}">
+        <div class="test-card-inner">
+          <div class="test-card-front">
+            <div class="test-icon">♡</div>
+            <div class="test-name">Love Languages</div>
+            <div class="test-category">Emotional Needs</div>
+          </div>
+          <div class="test-card-back">
+            <p class="test-back-desc">How you give and receive love: Words of Affirmation, Quality Time, Acts of Service, Physical Touch, or Receiving Gifts. Mismatched languages cause most relationship friction.</p>
+      <div id="quiz_result_love_languages_pepe" style="background:rgba(225,75,135,0.08);border:1px solid rgba(225,75,135,0.2);border-radius:8px;padding:10px 12px;font-size:12px;margin-top:4px;display:none"></div>
+      <div id="quiz_result_love_languages_agathe" style="background:rgba(45,158,107,0.08);border:1px solid rgba(45,158,107,0.2);border-radius:8px;padding:10px 12px;font-size:12px;margin-top:4px;display:none"></div>
+            <div class="test-links">
+          <button id="quiz_btn_love_languages_pepe" class="test-link-btn pepe-btn" onclick="openQuiz('love_languages','pepe');event.stopPropagation()">Pepe - retake</button>
+          <button id="quiz_btn_love_languages_agathe" class="test-link-btn agathe-btn" onclick="openQuiz('love_languages','agathe');event.stopPropagation()">Agathe - take</button>
+        </div>
+          </div>
+        </div>
+      </div>
+        <div class="test-card-wrapper" onclick="if(!event.target.closest('button,a')){this.classList.toggle('flipped')}">
+        <div class="test-card-inner">
+          <div class="test-card-front">
+            <div class="test-icon">◈</div>
+            <div class="test-name">DISC Profile</div>
+            <div class="test-category">Communication and Drive</div>
+          </div>
+          <div class="test-card-back">
+            <p class="test-back-desc">Behavioral model covering Dominance, Influence, Steadiness, Conscientiousness. Shows communication style, decision-making, and behavior under pressure.</p>
+      <div id="quiz_result_disc_pepe" style="background:rgba(225,75,135,0.08);border:1px solid rgba(225,75,135,0.2);border-radius:8px;padding:10px 12px;font-size:12px;margin-top:4px;display:none"></div>
+      <div id="quiz_result_disc_agathe" style="background:rgba(45,158,107,0.08);border:1px solid rgba(45,158,107,0.2);border-radius:8px;padding:10px 12px;font-size:12px;margin-top:4px;display:none"></div>
+            <div class="test-links">
+          <button id="quiz_btn_disc_pepe" class="test-link-btn pepe-btn" onclick="openQuiz('disc','pepe');event.stopPropagation()">Pepe - retake</button>
+          <button id="quiz_btn_disc_agathe" class="test-link-btn agathe-btn" onclick="openQuiz('disc','agathe');event.stopPropagation()">Agathe - take</button>
+        </div>
+          </div>
+        </div>
+      </div>
+        <div class="test-card-wrapper" onclick="if(!event.target.closest('button,a')){this.classList.toggle('flipped')}">
+        <div class="test-card-inner">
+          <div class="test-card-front">
+            <div class="test-icon">⚡</div>
+            <div class="test-name">Conflict Style (Thomas-Kilmann)</div>
+            <div class="test-category">Conflict and Repair</div>
+          </div>
+          <div class="test-card-back">
+            <p class="test-back-desc">Five approaches to conflict: Competing, Collaborating, Compromising, Avoiding, Accommodating. Knowing your default and your partner's prevents most recurring fights.</p>
+      <div id="quiz_result_conflict_pepe" style="background:rgba(225,75,135,0.08);border:1px solid rgba(225,75,135,0.2);border-radius:8px;padding:10px 12px;font-size:12px;margin-top:4px;display:none"></div>
+      <div id="quiz_result_conflict_agathe" style="background:rgba(45,158,107,0.08);border:1px solid rgba(45,158,107,0.2);border-radius:8px;padding:10px 12px;font-size:12px;margin-top:4px;display:none"></div>
+            <div class="test-links">
+          <button id="quiz_btn_conflict_pepe" class="test-link-btn pepe-btn" onclick="openQuiz('conflict','pepe');event.stopPropagation()">Pepe - take</button>
+          <button id="quiz_btn_conflict_agathe" class="test-link-btn agathe-btn" onclick="openQuiz('conflict','agathe');event.stopPropagation()">Agathe - take</button>
+        </div>
+          </div>
+        </div>
+      </div>
       </div>
     </div>
-    <button class="map-save-btn" onclick="saveMapResults()">Save</button>
-    <div id="map-save-msg" style="font-family:'Space Grotesk',sans-serif;font-size:12px;color:var(--green);margin-top:8px;display:none">Saved.</div>
+
+    <!-- PERSONALITY -->
+    <div class="map-category">
+      <div class="map-category-label">Personality</div>
+      <div class="test-grid">
+        <div class="test-card-wrapper" onclick="if(!event.target.closest('button,a')){this.classList.toggle('flipped')}">
+        <div class="test-card-inner">
+          <div class="test-card-front">
+            <div class="test-icon">⬛</div>
+            <div class="test-name">16Personalities (MBTI)</div>
+            <div class="test-category">Personality Architecture</div>
+          </div>
+          <div class="test-card-back">
+            <p class="test-back-desc">Sixteen types on four axes: Introvert/Extrovert, Intuition/Sensing, Thinking/Feeling, Judging/Perceiving. The most widely used personality framework worldwide.</p>
+            <div class="test-links">
+          
+        </div>
+          </div>
+        </div>
+      </div>
+        <div class="test-card-wrapper" onclick="if(!event.target.closest('button,a')){this.classList.toggle('flipped')}">
+        <div class="test-card-inner">
+          <div class="test-card-front">
+            <div class="test-icon">✦</div>
+            <div class="test-name">Enneagram</div>
+            <div class="test-category">Core Motivation and Fear</div>
+          </div>
+          <div class="test-card-back">
+            <p class="test-back-desc">Nine types driven by a deep unconscious motivation and fear. Goes deeper than MBTI by identifying the emotional driver, not just the surface behavior pattern.</p>
+      <div id="quiz_result_enneagram_pepe" style="background:rgba(225,75,135,0.08);border:1px solid rgba(225,75,135,0.2);border-radius:8px;padding:10px 12px;font-size:12px;margin-top:4px;display:none"></div>
+      <div id="quiz_result_enneagram_agathe" style="background:rgba(45,158,107,0.08);border:1px solid rgba(45,158,107,0.2);border-radius:8px;padding:10px 12px;font-size:12px;margin-top:4px;display:none"></div>
+            <div class="test-links">
+          <button id="quiz_btn_enneagram_pepe" class="test-link-btn pepe-btn" onclick="openQuiz('enneagram','pepe');event.stopPropagation()">Pepe - take</button>
+          <button id="quiz_btn_enneagram_agathe" class="test-link-btn agathe-btn" onclick="openQuiz('enneagram','agathe');event.stopPropagation()">Agathe - take</button>
+        </div>
+          </div>
+        </div>
+      </div>
+        <div class="test-card-wrapper" onclick="if(!event.target.closest('button,a')){this.classList.toggle('flipped')}">
+        <div class="test-card-inner">
+          <div class="test-card-front">
+            <div class="test-icon">▣</div>
+            <div class="test-name">Big Five (OCEAN)</div>
+            <div class="test-category">Trait-Based Personality</div>
+          </div>
+          <div class="test-card-back">
+            <p class="test-back-desc">The most scientifically validated model: Openness, Conscientiousness, Extraversion, Agreeableness, Neuroticism. Five dimensions that predict behavior across all contexts.</p>
+      <div id="quiz_result_big_five_pepe" style="background:rgba(225,75,135,0.08);border:1px solid rgba(225,75,135,0.2);border-radius:8px;padding:10px 12px;font-size:12px;margin-top:4px;display:none"></div>
+      <div id="quiz_result_big_five_agathe" style="background:rgba(45,158,107,0.08);border:1px solid rgba(45,158,107,0.2);border-radius:8px;padding:10px 12px;font-size:12px;margin-top:4px;display:none"></div>
+            <div class="test-links">
+          <button id="quiz_btn_big_five_pepe" class="test-link-btn pepe-btn" onclick="openQuiz('big_five','pepe');event.stopPropagation()">Pepe - take</button>
+          <button id="quiz_btn_big_five_agathe" class="test-link-btn agathe-btn" onclick="openQuiz('big_five','agathe');event.stopPropagation()">Agathe - take</button>
+        </div>
+          </div>
+        </div>
+      </div>
+      <div class="test-card-wrapper" onclick="if(!event.target.closest('button,a')){this.classList.toggle('flipped')}">
+        <div class="test-card-inner">
+          <div class="test-card-front">
+            <div class="test-icon">♦</div>
+            <div class="test-name">Erotic Blueprint</div>
+            <div class="test-category">Erotic Wiring</div>
+          </div>
+          <div class="test-card-back">
+            <p class="test-back-desc">Energetic, Sensual, Sexual, Kinky, or Shapeshifter. Identifies what turns you on and what disconnects you. The most practically useful sexual compatibility tool.</p>
+      <div id="quiz_result_erotic_blueprint_pepe" style="background:rgba(225,75,135,0.08);border:1px solid rgba(225,75,135,0.2);border-radius:8px;padding:10px 12px;font-size:12px;margin-top:4px;display:none"></div>
+      <div id="quiz_result_erotic_blueprint_agathe" style="background:rgba(45,158,107,0.08);border:1px solid rgba(45,158,107,0.2);border-radius:8px;padding:10px 12px;font-size:12px;margin-top:4px;display:none"></div>
+            <div class="test-links">
+          <button id="quiz_btn_erotic_blueprint_pepe" class="test-link-btn pepe-btn" onclick="openQuiz('erotic_blueprint','pepe');event.stopPropagation()">Pepe - take</button>
+          <button id="quiz_btn_erotic_blueprint_agathe" class="test-link-btn agathe-btn" onclick="openQuiz('erotic_blueprint','agathe');event.stopPropagation()">Agathe - take</button>
+        </div>
+          </div>
+        </div>
+      </div>
+      <div class="test-card-wrapper" onclick="if(!event.target.closest('button,a')){this.classList.toggle('flipped')}">
+        <div class="test-card-inner">
+          <div class="test-card-front">
+            <div class="test-icon">&#x1F517;</div>
+            <div class="test-name">BDSM Roles</div>
+            <div class="test-category">Erotic Wiring</div>
+          </div>
+          <div class="test-card-back">
+            <p class="test-back-desc">21 roles from Dominant to Pet to Experimentalist. Maps your actual arousal patterns across the full BDSM spectrum. In-house, no paywall, no external data.</p>
+      <div id="quiz_result_bdsm_roles_pepe" style="background:rgba(225,75,135,0.08);border:1px solid rgba(225,75,135,0.2);border-radius:8px;padding:10px 12px;font-size:12px;margin-top:4px;display:none"></div>
+      <div id="quiz_result_bdsm_roles_agathe" style="background:rgba(45,158,107,0.08);border:1px solid rgba(45,158,107,0.2);border-radius:8px;padding:10px 12px;font-size:12px;margin-top:4px;display:none"></div>
+            <div class="test-links">
+          <button id="quiz_btn_bdsm_roles_pepe" class="test-link-btn pepe-btn" onclick="openQuiz('bdsm_roles','pepe');event.stopPropagation()">Pepe - take</button>
+          <button id="quiz_btn_bdsm_roles_agathe" class="test-link-btn agathe-btn" onclick="openQuiz('bdsm_roles','agathe');event.stopPropagation()">Agathe - take</button>
+        </div>
+          </div>
+        </div>
+      </div>
+      <div class="test-card-wrapper" onclick="if(!event.target.closest('button,a')){this.classList.toggle('flipped')}">
+        <div class="test-card-inner">
+          <div class="test-card-front">
+            <div class="test-icon">&#x221E;</div>
+            <div class="test-name">ENM Alignment</div>
+            <div class="test-category">Relationship Structure</div>
+          </div>
+          <div class="test-card-back">
+            <p class="test-back-desc">Check-in tool for ethical non-monogamy alignment. Covers communication, boundaries, compersion, security, and autonomy. Taken as a couple.</p>
+      <div id="quiz_result_enm_alignment_pepe" style="background:rgba(225,75,135,0.08);border:1px solid rgba(225,75,135,0.2);border-radius:8px;padding:10px 12px;font-size:12px;margin-top:4px;display:none"></div>
+      <div id="quiz_result_enm_alignment_agathe" style="background:rgba(45,158,107,0.08);border:1px solid rgba(45,158,107,0.2);border-radius:8px;padding:10px 12px;font-size:12px;margin-top:4px;display:none"></div>
+            <div class="test-links">
+          <button id="quiz_btn_enm_alignment_pepe" class="test-link-btn pepe-btn" onclick="openQuiz('enm_alignment','pepe');event.stopPropagation()">Pepe - take</button>
+          <button id="quiz_btn_enm_alignment_agathe" class="test-link-btn agathe-btn" onclick="openQuiz('enm_alignment','agathe');event.stopPropagation()">Agathe - take</button>
+        </div>
+          </div>
+        </div>
+      </div>
+      </div>
+    </div>
 
     <!-- CELESTIAL -->
     <div class="map-category">
@@ -2040,259 +2228,10 @@ h1, h2 {
       </div>
     </div>
 
-    <!-- BEHAVIOR -->
-    <div class="map-category">
-      <div class="map-category-label">Behavior</div>
-      <div class="test-grid">
-        <div class="test-card-wrapper" onclick="if(!event.target.closest('button,a')){this.classList.toggle('flipped')}">
-        <div class="test-card-inner">
-          <div class="test-card-front">
-            <div class="test-icon">○</div>
-            <div class="test-name">Attachment Style</div>
-            <div class="test-category">Relationship Architecture</div>
-          </div>
-          <div class="test-card-back">
-            <p class="test-back-desc">How you seek closeness and respond to distance, shaped by early relationships. Secure, Anxious, Avoidant, or Disorganized. The most clinically validated relationship lens.</p>
-      <div id="quiz_result_attachment_pepe" style="background:rgba(225,75,135,0.08);border:1px solid rgba(225,75,135,0.2);border-radius:8px;padding:10px 12px;font-size:12px;margin-top:4px;display:none"></div>
-      <div id="quiz_result_attachment_agathe" style="background:rgba(45,158,107,0.08);border:1px solid rgba(45,158,107,0.2);border-radius:8px;padding:10px 12px;font-size:12px;margin-top:4px;display:none"></div>
-            <div class="test-links">
-          <button id="quiz_btn_attachment_pepe" class="test-link-btn pepe-btn" onclick="openQuiz('attachment','pepe');event.stopPropagation()">Pepe - retake</button>
-          <button id="quiz_btn_attachment_agathe" class="test-link-btn agathe-btn" onclick="openQuiz('attachment','agathe');event.stopPropagation()">Agathe - retake</button>
-        </div>
-          </div>
-        </div>
-      </div>
-        <div class="test-card-wrapper" onclick="if(!event.target.closest('button,a')){this.classList.toggle('flipped')}">
-        <div class="test-card-inner">
-          <div class="test-card-front">
-            <div class="test-icon">♡</div>
-            <div class="test-name">Love Languages</div>
-            <div class="test-category">Emotional Needs</div>
-          </div>
-          <div class="test-card-back">
-            <p class="test-back-desc">How you give and receive love: Words of Affirmation, Quality Time, Acts of Service, Physical Touch, or Receiving Gifts. Mismatched languages cause most relationship friction.</p>
-      <div id="quiz_result_love_languages_pepe" style="background:rgba(225,75,135,0.08);border:1px solid rgba(225,75,135,0.2);border-radius:8px;padding:10px 12px;font-size:12px;margin-top:4px;display:none"></div>
-      <div id="quiz_result_love_languages_agathe" style="background:rgba(45,158,107,0.08);border:1px solid rgba(45,158,107,0.2);border-radius:8px;padding:10px 12px;font-size:12px;margin-top:4px;display:none"></div>
-            <div class="test-links">
-          <button id="quiz_btn_love_languages_pepe" class="test-link-btn pepe-btn" onclick="openQuiz('love_languages','pepe');event.stopPropagation()">Pepe - retake</button>
-          <button id="quiz_btn_love_languages_agathe" class="test-link-btn agathe-btn" onclick="openQuiz('love_languages','agathe');event.stopPropagation()">Agathe - take</button>
-        </div>
-          </div>
-        </div>
-      </div>
-        <div class="test-card-wrapper" onclick="if(!event.target.closest('button,a')){this.classList.toggle('flipped')}">
-        <div class="test-card-inner">
-          <div class="test-card-front">
-            <div class="test-icon">◈</div>
-            <div class="test-name">DISC Profile</div>
-            <div class="test-category">Communication and Drive</div>
-          </div>
-          <div class="test-card-back">
-            <p class="test-back-desc">Behavioral model covering Dominance, Influence, Steadiness, Conscientiousness. Shows communication style, decision-making, and behavior under pressure.</p>
-      <div id="quiz_result_disc_pepe" style="background:rgba(225,75,135,0.08);border:1px solid rgba(225,75,135,0.2);border-radius:8px;padding:10px 12px;font-size:12px;margin-top:4px;display:none"></div>
-      <div id="quiz_result_disc_agathe" style="background:rgba(45,158,107,0.08);border:1px solid rgba(45,158,107,0.2);border-radius:8px;padding:10px 12px;font-size:12px;margin-top:4px;display:none"></div>
-            <div class="test-links">
-          <button id="quiz_btn_disc_pepe" class="test-link-btn pepe-btn" onclick="openQuiz('disc','pepe');event.stopPropagation()">Pepe - retake</button>
-          <button id="quiz_btn_disc_agathe" class="test-link-btn agathe-btn" onclick="openQuiz('disc','agathe');event.stopPropagation()">Agathe - take</button>
-        </div>
-          </div>
-        </div>
-      </div>
-        <div class="test-card-wrapper" onclick="if(!event.target.closest('button,a')){this.classList.toggle('flipped')}">
-        <div class="test-card-inner">
-          <div class="test-card-front">
-            <div class="test-icon">⚡</div>
-            <div class="test-name">Conflict Style (Thomas-Kilmann)</div>
-            <div class="test-category">Conflict and Repair</div>
-          </div>
-          <div class="test-card-back">
-            <p class="test-back-desc">Five approaches to conflict: Competing, Collaborating, Compromising, Avoiding, Accommodating. Knowing your default and your partner's prevents most recurring fights.</p>
-      <div id="quiz_result_conflict_pepe" style="background:rgba(225,75,135,0.08);border:1px solid rgba(225,75,135,0.2);border-radius:8px;padding:10px 12px;font-size:12px;margin-top:4px;display:none"></div>
-      <div id="quiz_result_conflict_agathe" style="background:rgba(45,158,107,0.08);border:1px solid rgba(45,158,107,0.2);border-radius:8px;padding:10px 12px;font-size:12px;margin-top:4px;display:none"></div>
-            <div class="test-links">
-          <button id="quiz_btn_conflict_pepe" class="test-link-btn pepe-btn" onclick="openQuiz('conflict','pepe');event.stopPropagation()">Pepe - take</button>
-          <button id="quiz_btn_conflict_agathe" class="test-link-btn agathe-btn" onclick="openQuiz('conflict','agathe');event.stopPropagation()">Agathe - take</button>
-        </div>
-          </div>
-        </div>
-      </div>
-
-    </div>
-
-    <div style="margin-top:48px;margin-bottom:24px;text-align:center">
-      <div style="display:inline-flex;align-items:center;gap:12px;color:var(--muted)">
-        <span style="height:1px;width:60px;background:var(--border);display:inline-block"></span>
-        <span style="font-family:'Space Grotesk',sans-serif;font-size:11px;letter-spacing:0.15em;text-transform:uppercase;color:var(--accent)">The Celestial Layer</span>
-        <span style="height:1px;width:60px;background:var(--border);display:inline-block"></span>
-      </div>
-      <p style="color:var(--muted);font-size:13px;margin-top:8px;max-width:540px;margin-left:auto;margin-right:auto">The instruments the ancients used before psychology had a name for any of this. Less scientific. More true.</p>
-    </div>
-
-    <div class="test-grid">
-
-      <div class="test-card-wrapper" onclick="if(!event.target.closest('button,a')){this.classList.toggle('flipped')}">
-        <div class="test-card-inner">
-          <div class="test-card-front">
-            <div class="test-icon">✦</div>
-            <div class="test-name">Natal Chart (Astrology)</div>
-            <div class="test-category">Cosmic Architecture</div>
-          </div>
-          <div class="test-card-back">
-            <p class="test-back-desc">Your birth chart maps the sky at your exact birth moment. Each planet in each house shapes personality, drives, and shadow. The most detailed self-portrait that exists.</p>
-            <div class="test-links">
-          <a onclick="event.stopPropagation()" class="test-link-btn both-btn" href="https://astro.com/cgi/chart.cgi" target="_blank" rel="noopener">Full chart (astro.com) →</a>
-        </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="test-card-wrapper" onclick="if(!event.target.closest('button,a')){this.classList.toggle('flipped')}">
-        <div class="test-card-inner">
-          <div class="test-card-front">
-            <div class="test-icon">⬡</div>
-            <div class="test-name">Human Design</div>
-            <div class="test-category">Energetic Mechanics</div>
-          </div>
-          <div class="test-card-back">
-            <p class="test-back-desc">Synthesizes astrology, I Ching, Kabbalah, and chakras into your energy type (Generator, Projector, Manifestor, Reflector) and decision-making strategy.</p>
-            <div class="test-links">
-          <a onclick="event.stopPropagation()" class="test-link-btn both-btn" href="https://www.jovianarchive.com/Get_Your_Chart" target="_blank" rel="noopener">Get your chart →</a>
-        </div>
-          </div>
-        </div>
-      </div>
-
-    </div>
-
-    <h3 style="margin-top:40px">Results: Side by Side</h3>
-    <p style="color:var(--muted);font-size:13px;margin-bottom:20px">Stored locally in your browser only. Compare when you've both taken them.</p>
-      </div>
-    </div>
-
-    <!-- PERSONALITY -->
-    <div class="map-category">
-      <div class="map-category-label">Personality</div>
-      <div class="test-grid">
-        <div class="test-card-wrapper" onclick="if(!event.target.closest('button,a')){this.classList.toggle('flipped')}">
-        <div class="test-card-inner">
-          <div class="test-card-front">
-            <div class="test-icon">⬛</div>
-            <div class="test-name">16Personalities (MBTI)</div>
-            <div class="test-category">Personality Architecture</div>
-          </div>
-          <div class="test-card-back">
-            <p class="test-back-desc">Sixteen types on four axes: Introvert/Extrovert, Intuition/Sensing, Thinking/Feeling, Judging/Perceiving. The most widely used personality framework worldwide.</p>
-            <div class="test-links">
-          
-        </div>
-          </div>
-        </div>
-      </div>
-        <div class="test-card-wrapper" onclick="if(!event.target.closest('button,a')){this.classList.toggle('flipped')}">
-        <div class="test-card-inner">
-          <div class="test-card-front">
-            <div class="test-icon">✦</div>
-            <div class="test-name">Enneagram</div>
-            <div class="test-category">Core Motivation and Fear</div>
-          </div>
-          <div class="test-card-back">
-            <p class="test-back-desc">Nine types driven by a deep unconscious motivation and fear. Goes deeper than MBTI by identifying the emotional driver, not just the surface behavior pattern.</p>
-      <div id="quiz_result_enneagram_pepe" style="background:rgba(225,75,135,0.08);border:1px solid rgba(225,75,135,0.2);border-radius:8px;padding:10px 12px;font-size:12px;margin-top:4px;display:none"></div>
-      <div id="quiz_result_enneagram_agathe" style="background:rgba(45,158,107,0.08);border:1px solid rgba(45,158,107,0.2);border-radius:8px;padding:10px 12px;font-size:12px;margin-top:4px;display:none"></div>
-            <div class="test-links">
-          <button id="quiz_btn_enneagram_pepe" class="test-link-btn pepe-btn" onclick="openQuiz('enneagram','pepe');event.stopPropagation()">Pepe - take</button>
-          <button id="quiz_btn_enneagram_agathe" class="test-link-btn agathe-btn" onclick="openQuiz('enneagram','agathe');event.stopPropagation()">Agathe - take</button>
-        </div>
-          </div>
-        </div>
-      </div>
-        <div class="test-card-wrapper" onclick="if(!event.target.closest('button,a')){this.classList.toggle('flipped')}">
-        <div class="test-card-inner">
-          <div class="test-card-front">
-            <div class="test-icon">▣</div>
-            <div class="test-name">Big Five (OCEAN)</div>
-            <div class="test-category">Trait-Based Personality</div>
-          </div>
-          <div class="test-card-back">
-            <p class="test-back-desc">The most scientifically validated model: Openness, Conscientiousness, Extraversion, Agreeableness, Neuroticism. Five dimensions that predict behavior across all contexts.</p>
-      <div id="quiz_result_big_five_pepe" style="background:rgba(225,75,135,0.08);border:1px solid rgba(225,75,135,0.2);border-radius:8px;padding:10px 12px;font-size:12px;margin-top:4px;display:none"></div>
-      <div id="quiz_result_big_five_agathe" style="background:rgba(45,158,107,0.08);border:1px solid rgba(45,158,107,0.2);border-radius:8px;padding:10px 12px;font-size:12px;margin-top:4px;display:none"></div>
-            <div class="test-links">
-          <button id="quiz_btn_big_five_pepe" class="test-link-btn pepe-btn" onclick="openQuiz('big_five','pepe');event.stopPropagation()">Pepe - take</button>
-          <button id="quiz_btn_big_five_agathe" class="test-link-btn agathe-btn" onclick="openQuiz('big_five','agathe');event.stopPropagation()">Agathe - take</button>
-        </div>
-          </div>
-        </div>
-      </div>
-      
-      <div class="test-card-wrapper" onclick="if(!event.target.closest('button,a')){this.classList.toggle('flipped')}">
-        <div class="test-card-inner">
-          <div class="test-card-front">
-            <div class="test-icon">♦</div>
-            <div class="test-name">Erotic Blueprint</div>
-            <div class="test-category">Erotic Wiring</div>
-          </div>
-          <div class="test-card-back">
-            <p class="test-back-desc">Energetic, Sensual, Sexual, Kinky, or Shapeshifter. Identifies what turns you on and what disconnects you. The most practically useful sexual compatibility tool.</p>
-      <div id="quiz_result_erotic_blueprint_pepe" style="background:rgba(225,75,135,0.08);border:1px solid rgba(225,75,135,0.2);border-radius:8px;padding:10px 12px;font-size:12px;margin-top:4px;display:none"></div>
-      <div id="quiz_result_erotic_blueprint_agathe" style="background:rgba(45,158,107,0.08);border:1px solid rgba(45,158,107,0.2);border-radius:8px;padding:10px 12px;font-size:12px;margin-top:4px;display:none"></div>
-            <div class="test-links">
-          <button id="quiz_btn_erotic_blueprint_pepe" class="test-link-btn pepe-btn" onclick="openQuiz('erotic_blueprint','pepe');event.stopPropagation()">Pepe - take</button>
-          <button id="quiz_btn_erotic_blueprint_agathe" class="test-link-btn agathe-btn" onclick="openQuiz('erotic_blueprint','agathe');event.stopPropagation()">Agathe - take</button>
-        </div>
-          </div>
-        </div>
-      </div>
-      <div class="test-card-wrapper" onclick="if(!event.target.closest('button,a')){this.classList.toggle('flipped')}">
-        <div class="test-card-inner">
-          <div class="test-card-front">
-            <div class="test-icon">&#x1F517;</div>
-            <div class="test-name">BDSM Roles</div>
-            <div class="test-category">Erotic Wiring</div>
-          </div>
-          <div class="test-card-back">
-            <p class="test-back-desc">21 roles from Dominant to Pet to Experimentalist. Maps your actual arousal patterns across the full BDSM spectrum. In-house, no paywall, no external data.</p>
-      <div id="quiz_result_bdsm_roles_pepe" style="background:rgba(225,75,135,0.08);border:1px solid rgba(225,75,135,0.2);border-radius:8px;padding:10px 12px;font-size:12px;margin-top:4px;display:none"></div>
-      <div id="quiz_result_bdsm_roles_agathe" style="background:rgba(45,158,107,0.08);border:1px solid rgba(45,158,107,0.2);border-radius:8px;padding:10px 12px;font-size:12px;margin-top:4px;display:none"></div>
-            <div class="test-links">
-          <button id="quiz_btn_bdsm_roles_pepe" class="test-link-btn pepe-btn" onclick="openQuiz('bdsm_roles','pepe');event.stopPropagation()">Pepe - take</button>
-          <button id="quiz_btn_bdsm_roles_agathe" class="test-link-btn agathe-btn" onclick="openQuiz('bdsm_roles','agathe');event.stopPropagation()">Agathe - take</button>
-        </div>
-          </div>
-        </div>
-      </div>
-      <div class="test-card-wrapper" onclick="if(!event.target.closest('button,a')){this.classList.toggle('flipped')}">
-        <div class="test-card-inner">
-          <div class="test-card-front">
-            <div class="test-icon">&#x221E;</div>
-            <div class="test-name">ENM Alignment</div>
-            <div class="test-category">Relationship Structure</div>
-          </div>
-          <div class="test-card-back">
-            <p class="test-back-desc">Check-in tool for ethical non-monogamy alignment. Covers communication, boundaries, compersion, security, and autonomy. Taken as a couple.</p>
-      <div id="quiz_result_enm_alignment_pepe" style="background:rgba(225,75,135,0.08);border:1px solid rgba(225,75,135,0.2);border-radius:8px;padding:10px 12px;font-size:12px;margin-top:4px;display:none"></div>
-      <div id="quiz_result_enm_alignment_agathe" style="background:rgba(45,158,107,0.08);border:1px solid rgba(45,158,107,0.2);border-radius:8px;padding:10px 12px;font-size:12px;margin-top:4px;display:none"></div>
-            <div class="test-links">
-          <button id="quiz_btn_enm_alignment_pepe" class="test-link-btn pepe-btn" onclick="openQuiz('enm_alignment','pepe');event.stopPropagation()">Pepe - take</button>
-          <button id="quiz_btn_enm_alignment_agathe" class="test-link-btn agathe-btn" onclick="openQuiz('enm_alignment','agathe');event.stopPropagation()">Agathe - take</button>
-        </div>
-          </div>
-        </div>
-      </div>
-      </div>
-    </div>
-
-  </div>
-</section>
-<section id="the-map">
-  <div class="container">
-    <div class="section-label">The Map</div>
-    <h2>Your Constellation</h2>
-    <p style="color:var(--muted);max-width:640px;margin-bottom:24px">Nine instruments. A constellation. Where you each are wired the same, and where the gaps live.</p>
-
-    <!-- SIDE BY SIDE -->
+    <!-- SIDE BY SIDE (moved to bottom) -->
     <div class="side-by-side-panel">
       <h3>Side by Side</h3>
+      <p style="color:var(--muted);font-size:13px;margin-bottom:16px">Stored locally in your browser only. Compare when you've both taken them.</p>
       <div class="map-results-grid">
       <div class="map-result-col">
         <h4 style="color:var(--pepe)">Pepe</h4>
@@ -2343,231 +2282,6 @@ h1, h2 {
     </div>
     <button class="map-save-btn" onclick="saveMapResults()">Save</button>
     <div id="map-save-msg" style="font-family:'Space Grotesk',sans-serif;font-size:12px;color:var(--green);margin-top:8px;display:none">Saved.</div>
-
-    <!-- CELESTIAL -->
-    <div class="map-category">
-      <div class="map-category-label">Celestial</div>
-      <div class="test-grid">
-        <div class="test-card-wrapper" onclick="if(!event.target.closest('button,a')){this.classList.toggle('flipped')}">
-        <div class="test-card-inner">
-          <div class="test-card-front">
-            <div class="test-icon">✦</div>
-            <div class="test-name">Natal Chart</div>
-            <div class="test-category">Celestial Architecture</div>
-          </div>
-          <div class="test-card-back">
-            <p class="test-back-desc">Your birth chart maps the sky at your exact birth moment. Each planet in each house shapes personality, drives, and shadow. The most detailed self-portrait that exists.</p>
-            <div class="test-links">
-          <a onclick="event.stopPropagation()" class="test-link-btn both-btn" href="https://astro.com/cgi/chart.cgi" target="_blank" rel="noopener">Generate chart</a>
-        </div>
-          </div>
-        </div>
-      </div>
-        <div class="test-card-wrapper" onclick="if(!event.target.closest('button,a')){this.classList.toggle('flipped')}">
-        <div class="test-card-inner">
-          <div class="test-card-front">
-            <div class="test-icon">⬡</div>
-            <div class="test-name">Human Design</div>
-            <div class="test-category">Energetic Mechanics</div>
-          </div>
-          <div class="test-card-back">
-            <p class="test-back-desc">Synthesizes astrology, I Ching, Kabbalah, and chakras into your energy type (Generator, Projector, Manifestor, Reflector) and decision-making strategy.</p>
-            <div class="test-links">
-          <a onclick="event.stopPropagation()" class="test-link-btn both-btn" href="https://www.jovianarchive.com/get_your_chart" target="_blank" rel="noopener">Generate chart</a>
-        </div>
-          </div>
-        </div>
-      </div>
-      </div>
-    </div>
-
-    <!-- BEHAVIOR -->
-    <div class="map-category">
-      <div class="map-category-label">Behavior</div>
-      <div class="test-grid">
-        <div class="test-card-wrapper" onclick="if(!event.target.closest('button,a')){this.classList.toggle('flipped')}">
-        <div class="test-card-inner">
-          <div class="test-card-front">
-            <div class="test-icon">○</div>
-            <div class="test-name">Attachment Style</div>
-            <div class="test-category">Relationship Architecture</div>
-          </div>
-          <div class="test-card-back">
-            <p class="test-back-desc">How you seek closeness and respond to distance, shaped by early relationships. Secure, Anxious, Avoidant, or Disorganized. The most clinically validated relationship lens.</p>
-      <div id="quiz_result_attachment_pepe" style="background:rgba(225,75,135,0.08);border:1px solid rgba(225,75,135,0.2);border-radius:8px;padding:10px 12px;font-size:12px;margin-top:4px;display:none"></div>
-      <div id="quiz_result_attachment_agathe" style="background:rgba(45,158,107,0.08);border:1px solid rgba(45,158,107,0.2);border-radius:8px;padding:10px 12px;font-size:12px;margin-top:4px;display:none"></div>
-            <div class="test-links">
-          <button id="quiz_btn_attachment_pepe" class="test-link-btn pepe-btn" onclick="openQuiz('attachment','pepe');event.stopPropagation()">Pepe - retake</button>
-          <button id="quiz_btn_attachment_agathe" class="test-link-btn agathe-btn" onclick="openQuiz('attachment','agathe');event.stopPropagation()">Agathe - retake</button>
-        </div>
-          </div>
-        </div>
-      </div>
-        <div class="test-card-wrapper" onclick="if(!event.target.closest('button,a')){this.classList.toggle('flipped')}">
-        <div class="test-card-inner">
-          <div class="test-card-front">
-            <div class="test-icon">♡</div>
-            <div class="test-name">Love Languages</div>
-            <div class="test-category">Emotional Needs</div>
-          </div>
-          <div class="test-card-back">
-            <p class="test-back-desc">How you give and receive love: Words of Affirmation, Quality Time, Acts of Service, Physical Touch, or Receiving Gifts. Mismatched languages cause most relationship friction.</p>
-      <div id="quiz_result_love_languages_pepe" style="background:rgba(225,75,135,0.08);border:1px solid rgba(225,75,135,0.2);border-radius:8px;padding:10px 12px;font-size:12px;margin-top:4px;display:none"></div>
-      <div id="quiz_result_love_languages_agathe" style="background:rgba(45,158,107,0.08);border:1px solid rgba(45,158,107,0.2);border-radius:8px;padding:10px 12px;font-size:12px;margin-top:4px;display:none"></div>
-            <div class="test-links">
-          <button id="quiz_btn_love_languages_pepe" class="test-link-btn pepe-btn" onclick="openQuiz('love_languages','pepe');event.stopPropagation()">Pepe - retake</button>
-          <button id="quiz_btn_love_languages_agathe" class="test-link-btn agathe-btn" onclick="openQuiz('love_languages','agathe');event.stopPropagation()">Agathe - take</button>
-        </div>
-          </div>
-        </div>
-      </div>
-        <div class="test-card-wrapper" onclick="if(!event.target.closest('button,a')){this.classList.toggle('flipped')}">
-        <div class="test-card-inner">
-          <div class="test-card-front">
-            <div class="test-icon">◈</div>
-            <div class="test-name">DISC Profile</div>
-            <div class="test-category">Communication and Drive</div>
-          </div>
-          <div class="test-card-back">
-            <p class="test-back-desc">Behavioral model covering Dominance, Influence, Steadiness, Conscientiousness. Shows communication style, decision-making, and behavior under pressure.</p>
-      <div id="quiz_result_disc_pepe" style="background:rgba(225,75,135,0.08);border:1px solid rgba(225,75,135,0.2);border-radius:8px;padding:10px 12px;font-size:12px;margin-top:4px;display:none"></div>
-      <div id="quiz_result_disc_agathe" style="background:rgba(45,158,107,0.08);border:1px solid rgba(45,158,107,0.2);border-radius:8px;padding:10px 12px;font-size:12px;margin-top:4px;display:none"></div>
-            <div class="test-links">
-          <button id="quiz_btn_disc_pepe" class="test-link-btn pepe-btn" onclick="openQuiz('disc','pepe');event.stopPropagation()">Pepe - retake</button>
-          <button id="quiz_btn_disc_agathe" class="test-link-btn agathe-btn" onclick="openQuiz('disc','agathe');event.stopPropagation()">Agathe - take</button>
-        </div>
-          </div>
-        </div>
-      </div>
-        <div class="test-card-wrapper" onclick="if(!event.target.closest('button,a')){this.classList.toggle('flipped')}">
-        <div class="test-card-inner">
-          <div class="test-card-front">
-            <div class="test-icon">⚡</div>
-            <div class="test-name">Conflict Style (Thomas-Kilmann)</div>
-            <div class="test-category">Conflict and Repair</div>
-          </div>
-          <div class="test-card-back">
-            <p class="test-back-desc">Five approaches to conflict: Competing, Collaborating, Compromising, Avoiding, Accommodating. Knowing your default and your partner's prevents most recurring fights.</p>
-      <div id="quiz_result_conflict_pepe" style="background:rgba(225,75,135,0.08);border:1px solid rgba(225,75,135,0.2);border-radius:8px;padding:10px 12px;font-size:12px;margin-top:4px;display:none"></div>
-      <div id="quiz_result_conflict_agathe" style="background:rgba(45,158,107,0.08);border:1px solid rgba(45,158,107,0.2);border-radius:8px;padding:10px 12px;font-size:12px;margin-top:4px;display:none"></div>
-            <div class="test-links">
-          <button id="quiz_btn_conflict_pepe" class="test-link-btn pepe-btn" onclick="openQuiz('conflict','pepe');event.stopPropagation()">Pepe - take</button>
-          <button id="quiz_btn_conflict_agathe" class="test-link-btn agathe-btn" onclick="openQuiz('conflict','agathe');event.stopPropagation()">Agathe - take</button>
-        </div>
-          </div>
-        </div>
-      </div>
-
-    </div>
-
-    <div style="margin-top:48px;margin-bottom:24px;text-align:center">
-      <div style="display:inline-flex;align-items:center;gap:12px;color:var(--muted)">
-        <span style="height:1px;width:60px;background:var(--border);display:inline-block"></span>
-        <span style="font-family:'Space Grotesk',sans-serif;font-size:11px;letter-spacing:0.15em;text-transform:uppercase;color:var(--accent)">The Celestial Layer</span>
-        <span style="height:1px;width:60px;background:var(--border);display:inline-block"></span>
-      </div>
-      <p style="color:var(--muted);font-size:13px;margin-top:8px;max-width:540px;margin-left:auto;margin-right:auto">The instruments the ancients used before psychology had a name for any of this. Less scientific. More true.</p>
-    </div>
-
-    <div class="test-grid">
-
-      <div class="test-card-wrapper" onclick="if(!event.target.closest('button,a')){this.classList.toggle('flipped')}">
-        <div class="test-card-inner">
-          <div class="test-card-front">
-            <div class="test-icon">✦</div>
-            <div class="test-name">Natal Chart (Astrology)</div>
-            <div class="test-category">Cosmic Architecture</div>
-          </div>
-          <div class="test-card-back">
-            <p class="test-back-desc">Your birth chart maps the sky at your exact birth moment. Each planet in each house shapes personality, drives, and shadow. The most detailed self-portrait that exists.</p>
-            <div class="test-links">
-          <a onclick="event.stopPropagation()" class="test-link-btn both-btn" href="https://astro.com/cgi/chart.cgi" target="_blank" rel="noopener">Full chart (astro.com) →</a>
-        </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="test-card-wrapper" onclick="if(!event.target.closest('button,a')){this.classList.toggle('flipped')}">
-        <div class="test-card-inner">
-          <div class="test-card-front">
-            <div class="test-icon">⬡</div>
-            <div class="test-name">Human Design</div>
-            <div class="test-category">Energetic Mechanics</div>
-          </div>
-          <div class="test-card-back">
-            <p class="test-back-desc">Synthesizes astrology, I Ching, Kabbalah, and chakras into your energy type (Generator, Projector, Manifestor, Reflector) and decision-making strategy.</p>
-            <div class="test-links">
-          <a onclick="event.stopPropagation()" class="test-link-btn both-btn" href="https://www.jovianarchive.com/Get_Your_Chart" target="_blank" rel="noopener">Get your chart →</a>
-        </div>
-          </div>
-        </div>
-      </div>
-
-    </div>
-
-    <h3 style="margin-top:40px">Results: Side by Side</h3>
-    <p style="color:var(--muted);font-size:13px;margin-bottom:20px">Stored locally in your browser only. Compare when you've both taken them.</p>
-      </div>
-    </div>
-
-    <!-- PERSONALITY -->
-    <div class="map-category">
-      <div class="map-category-label">Personality</div>
-      <div class="test-grid">
-        <div class="test-card-wrapper" onclick="if(!event.target.closest('button,a')){this.classList.toggle('flipped')}">
-        <div class="test-card-inner">
-          <div class="test-card-front">
-            <div class="test-icon">⬛</div>
-            <div class="test-name">16Personalities (MBTI)</div>
-            <div class="test-category">Personality Architecture</div>
-          </div>
-          <div class="test-card-back">
-            <p class="test-back-desc">Sixteen types on four axes: Introvert/Extrovert, Intuition/Sensing, Thinking/Feeling, Judging/Perceiving. The most widely used personality framework worldwide.</p>
-            <div class="test-links">
-          
-        </div>
-          </div>
-        </div>
-      </div>
-        <div class="test-card-wrapper" onclick="if(!event.target.closest('button,a')){this.classList.toggle('flipped')}">
-        <div class="test-card-inner">
-          <div class="test-card-front">
-            <div class="test-icon">✦</div>
-            <div class="test-name">Enneagram</div>
-            <div class="test-category">Core Motivation and Fear</div>
-          </div>
-          <div class="test-card-back">
-            <p class="test-back-desc">Nine types driven by a deep unconscious motivation and fear. Goes deeper than MBTI by identifying the emotional driver, not just the surface behavior pattern.</p>
-      <div id="quiz_result_enneagram_pepe" style="background:rgba(225,75,135,0.08);border:1px solid rgba(225,75,135,0.2);border-radius:8px;padding:10px 12px;font-size:12px;margin-top:4px;display:none"></div>
-      <div id="quiz_result_enneagram_agathe" style="background:rgba(45,158,107,0.08);border:1px solid rgba(45,158,107,0.2);border-radius:8px;padding:10px 12px;font-size:12px;margin-top:4px;display:none"></div>
-            <div class="test-links">
-          <button id="quiz_btn_enneagram_pepe" class="test-link-btn pepe-btn" onclick="openQuiz('enneagram','pepe');event.stopPropagation()">Pepe - take</button>
-          <button id="quiz_btn_enneagram_agathe" class="test-link-btn agathe-btn" onclick="openQuiz('enneagram','agathe');event.stopPropagation()">Agathe - take</button>
-        </div>
-          </div>
-        </div>
-      </div>
-        <div class="test-card-wrapper" onclick="if(!event.target.closest('button,a')){this.classList.toggle('flipped')}">
-        <div class="test-card-inner">
-          <div class="test-card-front">
-            <div class="test-icon">▣</div>
-            <div class="test-name">Big Five (OCEAN)</div>
-            <div class="test-category">Trait-Based Personality</div>
-          </div>
-          <div class="test-card-back">
-            <p class="test-back-desc">The most scientifically validated model: Openness, Conscientiousness, Extraversion, Agreeableness, Neuroticism. Five dimensions that predict behavior across all contexts.</p>
-      <div id="quiz_result_big_five_pepe" style="background:rgba(225,75,135,0.08);border:1px solid rgba(225,75,135,0.2);border-radius:8px;padding:10px 12px;font-size:12px;margin-top:4px;display:none"></div>
-      <div id="quiz_result_big_five_agathe" style="background:rgba(45,158,107,0.08);border:1px solid rgba(45,158,107,0.2);border-radius:8px;padding:10px 12px;font-size:12px;margin-top:4px;display:none"></div>
-            <div class="test-links">
-          <button id="quiz_btn_big_five_pepe" class="test-link-btn pepe-btn" onclick="openQuiz('big_five','pepe');event.stopPropagation()">Pepe - take</button>
-          <button id="quiz_btn_big_five_agathe" class="test-link-btn agathe-btn" onclick="openQuiz('big_five','agathe');event.stopPropagation()">Agathe - take</button>
-        </div>
-          </div>
-        </div>
-      </div>
-      </div>
-    </div>
-
   </div>
 </section>
 </div>
@@ -4492,6 +4206,47 @@ function populateSideBySide() {
     }
   });
 }
+function populateSummaryStrip() {
+  var strip = document.getElementById('map-summary-strip');
+  if (!strip) return;
+  var tests = [
+    { id: 'summary-card-attachment',  icon: '○', label: 'Attachment Style',      quizId: 'attachment',       manualField: null },
+    { id: 'summary-card-love',        icon: '♡', label: 'Love Languages',        quizId: 'love_languages',   manualField: null },
+    { id: 'summary-card-disc',        icon: '◈', label: 'DISC Profile',          quizId: 'disc_profile',     manualField: null },
+    { id: 'summary-card-conflict',    icon: '⚡', label: 'Conflict Style',        quizId: 'conflict_style',   manualField: null },
+    { id: 'summary-card-enneagram',   icon: '✦', label: 'Enneagram',             quizId: 'enneagram',        manualField: null },
+    { id: 'summary-card-ocean',       icon: '▣', label: 'Big Five (OCEAN)',      quizId: 'big_five',         manualField: null },
+    { id: 'summary-card-erotic',      icon: '♦', label: 'Erotic Blueprint',      quizId: 'erotic_blueprint', manualField: null },
+    { id: 'summary-card-mbti',        icon: '⬛', label: '16Personalities',       quizId: null,               manualField: 'mbti' },
+    { id: 'summary-card-astro',       icon: '✦', label: 'Astro (Sun/Moon/Asc)',  quizId: null,               manualField: 'astro' },
+    { id: 'summary-card-hd',          icon: '⬡', label: 'Human Design',         quizId: null,               manualField: 'hd' }
+  ];
+  strip.innerHTML = '';
+  tests.forEach(function(t) {
+    function getResult(person) {
+      if (t.quizId) return sbsGetQuizTop(t.quizId, person);
+      var v = localStorage.getItem('jva_map_' + person + '_' + t.manualField);
+      return (v && v.trim()) ? v.trim() : null;
+    }
+    var pepeVal   = getResult('pepe');
+    var agatheVal = getResult('agathe');
+    var card = document.createElement('div');
+    card.className = 'summary-card';
+    card.id = t.id;
+    card.innerHTML =
+      '<div class="summary-card-label"><span class="sc-icon">' + t.icon + '</span>' + t.label + '</div>' +
+      '<div class="summary-result-row">' +
+        '<span class="summary-dot" style="background:var(--pepe)"></span>' +
+        '<span class="summary-result-text" style="color:' + (pepeVal ? 'var(--pepe)' : 'var(--muted)') + '">' + (pepeVal || '—') + '</span>' +
+      '</div>' +
+      '<div class="summary-result-row">' +
+        '<span class="summary-dot" style="background:var(--agathe)"></span>' +
+        '<span class="summary-result-text" style="color:' + (agatheVal ? 'var(--agathe)' : 'var(--muted)') + '">' + (agatheVal || '—') + '</span>' +
+      '</div>';
+    strip.appendChild(card);
+  });
+}
+
 document.addEventListener('DOMContentLoaded', function() {
   loadAllQuizResults();
   var pepeDob = localStorage.getItem('jva_dob_pepe');
@@ -4499,6 +4254,7 @@ document.addEventListener('DOMContentLoaded', function() {
   if (pepeDob) { var lpnP = document.getElementById('lpn-pepe-dob'); if (lpnP) lpnP.value = pepeDob; }
   if (agatheDob) { var lpnA = document.getElementById('lpn-agathe-dob'); if (lpnA) lpnA.value = agatheDob; }
   populateSideBySide();
+  populateSummaryStrip();
 });
 
 // END QUIZ SYSTEM =====
