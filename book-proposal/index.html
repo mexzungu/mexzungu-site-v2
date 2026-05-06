@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0d0d0d">
+    <title>Book a Proposal Call — Mexzungu Group</title>
+    <meta name="description" content="Got questions about the proposal? Book a 30-minute call. We'll go through everything together.">
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="canonical" href="https://mexzungu.com/book-proposal">
+    <link rel="stylesheet" href="/fonts.css">
+    <link rel="stylesheet" href="/style.css?v=10">
+    <style>
+        /* Always dark — proposal context */
+        :root {
+            --bg-primary:     #0d0d0d;
+            --bg-card:        #1a1a1a;
+            --bg-dark:        #0d0d0d;
+            --text-primary:   #fafafa;
+            --text-secondary: #9a8f88;
+            --text-muted:     #6b5e57;
+            --text-accent:    #e86fa0;
+            --border:         #2a2a2a;
+            --border-hover:   #e14b87;
+            --card-bg:        #1a1a1a;
+            --card-border:    #2a2a2a;
+            --gray:           #9a8f88;
+            --gray-light:     #9a8f88;
+            --nav-bg:         rgba(13, 13, 13, 0.92);
+            --dropdown-bg:    rgba(26, 26, 26, 0.97);
+        }
+
+        /* ── HERO ── */
+        .bp-hero {
+            padding: 8rem 2rem 3.5rem;
+            max-width: 860px;
+            margin: 0 auto;
+        }
+        .bp-tag {
+            font-family: var(--font-accent);
+            font-size: 0.72rem;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--pink);
+            margin-bottom: 1.25rem;
+            opacity: 0.9;
+        }
+        .bp-hero h1 {
+            font-family: var(--font-heading);
+            font-size: clamp(2rem, 5vw, 3.2rem);
+            font-weight: 400;
+            line-height: 1.15;
+            color: var(--white);
+            margin-bottom: 1rem;
+        }
+        .bp-hero h1 .highlight {
+            color: var(--pink);
+        }
+        .bp-hero .bp-sub {
+            color: var(--gray);
+            font-size: 1.05rem;
+            line-height: 1.75;
+            max-width: 580px;
+        }
+
+        /* ── PROPOSAL CONTEXT CHIP ── */
+        .proposal-chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            background: rgba(225, 75, 135, 0.06);
+            border: 1px solid rgba(225, 75, 135, 0.22);
+            border-radius: 8px;
+            padding: 0.7rem 1.2rem;
+            margin: 1.5rem 0 2.5rem;
+            font-size: 0.88rem;
+            color: var(--gray);
+        }
+        .proposal-chip .chip-company {
+            color: var(--pink);
+            font-weight: 600;
+        }
+        .proposal-chip .chip-sep { opacity: 0.3; margin: 0 0.2rem; }
+        .proposal-chip a {
+            color: var(--gray);
+            text-decoration: none;
+            transition: color 0.15s;
+        }
+        .proposal-chip a:hover { color: var(--pink); }
+
+        /* ── STEPS ── */
+        .bp-steps {
+            display: flex;
+            align-items: center;
+            gap: 0;
+            margin-bottom: 2.5rem;
+        }
+        .bp-step-dot {
+            width: 34px; height: 34px;
+            border-radius: 50%;
+            border: 1.5px solid var(--border);
+            display: flex; align-items: center; justify-content: center;
+            font-family: var(--mono);
+            font-size: 0.8rem;
+            color: var(--gray);
+            flex-shrink: 0;
+            transition: all 0.2s;
+        }
+        .bp-step-dot.active  { border-color: var(--pink); color: var(--pink); background: rgba(225,75,135,0.1); }
+        .bp-step-dot.done    { background: var(--pink); border-color: var(--pink); color: #fff; }
+        .bp-step-line        { flex: 1; height: 1px; background: var(--border); }
+
+        /* ── SECTIONS ── */
+        .bp-section {
+            max-width: 860px;
+            margin: 0 auto;
+            padding: 0 2rem 4rem;
+            animation: bpFade 0.25s ease-out;
+        }
+        @keyframes bpFade {
+            from { opacity: 0; transform: translateY(10px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+        .bp-section-title {
+            font-family: var(--font-heading);
+            font-size: 1.6rem;
+            font-weight: 400;
+            color: var(--white);
+            margin-bottom: 0.5rem;
+        }
+        .bp-section-sub {
+            color: var(--gray);
+            font-size: 0.95rem;
+            margin-bottom: 2rem;
+            line-height: 1.65;
+        }
+
+        /* ── QUESTION TEXTAREA ── */
+        .bp-field-label {
+            display: block;
+            font-family: var(--mono);
+            font-size: 0.78rem;
+            text-transform: uppercase;
+            letter-spacing: .09em;
+            color: var(--gray);
+            margin-bottom: 0.55rem;
+        }
+        .bp-textarea {
+            width: 100%;
+            padding: 1rem 1.1rem;
+            background: rgba(255,255,255,0.04);
+            border: 1.5px solid var(--border);
+            border-radius: 8px;
+            color: var(--white);
+            font-family: var(--font-body);
+            font-size: 0.98rem;
+            outline: none;
+            transition: border-color 0.15s;
+            min-height: 130px;
+            resize: vertical;
+            box-sizing: border-box;
+            line-height: 1.6;
+            max-width: 600px;
+        }
+        .bp-textarea::placeholder { color: rgba(255,255,255,0.22); }
+        .bp-textarea:focus { border-color: var(--pink); box-shadow: 0 0 0 3px rgba(225,75,135,0.1); }
+        .bp-hint {
+            font-size: 0.78rem;
+            color: var(--gray);
+            margin-top: 0.45rem;
+            opacity: 0.7;
+        }
+
+        /* ── NEXT BUTTON ── */
+        .bp-btn {
+            font-family: var(--font-heading);
+            font-size: 0.95rem;
+            padding: 0.85rem 2.25rem;
+            background: var(--pink);
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 1.5rem;
+            box-shadow: 0 4px 14px rgba(225,75,135,0.3);
+        }
+        .bp-btn:hover:not(:disabled) {
+            background: #c23a74;
+            transform: translateY(-1px);
+            box-shadow: 0 6px 20px rgba(225,75,135,0.4);
+        }
+        .bp-btn:disabled { opacity: 0.35; cursor: default; transform: none; box-shadow: none; }
+
+        .back-btn {
+            background: none;
+            border: none;
+            color: var(--gray);
+            font-family: var(--mono);
+            font-size: 0.85rem;
+            cursor: pointer;
+            padding: 0;
+            margin-bottom: 1.5rem;
+            opacity: 0.7;
+            transition: opacity 0.15s;
+        }
+        .back-btn:hover { opacity: 1; }
+
+        /* ── SLOT PICKER ── */
+        .tz-note {
+            font-size: 0.82rem;
+            color: var(--gray);
+            margin-bottom: 1.5rem;
+            font-style: italic;
+        }
+        .loading-slots { text-align: center; padding: 3rem 0; color: var(--gray); }
+        .spinner-sm {
+            width: 28px; height: 28px;
+            border: 2px solid rgba(255,255,255,0.1);
+            border-top-color: var(--pink);
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin: 0 auto 1rem;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        .slots-date-label {
+            font-family: var(--mono);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: .1em;
+            color: var(--gray);
+            margin: 1.5rem 0 0.75rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid var(--border);
+        }
+        .slots-row  { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 0.5rem; }
+        .slot-btn {
+            padding: 0.5rem 1.1rem;
+            border: 1.5px solid var(--border);
+            border-radius: 5px;
+            background: transparent;
+            color: var(--white);
+            font-family: var(--mono);
+            font-size: 0.82rem;
+            cursor: pointer;
+            transition: all 0.15s;
+        }
+        .slot-btn:hover    { border-color: var(--pink); color: var(--pink); }
+        .slot-btn.selected { background: var(--pink); border-color: var(--pink); color: #fff; }
+        .slots-empty { text-align: center; padding: 2.5rem 0; color: var(--gray); font-size: 0.95rem; }
+
+        /* ── CONFIRM STEP ── */
+        .booking-summary-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            background: rgba(225,75,135,0.06);
+            border: 1px solid rgba(225,75,135,0.2);
+            border-radius: 8px;
+            padding: 0.75rem 1.25rem;
+            margin-bottom: 2rem;
+            font-size: 0.85rem;
+            color: var(--gray);
+            flex-wrap: wrap;
+        }
+        .booking-summary-pill strong { color: var(--pink); }
+        .booking-summary-pill .sep { opacity: 0.3; }
+
+        .form-group { margin-bottom: 1.25rem; max-width: 480px; }
+        .form-group label {
+            display: block;
+            font-family: var(--mono);
+            font-size: 0.78rem;
+            text-transform: uppercase;
+            letter-spacing: .08em;
+            color: var(--gray);
+            margin-bottom: 0.5rem;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            background: rgba(255,255,255,0.05);
+            border: 1.5px solid var(--border);
+            border-radius: 6px;
+            color: var(--white);
+            font-family: var(--font-body);
+            font-size: 0.95rem;
+            outline: none;
+            transition: border-color 0.15s;
+            box-sizing: border-box;
+        }
+        .form-group input::placeholder { color: rgba(255,255,255,0.25); }
+        .form-group input:focus { border-color: var(--pink); }
+
+        /* ── SUBMITTING ── */
+        .submitting-overlay {
+            text-align: center;
+            padding: 2rem 0;
+            display: none;
+        }
+
+        /* ── CONFIRMATION ── */
+        .confirmation-box {
+            text-align: center;
+            padding: 4rem 0 5rem;
+        }
+        .confirm-icon  { font-size: 3rem; margin-bottom: 1.5rem; }
+        .confirm-title {
+            font-family: var(--font-heading);
+            font-size: 2rem;
+            color: var(--white);
+            margin-bottom: 1rem;
+        }
+        .confirm-sub { color: var(--gray); margin-bottom: 2.5rem; line-height: 1.7; }
+        .what-next-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            text-align: left;
+            margin-bottom: 2rem;
+        }
+        @media (max-width: 600px) { .what-next-grid { grid-template-columns: 1fr; } }
+        .wn-card { border: 1px solid var(--border); border-radius: 10px; padding: 1.25rem; }
+        .wn-num  { font-family: var(--font-heading); font-size: 1.5rem; color: var(--pink); margin-bottom: 0.5rem; }
+        .wn-card h4 { font-family: var(--font-heading); font-size: 0.9rem; font-weight: 400; margin-bottom: 0.4rem; }
+        .wn-card p  { font-size: 0.82rem; color: var(--gray); line-height: 1.55; }
+
+        .hidden { display: none; }
+    </style>
+</head>
+<body>
+
+<nav>
+    <a href="/" class="nav-logo"><img src="/logo-v3.png" alt="Mexzungu Group"></a>
+    <button class="menu-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')" aria-label="Menu">
+        <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-links">
+        <li><a href="/">Home</a></li>
+        <li class="nav-dropdown">
+            <a href="/#pillars">What We Do</a>
+            <ul class="nav-dropdown-menu">
+                <li><a href="/venture-architecture">Venture Architecture</a></li>
+                <li><a href="/data-privacy">Data Privacy</a></li>
+                <li><a href="/rebel-capital">Rebel Capital</a></li>
+                <li><a href="/ai-ninja-factory">AI Ninja Factory</a></li>
+            </ul>
+        </li>
+        <li><a href="/outlaw-chronicles">Outlaw Chronicles</a></li>
+        <li><a href="/meet-the-band">Meet the Band</a></li>
+        <li><a href="/lets-jam" class="nav-cta"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:14px;height:14px;vertical-align:-2px;margin-right:4px;"><path d="M15.05 5A5 5 0 0 1 19 8.95M15.05 1A9 9 0 0 1 23 8.94m-1 7.98v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>Let's Jam</a></li>
+    </ul>
+</nav>
+
+<main id="main">
+
+<!-- HERO (always rendered, not a step) -->
+<div class="leopard-dense">
+    <div class="bp-hero">
+        <div class="bp-tag">Proposal Call</div>
+        <h1>Let's talk through <span class="highlight">it.</span></h1>
+        <p class="bp-sub">Got questions about the proposal? Unclear on anything? Bring it all. Thirty minutes, no agenda, no pitch — just answers.</p>
+        <div id="proposal-chip" class="proposal-chip hidden">
+            <span>&#128203;</span>
+            <span class="chip-company" id="chip-company"></span>
+            <span class="chip-sep">|</span>
+            <a id="chip-link" href="#" target="_blank">View proposal &rarr;</a>
+        </div>
+    </div>
+</div>
+
+<section>
+
+    <!-- STEP 1: Questions -->
+    <div id="step-1" class="bp-section">
+        <div class="bp-steps">
+            <div class="bp-step-dot active" id="dot-1">1</div>
+            <div class="bp-step-line"></div>
+            <div class="bp-step-dot" id="dot-2">2</div>
+            <div class="bp-step-line"></div>
+            <div class="bp-step-dot" id="dot-3">3</div>
+        </div>
+        <div class="bp-section-title">What do you want to cover?</div>
+        <p class="bp-section-sub">Anything on your mind about the proposal. One thing or ten. Raw draft is fine — I'll do the prep.</p>
+
+        <label class="bp-field-label" for="questions-input">Your questions</label>
+        <textarea id="questions-input" class="bp-textarea"
+            placeholder="E.g. How does the pricing work? What does the first month look like? Is the equity option mandatory?..."></textarea>
+        <p class="bp-hint">No minimum. Even one bullet helps me show up prepared.</p>
+
+        <button class="bp-btn" id="q-next-btn" onclick="goToSlots()">Find a time &rarr;</button>
+    </div>
+
+    <!-- STEP 2: Slot picker -->
+    <div id="step-2" class="bp-section hidden">
+        <div class="bp-steps">
+            <div class="bp-step-dot done">&#10003;</div>
+            <div class="bp-step-line"></div>
+            <div class="bp-step-dot active" id="dot-2b">2</div>
+            <div class="bp-step-line"></div>
+            <div class="bp-step-dot" id="dot-3b">3</div>
+        </div>
+        <button class="back-btn" onclick="goTo(1)">&larr; Back</button>
+        <div class="bp-section-title">Pick a time.</div>
+        <p class="bp-section-sub">30 minutes. Times shown in your timezone.</p>
+        <p class="tz-note">Your timezone: <span id="user-tz"></span></p>
+
+        <div id="slots-loading" class="loading-slots"><div class="spinner-sm"></div><p>Finding open times...</p></div>
+        <div id="slots-container" class="hidden"></div>
+        <div id="slots-empty" class="slots-empty hidden">
+            <p>No slots available right now.<br>Email <a href="mailto:janis@mexzungu.com" style="color:var(--pink);">janis@mexzungu.com</a> and we'll find a time.</p>
+        </div>
+    </div>
+
+    <!-- STEP 3: Confirm -->
+    <div id="step-3" class="bp-section hidden">
+        <div class="bp-steps">
+            <div class="bp-step-dot done">&#10003;</div>
+            <div class="bp-step-line"></div>
+            <div class="bp-step-dot done">&#10003;</div>
+            <div class="bp-step-line"></div>
+            <div class="bp-step-dot active">3</div>
+        </div>
+        <button class="back-btn" onclick="goTo(2)">&larr; Back</button>
+        <div class="bp-section-title">Almost there.</div>
+        <p class="bp-section-sub">Where to send the calendar invite.</p>
+
+        <div id="booking-summary-pill" class="booking-summary-pill"></div>
+
+        <div class="form-group">
+            <label>Your name</label>
+            <input type="text" id="c-name" placeholder="Full name" autocomplete="name">
+        </div>
+        <div class="form-group">
+            <label>Email</label>
+            <input type="email" id="c-email" placeholder="you@company.com" autocomplete="email">
+        </div>
+
+        <div class="submitting-overlay" id="submitting-overlay">
+            <div class="spinner-sm"></div>
+            <p style="color:var(--gray);font-size:0.9rem;">Booking your call...</p>
+        </div>
+
+        <button class="bp-btn" id="confirm-btn" onclick="submitBooking()">Book it &rarr;</button>
+    </div>
+
+    <!-- DONE -->
+    <div id="step-done" class="bp-section hidden">
+        <div class="confirmation-box">
+            <div class="confirm-icon">&#128293;</div>
+            <div class="confirm-title">You're booked.</div>
+            <p class="confirm-sub">Calendar invite on its way. Here's what happens next:</p>
+            <div class="what-next-grid">
+                <div class="wn-card">
+                    <div class="wn-num">01</div>
+                    <h4>I read your questions</h4>
+                    <p>Everything you sent gets read before the call. No cold starts.</p>
+                </div>
+                <div class="wn-card">
+                    <div class="wn-num">02</div>
+                    <h4>Show up, ask anything</h4>
+                    <p>No question is too basic. No detail too small. That's the point of the call.</p>
+                </div>
+                <div class="wn-card">
+                    <div class="wn-num">03</div>
+                    <h4>Leave with clarity</h4>
+                    <p>Every question answered. You'll know exactly what you're saying yes to.</p>
+                </div>
+            </div>
+            <p id="meet-link-msg" class="hidden" style="margin-top:1.5rem;">
+                <a id="meet-link" href="#" target="_blank" class="bp-btn">Join Google Meet &rarr;</a>
+            </p>
+            <p style="margin-top:2rem;font-size:0.82rem;color:var(--gray);">
+                Need to reschedule? <a href="mailto:janis@mexzungu.com?subject=Reschedule my proposal call" style="color:var(--pink);">Email janis@mexzungu.com</a>
+            </p>
+        </div>
+    </div>
+
+</section>
+
+</main>
+
+<footer>
+    <div style="max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;padding:0 2rem;">
+        <span>&copy; 2026 Mexzungu Group Ltd. All rights reserved.</span>
+        <span style="font-size:0.85rem;">
+            <a href="https://pepecarrillo.co" style="color:var(--gold);">Pepe's Writing</a> &middot;
+            <a href="/privacy/" style="color:var(--gold);">Privacy Policy</a> &middot;
+            <a href="/terms/" style="color:var(--gold);">Terms of Service</a> &middot;
+            <a href="/ai-policy/" style="color:var(--gold);">AI Policy</a>
+        </span>
+    </div>
+    <div class="footer-disclaimer">Mexzungu Group provides venture architecture, strategic advisory, and structural consulting. This does not constitute legal advice.</div>
+</footer>
+
+<script>
+const API = window.location.hostname === 'localhost' ? 'http://localhost:8741' : 'https://api.mexzungu.com';
+
+// ── Read URL params ──
+const params = new URLSearchParams(window.location.search);
+const refKey       = (params.get('ref') || '').toLowerCase();
+const paramName    = params.get('name') || '';
+const paramEmail   = params.get('email') || '';
+const paramCompany = params.get('company') || '';
+const paramLink    = params.get('proposal_link') || '';
+
+// Ref-based defaults
+const REF_DEFAULTS = {
+    havenpay: {
+        company:       'HavenPay',
+        proposal_link: 'https://mexzungu.com/proposals/havenpay',
+    },
+};
+
+const refDefaults = REF_DEFAULTS[refKey] || {};
+const company       = paramCompany  || refDefaults.company || '';
+const proposalLink  = paramLink     || refDefaults.proposal_link || '';
+
+// ── Populate hero chip ──
+if (company || proposalLink) {
+    const chip = document.getElementById('proposal-chip');
+    chip.classList.remove('hidden');
+    if (company) document.getElementById('chip-company').textContent = company;
+    if (proposalLink) {
+        document.getElementById('chip-link').href = proposalLink;
+    } else {
+        document.getElementById('chip-link').style.display = 'none';
+        document.getElementById('chip-sep').style.display  = 'none';
+    }
+}
+
+// ── Pre-fill name/email ──
+if (paramName)  document.getElementById('c-name').value  = paramName;
+if (paramEmail) document.getElementById('c-email').value = paramEmail;
+
+// ── Timezone ──
+document.getElementById('user-tz').textContent = Intl.DateTimeFormat().resolvedOptions().timeZone;
+
+// ── State ──
+let selectedSlot = null;
+
+// ── Navigation ──
+function goTo(n) {
+    document.querySelectorAll('[id^="step-"]').forEach(el => el.classList.add('hidden'));
+    const el = document.getElementById('step-' + n);
+    if (el) el.classList.remove('hidden');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ── Step 1 -> Step 2: load slots ──
+async function goToSlots() {
+    goTo(2);
+    await loadSlots();
+}
+
+async function loadSlots() {
+    document.getElementById('slots-loading').classList.remove('hidden');
+    document.getElementById('slots-container').classList.add('hidden');
+    document.getElementById('slots-empty').classList.add('hidden');
+
+    try {
+        const res = await fetch(`${API}/booking/slots/global/proposal?duration=30`);
+        if (!res.ok) throw new Error('API error');
+        const data = await res.json();
+        renderSlots(data.slots || []);
+    } catch (e) {
+        document.getElementById('slots-loading').classList.add('hidden');
+        document.getElementById('slots-empty').classList.remove('hidden');
+    }
+}
+
+function renderSlots(slots) {
+    document.getElementById('slots-loading').classList.add('hidden');
+    const container = document.getElementById('slots-container');
+
+    if (!slots.length) {
+        document.getElementById('slots-empty').classList.remove('hidden');
+        return;
+    }
+
+    container.classList.remove('hidden');
+    container.innerHTML = '';
+
+    // Group by date
+    const byDate = {};
+    slots.forEach(s => {
+        const dt  = new Date(s.start);
+        const key = dt.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' });
+        if (!byDate[key]) byDate[key] = [];
+        byDate[key].push(s);
+    });
+
+    for (const [label, daySlots] of Object.entries(byDate)) {
+        const d = document.createElement('div');
+        d.className = 'slots-date-label';
+        d.textContent = label;
+        container.appendChild(d);
+
+        const row = document.createElement('div');
+        row.className = 'slots-row';
+
+        daySlots.forEach(slot => {
+            const btn = document.createElement('button');
+            btn.className = 'slot-btn';
+            btn.textContent = new Date(slot.start).toLocaleTimeString('en-US', {
+                hour: 'numeric', minute: '2-digit', hour12: true
+            });
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.slot-btn').forEach(b => b.classList.remove('selected'));
+                btn.classList.add('selected');
+                selectedSlot = slot;
+                setTimeout(() => goToConfirm(), 350);
+            });
+            row.appendChild(btn);
+        });
+
+        container.appendChild(row);
+    }
+}
+
+function goToConfirm() {
+    // Build summary pill
+    const slotDt  = new Date(selectedSlot.start);
+    const slotStr = slotDt.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' })
+                  + ' at '
+                  + slotDt.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true });
+
+    let pillHTML = '<strong>Proposal call</strong>';
+    if (company) pillHTML += '<span class="sep"> | </span>' + company;
+    pillHTML += '<span class="sep"> | </span>30 min<span class="sep"> | </span>' + slotStr;
+
+    document.getElementById('booking-summary-pill').innerHTML = pillHTML;
+    goTo(3);
+}
+
+async function submitBooking() {
+    const name      = document.getElementById('c-name').value.trim();
+    const email     = document.getElementById('c-email').value.trim();
+    const questions = document.getElementById('questions-input').value.trim();
+
+    if (!name || !email) {
+        alert('Please fill in your name and email so we can send the calendar invite.');
+        return;
+    }
+
+    const confirmBtn        = document.getElementById('confirm-btn');
+    const submittingOverlay = document.getElementById('submitting-overlay');
+    confirmBtn.disabled     = true;
+    submittingOverlay.style.display = 'block';
+
+    // Build custom title
+    const title = company
+        ? `Proposal call: ${company}`
+        : 'Proposal call';
+
+    // Build notes for description
+    let notes = '';
+    if (company)      notes += `Company: ${company}\n`;
+    if (proposalLink) notes += `Proposal: ${proposalLink}`;
+
+    try {
+        const res = await fetch(`${API}/booking/create`, {
+            method:  'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                call_type:  'proposal',
+                zone:       'global',
+                duration:   30,
+                start:      selectedSlot.start,
+                end:        selectedSlot.end,
+                name,
+                email,
+                message:    questions || '(no questions submitted)',
+                notes:      notes.trim(),
+                docs_link:  proposalLink || '',
+                title,
+                source:     'mexzungu.com/book-proposal',
+            }),
+        });
+
+        if (!res.ok) {
+            const err = await res.json().catch(() => ({}));
+            alert(err.detail || 'Booking failed. Please try again or email janis@mexzungu.com.');
+            confirmBtn.disabled = false;
+            submittingOverlay.style.display = 'none';
+            return;
+        }
+
+        const data = await res.json();
+        goTo('done');
+
+        if (data.meet_link) {
+            document.getElementById('meet-link').href = data.meet_link;
+            document.getElementById('meet-link-msg').classList.remove('hidden');
+        }
+    } catch (err) {
+        alert('Something went wrong. Email janis@mexzungu.com directly and we will get you sorted.');
+        confirmBtn.disabled = false;
+        submittingOverlay.style.display = 'none';
+    }
+}
+
+// Close mobile nav on link click
+document.querySelectorAll('.nav-links a').forEach(l =>
+    l.addEventListener('click', () => document.querySelector('.nav-links').classList.remove('open'))
+);
+</script>
+
+</body>
+</html>

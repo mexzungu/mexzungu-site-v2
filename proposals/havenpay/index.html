@@ -385,6 +385,329 @@
             margin-top: 0.1rem;
         }
 
+        /* DELIVERABLE GRID */
+        .deliverable-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.2rem;
+            margin-top: 2.5rem;
+        }
+        @media (max-width: 640px) { .deliverable-grid { grid-template-columns: 1fr; } }
+        .deliverable-block {
+            background: #111111;
+            border: 1px solid #2a2a2a;
+            border-radius: 12px;
+            padding: 1.8rem;
+            transition: border-color 0.2s;
+        }
+        .deliverable-block:hover { border-color: #e14b87; }
+        .deliverable-header {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.9rem;
+            margin-bottom: 1rem;
+        }
+        .deliverable-num {
+            width: 1.8rem;
+            height: 1.8rem;
+            border-radius: 50%;
+            background: #1e1e1e;
+            border: 1px solid #2d2d2d;
+            color: #e14b87;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 0.75rem;
+            font-weight: 700;
+            flex-shrink: 0;
+            margin-top: 0.15rem;
+        }
+        .deliverable-title {
+            font-family: 'RocknRoll One', 'Space Grotesk', sans-serif;
+            font-size: 1rem;
+            font-weight: 400;
+            color: #c8c0bb;
+            line-height: 1.3;
+        }
+        .deliverable-body {
+            font-size: 0.85rem;
+            color: #6b5e57;
+            line-height: 1.7;
+        }
+        .deliverable-body ul {
+            list-style: none;
+            padding: 0;
+            margin: 0.5rem 0 0;
+        }
+        .deliverable-body ul li {
+            padding: 0.2rem 0;
+            display: flex;
+            gap: 0.6rem;
+        }
+        .deliverable-body ul li::before {
+            content: '⚡';
+            color: #e14b87;
+            font-size: 0.75rem;
+            flex-shrink: 0;
+            margin-top: 0.15rem;
+        }
+
+        /* SERVICE SPLIT */
+        .service-split {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-top: 2.5rem;
+        }
+        @media (max-width: 768px) { .service-split { grid-template-columns: 1fr; } }
+
+        .service-col {
+            background: #111111;
+            border: 1px solid #2a2a2a;
+            border-radius: 14px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .service-col-head {
+            padding: 1.8rem 1.8rem 1.4rem;
+            border-bottom: 1px solid #1e1e1e;
+        }
+
+        .service-col-tag {
+            font-size: 0.65rem;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: #e14b87;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .service-col-name {
+            font-family: 'RocknRoll One', 'Space Grotesk', sans-serif;
+            font-size: 1.35rem;
+            color: #fafafa;
+            margin-bottom: 0.8rem;
+            line-height: 1.2;
+        }
+
+        .service-col-tagline {
+            font-size: 0.83rem;
+            color: #6b5e57;
+            line-height: 1.65;
+            margin: 0;
+        }
+
+        .service-deliverables {
+            padding: 1.4rem 1.8rem;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+        }
+
+        .service-item-name {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 0.82rem;
+            font-weight: 700;
+            color: #c8c0bb;
+            margin-bottom: 0.3rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .service-item-name::before {
+            content: '';
+            display: inline-block;
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            background: #e14b87;
+            flex-shrink: 0;
+        }
+
+        .service-item-body {
+            font-size: 0.8rem;
+            color: #6b5e57;
+            line-height: 1.6;
+            padding-left: 1rem;
+        }
+
+        .service-timeline {
+            padding: 1rem 1.8rem;
+            border-top: 1px solid #1e1e1e;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .timeline-label {
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: #3d3533;
+            font-weight: 700;
+        }
+
+        .timeline-value {
+            font-size: 0.8rem;
+            color: #9a8f88;
+        }
+
+        /* ECONOMICS GRID */
+        .economics-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.2rem;
+            margin-top: 2.5rem;
+        }
+        @media (max-width: 640px) { .economics-grid { grid-template-columns: 1fr; } }
+
+        .economics-item {
+            background: #111111;
+            border: 1px solid #2a2a2a;
+            border-radius: 12px;
+            padding: 1.6rem;
+        }
+
+        .economics-trigger {
+            font-size: 0.65rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: #3d3533;
+            margin-bottom: 0.5rem;
+        }
+
+        .economics-name {
+            font-family: 'RocknRoll One', 'Space Grotesk', sans-serif;
+            font-size: 1rem;
+            color: #fafafa;
+            margin-bottom: 0.8rem;
+        }
+
+        .economics-desc {
+            font-size: 0.8rem;
+            color: #6b5e57;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .economics-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+        }
+
+        .economics-list li {
+            font-size: 0.85rem;
+            color: #c8c0bb;
+            padding-left: 0.9rem;
+            position: relative;
+        }
+
+        .economics-list li::before {
+            content: '–';
+            position: absolute;
+            left: 0;
+            color: #e14b87;
+        }
+
+        .economics-list li strong {
+            color: #d4a039;
+            font-family: 'RocknRoll One', 'Space Grotesk', sans-serif;
+        }
+
+        /* WHY CARDS */
+        .why-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.2rem;
+            margin-top: 2rem;
+        }
+        @media (max-width: 600px) { .why-grid { grid-template-columns: 1fr; } }
+        .why-card {
+            background: #111111;
+            border: 1px solid #2a2a2a;
+            border-radius: 10px;
+            padding: 1.6rem;
+        }
+        .why-card-label {
+            font-size: 0.68rem;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: #e14b87;
+            font-weight: 700;
+            margin-bottom: 0.7rem;
+        }
+        .why-card p {
+            font-size: 0.9rem;
+            color: #6b5e57;
+            line-height: 1.7;
+            margin: 0;
+        }
+        .why-card p strong { color: #9a8f88; }
+
+        /* PRICING SECTION */
+        .pricing-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 1.2rem;
+            margin-top: 2.5rem;
+        }
+        @media (max-width: 768px) { .pricing-row { grid-template-columns: 1fr; } }
+        .pricing-card {
+            background: #111111;
+            border: 1px solid #2a2a2a;
+            border-radius: 12px;
+            padding: 2rem 1.6rem;
+            display: flex;
+            flex-direction: column;
+        }
+        .pricing-card.main {
+            border-color: #2d1f28;
+            background: linear-gradient(160deg, #111111 0%, #1a0f15 100%);
+        }
+        .pricing-card-label {
+            font-size: 0.68rem;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: #e14b87;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+        .pricing-card-name {
+            font-family: 'RocknRoll One', 'Space Grotesk', sans-serif;
+            font-size: 1.1rem;
+            color: #fafafa;
+            margin-bottom: 1.2rem;
+            line-height: 1.3;
+        }
+        .pricing-number {
+            font-family: 'RocknRoll One', 'Space Grotesk', sans-serif;
+            font-size: 2rem;
+            color: #d4a039;
+            letter-spacing: -0.02em;
+            line-height: 1;
+            margin-bottom: 0.3rem;
+        }
+        .pricing-number-sub {
+            font-size: 0.8rem;
+            color: #4a4a4a;
+            margin-bottom: 1.2rem;
+        }
+        .pricing-desc {
+            font-size: 0.85rem;
+            color: #6b5e57;
+            line-height: 1.65;
+            flex: 1;
+        }
+        .pricing-desc strong { color: #9a8f88; }
+
         /* CTA SECTION */
         .cta-section {
             text-align: center;
@@ -513,115 +836,181 @@
 
 <!-- HERO -->
 <div class="proposal-hero leopard-dense">
-    <div class="hero-tag">For Yoeal Haile &mdash; HavenPay</div>
+    <div class="hero-tag">For Yoeal Haile, HavenPay</div>
     <h1>Here is what we can build together.</h1>
-    <p class="valid-note">This proposal was prepared specifically for HavenPay. It is valid for 30 days from May 1, 2026.</p>
+    <p class="valid-note">Prepared specifically for HavenPay. Valid for 30 days from May 1, 2026.</p>
 </div>
 
 <div class="prop-divider"></div>
 
-<!-- SECTION 1: WHERE YOU ARE -->
+<!-- SECTION 01: WHAT WE HEARD -->
 <div class="prop-section">
-    <div class="prop-label">01 / Where you are</div>
-    <div class="prop-heading">Where you are.</div>
+    <div class="prop-label">01 / What we heard</div>
+    <div class="prop-heading">You are building two things at once.</div>
     <p class="prop-copy">
-        HavenPay is building financial infrastructure for some of the most underserved people on the planet. The dual-entity model — NGO arm for grants and impact infrastructure, HoldCo for IP, equity, and long-term value — is exactly the right architecture. But it only works if the structure is airtight from day one.
+        <strong>HavenPay Foundation</strong> receives grant capital from DFIs, foundations, and UNHCR. It funds evaluation, policy engagement, community ambassador infrastructure, and the Refugee Financial Identity Stack blueprint. This entity makes the model credible to institutions.
         <br><br>
-        IP licensing between entities. Data privacy for refugee financial data that actually holds up under Kenyan and GDPR scrutiny. Corporate governance that satisfies both impact investors and equity investors.
+        <strong>HavenPay Technologies</strong> owns the platform and IP, holds the Choice Bank BaaS relationship, issues equity to investors, and generates all five revenue streams. This entity makes the model attractive to capital.
         <br><br>
-        Get this wrong and you spend the next two years fixing it instead of building. We have seen this before. We know how to get it right.
+        You have the architecture in your head. The problem is that the architecture in your head is not the same as a legally defensible, investor-ready structure. The dual-entity model only works if the IP licensing terms between Foundation and Technologies are watertight, grant compliance requirements are structurally separated from equity upside, and the cap table in Technologies is clean before the first institutional cheque lands.
+        <br><br>
+        That is not a legal problem. It is a Venture Architecture problem. And it is exactly what we do.
     </p>
 </div>
 
 <div class="prop-divider"></div>
 
-<!-- SECTION 2: THE PRODUCTS -->
+<!-- SECTION 02: WHAT WE WILL BUILD -->
 <div class="prop-section">
-    <div class="prop-label">02 / What we are offering</div>
-    <div class="prop-heading">Two products, one proposal.</div>
+    <div class="prop-label">02 / What we will build</div>
+    <div class="prop-heading">Two workstreams. Activate one or both.</div>
+    <p class="prop-copy" style="margin-bottom: 0;">Each deliverable in Workstream 1 is a decision-ready document — not a deck, not a framework. Something you can hand to a lawyer, an investor, or a regulator and have it hold up.</p>
 
-    <!-- Product 1: Venture Architecture -->
-    <div class="product-card featured" style="margin-top: 2.5rem;">
-        <div class="product-tag">Venture Architecture</div>
-        <div class="product-name">The complete blueprint.</div>
-        <div class="product-price">$10,000</div>
-        <div class="product-price-sub">Fixed fee. One engagement. Everything you need to build on.</div>
-        <p class="product-tagline">Three memos, one complete blueprint.</p>
-        <ul class="product-list">
-            <li>
-                <div><strong>Corporate Structure and Governance Memo</strong> — NGO and HoldCo architecture, jurisdiction selection, cap table design, governance framework, exit architecture.</div>
-            </li>
-            <li>
-                <div><strong>IP Structure Memo</strong> — IP ownership across entities, NGO-to-HoldCo licensing framework, protection strategy.</div>
-            </li>
-            <li>
-                <div><strong>Privacy Structure Memo</strong> — Data flows, Kenya DPA compliance, GDPR where applicable, processing agreements for refugee financial data.</div>
-            </li>
-            <li>
-                <div>Delivered as secure, password-protected pages. Timeline: 4 weeks from kickoff.</div>
-            </li>
-        </ul>
-        <div class="equity-note">
-            <strong>Equity option.</strong> Up to 40% of fees can be converted into equity in HavenPay Technologies at the next closing price instead of paid in cash.
+    <div class="service-split">
+
+        <!-- VENTURE ARCHITECTURE -->
+        <div class="service-col">
+            <div class="service-col-head">
+                <div class="service-col-tag">Workstream 1</div>
+                <div class="service-col-name">Venture Architecture</div>
+                <p class="service-col-tagline">The full architecture blueprint. Entity structure, IP, capital stack, and investor narrative — all four deliverables, built before you raise, so you are not improvising under term sheet pressure.</p>
+            </div>
+            <div class="service-deliverables">
+                <div class="service-item">
+                    <div class="service-item-name">Entity Architecture Memo</div>
+                    <div class="service-item-body">Foundation and Technologies HoldCo structure, jurisdiction recommendation, board composition, decision rights, and which entity owns the Choice Bank BaaS relationship from day one.</div>
+                </div>
+                <div class="service-item">
+                    <div class="service-item-name">IP Licensing Framework</div>
+                    <div class="service-item-body">Full IP asset inventory: HavenScore, the Refugee Financial Identity Stack, transaction data protocols, platform technology, brand. Licensing terms defensible to a DFI grant officer and a Series A investor at the same time. Carve-outs for open-access grant deliverables.</div>
+                </div>
+                <div class="service-item">
+                    <div class="service-item-name">Fundraising Architecture</div>
+                    <div class="service-item-body">How the $250K grant, $500K pre-seed, and DFI debt facility work together without destroying each other. Instrument recommendation, cap table design, and the evidence base Phase 2 needs to unlock.</div>
+                </div>
+                <div class="service-item">
+                    <div class="service-item-name">Investor Narrative Brief</div>
+                    <div class="service-item-body">One page. Three audiences: the Systems Disruptor family office, the DFI grant officer, the future Series A. Each hears the same story through their own lens.</div>
+                </div>
+            </div>
+            <div class="service-timeline">
+                <span class="timeline-label">Timeline</span>
+                <span class="timeline-value">4 weeks from kickoff</span>
+            </div>
+        </div>
+
+        <!-- FUNDRAISING -->
+        <div class="service-col">
+            <div class="service-col-head">
+                <div class="service-col-tag">Workstream 2</div>
+                <div class="service-col-name">Fundraising</div>
+                <p class="service-col-tagline">We stay in the room until the money clears. First call, term sheet, closing — always there. Add this when you are ready to raise.</p>
+            </div>
+            <div class="service-deliverables">
+                <div class="service-item">
+                    <div class="service-item-name">First Investor Call</div>
+                    <div class="service-item-body">We are on the call. Not as a note-taker — as a co-presenter on structure, jurisdiction, and the dual-entity architecture. The questions investors ask about your setup are exactly the ones we built the architecture to answer.</div>
+                </div>
+                <div class="service-item">
+                    <div class="service-item-name">Term Sheet Negotiation</div>
+                    <div class="service-item-body">We read every term sheet before you do. We flag what matters, what is standard, and what is designed to look standard but is not. You decide. We make sure you are deciding with full information.</div>
+                </div>
+                <div class="service-item">
+                    <div class="service-item-name">Closing Support</div>
+                    <div class="service-item-body">On the closing call and available on 48 hours notice for anything that surfaces between term sheet and money clearing. Equity and debt closings only — success fee applies.</div>
+                </div>
+            </div>
+            <div class="service-timeline">
+                <span class="timeline-label">Timeline</span>
+                <span class="timeline-value">Ongoing through the raise. Success fee when capital clears.</span>
+            </div>
+        </div>
+
+    </div><!-- /service-split -->
+
+    <div class="disclosure-card" style="margin-top: 2.5rem; border-left: 3px solid #e14b87; background: transparent;">
+        <p style="font-size: 1.05rem; color: #9a8f88; font-style: italic; line-height: 1.8; margin: 0;">"Your pitch decks are as good as any I have seen at this stage. The architecture just needs to catch up."</p>
+    </div>
+</div>
+
+<div class="prop-divider"></div>
+
+<!-- SECTION 03: WHY MEXZUNGU -->
+<div class="prop-section">
+    <div class="prop-label">03 / Why us</div>
+    <div class="prop-heading">We have done this exact problem before.</div>
+    <p class="prop-copy">Duara Education runs on exactly this structure: a Delaware C-Corp that owns the IP and cap table, and a Kenya operating entity. Pepe designed the architecture, drafted the governance documents, structured the fundraising instruments, and sits on their board as a counsel-investor. Duara is currently scaling from 4 to 40 schools.</p>
+
+    <div class="why-grid">
+        <div class="why-card">
+            <div class="why-card-label">East Africa presence</div>
+            <p>Active experience in Kenya, Uganda, and Rwanda on the legal and structural side of building. We know the CBK environment. We know what DFI grant officers need to see before signing off on a dual-entity structure.</p>
+        </div>
+        <div class="why-card">
+            <div class="why-card-label">Operator lens</div>
+            <p>Pepe is a corporate lawyer who has lived inside organisations as an operator. We care about whether the structure actually works, not just whether it is technically defensible.</p>
+        </div>
+        <div class="why-card">
+            <div class="why-card-label">Investor fluency</div>
+            <p>We know what Systems Disruptor family offices need to see before they write a pre-seed cheque — and what gets a DFI to co-sign on the same structure. Both at once is the skill.</p>
+        </div>
+        <div class="why-card">
+            <div class="why-card-label">No conflict</div>
+            <p>Pepe holds no equity or prior financial interest in HavenPay. We are telling you because you should know, and because we like clean tables.</p>
         </div>
     </div>
+</div>
 
-    <!-- Product 2: Deal Closing -->
-    <div class="product-card">
-        <div class="product-tag">Deal Closing</div>
-        <div class="product-name">In your corner from first call to wire.</div>
-        <div class="product-price" style="font-size: 1.6rem; line-height: 1.3;">$2,500 <span style="font-size: 0.9rem; color: #6b5e57;">onboarding</span> + $1,500<span style="font-size: 0.9rem; color: #6b5e57;">/mo</span> + 2%<span style="font-size: 0.9rem; color: #6b5e57;"> success</span></div>
-        <div class="product-price-sub">Monthly advisory + success fee on equity closed.</div>
-        <p class="product-tagline">We join every high-stakes call. We help you close.</p>
-        <ul class="product-list">
-            <li>We join your first serious investor call, your term sheet negotiation, and your closing call. Always.</li>
-            <li>Available on 48 hours notice for any other high-stakes call.</li>
-            <li>Janis, our AI Chief of Staff, responds same day on anything you send. Pepe weighs in within 4 CET business hours on anything that needs judgment.</li>
-            <li>2% of equity closed, payable within 14 days of money clearing. 20% in cash, 80% in advisory shares at closing price.</li>
-            <li>Monthly advisory fee is not credited against the success fee. The retainer is for the work. The success fee is for the outcome.</li>
-        </ul>
-        <div class="equity-note">
-            <strong>Equity option.</strong> Up to 40% of fees convertible to equity.
+<div class="prop-divider"></div>
+
+<!-- SECTION 04: WHAT THIS COSTS -->
+<div class="prop-section">
+    <div class="prop-label">04 / What this costs</div>
+    <div class="prop-heading">Transparent pricing. Two workstreams, two models.</div>
+
+    <div class="economics-grid" style="margin-bottom: 1.2rem;">
+
+        <div class="economics-item" style="border-color: #2d1f28; background: linear-gradient(135deg, #111111 0%, #1a0f15 100%);">
+            <div class="economics-trigger">Workstream 1 — flat fee</div>
+            <div class="economics-name">Venture Architecture</div>
+            <p class="economics-desc">Fixed price for all four deliverables: Entity Architecture Memo, IP Licensing Framework, Fundraising Architecture, and Investor Narrative Brief. No hourly billing, no scope creep. The work is defined, the price is fixed.</p>
+            <ul class="economics-list">
+                <li>Flat fee: <strong>$10,000</strong></li>
+                <li>Delivery within 4 weeks of kickoff.</li>
+            </ul>
+        </div>
+
+        <div class="economics-item" style="border-color: #2d1f28; background: linear-gradient(135deg, #111111 0%, #1a0f15 100%);">
+            <div class="economics-trigger">Workstream 2 — success fee</div>
+            <div class="economics-name">Fundraising</div>
+            <p class="economics-desc">Applies to capital closed within 12 months of engagement start. Payable within 14 days of money clearing. No outcome, no fee.</p>
+            <ul class="economics-list">
+                <li>Equity raised: <strong>2%</strong></li>
+                <li>Debt facility: <strong>1%</strong></li>
+            </ul>
+        </div>
+
+    </div>
+
+    <div class="economics-grid" style="grid-template-columns: 1fr;">
+        <div class="economics-item">
+            <div class="economics-trigger">Both workstreams — billed monthly</div>
+            <div class="economics-name">Administration fee</div>
+            <p class="economics-desc">Covers access, coordination, and advisory while any workstream is live. Stops automatically when the engagement ends.</p>
+            <ul class="economics-list">
+                <li>One workstream active: <strong>$500 / mo</strong></li>
+                <li>Both workstreams active: <strong>$900 / mo</strong></li>
+            </ul>
+            <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid #2a2a2a; font-size: 0.82rem; color: #6b5e57; line-height: 1.6;">
+                <strong style="color: #d4a039;">Equity conversion option:</strong> Up to 40% of any fee under either workstream may be converted to equity in HavenPay Technologies at the next closing price. Available at your discretion, elected before invoice.
+            </div>
         </div>
     </div>
 </div>
 
 <div class="prop-divider"></div>
 
-<!-- SECTION 3: HOW IT WORKS -->
-<div class="prop-section">
-    <div class="prop-label">03 / How it works</div>
-    <div class="prop-heading">Simple.</div>
-    <ol class="steps-list">
-        <li>
-            <div class="step-num">1</div>
-            <div class="step-text">Hit the button below.</div>
-        </li>
-        <li>
-            <div class="step-num">2</div>
-            <div class="step-text">We schedule a 30-minute kickoff call.</div>
-        </li>
-        <li>
-            <div class="step-num">3</div>
-            <div class="step-text">We get to work.</div>
-        </li>
-    </ol>
-</div>
-
-<div class="prop-divider"></div>
-
-<!-- SECTION 4: DISCLOSURE -->
-<div class="prop-section">
-    <div class="prop-label">04 / One thing to say upfront</div>
-    <div class="prop-heading">Clean table.</div>
-    <div class="disclosure-card">
-        <p>Pepe holds no equity or prior financial interest in HavenPay. We are telling you because you should know, and because we like clean tables.</p>
-    </div>
-</div>
-
-<div class="prop-divider"></div>
-
-<!-- SECTION 5: FINE PRINT -->
+<!-- SECTION 05: FINE PRINT -->
 <div class="prop-section">
     <div class="prop-label">05 / The fine print</div>
     <div class="prop-heading">Short version.</div>
@@ -639,13 +1028,13 @@
 <div class="cta-section">
     <div class="prop-label">Ready?</div>
     <div class="prop-heading">Let us build this.</div>
-    <p class="cta-sub">One email. That is all it takes.</p>
-    <a class="cta-btn" href="mailto:pepe@mexzungu.com?subject=HavenPay%20%E2%80%94%20Proposal%20Accepted&body=Hi%20Pepe%2C%20I%20have%20reviewed%20the%20proposal%20and%20I%20am%20in.%20Let%20us%20schedule%20a%20kickoff.">
-        I am in. Let us do this.
+    <p class="cta-sub">Read the engagement letter and sign when you are ready.</p>
+    <a class="cta-btn" href="https://mexzungu.com/sign/havenpay">
+        Review &amp; Sign the Engagement Letter
     </a>
-    <p class="cta-secondary">
-        Want to talk through this first?<br>
-        <a href="https://mexzungu.com/lets-jam">Book 30 minutes with Pepe</a>
+    <p class="cta-secondary" style="margin-top: 1.5rem;">
+        Got questions about the proposal?<br>
+        <a href="https://mexzungu.com/book-proposal?ref=havenpay&amp;company=HavenPay">Book a 30-min call with Pepe &rarr;</a>
     </p>
 </div>
 

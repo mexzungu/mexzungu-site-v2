@@ -145,28 +145,6 @@
         .intake-next-btn:hover:not(:disabled) { background: #c23a74; transform: translateY(-1px); }
         .intake-next-btn:disabled { opacity: 0.35; cursor: default; transform: none; }
 
-        /* Zone cards */
-        .zone-cards-dark {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1rem;
-            margin-bottom: 2rem;
-            max-width: 600px;
-        }
-        @media (max-width: 500px) { .zone-cards-dark { grid-template-columns: 1fr; } }
-        .zone-card-dark {
-            border: 1.5px solid var(--border);
-            border-radius: 10px;
-            padding: 1.5rem;
-            cursor: pointer;
-            transition: all 0.2s;
-            background: rgba(255,255,255,0.02);
-        }
-        .zone-card-dark:hover   { border-color: var(--pink); background: rgba(225,75,135,0.05); }
-        .zone-card-dark.selected { border-color: var(--pink); background: rgba(225,75,135,0.08); }
-        .zone-card-dark .zone-emoji { font-size: 1.6rem; margin-bottom: 0.75rem; }
-        .zone-card-dark h3 { font-family: var(--font-heading); font-size: 0.95rem; font-weight: 400; margin-bottom: 0.4rem; color: var(--white); }
-        .zone-card-dark p  { font-size: 0.82rem; color: var(--gray); }
 
         /* Slot picker */
         .tz-note { font-size: 0.82rem; color: var(--gray); margin-bottom: 1.5rem; font-style: italic; }
@@ -340,9 +318,9 @@
 <main id="main">
 
 <div class="page-hero leopard-dense intake-hero">
-    <div class="section-label">Client Portal</div>
-    <h1>Already working <span class="highlight">together.</span></h1>
-    <p>Pick what you need. I read everything before we talk.</p>
+    <div class="section-label">Backstage Pass</div>
+    <h1>You know where to find <span class="highlight">me.</span></h1>
+    <p>Tell me what you need. I show up prepped.</p>
 </div>
 
 <section>
@@ -355,36 +333,36 @@
             <div class="intake-step-dot">3</div><div class="intake-step-line"></div>
             <div class="intake-step-dot">4</div>
         </div>
-        <div class="intake-title">What kind of call?</div>
-        <p class="intake-subtitle">Pick the one closest to what you need. We can always change direction once we're on.</p>
+        <div class="intake-title">What are we solving today?</div>
+        <p class="intake-subtitle">Pick the closest fit. Once we're talking, we'll go wherever it takes us.</p>
 
         <div class="call-type-cards">
             <div class="call-type-card" data-ct="venting" data-duration="45" onclick="selectCallType(this)">
                 <div class="ct-check">&#10003;</div>
                 <div class="ct-icon">&#128172;</div>
                 <h3>I want to talk</h3>
-                <p>Sometimes you need someone to think out loud with. No agenda, no structure required.</p>
+                <p>Sometimes you need to say it out loud to someone who gets the full picture. No agenda, no prep. Just talk.</p>
                 <span class="ct-tag">45 min</span>
             </div>
             <div class="call-type-card" data-ct="brainstorm" data-duration="45" onclick="selectCallType(this)">
                 <div class="ct-check">&#10003;</div>
                 <div class="ct-icon">&#129504;</div>
                 <h3>I need a thought partner</h3>
-                <p>Bring the fork in the road, the decision you're stuck on, or the idea to pressure-test.</p>
+                <p>Got a fork in the road? Bring the decision you keep turning over. We'll pressure-test it together.</p>
                 <span class="ct-tag">45 min</span>
             </div>
             <div class="call-type-card" data-ct="troubleshoot" data-duration="60" onclick="selectCallType(this)">
                 <div class="ct-check">&#10003;</div>
                 <div class="ct-icon">&#128295;</div>
                 <h3>I have a problem</h3>
-                <p>Something specific needs solving. Bring the problem, the context, and any relevant docs.</p>
+                <p>Something is broken or stuck. Bring the full picture — context, docs, everything. Let's fix it.</p>
                 <span class="ct-tag">60 min</span>
             </div>
             <div class="call-type-card" data-ct="other" data-duration="30" onclick="selectCallType(this)">
                 <div class="ct-check">&#10003;</div>
                 <div class="ct-icon">&#10024;</div>
                 <h3>Something else</h3>
-                <p>Not sure what box it fits in. That's fine. Say the word and we'll figure it out.</p>
+                <p>Can't name it yet? Perfect. Some of the best conversations start exactly like this.</p>
                 <span class="ct-tag">30 min</span>
             </div>
         </div>
@@ -392,7 +370,7 @@
         <button class="intake-next-btn" id="ct-next-btn" disabled onclick="goTo(2)">Next &rarr;</button>
     </div>
 
-    <!-- STEP 2: Timezone zone -->
+    <!-- STEP 2: Topic + doc link -->
     <div id="step-2" class="intake-section hidden">
         <div class="intake-steps">
             <div class="intake-step-dot done">&#10003;</div><div class="intake-step-line"></div>
@@ -401,23 +379,21 @@
             <div class="intake-step-dot">4</div>
         </div>
         <button class="back-btn" onclick="goTo(1)">&larr; Back</button>
-        <div class="intake-title">Where are you based?</div>
-        <p class="intake-subtitle">Slots are filtered by timezone window so we don't schedule each other at 3am.</p>
+        <div class="intake-title">What is it about?</div>
+        <p class="intake-subtitle">Two sentences is enough. Even a headline helps me show up prepared.</p>
 
-        <div class="zone-cards-dark">
-            <div class="zone-card-dark" data-zone="cet" onclick="selectZone(this)">
-                <div class="zone-emoji">&#127757;</div>
-                <h3>Europe / Africa / Middle East</h3>
-                <p>Monday to Friday, 9am to 5pm CET</p>
-            </div>
-            <div class="zone-card-dark" data-zone="us" onclick="selectZone(this)">
-                <div class="zone-emoji">&#127758;</div>
-                <h3>Americas</h3>
-                <p>Monday to Thursday, evenings CET / your afternoon</p>
-            </div>
+        <div class="form-group">
+            <label>In a sentence or two...</label>
+            <textarea id="topic-input" style="width:100%;max-width:560px;padding:0.7rem 1rem;background:rgba(255,255,255,0.05);border:1.5px solid var(--border);border-radius:6px;color:var(--white);font-family:var(--font-body);font-size:0.95rem;outline:none;transition:border-color 0.15s;min-height:80px;resize:vertical;box-sizing:border-box;" placeholder="e.g. We're deciding between two fundraising structures and I need a second pair of eyes..."></textarea>
+            <p class="form-hint">What's the real thing on your mind?</p>
+        </div>
+        <div class="form-group">
+            <label>Relevant doc or link <span style="color:var(--gray);font-weight:400;">(optional)</span></label>
+            <input type="url" id="doc-link-input" placeholder="https://docs.google.com/..." autocomplete="off" style="width:100%;max-width:560px;padding:0.7rem 1rem;background:rgba(255,255,255,0.05);border:1.5px solid var(--border);border-radius:6px;color:var(--white);font-family:var(--font-body);font-size:0.95rem;outline:none;transition:border-color 0.15s;box-sizing:border-box;">
+            <p class="form-hint">Cap table, term sheet, board minutes, contract — whatever is relevant.</p>
         </div>
 
-        <button class="intake-next-btn" id="zone-next-btn" disabled onclick="goToSlots()">Next &rarr;</button>
+        <button class="intake-next-btn" onclick="goToSlots()">Next &rarr;</button>
     </div>
 
     <!-- STEP 3: Slot picker -->
@@ -464,7 +440,7 @@
                 <input type="email" id="c-email" placeholder="you@company.com" required autocomplete="email">
             </div>
             <div class="form-group">
-                <label>Anything I should know before we talk? <span style="color:var(--gray);font-weight:400;">(optional)</span></label>
+                <label>Catch me up. <span style="color:var(--gray);font-weight:400;">(optional)</span></label>
                 <textarea id="c-note" placeholder="Context, docs link, what's on your mind..."></textarea>
                 <p class="form-hint">I read everything. Even two sentences helps.</p>
             </div>
@@ -488,17 +464,17 @@
                 <div class="wn-card">
                     <div class="wn-num">01</div>
                     <h4>I read your note</h4>
-                    <p>Whatever you left in the notes field gets read before we talk. No cold calls on my end.</p>
+                    <p>No cold calls on my end. Whatever you wrote gets read before we get on. Every word.</p>
                 </div>
                 <div class="wn-card">
                     <div class="wn-num">02</div>
                     <h4>Show up with the thing</h4>
-                    <p>Bring the actual problem, decision, or situation. We'll work through it together.</p>
+                    <p>Bring the real version. Not the polished summary — the actual situation. That's where the work is.</p>
                 </div>
                 <div class="wn-card">
                     <div class="wn-num">03</div>
                     <h4>Leave with a next step</h4>
-                    <p>Every call ends with something actionable. Not a vague "let's circle back."</p>
+                    <p>Every call ends with something concrete on the table. Not "let's sync." An actual move.</p>
                 </div>
             </div>
             <p id="meet-link-msg" class="hidden" style="margin-top:1.5rem;">
@@ -561,7 +537,6 @@ const API = window.location.hostname === 'localhost' ? 'http://localhost:8741' :
 
 let selectedCallType = null;
 let selectedDuration  = null;
-let selectedZone      = null;
 let selectedSlot      = null;
 
 const CT_LABELS = {
@@ -569,11 +544,6 @@ const CT_LABELS = {
     brainstorm:  'I need a thought partner',
     troubleshoot: 'I have a problem',
     other:       'Something else',
-};
-
-const ZONE_LABELS = {
-    cet: 'Europe / Africa / Middle East',
-    us:  'Americas',
 };
 
 // Set user timezone display
@@ -596,14 +566,6 @@ function selectCallType(card) {
     document.getElementById('ct-next-btn').disabled = false;
 }
 
-// Step 2: Zone selection
-function selectZone(card) {
-    document.querySelectorAll('.zone-card-dark').forEach(c => c.classList.remove('selected'));
-    card.classList.add('selected');
-    selectedZone = card.dataset.zone;
-    document.getElementById('zone-next-btn').disabled = false;
-}
-
 // Step 2 Next: go to slot picker and load slots
 async function goToSlots() {
     goTo(3);
@@ -618,7 +580,7 @@ async function loadSlots() {
     document.getElementById('slots-remaining').classList.add('hidden');
 
     try {
-        const res = await fetch(`${API}/booking/slots/${selectedZone}/${selectedCallType}?duration=${selectedDuration}`);
+        const res = await fetch(`${API}/booking/slots/global/${selectedCallType}?duration=${selectedDuration}`);
         if (!res.ok) throw new Error('API error');
         const data = await res.json();
         renderSlots(data.slots || [], data.slots_remaining_this_week || 0);
@@ -694,17 +656,18 @@ function goToContact() {
     document.getElementById('booking-summary').innerHTML =
         `<strong>${CT_LABELS[selectedCallType]}</strong>`
         + `<span class="bs-sep">|</span>${selectedDuration} min`
-        + `<span class="bs-sep">|</span>${slotStr}`
-        + `<span class="bs-sep">|</span>${ZONE_LABELS[selectedZone]}`;
+        + `<span class="bs-sep">|</span>${slotStr}`;
 
     goTo(4);
 }
 
 // Step 4: Submit booking
 async function submitBooking() {
-    const name  = document.getElementById('c-name').value.trim();
-    const email = document.getElementById('c-email').value.trim();
-    const note  = document.getElementById('c-note').value.trim();
+    const name     = document.getElementById('c-name').value.trim();
+    const email    = document.getElementById('c-email').value.trim();
+    const note     = document.getElementById('c-note').value.trim();
+    const topic    = document.getElementById('topic-input').value.trim();
+    const docLink  = document.getElementById('doc-link-input').value.trim();
 
     if (!name || !email) {
         alert('Please fill in your name and email.');
@@ -722,13 +685,15 @@ async function submitBooking() {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
                 call_type: selectedCallType,
-                zone:      selectedZone,
+                zone:      'global',
                 duration:  selectedDuration,
                 start:     selectedSlot.start,
                 end:       selectedSlot.end,
                 name,
                 email,
-                message:   note || '',
+                message:   topic || note || '',
+                notes:     note || '',
+                docs_link: docLink || '',
                 source:    'mexzungu.com/clients',
             }),
         });
