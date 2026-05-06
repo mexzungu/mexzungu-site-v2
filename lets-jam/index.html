@@ -6,20 +6,320 @@
     <link rel="apple-touch-icon" href="/apple-touch-icon.png">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#0d0d0d">
-    <title>Let's Jam — Mexzungu Group</title>
-    <meta name="description" content="Book a call with Pepe Carrillo. Real talk, no scripts, no gatekeepers.">
-    <meta property="og:title" content="Talk to Pepe | Mexzungu Group">
-    <meta property="og:description" content="Book a call with Pepe. Just tell me what you need.">
+    <title>Work With Us — Mexzungu Group</title>
+    <meta name="description" content="Tell us what you're building and what you need. We'll figure out if we're the right fit.">
+    <meta property="og:title" content="Work With Mexzungu Group">
+    <meta property="og:description" content="Venture Architecture. Deal Closing. Fractional GC. Tell us what you need.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://mexzungu.com/lets-jam">
     <meta property="og:image" content="https://mexzungu.com/logo-v3.png">
     <meta name="twitter:card" content="summary_large_image">
     <link rel="canonical" href="https://mexzungu.com/lets-jam">
-    <link rel="alternate" hreflang="en" href="https://mexzungu.com/lets-jam">
-    <link rel="alternate" hreflang="es" href="https://mexzungu.com/es/lets-jam">
-    <link rel="alternate" hreflang="x-default" href="https://mexzungu.com/lets-jam">
     <link rel="stylesheet" href="/fonts.css">
     <link rel="stylesheet" href="/style.css?v=10">
+    <style>
+        /* Intake-specific overrides */
+        .intake-hero {
+            padding: 4rem 0 3rem;
+        }
+        .intake-hero .section-label {
+            margin-bottom: 1rem;
+        }
+        .intake-hero h1 {
+            font-size: clamp(2rem, 5vw, 3rem);
+            margin-bottom: 1.25rem;
+        }
+        .intake-hero p {
+            color: var(--gray);
+            max-width: 560px;
+            line-height: 1.7;
+        }
+
+        /* Steps */
+        .intake-steps {
+            display: flex;
+            align-items: center;
+            gap: 0;
+            margin-bottom: 2.5rem;
+        }
+        .intake-step-dot {
+            width: 34px; height: 34px;
+            border-radius: 50%;
+            border: 1.5px solid var(--border);
+            display: flex; align-items: center; justify-content: center;
+            font-family: var(--mono);
+            font-size: 0.8rem;
+            color: var(--gray);
+            flex-shrink: 0;
+            transition: all 0.2s;
+        }
+        .intake-step-dot.active { border-color: var(--pink); color: var(--pink); background: rgba(225,75,135,0.1); }
+        .intake-step-dot.done { background: var(--pink); border-color: var(--pink); color: #fff; }
+        .intake-step-line { flex: 1; height: 1px; background: var(--border); }
+
+        .intake-section { animation: intakeFade 0.25s ease-out; }
+        @keyframes intakeFade { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        .intake-title {
+            font-size: 1.6rem;
+            font-family: var(--font-heading);
+            font-weight: 400;
+            margin-bottom: 0.5rem;
+        }
+        .intake-subtitle {
+            color: var(--gray);
+            font-size: 0.95rem;
+            margin-bottom: 2rem;
+        }
+        .back-btn {
+            background: none;
+            border: none;
+            color: var(--gray);
+            font-family: var(--mono);
+            font-size: 0.85rem;
+            cursor: pointer;
+            padding: 0;
+            margin-bottom: 1.5rem;
+            opacity: 0.7;
+            transition: opacity 0.15s;
+        }
+        .back-btn:hover { opacity: 1; }
+
+        /* Product cards */
+        .product-cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        @media (max-width: 700px) { .product-cards { grid-template-columns: 1fr; } }
+        .product-card {
+            border: 1.5px solid var(--border);
+            border-radius: 10px;
+            padding: 1.75rem 1.5rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            background: rgba(255,255,255,0.02);
+            position: relative;
+        }
+        .product-card:hover { border-color: var(--pink); background: rgba(225,75,135,0.05); }
+        .product-card.selected { border-color: var(--pink); background: rgba(225,75,135,0.08); }
+        .product-card .product-icon { font-size: 1.75rem; margin-bottom: 1rem; }
+        .product-card h3 { font-family: var(--font-heading); font-size: 1rem; font-weight: 400; margin-bottom: 0.5rem; color: var(--white); }
+        .product-card p { font-size: 0.85rem; color: var(--gray); line-height: 1.55; }
+        .product-card .product-tag {
+            display: inline-block;
+            margin-top: 1rem;
+            font-size: 0.75rem;
+            font-family: var(--mono);
+            color: var(--pink);
+            background: rgba(225,75,135,0.1);
+            padding: 0.2rem 0.6rem;
+            border-radius: 4px;
+            border: 1px solid rgba(225,75,135,0.2);
+        }
+        .product-selected-check {
+            position: absolute;
+            top: 1rem; right: 1rem;
+            width: 22px; height: 22px;
+            background: var(--pink);
+            border-radius: 50%;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            color: #fff;
+        }
+        .product-card.selected .product-selected-check { display: flex; }
+
+        /* Next button */
+        .intake-next-btn {
+            font-family: var(--font-heading);
+            font-size: 0.95rem;
+            padding: 0.8rem 2.25rem;
+            background: var(--pink);
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .intake-next-btn:hover:not(:disabled) { background: #c23a74; transform: translateY(-1px); }
+        .intake-next-btn:disabled { opacity: 0.35; cursor: default; transform: none; }
+
+        /* Stage selector */
+        .stage-options {
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+            margin-bottom: 2rem;
+        }
+        .stage-option {
+            border: 1.5px solid var(--border);
+            border-radius: 8px;
+            padding: 1rem 1.25rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            transition: all 0.2s;
+        }
+        .stage-option:hover { border-color: var(--pink); background: rgba(225,75,135,0.04); }
+        .stage-option.selected { border-color: var(--pink); background: rgba(225,75,135,0.08); }
+        .stage-radio {
+            width: 18px; height: 18px;
+            border-radius: 50%;
+            border: 1.5px solid var(--border);
+            flex-shrink: 0;
+            transition: all 0.2s;
+        }
+        .stage-option.selected .stage-radio { background: var(--pink); border-color: var(--pink); box-shadow: 0 0 0 3px rgba(225,75,135,0.2); }
+        .stage-label { font-size: 0.9rem; color: var(--white); }
+
+        /* Form */
+        .intake-form-grid { display: flex; flex-direction: column; gap: 0; max-width: 600px; }
+        .form-group { margin-bottom: 1.25rem; }
+        .form-group label {
+            display: block;
+            font-family: var(--mono);
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: .08em;
+            color: var(--gray);
+            margin-bottom: 0.5rem;
+        }
+        .form-group input, .form-group textarea, .form-group select {
+            width: 100%;
+            padding: 0.7rem 1rem;
+            background: rgba(255,255,255,0.05);
+            border: 1.5px solid var(--border);
+            border-radius: 6px;
+            color: var(--white);
+            font-family: var(--font-body);
+            font-size: 0.95rem;
+            outline: none;
+            transition: border-color 0.15s;
+        }
+        .form-group input::placeholder, .form-group textarea::placeholder { color: rgba(255,255,255,0.25); }
+        .form-group input:focus, .form-group textarea:focus, .form-group select:focus { border-color: var(--pink); }
+        .form-group textarea { min-height: 90px; resize: vertical; }
+        .form-group select { cursor: pointer; appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23888' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 1rem center; padding-right: 2.5rem; }
+        .form-group select option { background: #1a1a1a; }
+        .form-row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+        @media (max-width: 500px) { .form-row-2 { grid-template-columns: 1fr; } }
+        .form-hint { font-size: 0.78rem; color: var(--gray); margin-top: 0.4rem; opacity: 0.7; }
+
+        /* Brief box — shown above form in step 2 */
+        .context-brief {
+            background: rgba(225,75,135,0.06);
+            border: 1px solid rgba(225,75,135,0.2);
+            border-radius: 8px;
+            padding: 1rem 1.25rem;
+            margin-bottom: 2rem;
+            font-size: 0.85rem;
+            color: var(--gray);
+        }
+        .context-brief strong { color: var(--pink); }
+
+        /* Slot picker */
+        .zone-cards-dark {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        @media (max-width: 500px) { .zone-cards-dark { grid-template-columns: 1fr; } }
+        .zone-card-dark {
+            border: 1.5px solid var(--border);
+            border-radius: 10px;
+            padding: 1.5rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            background: rgba(255,255,255,0.02);
+        }
+        .zone-card-dark:hover { border-color: var(--pink); background: rgba(225,75,135,0.05); }
+        .zone-card-dark.selected { border-color: var(--pink); background: rgba(225,75,135,0.08); }
+        .zone-card-dark .zone-emoji { font-size: 1.6rem; margin-bottom: 0.75rem; }
+        .zone-card-dark h3 { font-family: var(--font-heading); font-size: 0.95rem; font-weight: 400; margin-bottom: 0.4rem; color: var(--white); }
+        .zone-card-dark p { font-size: 0.82rem; color: var(--gray); }
+
+        .tz-note { font-size: 0.82rem; color: var(--gray); margin-bottom: 1.5rem; font-style: italic; }
+        .slots-remaining-badge {
+            display: inline-block;
+            background: rgba(212,160,57,0.1);
+            color: var(--gold);
+            border: 1px solid rgba(212,160,57,0.25);
+            font-size: 0.78rem;
+            font-family: var(--mono);
+            padding: 0.25rem 0.7rem;
+            border-radius: 20px;
+            margin-bottom: 1.5rem;
+        }
+        .loading-slots { text-align: center; padding: 3rem 0; color: var(--gray); }
+        .spinner-sm {
+            width: 28px; height: 28px;
+            border: 2px solid rgba(255,255,255,0.1);
+            border-top-color: var(--pink);
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin: 0 auto 1rem;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        .slots-date-label {
+            font-family: var(--mono);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: .1em;
+            color: var(--gray);
+            margin: 1.5rem 0 0.75rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid var(--border);
+        }
+        .slots-row { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 0.5rem; }
+        .slot-btn {
+            padding: 0.45rem 1rem;
+            border: 1.5px solid var(--border);
+            border-radius: 5px;
+            background: transparent;
+            color: var(--white);
+            font-family: var(--mono);
+            font-size: 0.82rem;
+            cursor: pointer;
+            transition: all 0.15s;
+        }
+        .slot-btn:hover { border-color: var(--pink); color: var(--pink); }
+        .slot-btn.selected { background: var(--pink); border-color: var(--pink); color: #fff; }
+        .notice-note { font-size: 0.78rem; color: var(--gray); margin-top: 1.5rem; font-style: italic; opacity: 0.7; }
+
+        /* Confirmation */
+        .confirmation-box {
+            text-align: center;
+            padding: 4rem 0;
+        }
+        .confirm-icon { font-size: 3rem; margin-bottom: 1.5rem; }
+        .confirm-title {
+            font-family: var(--font-heading);
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+        .confirm-subtitle { color: var(--gray); margin-bottom: 2.5rem; }
+        .what-next-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            text-align: left;
+            margin-bottom: 2rem;
+        }
+        @media (max-width: 600px) { .what-next-grid { grid-template-columns: 1fr; } }
+        .wn-card {
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 1.25rem;
+        }
+        .wn-num { font-family: var(--font-heading); font-size: 1.5rem; color: var(--pink); margin-bottom: 0.5rem; }
+        .wn-card h4 { font-family: var(--font-heading); font-size: 0.9rem; font-weight: 400; margin-bottom: 0.4rem; }
+        .wn-card p { font-size: 0.82rem; color: var(--gray); line-height: 1.55; }
+    </style>
 </head>
 <body>
 
@@ -48,193 +348,224 @@
 
 <main id="main">
 
-<div class="page-hero leopard-dense">
-    <div class="section-label">Let's Jam</div>
-    <h1>Pick your <span class="highlight">poison.</span></h1>
-    <p>No gatekeepers. No forms that go nowhere. Every call is prepped individually.</p>
-    <p class="hero-accent">Real talk. No scripts. Just you and me.</p>
-    <span class="margin-whisper">no small talk. all riff.</span>
+<div class="page-hero leopard-dense intake-hero">
+    <div class="section-label">Work With Us</div>
+    <h1>Tell us what you're <span class="highlight">building.</span></h1>
+    <p>We'll tell you in 30 minutes if we're the right fit. No sales script. No pitch deck. Just a real conversation about what you need and how we work.</p>
 </div>
 
 <section>
-    <!-- STEP 1: Timezone -->
-    <div id="step-1">
-        <div class="steps">
-            <div class="step-dot active">1</div><div class="step-line"></div>
-            <div class="step-dot">2</div><div class="step-line"></div>
-            <div class="step-dot">3</div><div class="step-line"></div>
-            <div class="step-dot">4</div><div class="step-line"></div>
-            <div class="step-dot">5</div>
+
+    <!-- STEP 1: Product -->
+    <div id="step-1" class="intake-section">
+        <div class="intake-steps">
+            <div class="intake-step-dot active">1</div><div class="intake-step-line"></div>
+            <div class="intake-step-dot">2</div><div class="intake-step-line"></div>
+            <div class="intake-step-dot">3</div><div class="intake-step-line"></div>
+            <div class="intake-step-dot">4</div>
         </div>
-        <div class="section-title">Where are you?</div>
-        <div class="zone-cards">
-            <div class="zone-card" data-zone="cet">
+        <div class="intake-title">What do you need?</div>
+        <p class="intake-subtitle">Pick the workstream closest to your situation. You can mix and match once we talk.</p>
+        <div class="product-cards">
+            <div class="product-card" data-product="fractional-gc" onclick="selectProduct(this)">
+                <div class="product-selected-check">&#10003;</div>
+                <div class="product-icon">⚖️</div>
+                <h3>Fractional GC</h3>
+                <p>Legal infrastructure without a full-time hire. Contracts, governance, cap table health, investor documents. Async-first. Monthly retainer.</p>
+                <span class="product-tag">Fractional / Ongoing</span>
+            </div>
+            <div class="product-card" data-product="deal-closing" onclick="selectProduct(this)">
+                <div class="product-selected-check">&#10003;</div>
+                <div class="product-icon">🤝</div>
+                <h3>Deal Closing</h3>
+                <p>Fundraising strategy, SPV formation, term sheet redlines, cap raise support from first meeting to money clearing. Project-based.</p>
+                <span class="product-tag">Project-Based / Capital</span>
+            </div>
+            <div class="product-card" data-product="venture-architect" onclick="selectProduct(this)">
+                <div class="product-selected-check">&#10003;</div>
+                <div class="product-icon">🏗️</div>
+                <h3>Venture Architecture</h3>
+                <p>Full structural review. Holding structure, domicile, cap table design, exit architecture. Typically a 4-8 week engagement.</p>
+                <span class="product-tag">Diagnostic / Advisory</span>
+            </div>
+            <div class="product-card" data-product="diagnosis" onclick="selectProduct(this)">
+                <div class="product-selected-check">&#10003;</div>
+                <div class="product-icon">🔍</div>
+                <h3>Diagnosis Session <span style="font-family:var(--mono);font-size:0.75rem;color:var(--pink);font-weight:400;">$250</span></h3>
+                <p>90-minute structured assessment of your legal and structural situation. Written recommendations delivered within 48h. Friends and referrals get a voucher.</p>
+                <span class="product-tag">Paid / One-Off</span>
+            </div>
+        </div>
+        <button class="intake-next-btn" id="product-next-btn" disabled onclick="goTo(2)">Next &rarr;</button>
+    </div>
+
+    <!-- STEP 2: About your venture -->
+    <div id="step-2" class="intake-section hidden">
+        <div class="intake-steps">
+            <div class="intake-step-dot done">&#10003;</div><div class="intake-step-line"></div>
+            <div class="intake-step-dot active">2</div><div class="intake-step-line"></div>
+            <div class="intake-step-dot">3</div><div class="intake-step-line"></div>
+            <div class="intake-step-dot">4</div>
+        </div>
+        <button class="back-btn" onclick="goTo(1)">&larr; Back</button>
+        <div class="intake-title">Tell us about the venture.</div>
+        <p class="intake-subtitle">Brief is fine. We read everything before the call.</p>
+
+        <div id="product-context-brief" class="context-brief"></div>
+
+        <div class="intake-form-grid">
+            <div class="form-group">
+                <label>Company / Venture Name</label>
+                <input type="text" id="b-company" placeholder="What are you building?" required>
+            </div>
+            <div class="form-row-2">
+                <div class="form-group">
+                    <label>Where are you incorporated?</label>
+                    <input type="text" id="b-jurisdiction" placeholder="e.g. Delaware, Kenya, Netherlands">
+                </div>
+                <div class="form-group">
+                    <label>Stage</label>
+                    <select id="b-stage">
+                        <option value="">Select stage</option>
+                        <option value="idea">Idea / Pre-incorporation</option>
+                        <option value="pre-seed">Pre-seed</option>
+                        <option value="seed">Seed</option>
+                        <option value="series-a">Series A</option>
+                        <option value="growth">Growth / Later Stage</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>What's the situation?</label>
+                <textarea id="b-brief" placeholder="What's going on? What do you need? What's the urgency?" required></textarea>
+            </div>
+            <div class="form-group">
+                <label>Any materials to share?</label>
+                <input type="url" id="b-docs" placeholder="Cap table, term sheet, deck... (optional)">
+                <p class="form-hint">Google Drive, Dropbox, or any link. Helps us prep.</p>
+            </div>
+        </div>
+        <button class="intake-next-btn" onclick="goToStep3()">Next &rarr;</button>
+    </div>
+
+    <!-- STEP 3: Contact -->
+    <div id="step-3" class="intake-section hidden">
+        <div class="intake-steps">
+            <div class="intake-step-dot done">&#10003;</div><div class="intake-step-line"></div>
+            <div class="intake-step-dot done">&#10003;</div><div class="intake-step-line"></div>
+            <div class="intake-step-dot active">3</div><div class="intake-step-line"></div>
+            <div class="intake-step-dot">4</div>
+        </div>
+        <button class="back-btn" onclick="goTo(2)">&larr; Back</button>
+        <div class="intake-title">Who are we talking to?</div>
+        <p class="intake-subtitle">Where to send the invite.</p>
+        <div class="intake-form-grid">
+            <div class="form-row-2">
+                <div class="form-group">
+                    <label>First Name</label>
+                    <input type="text" id="c-first" required>
+                </div>
+                <div class="form-group">
+                    <label>Last Name</label>
+                    <input type="text" id="c-last" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Email</label>
+                <input type="email" id="c-email" required placeholder="you@company.com">
+            </div>
+            <div class="form-group">
+                <label>Role</label>
+                <input type="text" id="c-role" placeholder="Founder, CEO, CFO..." required>
+            </div>
+        </div>
+        <button class="intake-next-btn" onclick="goToStep4()">Next &rarr;</button>
+    </div>
+
+    <!-- STEP 4: Book the discovery call -->
+    <div id="step-4" class="intake-section hidden">
+        <div class="intake-steps">
+            <div class="intake-step-dot done">&#10003;</div><div class="intake-step-line"></div>
+            <div class="intake-step-dot done">&#10003;</div><div class="intake-step-line"></div>
+            <div class="intake-step-dot done">&#10003;</div><div class="intake-step-line"></div>
+            <div class="intake-step-dot active">4</div>
+        </div>
+        <button class="back-btn" onclick="goTo(3)">&larr; Back</button>
+        <div id="step4-title-discovery" class="intake-title">Book the discovery call.</div>
+        <p id="step4-sub-discovery" class="intake-subtitle">30 minutes. We read everything first. You get a real conversation, not a sales pitch.</p>
+        <div id="step4-title-diagnosis" class="intake-title hidden">Book your Diagnosis Session. <span style="font-family:var(--mono);font-size:0.85rem;color:var(--pink);">$250</span></div>
+        <p id="step4-sub-diagnosis" class="intake-subtitle hidden">90 minutes. Structured assessment. Written recommendations within 48h. Have a voucher? Enter it below to waive the fee.</p>
+        <div id="voucher-section" style="display:none;margin-bottom:1.5rem;">
+            <div class="form-group" style="max-width:360px;">
+                <label>Voucher Code <span style="color:var(--gray);font-size:0.85rem;font-weight:400;">(optional — waives the $250 fee)</span></label>
+                <div style="display:flex;gap:0.5rem;align-items:center;">
+                    <input type="text" id="voucher-input" placeholder="e.g. FRIEND" style="text-transform:uppercase;letter-spacing:0.05em;" oninput="this.value=this.value.toUpperCase()">
+                    <button type="button" onclick="applyVoucher()" style="background:var(--pink);color:#fff;border:none;padding:0.5rem 1rem;border-radius:4px;font-family:var(--mono);font-size:0.85rem;cursor:pointer;white-space:nowrap;">Apply</button>
+                </div>
+                <div id="voucher-status" style="margin-top:0.4rem;font-size:0.85rem;"></div>
+            </div>
+        </div>
+
+        <div class="zone-cards-dark">
+            <div class="zone-card-dark" data-zone="cet" onclick="selectZone(this)">
                 <div class="zone-emoji">🌍</div>
                 <h3>Europe / Africa / Middle East</h3>
                 <p>Monday to Friday, 9am to 5pm CET</p>
             </div>
-            <div class="zone-card" data-zone="us">
+            <div class="zone-card-dark" data-zone="us" onclick="selectZone(this)">
                 <div class="zone-emoji">🌎</div>
                 <h3>Americas</h3>
                 <p>Monday to Thursday, evenings CET / your afternoon</p>
             </div>
         </div>
-    </div>
 
-    <!-- STEP 2: What do you need? -->
-    <div id="step-2" class="hidden">
-        <div class="steps">
-            <div class="step-dot done">&#10003;</div><div class="step-line"></div>
-            <div class="step-dot active">2</div><div class="step-line"></div>
-            <div class="step-dot">3</div><div class="step-line"></div>
-            <div class="step-dot">4</div><div class="step-line"></div>
-            <div class="step-dot">5</div>
-        </div>
-        <button class="back-btn" onclick="goTo(1)">&larr; Back</button>
-        <div class="section-title">How can I help you?</div>
-
-        <div class="type-options">
-            <div class="type-option" data-type="venting">
-                <div class="type-radio"></div>
-                <div class="type-content">
-                    <h4>💬 I want to talk</h4>
-                    <p>Some of my best conversations started with "I don't even know where to begin." No agenda, no slides, no homework. Just you and me on a call, talking about whatever's on your mind. Sometimes the best clarity comes from saying things out loud to the right person.</p>
-                    <span class="type-langs">EN / ES</span>
-                </div>
-            </div>
-            <div class="type-option" data-type="brainstorm">
-                <div class="type-radio"></div>
-                <div class="type-content">
-                    <h4>🧠 I need a thought partner</h4>
-                    <p>I once had a founder call me at 11pm because she couldn't decide between two term sheets. We talked for 40 minutes and she knew by minute 20. That's what this is. You bring the idea, the fork in the road, the thing keeping you up. I'll think with you until it clicks.</p>
-                    <span class="type-langs">EN / ES</span>
-                </div>
-            </div>
-            <div class="type-option" data-type="troubleshoot">
-                <div class="type-radio"></div>
-                <div class="type-content">
-                    <h4>🔧 I have a problem</h4>
-                    <p>Cap table mess, governance gap, co-founder tension, fundraise going sideways, investor asking questions you don't have answers to. I've been the lawyer in this room. I've been the operator in this room. I've been the board member in this room. Let's fix it.</p>
-                    <span class="type-langs">EN / ES</span>
-                </div>
-            </div>
-            <div class="type-option" data-type="other">
-                <div class="type-radio"></div>
-                <div class="type-content">
-                    <h4>✨ Something else</h4>
-                    <p>You don't fit in a box. Good. Neither do I. Tell me what's on your mind in the next step and we'll figure out the shape of it together.</p>
-                    <span class="type-langs">EN / ES</span>
-                </div>
-            </div>
-        </div>
-        <button class="next-btn" id="type-next-btn" disabled onclick="goTo(3)">Next &rarr;</button>
-    </div>
-
-    <!-- STEP 3: Duration -->
-    <div id="step-3" class="hidden">
-        <div class="steps">
-            <div class="step-dot done">&#10003;</div><div class="step-line"></div>
-            <div class="step-dot done">&#10003;</div><div class="step-line"></div>
-            <div class="step-dot active">3</div><div class="step-line"></div>
-            <div class="step-dot">4</div><div class="step-line"></div>
-            <div class="step-dot">5</div>
-        </div>
-        <button class="back-btn" onclick="goTo(2)">&larr; Back</button>
-        <div class="section-title">How much time do we need?</div>
-
-        <div class="duration-options">
-            <div class="duration-option" data-duration="30">
-                <div class="duration-number">30</div>
-                <div class="duration-label">minutes</div>
-                <p>Quick and focused. One question, one topic.</p>
-            </div>
-            <div class="duration-option" data-duration="45">
-                <div class="duration-number">45</div>
-                <div class="duration-label">minutes</div>
-                <p>Room to dig in. Most conversations land here.</p>
-            </div>
-            <div class="duration-option" data-duration="60">
-                <div class="duration-number">60</div>
-                <div class="duration-label">minutes</div>
-                <p>The full session. Complex problems, multiple threads.</p>
-            </div>
-        </div>
-    </div>
-
-    <!-- STEP 4: Pick time -->
-    <div id="step-4" class="hidden">
-        <div class="steps">
-            <div class="step-dot done">&#10003;</div><div class="step-line"></div>
-            <div class="step-dot done">&#10003;</div><div class="step-line"></div>
-            <div class="step-dot done">&#10003;</div><div class="step-line"></div>
-            <div class="step-dot active">4</div><div class="step-line"></div>
-            <div class="step-dot">5</div>
-        </div>
-        <button class="back-btn" onclick="goTo(3)">&larr; Back</button>
-        <div class="section-title" id="slots-title">Pick a time</div>
-        <p class="tz-note">Times shown in your local timezone (<span id="user-tz"></span>)</p>
-        <p id="slots-remaining" class="slots-remaining hidden"></p>
-        <div id="slots-loading" class="loading"><div class="spinner"></div><p>Loading available times...</p></div>
-        <div id="slots-container" class="slots-container hidden"></div>
-        <div id="slots-empty" class="loading hidden"><p>No available slots in the next 2 weeks. Try a different duration or reach out at janis@mexzungu.com.</p></div>
-        <p class="notice-note">All bookings require 24h notice so Pepe can prepare individually for your call.</p>
-    </div>
-
-    <!-- STEP 5: Details -->
-    <div id="step-5" class="hidden">
-        <div class="steps">
-            <div class="step-dot done">&#10003;</div><div class="step-line"></div>
-            <div class="step-dot done">&#10003;</div><div class="step-line"></div>
-            <div class="step-dot done">&#10003;</div><div class="step-line"></div>
-            <div class="step-dot done">&#10003;</div><div class="step-line"></div>
-            <div class="step-dot active">5</div>
-        </div>
-        <button class="back-btn" onclick="goTo(4)">&larr; Back</button>
-        <div class="section-title">Almost there.</div>
-        <p class="section-text" style="margin-bottom:2rem;">Selected: <strong id="selected-summary"></strong></p>
-
-        <form class="booking-form" onsubmit="submitBooking(event)">
-            <div class="form-row">
-                <div class="form-group"><label>First Name</label><input type="text" id="f-first" required></div>
-                <div class="form-group"><label>Last Name</label><input type="text" id="f-last" required></div>
-            </div>
-            <div class="form-group"><label>Email</label><input type="email" id="f-email" required placeholder="you@company.com"></div>
-            <div class="form-group"><label id="msg-label">Tell me what's on your mind</label><textarea id="f-message"></textarea></div>
-            <div class="form-group"><label>Any documents I should read before our call?</label><input type="url" id="f-docs" placeholder="Paste a link (Google Drive, Dropbox, website, etc.)"><p class="form-hint">Cap table, pitch deck, shareholders' agreement, anything that gives me context. Optional but helps me prep.</p></div>
-            <button type="submit" class="submit-btn" id="submit-btn">Book it &rarr;</button>
-        </form>
+        <p class="tz-note" id="tz-note" style="display:none;">Times shown in your timezone (<span id="user-tz"></span>)</p>
+        <p id="slots-remaining" class="slots-remaining-badge hidden"></p>
+        <div id="slots-loading" class="loading-slots hidden"><div class="spinner-sm"></div><p>Loading times...</p></div>
+        <div id="slots-container" class="hidden"></div>
+        <div id="slots-empty" class="loading-slots hidden"><p>No slots in the next 2 weeks for this timezone. Email us at <a href="mailto:janis@mexzungu.com" style="color:var(--pink);">janis@mexzungu.com</a> and we'll find a time.</p></div>
+        <p class="notice-note" style="display:none;" id="notice-note">We review every intake before the call. That's why we need 24 hours notice.</p>
     </div>
 
     <!-- DONE -->
-    <div id="step-done" class="hidden">
-        <div class="confirmation">
-            <div class="big-check">🔥</div>
-            <div class="section-title">You're in.</div>
-            <p class="section-text" style="margin:0 auto;">Here's what happens next:</p>
-            <div class="what-next">
-                <div class="what-next-step">
+    <div id="step-done" class="intake-section hidden">
+        <div class="confirmation-box">
+            <div class="confirm-icon">🔥</div>
+            <div class="confirm-title">You're in.</div>
+            <p class="confirm-subtitle">Calendar invite is on its way. Here's what happens next:</p>
+            <div class="what-next-grid">
+                <div class="wn-card">
                     <div class="wn-num">01</div>
-                    <h4>Check your email</h4>
-                    <p>You'll get a calendar invite with a Google Meet link.</p>
+                    <h4>We read your brief</h4>
+                    <p>Everything you submitted gets reviewed before the call. No generic questions.</p>
                 </div>
-                <div class="what-next-step">
+                <div class="wn-card">
                     <div class="wn-num">02</div>
-                    <h4>Pepe preps</h4>
-                    <p>Every call is reviewed and prepared individually. That's why we ask for 24h.</p>
+                    <h4>30 minutes, real talk</h4>
+                    <p>We tell you what we'd do, what it costs, and whether we're the right fit. No pitch, no pressure.</p>
                 </div>
-                <div class="what-next-step">
+                <div class="wn-card">
                     <div class="wn-num">03</div>
-                    <h4>We talk</h4>
-                    <p>Show up ready. Bring the chaos. We'll build the structure.</p>
+                    <h4>Engagement letter or nothing</h4>
+                    <p>If it's a fit, you get a clear proposal within 48 hours. If not, you get an honest referral.</p>
                 </div>
             </div>
-            <p id="meet-link-msg" class="hidden" style="margin-top:2rem;"><a id="meet-link" href="#" target="_blank" class="submit-btn">Join Google Meet</a></p>
-            <p style="margin-top:2rem; font-size:0.85rem; color:var(--gray);">
-                Changed your mind? <a href="mailto:janis@mexzungu.com?subject=Cancel my call" style="color:var(--pink);">Cancel this call</a> &middot;
-                <a href="/lets-jam/" style="color:var(--pink);">Reschedule</a>
+            <p id="meet-link-msg" class="hidden" style="margin-top:1.5rem;"><a id="meet-link" href="#" target="_blank" class="intake-next-btn">Join Google Meet &rarr;</a></p>
+            <div id="payment-pending-msg" class="hidden" style="margin-top:1rem;padding:1rem;border:1px solid var(--pink);border-radius:6px;">
+                <strong>Next step: complete your payment</strong><br>
+                Your Diagnosis Session is tentatively reserved. Payment instructions ($250) will be sent to your email within 1 hour to confirm the slot.
+            </div>
+            <div id="voucher-confirmed-msg" class="hidden" style="margin-top:1rem;padding:1rem;border:1px solid #4ade80;border-radius:6px;color:#4ade80;">
+                Voucher applied — your session is confirmed. No payment needed.
+            </div>
+            <p style="margin-top: 2rem; font-size: 0.82rem; color: var(--gray);">
+                Changed your mind? <a href="mailto:janis@mexzungu.com?subject=Cancel my discovery call" style="color:var(--pink);">Cancel this call</a> &middot;
+                <a href="/lets-jam" style="color:var(--pink);">Reschedule</a>
             </p>
         </div>
     </div>
+
 </section>
 
 <hr class="leopard-divider">
@@ -283,10 +614,15 @@
 
 <script>
 const API = window.location.hostname === 'localhost' ? 'http://localhost:8741' : 'https://api.mexzungu.com';
-let selectedZone = null, selectedType = null, selectedDuration = null, selectedSlot = null;
+let selectedProduct = null, selectedZone = null, selectedSlot = null;
+let voucherApplied = null;
 
-const TYPE_LABELS = { 'talk':'💬 Just talking', 'brainstorm':'🧠 Thought partner', 'troubleshoot':'🔧 Problem solving', 'other':'✨ Something else' };
-const MSG_LABELS = { 'talk':"What's on your mind?", 'brainstorm':'What are we thinking through?', 'troubleshoot':"What's broken?", 'other':'Tell me more' };
+const PRODUCT_BRIEFS = {
+    'fractional-gc': 'You selected <strong>Fractional GC</strong> — ongoing legal infrastructure on retainer. Tell us what\'s currently broken or missing: contracts, governance, cap table, investor relations.',
+    'deal-closing': 'You selected <strong>Deal Closing</strong> — capital raise or transaction support. Tell us what round you\'re running, where you are in the process, and what\'s blocking you.',
+    'venture-architect': 'You selected <strong>Venture Architecture</strong> — structural review of your holding setup, domicile, cap table, and exit architecture. Tell us what\'s driving this: new investment, restructuring, expansion?',
+    'diagnosis': 'You selected <strong>Diagnosis Session ($250)</strong> — 90 minutes, structured assessment of your legal and structural setup. Written summary with recommendations within 48h. Have a voucher? Enter it on the last step.'
+};
 
 document.getElementById('user-tz').textContent = Intl.DateTimeFormat().resolvedOptions().timeZone;
 
@@ -296,47 +632,77 @@ function goTo(n) {
     window.scrollTo({ top: 200, behavior: 'smooth' });
 }
 
-// Step 1: Zone
-document.querySelectorAll('.zone-card').forEach(el => {
-    el.addEventListener('click', () => {
-        selectedZone = el.dataset.zone;
-        document.querySelectorAll('.zone-card').forEach(e => e.classList.remove('selected'));
-        el.classList.add('selected');
-        goTo(2);
-    });
-});
+function selectProduct(card) {
+    document.querySelectorAll('.product-card').forEach(c => c.classList.remove('selected'));
+    card.classList.add('selected');
+    selectedProduct = card.dataset.product;
+    document.getElementById('product-next-btn').disabled = false;
+}
 
-// Step 2: Type
-document.querySelectorAll('.type-option').forEach(el => {
-    el.addEventListener('click', () => {
-        selectedType = el.dataset.type;
-        document.querySelectorAll('.type-option').forEach(e => e.classList.remove('selected'));
-        el.classList.add('selected');
-        document.getElementById('type-next-btn').disabled = false;
-    });
-});
+function showStep4ForProduct() {
+    const isDiagnosis = selectedProduct === "diagnosis";
+    document.getElementById("step4-title-discovery").classList.toggle("hidden", isDiagnosis);
+    document.getElementById("step4-sub-discovery").classList.toggle("hidden", isDiagnosis);
+    document.getElementById("step4-title-diagnosis").classList.toggle("hidden", !isDiagnosis);
+    document.getElementById("step4-sub-diagnosis").classList.toggle("hidden", !isDiagnosis);
+    document.getElementById("voucher-section").style.display = isDiagnosis ? "block" : "none";
+}
 
-// Step 3: Duration
-document.querySelectorAll('.duration-option').forEach(el => {
-    el.addEventListener('click', () => {
-        selectedDuration = parseInt(el.dataset.duration);
-        document.querySelectorAll('.duration-option').forEach(e => e.classList.remove('selected'));
-        el.classList.add('selected');
-        loadSlots();
-    });
-});
+function goToStep3() {
+    const company = document.getElementById('b-company').value.trim();
+    const brief = document.getElementById('b-brief').value.trim();
+    if (!company || !brief) {
+        alert('Please fill in the venture name and the situation brief.');
+        return;
+    }
+    goTo(3);
+}
 
-// Step 4: Slots
-async function loadSlots() {
+function goToStep4() {
+    const first = document.getElementById('c-first').value.trim();
+    const email = document.getElementById('c-email').value.trim();
+    const role = document.getElementById('c-role').value.trim();
+    if (!first || !email || !role) {
+        alert('Please fill in your name, email, and role.');
+        return;
+    }
     goTo(4);
+    showStep4ForProduct();
+    // Update product context brief
+    document.getElementById('product-context-brief').innerHTML = PRODUCT_BRIEFS[selectedProduct] || '';
+}
+
+// goTo(2) also sets the context brief
+const origGoTo2 = goTo;
+function goTo(n) {
+    document.querySelectorAll('[id^="step-"]').forEach(el => el.classList.add('hidden'));
+    const el = document.getElementById('step-' + n);
+    if (el) el.classList.remove('hidden');
+    if (n === 2 && selectedProduct) {
+        document.getElementById('product-context-brief').innerHTML = PRODUCT_BRIEFS[selectedProduct] || '';
+    }
+    window.scrollTo({ top: 200, behavior: 'smooth' });
+}
+
+function selectZone(card) {
+    document.querySelectorAll('.zone-card-dark').forEach(c => c.classList.remove('selected'));
+    card.classList.add('selected');
+    selectedZone = card.dataset.zone;
+    loadSlots();
+}
+
+async function loadSlots() {
+    document.getElementById('tz-note').style.display = 'block';
+    document.getElementById('notice-note').style.display = 'block';
     document.getElementById('slots-loading').classList.remove('hidden');
     document.getElementById('slots-container').classList.add('hidden');
     document.getElementById('slots-empty').classList.add('hidden');
     document.getElementById('slots-remaining').classList.add('hidden');
-    document.getElementById('slots-title').textContent = `Pick a time — ${selectedDuration} min`;
-
     try {
-        const res = await fetch(`${API}/booking/slots/${selectedZone}/${selectedType}?duration=${selectedDuration}`);
+        const isDiagnosis = selectedProduct === "diagnosis";
+        const callType = isDiagnosis ? "diagnosis" : "discovery";
+        const slotDuration = isDiagnosis ? 90 : 30;
+        const res = await fetch(`${API}/booking/slots/${selectedZone}/${callType}?duration=${slotDuration}`);
         const data = await res.json();
         renderSlots(data.slots || [], data.slots_remaining_this_week || 0);
     } catch (e) {
@@ -348,36 +714,36 @@ async function loadSlots() {
 function renderSlots(slots, remaining) {
     document.getElementById('slots-loading').classList.add('hidden');
     const container = document.getElementById('slots-container');
-    if (!slots.length) { document.getElementById('slots-empty').classList.remove('hidden'); return; }
-
+    if (!slots.length) {
+        document.getElementById('slots-empty').classList.remove('hidden');
+        return;
+    }
     if (remaining > 0 && remaining <= 8) {
         const rem = document.getElementById('slots-remaining');
         rem.textContent = `${remaining} slot${remaining === 1 ? '' : 's'} remaining this week`;
         rem.classList.remove('hidden');
     }
-
     container.classList.remove('hidden');
     container.innerHTML = '';
     const byDate = {};
     slots.forEach(s => {
         const dt = new Date(s.start);
-        const key = dt.toLocaleDateString('en-US', { weekday:'long', month:'long', day:'numeric' });
+        const key = dt.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' });
         if (!byDate[key]) byDate[key] = [];
         byDate[key].push(s);
     });
-
     for (const [label, daySlots] of Object.entries(byDate)) {
-        const d = document.createElement('div'); d.className = 'slots-date'; d.textContent = label;
+        const d = document.createElement('div'); d.className = 'slots-date-label'; d.textContent = label;
         container.appendChild(d);
         const row = document.createElement('div'); row.className = 'slots-row';
         daySlots.forEach(slot => {
             const btn = document.createElement('button'); btn.className = 'slot-btn';
-            btn.textContent = new Date(slot.start).toLocaleTimeString('en-US', { hour:'numeric', minute:'2-digit', hour12:true });
+            btn.textContent = new Date(slot.start).toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true });
             btn.addEventListener('click', () => {
                 document.querySelectorAll('.slot-btn').forEach(b => b.classList.remove('selected'));
                 btn.classList.add('selected');
                 selectedSlot = slot;
-                setTimeout(() => goToStep5(), 300);
+                setTimeout(() => submitIntake(), 300);
             });
             row.appendChild(btn);
         });
@@ -385,39 +751,99 @@ function renderSlots(slots, remaining) {
     }
 }
 
-function goToStep5() {
-    goTo(5);
-    const dt = new Date(selectedSlot.start);
-    document.getElementById('selected-summary').textContent = `${TYPE_LABELS[selectedType]} — ${selectedDuration} min — ${dt.toLocaleString('en-US', { weekday:'long', month:'long', day:'numeric', hour:'numeric', minute:'2-digit', hour12:true })}`;
-    document.getElementById('msg-label').textContent = MSG_LABELS[selectedType] || 'Tell me what\'s on your mind';
+async function applyVoucher() {
+    const code = document.getElementById("voucher-input").value.trim().toUpperCase();
+    if (!code) return;
+    const statusEl = document.getElementById("voucher-status");
+    statusEl.textContent = "Checking...";
+    statusEl.style.color = "var(--gray)";
+    try {
+        const res = await fetch(`${API}/booking/voucher/validate?code=${encodeURIComponent(code)}`);
+        const data = await res.json();
+        if (data.valid) {
+            voucherApplied = code;
+            statusEl.textContent = "✓ Voucher applied — $250 fee waived";
+            statusEl.style.color = "#4ade80";
+        } else {
+            voucherApplied = null;
+            statusEl.textContent = "✗ " + (data.reason || "Invalid code");
+            statusEl.style.color = "#f87171";
+        }
+    } catch (e) {
+        statusEl.textContent = "Could not validate. Try again or email janis@mexzungu.com";
+        statusEl.style.color = "var(--gray)";
+    }
 }
 
-async function submitBooking(e) {
-    e.preventDefault();
-    const btn = document.getElementById('submit-btn');
-    btn.disabled = true; btn.textContent = 'Booking...';
+async function submitIntake() {
+    const isDiagnosis = selectedProduct === "diagnosis";
+    const callType = isDiagnosis ? "diagnosis" : "discovery";
+    const callDuration = isDiagnosis ? 90 : 30;
+
+    const name = `${document.getElementById('c-first').value} ${document.getElementById('c-last').value}`;
+    const email = document.getElementById('c-email').value;
+    const role = document.getElementById('c-role').value;
+    const company = document.getElementById('b-company').value;
+    const jurisdiction = document.getElementById('b-jurisdiction').value;
+    const stage = document.getElementById('b-stage').value;
+    const brief = document.getElementById('b-brief').value;
+    const docs = document.getElementById('b-docs').value;
+
+    const message = [
+        `Product: ${selectedProduct}`,
+        `Company: ${company}`,
+        `Jurisdiction: ${jurisdiction || 'Not provided'}`,
+        `Stage: ${stage || 'Not provided'}`,
+        `Role: ${role}`,
+        '',
+        brief,
+        docs ? `\nDocs: ${docs}` : ''
+    ].filter(Boolean).join('\n');
+
     try {
         const res = await fetch(`${API}/booking/create`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
-                call_type: selectedType, zone: selectedZone,
-                duration: selectedDuration,
-                start: selectedSlot.start, end: selectedSlot.end,
-                name: `${document.getElementById('f-first').value} ${document.getElementById('f-last').value}`,
-                email: document.getElementById('f-email').value,
-                message: document.getElementById('f-message').value,
-                docs_link: document.getElementById('f-docs').value || null,
+                call_type: callType,
+                zone: selectedZone,
+                duration: callDuration,
+                start: selectedSlot.start,
+                end: selectedSlot.end,
+                name,
+                email,
+                message,
+                voucher_code: isDiagnosis ? (voucherApplied || "") : "",
+                docs_link: docs || null,
+                source: 'mexzungu.com/lets-jam',
+                metadata: { product: selectedProduct, company, stage, role }
             }),
         });
-        if (!res.ok) { const err = await res.json(); alert(err.detail || 'Booking failed.'); btn.disabled = false; btn.textContent = 'Book it →'; return; }
+        if (!res.ok) {
+            const err = await res.json();
+            alert(err.detail || 'Booking failed. Please try again.');
+            return;
+        }
         const data = await res.json();
         goTo('done');
-        if (data.meet_link) { document.getElementById('meet-link').href = data.meet_link; document.getElementById('meet-link-msg').classList.remove('hidden'); }
-    } catch (err) { alert('Something went wrong. Email janis@mexzungu.com.'); btn.disabled = false; btn.textContent = 'Book it →'; }
+        if (isDiagnosis) {
+            if (voucherApplied) {
+                document.getElementById("voucher-confirmed-msg").classList.remove("hidden");
+            } else {
+                document.getElementById("payment-pending-msg").classList.remove("hidden");
+            }
+        }
+        if (data.meet_link) {
+            document.getElementById('meet-link').href = data.meet_link;
+            document.getElementById('meet-link-msg').classList.remove('hidden');
+        }
+    } catch (err) {
+        alert('Something went wrong. Email janis@mexzungu.com directly.');
+    }
 }
 
 document.querySelectorAll('.nav-links a').forEach(l => l.addEventListener('click', () => document.querySelector('.nav-links').classList.remove('open')));
 </script>
+
 </body>
 </html>
