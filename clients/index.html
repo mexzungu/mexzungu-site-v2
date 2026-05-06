@@ -1,0 +1,765 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0d0d0d">
+    <title>Client Calls — Mexzungu Group</title>
+    <meta name="description" content="Already working together. Pick what you need and book a call.">
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="canonical" href="https://mexzungu.com/clients">
+    <link rel="stylesheet" href="/fonts.css">
+    <link rel="stylesheet" href="/style.css?v=10">
+    <style>
+        /* Shared intake styles */
+        .intake-hero {
+            padding: 4rem 0 3rem;
+        }
+        .intake-hero .section-label {
+            margin-bottom: 1rem;
+        }
+        .intake-hero h1 {
+            font-size: clamp(2rem, 5vw, 3rem);
+            margin-bottom: 1.25rem;
+        }
+        .intake-hero p {
+            color: var(--gray);
+            max-width: 560px;
+            line-height: 1.7;
+        }
+
+        /* Steps indicator */
+        .intake-steps {
+            display: flex;
+            align-items: center;
+            gap: 0;
+            margin-bottom: 2.5rem;
+        }
+        .intake-step-dot {
+            width: 34px; height: 34px;
+            border-radius: 50%;
+            border: 1.5px solid var(--border);
+            display: flex; align-items: center; justify-content: center;
+            font-family: var(--mono);
+            font-size: 0.8rem;
+            color: var(--gray);
+            flex-shrink: 0;
+            transition: all 0.2s;
+        }
+        .intake-step-dot.active  { border-color: var(--pink); color: var(--pink); background: rgba(225,75,135,0.1); }
+        .intake-step-dot.done    { background: var(--pink); border-color: var(--pink); color: #fff; }
+        .intake-step-line        { flex: 1; height: 1px; background: var(--border); }
+
+        .intake-section { animation: intakeFade 0.25s ease-out; }
+        @keyframes intakeFade { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        .intake-title {
+            font-size: 1.6rem;
+            font-family: var(--font-heading);
+            font-weight: 400;
+            margin-bottom: 0.5rem;
+        }
+        .intake-subtitle {
+            color: var(--gray);
+            font-size: 0.95rem;
+            margin-bottom: 2rem;
+        }
+        .back-btn {
+            background: none;
+            border: none;
+            color: var(--gray);
+            font-family: var(--mono);
+            font-size: 0.85rem;
+            cursor: pointer;
+            padding: 0;
+            margin-bottom: 1.5rem;
+            opacity: 0.7;
+            transition: opacity 0.15s;
+        }
+        .back-btn:hover { opacity: 1; }
+
+        /* Call type cards */
+        .call-type-cards {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin-bottom: 2rem;
+            max-width: 680px;
+        }
+        @media (max-width: 560px) { .call-type-cards { grid-template-columns: 1fr; } }
+
+        .call-type-card {
+            border: 1.5px solid var(--border);
+            border-radius: 10px;
+            padding: 1.75rem 1.5rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            background: rgba(255,255,255,0.02);
+            position: relative;
+        }
+        .call-type-card:hover   { border-color: var(--pink); background: rgba(225,75,135,0.05); }
+        .call-type-card.selected { border-color: var(--pink); background: rgba(225,75,135,0.08); }
+        .call-type-card .ct-icon  { font-size: 1.75rem; margin-bottom: 0.9rem; }
+        .call-type-card h3        { font-family: var(--font-heading); font-size: 1rem; font-weight: 400; margin-bottom: 0.4rem; color: var(--white); }
+        .call-type-card p         { font-size: 0.85rem; color: var(--gray); line-height: 1.55; margin-bottom: 0.75rem; }
+        .call-type-card .ct-tag {
+            display: inline-block;
+            font-size: 0.75rem;
+            font-family: var(--mono);
+            color: var(--pink);
+            background: rgba(225,75,135,0.1);
+            padding: 0.2rem 0.6rem;
+            border-radius: 4px;
+            border: 1px solid rgba(225,75,135,0.2);
+        }
+        .ct-check {
+            position: absolute;
+            top: 1rem; right: 1rem;
+            width: 22px; height: 22px;
+            background: var(--pink);
+            border-radius: 50%;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            color: #fff;
+        }
+        .call-type-card.selected .ct-check { display: flex; }
+
+        /* Next / confirm button */
+        .intake-next-btn {
+            font-family: var(--font-heading);
+            font-size: 0.95rem;
+            padding: 0.8rem 2.25rem;
+            background: var(--pink);
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .intake-next-btn:hover:not(:disabled) { background: #c23a74; transform: translateY(-1px); }
+        .intake-next-btn:disabled { opacity: 0.35; cursor: default; transform: none; }
+
+        /* Zone cards */
+        .zone-cards-dark {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            max-width: 600px;
+        }
+        @media (max-width: 500px) { .zone-cards-dark { grid-template-columns: 1fr; } }
+        .zone-card-dark {
+            border: 1.5px solid var(--border);
+            border-radius: 10px;
+            padding: 1.5rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            background: rgba(255,255,255,0.02);
+        }
+        .zone-card-dark:hover   { border-color: var(--pink); background: rgba(225,75,135,0.05); }
+        .zone-card-dark.selected { border-color: var(--pink); background: rgba(225,75,135,0.08); }
+        .zone-card-dark .zone-emoji { font-size: 1.6rem; margin-bottom: 0.75rem; }
+        .zone-card-dark h3 { font-family: var(--font-heading); font-size: 0.95rem; font-weight: 400; margin-bottom: 0.4rem; color: var(--white); }
+        .zone-card-dark p  { font-size: 0.82rem; color: var(--gray); }
+
+        /* Slot picker */
+        .tz-note { font-size: 0.82rem; color: var(--gray); margin-bottom: 1.5rem; font-style: italic; }
+        .slots-remaining-badge {
+            display: inline-block;
+            background: rgba(212,160,57,0.1);
+            color: var(--gold);
+            border: 1px solid rgba(212,160,57,0.25);
+            font-size: 0.78rem;
+            font-family: var(--mono);
+            padding: 0.25rem 0.7rem;
+            border-radius: 20px;
+            margin-bottom: 1.5rem;
+        }
+        .loading-slots { text-align: center; padding: 3rem 0; color: var(--gray); }
+        .spinner-sm {
+            width: 28px; height: 28px;
+            border: 2px solid rgba(255,255,255,0.1);
+            border-top-color: var(--pink);
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin: 0 auto 1rem;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        .slots-date-label {
+            font-family: var(--mono);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: .1em;
+            color: var(--gray);
+            margin: 1.5rem 0 0.75rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid var(--border);
+        }
+        .slots-row  { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 0.5rem; }
+        .slot-btn {
+            padding: 0.45rem 1rem;
+            border: 1.5px solid var(--border);
+            border-radius: 5px;
+            background: transparent;
+            color: var(--white);
+            font-family: var(--mono);
+            font-size: 0.82rem;
+            cursor: pointer;
+            transition: all 0.15s;
+        }
+        .slot-btn:hover    { border-color: var(--pink); color: var(--pink); }
+        .slot-btn.selected { background: var(--pink); border-color: var(--pink); color: #fff; }
+        .notice-note { font-size: 0.78rem; color: var(--gray); margin-top: 1.5rem; font-style: italic; opacity: 0.7; }
+
+        /* Summary pill */
+        .booking-summary {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            background: rgba(225,75,135,0.06);
+            border: 1px solid rgba(225,75,135,0.2);
+            border-radius: 8px;
+            padding: 0.75rem 1.25rem;
+            margin-bottom: 2rem;
+            font-size: 0.85rem;
+            color: var(--gray);
+        }
+        .booking-summary strong { color: var(--pink); }
+        .booking-summary .bs-sep { opacity: 0.3; }
+
+        /* Contact form */
+        .intake-form-grid { display: flex; flex-direction: column; gap: 0; max-width: 480px; }
+        .form-group { margin-bottom: 1.25rem; }
+        .form-group label {
+            display: block;
+            font-family: var(--mono);
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: .08em;
+            color: var(--gray);
+            margin-bottom: 0.5rem;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 0.7rem 1rem;
+            background: rgba(255,255,255,0.05);
+            border: 1.5px solid var(--border);
+            border-radius: 6px;
+            color: var(--white);
+            font-family: var(--font-body);
+            font-size: 0.95rem;
+            outline: none;
+            transition: border-color 0.15s;
+            box-sizing: border-box;
+        }
+        .form-group input::placeholder { color: rgba(255,255,255,0.25); }
+        .form-group input:focus { border-color: var(--pink); }
+        .form-group textarea {
+            width: 100%;
+            padding: 0.7rem 1rem;
+            background: rgba(255,255,255,0.05);
+            border: 1.5px solid var(--border);
+            border-radius: 6px;
+            color: var(--white);
+            font-family: var(--font-body);
+            font-size: 0.95rem;
+            outline: none;
+            transition: border-color 0.15s;
+            min-height: 80px;
+            resize: vertical;
+            box-sizing: border-box;
+        }
+        .form-group textarea::placeholder { color: rgba(255,255,255,0.25); }
+        .form-group textarea:focus { border-color: var(--pink); }
+        .form-hint { font-size: 0.78rem; color: var(--gray); margin-top: 0.4rem; opacity: 0.7; }
+
+        /* Confirmation */
+        .confirmation-box {
+            text-align: center;
+            padding: 4rem 0;
+        }
+        .confirm-icon  { font-size: 3rem; margin-bottom: 1.5rem; }
+        .confirm-title {
+            font-family: var(--font-heading);
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+        .confirm-subtitle { color: var(--gray); margin-bottom: 2.5rem; }
+        .what-next-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            text-align: left;
+            margin-bottom: 2rem;
+        }
+        @media (max-width: 600px) { .what-next-grid { grid-template-columns: 1fr; } }
+        .wn-card { border: 1px solid var(--border); border-radius: 10px; padding: 1.25rem; }
+        .wn-num  { font-family: var(--font-heading); font-size: 1.5rem; color: var(--pink); margin-bottom: 0.5rem; }
+        .wn-card h4 { font-family: var(--font-heading); font-size: 0.9rem; font-weight: 400; margin-bottom: 0.4rem; }
+        .wn-card p  { font-size: 0.82rem; color: var(--gray); line-height: 1.55; }
+
+        /* Submitting state */
+        .submitting-overlay {
+            text-align: center;
+            padding: 2rem 0;
+            display: none;
+        }
+        .submitting-overlay .spinner-sm { margin: 0 auto 1rem; }
+    </style>
+</head>
+<body>
+
+<nav>
+    <a href="/" class="nav-logo"><img src="/logo-v3.png" alt="Mexzungu Group"></a>
+    <button class="menu-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')" aria-label="Menu">
+        <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-links">
+        <li><a href="/">Home</a></li>
+        <li class="nav-dropdown">
+            <a href="/#pillars">What We Do</a>
+            <ul class="nav-dropdown-menu">
+                <li><a href="/venture-architecture">Venture Architecture</a></li>
+                <li><a href="/data-privacy">Data Privacy</a></li>
+                <li><a href="/rebel-capital">Rebel Capital</a></li>
+                <li><a href="/ai-ninja-factory">AI Ninja Factory</a></li>
+            </ul>
+        </li>
+        <li><a href="/outlaw-chronicles">Outlaw Chronicles</a></li>
+        <li><a href="/meet-the-band">Meet the Band</a></li>
+        <li><a href="/lets-jam" class="nav-cta"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:14px;height:14px;vertical-align:-2px;margin-right:4px;"><path d="M15.05 5A5 5 0 0 1 19 8.95M15.05 1A9 9 0 0 1 23 8.94m-1 7.98v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>Let's Jam</a></li>
+    </ul>
+</nav>
+
+<main id="main">
+
+<div class="page-hero leopard-dense intake-hero">
+    <div class="section-label">Client Portal</div>
+    <h1>Already working <span class="highlight">together.</span></h1>
+    <p>Pick what you need. I read everything before we talk.</p>
+</div>
+
+<section>
+
+    <!-- STEP 1: Call type -->
+    <div id="step-1" class="intake-section">
+        <div class="intake-steps">
+            <div class="intake-step-dot active">1</div><div class="intake-step-line"></div>
+            <div class="intake-step-dot">2</div><div class="intake-step-line"></div>
+            <div class="intake-step-dot">3</div><div class="intake-step-line"></div>
+            <div class="intake-step-dot">4</div>
+        </div>
+        <div class="intake-title">What kind of call?</div>
+        <p class="intake-subtitle">Pick the one closest to what you need. We can always change direction once we're on.</p>
+
+        <div class="call-type-cards">
+            <div class="call-type-card" data-ct="venting" data-duration="45" onclick="selectCallType(this)">
+                <div class="ct-check">&#10003;</div>
+                <div class="ct-icon">&#128172;</div>
+                <h3>I want to talk</h3>
+                <p>Sometimes you need someone to think out loud with. No agenda, no structure required.</p>
+                <span class="ct-tag">45 min</span>
+            </div>
+            <div class="call-type-card" data-ct="brainstorm" data-duration="45" onclick="selectCallType(this)">
+                <div class="ct-check">&#10003;</div>
+                <div class="ct-icon">&#129504;</div>
+                <h3>I need a thought partner</h3>
+                <p>Bring the fork in the road, the decision you're stuck on, or the idea to pressure-test.</p>
+                <span class="ct-tag">45 min</span>
+            </div>
+            <div class="call-type-card" data-ct="troubleshoot" data-duration="60" onclick="selectCallType(this)">
+                <div class="ct-check">&#10003;</div>
+                <div class="ct-icon">&#128295;</div>
+                <h3>I have a problem</h3>
+                <p>Something specific needs solving. Bring the problem, the context, and any relevant docs.</p>
+                <span class="ct-tag">60 min</span>
+            </div>
+            <div class="call-type-card" data-ct="other" data-duration="30" onclick="selectCallType(this)">
+                <div class="ct-check">&#10003;</div>
+                <div class="ct-icon">&#10024;</div>
+                <h3>Something else</h3>
+                <p>Not sure what box it fits in. That's fine. Say the word and we'll figure it out.</p>
+                <span class="ct-tag">30 min</span>
+            </div>
+        </div>
+
+        <button class="intake-next-btn" id="ct-next-btn" disabled onclick="goTo(2)">Next &rarr;</button>
+    </div>
+
+    <!-- STEP 2: Timezone zone -->
+    <div id="step-2" class="intake-section hidden">
+        <div class="intake-steps">
+            <div class="intake-step-dot done">&#10003;</div><div class="intake-step-line"></div>
+            <div class="intake-step-dot active">2</div><div class="intake-step-line"></div>
+            <div class="intake-step-dot">3</div><div class="intake-step-line"></div>
+            <div class="intake-step-dot">4</div>
+        </div>
+        <button class="back-btn" onclick="goTo(1)">&larr; Back</button>
+        <div class="intake-title">Where are you based?</div>
+        <p class="intake-subtitle">Slots are filtered by timezone window so we don't schedule each other at 3am.</p>
+
+        <div class="zone-cards-dark">
+            <div class="zone-card-dark" data-zone="cet" onclick="selectZone(this)">
+                <div class="zone-emoji">&#127757;</div>
+                <h3>Europe / Africa / Middle East</h3>
+                <p>Monday to Friday, 9am to 5pm CET</p>
+            </div>
+            <div class="zone-card-dark" data-zone="us" onclick="selectZone(this)">
+                <div class="zone-emoji">&#127758;</div>
+                <h3>Americas</h3>
+                <p>Monday to Thursday, evenings CET / your afternoon</p>
+            </div>
+        </div>
+
+        <button class="intake-next-btn" id="zone-next-btn" disabled onclick="goToSlots()">Next &rarr;</button>
+    </div>
+
+    <!-- STEP 3: Slot picker -->
+    <div id="step-3" class="intake-section hidden">
+        <div class="intake-steps">
+            <div class="intake-step-dot done">&#10003;</div><div class="intake-step-line"></div>
+            <div class="intake-step-dot done">&#10003;</div><div class="intake-step-line"></div>
+            <div class="intake-step-dot active">3</div><div class="intake-step-line"></div>
+            <div class="intake-step-dot">4</div>
+        </div>
+        <button class="back-btn" onclick="goTo(2)">&larr; Back</button>
+        <div class="intake-title">Pick a time.</div>
+        <p class="intake-subtitle">Times shown in your timezone (<span id="user-tz"></span>). Needs 24h notice so I can prepare.</p>
+
+        <span id="slots-remaining" class="slots-remaining-badge hidden"></span>
+        <div id="slots-loading" class="loading-slots"><div class="spinner-sm"></div><p>Loading times...</p></div>
+        <div id="slots-container" class="hidden"></div>
+        <div id="slots-empty" class="loading-slots hidden">
+            <p>No slots in the next 2 weeks for this timezone.<br>Email <a href="mailto:janis@mexzungu.com" style="color:var(--pink);">janis@mexzungu.com</a> and we'll find a time.</p>
+        </div>
+    </div>
+
+    <!-- STEP 4: Contact + confirm -->
+    <div id="step-4" class="intake-section hidden">
+        <div class="intake-steps">
+            <div class="intake-step-dot done">&#10003;</div><div class="intake-step-line"></div>
+            <div class="intake-step-dot done">&#10003;</div><div class="intake-step-line"></div>
+            <div class="intake-step-dot done">&#10003;</div><div class="intake-step-line"></div>
+            <div class="intake-step-dot active">4</div>
+        </div>
+        <button class="back-btn" onclick="goTo(3)">&larr; Back</button>
+        <div class="intake-title">Almost there.</div>
+        <p class="intake-subtitle">Where to send the calendar invite.</p>
+
+        <div id="booking-summary" class="booking-summary"></div>
+
+        <div class="intake-form-grid">
+            <div class="form-group">
+                <label>Your name</label>
+                <input type="text" id="c-name" placeholder="Full name" required autocomplete="name">
+            </div>
+            <div class="form-group">
+                <label>Email</label>
+                <input type="email" id="c-email" placeholder="you@company.com" required autocomplete="email">
+            </div>
+            <div class="form-group">
+                <label>Anything I should know before we talk? <span style="color:var(--gray);font-weight:400;">(optional)</span></label>
+                <textarea id="c-note" placeholder="Context, docs link, what's on your mind..."></textarea>
+                <p class="form-hint">I read everything. Even two sentences helps.</p>
+            </div>
+        </div>
+
+        <div class="submitting-overlay" id="submitting-overlay">
+            <div class="spinner-sm"></div>
+            <p style="color:var(--gray);font-size:0.9rem;">Booking your call...</p>
+        </div>
+
+        <button class="intake-next-btn" id="confirm-btn" onclick="submitBooking()">Confirm &rarr;</button>
+    </div>
+
+    <!-- DONE -->
+    <div id="step-done" class="intake-section hidden">
+        <div class="confirmation-box">
+            <div class="confirm-icon">&#128293;</div>
+            <div class="confirm-title">You're in.</div>
+            <p class="confirm-subtitle">Calendar invite is on its way. Here's what happens next:</p>
+            <div class="what-next-grid">
+                <div class="wn-card">
+                    <div class="wn-num">01</div>
+                    <h4>I read your note</h4>
+                    <p>Whatever you left in the notes field gets read before we talk. No cold calls on my end.</p>
+                </div>
+                <div class="wn-card">
+                    <div class="wn-num">02</div>
+                    <h4>Show up with the thing</h4>
+                    <p>Bring the actual problem, decision, or situation. We'll work through it together.</p>
+                </div>
+                <div class="wn-card">
+                    <div class="wn-num">03</div>
+                    <h4>Leave with a next step</h4>
+                    <p>Every call ends with something actionable. Not a vague "let's circle back."</p>
+                </div>
+            </div>
+            <p id="meet-link-msg" class="hidden" style="margin-top:1.5rem;">
+                <a id="meet-link" href="#" target="_blank" class="intake-next-btn">Join Google Meet &rarr;</a>
+            </p>
+            <p style="margin-top:2rem;font-size:0.82rem;color:var(--gray);">
+                Need to reschedule? <a href="mailto:janis@mexzungu.com?subject=Reschedule my client call" style="color:var(--pink);">Email janis@mexzungu.com</a>
+            </p>
+        </div>
+    </div>
+
+</section>
+
+<hr class="leopard-divider">
+
+<section class="trusted-by">
+    <div class="section-label">In Our Orbit</div>
+    <div class="logo-carousel">
+        <div class="logo-track">
+            <a href="https://www.sandtech.com" target="_blank" rel="noopener"><img src="/logos/sand-technologies.png" alt="Sand Technologies" class="logo-invert" loading="lazy"></a>
+            <a href="https://www.alxafrica.com" target="_blank" rel="noopener"><img src="/logos/alx.png" alt="ALX" class="logo-invert" loading="lazy"></a>
+            <a href="https://www.duara.education" target="_blank" rel="noopener"><img src="/logos/duara-education.webp" alt="Duara Education" loading="lazy"></a>
+            <a href="https://nobodies.team" target="_blank" rel="noopener"><img src="/logos/nca.png" alt="NCA" class="logo-invert" loading="lazy"></a>
+            <a href="https://www.ladx.co" target="_blank" rel="noopener"><img src="/logos/ladx.png" alt="LADX" loading="lazy"></a>
+            <img src="/logos/ayambe.png" alt="Ayambe" loading="lazy">
+            <img src="/logos/kabisa.webp" alt="Kabisa" loading="lazy">
+            <img src="/logos/diani-kite-club.png" alt="Diani Kite Club" loading="lazy">
+            <img src="/logos/e-moti.png" alt="E-Moti" loading="lazy">
+            <!-- duplicate for loop -->
+            <a href="https://www.sandtech.com" target="_blank" rel="noopener"><img src="/logos/sand-technologies.png" alt="Sand Technologies" class="logo-invert" loading="lazy"></a>
+            <a href="https://www.alxafrica.com" target="_blank" rel="noopener"><img src="/logos/alx.png" alt="ALX" class="logo-invert" loading="lazy"></a>
+            <a href="https://www.duara.education" target="_blank" rel="noopener"><img src="/logos/duara-education.webp" alt="Duara Education" loading="lazy"></a>
+            <a href="https://nobodies.team" target="_blank" rel="noopener"><img src="/logos/nca.png" alt="NCA" class="logo-invert" loading="lazy"></a>
+            <a href="https://www.ladx.co" target="_blank" rel="noopener"><img src="/logos/ladx.png" alt="LADX" loading="lazy"></a>
+            <img src="/logos/ayambe.png" alt="Ayambe" loading="lazy">
+            <img src="/logos/kabisa.webp" alt="Kabisa" loading="lazy">
+            <img src="/logos/diani-kite-club.png" alt="Diani Kite Club" loading="lazy">
+            <img src="/logos/e-moti.png" alt="E-Moti" loading="lazy">
+        </div>
+    </div>
+</section>
+
+</main>
+
+<footer>
+    <div style="max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;padding:0 2rem;">
+        <span>&copy; 2026 Mexzungu Group Ltd. All rights reserved.</span>
+        <span style="font-size:0.85rem;">
+            <a href="https://pepecarrillo.co" style="color:var(--gold);">Pepe's Writing</a> &middot;
+            <a href="/privacy/" style="color:var(--gold);">Privacy Policy</a> &middot;
+            <a href="/terms/" style="color:var(--gold);">Terms of Service</a> &middot;
+            <a href="/ai-policy/" style="color:var(--gold);">AI Policy</a>
+        </span>
+    </div>
+    <div class="footer-disclaimer">Mexzungu Group provides venture architecture, strategic advisory, and structural consulting. This does not constitute legal advice.</div>
+</footer>
+
+<script>
+const API = window.location.hostname === 'localhost' ? 'http://localhost:8741' : 'https://api.mexzungu.com';
+
+let selectedCallType = null;
+let selectedDuration  = null;
+let selectedZone      = null;
+let selectedSlot      = null;
+
+const CT_LABELS = {
+    venting:     'I want to talk',
+    brainstorm:  'I need a thought partner',
+    troubleshoot: 'I have a problem',
+    other:       'Something else',
+};
+
+const ZONE_LABELS = {
+    cet: 'Europe / Africa / Middle East',
+    us:  'Americas',
+};
+
+// Set user timezone display
+document.getElementById('user-tz').textContent = Intl.DateTimeFormat().resolvedOptions().timeZone;
+
+// Navigation
+function goTo(n) {
+    document.querySelectorAll('[id^="step-"]').forEach(el => el.classList.add('hidden'));
+    const el = document.getElementById('step-' + n);
+    if (el) el.classList.remove('hidden');
+    window.scrollTo({ top: 200, behavior: 'smooth' });
+}
+
+// Step 1: Call type selection
+function selectCallType(card) {
+    document.querySelectorAll('.call-type-card').forEach(c => c.classList.remove('selected'));
+    card.classList.add('selected');
+    selectedCallType = card.dataset.ct;
+    selectedDuration = parseInt(card.dataset.duration, 10);
+    document.getElementById('ct-next-btn').disabled = false;
+}
+
+// Step 2: Zone selection
+function selectZone(card) {
+    document.querySelectorAll('.zone-card-dark').forEach(c => c.classList.remove('selected'));
+    card.classList.add('selected');
+    selectedZone = card.dataset.zone;
+    document.getElementById('zone-next-btn').disabled = false;
+}
+
+// Step 2 Next: go to slot picker and load slots
+async function goToSlots() {
+    goTo(3);
+    await loadSlots();
+}
+
+// Slot loading
+async function loadSlots() {
+    document.getElementById('slots-loading').classList.remove('hidden');
+    document.getElementById('slots-container').classList.add('hidden');
+    document.getElementById('slots-empty').classList.add('hidden');
+    document.getElementById('slots-remaining').classList.add('hidden');
+
+    try {
+        const res = await fetch(`${API}/booking/slots/${selectedZone}/${selectedCallType}?duration=${selectedDuration}`);
+        if (!res.ok) throw new Error('API error');
+        const data = await res.json();
+        renderSlots(data.slots || [], data.slots_remaining_this_week || 0);
+    } catch (e) {
+        document.getElementById('slots-loading').classList.add('hidden');
+        document.getElementById('slots-empty').classList.remove('hidden');
+    }
+}
+
+function renderSlots(slots, remaining) {
+    document.getElementById('slots-loading').classList.add('hidden');
+    const container = document.getElementById('slots-container');
+
+    if (!slots.length) {
+        document.getElementById('slots-empty').classList.remove('hidden');
+        return;
+    }
+
+    if (remaining > 0 && remaining <= 8) {
+        const rem = document.getElementById('slots-remaining');
+        rem.textContent = `${remaining} slot${remaining === 1 ? '' : 's'} remaining this week`;
+        rem.classList.remove('hidden');
+    }
+
+    container.classList.remove('hidden');
+    container.innerHTML = '';
+
+    // Group by date
+    const byDate = {};
+    slots.forEach(s => {
+        const dt  = new Date(s.start);
+        const key = dt.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' });
+        if (!byDate[key]) byDate[key] = [];
+        byDate[key].push(s);
+    });
+
+    for (const [label, daySlots] of Object.entries(byDate)) {
+        const d = document.createElement('div');
+        d.className = 'slots-date-label';
+        d.textContent = label;
+        container.appendChild(d);
+
+        const row = document.createElement('div');
+        row.className = 'slots-row';
+
+        daySlots.forEach(slot => {
+            const btn = document.createElement('button');
+            btn.className = 'slot-btn';
+            btn.textContent = new Date(slot.start).toLocaleTimeString('en-US', {
+                hour: 'numeric', minute: '2-digit', hour12: true
+            });
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.slot-btn').forEach(b => b.classList.remove('selected'));
+                btn.classList.add('selected');
+                selectedSlot = slot;
+                setTimeout(() => goToContact(), 350);
+            });
+            row.appendChild(btn);
+        });
+
+        container.appendChild(row);
+    }
+}
+
+// Step 3 -> Step 4: build summary, show contact form
+function goToContact() {
+    // Build summary pill
+    const slotDt  = new Date(selectedSlot.start);
+    const slotStr = slotDt.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' })
+                  + ' at '
+                  + slotDt.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true });
+
+    document.getElementById('booking-summary').innerHTML =
+        `<strong>${CT_LABELS[selectedCallType]}</strong>`
+        + `<span class="bs-sep">|</span>${selectedDuration} min`
+        + `<span class="bs-sep">|</span>${slotStr}`
+        + `<span class="bs-sep">|</span>${ZONE_LABELS[selectedZone]}`;
+
+    goTo(4);
+}
+
+// Step 4: Submit booking
+async function submitBooking() {
+    const name  = document.getElementById('c-name').value.trim();
+    const email = document.getElementById('c-email').value.trim();
+    const note  = document.getElementById('c-note').value.trim();
+
+    if (!name || !email) {
+        alert('Please fill in your name and email.');
+        return;
+    }
+
+    const confirmBtn       = document.getElementById('confirm-btn');
+    const submittingOverlay = document.getElementById('submitting-overlay');
+    confirmBtn.disabled    = true;
+    submittingOverlay.style.display = 'block';
+
+    try {
+        const res = await fetch(`${API}/booking/create`, {
+            method:  'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                call_type: selectedCallType,
+                zone:      selectedZone,
+                duration:  selectedDuration,
+                start:     selectedSlot.start,
+                end:       selectedSlot.end,
+                name,
+                email,
+                message:   note || '',
+                source:    'mexzungu.com/clients',
+            }),
+        });
+
+        if (!res.ok) {
+            const err = await res.json().catch(() => ({}));
+            alert(err.detail || 'Booking failed. Please try again or email janis@mexzungu.com.');
+            confirmBtn.disabled = false;
+            submittingOverlay.style.display = 'none';
+            return;
+        }
+
+        const data = await res.json();
+        goTo('done');
+
+        if (data.meet_link) {
+            document.getElementById('meet-link').href = data.meet_link;
+            document.getElementById('meet-link-msg').classList.remove('hidden');
+        }
+    } catch (err) {
+        alert('Something went wrong. Email janis@mexzungu.com directly and we will get you sorted.');
+        confirmBtn.disabled = false;
+        submittingOverlay.style.display = 'none';
+    }
+}
+
+// Close mobile nav on link click
+document.querySelectorAll('.nav-links a').forEach(l =>
+    l.addEventListener('click', () => document.querySelector('.nav-links').classList.remove('open'))
+);
+</script>
+
+</body>
+</html>
