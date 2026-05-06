@@ -1,0 +1,857 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Root & Wing — A barter-based advisory for creative businesses</title>
+  <meta name="description" content="Pepe Carrillo looks at what you have built, helps you put structure under it, then you fly solo. No fees. Barter only." />
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ─── RESET ─── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    /* ─── DESIGN TOKENS ─── */
+    :root {
+      --bg:            #0e0e0c;
+      --surface:       #141410;
+      --surface-2:     #1a1a15;
+      --gold:          #C9A84C;
+      --gold-dim:      rgba(201,168,76,0.18);
+      --gold-border:   rgba(201,168,76,0.28);
+      --gold-soft:     rgba(201,168,76,0.08);
+      --forest:        #2D4A3E;
+      --forest-light:  rgba(45,74,62,0.3);
+      --cream:         #F2EBE3;
+      --cream-muted:   rgba(242,235,227,0.7);
+      --cream-faint:   rgba(242,235,227,0.38);
+      --rose:          #C47E8A;
+      --rose-dim:      rgba(196,126,138,0.15);
+      --divider:       rgba(201,168,76,0.22);
+      --serif:         'Cormorant Garamond', Georgia, serif;
+      --sans:          'DM Sans', system-ui, sans-serif;
+      --radius:        3px;
+      --ease:          cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      --max-w:         780px;
+      --max-w-wide:    1100px;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      font-size: 16px;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--cream);
+      font-family: var(--sans);
+      font-weight: 300;
+      line-height: 1.75;
+      overflow-x: hidden;
+    }
+
+    ::-webkit-scrollbar { width: 5px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--gold-border); border-radius: 3px; }
+
+    ::selection { background: var(--gold-dim); color: var(--gold); }
+
+    /* ─── FILM GRAIN OVERLAY ─── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      z-index: 999;
+      pointer-events: none;
+      opacity: 0.03;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='grain'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23grain)' opacity='1'/%3E%3C/svg%3E");
+      background-repeat: repeat;
+      background-size: 300px 300px;
+    }
+
+    /* ─── LAYOUT HELPERS ─── */
+    .container {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    .container--wide {
+      max-width: var(--max-w-wide);
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* ─── GOLD DIVIDER ─── */
+    .divider {
+      width: 100%;
+      height: 1px;
+      background: var(--divider);
+      margin: 0;
+    }
+
+    .divider--short {
+      width: 60px;
+      height: 1px;
+      background: var(--gold-border);
+      margin: 28px auto 0;
+    }
+
+    /* ─── SECTION BASE ─── */
+    section {
+      padding: 100px 0;
+    }
+
+    .section-label {
+      font-family: var(--sans);
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 28px;
+      display: block;
+    }
+
+    .section-heading {
+      font-family: var(--serif);
+      font-size: clamp(28px, 4vw, 40px);
+      font-weight: 400;
+      line-height: 1.2;
+      color: var(--cream);
+      margin-bottom: 28px;
+    }
+
+    .section-heading em {
+      font-style: italic;
+      color: var(--gold);
+    }
+
+    .body-text {
+      font-size: 15px;
+      font-weight: 300;
+      line-height: 1.8;
+      color: var(--cream-muted);
+      max-width: 600px;
+    }
+
+    /* ─── SCROLL REVEAL ─── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.7s var(--ease), transform 0.7s var(--ease);
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+    .reveal-delay-4 { transition-delay: 0.4s; }
+    .reveal-delay-5 { transition-delay: 0.5s; }
+
+    /* ════════════════════════════════════════
+       HERO
+    ════════════════════════════════════════ */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 80px 24px 0;
+      position: relative;
+    }
+
+    .hero-eyebrow {
+      font-family: var(--sans);
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 36px;
+      opacity: 0;
+      animation: fadeUp 1s var(--ease) 0.2s forwards;
+    }
+
+    .hero-title {
+      font-family: var(--serif);
+      font-size: clamp(56px, 10vw, 108px);
+      font-weight: 300;
+      letter-spacing: 0.18em;
+      line-height: 0.95;
+      color: var(--gold);
+      text-transform: uppercase;
+      margin-bottom: 32px;
+      opacity: 0;
+      animation: fadeUp 1s var(--ease) 0.45s forwards;
+    }
+
+    .hero-subtitle {
+      font-family: var(--sans);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--cream);
+      margin-bottom: 28px;
+      opacity: 0;
+      animation: fadeUp 1s var(--ease) 0.65s forwards;
+    }
+
+    .hero-tagline {
+      font-family: var(--serif);
+      font-size: clamp(16px, 2.2vw, 20px);
+      font-style: italic;
+      font-weight: 300;
+      color: var(--cream-muted);
+      max-width: 520px;
+      line-height: 1.6;
+      opacity: 0;
+      animation: fadeUp 1s var(--ease) 0.85s forwards;
+    }
+
+    .hero-divider {
+      width: 100%;
+      height: 1px;
+      background: var(--divider);
+      margin-top: auto;
+      opacity: 0;
+      animation: fadeIn 1s ease 1.2s forwards;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+
+    /* ════════════════════════════════════════
+       FOR WHO
+    ════════════════════════════════════════ */
+    #for-who {
+      background: var(--bg);
+    }
+
+    .for-who-intro {
+      font-family: var(--serif);
+      font-size: clamp(18px, 2.5vw, 23px);
+      font-weight: 300;
+      line-height: 1.65;
+      color: var(--cream);
+      margin-bottom: 64px;
+      max-width: 640px;
+    }
+
+    .for-who-intro strong {
+      font-weight: 500;
+      color: var(--cream);
+    }
+
+    .who-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+    }
+
+    .who-card {
+      background: var(--surface);
+      border-top: 1px solid var(--gold-border);
+      padding: 36px 32px;
+    }
+
+    .who-card-label {
+      font-family: var(--sans);
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 14px;
+      display: block;
+    }
+
+    .who-card-title {
+      font-family: var(--serif);
+      font-size: 20px;
+      font-weight: 400;
+      color: var(--cream);
+      margin-bottom: 12px;
+      line-height: 1.3;
+    }
+
+    .who-card-desc {
+      font-size: 13px;
+      font-weight: 300;
+      color: var(--cream-muted);
+      line-height: 1.7;
+    }
+
+    /* ════════════════════════════════════════
+       THREE ACTS
+    ════════════════════════════════════════ */
+    #three-acts {
+      background: var(--surface);
+    }
+
+    .acts-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      margin-top: 56px;
+    }
+
+    .act-card {
+      background: var(--bg);
+      border-left: 2px solid var(--gold-border);
+      padding: 48px 36px;
+      position: relative;
+    }
+
+    .act-number {
+      font-family: var(--serif);
+      font-size: 72px;
+      font-weight: 300;
+      color: var(--gold-dim);
+      line-height: 1;
+      margin-bottom: 24px;
+      display: block;
+      letter-spacing: -0.02em;
+    }
+
+    .act-name {
+      font-family: var(--serif);
+      font-size: 26px;
+      font-weight: 400;
+      color: var(--cream);
+      margin-bottom: 20px;
+      line-height: 1.2;
+    }
+
+    .act-desc {
+      font-size: 13.5px;
+      font-weight: 300;
+      color: var(--cream-muted);
+      line-height: 1.8;
+    }
+
+    /* ════════════════════════════════════════
+       FOUR PHASES
+    ════════════════════════════════════════ */
+    #four-phases {
+      background: var(--surface);
+      padding-top: 0;
+    }
+
+    .phases-inner {
+      background: var(--surface-2);
+      border: 1px solid var(--gold-dim);
+      padding: 56px;
+    }
+
+    .phases-heading {
+      font-family: var(--sans);
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 40px;
+      display: block;
+    }
+
+    .phase-list {
+      list-style: none;
+      border-top: 1px solid var(--gold-dim);
+    }
+
+    .phase-item {
+      display: grid;
+      grid-template-columns: 40px 1fr;
+      gap: 24px;
+      align-items: baseline;
+      padding: 28px 0;
+      border-bottom: 1px solid rgba(201,168,76,0.08);
+    }
+
+    .phase-num {
+      font-family: var(--serif);
+      font-size: 22px;
+      font-weight: 300;
+      color: var(--gold);
+      line-height: 1;
+    }
+
+    .phase-content {}
+
+    .phase-name {
+      font-family: var(--serif);
+      font-size: 19px;
+      font-weight: 400;
+      color: var(--cream);
+      margin-bottom: 4px;
+    }
+
+    .phase-timing {
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 8px;
+      display: block;
+    }
+
+    .phase-desc {
+      font-size: 13px;
+      font-weight: 300;
+      color: var(--cream-muted);
+      line-height: 1.7;
+    }
+
+    .phases-note {
+      margin-top: 36px;
+      padding-top: 28px;
+      border-top: 1px solid var(--gold-dim);
+      font-family: var(--serif);
+      font-size: 15px;
+      font-style: italic;
+      color: var(--cream-faint);
+      line-height: 1.6;
+    }
+
+    /* ════════════════════════════════════════
+       BARTER
+    ════════════════════════════════════════ */
+    #barter {
+      background: var(--bg);
+      text-align: center;
+    }
+
+    #barter .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    #barter .section-label {
+      margin-bottom: 16px;
+    }
+
+    #barter .section-heading {
+      text-align: center;
+    }
+
+    .barter-body {
+      font-size: 15px;
+      font-weight: 300;
+      line-height: 1.8;
+      color: var(--cream-muted);
+      max-width: 560px;
+      text-align: center;
+      margin-bottom: 28px;
+    }
+
+    .barter-tagline {
+      font-family: var(--serif);
+      font-size: 19px;
+      font-style: italic;
+      font-weight: 300;
+      color: var(--cream-muted);
+      max-width: 500px;
+      text-align: center;
+      line-height: 1.6;
+    }
+
+    /* ════════════════════════════════════════
+       IN THE FIELD
+    ════════════════════════════════════════ */
+    #field {
+      background: var(--bg);
+      padding-top: 0;
+    }
+
+    .field-card {
+      max-width: 520px;
+      background: var(--surface);
+      border: 1px solid var(--gold-dim);
+      border-left: 3px solid var(--gold-border);
+      padding: 40px 44px;
+      margin-bottom: 32px;
+    }
+
+    .field-card-header {
+      display: flex;
+      align-items: baseline;
+      gap: 16px;
+      margin-bottom: 12px;
+    }
+
+    .field-card-name {
+      font-family: var(--serif);
+      font-size: 24px;
+      font-weight: 400;
+      color: var(--cream);
+    }
+
+    .field-status {
+      font-size: 9px;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--rose);
+      border: 1px solid var(--rose-dim);
+      padding: 3px 8px;
+      border-radius: 2px;
+      white-space: nowrap;
+    }
+
+    .field-location {
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 12px;
+      display: block;
+    }
+
+    .field-desc {
+      font-size: 13px;
+      font-weight: 300;
+      color: var(--cream-muted);
+      line-height: 1.75;
+    }
+
+    .field-note {
+      font-family: var(--serif);
+      font-size: 14px;
+      font-style: italic;
+      color: var(--cream-faint);
+      line-height: 1.6;
+    }
+
+    /* ════════════════════════════════════════
+       FOOTER
+    ════════════════════════════════════════ */
+    #footer {
+      background: var(--bg);
+      padding: 52px 0 48px;
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .footer-brand {
+      font-family: var(--serif);
+      font-size: 15px;
+      font-weight: 300;
+      color: var(--cream-faint);
+      line-height: 1.6;
+    }
+
+    .footer-brand strong {
+      display: block;
+      font-weight: 400;
+      color: var(--cream-muted);
+    }
+
+    .footer-contact {
+      font-size: 12px;
+      font-weight: 300;
+      letter-spacing: 0.05em;
+      color: var(--cream-faint);
+    }
+
+    .footer-contact a {
+      color: var(--gold);
+      text-decoration: none;
+      transition: opacity 0.2s ease;
+    }
+
+    .footer-contact a:hover {
+      opacity: 0.75;
+    }
+
+    .footer-year {
+      font-size: 11px;
+      font-weight: 300;
+      color: var(--cream-faint);
+      letter-spacing: 0.08em;
+    }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 860px) {
+      .who-grid {
+        grid-template-columns: 1fr;
+        gap: 2px;
+      }
+
+      .acts-grid {
+        grid-template-columns: 1fr;
+        gap: 2px;
+      }
+
+      .act-card {
+        padding: 40px 28px;
+      }
+
+      .phases-inner {
+        padding: 36px 28px;
+      }
+
+      .footer-inner {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+      }
+    }
+
+    @media (max-width: 540px) {
+      section {
+        padding: 72px 0;
+      }
+
+      .hero-title {
+        letter-spacing: 0.1em;
+      }
+
+      .phase-item {
+        grid-template-columns: 28px 1fr;
+        gap: 16px;
+      }
+
+      .field-card {
+        padding: 32px 24px;
+      }
+
+      .field-card-header {
+        flex-direction: column;
+        gap: 8px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ─── HERO ─── -->
+  <section id="hero">
+    <div>
+      <p class="hero-eyebrow">A Mexzungu Initiative</p>
+      <h1 class="hero-title">Root &amp; Wing</h1>
+      <p class="hero-subtitle">A barter-based advisory for creative businesses</p>
+      <p class="hero-tagline">We look at what you have. We build the structure together. Then you fly.</p>
+    </div>
+    <div class="hero-divider"></div>
+  </section>
+
+  <!-- ─── FOR WHO ─── -->
+  <section id="for-who">
+    <div class="container">
+      <span class="section-label reveal">Who this is for</span>
+      <h2 class="section-heading reveal reveal-delay-1">You built something real.</h2>
+      <p class="for-who-intro reveal reveal-delay-2">
+        You built something real — by instinct, by passion, by showing up. People come. They come back.
+        But the back end is chaos, nobody owns anything, and you are exhausted from holding it all together.
+        Root &amp; Wing is for you.
+      </p>
+    </div>
+    <div class="container--wide">
+      <div class="who-grid">
+        <div class="who-card reveal reveal-delay-2">
+          <span class="who-card-label">01</span>
+          <h3 class="who-card-title">Creative Collectives</h3>
+          <p class="who-card-desc">Events, spaces, gatherings with a community that already loves you.</p>
+        </div>
+        <div class="who-card reveal reveal-delay-3">
+          <span class="who-card-label">02</span>
+          <h3 class="who-card-title">Conscious Businesses</h3>
+          <p class="who-card-desc">Somatic, erotic, therapeutic, sensory — the spaces that don't fit a category.</p>
+        </div>
+        <div class="who-card reveal reveal-delay-4">
+          <span class="who-card-label">03</span>
+          <h3 class="who-card-title">Underground Brands</h3>
+          <p class="who-card-desc">Subculture-adjacent, word-of-mouth built. Not ready for VCs — but ready for structure.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ─── THREE ACTS ─── -->
+  <section id="three-acts">
+    <div class="container">
+      <span class="section-label reveal">How it works</span>
+      <h2 class="section-heading reveal reveal-delay-1">Three acts. One through-line.</h2>
+    </div>
+    <div class="container--wide">
+      <div class="acts-grid">
+        <div class="act-card reveal reveal-delay-2">
+          <span class="act-number">01</span>
+          <h3 class="act-name">The Mirror</h3>
+          <p class="act-desc">
+            We look at what you have built and reflect it back clearly. What is working. What is creating friction.
+            What needs a decision. You receive a visual document — The Mirror — before we meet.
+            The session is for alignment, not discovery.
+          </p>
+        </div>
+        <div class="act-card reveal reveal-delay-3">
+          <span class="act-number">02</span>
+          <h3 class="act-name">The Nest</h3>
+          <p class="act-desc">
+            We build the structure together. Not for you — with you. Ops that run without heroic effort.
+            Roles that are clear. A story people understand before they arrive. A community that grows
+            instead of just sustaining. Four phases, conservative pacing, one milestone at a time.
+          </p>
+        </div>
+        <div class="act-card reveal reveal-delay-4">
+          <span class="act-number">03</span>
+          <h3 class="act-name">The Flight</h3>
+          <p class="act-desc">
+            You fly solo. The engagement ends when you no longer need us to hold the structure.
+            That is the definition of done — not dependency, independence.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── FOUR PHASES ─── -->
+  <section id="four-phases">
+    <div class="container">
+      <div class="phases-inner reveal">
+        <span class="phases-heading">The four phases of The Nest</span>
+        <ul class="phase-list">
+          <li class="phase-item">
+            <span class="phase-num">1</span>
+            <div class="phase-content">
+              <span class="phase-timing">Weeks 1–2</span>
+              <h4 class="phase-name">The Clearing</h4>
+              <p class="phase-desc">Clarity session. Value proposition, roles, key decisions.</p>
+            </div>
+          </li>
+          <li class="phase-item">
+            <span class="phase-num">2</span>
+            <div class="phase-content">
+              <span class="phase-timing">Weeks 3–8</span>
+              <h4 class="phase-name">The Ground</h4>
+              <p class="phase-desc">Operational structure. Fix what creates friction.</p>
+            </div>
+          </li>
+          <li class="phase-item">
+            <span class="phase-num">3</span>
+            <div class="phase-content">
+              <span class="phase-timing">Weeks 9–14</span>
+              <h4 class="phase-name">The Voice</h4>
+              <p class="phase-desc">Story and communications. People know what they are signing up for.</p>
+            </div>
+          </li>
+          <li class="phase-item">
+            <span class="phase-num">4</span>
+            <div class="phase-content">
+              <span class="phase-timing">Weeks 15–24</span>
+              <h4 class="phase-name">The Bloom</h4>
+              <p class="phase-desc">Community and growth. Intentional, not accidental.</p>
+            </div>
+          </li>
+        </ul>
+        <p class="phases-note">Not every engagement needs all four phases. The Mirror tells us where to start.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ─── BARTER ─── -->
+  <section id="barter">
+    <div class="container">
+      <span class="section-label reveal">The exchange</span>
+      <h2 class="section-heading reveal reveal-delay-1">No fees. No equity.</h2>
+      <p class="barter-body reveal reveal-delay-2">
+        Root &amp; Wing is barter-based. Pepe brings the structure. You bring access to what you do —
+        classes, sessions, events, experiences, introductions. The exchange is agreed before
+        the work begins. Never after.
+      </p>
+      <p class="barter-tagline reveal reveal-delay-3">
+        What Pepe asks for is always proportional to what you do.<br>And always something he actually wants.
+      </p>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ─── IN THE FIELD ─── -->
+  <section id="field">
+    <div class="container">
+      <span class="section-label reveal">In the field</span>
+      <div class="field-card reveal reveal-delay-1">
+        <div class="field-card-header">
+          <h3 class="field-card-name">House of Kleos</h3>
+          <span class="field-status">The Mirror in progress</span>
+        </div>
+        <span class="field-location">Barcelona</span>
+        <p class="field-desc">Conscious erotic experiences. Erostatic dance, ritual events, intimate workshops.</p>
+      </div>
+      <p class="field-note reveal reveal-delay-2">Root &amp; Wing engagements are by introduction only.</p>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ─── FOOTER ─── -->
+  <footer id="footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <strong>Root &amp; Wing</strong>
+          A Mexzungu initiative.
+        </div>
+        <div class="footer-contact">
+          Pepe Carrillo &middot; <a href="mailto:pepe@mexzungu.com">pepe@mexzungu.com</a>
+        </div>
+        <div class="footer-year">&#169; 2026</div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ─── SCROLL REVEAL ─── -->
+  <script>
+    (function () {
+      var targets = document.querySelectorAll('.reveal');
+      if (!('IntersectionObserver' in window)) {
+        targets.forEach(function (el) { el.classList.add('visible'); });
+        return;
+      }
+      var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.12 });
+      targets.forEach(function (el) { observer.observe(el); });
+    })();
+  </script>
+
+</body>
+</html>
