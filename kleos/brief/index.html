@@ -216,6 +216,63 @@
     .cta-button:active { transform:translateY(0); box-shadow:0 2px 8px rgba(196,98,58,.22); }
     .cta-button svg { width:14px; height:14px; stroke:currentColor; fill:none; stroke-width:2; stroke-linecap:round; stroke-linejoin:round; flex-shrink:0; }
 
+    /* ── HORIZON (§VI) ── */
+    #horizon { background: var(--bg-warm); }
+    .horizon-intro { font-size:clamp(.9rem,1.6vw,1rem); color:var(--muted); line-height:1.85; max-width:580px; margin-bottom:3rem; font-style:italic; }
+    .horizon-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:1.1rem; }
+    @media (max-width:540px) { .horizon-grid { grid-template-columns:1fr; } }
+    .horizon-card {
+      background: var(--bg-card);
+      border: 1px dashed rgba(42,26,14,.18);
+      border-radius: var(--radius);
+      padding: clamp(1.6rem,3.5vw,2.2rem);
+      position: relative;
+      opacity: .88;
+      transition: opacity .2s ease, border-color .2s ease;
+    }
+    .horizon-card:hover { opacity:1; border-color:var(--terracotta); border-style:solid; }
+    .horizon-icon { font-size:1.5rem; margin-bottom:.8rem; display:block; }
+    .horizon-title { font-family:var(--font-display); font-size:clamp(1.15rem,2vw,1.5rem); font-weight:400; color:var(--espresso); margin-bottom:.5rem; font-style:italic; }
+    .horizon-text  { font-size:clamp(.84rem,1.45vw,.93rem); color:var(--muted); line-height:1.75; }
+    .horizon-tag   { display:inline-block; margin-top:.9rem; font-size:.6rem; letter-spacing:.14em; text-transform:uppercase; color:var(--sage-d); background:rgba(122,158,139,.12); border:1px solid rgba(122,158,139,.3); padding:.2rem .65rem; border-radius:100px; }
+
+    /* ── REACTIONS ── */
+    #reactions { background: var(--bg); }
+    .reactions-intro { font-size:clamp(.9rem,1.6vw,1rem); color:var(--muted); line-height:1.85; max-width:580px; margin-bottom:2rem; }
+    .reactions-box {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: clamp(1.6rem,3.5vw,2.4rem);
+      box-shadow: var(--shadow);
+    }
+    .reactions-box textarea {
+      width: 100%;
+      min-height: 160px;
+      background: transparent;
+      border: none;
+      border-bottom: 1px solid var(--border);
+      padding: .5rem 0 1rem;
+      font-family: var(--font-body);
+      font-size: clamp(.9rem,1.6vw,1rem);
+      color: var(--espresso);
+      line-height: 1.75;
+      resize: vertical;
+      outline: none;
+      margin-bottom: 1.4rem;
+    }
+    .reactions-box textarea::placeholder { color: var(--muted); opacity:.6; }
+    .reactions-send {
+      display: inline-flex; align-items: center; gap:.45rem;
+      background: var(--espresso); color: white;
+      font-family: var(--font-body); font-size:.86rem; font-weight:500;
+      letter-spacing:.03em; text-decoration:none;
+      padding: 0 2rem; height:44px; border-radius:100px; border:none; cursor:pointer;
+      transition: background .2s ease, transform .18s ease;
+      box-shadow: 0 3px 14px rgba(42,26,14,.18);
+    }
+    .reactions-send:hover { background: #3D2910; transform:translateY(-1px); }
+
     /* ── FOOTER ── */
     footer { padding:2.4rem 0 3rem; background:var(--bg); }
     .footer-text { text-align:center; font-size:.7rem; letter-spacing:.16em; text-transform:uppercase; color:var(--muted); opacity:.5; }
@@ -496,6 +553,62 @@
 
   <div class="warm-line"></div>
 
+  <!-- SECTION VI — HORIZON -->
+  <section id="horizon">
+    <div class="container">
+      <p class="section-label reveal" data-i18n="horizonLabel">Section VI</p>
+      <h2 class="section-heading reveal" data-i18n="horizonHeading">What Opens Up Next</h2>
+      <p class="horizon-intro reveal" data-i18n="horizonIntro">Once the foundation is solid, a whole tier of tools becomes available. These are not part of the first engagement &mdash; they are the reason to build the foundation well.</p>
+
+      <div class="horizon-grid">
+        <div class="horizon-card reveal">
+          <span class="horizon-icon">&#x25CB;</span>
+          <p class="horizon-title" data-i18n="horizon1Title">Member Profiles</p>
+          <p class="horizon-text" data-i18n="horizon1Text">One registration, remembered forever. Gender, consent level, past events, allergies, preferences &mdash; all stored. Returning attendees skip the form. You stop asking the same questions.</p>
+          <span class="horizon-tag" data-i18n="horizonTag1">Registration + CRM</span>
+        </div>
+        <div class="horizon-card reveal">
+          <span class="horizon-icon">&#x25C7;</span>
+          <p class="horizon-title" data-i18n="horizon2Title">Event Intelligence</p>
+          <p class="horizon-text" data-i18n="horizon2Text">See who attended what, how often they come back, which events attract first-timers vs. regulars. You stop guessing what is working and start knowing.</p>
+          <span class="horizon-tag" data-i18n="horizonTag2">Analytics + Visibility</span>
+        </div>
+        <div class="horizon-card reveal">
+          <span class="horizon-icon">&#x25B3;</span>
+          <p class="horizon-title" data-i18n="horizon3Title">Loyalty &amp; Incentives</p>
+          <p class="horizon-text" data-i18n="horizon3Text">Early access for returning members. Discounts for bringing someone new. Freebies after five events. Small mechanics that reward loyalty and turn attendees into advocates.</p>
+          <span class="horizon-tag" data-i18n="horizonTag3">Retention + Growth</span>
+        </div>
+        <div class="horizon-card reveal">
+          <span class="horizon-icon">&#x25A1;</span>
+          <p class="horizon-title" data-i18n="horizon4Title">Practitioner Marketplace</p>
+          <p class="horizon-text" data-i18n="horizon4Text">When the model is defined and the brand is clear, other practitioners can apply to host under Kleos. The mothership starts filling up with spaceships.</p>
+          <span class="horizon-tag" data-i18n="horizonTag4">Platform + Scale</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="warm-line"></div>
+
+  <!-- REACTIONS -->
+  <section id="reactions">
+    <div class="container">
+      <p class="section-label reveal" data-i18n="reactionsLabel">Your Turn</p>
+      <h2 class="section-heading reveal" data-i18n="reactionsHeading">Drop Your Thoughts Here</h2>
+      <p class="reactions-intro reveal" data-i18n="reactionsIntro">Read something that is wrong? Something we missed? Something that sparked an idea? Leave it here. It goes straight to Pepe before our session.</p>
+      <div class="reactions-box reveal">
+        <textarea id="reactions-text" placeholder="What did we get right, wrong, or miss completely..." data-i18n-ph="reactionsPlaceholder"></textarea>
+        <button class="reactions-send" id="reactions-btn">
+          <span data-i18n="reactionsSend">Send to Pepe</span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <div class="warm-line"></div>
+
   <!-- CTA -->
   <section id="cta">
     <div class="cta-inner">
@@ -570,6 +683,16 @@
         phase4Weeks:'Weeks 15\u201324', phase4Desc:'Community and growth. Intentional, not accidental. The platform starts to attract without heroic effort from the founders.',
         phase4M1:'Community activation plan in place', phase4M2:'Practitioner onboarding process',
         phase4M3:'First expanded offering or retreat', phase4M4:'Growth without founder dependency',
+        horizonLabel:'Section VI', horizonHeading:'What Opens Up Next',
+        horizonIntro:'Once the foundation is solid, a whole tier of tools becomes available. These are not part of the first engagement \u2014 they are the reason to build the foundation well.',
+        horizon1Title:'Member Profiles', horizon1Text:'One registration, remembered forever. Gender, consent level, past events, preferences \u2014 all stored. Returning attendees skip the form. You stop asking the same questions.',
+        horizon2Title:'Event Intelligence', horizon2Text:'See who attended what, how often they come back, which events attract first-timers vs. regulars. You stop guessing what is working and start knowing.',
+        horizon3Title:'Loyalty & Incentives', horizon3Text:'Early access for returning members. Discounts for bringing someone new. Freebies after five events. Small mechanics that reward loyalty and turn attendees into advocates.',
+        horizon4Title:'Practitioner Marketplace', horizon4Text:'When the model is defined and the brand is clear, other practitioners can apply to host under Kleos. The mothership starts filling up with spaceships.',
+        horizonTag1:'Registration + CRM', horizonTag2:'Analytics + Visibility', horizonTag3:'Retention + Growth', horizonTag4:'Platform + Scale',
+        reactionsLabel:'Your Turn', reactionsHeading:'Drop Your Thoughts Here',
+        reactionsIntro:'Read something that is wrong? Something we missed? Something that sparked an idea? Leave it here. It goes straight to Pepe before our session.',
+        reactionsPlaceholder:'What did we get right, wrong, or miss completely\u2026', reactionsSend:'Send to Pepe',
         ctaEyebrow:'Your turn.', ctaHeading:'Come with reactions.',
         ctaSub:'What did we get right? What is wrong? What is missing? Send Pepe a message and let\u2019s find a time.',
         ctaBtn:'Get in touch',
@@ -626,6 +749,16 @@
         phase4Weeks:'Semanas 15\u201324', phase4Desc:'Comunidad y crecimiento. Intencional, no accidental. La plataforma empieza a atraer sin esfuerzo hero\u00edco de las fundadoras.',
         phase4M1:'Plan de activaci\u00f3n comunitaria', phase4M2:'Proceso de incorporaci\u00f3n de practicantes',
         phase4M3:'Primera oferta ampliada o retiro', phase4M4:'Crecimiento sin dependencia de las fundadoras',
+        horizonLabel:'Secci\u00f3n VI', horizonHeading:'Lo que se abre despu\u00e9s',
+        horizonIntro:'Una vez que la base est\u00e9 s\u00f3lida, se abre un nivel completo de herramientas. Estas no forman parte del primer compromiso \u2014 son la raz\u00f3n para construir bien los cimientos.',
+        horizon1Title:'Perfiles de miembros', horizon1Text:'Un solo registro, recordado para siempre. G\u00e9nero, nivel de consentimiento, eventos anteriores, preferencias \u2014 todo guardado. Los asistentes recurrentes omiten el formulario.',
+        horizon2Title:'Inteligencia de eventos', horizon2Text:'Vean qui\u00e9n asisti\u00f3 a qu\u00e9, con qu\u00e9 frecuencia regresan, qu\u00e9 eventos atraen a nuevos vs. a los habituales. Dejan de adivinar y empiezan a saber.',
+        horizon3Title:'Fidelidad e incentivos', horizon3Text:'Acceso anticipado para miembros recurrentes. Descuentos por traer a alguien nuevo. Regalos despu\u00e9s de cinco eventos. Mec\u00e1nicas peque\u00f1as que recompensan la lealtad.',
+        horizon4Title:'Marketplace de practicantes', horizon4Text:'Cuando el modelo est\u00e9 definido y la marca sea clara, otros practicantes podr\u00e1n aplicar para operar bajo Kleos. La nave nodriza empieza a llenarse.',
+        horizonTag1:'Registro + CRM', horizonTag2:'An\u00e1lisis + Visibilidad', horizonTag3:'Retenci\u00f3n + Crecimiento', horizonTag4:'Plataforma + Escala',
+        reactionsLabel:'Su turno', reactionsHeading:'Dejen sus pensamientos aqu\u00ed',
+        reactionsIntro:'\u00bfLeyeron algo incorrecto? \u00bfAlgo que nos falt\u00f3? \u00bfAlgo que encendi\u00f3 una idea? D\u00e9jenlo aqu\u00ed. Le llega directamente a Pepe antes de nuestra sesi\u00f3n.',
+        reactionsPlaceholder:'\u00bfQu\u00e9 acertamos, qu\u00e9 est\u00e1 mal, o qu\u00e9 nos falt\u00f3 por completo\u2026', reactionsSend:'Enviar a Pepe',
         ctaEyebrow:'Su turno.', ctaHeading:'Vengan con reacciones.',
         ctaSub:'\u00bfQu\u00e9 acertamos? \u00bfQu\u00e9 est\u00e1 mal? \u00bfQu\u00e9 falta? Escr\u00edbanle a Pepe y encontremos un momento.',
         ctaBtn:'Escribir a Pepe',
@@ -682,11 +815,30 @@
         phase4Weeks:'Semanas 15\u201324', phase4Desc:'Comunidade e crescimento. Intencional, n\u00e3o acidental. A plataforma come\u00e7a a atrair sem esfor\u00e7o hero\u00edco das fundadoras.',
         phase4M1:'Plano de ativa\u00e7\u00e3o da comunidade', phase4M2:'Processo de integra\u00e7\u00e3o de praticantes',
         phase4M3:'Primeira oferta expandida ou retiro', phase4M4:'Crescimento sem depend\u00eancia das fundadoras',
+        horizonLabel:'Se\u00e7\u00e3o VI', horizonHeading:'O que se abre depois',
+        horizonIntro:'Uma vez que a base esteja s\u00f3lida, toda uma camada de ferramentas se torna dispon\u00edvel. Estas n\u00e3o fazem parte do primeiro compromisso \u2014 s\u00e3o a raz\u00e3o para construir bem os alicerces.',
+        horizon1Title:'Perfis de membros', horizon1Text:'Um s\u00f3 cadastro, lembrado para sempre. G\u00eanero, n\u00edvel de consentimento, eventos anteriores, prefer\u00eancias \u2014 tudo armazenado. Participantes recorrentes pulam o formul\u00e1rio.',
+        horizon2Title:'Intelig\u00eancia de eventos', horizon2Text:'Veja quem foi a qual evento, com que frequ\u00eancia voltam, quais eventos atraem novatos vs. habitu\u00e9s. Voc\u00eas param de adivinhar o que funciona e come\u00e7am a saber.',
+        horizon3Title:'Fidelidade e incentivos', horizon3Text:'Acesso antecipado para membros recorrentes. Descontos por trazer algu\u00e9m novo. Mimos ap\u00f3s cinco eventos. Mec\u00e2nicas pequenas que recompensam a lealdade.',
+        horizon4Title:'Marketplace de praticantes', horizon4Text:'Quando o modelo estiver definido e a marca for clara, outros praticantes poder\u00e3o se candidatar a operar sob a Kleos. A nave-m\u00e3e come\u00e7a a se encher.',
+        horizonTag1:'Cadastro + CRM', horizonTag2:'An\u00e1lise + Visibilidade', horizonTag3:'Reten\u00e7\u00e3o + Crescimento', horizonTag4:'Plataforma + Escala',
+        reactionsLabel:'Sua vez', reactionsHeading:'Deixe seus pensamentos aqui',
+        reactionsIntro:'Leu algo errado? Algo que faltou? Algo que acendeu uma ideia? Deixe aqui. Vai direto para o Pepe antes da nossa conversa.',
+        reactionsPlaceholder:'O que acertamos, erramos, ou perdemos completamente\u2026', reactionsSend:'Enviar para o Pepe',
         ctaEyebrow:'Sua vez.', ctaHeading:'Venham com rea\u00e7\u00f5es.',
         ctaSub:'O que acertamos? O que est\u00e1 errado? O que est\u00e1 faltando? Mandem uma mensagem para o Pepe e a gente encontra um hor\u00e1rio.',
         ctaBtn:'Entrar em contato',
       },
     };
+
+    /* REACTIONS BUTTON */
+    document.getElementById('reactions-btn').addEventListener('click', function() {
+      var text = (document.getElementById('reactions-text').value || '').trim();
+      if (!text) return;
+      var sub = encodeURIComponent('Kleos brief \u2014 reactions');
+      var body = encodeURIComponent('Hi Pepe,\n\nHere are my thoughts on the brief:\n\n' + text);
+      window.location.href = 'mailto:pepe@mexzungu.com?subject=' + sub + '&body=' + body;
+    });
 
     function applyLang(lang) {
       var t = T[lang]; if (!t) return;
@@ -694,6 +846,8 @@
         var k = el.getAttribute('data-i18n');
         if (t[k] !== undefined) el.textContent = t[k];
       });
+      var ph = document.getElementById('reactions-text');
+      if (ph && t.reactionsPlaceholder) ph.placeholder = t.reactionsPlaceholder;
       document.querySelectorAll('.lang-btn').forEach(function(b) {
         b.classList.toggle('active', b.getAttribute('data-lang') === lang);
       });
