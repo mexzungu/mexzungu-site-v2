@@ -9,24 +9,29 @@
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap" rel="stylesheet" />
 
   <style>
-    /* ── Design System ── */
+    /* ── Design System — Sacred Body ── */
     :root {
-      --bg:        #0d0a0b;
-      --bg-card:   #130e10;
-      --bg-raised: #1a1215;
-      --crimson:   #8B2346;
-      --crimson-l: #a8304f;
-      --gold:      #C9A84C;
-      --gold-dim:  #8a6f30;
-      --cream:     #F2EBE3;
-      --cream-dim: #b8a99a;
-      --rose:      #C47E8A;
-      --green:     #4a8c5c;
-      --amber:     #9e6c2e;
-      --muted:     #4a4048;
+      --bg:          #F5EDE0;   /* warm parchment */
+      --bg-card:     #FFFFFF;   /* clean white cards */
+      --bg-raised:   #EDE3D5;   /* deeper parchment */
+      --terracotta:  #C4623A;   /* primary accent — earthy, warm */
+      --terracotta-l:#D4764E;   /* lighter terracotta */
+      --gold:        #C9A84C;   /* warm gold — sacred, subtle */
+      --gold-dim:    #A08040;   /* muted gold */
+      --text:        #2A1A0E;   /* deep espresso — main text */
+      --text-dim:    #7A5740;   /* muted body text */
+      --sage:        #7A9E8B;   /* dusty sage — grounding, nature */
+      --sage-dim:    #5A7E6B;   /* deeper sage */
+      --muted:       #B09880;   /* disabled / placeholder text */
+      --border:      #E2CEB8;   /* soft card borders */
 
       --font-display: 'Cormorant Garamond', Georgia, serif;
       --font-body:    'DM Sans', system-ui, sans-serif;
+
+      --radius:      16px;
+      --radius-sm:   10px;
+      --shadow:      0 2px 12px rgba(42, 26, 14, 0.08), 0 1px 3px rgba(42, 26, 14, 0.06);
+      --shadow-md:   0 4px 24px rgba(42, 26, 14, 0.10), 0 2px 6px rgba(42, 26, 14, 0.06);
 
       --section-pad: clamp(4rem, 8vw, 7rem);
       --content-w:   860px;
@@ -39,23 +44,12 @@
 
     body {
       background: var(--bg);
-      color: var(--cream);
+      color: var(--text);
       font-family: var(--font-body);
       font-size: clamp(15px, 1.8vw, 17px);
       line-height: 1.75;
       overflow-x: hidden;
       -webkit-font-smoothing: antialiased;
-    }
-
-    /* ── Film grain overlay ── */
-    #grain {
-      position: fixed;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      z-index: 9999;
-      opacity: 0.03;
     }
 
     /* ── Layout ── */
@@ -69,7 +63,7 @@
     .gold-line {
       width: 100%;
       height: 1px;
-      background: linear-gradient(to right, transparent, var(--gold-dim), transparent);
+      background: linear-gradient(to right, transparent, var(--border), transparent);
       margin: 0;
     }
 
@@ -97,6 +91,7 @@
       padding: clamp(3rem, 8vw, 6rem) clamp(1.25rem, 5vw, 3rem);
       gap: 1.5rem;
       position: relative;
+      background: linear-gradient(170deg, #FAF3E8 0%, var(--bg) 60%);
     }
 
     .cover-eyebrow {
@@ -104,7 +99,7 @@
       font-size: 0.68rem;
       letter-spacing: 0.22em;
       text-transform: uppercase;
-      color: var(--gold-dim);
+      color: var(--text-dim);
       font-weight: 400;
     }
 
@@ -114,7 +109,7 @@
       font-weight: 300;
       letter-spacing: 0.14em;
       line-height: 1.0;
-      color: var(--crimson);
+      color: var(--terracotta);
       text-transform: uppercase;
     }
 
@@ -123,28 +118,29 @@
       font-size: clamp(0.8rem, 1.4vw, 0.95rem);
       letter-spacing: 0.18em;
       text-transform: uppercase;
-      color: var(--cream-dim);
+      color: var(--text-dim);
       font-weight: 300;
     }
 
     .cover-from {
       font-family: var(--font-body);
       font-size: 0.85rem;
-      color: var(--gold);
+      color: var(--gold-dim);
       letter-spacing: 0.08em;
     }
 
     .cover-divider {
       width: clamp(100px, 20vw, 180px);
       height: 1px;
-      background: linear-gradient(to right, transparent, var(--gold), transparent);
+      background: linear-gradient(to right, transparent, var(--terracotta), transparent);
+      opacity: 0.4;
     }
 
     .cover-tagline {
       font-family: var(--font-display);
       font-style: italic;
       font-size: clamp(1rem, 2.2vw, 1.4rem);
-      color: var(--cream-dim);
+      color: var(--text-dim);
       font-weight: 300;
       max-width: 520px;
       line-height: 1.5;
@@ -162,23 +158,23 @@
       font-size: 0.65rem;
       letter-spacing: 0.22em;
       text-transform: uppercase;
-      color: var(--gold-dim);
+      color: var(--terracotta);
       margin-bottom: 0.8rem;
-      font-weight: 400;
+      font-weight: 500;
     }
 
     .section-heading {
       font-family: var(--font-display);
       font-size: clamp(2.4rem, 7vw, 5rem);
       font-weight: 300;
-      color: var(--cream);
+      color: var(--text);
       line-height: 1.0;
       margin-bottom: 2rem;
     }
 
     .section-intro {
       font-size: clamp(0.95rem, 1.8vw, 1.08rem);
-      color: var(--cream-dim);
+      color: var(--text-dim);
       line-height: 1.8;
       max-width: 720px;
       margin-bottom: 3rem;
@@ -202,9 +198,11 @@
 
     .card {
       background: var(--bg-card);
-      border: 1px solid #2a1f23;
-      border-left: 3px solid var(--crimson);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--terracotta);
+      border-radius: var(--radius);
       padding: 1.6rem 1.5rem;
+      box-shadow: var(--shadow);
       position: relative;
     }
 
@@ -212,14 +210,14 @@
       font-family: var(--font-display);
       font-size: clamp(1.2rem, 2.5vw, 1.55rem);
       font-weight: 400;
-      color: var(--cream);
+      color: var(--text);
       line-height: 1.2;
       margin-bottom: 0.4rem;
     }
 
     .card-meta {
       font-size: 0.78rem;
-      color: var(--cream-dim);
+      color: var(--text-dim);
       line-height: 1.6;
       letter-spacing: 0.02em;
     }
@@ -233,16 +231,16 @@
       font-size: 0.6rem;
       letter-spacing: 0.15em;
       text-transform: uppercase;
-      padding: 0.2rem 0.6rem;
-      border-radius: 2px;
+      padding: 0.2rem 0.65rem;
+      border-radius: 100px;
       margin-top: 0.9rem;
       font-family: var(--font-body);
       font-weight: 500;
     }
 
-    .badge-live    { background: rgba(74, 140, 92, 0.18); color: #7ecf95; border: 1px solid rgba(74,140,92,0.3); }
-    .badge-testing { background: rgba(158, 108, 46, 0.18); color: #d4924e; border: 1px solid rgba(158,108,46,0.3); }
-    .badge-avail   { background: rgba(74, 64, 72, 0.35); color: #8a7d84; border: 1px solid rgba(100,80,90,0.3); }
+    .badge-live    { background: rgba(122, 158, 139, 0.18); color: var(--sage-dim); border: 1px solid rgba(122, 158, 139, 0.4); }
+    .badge-testing { background: rgba(201, 168, 76, 0.15); color: var(--gold-dim); border: 1px solid rgba(201, 168, 76, 0.4); }
+    .badge-avail   { background: rgba(176, 152, 128, 0.15); color: var(--muted); border: 1px solid rgba(176, 152, 128, 0.35); }
 
     /* Stat blocks */
     .stats-row {
@@ -262,7 +260,7 @@
 
     .stat-block {
       padding: 2.5rem 0 2rem;
-      border-top: 1px solid var(--gold-dim);
+      border-top: 2px solid var(--border);
       text-align: center;
     }
 
@@ -270,7 +268,7 @@
       font-family: var(--font-display);
       font-size: clamp(3.5rem, 9vw, 7rem);
       font-weight: 300;
-      color: var(--gold);
+      color: var(--terracotta);
       line-height: 0.88;
       margin-bottom: 1rem;
       letter-spacing: -0.03em;
@@ -279,7 +277,7 @@
 
     .stat-label {
       font-size: 0.72rem;
-      color: var(--cream-dim);
+      color: var(--text-dim);
       letter-spacing: 0.16em;
       text-transform: uppercase;
       line-height: 1.6;
@@ -289,7 +287,7 @@
       font-family: var(--font-display);
       font-style: italic;
       font-size: clamp(0.95rem, 1.8vw, 1.1rem);
-      color: var(--rose);
+      color: var(--sage-dim);
       max-width: 580px;
       line-height: 1.6;
     }
@@ -298,8 +296,9 @@
        § 3 — WHAT IS WORKING
     ══════════════════════════════════════ */
     .callout {
-      border-left: 3px solid var(--crimson);
+      border-left: 3px solid var(--terracotta);
       background: var(--bg-raised);
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
       padding: 2rem 2rem 2rem 2.2rem;
       margin-bottom: 2rem;
     }
@@ -309,7 +308,7 @@
       font-size: 0.72rem;
       letter-spacing: 0.18em;
       text-transform: uppercase;
-      color: var(--crimson-l);
+      color: var(--terracotta);
       margin-bottom: 1.2rem;
       font-weight: 500;
     }
@@ -326,7 +325,7 @@
       gap: 0.9rem;
       align-items: flex-start;
       font-size: clamp(0.9rem, 1.6vw, 1rem);
-      color: var(--cream-dim);
+      color: var(--text-dim);
       line-height: 1.65;
     }
 
@@ -344,6 +343,7 @@
     .vision-block {
       border-left: 3px solid var(--gold);
       background: var(--bg-raised);
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
       padding: clamp(1.8rem, 4vw, 2.8rem) clamp(1.8rem, 4vw, 2.8rem) clamp(1.8rem, 4vw, 2.8rem) clamp(2rem, 5vw, 3rem);
     }
 
@@ -352,7 +352,7 @@
       font-style: italic;
       font-size: clamp(1.5rem, 4vw, 2.4rem);
       font-weight: 300;
-      color: var(--gold);
+      color: var(--text);
       line-height: 1.25;
       margin-bottom: 0.6rem;
     }
@@ -368,7 +368,7 @@
 
     .vision-body {
       font-size: clamp(0.92rem, 1.7vw, 1.05rem);
-      color: var(--cream-dim);
+      color: var(--text-dim);
       line-height: 1.85;
     }
 
@@ -381,9 +381,7 @@
       display: grid;
       grid-template-columns: 1fr 1fr;
       grid-template-rows: 1fr 1fr;
-      gap: 2px;
-      background: var(--gold-dim);
-      border: 1px solid var(--gold-dim);
+      gap: 1.25rem;
     }
 
     @media (max-width: 580px) {
@@ -392,21 +390,31 @@
 
     .matrix-cell {
       background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
       padding: clamp(1.6rem, 4vw, 2.4rem);
       display: flex;
       flex-direction: column;
       gap: 1rem;
       position: relative;
+      box-shadow: var(--shadow);
+      transition: box-shadow 0.25s ease, border-color 0.25s ease;
     }
 
     .matrix-cell::before {
       content: '';
       position: absolute;
       top: 0; left: 0; right: 0;
-      height: 2px;
-      background: var(--crimson);
+      height: 3px;
+      background: var(--terracotta);
+      border-radius: var(--radius) var(--radius) 0 0;
       opacity: 0;
       transition: opacity 0.3s ease;
+    }
+
+    .matrix-cell:hover {
+      box-shadow: var(--shadow-md);
+      border-color: rgba(196, 98, 58, 0.3);
     }
 
     .matrix-cell:hover::before { opacity: 1; }
@@ -414,7 +422,7 @@
     .matrix-icon {
       width: 2.4rem;
       height: 2.4rem;
-      color: var(--crimson);
+      color: var(--terracotta);
       opacity: 0.85;
       flex-shrink: 0;
     }
@@ -435,13 +443,13 @@
       font-weight: 600;
       letter-spacing: 0.1em;
       text-transform: uppercase;
-      color: var(--cream);
+      color: var(--text);
       line-height: 1.4;
     }
 
     .matrix-text {
       font-size: clamp(0.85rem, 1.5vw, 0.95rem);
-      color: var(--cream-dim);
+      color: var(--text-dim);
       line-height: 1.75;
       flex: 1;
     }
@@ -453,7 +461,7 @@
       font-family: var(--font-display);
       font-style: italic;
       font-size: clamp(0.95rem, 1.8vw, 1.1rem);
-      color: var(--rose);
+      color: var(--sage-dim);
       margin-bottom: 2.5rem;
       line-height: 1.6;
     }
@@ -479,22 +487,23 @@
       font-family: var(--font-display);
       font-size: clamp(4rem, 10vw, 7rem);
       font-weight: 300;
-      color: var(--crimson);
+      color: var(--terracotta);
       line-height: 0.88;
       letter-spacing: -0.02em;
+      opacity: 0.35;
     }
 
     .decide-q {
       font-family: var(--font-body);
       font-size: clamp(0.95rem, 1.7vw, 1.05rem);
       font-weight: 500;
-      color: var(--cream);
+      color: var(--text);
       margin-bottom: 0.45rem;
     }
 
     .decide-exp {
       font-size: clamp(0.86rem, 1.55vw, 0.95rem);
-      color: var(--cream-dim);
+      color: var(--text-dim);
       line-height: 1.75;
     }
 
@@ -503,7 +512,8 @@
     ══════════════════════════════════════ */
     .how-block {
       background: var(--bg-raised);
-      border: 1px solid #2a1f23;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
       padding: clamp(2rem, 4vw, 3rem);
       margin-bottom: 2.5rem;
     }
@@ -513,7 +523,7 @@
       font-size: clamp(1.1rem, 2.2vw, 1.4rem);
       font-weight: 300;
       line-height: 1.7;
-      color: var(--cream);
+      color: var(--text);
       margin-bottom: 2.5rem;
     }
 
@@ -521,7 +531,7 @@
       font-size: 0.65rem;
       letter-spacing: 0.2em;
       text-transform: uppercase;
-      color: var(--gold-dim);
+      color: var(--text-dim);
       margin-bottom: 1.2rem;
       font-weight: 500;
     }
@@ -540,7 +550,7 @@
       gap: 1rem;
       align-items: flex-start;
       font-size: clamp(0.88rem, 1.6vw, 0.98rem);
-      color: var(--cream-dim);
+      color: var(--text-dim);
     }
 
     .agenda-list li::before {
@@ -548,7 +558,7 @@
       font-family: var(--font-display);
       font-size: 1.4rem;
       font-weight: 300;
-      color: var(--gold);
+      color: var(--terracotta);
       line-height: 1;
       flex-shrink: 0;
       width: 1.4rem;
@@ -558,7 +568,7 @@
       font-family: var(--font-display);
       font-style: italic;
       font-size: clamp(1rem, 2vw, 1.25rem);
-      color: var(--rose);
+      color: var(--sage-dim);
       line-height: 1.6;
     }
 
@@ -571,8 +581,8 @@
       flex-wrap: wrap;
       margin: 2rem 0 2.8rem;
       padding: 1.6rem 0;
-      border-top: 1px solid #2a1f23;
-      border-bottom: 1px solid #2a1f23;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
       align-items: center;
     }
 
@@ -586,13 +596,13 @@
       text-transform: uppercase;
       font-weight: 400;
       text-decoration: line-through;
-      text-decoration-color: var(--crimson);
+      text-decoration-color: var(--terracotta);
       text-decoration-thickness: 1.5px;
     }
 
     .not-x {
       font-size: 0.65rem;
-      color: var(--crimson);
+      color: var(--terracotta);
       font-style: normal;
       text-decoration: none;
       flex-shrink: 0;
@@ -603,7 +613,7 @@
       font-family: var(--font-display);
       font-style: italic;
       font-size: clamp(0.95rem, 1.8vw, 1.1rem);
-      color: var(--rose);
+      color: var(--text-dim);
       text-decoration: none;
       letter-spacing: 0;
       text-transform: none;
@@ -627,7 +637,7 @@
       font-size: 0.78rem;
       letter-spacing: 0.14em;
       text-transform: uppercase;
-      color: var(--gold-dim);
+      color: var(--muted);
       margin-top: 2rem;
     }
 
@@ -649,7 +659,7 @@
       position: absolute;
       font-size: 0.65rem;
       font-family: var(--font-body);
-      color: var(--gold-dim);
+      color: var(--text-dim);
       letter-spacing: 0.08em;
       transform: translateX(-50%);
     }
@@ -657,9 +667,9 @@
     .gantt-track {
       position: relative;
       height: 3rem;
-      background: rgba(201, 168, 76, 0.06);
-      border: 1px solid rgba(201, 168, 76, 0.15);
-      border-radius: 4px;
+      background: rgba(196, 98, 58, 0.05);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
       overflow: hidden;
     }
 
@@ -667,44 +677,46 @@
       position: absolute;
       top: 5px;
       bottom: 5px;
-      border-radius: 3px;
+      border-radius: 6px;
       display: flex;
       align-items: center;
       justify-content: center;
       overflow: hidden;
     }
 
-    .gantt-bar.clearing { background: var(--rose); opacity: 0.75; }
-    .gantt-bar.ground   { background: var(--gold); opacity: 0.6; }
-    .gantt-bar.voice    { background: var(--crimson); opacity: 0.72; }
-    .gantt-bar.bloom    { background: #2D4A3E; opacity: 0.9; border: 1px solid rgba(201,168,76,0.2); }
+    .gantt-bar.clearing { background: rgba(196, 98, 58, 0.55); }
+    .gantt-bar.ground   { background: rgba(201, 168, 76, 0.6); }
+    .gantt-bar.voice    { background: rgba(122, 158, 139, 0.65); }
+    .gantt-bar.bloom    { background: rgba(90, 126, 107, 0.7); }
 
     .gantt-bar-label {
       font-size: 0.6rem;
       font-family: var(--font-body);
-      color: var(--cream);
+      color: #FFFFFF;
       letter-spacing: 0.1em;
       text-transform: uppercase;
       white-space: nowrap;
       padding: 0 0.4rem;
-      opacity: 0.92;
+      opacity: 0.95;
+      font-weight: 500;
     }
 
     /* Phase cards */
     .phase-cards {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: 1.5px;
-      background: rgba(201, 168, 76, 0.18);
-      margin: 1.5px 0 3rem;
-      border-radius: 2px;
-      overflow: hidden;
+      gap: 1.25rem;
+      margin: 2rem 0 3rem;
     }
 
     .phase-card {
       background: var(--bg-card);
-      padding: clamp(2rem, 4vw, 2.8rem) clamp(1.6rem, 3vw, 2.2rem);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: clamp(1.8rem, 3.5vw, 2.4rem) clamp(1.4rem, 2.5vw, 1.8rem);
+      box-shadow: var(--shadow);
       position: relative;
+      overflow: hidden;
     }
 
     .phase-stripe {
@@ -714,73 +726,74 @@
       top: 0;
       left: 0;
     }
-    .clearing-stripe { background: var(--rose); }
+    .clearing-stripe { background: var(--terracotta); }
     .ground-stripe   { background: var(--gold); }
-    .voice-stripe    { background: var(--crimson); }
-    .bloom-stripe    { background: #2D4A3E; }
+    .voice-stripe    { background: var(--sage); }
+    .bloom-stripe    { background: var(--sage-dim); }
 
     .phase-num {
       font-family: var(--font-display);
-      font-size: clamp(3.5rem, 5.5vw, 5rem);
+      font-size: clamp(3rem, 5.5vw, 4.5rem);
       line-height: 1;
-      margin-bottom: 0.5rem;
+      margin-bottom: 0.4rem;
       font-weight: 300;
       letter-spacing: -0.02em;
+      opacity: 0.25;
     }
-    .phase-num-clearing { color: var(--rose); }
+    .phase-num-clearing { color: var(--terracotta); }
     .phase-num-ground   { color: var(--gold); }
-    .phase-num-voice    { color: var(--crimson-l); }
-    .phase-num-bloom    { color: #5a9a6e; }
+    .phase-num-voice    { color: var(--sage-dim); }
+    .phase-num-bloom    { color: var(--sage-dim); }
 
     .phase-weeks {
       font-size: 0.65rem;
       letter-spacing: 0.14em;
       text-transform: uppercase;
-      color: var(--cream-dim);
-      opacity: 0.6;
-      margin-bottom: 0.6rem;
+      color: var(--muted);
+      margin-bottom: 0.5rem;
     }
 
     .phase-name {
       font-family: var(--font-display);
-      font-size: clamp(1.3rem, 2.2vw, 1.75rem);
-      color: var(--cream);
-      margin-bottom: 0.9rem;
+      font-size: clamp(1.2rem, 2.2vw, 1.65rem);
+      color: var(--text);
+      margin-bottom: 0.75rem;
       font-weight: 400;
       font-style: italic;
       line-height: 1.2;
     }
 
     .phase-desc {
-      font-size: clamp(0.85rem, 1.3vw, 0.95rem);
-      color: var(--cream-dim);
+      font-size: clamp(0.82rem, 1.3vw, 0.9rem);
+      color: var(--text-dim);
       line-height: 1.75;
-      margin-bottom: 1.4rem;
+      margin-bottom: 1.2rem;
     }
 
     .phase-milestones {
       list-style: none;
       padding: 0;
       margin: 0;
-      border-top: 1px solid rgba(201, 168, 76, 0.15);
+      border-top: 1px solid var(--border);
     }
 
     .phase-milestones li {
       font-size: 0.8rem;
-      color: var(--cream-dim);
+      color: var(--text-dim);
       padding: 0.55rem 0 0.55rem 1.4rem;
-      border-bottom: 1px solid rgba(201, 168, 76, 0.08);
+      border-bottom: 1px solid var(--border);
       position: relative;
       line-height: 1.5;
-      opacity: 0.85;
     }
+
+    .phase-milestones li:last-child { border-bottom: none; }
 
     .phase-milestones li::before {
       content: '→';
       position: absolute;
       left: 0;
-      color: var(--gold);
-      opacity: 0.65;
+      color: var(--terracotta);
+      opacity: 0.7;
       font-size: 0.72rem;
     }
 
@@ -800,18 +813,19 @@
        § ROADMAP CTA
     ══════════════════════════════════════ */
     .roadmap-cta {
-      margin-top: 3.5rem;
-      border: 1px solid rgba(201, 168, 76, 0.22);
-      border-left: 4px solid var(--gold);
+      margin-top: 3rem;
       background: var(--bg-raised);
-      padding: clamp(1.8rem, 4vw, 2.4rem) clamp(1.8rem, 4vw, 2.4rem) clamp(1.8rem, 4vw, 2.4rem) clamp(2rem, 5vw, 3rem);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: clamp(2rem, 4vw, 2.8rem) clamp(2rem, 4vw, 2.8rem);
+      text-align: center;
     }
 
     .roadmap-cta-eyebrow {
       font-size: 0.65rem;
       letter-spacing: 0.22em;
       text-transform: uppercase;
-      color: var(--gold-dim);
+      color: var(--terracotta);
       margin-bottom: 0.8rem;
       font-weight: 500;
     }
@@ -819,29 +833,44 @@
     .roadmap-cta-text {
       font-family: var(--font-display);
       font-style: italic;
-      font-size: clamp(1.15rem, 2.5vw, 1.6rem);
-      color: var(--gold);
+      font-size: clamp(1.2rem, 2.5vw, 1.7rem);
+      color: var(--text);
       line-height: 1.45;
       margin-bottom: 1rem;
+      max-width: 540px;
+      margin-left: auto;
+      margin-right: auto;
     }
 
     .roadmap-cta-sub {
       font-size: clamp(0.86rem, 1.55vw, 0.96rem);
-      color: var(--cream-dim);
+      color: var(--text-dim);
       line-height: 1.75;
+      margin-bottom: 2rem;
+    }
+
+    .cta-pill {
+      display: inline-block;
+      background: var(--terracotta);
+      color: #FFFFFF;
+      font-family: var(--font-body);
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 0.85rem 2.2rem;
+      border-radius: 100px;
+      transition: background 0.2s ease, transform 0.2s ease;
+    }
+
+    .cta-pill:hover {
+      background: var(--terracotta-l);
+      transform: translateY(-1px);
     }
   </style>
 </head>
 <body>
-
-  <!-- Film grain -->
-  <svg id="grain" xmlns="http://www.w3.org/2000/svg">
-    <filter id="noise">
-      <feTurbulence type="fractalNoise" baseFrequency="0.75" numOctaves="4" stitchTiles="stitch" />
-      <feColorMatrix type="saturate" values="0" />
-    </filter>
-    <rect width="100%" height="100%" filter="url(#noise)" />
-  </svg>
 
   <!-- ══ COVER ══ -->
   <section id="cover">
@@ -938,8 +967,8 @@
           <div class="stat-number" data-target="250" data-prefix="~">0</div>
           <div class="stat-label">Telegram — Hedone Barcelona</div>
         </div>
-        <div class="stat-block reveal" style="border-top-color: var(--crimson);">
-          <div class="stat-number" style="color: var(--rose); font-size: clamp(3.5rem, 12vw, 8rem);" data-target="23" data-prefix="€" data-suffix="k">0</div>
+        <div class="stat-block reveal" style="border-top-color: var(--sage);">
+          <div class="stat-number" style="color: var(--gold); font-size: clamp(3.5rem, 12vw, 8rem);" data-target="23" data-prefix="€" data-suffix="k">0</div>
           <div class="stat-label">Estimated annual revenue<br><span style="color: var(--muted); font-size: 0.65rem; letter-spacing: 0.1em;">Not yet tracked — modelled from pricing</span></div>
         </div>
       </div>
@@ -1110,30 +1139,35 @@
 
       <!-- Phase cards -->
       <div class="phase-cards">
+
         <div class="phase-card reveal">
           <div class="phase-stripe clearing-stripe"></div>
           <p class="phase-weeks">Weeks 1&ndash;2</p>
           <div class="phase-num phase-num-clearing">01</div>
           <h3 class="phase-name">The Clearing</h3>
-          <p class="phase-desc">Clarity session. Lock the value proposition, agree on roles, answer the open questions. Leave with a shared compass.</p>
+          <p class="phase-desc">Clarity and foundation. Lock the value proposition, agree on roles, answer the open questions. Leave with a shared compass.</p>
           <ul class="phase-milestones">
             <li>Value proposition in one sentence</li>
             <li>Roles and decision authority confirmed</li>
             <li>Open strategic questions resolved</li>
+            <li>Shared compass for what comes next</li>
           </ul>
         </div>
+
         <div class="phase-card reveal">
           <div class="phase-stripe ground-stripe"></div>
           <p class="phase-weeks">Weeks 3&ndash;8</p>
           <div class="phase-num phase-num-ground">02</div>
           <h3 class="phase-name">The Ground</h3>
-          <p class="phase-desc">Operational structure. Fix what is creating friction without slowing what is already working.</p>
+          <p class="phase-desc">Operational setup. Fix what creates friction without slowing what is already working.</p>
           <ul class="phase-milestones">
             <li>Registration flow simplified</li>
             <li>Basic revenue tracking live</li>
             <li>Comms templates built</li>
+            <li>Roles and responsibilities documented</li>
           </ul>
         </div>
+
         <div class="phase-card reveal">
           <div class="phase-stripe voice-stripe"></div>
           <p class="phase-weeks">Weeks 9&ndash;14</p>
@@ -1142,10 +1176,12 @@
           <p class="phase-desc">Story and communications. People know what they are signing up for before they arrive. Fear becomes curiosity.</p>
           <ul class="phase-milestones">
             <li>One explainer per event type</li>
-            <li>First-timer guide</li>
+            <li>First-timer guide live</li>
             <li>Consistent channel voice</li>
+            <li>Brand language defined</li>
           </ul>
         </div>
+
         <div class="phase-card reveal">
           <div class="phase-stripe bloom-stripe"></div>
           <p class="phase-weeks">Weeks 15&ndash;24</p>
@@ -1156,14 +1192,18 @@
             <li>Community activation plan</li>
             <li>Practitioner onboarding process</li>
             <li>First expanded offering or retreat</li>
+            <li>Revenue growing beyond events</li>
           </ul>
         </div>
+
       </div>
 
+      <!-- CTA -->
       <div class="roadmap-cta reveal">
         <p class="roadmap-cta-eyebrow">Your move</p>
         <p class="roadmap-cta-text">Come with reactions. What did we get right? What is wrong? What is missing?</p>
         <p class="roadmap-cta-sub">This is your mirror. Bring your honest read to the session. That is where we start.</p>
+        <a class="cta-pill" href="https://mexzungu.com/talk_to_pepe">Book the session</a>
       </div>
     </div>
   </section>
@@ -1196,7 +1236,6 @@
     document.querySelectorAll('#cover .reveal').forEach(el => {
       el.style.transition = 'none';
       el.classList.add('visible');
-      // re-enable transition after paint
       requestAnimationFrame(() => {
         requestAnimationFrame(() => {
           el.style.transition = '';
