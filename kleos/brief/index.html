@@ -75,6 +75,70 @@
     }
 
     /* ══════════════════════════════════════
+       § LANGUAGE SWITCHER
+    ══════════════════════════════════════ */
+    #lang-switcher {
+      position: fixed;
+      top: 1.1rem;
+      right: 1.4rem;
+      z-index: 200;
+      display: flex;
+      align-items: center;
+      gap: 0.1rem;
+      background: rgba(245, 237, 224, 0.92);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      padding: 0.3rem 0.6rem;
+      box-shadow: 0 2px 14px rgba(42, 26, 14, 0.09);
+    }
+
+    .lang-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-family: var(--font-body);
+      font-size: 0.68rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+      padding: 0.22rem 0.45rem;
+      border-radius: 4px;
+      transition: color 0.15s ease;
+      position: relative;
+      line-height: 1;
+    }
+
+    .lang-btn:hover {
+      color: var(--espresso);
+    }
+
+    .lang-btn.active {
+      color: var(--terracotta);
+    }
+
+    .lang-btn.active::after {
+      content: '';
+      position: absolute;
+      bottom: -1px;
+      left: 0.45rem;
+      right: 0.45rem;
+      height: 1px;
+      background: var(--terracotta);
+      border-radius: 1px;
+    }
+
+    .lang-sep {
+      color: var(--border);
+      font-size: 0.75rem;
+      line-height: 1;
+      user-select: none;
+      pointer-events: none;
+      opacity: 0.6;
+    }
+
+    /* ══════════════════════════════════════
        § COVER
     ══════════════════════════════════════ */
     #cover {
@@ -458,13 +522,22 @@
 </head>
 <body>
 
+  <!-- ══ LANGUAGE SWITCHER ══ -->
+  <div id="lang-switcher" aria-label="Language selector">
+    <button class="lang-btn" data-lang="en" aria-label="English">EN</button>
+    <span class="lang-sep" aria-hidden="true">|</span>
+    <button class="lang-btn" data-lang="es" aria-label="Español">ES</button>
+    <span class="lang-sep" aria-hidden="true">|</span>
+    <button class="lang-btn" data-lang="pt" aria-label="Português">PT</button>
+  </div>
+
   <!-- ══ COVER ══ -->
   <section id="cover">
     <p class="cover-eyebrow reveal">Nani &amp; Einat &nbsp;/&nbsp; May 2026</p>
     <h1 class="cover-title reveal">House of Kleos</h1>
-    <p class="cover-sub reveal">Engagement Roadmap</p>
+    <p class="cover-sub reveal" data-i18n="coverSub">Engagement Roadmap</p>
     <div class="cover-divider reveal"></div>
-    <p class="cover-tagline reveal">A 24-week arc — from clarity to community.</p>
+    <p class="cover-tagline reveal" data-i18n="coverTagline">A 24-week arc &mdash; from clarity to community.</p>
   </section>
 
   <div class="warm-line"></div>
@@ -472,11 +545,11 @@
   <!-- ══ ROADMAP ══ -->
   <section id="roadmap">
     <div class="container">
-      <p class="section-label reveal">The Plan</p>
-      <h2 class="section-heading reveal">How We Do This</h2>
-      <p class="section-intro reveal">Conservative pacing. One milestone at a time. Not every engagement needs all four phases — the clarity session tells us where to start and what to skip.</p>
+      <p class="section-label reveal" data-i18n="roadmapLabel">The Plan</p>
+      <h2 class="section-heading reveal" data-i18n="roadmapHeading">How We Do This</h2>
+      <p class="section-intro reveal" data-i18n="roadmapIntro">Conservative pacing. One milestone at a time. Not every engagement needs all four phases &mdash; the clarity session tells us where to start and what to skip.</p>
 
-      <!-- Gantt timeline -->
+      <!-- Gantt timeline — phase names stay in English (brand names) -->
       <div class="gantt-wrap reveal">
         <div class="gantt-axis">
           <span class="gantt-tick" style="left: 0%">W1</span>
@@ -505,54 +578,54 @@
       <div class="phase-grid">
 
         <div class="phase-card clearing reveal">
-          <p class="phase-weeks">Weeks 1&ndash;2</p>
+          <p class="phase-weeks" data-i18n="phase1Weeks">Weeks 1&ndash;2</p>
           <div class="phase-num">01</div>
           <h3 class="phase-name">The Clearing</h3>
-          <p class="phase-desc">Clarity and foundation. Lock the value proposition, agree on roles, resolve the open questions. Leave with a shared compass.</p>
+          <p class="phase-desc" data-i18n="phase1Desc">Clarity and foundation. Lock the value proposition, agree on roles, resolve the open questions. Leave with a shared compass.</p>
           <ul class="phase-milestones">
-            <li>Value proposition in one sentence</li>
-            <li>Roles and decision authority confirmed</li>
-            <li>Open strategic questions resolved</li>
-            <li>Shared compass for the months ahead</li>
+            <li data-i18n="phase1M1">Value proposition in one sentence</li>
+            <li data-i18n="phase1M2">Roles and decision authority confirmed</li>
+            <li data-i18n="phase1M3">Open strategic questions resolved</li>
+            <li data-i18n="phase1M4">Shared compass for the months ahead</li>
           </ul>
         </div>
 
         <div class="phase-card ground reveal reveal-d1">
-          <p class="phase-weeks">Weeks 3&ndash;8</p>
+          <p class="phase-weeks" data-i18n="phase2Weeks">Weeks 3&ndash;8</p>
           <div class="phase-num">02</div>
           <h3 class="phase-name">The Ground</h3>
-          <p class="phase-desc">Operational setup. Fix what is creating friction without slowing what is already working.</p>
+          <p class="phase-desc" data-i18n="phase2Desc">Operational setup. Fix what is creating friction without slowing what is already working.</p>
           <ul class="phase-milestones">
-            <li>Registration flow simplified</li>
-            <li>Basic revenue tracking live</li>
-            <li>Communications templates built</li>
-            <li>Roles and ownership clearly defined</li>
+            <li data-i18n="phase2M1">Registration flow simplified</li>
+            <li data-i18n="phase2M2">Basic revenue tracking live</li>
+            <li data-i18n="phase2M3">Communications templates built</li>
+            <li data-i18n="phase2M4">Roles and ownership clearly defined</li>
           </ul>
         </div>
 
         <div class="phase-card voice reveal">
-          <p class="phase-weeks">Weeks 9&ndash;14</p>
+          <p class="phase-weeks" data-i18n="phase3Weeks">Weeks 9&ndash;14</p>
           <div class="phase-num">03</div>
           <h3 class="phase-name">The Voice</h3>
-          <p class="phase-desc">Story and communications. People know what they are signing up for before they arrive. Fear becomes curiosity.</p>
+          <p class="phase-desc" data-i18n="phase3Desc">Story and communications. People know what they are signing up for before they arrive. Fear becomes curiosity.</p>
           <ul class="phase-milestones">
-            <li>One explainer per event type</li>
-            <li>First-timer guide</li>
-            <li>Consistent channel voice established</li>
-            <li>Brand language documented</li>
+            <li data-i18n="phase3M1">One explainer per event type</li>
+            <li data-i18n="phase3M2">First-timer guide</li>
+            <li data-i18n="phase3M3">Consistent channel voice established</li>
+            <li data-i18n="phase3M4">Brand language documented</li>
           </ul>
         </div>
 
         <div class="phase-card bloom reveal reveal-d1">
-          <p class="phase-weeks">Weeks 15&ndash;24</p>
+          <p class="phase-weeks" data-i18n="phase4Weeks">Weeks 15&ndash;24</p>
           <div class="phase-num">04</div>
           <h3 class="phase-name">The Bloom</h3>
-          <p class="phase-desc">Community and growth. Intentional, not accidental. The platform starts to attract without heroic effort from the founders.</p>
+          <p class="phase-desc" data-i18n="phase4Desc">Community and growth. Intentional, not accidental. The platform starts to attract without heroic effort from the founders.</p>
           <ul class="phase-milestones">
-            <li>Community activation plan in place</li>
-            <li>Practitioner onboarding process</li>
-            <li>First expanded offering or retreat</li>
-            <li>Growth without founder dependency</li>
+            <li data-i18n="phase4M1">Community activation plan in place</li>
+            <li data-i18n="phase4M2">Practitioner onboarding process</li>
+            <li data-i18n="phase4M3">First expanded offering or retreat</li>
+            <li data-i18n="phase4M4">Growth without founder dependency</li>
           </ul>
         </div>
 
@@ -565,11 +638,11 @@
   <!-- ══ SCHEDULING CTA ══ -->
   <section id="cta">
     <div class="cta-inner">
-      <p class="cta-eyebrow reveal">Ready to begin?</p>
-      <h2 class="cta-heading reveal">Let's start the conversation.</h2>
-      <p class="cta-sub reveal">Book a 90-minute in-person strategy session. We'll map where you are, where you're going, and exactly what comes first.</p>
+      <p class="cta-eyebrow reveal" data-i18n="ctaEyebrow">Ready to begin?</p>
+      <h2 class="cta-heading reveal" data-i18n="ctaHeading">Let&rsquo;s start the conversation.</h2>
+      <p class="cta-sub reveal" data-i18n="ctaSub">Book a 90-minute in-person strategy session. We&rsquo;ll map where you are, where you&rsquo;re going, and exactly what comes first.</p>
       <a href="https://mexzungu.com/talk_to_pepe" class="cta-button reveal">
-        Check availability
+        <span data-i18n="ctaBtn">Check availability</span>
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
       </a>
     </div>
@@ -583,9 +656,161 @@
   </footer>
 
   <script>
-    // Scroll reveal
-    const revealObs = new IntersectionObserver((entries) => {
-      entries.forEach(e => {
+    /* ══════════════════════════════════════
+       TRANSLATIONS
+    ══════════════════════════════════════ */
+    const translations = {
+      en: {
+        coverSub:      'Engagement Roadmap',
+        coverTagline:  'A 24-week arc \u2014 from clarity to community.',
+        roadmapLabel:  'The Plan',
+        roadmapHeading:'How We Do This',
+        roadmapIntro:  'Conservative pacing. One milestone at a time. Not every engagement needs all four phases \u2014 the clarity session tells us where to start and what to skip.',
+        phase1Weeks:   'Weeks 1\u20132',
+        phase1Desc:    'Clarity and foundation. Lock the value proposition, agree on roles, resolve the open questions. Leave with a shared compass.',
+        phase1M1:      'Value proposition in one sentence',
+        phase1M2:      'Roles and decision authority confirmed',
+        phase1M3:      'Open strategic questions resolved',
+        phase1M4:      'Shared compass for the months ahead',
+        phase2Weeks:   'Weeks 3\u20138',
+        phase2Desc:    'Operational setup. Fix what is creating friction without slowing what is already working.',
+        phase2M1:      'Registration flow simplified',
+        phase2M2:      'Basic revenue tracking live',
+        phase2M3:      'Communications templates built',
+        phase2M4:      'Roles and ownership clearly defined',
+        phase3Weeks:   'Weeks 9\u201314',
+        phase3Desc:    'Story and communications. People know what they are signing up for before they arrive. Fear becomes curiosity.',
+        phase3M1:      'One explainer per event type',
+        phase3M2:      'First-timer guide',
+        phase3M3:      'Consistent channel voice established',
+        phase3M4:      'Brand language documented',
+        phase4Weeks:   'Weeks 15\u201324',
+        phase4Desc:    'Community and growth. Intentional, not accidental. The platform starts to attract without heroic effort from the founders.',
+        phase4M1:      'Community activation plan in place',
+        phase4M2:      'Practitioner onboarding process',
+        phase4M3:      'First expanded offering or retreat',
+        phase4M4:      'Growth without founder dependency',
+        ctaEyebrow:    'Ready to begin?',
+        ctaHeading:    'Let\u2019s start the conversation.',
+        ctaSub:        'Book a 90-minute in-person strategy session. We\u2019ll map where you are, where you\u2019re going, and exactly what comes first.',
+        ctaBtn:        'Check availability',
+      },
+
+      es: {
+        coverSub:      'Hoja de Ruta',
+        coverTagline:  'Un arco de 24 semanas: de la claridad a la comunidad.',
+        roadmapLabel:  'El Plan',
+        roadmapHeading:'C\u00f3mo Lo Hacemos',
+        roadmapIntro:  'Paso conservador. Un hito a la vez. No todos los proyectos necesitan las cuatro fases \u2014 la sesi\u00f3n de claridad nos dice por d\u00f3nde empezar y qu\u00e9 podemos omitir.',
+        phase1Weeks:   'Semanas 1\u20132',
+        phase1Desc:    'Claridad y fundaci\u00f3n. Definimos la propuesta de valor, acordamos los roles y resolvemos las preguntas abiertas. Salimos con una br\u00fajula compartida.',
+        phase1M1:      'Propuesta de valor en una sola oraci\u00f3n',
+        phase1M2:      'Roles y autoridad de decisi\u00f3n confirmados',
+        phase1M3:      'Preguntas estrat\u00e9gicas abiertas resueltas',
+        phase1M4:      'Br\u00fajula compartida para los meses por venir',
+        phase2Weeks:   'Semanas 3\u20138',
+        phase2Desc:    'Configuraci\u00f3n operacional. Corregimos lo que genera fricci\u00f3n sin frenar lo que ya funciona.',
+        phase2M1:      'Proceso de registro simplificado',
+        phase2M2:      'Seguimiento b\u00e1sico de ingresos activo',
+        phase2M3:      'Plantillas de comunicaci\u00f3n listas',
+        phase2M4:      'Roles y responsabilidades claramente definidos',
+        phase3Weeks:   'Semanas 9\u201314',
+        phase3Desc:    'Narrativa y comunicaciones. La gente sabe a qu\u00e9 se inscribe antes de llegar. El miedo se convierte en curiosidad.',
+        phase3M1:      'Un texto explicativo por tipo de evento',
+        phase3M2:      'Gu\u00eda para nuevos participantes',
+        phase3M3:      'Voz de canal consistente establecida',
+        phase3M4:      'Lenguaje de marca documentado',
+        phase4Weeks:   'Semanas 15\u201324',
+        phase4Desc:    'Comunidad y crecimiento. Intencional, no accidental. La plataforma empieza a atraer sin esfuerzo hero\u00edco de los fundadores.',
+        phase4M1:      'Plan de activaci\u00f3n comunitaria en marcha',
+        phase4M2:      'Proceso de incorporaci\u00f3n de practicantes',
+        phase4M3:      'Primera oferta ampliada o retiro',
+        phase4M4:      'Crecimiento sin dependencia de los fundadores',
+        ctaEyebrow:    '\u00bfSiguiente paso?',
+        ctaHeading:    'Listo para comenzar?',
+        ctaSub:        'Reserva una sesi\u00f3n de estrategia de 90 minutos en persona.',
+        ctaBtn:        'Ver disponibilidad',
+      },
+
+      pt: {
+        coverSub:      'Plano de Engajamento',
+        coverTagline:  'Um arco de 24 semanas: da clareza \u00e0 comunidade.',
+        roadmapLabel:  'O Plano',
+        roadmapHeading:'Como Fazemos Isso',
+        roadmapIntro:  'Ritmo conservador. Um marco de cada vez. Nem todos os projetos precisam das quatro fases \u2014 a sess\u00e3o de clareza nos diz onde come\u00e7ar e o que podemos pular.',
+        phase1Weeks:   'Semanas 1\u20132',
+        phase1Desc:    'Clareza e funda\u00e7\u00e3o. Definimos a proposta de valor, acordamos os pap\u00e9is e resolvemos as quest\u00f5es em aberto. Sa\u00edmos com uma b\u00fassola compartilhada.',
+        phase1M1:      'Proposta de valor em uma \u00fanica frase',
+        phase1M2:      'Pap\u00e9is e autoridade de decis\u00e3o confirmados',
+        phase1M3:      'Quest\u00f5es estrat\u00e9gicas abertas resolvidas',
+        phase1M4:      'B\u00fassola compartilhada para os meses \u00e0 frente',
+        phase2Weeks:   'Semanas 3\u20138',
+        phase2Desc:    'Configura\u00e7\u00e3o operacional. Corrigimos o que est\u00e1 gerando atrito sem frear o que j\u00e1 est\u00e1 funcionando.',
+        phase2M1:      'Processo de inscri\u00e7\u00e3o simplificado',
+        phase2M2:      'Rastreamento b\u00e1sico de receita funcionando',
+        phase2M3:      'Modelos de comunica\u00e7\u00e3o criados',
+        phase2M4:      'Pap\u00e9is e responsabilidades claramente definidos',
+        phase3Weeks:   'Semanas 9\u201314',
+        phase3Desc:    'Narrativa e comunica\u00e7\u00f5es. As pessoas sabem no que est\u00e3o se inscrevendo antes de chegar. O medo vira curiosidade.',
+        phase3M1:      'Um texto explicativo por tipo de evento',
+        phase3M2:      'Guia para novos participantes',
+        phase3M3:      'Voz consistente estabelecida nos canais',
+        phase3M4:      'Linguagem da marca documentada',
+        phase4Weeks:   'Semanas 15\u201324',
+        phase4Desc:    'Comunidade e crescimento. Intencional, n\u00e3o acidental. A plataforma come\u00e7a a atrair sem esfor\u00e7o hero\u00edco dos fundadores.',
+        phase4M1:      'Plano de ativa\u00e7\u00e3o da comunidade em pr\u00e1tica',
+        phase4M2:      'Processo de integra\u00e7\u00e3o de praticantes',
+        phase4M3:      'Primeira oferta expandida ou retiro',
+        phase4M4:      'Crescimento sem depend\u00eancia dos fundadores',
+        ctaEyebrow:    'Pr\u00f3ximo passo',
+        ctaHeading:    'Pronto para come\u00e7ar?',
+        ctaSub:        'Agende uma sess\u00e3o de estrat\u00e9gia de 90 minutos presencial.',
+        ctaBtn:        'Ver disponibilidade',
+      },
+    };
+
+    /* ══════════════════════════════════════
+       LANGUAGE SWITCHING
+    ══════════════════════════════════════ */
+    function applyLang(lang) {
+      const t = translations[lang];
+      if (!t) return;
+
+      document.querySelectorAll('[data-i18n]').forEach(function(el) {
+        const key = el.getAttribute('data-i18n');
+        if (t[key] !== undefined) {
+          el.textContent = t[key];
+        }
+      });
+
+      document.querySelectorAll('.lang-btn').forEach(function(btn) {
+        btn.classList.toggle('active', btn.getAttribute('data-lang') === lang);
+      });
+
+      document.documentElement.setAttribute('lang', lang);
+      localStorage.setItem('kleos-lang', lang);
+    }
+
+    function detectInitialLang() {
+      const saved = localStorage.getItem('kleos-lang');
+      if (saved && translations[saved]) return saved;
+      const nav = (navigator.language || navigator.userLanguage || 'en').toLowerCase().slice(0, 2);
+      if (nav === 'es') return 'es';
+      if (nav === 'pt') return 'pt';
+      return 'en';
+    }
+
+    document.querySelectorAll('.lang-btn').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        applyLang(btn.getAttribute('data-lang'));
+      });
+    });
+
+    /* ══════════════════════════════════════
+       SCROLL REVEAL
+    ══════════════════════════════════════ */
+    const revealObs = new IntersectionObserver(function(entries) {
+      entries.forEach(function(e) {
         if (e.isIntersecting) {
           e.target.classList.add('visible');
           revealObs.unobserve(e.target);
@@ -593,16 +818,19 @@
       });
     }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
 
-    document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
+    document.querySelectorAll('.reveal').forEach(function(el) { revealObs.observe(el); });
 
     // Cover elements: show immediately
-    document.querySelectorAll('#cover .reveal').forEach(el => {
+    document.querySelectorAll('#cover .reveal').forEach(function(el) {
       el.style.transition = 'none';
       el.classList.add('visible');
-      requestAnimationFrame(() => {
-        requestAnimationFrame(() => { el.style.transition = ''; });
+      requestAnimationFrame(function() {
+        requestAnimationFrame(function() { el.style.transition = ''; });
       });
     });
+
+    // Apply language on load
+    applyLang(detectInitialLang());
   </script>
 
 </body>
