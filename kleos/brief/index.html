@@ -180,8 +180,23 @@
     @media (max-width:480px) { .gantt-wrap { display:none; } }
 
     /* ── PHASE CARDS ── */
-    .phase-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:1.25rem; }
-    @media (max-width:560px) { .phase-grid { grid-template-columns:1fr; } }
+    /* CAROUSEL */
+    .carousel-wrap { position:relative; }
+    .carousel-track { display:flex; overflow-x:scroll; scroll-snap-type:x mandatory; scrollbar-width:none; gap:1.25rem; padding:.25rem 0 1.5rem; cursor:grab; user-select:none; -webkit-overflow-scrolling:touch; }
+    .carousel-track::-webkit-scrollbar { display:none; }
+    .carousel-track.dragging { cursor:grabbing; scroll-snap-type:none; }
+    .carousel-track .phase-card { flex:0 0 min(calc(82vw),320px); scroll-snap-align:start; }
+    @media (min-width:560px) { .carousel-track .phase-card { flex:0 0 calc(50% - .75rem); } }
+    @media (min-width:900px) { .carousel-track .phase-card { flex:0 0 calc(41.5% - .75rem); } }
+    .carousel-track .phase-card.carousel-active { box-shadow:0 8px 32px rgba(42,26,14,.15),0 3px 10px rgba(42,26,14,.09); }
+    .carousel-btn { position:absolute; top:42%; transform:translateY(-50%); background:var(--bg-card); border:1px solid var(--border); border-radius:50%; width:2.5rem; height:2.5rem; display:none; align-items:center; justify-content:center; cursor:pointer; font-size:1.2rem; color:var(--terracotta); z-index:2; box-shadow:var(--shadow); transition:background .2s,box-shadow .2s; padding:0; }
+    .carousel-btn:hover { background:var(--bg-warm); box-shadow:var(--shadow-md); }
+    .carousel-prev { left:-1.4rem; }
+    .carousel-next { right:-1.4rem; }
+    @media (min-width:560px) { .carousel-btn { display:flex; } }
+    .carousel-dots { display:flex; justify-content:center; gap:.5rem; margin-top:.25rem; }
+    .carousel-dots button { width:.5rem; height:.5rem; border-radius:50%; background:rgba(42,26,14,.18); border:none; cursor:pointer; padding:0; transition:background .25s,width .25s; }
+    .carousel-dots button.active { background:var(--terracotta); width:1.5rem; border-radius:.25rem; }
     .phase-card { background:var(--bg-card); border:1px solid var(--border); border-left:4px solid var(--terracotta); border-radius:0 var(--radius) var(--radius) 0; padding:clamp(1.8rem,3.5vw,2.4rem); box-shadow:var(--shadow); transition:box-shadow .25s ease, transform .25s ease; }
     .phase-card:hover { box-shadow:var(--shadow-md); transform:translateY(-2px); }
     .phase-card.clearing { border-left-color:var(--gold); }
@@ -498,54 +513,64 @@
           <div class="gantt-bar bloom"    style="left:58.83%;width:40.17%"><span class="gantt-bar-label">The Bloom</span></div>
         </div>
       </div>
-      <div class="phase-grid">
-        <div class="phase-card clearing reveal">
-          <p class="phase-weeks" data-i18n="phase1Weeks">Weeks 1&ndash;2</p>
-          <div class="phase-num">01</div>
-          <h3 class="phase-name">The Clearing</h3>
-          <p class="phase-desc" data-i18n="phase1Desc">Clarity and foundation. Lock the value proposition, agree on roles, resolve the open questions. Leave with a shared compass.</p>
-          <ul class="phase-milestones">
-            <li data-i18n="phase1M1">Value proposition in one sentence</li>
-            <li data-i18n="phase1M2">Roles and decision authority confirmed</li>
-            <li data-i18n="phase1M3">Open strategic questions resolved</li>
-            <li data-i18n="phase1M4">Shared compass for the months ahead</li>
-          </ul>
+      <div class="carousel-wrap">
+        <button class="carousel-btn carousel-prev" aria-label="Previous phase">&#8592;</button>
+        <div class="carousel-track" id="phaseTrack">
+          <div class="phase-card clearing">
+            <p class="phase-weeks" data-i18n="phase1Weeks">Weeks 1&ndash;2</p>
+            <div class="phase-num">01</div>
+            <h3 class="phase-name">The Clearing</h3>
+            <p class="phase-desc" data-i18n="phase1Desc">Clarity and foundation. Lock the value proposition, agree on roles, resolve the open questions. Leave with a shared compass.</p>
+            <ul class="phase-milestones">
+              <li data-i18n="phase1M1">Value proposition in one sentence</li>
+              <li data-i18n="phase1M2">Roles and decision authority confirmed</li>
+              <li data-i18n="phase1M3">Open strategic questions resolved</li>
+              <li data-i18n="phase1M4">Shared compass for the months ahead</li>
+            </ul>
+          </div>
+          <div class="phase-card ground">
+            <p class="phase-weeks" data-i18n="phase2Weeks">Weeks 3&ndash;8</p>
+            <div class="phase-num">02</div>
+            <h3 class="phase-name">The Ground</h3>
+            <p class="phase-desc" data-i18n="phase2Desc">Operational setup. Fix what is creating friction without slowing what is already working.</p>
+            <ul class="phase-milestones">
+              <li data-i18n="phase2M1">Registration flow simplified</li>
+              <li data-i18n="phase2M2">Basic revenue tracking live</li>
+              <li data-i18n="phase2M3">Communications templates built</li>
+              <li data-i18n="phase2M4">Roles and ownership clearly defined</li>
+            </ul>
+          </div>
+          <div class="phase-card voice">
+            <p class="phase-weeks" data-i18n="phase3Weeks">Weeks 9&ndash;14</p>
+            <div class="phase-num">03</div>
+            <h3 class="phase-name">The Voice</h3>
+            <p class="phase-desc" data-i18n="phase3Desc">Story and communications. People know what they are signing up for before they arrive. Fear becomes curiosity.</p>
+            <ul class="phase-milestones">
+              <li data-i18n="phase3M1">One explainer per event type</li>
+              <li data-i18n="phase3M2">First-timer guide</li>
+              <li data-i18n="phase3M3">Consistent channel voice established</li>
+              <li data-i18n="phase3M4">Brand language documented</li>
+            </ul>
+          </div>
+          <div class="phase-card bloom">
+            <p class="phase-weeks" data-i18n="phase4Weeks">Weeks 15&ndash;24</p>
+            <div class="phase-num">04</div>
+            <h3 class="phase-name">The Bloom</h3>
+            <p class="phase-desc" data-i18n="phase4Desc">Community and growth. Intentional, not accidental. The platform starts to attract without heroic effort from the founders.</p>
+            <ul class="phase-milestones">
+              <li data-i18n="phase4M1">Community activation plan in place</li>
+              <li data-i18n="phase4M2">Practitioner onboarding process</li>
+              <li data-i18n="phase4M3">First expanded offering or retreat</li>
+              <li data-i18n="phase4M4">Growth without founder dependency</li>
+            </ul>
+          </div>
         </div>
-        <div class="phase-card ground reveal reveal-d1">
-          <p class="phase-weeks" data-i18n="phase2Weeks">Weeks 3&ndash;8</p>
-          <div class="phase-num">02</div>
-          <h3 class="phase-name">The Ground</h3>
-          <p class="phase-desc" data-i18n="phase2Desc">Operational setup. Fix what is creating friction without slowing what is already working.</p>
-          <ul class="phase-milestones">
-            <li data-i18n="phase2M1">Registration flow simplified</li>
-            <li data-i18n="phase2M2">Basic revenue tracking live</li>
-            <li data-i18n="phase2M3">Communications templates built</li>
-            <li data-i18n="phase2M4">Roles and ownership clearly defined</li>
-          </ul>
-        </div>
-        <div class="phase-card voice reveal">
-          <p class="phase-weeks" data-i18n="phase3Weeks">Weeks 9&ndash;14</p>
-          <div class="phase-num">03</div>
-          <h3 class="phase-name">The Voice</h3>
-          <p class="phase-desc" data-i18n="phase3Desc">Story and communications. People know what they are signing up for before they arrive. Fear becomes curiosity.</p>
-          <ul class="phase-milestones">
-            <li data-i18n="phase3M1">One explainer per event type</li>
-            <li data-i18n="phase3M2">First-timer guide</li>
-            <li data-i18n="phase3M3">Consistent channel voice established</li>
-            <li data-i18n="phase3M4">Brand language documented</li>
-          </ul>
-        </div>
-        <div class="phase-card bloom reveal reveal-d1">
-          <p class="phase-weeks" data-i18n="phase4Weeks">Weeks 15&ndash;24</p>
-          <div class="phase-num">04</div>
-          <h3 class="phase-name">The Bloom</h3>
-          <p class="phase-desc" data-i18n="phase4Desc">Community and growth. Intentional, not accidental. The platform starts to attract without heroic effort from the founders.</p>
-          <ul class="phase-milestones">
-            <li data-i18n="phase4M1">Community activation plan in place</li>
-            <li data-i18n="phase4M2">Practitioner onboarding process</li>
-            <li data-i18n="phase4M3">First expanded offering or retreat</li>
-            <li data-i18n="phase4M4">Growth without founder dependency</li>
-          </ul>
+        <button class="carousel-btn carousel-next" aria-label="Next phase">&#8594;</button>
+        <div class="carousel-dots" id="phaseDots">
+          <button class="active" data-idx="0" aria-label="Phase 1"></button>
+          <button data-idx="1" aria-label="Phase 2"></button>
+          <button data-idx="2" aria-label="Phase 3"></button>
+          <button data-idx="3" aria-label="Phase 4"></button>
         </div>
       </div>
     </div>
@@ -902,6 +927,68 @@
     });
 
     applyLang(initLang());
+
+    /* PHASE CAROUSEL */
+    (function(){
+      var track  = document.getElementById('phaseTrack');
+      var dotsEl = document.getElementById('phaseDots');
+      if (!track) return;
+      var cards = track.querySelectorAll('.phase-card');
+      var dots  = dotsEl ? dotsEl.querySelectorAll('button') : [];
+
+      function getActiveIdx() {
+        var mid = track.scrollLeft + track.clientWidth / 2;
+        var best = 0, bestDist = Infinity;
+        cards.forEach(function(c, i) {
+          var d = Math.abs(c.offsetLeft + c.offsetWidth / 2 - mid);
+          if (d < bestDist) { bestDist = d; best = i; }
+        });
+        return best;
+      }
+
+      function syncUI() {
+        var idx = getActiveIdx();
+        cards.forEach(function(c, i) { c.classList.toggle('carousel-active', i === idx); });
+        dots.forEach(function(d, i) { d.classList.toggle('active', i === idx); });
+      }
+
+      track.addEventListener('scroll', syncUI, { passive: true });
+      syncUI();
+
+      var prevBtn = document.querySelector('.carousel-prev');
+      var nextBtn = document.querySelector('.carousel-next');
+      if (prevBtn) prevBtn.addEventListener('click', function() {
+        var idx = Math.max(0, getActiveIdx() - 1);
+        cards[idx].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'start' });
+      });
+      if (nextBtn) nextBtn.addEventListener('click', function() {
+        var idx = Math.min(cards.length - 1, getActiveIdx() + 1);
+        cards[idx].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'start' });
+      });
+      dots.forEach(function(d) {
+        d.addEventListener('click', function() {
+          var idx = parseInt(d.getAttribute('data-idx'), 10);
+          cards[idx].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'start' });
+        });
+      });
+
+      /* Mouse drag to scroll */
+      var startX, startScroll, dragging = false;
+      track.addEventListener('mousedown', function(e) {
+        dragging = true; startX = e.pageX; startScroll = track.scrollLeft;
+        track.classList.add('dragging');
+        e.preventDefault();
+      });
+      document.addEventListener('mousemove', function(e) {
+        if (!dragging) return;
+        track.scrollLeft = startScroll - (e.pageX - startX);
+      });
+      document.addEventListener('mouseup', function() {
+        if (!dragging) return;
+        dragging = false;
+        track.classList.remove('dragging');
+      });
+    })();
   </script>
 </body>
 </html>
