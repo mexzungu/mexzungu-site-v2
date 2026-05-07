@@ -156,6 +156,7 @@
     .matrix-icon svg { width:100%; height:100%; stroke:currentColor; fill:none; stroke-width:1.5; stroke-linecap:round; stroke-linejoin:round; }
     .matrix-title { font-size:clamp(.78rem,1.3vw,.86rem); font-weight:600; letter-spacing:.08em; text-transform:uppercase; color:var(--espresso); line-height:1.4; }
     .matrix-text  { font-size:clamp(.85rem,1.5vw,.95rem); color:var(--muted); line-height:1.75; flex:1; }
+    .working-num  { font-family:var(--font-display); font-size:clamp(3rem,8vw,5.5rem); font-weight:300; line-height:.88; letter-spacing:-.03em; display:block; margin:.25rem 0 .55rem; }
 
     /* ── DECIDE ── */
     .decide-sub { font-family:var(--font-display); font-style:italic; font-size:clamp(.95rem,1.8vw,1.1rem); color:var(--sage-d); margin-bottom:2.5rem; line-height:1.6; }
@@ -405,14 +406,32 @@
     <div class="container">
       <p class="section-label reveal" data-i18n="workingLabel">Section II</p>
       <h2 class="section-heading reveal" data-i18n="workingHeading">What Is Working</h2>
-      <div class="callout reveal">
-        <p class="callout-sub" data-i18n="calloutSub">These are the things we protect, not change.</p>
-        <ul class="working-list">
-          <li data-i18n="working1">The container quality. 95% attendance rate, ~50% return rate. The space you hold IS the product.</li>
-          <li data-i18n="working2">Community trust. 115 past attendees in an exclusive group. This is rare.</li>
-          <li data-i18n="working3">Word of mouth. Your primary acquisition channel. Harder to build than any campaign.</li>
-          <li data-i18n="working4">Positioning instinct. You already know what you are not. That clarity protects the brand.</li>
-        </ul>
+      <p class="section-intro reveal" data-i18n="calloutSub">These are the things we protect, not change.</p>
+      <div class="matrix-2x2">
+        <div class="matrix-cell reveal">
+          <div class="matrix-icon" style="color:var(--gold)"><svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
+          <span class="working-num" style="color:var(--gold-d)" data-target="95" data-suffix="%">0</span>
+          <p class="matrix-title" data-i18n="working1Title">Attendance rate</p>
+          <p class="matrix-text" data-i18n="working1Text">The space you hold is the product. People show up because it is worth it.</p>
+        </div>
+        <div class="matrix-cell reveal">
+          <div class="matrix-icon" style="color:var(--terracotta)"><svg viewBox="0 0 24 24"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-3.5"/></svg></div>
+          <span class="working-num" style="color:var(--terracotta)" data-target="50" data-prefix="~" data-suffix="%">0</span>
+          <p class="matrix-title" data-i18n="working2Title">Return rate</p>
+          <p class="matrix-text" data-i18n="working2Text">They come back. Every time. Community trust at its most honest metric.</p>
+        </div>
+        <div class="matrix-cell reveal">
+          <div class="matrix-icon" style="color:var(--sage)"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+          <span class="working-num" style="color:var(--sage)" data-target="115">0</span>
+          <p class="matrix-title" data-i18n="working3Title">Exclusive community</p>
+          <p class="matrix-text" data-i18n="working3Text">Past attendees only. Invitation-only. 115 people who already trust you.</p>
+        </div>
+        <div class="matrix-cell reveal">
+          <div class="matrix-icon" style="color:var(--sage-d)"><svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></div>
+          <span class="working-num" style="color:var(--sage-d);font-size:clamp(2.4rem,6vw,4.2rem)">#1</span>
+          <p class="matrix-title" data-i18n="working4Title">Word of mouth</p>
+          <p class="matrix-text" data-i18n="working4Text">Your primary acquisition channel. Harder to build than any campaign. Zero paid ads.</p>
+        </div>
       </div>
     </div>
   </section>
@@ -671,10 +690,10 @@
         visionBody2:'Everything in this document \u2014 the improvements, the questions \u2014 should be read through this lens. We are not just professionalizing a monthly dance event. We are building the infrastructure for something that can grow beyond the two of you.',
         workingLabel:'Section II', workingHeading:'What Is Working',
         calloutSub:'These are the things we protect, not change.',
-        working1:'The container quality. 95% attendance rate, ~50% return rate. The space you hold IS the product.',
-        working2:'Community trust. 115 past attendees in an exclusive group. This is rare.',
-        working3:'Word of mouth. Your primary acquisition channel. Harder to build than any campaign.',
-        working4:'Positioning instinct. You already know what you are not. That clarity protects the brand.',
+        working1Title:'Attendance rate', working1Text:'The space you hold is the product. People show up because it is worth it.',
+        working2Title:'Return rate', working2Text:'They come back. Every time. Community trust at its most honest metric.',
+        working3Title:'Exclusive community', working3Text:'Past attendees only. Invitation-only. 115 people who already trust you.',
+        working4Title:'Word of mouth', working4Text:'Your primary acquisition channel. Harder to build than any campaign. Zero paid ads.',
         improveLabel:'Section III', improveHeading:'What We Can Improve',
         improve1Title:'You Do Not Know What You Are Earning',
         improve1Text:'Neither of you tracks average revenue per event or per person. You know the range but not where people land. Making decisions without this data means flying blind.',
@@ -737,10 +756,10 @@
         visionBody2:'Todo en este documento \u2014 las mejoras, las preguntas \u2014 debe leerse a trav\u00e9s de esta lente. No solo estamos profesionalizando un evento mensual. Estamos construyendo la infraestructura para algo que puede crecer m\u00e1s all\u00e1 de ustedes dos.',
         workingLabel:'Secci\u00f3n II', workingHeading:'Lo que est\u00e1 funcionando',
         calloutSub:'Esto es lo que protegemos, no cambiamos.',
-        working1:'La calidad del contenedor. 95% de asistencia, ~50% de retorno. El espacio que sostienen ES el producto.',
-        working2:'Confianza comunitaria. 115 asistentes previos en un grupo exclusivo. Eso es raro.',
-        working3:'Boca a boca. Su canal principal de adquisici\u00f3n. M\u00e1s dif\u00edcil de construir que cualquier campa\u00f1a.',
-        working4:'Instinto de posicionamiento. Ya saben lo que no son. Esa claridad protege la marca.',
+        working1Title:'Tasa de asistencia', working1Text:'El espacio que sostienen ES el producto. La gente aparece porque vale la pena.',
+        working2Title:'Tasa de retorno', working2Text:'Regresan. Siempre. La confianza comunitaria en su m\u00e9trica m\u00e1s honesta.',
+        working3Title:'Comunidad exclusiva', working3Text:'Solo asistentes previos. Solo por invitaci\u00f3n. 115 personas que ya conf\u00edan en ustedes.',
+        working4Title:'Boca a boca', working4Text:'Su canal principal de adquisici\u00f3n. M\u00e1s dif\u00edcil de construir que cualquier campa\u00f1a. Cero publicidad pagada.',
         improveLabel:'Secci\u00f3n III', improveHeading:'Lo que podemos mejorar',
         improve1Title:'No saben cu\u00e1nto est\u00e1n ganando',
         improve1Text:'Ninguna rastrea los ingresos promedio por evento o por persona. Conocen el rango, pero no d\u00f3nde aterriza la gente. Tomar decisiones sin estos datos es volar a ciegas.',
@@ -803,10 +822,10 @@
         visionBody2:'Tudo neste documento \u2014 as melhorias, as perguntas \u2014 deve ser lido por essa lente. N\u00e3o estamos apenas profissionalizando um evento mensal. Estamos construindo a infraestrutura para algo que pode crescer al\u00e9m de voc\u00eas duas.',
         workingLabel:'Se\u00e7\u00e3o II', workingHeading:'O que est\u00e1 funcionando',
         calloutSub:'Essas s\u00e3o as coisas que protegemos, n\u00e3o mudamos.',
-        working1:'A qualidade do cont\u00eainer. 95% de presen\u00e7a, ~50% de retorno. O espa\u00e7o que voc\u00eas sustentam \u00c9 o produto.',
-        working2:'Confian\u00e7a comunit\u00e1ria. 115 participantes anteriores em um grupo exclusivo. Isso \u00e9 raro.',
-        working3:'Boca a boca. Seu canal principal de aquisi\u00e7\u00e3o. Mais dif\u00edcil de construir do que qualquer campanha.',
-        working4:'Instinto de posicionamento. Voc\u00eas j\u00e1 sabem o que n\u00e3o s\u00e3o. Essa clareza protege a marca.',
+        working1Title:'Taxa de presen\u00e7a', working1Text:'O espa\u00e7o que voc\u00eas sustentam \u00c9 o produto. As pessoas aparecem porque vale a pena.',
+        working2Title:'Taxa de retorno', working2Text:'Elas voltam. Sempre. Confian\u00e7a comunit\u00e1ria na sua m\u00e9trica mais honesta.',
+        working3Title:'Comunidade exclusiva', working3Text:'Somente participantes anteriores. Somente por convite. 115 pessoas que j\u00e1 confiam em voc\u00eas.',
+        working4Title:'Boca a boca', working4Text:'Seu canal principal de aquisi\u00e7\u00e3o. Mais dif\u00edcil de construir do que qualquer campanha. Zero publicidade paga.',
         improveLabel:'Se\u00e7\u00e3o III', improveHeading:'O que podemos melhorar',
         improve1Title:'Voc\u00eas n\u00e3o sabem quanto est\u00e3o ganhando',
         improve1Text:'Nenhuma rastreia a receita m\u00e9dia por evento ou por pessoa. Conhecem o intervalo, mas n\u00e3o onde as pessoas chegam. Tomar decis\u00f5es sem esses dados \u00e9 voar \u00e0s cegas.',
@@ -915,6 +934,10 @@
         if (e.target.classList.contains('stat-block')) {
           var n = e.target.querySelector('.stat-number[data-target]');
           if (n) animateStat(n);
+        }
+        if (e.target.classList.contains('matrix-cell')) {
+          var wn = e.target.querySelector('.working-num[data-target]');
+          if (wn) animateStat(wn);
         }
         obs.unobserve(e.target);
       });
