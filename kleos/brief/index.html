@@ -137,6 +137,8 @@
     .vision-attr  { font-size:.66rem; letter-spacing:.18em; text-transform:uppercase; color:var(--gold-d); margin-bottom:1.8rem; display:block; }
     .vision-body  { font-size:clamp(.92rem,1.7vw,1.05rem); color:var(--muted); line-height:1.85; }
     .vision-body + .vision-body { margin-top:1rem; }
+    .vision-diagram { margin-top:2.8rem; text-align:center; overflow-x:auto; -webkit-overflow-scrolling:touch; }
+    .vision-diagram svg { width:100%; max-width:540px; height:auto; display:inline-block; }
 
     /* ── WORKING ── */
     .callout { border-left:3px solid var(--terracotta); background:var(--bg-warm); border-radius:0 var(--radius-sm) var(--radius-sm) 0; padding:2rem 2rem 2rem 2.2rem; }
@@ -396,6 +398,116 @@
         <p class="vision-body" data-i18n="visionBody1">This is what you told me Kleos is building toward. Not a single event series. A platform. Multiple practitioners, multiple modalities &mdash; erostatic dance, shibari, tantra, somatic work, erotic meditation, femdom &mdash; all delivered under one brand, held together by one community. The experiences are the spaceships. The community is the mothership.</p>
         <p class="vision-body" style="margin-top:1rem" data-i18n="visionBody2">Everything in this document &mdash; the improvements, the questions &mdash; should be read through this lens. We are not just professionalizing a monthly dance event. We are building the infrastructure for something that can grow beyond the two of you.</p>
       </div>
+
+      <!-- COLLECTIVE DIAGRAM -->
+      <div class="vision-diagram reveal">
+        <svg viewBox="0 0 580 580" xmlns="http://www.w3.org/2000/svg" aria-label="House of Kleos collective ecosystem diagram" role="img">
+          <defs>
+            <radialGradient id="kleosBg" cx="50%" cy="48%" r="50%">
+              <stop offset="0%" stop-color="#F5EDE0" stop-opacity="0.95"/>
+              <stop offset="100%" stop-color="#EDE0CE" stop-opacity="0.55"/>
+            </radialGradient>
+          </defs>
+
+          <!-- Outer mothership circle -->
+          <circle cx="290" cy="295" r="255" fill="url(#kleosBg)" stroke="#C9A84C" stroke-width="1.8" stroke-dasharray="12,6"/>
+
+          <!-- Orbit rings -->
+          <circle cx="290" cy="295" r="95"  fill="none" stroke="rgba(42,26,14,0.06)" stroke-width="1"/>
+          <circle cx="290" cy="295" r="172" fill="none" stroke="rgba(42,26,14,0.04)" stroke-width="1" stroke-dasharray="3,6"/>
+
+          <!-- Tiny orbital dots (r=198 ring) -->
+          <circle cx="290" cy="97"  r="2.5" fill="#C9A84C"  opacity="0.3"/>
+          <circle cx="381" cy="122" r="2"   fill="#C4623A"  opacity="0.28"/>
+          <circle cx="452" cy="196" r="2.5" fill="#7A9E8B"  opacity="0.3"/>
+          <circle cx="488" cy="295" r="2"   fill="#C9A84C"  opacity="0.25"/>
+          <circle cx="452" cy="394" r="2.5" fill="#A68A35"  opacity="0.3"/>
+          <circle cx="381" cy="468" r="2"   fill="#5C826E"  opacity="0.28"/>
+          <circle cx="290" cy="493" r="2.5" fill="#D27448"  opacity="0.3"/>
+          <circle cx="199" cy="468" r="2"   fill="#C9A84C"  opacity="0.28"/>
+          <circle cx="128" cy="394" r="2.5" fill="#7A9E8B"  opacity="0.3"/>
+          <circle cx="92"  cy="295" r="2"   fill="#C4623A"  opacity="0.25"/>
+          <circle cx="128" cy="196" r="2.5" fill="#A68A35"  opacity="0.3"/>
+          <circle cx="199" cy="122" r="2"   fill="#5C826E"  opacity="0.28"/>
+
+          <!-- Connector lines: center → each modality -->
+          <line x1="290" y1="295" x2="290" y2="120"  stroke="rgba(122,158,139,0.22)" stroke-width="1" stroke-dasharray="4,4"/>
+          <line x1="290" y1="295" x2="440" y2="215"  stroke="rgba(196,98,58,0.2)"   stroke-width="1" stroke-dasharray="4,4"/>
+          <line x1="290" y1="295" x2="445" y2="385"  stroke="rgba(201,168,76,0.22)" stroke-width="1" stroke-dasharray="4,4"/>
+          <line x1="290" y1="295" x2="292" y2="470"  stroke="rgba(92,130,110,0.2)"  stroke-width="1" stroke-dasharray="4,4"/>
+          <line x1="290" y1="295" x2="140" y2="383"  stroke="rgba(210,116,72,0.2)"  stroke-width="1" stroke-dasharray="4,4"/>
+          <line x1="290" y1="295" x2="145" y2="215"  stroke="rgba(166,138,53,0.2)"  stroke-width="1" stroke-dasharray="4,4"/>
+
+          <!-- Scattered interior dots -->
+          <circle cx="218" cy="148" r="2"   fill="#C9A84C" opacity="0.32"/>
+          <circle cx="362" cy="132" r="1.5" fill="#7A9E8B" opacity="0.38"/>
+          <circle cx="474" cy="255" r="1.8" fill="#C4623A" opacity="0.26"/>
+          <circle cx="467" cy="338" r="1.5" fill="#A68A35" opacity="0.28"/>
+          <circle cx="357" cy="497" r="2"   fill="#5C826E" opacity="0.3"/>
+          <circle cx="217" cy="499" r="1.5" fill="#D27448" opacity="0.28"/>
+          <circle cx="115" cy="338" r="1.8" fill="#7A9E8B" opacity="0.28"/>
+          <circle cx="118" cy="258" r="1.5" fill="#A68A35" opacity="0.26"/>
+          <circle cx="340" cy="190" r="1.5" fill="#C4623A" opacity="0.28"/>
+          <circle cx="248" cy="415" r="1.8" fill="#C9A84C" opacity="0.28"/>
+          <circle cx="398" cy="172" r="1.5" fill="#5C826E" opacity="0.3"/>
+          <circle cx="400" cy="422" r="1.5" fill="#7A9E8B" opacity="0.28"/>
+
+          <!-- Asterisk ornaments -->
+          <text x="232" y="108" font-size="9"  fill="#7A9E8B" opacity="0.45" text-anchor="middle">✦</text>
+          <text x="350" y="107" font-size="8"  fill="#7A9E8B" opacity="0.4"  text-anchor="middle">✦</text>
+          <text x="497" y="194" font-size="8"  fill="#C4623A" opacity="0.38" text-anchor="middle">✦</text>
+          <text x="499" y="392" font-size="9"  fill="#A68A35" opacity="0.36" text-anchor="middle">✦</text>
+          <text x="352" y="506" font-size="8"  fill="#5C826E" opacity="0.38" text-anchor="middle">✦</text>
+          <text x="234" y="508" font-size="8"  fill="#D27448" opacity="0.36" text-anchor="middle">✦</text>
+          <text x="83"  cy="388" font-size="9"  fill="#7A9E8B" opacity="0.36" text-anchor="middle">✦</text>
+          <text x="82"  y="208" font-size="8"  fill="#A68A35" opacity="0.36" text-anchor="middle">✦</text>
+
+          <!-- ── SPACESHIP BUBBLES ── -->
+
+          <!-- 1. Erostatic Dance — top — sage -->
+          <ellipse cx="290" cy="120" rx="68" ry="40" fill="#7A9E8B" fill-opacity="0.13" stroke="#7A9E8B" stroke-width="1.5"/>
+          <text text-anchor="middle" font-style="italic" fill="#5C826E" font-family="'Cormorant Garamond',Georgia,serif">
+            <tspan x="290" y="115" font-size="13.5">Erostatic</tspan>
+            <tspan x="290" dy="17"  font-size="13.5">Dance</tspan>
+          </text>
+
+          <!-- 2. Shibari — upper right — terracotta -->
+          <ellipse cx="440" cy="215" rx="63" ry="38" fill="#C4623A" fill-opacity="0.11" stroke="#C4623A" stroke-width="1.5"/>
+          <text x="440" y="219" text-anchor="middle" font-size="14" font-style="italic" fill="#C4623A" font-family="'Cormorant Garamond',Georgia,serif">Shibari</text>
+
+          <!-- 3. Tantra — lower right — gold -->
+          <ellipse cx="445" cy="385" rx="63" ry="38" fill="#C9A84C" fill-opacity="0.13" stroke="#C9A84C" stroke-width="1.5"/>
+          <text x="445" y="389" text-anchor="middle" font-size="14" font-style="italic" fill="#A68A35" font-family="'Cormorant Garamond',Georgia,serif">Tantra</text>
+
+          <!-- 4. Femdom — bottom — sage-d -->
+          <ellipse cx="292" cy="470" rx="70" ry="41" fill="#5C826E" fill-opacity="0.11" stroke="#5C826E" stroke-width="1.5"/>
+          <text x="292" y="474" text-anchor="middle" font-size="14" font-style="italic" fill="#5C826E" font-family="'Cormorant Garamond',Georgia,serif">Femdom</text>
+
+          <!-- 5. Somatic Work — lower left — terra-l -->
+          <ellipse cx="140" cy="383" rx="63" ry="38" fill="#D27448" fill-opacity="0.11" stroke="#D27448" stroke-width="1.5"/>
+          <text text-anchor="middle" font-style="italic" fill="#C4623A" font-family="'Cormorant Garamond',Georgia,serif">
+            <tspan x="140" y="379" font-size="13.5">Somatic</tspan>
+            <tspan x="140" dy="16"  font-size="13.5">Work</tspan>
+          </text>
+
+          <!-- 6. Erotic Meditation — upper left — gold-d/muted -->
+          <ellipse cx="145" cy="215" rx="65" ry="39" fill="#A68A35" fill-opacity="0.11" stroke="#A68A35" stroke-width="1.5"/>
+          <text text-anchor="middle" font-style="italic" fill="#8C7B6E" font-family="'Cormorant Garamond',Georgia,serif">
+            <tspan x="145" y="211" font-size="13">Erotic</tspan>
+            <tspan x="145" dy="16"  font-size="13">Meditation</tspan>
+          </text>
+
+          <!-- ── CENTER: Community (mothership core) ── -->
+          <ellipse cx="290" cy="295" rx="62" ry="42" fill="#C9A84C" fill-opacity="0.2" stroke="#C9A84C" stroke-width="2"/>
+          <text x="290" y="290" text-anchor="middle" font-size="14" font-style="italic" fill="#A68A35" font-family="'Cormorant Garamond',Georgia,serif">Community</text>
+          <text x="290" y="308" text-anchor="middle" font-size="9" fill="#8C7B6E" font-family="'DM Sans',system-ui,sans-serif" letter-spacing="1.5">115 members</text>
+
+          <!-- ── HOUSE OF KLEOS title ── -->
+          <text x="290" y="59" text-anchor="middle" font-size="15" fill="#2A1A0E" letter-spacing="5" opacity="0.82" font-family="'Cormorant Garamond',Georgia,serif">HOUSE OF KLEOS</text>
+          <line x1="224" y1="67" x2="356" y2="67" stroke="#C9A84C" stroke-width="0.8" opacity="0.45"/>
+        </svg>
+      </div>
+
     </div>
   </section>
 
