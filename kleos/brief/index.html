@@ -1,0 +1,1240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>House of Kleos — Business Clarity Brief / May 2026</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ── Design System ── */
+    :root {
+      --bg:        #0d0a0b;
+      --bg-card:   #130e10;
+      --bg-raised: #1a1215;
+      --crimson:   #8B2346;
+      --crimson-l: #a8304f;
+      --gold:      #C9A84C;
+      --gold-dim:  #8a6f30;
+      --cream:     #F2EBE3;
+      --cream-dim: #b8a99a;
+      --rose:      #C47E8A;
+      --green:     #4a8c5c;
+      --amber:     #9e6c2e;
+      --muted:     #4a4048;
+
+      --font-display: 'Cormorant Garamond', Georgia, serif;
+      --font-body:    'DM Sans', system-ui, sans-serif;
+
+      --section-pad: clamp(4rem, 8vw, 7rem);
+      --content-w:   860px;
+    }
+
+    /* ── Reset ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--cream);
+      font-family: var(--font-body);
+      font-size: clamp(15px, 1.8vw, 17px);
+      line-height: 1.75;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── Film grain overlay ── */
+    #grain {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0.03;
+    }
+
+    /* ── Layout ── */
+    .container {
+      max-width: var(--content-w);
+      margin: 0 auto;
+      padding: 0 clamp(1.25rem, 5vw, 3rem);
+    }
+
+    /* ── Divider ── */
+    .gold-line {
+      width: 100%;
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--gold-dim), transparent);
+      margin: 0;
+    }
+
+    /* ── Scroll reveal ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(22px);
+      transition: opacity 0.65s ease, transform 0.65s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: none;
+    }
+
+    /* ══════════════════════════════════════
+       § 1 — COVER
+    ══════════════════════════════════════ */
+    #cover {
+      min-height: 100svh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: clamp(3rem, 8vw, 6rem) clamp(1.25rem, 5vw, 3rem);
+      gap: 1.5rem;
+      position: relative;
+    }
+
+    .cover-eyebrow {
+      font-family: var(--font-body);
+      font-size: 0.68rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold-dim);
+      font-weight: 400;
+    }
+
+    .cover-title {
+      font-family: var(--font-display);
+      font-size: clamp(3.5rem, 14vw, 10rem);
+      font-weight: 300;
+      letter-spacing: 0.14em;
+      line-height: 1.0;
+      color: var(--crimson);
+      text-transform: uppercase;
+    }
+
+    .cover-subtitle {
+      font-family: var(--font-body);
+      font-size: clamp(0.8rem, 1.4vw, 0.95rem);
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--cream-dim);
+      font-weight: 300;
+    }
+
+    .cover-from {
+      font-family: var(--font-body);
+      font-size: 0.85rem;
+      color: var(--gold);
+      letter-spacing: 0.08em;
+    }
+
+    .cover-divider {
+      width: clamp(100px, 20vw, 180px);
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--gold), transparent);
+    }
+
+    .cover-tagline {
+      font-family: var(--font-display);
+      font-style: italic;
+      font-size: clamp(1rem, 2.2vw, 1.4rem);
+      color: var(--cream-dim);
+      font-weight: 300;
+      max-width: 520px;
+      line-height: 1.5;
+    }
+
+    /* ══════════════════════════════════════
+       § SECTION WRAPPER
+    ══════════════════════════════════════ */
+    section {
+      padding: var(--section-pad) 0;
+    }
+
+    .section-label {
+      font-family: var(--font-body);
+      font-size: 0.65rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold-dim);
+      margin-bottom: 0.8rem;
+      font-weight: 400;
+    }
+
+    .section-heading {
+      font-family: var(--font-display);
+      font-size: clamp(2.4rem, 7vw, 5rem);
+      font-weight: 300;
+      color: var(--cream);
+      line-height: 1.0;
+      margin-bottom: 2rem;
+    }
+
+    .section-intro {
+      font-size: clamp(0.95rem, 1.8vw, 1.08rem);
+      color: var(--cream-dim);
+      line-height: 1.8;
+      max-width: 720px;
+      margin-bottom: 3rem;
+    }
+
+    /* ══════════════════════════════════════
+       § 2 — WHAT YOU HAVE BUILT
+    ══════════════════════════════════════ */
+
+    /* Offering Cards */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.25rem;
+      margin-bottom: 4rem;
+    }
+
+    @media (max-width: 600px) {
+      .cards-grid { grid-template-columns: 1fr; }
+    }
+
+    .card {
+      background: var(--bg-card);
+      border: 1px solid #2a1f23;
+      border-left: 3px solid var(--crimson);
+      padding: 1.6rem 1.5rem;
+      position: relative;
+    }
+
+    .card-name {
+      font-family: var(--font-display);
+      font-size: clamp(1.2rem, 2.5vw, 1.55rem);
+      font-weight: 400;
+      color: var(--cream);
+      line-height: 1.2;
+      margin-bottom: 0.4rem;
+    }
+
+    .card-meta {
+      font-size: 0.78rem;
+      color: var(--cream-dim);
+      line-height: 1.6;
+      letter-spacing: 0.02em;
+    }
+
+    .card-meta span {
+      display: block;
+    }
+
+    .badge {
+      display: inline-block;
+      font-size: 0.6rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 0.2rem 0.6rem;
+      border-radius: 2px;
+      margin-top: 0.9rem;
+      font-family: var(--font-body);
+      font-weight: 500;
+    }
+
+    .badge-live    { background: rgba(74, 140, 92, 0.18); color: #7ecf95; border: 1px solid rgba(74,140,92,0.3); }
+    .badge-testing { background: rgba(158, 108, 46, 0.18); color: #d4924e; border: 1px solid rgba(158,108,46,0.3); }
+    .badge-avail   { background: rgba(74, 64, 72, 0.35); color: #8a7d84; border: 1px solid rgba(100,80,90,0.3); }
+
+    /* Stat blocks */
+    .stats-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0 2px;
+      margin-bottom: 3rem;
+    }
+
+    @media (max-width: 760px) {
+      .stats-row { grid-template-columns: repeat(2, 1fr); gap: 2px; }
+    }
+
+    @media (max-width: 420px) {
+      .stats-row { grid-template-columns: 1fr; }
+    }
+
+    .stat-block {
+      padding: 2.5rem 0 2rem;
+      border-top: 1px solid var(--gold-dim);
+      text-align: center;
+    }
+
+    .stat-number {
+      font-family: var(--font-display);
+      font-size: clamp(3.5rem, 9vw, 7rem);
+      font-weight: 300;
+      color: var(--gold);
+      line-height: 0.88;
+      margin-bottom: 1rem;
+      letter-spacing: -0.03em;
+      display: block;
+    }
+
+    .stat-label {
+      font-size: 0.72rem;
+      color: var(--cream-dim);
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      line-height: 1.6;
+    }
+
+    .stats-note {
+      font-family: var(--font-display);
+      font-style: italic;
+      font-size: clamp(0.95rem, 1.8vw, 1.1rem);
+      color: var(--rose);
+      max-width: 580px;
+      line-height: 1.6;
+    }
+
+    /* ══════════════════════════════════════
+       § 3 — WHAT IS WORKING
+    ══════════════════════════════════════ */
+    .callout {
+      border-left: 3px solid var(--crimson);
+      background: var(--bg-raised);
+      padding: 2rem 2rem 2rem 2.2rem;
+      margin-bottom: 2rem;
+    }
+
+    .callout-sub {
+      font-family: var(--font-body);
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--crimson-l);
+      margin-bottom: 1.2rem;
+      font-weight: 500;
+    }
+
+    .working-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.9rem;
+    }
+
+    .working-list li {
+      display: flex;
+      gap: 0.9rem;
+      align-items: flex-start;
+      font-size: clamp(0.9rem, 1.6vw, 1rem);
+      color: var(--cream-dim);
+      line-height: 1.65;
+    }
+
+    .working-list li::before {
+      content: '◆';
+      color: var(--gold);
+      font-size: 0.55rem;
+      flex-shrink: 0;
+      margin-top: 0.45rem;
+    }
+
+    /* ══════════════════════════════════════
+       § VISION BLOCK
+    ══════════════════════════════════════ */
+    .vision-block {
+      border-left: 3px solid var(--gold);
+      background: var(--bg-raised);
+      padding: clamp(1.8rem, 4vw, 2.8rem) clamp(1.8rem, 4vw, 2.8rem) clamp(1.8rem, 4vw, 2.8rem) clamp(2rem, 5vw, 3rem);
+    }
+
+    .vision-quote {
+      font-family: var(--font-display);
+      font-style: italic;
+      font-size: clamp(1.5rem, 4vw, 2.4rem);
+      font-weight: 300;
+      color: var(--gold);
+      line-height: 1.25;
+      margin-bottom: 0.6rem;
+    }
+
+    .vision-attr {
+      font-size: 0.68rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gold-dim);
+      margin-bottom: 2rem;
+      display: block;
+    }
+
+    .vision-body {
+      font-size: clamp(0.92rem, 1.7vw, 1.05rem);
+      color: var(--cream-dim);
+      line-height: 1.85;
+    }
+
+    .vision-body + .vision-body { margin-top: 1rem; }
+
+    /* ══════════════════════════════════════
+       § 4 — WHAT WE CAN IMPROVE (2×2)
+    ══════════════════════════════════════ */
+    .matrix-2x2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 1fr 1fr;
+      gap: 2px;
+      background: var(--gold-dim);
+      border: 1px solid var(--gold-dim);
+    }
+
+    @media (max-width: 580px) {
+      .matrix-2x2 { grid-template-columns: 1fr; }
+    }
+
+    .matrix-cell {
+      background: var(--bg-card);
+      padding: clamp(1.6rem, 4vw, 2.4rem);
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      position: relative;
+    }
+
+    .matrix-cell::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: var(--crimson);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .matrix-cell:hover::before { opacity: 1; }
+
+    .matrix-icon {
+      width: 2.4rem;
+      height: 2.4rem;
+      color: var(--crimson);
+      opacity: 0.85;
+      flex-shrink: 0;
+    }
+
+    .matrix-icon svg {
+      width: 100%;
+      height: 100%;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 1.5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .matrix-title {
+      font-family: var(--font-body);
+      font-size: clamp(0.78rem, 1.3vw, 0.88rem);
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--cream);
+      line-height: 1.4;
+    }
+
+    .matrix-text {
+      font-size: clamp(0.85rem, 1.5vw, 0.95rem);
+      color: var(--cream-dim);
+      line-height: 1.75;
+      flex: 1;
+    }
+
+    /* ══════════════════════════════════════
+       § 5 — WHAT WE NEED TO DECIDE
+    ══════════════════════════════════════ */
+    .decide-sub {
+      font-family: var(--font-display);
+      font-style: italic;
+      font-size: clamp(0.95rem, 1.8vw, 1.1rem);
+      color: var(--rose);
+      margin-bottom: 2.5rem;
+      line-height: 1.6;
+    }
+
+    .decide-list {
+      display: flex;
+      flex-direction: column;
+      gap: 2.6rem;
+    }
+
+    .decide-item {
+      display: grid;
+      grid-template-columns: 6rem 1fr;
+      gap: 0 2rem;
+      align-items: start;
+    }
+
+    @media (max-width: 500px) {
+      .decide-item { grid-template-columns: 4rem 1fr; gap: 0 1rem; }
+    }
+
+    .decide-num {
+      font-family: var(--font-display);
+      font-size: clamp(4rem, 10vw, 7rem);
+      font-weight: 300;
+      color: var(--crimson);
+      line-height: 0.88;
+      letter-spacing: -0.02em;
+    }
+
+    .decide-q {
+      font-family: var(--font-body);
+      font-size: clamp(0.95rem, 1.7vw, 1.05rem);
+      font-weight: 500;
+      color: var(--cream);
+      margin-bottom: 0.45rem;
+    }
+
+    .decide-exp {
+      font-size: clamp(0.86rem, 1.55vw, 0.95rem);
+      color: var(--cream-dim);
+      line-height: 1.75;
+    }
+
+    /* ══════════════════════════════════════
+       § 6 — HOW WE DO THIS
+    ══════════════════════════════════════ */
+    .how-block {
+      background: var(--bg-raised);
+      border: 1px solid #2a1f23;
+      padding: clamp(2rem, 4vw, 3rem);
+      margin-bottom: 2.5rem;
+    }
+
+    .how-text {
+      font-family: var(--font-display);
+      font-size: clamp(1.1rem, 2.2vw, 1.4rem);
+      font-weight: 300;
+      line-height: 1.7;
+      color: var(--cream);
+      margin-bottom: 2.5rem;
+    }
+
+    .agenda-label {
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold-dim);
+      margin-bottom: 1.2rem;
+      font-weight: 500;
+    }
+
+    .agenda-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.7rem;
+      counter-reset: agenda;
+    }
+
+    .agenda-list li {
+      counter-increment: agenda;
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+      font-size: clamp(0.88rem, 1.6vw, 0.98rem);
+      color: var(--cream-dim);
+    }
+
+    .agenda-list li::before {
+      content: counter(agenda);
+      font-family: var(--font-display);
+      font-size: 1.4rem;
+      font-weight: 300;
+      color: var(--gold);
+      line-height: 1;
+      flex-shrink: 0;
+      width: 1.4rem;
+    }
+
+    .closing-italic {
+      font-family: var(--font-display);
+      font-style: italic;
+      font-size: clamp(1rem, 2vw, 1.25rem);
+      color: var(--rose);
+      line-height: 1.6;
+    }
+
+    /* ══════════════════════════════════════
+       § NOT STRIP
+    ══════════════════════════════════════ */
+    .not-strip {
+      display: flex;
+      gap: clamp(1.5rem, 4vw, 3rem);
+      flex-wrap: wrap;
+      margin: 2rem 0 2.8rem;
+      padding: 1.6rem 0;
+      border-top: 1px solid #2a1f23;
+      border-bottom: 1px solid #2a1f23;
+      align-items: center;
+    }
+
+    .not-item {
+      display: flex;
+      align-items: center;
+      gap: 0.55rem;
+      font-size: clamp(0.78rem, 1.4vw, 0.9rem);
+      color: var(--muted);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-weight: 400;
+      text-decoration: line-through;
+      text-decoration-color: var(--crimson);
+      text-decoration-thickness: 1.5px;
+    }
+
+    .not-x {
+      font-size: 0.65rem;
+      color: var(--crimson);
+      font-style: normal;
+      text-decoration: none;
+      flex-shrink: 0;
+    }
+
+    .not-owns {
+      margin-left: auto;
+      font-family: var(--font-display);
+      font-style: italic;
+      font-size: clamp(0.95rem, 1.8vw, 1.1rem);
+      color: var(--rose);
+      text-decoration: none;
+      letter-spacing: 0;
+      text-transform: none;
+      font-weight: 300;
+    }
+
+    @media (max-width: 580px) {
+      .not-owns { margin-left: 0; margin-top: 0.5rem; width: 100%; }
+    }
+
+    /* ══════════════════════════════════════
+       § 7 — FOOTER
+    ══════════════════════════════════════ */
+    footer {
+      padding: 3rem 0 4rem;
+    }
+
+    .footer-text {
+      text-align: center;
+      font-family: var(--font-body);
+      font-size: 0.78rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--gold-dim);
+      margin-top: 2rem;
+    }
+
+    /* ══════════════════════════════════════
+       § 8 — TIMELINE / GANTT
+    ══════════════════════════════════════ */
+    .gantt-wrap {
+      margin: 2.5rem 0 0;
+      overflow: hidden;
+    }
+
+    .gantt-axis {
+      position: relative;
+      height: 1.6rem;
+      margin-bottom: 0.4rem;
+    }
+
+    .gantt-tick {
+      position: absolute;
+      font-size: 0.65rem;
+      font-family: var(--font-body);
+      color: var(--gold-dim);
+      letter-spacing: 0.08em;
+      transform: translateX(-50%);
+    }
+
+    .gantt-track {
+      position: relative;
+      height: 3rem;
+      background: rgba(201, 168, 76, 0.06);
+      border: 1px solid rgba(201, 168, 76, 0.15);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .gantt-bar {
+      position: absolute;
+      top: 5px;
+      bottom: 5px;
+      border-radius: 3px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .gantt-bar.clearing { background: var(--rose); opacity: 0.75; }
+    .gantt-bar.ground   { background: var(--gold); opacity: 0.6; }
+    .gantt-bar.voice    { background: var(--crimson); opacity: 0.72; }
+    .gantt-bar.bloom    { background: #2D4A3E; opacity: 0.9; border: 1px solid rgba(201,168,76,0.2); }
+
+    .gantt-bar-label {
+      font-size: 0.6rem;
+      font-family: var(--font-body);
+      color: var(--cream);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      white-space: nowrap;
+      padding: 0 0.4rem;
+      opacity: 0.92;
+    }
+
+    /* Phase cards */
+    .phase-cards {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.5px;
+      background: rgba(201, 168, 76, 0.18);
+      margin: 1.5px 0 3rem;
+      border-radius: 2px;
+      overflow: hidden;
+    }
+
+    .phase-card {
+      background: var(--bg-card);
+      padding: clamp(2rem, 4vw, 2.8rem) clamp(1.6rem, 3vw, 2.2rem);
+      position: relative;
+    }
+
+    .phase-stripe {
+      height: 4px;
+      width: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+    .clearing-stripe { background: var(--rose); }
+    .ground-stripe   { background: var(--gold); }
+    .voice-stripe    { background: var(--crimson); }
+    .bloom-stripe    { background: #2D4A3E; }
+
+    .phase-num {
+      font-family: var(--font-display);
+      font-size: clamp(3.5rem, 5.5vw, 5rem);
+      line-height: 1;
+      margin-bottom: 0.5rem;
+      font-weight: 300;
+      letter-spacing: -0.02em;
+    }
+    .phase-num-clearing { color: var(--rose); }
+    .phase-num-ground   { color: var(--gold); }
+    .phase-num-voice    { color: var(--crimson-l); }
+    .phase-num-bloom    { color: #5a9a6e; }
+
+    .phase-weeks {
+      font-size: 0.65rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--cream-dim);
+      opacity: 0.6;
+      margin-bottom: 0.6rem;
+    }
+
+    .phase-name {
+      font-family: var(--font-display);
+      font-size: clamp(1.3rem, 2.2vw, 1.75rem);
+      color: var(--cream);
+      margin-bottom: 0.9rem;
+      font-weight: 400;
+      font-style: italic;
+      line-height: 1.2;
+    }
+
+    .phase-desc {
+      font-size: clamp(0.85rem, 1.3vw, 0.95rem);
+      color: var(--cream-dim);
+      line-height: 1.75;
+      margin-bottom: 1.4rem;
+    }
+
+    .phase-milestones {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      border-top: 1px solid rgba(201, 168, 76, 0.15);
+    }
+
+    .phase-milestones li {
+      font-size: 0.8rem;
+      color: var(--cream-dim);
+      padding: 0.55rem 0 0.55rem 1.4rem;
+      border-bottom: 1px solid rgba(201, 168, 76, 0.08);
+      position: relative;
+      line-height: 1.5;
+      opacity: 0.85;
+    }
+
+    .phase-milestones li::before {
+      content: '→';
+      position: absolute;
+      left: 0;
+      color: var(--gold);
+      opacity: 0.65;
+      font-size: 0.72rem;
+    }
+
+    @media (max-width: 860px) {
+      .phase-cards { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 600px) {
+      .phase-cards { grid-template-columns: 1fr; }
+      .phase-num { font-size: clamp(3rem, 10vw, 4rem); }
+    }
+    @media (max-width: 480px) {
+      .gantt-bar-label { display: none; }
+      .gantt-wrap { display: none; }
+    }
+
+    /* ══════════════════════════════════════
+       § ROADMAP CTA
+    ══════════════════════════════════════ */
+    .roadmap-cta {
+      margin-top: 3.5rem;
+      border: 1px solid rgba(201, 168, 76, 0.22);
+      border-left: 4px solid var(--gold);
+      background: var(--bg-raised);
+      padding: clamp(1.8rem, 4vw, 2.4rem) clamp(1.8rem, 4vw, 2.4rem) clamp(1.8rem, 4vw, 2.4rem) clamp(2rem, 5vw, 3rem);
+    }
+
+    .roadmap-cta-eyebrow {
+      font-size: 0.65rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold-dim);
+      margin-bottom: 0.8rem;
+      font-weight: 500;
+    }
+
+    .roadmap-cta-text {
+      font-family: var(--font-display);
+      font-style: italic;
+      font-size: clamp(1.15rem, 2.5vw, 1.6rem);
+      color: var(--gold);
+      line-height: 1.45;
+      margin-bottom: 1rem;
+    }
+
+    .roadmap-cta-sub {
+      font-size: clamp(0.86rem, 1.55vw, 0.96rem);
+      color: var(--cream-dim);
+      line-height: 1.75;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Film grain -->
+  <svg id="grain" xmlns="http://www.w3.org/2000/svg">
+    <filter id="noise">
+      <feTurbulence type="fractalNoise" baseFrequency="0.75" numOctaves="4" stitchTiles="stitch" />
+      <feColorMatrix type="saturate" values="0" />
+    </filter>
+    <rect width="100%" height="100%" filter="url(#noise)" />
+  </svg>
+
+  <!-- ══ COVER ══ -->
+  <section id="cover">
+    <p class="cover-eyebrow reveal">Prepared for Nani &amp; Einat</p>
+    <h1 class="cover-title reveal">House of Kleos</h1>
+    <p class="cover-subtitle reveal">Business Clarity Brief &nbsp;/&nbsp; May 2026</p>
+    <p class="cover-from reveal">From Pepe</p>
+    <div class="cover-divider reveal"></div>
+    <p class="cover-tagline reveal">This is where you are. This is what we can build.</p>
+  </section>
+
+  <div class="gold-line"></div>
+
+  <!-- ══ §1 WHAT YOU HAVE BUILT ══ -->
+  <section id="built">
+    <div class="container">
+      <p class="section-label reveal">Section I</p>
+      <h2 class="section-heading reveal">What You Have Built</h2>
+      <p class="section-intro reveal">
+        You create conscious erotic experiences. Events where people explore pleasure, connection, and their own edges — in a container that feels safe, artful, and alive. Something that sits in its own category.
+      </p>
+
+      <div class="not-strip reveal">
+        <span class="not-item"><em class="not-x">✕</em> Sex party</span>
+        <span class="not-item"><em class="not-x">✕</em> Tantra retreat</span>
+        <span class="not-item"><em class="not-x">✕</em> Kink club</span>
+        <span class="not-item"><em class="not-x">✕</em> New age ceremony</span>
+        <span class="not-item"><em class="not-x">✕</em> Munch</span>
+        <span class="not-owns">Something that sits in its own category.</span>
+      </div>
+
+      <!-- Offering Cards -->
+      <div class="cards-grid">
+
+        <div class="card reveal">
+          <p class="card-name">Erostatic Dance</p>
+          <div class="card-meta">
+            <span>Group movement</span>
+            <span>Monthly &nbsp;·&nbsp; 30 people</span>
+            <span style="color: var(--gold-dim); margin-top: 0.3rem;">5 editions</span>
+          </div>
+          <span class="badge badge-live">Live</span>
+        </div>
+
+        <div class="card reveal">
+          <p class="card-name">Kleos Temple</p>
+          <div class="card-meta">
+            <span>Ritual &amp; exploration</span>
+            <span>Quarterly &nbsp;·&nbsp; 25–50 people</span>
+            <span style="color: var(--gold-dim); margin-top: 0.3rem;">2 editions</span>
+          </div>
+          <span class="badge badge-live">Live</span>
+        </div>
+
+        <div class="card reveal">
+          <p class="card-name">Safe to Feel Eros</p>
+          <div class="card-meta">
+            <span>Intimate workshop</span>
+            <span>Testing &nbsp;·&nbsp; ~20 people</span>
+          </div>
+          <span class="badge badge-testing">Testing</span>
+        </div>
+
+        <div class="card reveal">
+          <p class="card-name">Erostatic Women + Queer</p>
+          <div class="card-meta">
+            <span>Women and queer space</span>
+            <span>Testing &nbsp;·&nbsp; First: May 24</span>
+          </div>
+          <span class="badge badge-testing">Testing</span>
+        </div>
+
+        <div class="card reveal" style="grid-column: 1 / -1;">
+          <p class="card-name">Private Sessions</p>
+          <div class="card-meta">
+            <span>On request &nbsp;·&nbsp; Flexible &nbsp;·&nbsp; Custom</span>
+          </div>
+          <span class="badge badge-avail">Available</span>
+        </div>
+
+      </div>
+
+      <!-- Stats -->
+      <div class="stats-row">
+        <div class="stat-block reveal">
+          <div class="stat-number" data-target="174">0</div>
+          <div class="stat-label">Registered contacts</div>
+        </div>
+        <div class="stat-block reveal">
+          <div class="stat-number" data-target="115">0</div>
+          <div class="stat-label">WhatsApp community<br>(past attendees only)</div>
+        </div>
+        <div class="stat-block reveal">
+          <div class="stat-number" data-target="250" data-prefix="~">0</div>
+          <div class="stat-label">Telegram — Hedone Barcelona</div>
+        </div>
+        <div class="stat-block reveal" style="border-top-color: var(--crimson);">
+          <div class="stat-number" style="color: var(--rose); font-size: clamp(3.5rem, 12vw, 8rem);" data-target="23" data-prefix="€" data-suffix="k">0</div>
+          <div class="stat-label">Estimated annual revenue<br><span style="color: var(--muted); font-size: 0.65rem; letter-spacing: 0.1em;">Not yet tracked — modelled from pricing</span></div>
+        </div>
+      </div>
+
+      <p class="stats-note reveal">Primary acquisition: word of mouth. The hardest kind of growth to build — and you already have it.</p>
+    </div>
+  </section>
+
+  <div class="gold-line"></div>
+
+  <!-- ══ VISION / NORTH STAR ══ -->
+  <section id="vision">
+    <div class="container">
+      <p class="section-label reveal">The Vision</p>
+      <div class="vision-block reveal">
+        <p class="vision-quote">"Mothership of different spaceships. Each spaceship holds different keys."</p>
+        <span class="vision-attr">— Einat</span>
+        <p class="vision-body">This is what you told me Kleos is building toward. Not a single event series. A platform. Multiple practitioners, multiple modalities — erostatic dance, shibari, tantra, somatic work, erotic meditation, femdom — all delivered under one brand, held together by one community. The experiences are the spaceships. The community is the mothership.</p>
+        <p class="vision-body">Everything in this document — the improvements, the decisions — should be read through this lens. We are not just professionalizing a monthly dance event. We are building the infrastructure for something that can grow beyond the two of you.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="gold-line"></div>
+
+  <!-- ══ §2 WHAT IS WORKING ══ -->
+  <section id="working">
+    <div class="container">
+      <p class="section-label reveal">Section II</p>
+      <h2 class="section-heading reveal">What Is Working</h2>
+
+      <div class="callout reveal">
+        <p class="callout-sub">These are the things we protect, not change.</p>
+        <ul class="working-list">
+          <li>The container quality. 95% attendance rate, ~50% return rate. The space you hold IS the product.</li>
+          <li>Community trust. 115 past attendees in an exclusive group. This is rare.</li>
+          <li>Word of mouth. Your primary acquisition channel. Harder to build than any campaign.</li>
+          <li>Positioning instinct. You already know what you are not. That clarity protects the brand.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <div class="gold-line"></div>
+
+  <!-- ══ §3 WHAT WE CAN IMPROVE ══ -->
+  <section id="improve">
+    <div class="container">
+      <p class="section-label reveal">Section III</p>
+      <h2 class="section-heading reveal">What We Can Improve</h2>
+
+      <div class="matrix-2x2">
+
+        <div class="matrix-cell reveal">
+          <div class="matrix-icon">
+            <svg viewBox="0 0 24 24"><line x1="12" y1="20" x2="12" y2="10"/><line x1="18" y1="20" x2="18" y2="4"/><line x1="6" y1="20" x2="6" y2="16"/></svg>
+          </div>
+          <p class="matrix-title">You Do Not Know What You Are Earning</p>
+          <p class="matrix-text">Neither of you tracks average revenue per event or per person. You know the range but not where people land. Making decisions without this data means flying blind.</p>
+        </div>
+
+        <div class="matrix-cell reveal">
+          <div class="matrix-icon">
+            <svg viewBox="0 0 24 24"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg>
+          </div>
+          <p class="matrix-title">The Registration Flow Is a Bottleneck You Built for Yourselves</p>
+          <p class="matrix-text">The gender balance check is right and should stay. But today every registration triggers a manual decision plus a manual deposit request. 30 registrations = 30 individual actions. This is solvable.</p>
+        </div>
+
+        <div class="matrix-cell reveal">
+          <div class="matrix-icon">
+            <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          </div>
+          <p class="matrix-title">People Do Not Know What They Are Signing Up For</p>
+          <p class="matrix-text">Einat said it herself: missing explanations, many people have fear. Fear is normal for this category. The question is whether you help people through it or leave them alone with it.</p>
+        </div>
+
+        <div class="matrix-cell reveal">
+          <div class="matrix-icon">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="5" r="2"/><circle cx="5" cy="19" r="2"/><circle cx="19" cy="19" r="2"/><line x1="12" y1="7" x2="5" y2="17"/><line x1="12" y1="7" x2="19" y2="17"/></svg>
+          </div>
+          <p class="matrix-title">No One Owns Anything</p>
+          <p class="matrix-text">Einat, Nani, Rodrigo, Leo, Kimi — who decides when a new event launches? Who sends communications? Who manages the WhatsApp group? When everyone is responsible, things fall through.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <div class="gold-line"></div>
+
+  <!-- ══ §4 WHAT WE NEED TO DECIDE ══ -->
+  <section id="decide">
+    <div class="container">
+      <p class="section-label reveal">Section IV</p>
+      <h2 class="section-heading reveal">What We Need to Decide</h2>
+      <p class="decide-sub reveal">These questions only you can answer. Bring your answers to the session.</p>
+
+      <div class="decide-list">
+
+        <div class="decide-item reveal">
+          <div class="decide-num">1</div>
+          <div>
+            <p class="decide-q">What is the Kleos DNA — the thread that runs through every experience?</p>
+            <p class="decide-exp">Erostatic dance and a femdom workshop are very different rooms. What is the value, the aesthetic, the feeling that makes both unmistakably Kleos? Without this, the collective becomes incoherent as it grows. This is the question that shapes everything else — the brand, who you let in, how you onboard practitioners.</p>
+          </div>
+        </div>
+
+        <div class="decide-item reveal">
+          <div class="decide-num">2</div>
+          <div>
+            <p class="decide-q">What does it take to deliver under the Kleos brand?</p>
+            <p class="decide-exp">If Kleos puts its name on someone's work, what needs to be true about them first? Standards, values alignment, quality of container — and in return, what does Kleos give them that they could not build alone? The answer to this question is your practitioner model. Without it, growth means brand dilution.</p>
+          </div>
+        </div>
+
+        <div class="decide-item reveal">
+          <div class="decide-num">3</div>
+          <div>
+            <p class="decide-q">What holds the community together between events?</p>
+            <p class="decide-exp">115 people in a WhatsApp group is a foundation. But a platform community needs a reason to stay engaged beyond event announcements. A shared identity. A recurring ritual. A sense of belonging to something. What is that for Kleos — and who is responsible for tending it?</p>
+          </div>
+        </div>
+
+        <div class="decide-item reveal">
+          <div class="decide-num">4</div>
+          <div>
+            <p class="decide-q">How do you make decisions as the collective grows?</p>
+            <p class="decide-exp">Today, two founders decide everything. When there are five practitioners delivering under Kleos, who decides on new offerings, brand standards, who gets to join? You need a governance model before you need it — not after a conflict forces the question.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <div class="gold-line"></div>
+
+  <!-- ══ §5 HOW WE DO THIS ══ -->
+  <section id="how">
+    <div class="container">
+      <p class="section-label reveal">Section V</p>
+      <h2 class="section-heading reveal">How We Do This</h2>
+      <p class="section-intro reveal">Conservative pacing. One milestone at a time. Not every engagement needs all four phases — the clarity session tells us where to start and what to skip.</p>
+
+      <!-- Gantt bar -->
+      <div class="gantt-wrap reveal">
+        <div class="gantt-axis">
+          <span class="gantt-tick" style="left: 0%">W1</span>
+          <span class="gantt-tick" style="left: 8.33%">W3</span>
+          <span class="gantt-tick" style="left: 33.33%">W9</span>
+          <span class="gantt-tick" style="left: 58.33%">W15</span>
+          <span class="gantt-tick" style="left: 100%">W24</span>
+        </div>
+        <div class="gantt-track">
+          <div class="gantt-bar clearing" style="left: 0.5%; width: 7.33%"></div>
+          <div class="gantt-bar ground" style="left: 8.83%; width: 24%">
+            <span class="gantt-bar-label">The Ground</span>
+          </div>
+          <div class="gantt-bar voice" style="left: 33.83%; width: 24%">
+            <span class="gantt-bar-label">The Voice</span>
+          </div>
+          <div class="gantt-bar bloom" style="left: 58.83%; width: 40.17%">
+            <span class="gantt-bar-label">The Bloom</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Phase cards -->
+      <div class="phase-cards">
+        <div class="phase-card reveal">
+          <div class="phase-stripe clearing-stripe"></div>
+          <p class="phase-weeks">Weeks 1&ndash;2</p>
+          <div class="phase-num phase-num-clearing">01</div>
+          <h3 class="phase-name">The Clearing</h3>
+          <p class="phase-desc">Clarity session. Lock the value proposition, agree on roles, answer the open questions. Leave with a shared compass.</p>
+          <ul class="phase-milestones">
+            <li>Value proposition in one sentence</li>
+            <li>Roles and decision authority confirmed</li>
+            <li>Open strategic questions resolved</li>
+          </ul>
+        </div>
+        <div class="phase-card reveal">
+          <div class="phase-stripe ground-stripe"></div>
+          <p class="phase-weeks">Weeks 3&ndash;8</p>
+          <div class="phase-num phase-num-ground">02</div>
+          <h3 class="phase-name">The Ground</h3>
+          <p class="phase-desc">Operational structure. Fix what is creating friction without slowing what is already working.</p>
+          <ul class="phase-milestones">
+            <li>Registration flow simplified</li>
+            <li>Basic revenue tracking live</li>
+            <li>Comms templates built</li>
+          </ul>
+        </div>
+        <div class="phase-card reveal">
+          <div class="phase-stripe voice-stripe"></div>
+          <p class="phase-weeks">Weeks 9&ndash;14</p>
+          <div class="phase-num phase-num-voice">03</div>
+          <h3 class="phase-name">The Voice</h3>
+          <p class="phase-desc">Story and communications. People know what they are signing up for before they arrive. Fear becomes curiosity.</p>
+          <ul class="phase-milestones">
+            <li>One explainer per event type</li>
+            <li>First-timer guide</li>
+            <li>Consistent channel voice</li>
+          </ul>
+        </div>
+        <div class="phase-card reveal">
+          <div class="phase-stripe bloom-stripe"></div>
+          <p class="phase-weeks">Weeks 15&ndash;24</p>
+          <div class="phase-num phase-num-bloom">04</div>
+          <h3 class="phase-name">The Bloom</h3>
+          <p class="phase-desc">Community and growth. Intentional, not accidental. The platform starts to attract without heroic effort from the founders.</p>
+          <ul class="phase-milestones">
+            <li>Community activation plan</li>
+            <li>Practitioner onboarding process</li>
+            <li>First expanded offering or retreat</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="roadmap-cta reveal">
+        <p class="roadmap-cta-eyebrow">Your move</p>
+        <p class="roadmap-cta-text">Come with reactions. What did we get right? What is wrong? What is missing?</p>
+        <p class="roadmap-cta-sub">This is your mirror. Bring your honest read to the session. That is where we start.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="gold-line"></div>
+
+  <!-- ══ FOOTER ══ -->
+  <footer>
+    <div class="container">
+      <p class="footer-text reveal">Pepe Carrillo &nbsp;/&nbsp; May 2026</p>
+    </div>
+  </footer>
+
+
+  <script>
+    // ── Scroll reveal ──
+    const reveals = document.querySelectorAll('.reveal');
+    const revealObs = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          revealObs.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+    reveals.forEach(el => revealObs.observe(el));
+
+    // ── Cover elements visible immediately ──
+    document.querySelectorAll('#cover .reveal').forEach(el => {
+      el.style.transition = 'none';
+      el.classList.add('visible');
+      // re-enable transition after paint
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          el.style.transition = '';
+        });
+      });
+    });
+
+    // ── Count-up animation ──
+    function countUp(el) {
+      const target = parseInt(el.dataset.target, 10);
+      const prefix = el.dataset.prefix || '';
+      const suffix = el.dataset.suffix || '';
+      const duration = 1400;
+      const start = performance.now();
+
+      function frame(now) {
+        const elapsed = now - start;
+        const progress = Math.min(elapsed / duration, 1);
+        const eased = 1 - Math.pow(1 - progress, 3);
+        const value = Math.round(eased * target);
+        el.textContent = prefix + value.toLocaleString() + suffix;
+        if (progress < 1) requestAnimationFrame(frame);
+      }
+      requestAnimationFrame(frame);
+    }
+
+    const statNumbers = document.querySelectorAll('.stat-number[data-target]');
+    const countObs = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          countUp(e.target);
+          countObs.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.5 });
+
+    statNumbers.forEach(el => countObs.observe(el));
+  </script>
+
+</body>
+</html>
