@@ -901,6 +901,128 @@ h1, h2 {
 .quiz-complete-msg h2 { font-family:'Space Grotesk',sans-serif; margin-bottom:12px; }
 .quiz-done-btn { background:var(--pepe); color:white; border:none; padding:12px 32px; border-radius:8px; font-family:'Space Grotesk',sans-serif; font-size:15px; cursor:pointer; margin-top:20px; }
 
+/* MOBILE TYPOGRAPHY — min 14px for readability on screens ≤768px */
+@media (max-width: 768px) {
+  body { font-size: 16px; }
+
+  /* Hero subtitle and tagline */
+  .confluence-hero h1 { font-size: 28px; }
+  .confluence-hero .sub { font-size: 15px; }
+  .confluence-hero .hero-label { font-size: 13px; letter-spacing: 0.15em; }
+  .hero-label { font-size: 13px; }
+  .hero-sub { font-size: 15px; }
+
+  /* Score boxes — bigger percentage numbers */
+  .stat-num { font-size: 38px; }
+  .stat-lbl { font-size: 11px; letter-spacing: 0.06em; }
+  .score-number { font-size: 34px; }
+  .score-label { font-size: 12px; }
+
+  /* Section health labels (S1 Structure, S2 Time & Presence, etc.) */
+  .health-label { font-size: 14px; }
+  .health-pct { font-size: 13px; font-weight: 700; }
+  .home-sec-label { font-size: 13px; }
+
+  /* Action buttons (Full Report, ENM Module, Plan & Log, Psych Map) */
+  .action-btn { font-size: 14px; padding: 11px 22px; letter-spacing: 0.04em; }
+
+  /* Bottom nav tab labels */
+  .tab-label { font-size: 11px; }
+
+  /* Section labels and headings */
+  .section-label { font-size: 13px; }
+  h4 { font-size: 14px; }
+  h3 { font-size: 19px; }
+
+  /* Accordion title */
+  .acc-title { font-size: 14px; }
+  .acc-score { font-size: 14px; }
+
+  /* Resource cards */
+  .resource-area { font-size: 12px; }
+  .resource-title { font-size: 15px; }
+  .resource-desc { font-size: 14px; }
+
+  /* Quote blocks */
+  .quote-who { font-size: 13px; }
+  .quote-text { font-size: 15px; }
+
+  /* Tables */
+  th { font-size: 12px; }
+  td { font-size: 14px; }
+  .table-wrap { font-size: 14px; }
+
+  /* BDSM bars */
+  .bdsm-bar-label { font-size: 13px; }
+  .bdsm-bar-pct { font-size: 12px; }
+
+  /* Calibration */
+  .calib-label { font-size: 12px; }
+  .calib-note-hint { font-size: 12px; }
+  .calib-toggle { font-size: 13px; }
+
+  /* Confluence cards */
+  .confluence-card-title { font-size: 12px; }
+  .cc-col-label { font-size: 13px; }
+  .cc-field label { font-size: 12px; }
+
+  /* Chart titles */
+  .chart-title { font-size: 13px; }
+
+  /* Legend */
+  .legend-item { font-size: 13px; }
+
+  /* Agenda */
+  .agenda-content p { font-size: 14px; }
+  .agenda-time { font-size: 13px; }
+
+  /* Review cards */
+  .review-card li { font-size: 14px; }
+  .review-card h4 { font-size: 15px; }
+
+  /* Gap cards */
+  .gap-number { font-size: 12px; }
+  .gap-title { font-size: 17px; }
+  .gap-body { font-size: 14px; }
+  .gap-resolution { font-size: 14px; }
+
+  /* Trigger form */
+  .trig-row label { font-size: 13px; }
+  .home-trigger-row { font-size: 14px; }
+
+  /* ENM stats */
+  .enm-stat-num { font-size: 26px; }
+  .enm-stat-lbl { font-size: 11px; }
+
+  /* Map summary cards */
+  .summary-card-label { font-size: 12px; }
+  .summary-result-text { font-size: 13px; }
+
+  /* Calendar cards */
+  .cal-date-label { font-size: 13px; }
+  .cal-card h4 { font-size: 16px; }
+  .cal-card p, .cal-card li { font-size: 14px; }
+
+  /* Nav links */
+  nav a { font-size: 11px; }
+
+  /* Needs cards */
+  .needs-card-title { font-size: 13px; }
+  .needs-card { font-size: 14px; }
+
+  /* S9 blocks */
+  .s9-block p { font-size: 15px; }
+  .s9-block .who { font-size: 12px; }
+
+  /* Insight/warning/callout boxes */
+  .insight, .warning, .callout { font-size: 14px; }
+
+  /* General paragraph and list text */
+  p { font-size: 14px; }
+  li { font-size: 14px; }
+  .trig-empty { font-size: 14px; }
+}
+
 </style>
 </head>
 <body>
@@ -986,7 +1108,7 @@ h1, h2 {
 
   <div class="stat-row">
     <div class="stat-card">
-      <div class="stat-num" style="color:var(--green)">84%</div>
+      <div class="stat-num" style="color:var(--green)">89%</div>
       <div class="stat-lbl">Overall</div>
     </div>
     <div class="stat-card">
@@ -994,7 +1116,7 @@ h1, h2 {
       <div class="stat-lbl">Best: Health</div>
     </div>
     <div class="stat-card">
-      <div class="stat-num" style="color:var(--red)">71%</div>
+      <div class="stat-num" style="color:var(--amber)">83%</div>
       <div class="stat-lbl">Focus: ENM</div>
     </div>
   </div>
@@ -1008,13 +1130,13 @@ h1, h2 {
     </div>
     <div class="health-row">
       <span class="health-label">S2 Time &amp; Presence</span>
-      <div class="health-bar"><div class="health-fill" style="width:75%;background:var(--amber)"></div></div>
-      <span class="health-pct" style="color:var(--amber)">75%</span>
+      <div class="health-bar"><div class="health-fill" style="width:91%;background:var(--green)"></div></div>
+      <span class="health-pct" style="color:var(--green)">91%</span>
     </div>
     <div class="health-row">
       <span class="health-label">S3 Other Connections</span>
-      <div class="health-bar"><div class="health-fill" style="width:71%;background:var(--red)"></div></div>
-      <span class="health-pct" style="color:var(--red)">71%</span>
+      <div class="health-bar"><div class="health-fill" style="width:83%;background:var(--amber)"></div></div>
+      <span class="health-pct" style="color:var(--amber)">83%</span>
     </div>
     <div class="health-row">
       <span class="health-label">S4 Health &amp; Safety</span>
@@ -1122,11 +1244,13 @@ h1, h2 {
     <div class="section-label">Part I</div>
     <h2>📊 Alignment Overview</h2>
 
+    <div style="background:rgba(61,186,122,0.07);border:1px solid rgba(61,186,122,0.25);border-radius:10px;padding:16px 20px;margin-bottom:32px;font-size:13px"><strong style="color:var(--green)">Live calibration session completed - May 10, 2026</strong><br><span style="color:var(--muted)">2h41m. All nine sections reviewed. Two gaps resolved in session. One new mapping task identified (D/s outside bedroom). Overall alignment upgraded from 84% to 89%.</span></div>
+
     <!-- BIG OVERALL -->
     <div style="text-align:center;padding:40px 0 32px;border-bottom:1px solid var(--border);margin-bottom:40px">
       <div style="font-family:'Space Grotesk',sans-serif;font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);margin-bottom:12px">Overall Compatibility</div>
-      <div style="font-family:'Space Grotesk',sans-serif;font-size:96px;font-weight:200;line-height:1;color:var(--green);margin-bottom:8px">84%</div>
-      <div style="color:var(--muted);font-size:15px;max-width:520px;margin:0 auto">Foundation is solid. Five sections are strong. Two need a conversation. One needs a protocol before it becomes a pattern.</div>
+      <div style="font-family:'Space Grotesk',sans-serif;font-size:96px;font-weight:200;line-height:1;color:var(--green);margin-bottom:8px">89%</div>
+      <div style="color:var(--muted);font-size:15px;max-width:520px;margin:0 auto">Foundation confirmed. Session calibrated. The two areas of friction were resolved live. What remains is mapping.</div>
     </div>
 
     <!-- WHAT THIS SCORE MEANS -->
@@ -1138,8 +1262,8 @@ h1, h2 {
     <div style="font-family:'Space Grotesk',sans-serif;font-size:11px;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);margin-bottom:16px">Section Scores</div>
     <div class="score-grid">
       <div class="score-card"><div class="score-number green">85%</div><div class="score-label">Structure</div></div>
-      <div class="score-card"><div class="score-number amber">75%</div><div class="score-label">Time &amp; Presence</div></div>
-      <div class="score-card"><div class="score-number red">71%</div><div class="score-label">Other Connections</div></div>
+      <div class="score-card"><div class="score-number green">91%</div><div class="score-label">Time &amp; Presence</div></div>
+      <div class="score-card"><div class="score-number amber">83%</div><div class="score-label">Other Connections</div></div>
       <div class="score-card"><div class="score-number green">95%</div><div class="score-label">Health &amp; Safety</div></div>
       <div class="score-card"><div class="score-number green">92%</div><div class="score-label">Emotional Needs</div></div>
       <div class="score-card"><div class="score-number green">88%</div><div class="score-label">The Dynamic</div></div>
@@ -1215,26 +1339,26 @@ h1, h2 {
       <div class="accordion-header" onclick="toggleAcc(this)">
         <span class="acc-icon">⏱</span>
         <span class="acc-title">S2: Time &amp; Presence</span>
-        <span class="acc-score" style="color:var(--amber)">75% · Watch this</span>
+        <span class="acc-score" style="color:var(--green)">91% · Calibrated</span>
         <span class="acc-arrow">▼</span>
       </div>
       <div class="accordion-body">
         <div class="table-wrap">
           <table>
             <tr><th>Question</th><th>Agathe</th><th>Pepe</th><th>Status</th></tr>
-            <tr><td>Once/week matters to me</td><td>4/5</td><td>5/5</td><td><span class="tag tag-gap1">1pt gap</span></td></tr>
+            <tr><td>Once/week matters to me</td><td>5/5</td><td>5/5</td><td><span class="tag tag-aligned">Aligned</span></td></tr>
             <tr><td>Comfortable with extended apart</td><td>3/5</td><td>3/5</td><td><span class="tag tag-aligned">Aligned</span></td></tr>
             <tr><td>Response speed during waking hours</td><td>3/5</td><td>2/5</td><td><span class="tag tag-gap1">1pt gap</span></td></tr>
             <tr><td>Proactive contact at least once/week</td><td>5/5</td><td>4/5</td><td><span class="tag tag-gap1">1pt gap</span></td></tr>
             <tr><td>Knowing about upcoming unavailability</td><td>5/5</td><td>4/5</td><td><span class="tag tag-gap1">1pt gap</span></td></tr>
-            <tr><td style="font-weight:600">Alignment importance</td><td style="font-weight:600">5/5</td><td style="font-weight:600">3/5</td><td><span class="tag tag-gap2">2pt gap</span></td></tr>
+            <tr><td style="font-weight:600">Alignment importance</td><td style="font-weight:600">5/5</td><td style="font-weight:600">5/5</td><td><span class="tag tag-aligned">Aligned</span></td></tr>
           </table>
         </div>
         <div class="quote-grid">
           <div class="quote-block agathe"><div class="quote-who agathe">Agathe: What does enough presence look like?</div><div class="quote-text">"In the same city, at least 2 days a week. Can be sometimes just spending the night. I need a mix of high-quality dates and casual time together. Time and presence is the most valuable thing in human existence."</div></div>
           <div class="quote-block pepe"><div class="quote-who pepe">Pepe: What does enough presence look like?</div><div class="quote-text">"Be there for each other when we need each other. Knowing that we got each other's backs and that we are reachable when needed."</div></div>
         </div>
-        <div class="insight"><strong>Two different operating systems.</strong> She runs on frequency. He runs on availability. The 2-point gap on alignment importance is the real problem. He does not think they need to negotiate the cadence. She knows from experience that not negotiating it is how neglect begins. Her twice-a-week minimum is not a preference. In her framework it is the concrete definition of primary.</div>
+        <div class="insight"><strong>Calibrated May 10.</strong> Pepe admitted he was underselling his capacity - a caution reflex from previous relationships, not his actual availability. Both confirmed twice-a-week minimum in-person as the concrete definition of primary. Both agreed to moderate messaging: she sends fewer; he replies more consistently. Balance point: some contact to show presence during days apart, advance notice if unavailable 3+ days. The frequency vs. availability tension was the conversation. It happened. This is resolved.</div>
       </div>
     </div>
     <div class="calib-panel">
@@ -1252,7 +1376,7 @@ h1, h2 {
       <div class="accordion-header open" onclick="toggleAcc(this)">
         <span class="acc-icon">🌐</span>
         <span class="acc-title">S3: Other Connections</span>
-        <span class="acc-score" style="color:var(--red)">71% · Lowest. This is the session.</span>
+        <span class="acc-score" style="color:var(--amber)">83% · Session resolved this</span>
         <span class="acc-arrow" style="transform:rotate(180deg)">▼</span>
       </div>
       <div class="accordion-body open">
@@ -1260,8 +1384,8 @@ h1, h2 {
           <table>
             <tr><th>Question</th><th>Agathe</th><th>Pepe</th><th>Status</th></tr>
             <tr><td>Comfortable with partner + shared social circle</td><td>2/5</td><td>1/5</td><td><span class="tag tag-gap1">1pt gap</span></td></tr>
-            <tr><td>Partner tells me when starting someone new</td><td>5/5</td><td>4/5</td><td><span class="tag tag-gap1">1pt gap</span></td></tr>
-            <tr><td style="font-weight:600">I have the right to raise concerns</td><td style="font-weight:600">5/5</td><td style="font-weight:600">3/5</td><td><span class="tag tag-gap2">2pt gap</span></td></tr>
+            <tr><td>Partner tells me when starting someone new</td><td>5/5</td><td>5/5</td><td><span class="tag tag-aligned">Aligned</span></td></tr>
+            <tr><td style="font-weight:600">I have the right to raise concerns</td><td style="font-weight:600">5/5</td><td style="font-weight:600">5/5</td><td><span class="tag tag-aligned">Aligned</span></td></tr>
             <tr><td>Immediate disclosure of new fluid bond</td><td>5/5</td><td>5/5</td><td><span class="tag tag-aligned">Aligned</span></td></tr>
             <tr><td>Some form of sexual exclusivity wanted</td><td>2/5</td><td>3/5</td><td><span class="tag tag-gap1">1pt gap</span></td></tr>
             <tr><td style="font-weight:600">Alignment importance</td><td style="font-weight:600">3/5</td><td style="font-weight:600">5/5</td><td><span class="tag tag-gap2">2pt gap (inverted)</span></td></tr>
@@ -1275,6 +1399,7 @@ h1, h2 {
         <h4>What the inverted importance gap means in practice</h4>
         <p style="font-size:14px;margin-bottom:16px;">She has navigated ENM through a 5-year primary partnership. She knows what goes wrong at 6 months, at 18 months, during NRE episodes, during the first time your partner has real feelings for someone else. She knows the somatic response, the timing of the rupture points, the specific grief of feeling secondary without being told you are. He knows none of this from experience yet. The asymmetry is a resource, not a problem. Access it.</p>
         <div class="callout"><strong>The one question that closes this gap fastest:</strong> "What do you wish someone had told you in your first year of ENM?" Not about Pepe. Not about this relationship. What did you learn that you wish you had known before the cost? Let her transfer the experience. It is the most valuable asset in this partnership and it has not been accessed yet.</div>
+        <div class="insight" style="margin-top:20px"><strong>Calibrated May 10.</strong> Two critical gaps resolved live: (1) Pepe upgraded concerns right to 5/5 - good-faith concerns are a right, not a favour. Framework: valid concern = internal work + root cause + collaborative solution. Invalid = 'stop' with no reasoning. (2) Immediate disclosure confirmed: first time having sex with someone new, tell immediately - not just when dating regularly. Shared social circle: 99% no, 1% exception with three-way conversation required. Cathedral &amp; Chapel hierarchy adopted: primary is the cathedral; others are chapels.</div>
       </div>
     </div>
     <div class="calib-panel">
@@ -1380,6 +1505,7 @@ h1, h2 {
           <div class="quote-block pepe"><div class="quote-who pepe">Pepe: How should it evolve?</div><div class="quote-text">"I want to stop approaching and start inhabiting. The trust is solid enough now to actually use it. And I want the ordinary. The Tuesday afternoon version."</div></div>
         </div>
         <div class="insight"><strong>The Tuesday afternoon version</strong> he described is not the death of the dynamic. It is its most sophisticated form: activating the dynamic from a baseline of comfort, without ceremony. She wants specific scenario depth. He wants the dynamic as unmarked baseline. Both are compatible. More depth in practice, less ceremony required.</div>
+        <div class="callout" style="margin-top:20px"><strong>Mapping needed (from session):</strong> D/s inside bedroom during sex: 5/5, no friction. D/s outside bedroom, non-sexual context: trigger for her. Ownership markers (collars, clothing orders, pet names with ownership connotation) outside sexual play read as territory marking. His natural directive personality is not sexual D/s - it is personality. These need a map: what counts as personality vs. play. Not a problem. The most interesting part of the design.</div>
       </div>
     </div>
     <div class="calib-panel">
@@ -1405,7 +1531,7 @@ h1, h2 {
           <table>
             <tr><th>Question</th><th>Agathe</th><th>Pepe</th><th>Status</th></tr>
             <tr><td>Long-term vision: years not months</td><td>5/5</td><td>5/5</td><td><span class="tag tag-aligned">Aligned</span></td></tr>
-            <tr><td style="font-weight:600">Quarterly reviews taken seriously</td><td style="font-weight:600">3/5</td><td style="font-weight:600">5/5</td><td><span class="tag tag-gap2">2pt gap</span></td></tr>
+            <tr><td style="font-weight:600">Monthly check-ins agreed</td><td style="font-weight:600">5/5</td><td style="font-weight:600">5/5</td><td><span class="tag tag-aligned">Aligned</span></td></tr>
             <tr><td>Periodic formal check-ins needed</td><td>3/5</td><td>3/5</td><td><span class="tag tag-aligned">Aligned</span></td></tr>
             <tr><td>Emergency review if losing self</td><td>4/5</td><td>5/5</td><td><span class="tag tag-gap1">1pt gap</span></td></tr>
             <tr><td>Can exit with integrity if needed</td><td>4/5</td><td>5/5</td><td><span class="tag tag-gap1">1pt gap</span></td></tr>
@@ -1825,67 +1951,6 @@ h1, h2 {
 
 </div>
 <div id="screen-map" class="screen">
-<!-- BDSM SECTION -->
-<section id="bdsm">
-  <div class="container">
-    <div class="section-label">Dynamic Intelligence</div>
-    <h2>🔗 The Erotic Map</h2>
-    <p style="color:var(--muted);max-width:640px;margin-bottom:24px">bdsmtest.org scores. Agathe: Mar 2026. Pepe: May 2, 2026.</p>
-
-    <div style="margin-bottom:24px;display:flex;gap:12px;flex-wrap:wrap">
-      <button class="test-link-btn pepe-btn" id="quiz_btn_bdsm_roles_pepe" onclick="openQuiz('bdsm_roles','pepe')" style="font-size:12px">Pepe - Take in-house test</button>
-      <button class="test-link-btn agathe-btn" id="quiz_btn_bdsm_roles_agathe" onclick="openQuiz('bdsm_roles','agathe')" style="font-size:12px">Agathe - Take in-house test</button>
-    </div>
-    <div id="quiz_result_bdsm_roles_pepe" style="background:rgba(225,75,135,0.08);border:1px solid rgba(225,75,135,0.2);border-radius:8px;padding:10px 12px;font-size:12px;margin-bottom:12px;display:none"></div>
-    <div id="quiz_result_bdsm_roles_agathe" style="background:rgba(45,158,107,0.08);border:1px solid rgba(45,158,107,0.2);border-radius:8px;padding:10px 12px;font-size:12px;margin-bottom:16px;display:none"></div>
-    <div class="bdsm-grid">
-      <div class="bdsm-col">
-        <h4 style="color:var(--agathe);margin-bottom:6px">Agathe · Mar 2026</h4>
-        <p style="font-size:12px;color:var(--muted);margin-bottom:16px">Result ID: p9Y9qDWY</p>
-        <div class="bdsm-bar-row"><div class="bdsm-bar-label">Brat</div><div class="bdsm-bar-track"><div class="bdsm-bar-fill" style="width:100%;background:var(--agathe)"></div></div><div class="bdsm-bar-pct">100%</div></div>
-        <div class="bdsm-bar-row"><div class="bdsm-bar-label">Rope bunny</div><div class="bdsm-bar-track"><div class="bdsm-bar-fill" style="width:100%;background:var(--agathe)"></div></div><div class="bdsm-bar-pct">100%</div></div>
-        <div class="bdsm-bar-row"><div class="bdsm-bar-label">Submissive</div><div class="bdsm-bar-track"><div class="bdsm-bar-fill" style="width:99%;background:var(--agathe)"></div></div><div class="bdsm-bar-pct">99%</div></div>
-        <div class="bdsm-bar-row"><div class="bdsm-bar-label">Exhibitionist</div><div class="bdsm-bar-track"><div class="bdsm-bar-fill" style="width:89%;background:var(--agathe)"></div></div><div class="bdsm-bar-pct">89%</div></div>
-        <div class="bdsm-bar-row"><div class="bdsm-bar-label">Degradee</div><div class="bdsm-bar-track"><div class="bdsm-bar-fill" style="width:85%;background:var(--agathe)"></div></div><div class="bdsm-bar-pct">85%</div></div>
-        <div class="bdsm-bar-row"><div class="bdsm-bar-label">Primal (Prey)</div><div class="bdsm-bar-track"><div class="bdsm-bar-fill" style="width:82%;background:var(--agathe)"></div></div><div class="bdsm-bar-pct">82%</div></div>
-        <div class="bdsm-bar-row"><div class="bdsm-bar-label">Experimentalist</div><div class="bdsm-bar-track"><div class="bdsm-bar-fill" style="width:81%;background:var(--agathe)"></div></div><div class="bdsm-bar-pct">81%</div></div>
-        <div class="bdsm-bar-row"><div class="bdsm-bar-label">Non-monogamist</div><div class="bdsm-bar-track"><div class="bdsm-bar-fill" style="width:81%;background:var(--agathe)"></div></div><div class="bdsm-bar-pct">81%</div></div>
-        <div class="bdsm-bar-row"><div class="bdsm-bar-label">Masochist</div><div class="bdsm-bar-track"><div class="bdsm-bar-fill" style="width:76%;background:var(--agathe)"></div></div><div class="bdsm-bar-pct">76%</div></div>
-      </div>
-
-      <div class="bdsm-col">
-        <h4 style="color:var(--pepe);margin-bottom:6px">Pepe · May 2026</h4>
-        <p style="font-size:12px;color:var(--muted);margin-bottom:16px">Result ID: 2kLKsWQs</p>
-        <div style="font-family:'Space Grotesk',sans-serif;font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:8px">Dominant side</div>
-        <div class="bdsm-bar-row"><div class="bdsm-bar-label">Non-monogamist</div><div class="bdsm-bar-track"><div class="bdsm-bar-fill" style="width:100%;background:var(--pepe)"></div></div><div class="bdsm-bar-pct">100%</div></div>
-        <div class="bdsm-bar-row"><div class="bdsm-bar-label">Rigger</div><div class="bdsm-bar-track"><div class="bdsm-bar-fill" style="width:100%;background:var(--pepe)"></div></div><div class="bdsm-bar-pct">100%</div></div>
-        <div class="bdsm-bar-row"><div class="bdsm-bar-label">Sadist</div><div class="bdsm-bar-track"><div class="bdsm-bar-fill" style="width:100%;background:var(--pepe)"></div></div><div class="bdsm-bar-pct">100%</div></div>
-        <div class="bdsm-bar-row"><div class="bdsm-bar-label">Voyeur</div><div class="bdsm-bar-track"><div class="bdsm-bar-fill" style="width:100%;background:var(--pepe)"></div></div><div class="bdsm-bar-pct">100%</div></div>
-        <div class="bdsm-bar-row"><div class="bdsm-bar-label">Exhibitionist</div><div class="bdsm-bar-track"><div class="bdsm-bar-fill" style="width:100%;background:var(--pepe)"></div></div><div class="bdsm-bar-pct">100%</div></div>
-        <div class="bdsm-bar-row"><div class="bdsm-bar-label">Degrader</div><div class="bdsm-bar-track"><div class="bdsm-bar-fill" style="width:100%;background:var(--pepe)"></div></div><div class="bdsm-bar-pct">100%</div></div>
-        <div class="bdsm-bar-row"><div class="bdsm-bar-label">Primal (Hunter)</div><div class="bdsm-bar-track"><div class="bdsm-bar-fill" style="width:98%;background:var(--pepe)"></div></div><div class="bdsm-bar-pct">98%</div></div>
-        <div class="bdsm-bar-row"><div class="bdsm-bar-label">Dominant</div><div class="bdsm-bar-track"><div class="bdsm-bar-fill" style="width:98%;background:var(--pepe)"></div></div><div class="bdsm-bar-pct">98%</div></div>
-        <div class="bdsm-bar-row"><div class="bdsm-bar-label">Experimentalist</div><div class="bdsm-bar-track"><div class="bdsm-bar-fill" style="width:95%;background:var(--pepe)"></div></div><div class="bdsm-bar-pct">95%</div></div>
-        <div class="bdsm-bar-row"><div class="bdsm-bar-label">Master/Mistress</div><div class="bdsm-bar-track"><div class="bdsm-bar-fill" style="width:94%;background:var(--pepe)"></div></div><div class="bdsm-bar-pct">94%</div></div>
-        <div class="bdsm-bar-row"><div class="bdsm-bar-label">Brat tamer</div><div class="bdsm-bar-track"><div class="bdsm-bar-fill" style="width:87%;background:var(--pepe)"></div></div><div class="bdsm-bar-pct">87%</div></div>
-        <div style="font-family:'Space Grotesk',sans-serif;font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin:16px 0 8px">Switch side (new since 2022)</div>
-        <div class="bdsm-bar-row"><div class="bdsm-bar-label">Primal (Prey)</div><div class="bdsm-bar-track"><div class="bdsm-bar-fill" style="width:83%;background:rgba(225,75,135,0.45)"></div></div><div class="bdsm-bar-pct" style="color:var(--muted)">83%</div></div>
-        <div class="bdsm-bar-row"><div class="bdsm-bar-label">Brat</div><div class="bdsm-bar-track"><div class="bdsm-bar-fill" style="width:74%;background:rgba(225,75,135,0.45)"></div></div><div class="bdsm-bar-pct" style="color:var(--muted)">74%</div></div>
-        <div class="bdsm-bar-row"><div class="bdsm-bar-label">Submissive</div><div class="bdsm-bar-track"><div class="bdsm-bar-fill" style="width:72%;background:rgba(225,75,135,0.45)"></div></div><div class="bdsm-bar-pct" style="color:var(--muted)">72%</div></div>
-        <div class="bdsm-bar-row"><div class="bdsm-bar-label">Rope bunny</div><div class="bdsm-bar-track"><div class="bdsm-bar-fill" style="width:50%;background:rgba(225,75,135,0.45)"></div></div><div class="bdsm-bar-pct" style="color:var(--muted)">50%</div></div>
-      </div>
-    </div>
-
-    <div class="bdsm-match" style="margin-top:32px">
-      <h4 style="font-family:'Space Grotesk',sans-serif;font-size:12px;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:16px">Compatibility Reads  -  highest match first</h4>
-      <div class="bdsm-match-row"><div class="bdsm-match-icon">✅</div><div><strong>Rigger / Rope bunny:</strong> Both 100%. The rope interest is not a curiosity. It is a core language for both of them. Perfect match.</div></div>
-      <div class="bdsm-match-row"><div class="bdsm-match-icon">✅</div><div><strong>Exhibitionism:</strong> Both 100%. No negotiation needed here. Perfect match.</div></div>
-      <div class="bdsm-match-row"><div class="bdsm-match-icon">✅</div><div><strong>Dominant / Submissive:</strong> 98% and 99%. The D/s dynamic is not performance. It is wiring on both sides.</div></div>
-      <div class="bdsm-match-row"><div class="bdsm-match-icon">🔥</div><div><strong>Brat / Brat tamer:</strong> Her 100% brat. His 87% brat tamer. Up from 69% in 2022. The structural tension is real. She will push. He decides when to catch it and when to let it run. This is where the daily dynamic lives.</div></div>
-      <div class="bdsm-match-row"><div class="bdsm-match-icon">✅</div><div><strong>Degrader / Degradee:</strong> 100% and 85%. Both went all the way up. This is a fully shared language.</div></div>
-      <div class="bdsm-match-row"><div class="bdsm-match-icon">✅</div><div><strong>Primal Hunter / Primal Prey:</strong> 98% and 82%. The chase dynamic is hardwired on both sides.</div></div>
-      <div class="bdsm-match-row"><div class="bdsm-match-icon">✅</div><div><strong>Sadist / Masochist:</strong> 100% and 76%. Direct match. The intensity difference is not a problem. It is calibration.</div></div>
-      <div class="bdsm-match-row"><div class="bdsm-match-icon">🌀</div><div><strong>The curiosity door:</strong> In 2022 his submissive side was essentially zero. In 2026 the test scored him 72% submissive, 74% brat, 83% primal prey  -  but the lived reality is milder than that. He is not a switch. He is a dominant who has opened a door of curiosity. One time she tied him up. That is where this lives right now: a door ajar, not a side of himself. Worth revisiting in a year.</div></div>
 <section id="the-map">
   <div class="container">
     <div class="section-label">The Map</div>
@@ -2284,6 +2349,70 @@ h1, h2 {
     <div id="map-save-msg" style="font-family:'Space Grotesk',sans-serif;font-size:12px;color:var(--green);margin-top:8px;display:none">Saved.</div>
   </div>
 </section>
+<!-- BDSM SECTION -->
+<section id="bdsm">
+  <div class="container">
+    <div class="section-label">Dynamic Intelligence</div>
+    <h2>🔗 The Erotic Map</h2>
+    <p style="color:var(--muted);max-width:640px;margin-bottom:24px">bdsmtest.org scores. Agathe: Mar 2026. Pepe: May 2, 2026.</p>
+
+    <div style="margin-bottom:24px;display:flex;gap:12px;flex-wrap:wrap">
+      <button class="test-link-btn pepe-btn" id="quiz_btn_bdsm_roles_pepe" onclick="openQuiz('bdsm_roles','pepe')" style="font-size:12px">Pepe - Take in-house test</button>
+      <button class="test-link-btn agathe-btn" id="quiz_btn_bdsm_roles_agathe" onclick="openQuiz('bdsm_roles','agathe')" style="font-size:12px">Agathe - Take in-house test</button>
+    </div>
+    <div id="quiz_result_bdsm_roles_pepe" style="background:rgba(225,75,135,0.08);border:1px solid rgba(225,75,135,0.2);border-radius:8px;padding:10px 12px;font-size:12px;margin-bottom:12px;display:none"></div>
+    <div id="quiz_result_bdsm_roles_agathe" style="background:rgba(45,158,107,0.08);border:1px solid rgba(45,158,107,0.2);border-radius:8px;padding:10px 12px;font-size:12px;margin-bottom:16px;display:none"></div>
+    <div class="bdsm-grid">
+      <div class="bdsm-col">
+        <h4 style="color:var(--agathe);margin-bottom:6px">Agathe · Mar 2026</h4>
+        <p style="font-size:12px;color:var(--muted);margin-bottom:16px">Result ID: p9Y9qDWY</p>
+        <div class="bdsm-bar-row"><div class="bdsm-bar-label">Brat</div><div class="bdsm-bar-track"><div class="bdsm-bar-fill" style="width:100%;background:var(--agathe)"></div></div><div class="bdsm-bar-pct">100%</div></div>
+        <div class="bdsm-bar-row"><div class="bdsm-bar-label">Rope bunny</div><div class="bdsm-bar-track"><div class="bdsm-bar-fill" style="width:100%;background:var(--agathe)"></div></div><div class="bdsm-bar-pct">100%</div></div>
+        <div class="bdsm-bar-row"><div class="bdsm-bar-label">Submissive</div><div class="bdsm-bar-track"><div class="bdsm-bar-fill" style="width:99%;background:var(--agathe)"></div></div><div class="bdsm-bar-pct">99%</div></div>
+        <div class="bdsm-bar-row"><div class="bdsm-bar-label">Exhibitionist</div><div class="bdsm-bar-track"><div class="bdsm-bar-fill" style="width:89%;background:var(--agathe)"></div></div><div class="bdsm-bar-pct">89%</div></div>
+        <div class="bdsm-bar-row"><div class="bdsm-bar-label">Degradee</div><div class="bdsm-bar-track"><div class="bdsm-bar-fill" style="width:85%;background:var(--agathe)"></div></div><div class="bdsm-bar-pct">85%</div></div>
+        <div class="bdsm-bar-row"><div class="bdsm-bar-label">Primal (Prey)</div><div class="bdsm-bar-track"><div class="bdsm-bar-fill" style="width:82%;background:var(--agathe)"></div></div><div class="bdsm-bar-pct">82%</div></div>
+        <div class="bdsm-bar-row"><div class="bdsm-bar-label">Experimentalist</div><div class="bdsm-bar-track"><div class="bdsm-bar-fill" style="width:81%;background:var(--agathe)"></div></div><div class="bdsm-bar-pct">81%</div></div>
+        <div class="bdsm-bar-row"><div class="bdsm-bar-label">Non-monogamist</div><div class="bdsm-bar-track"><div class="bdsm-bar-fill" style="width:81%;background:var(--agathe)"></div></div><div class="bdsm-bar-pct">81%</div></div>
+        <div class="bdsm-bar-row"><div class="bdsm-bar-label">Masochist</div><div class="bdsm-bar-track"><div class="bdsm-bar-fill" style="width:76%;background:var(--agathe)"></div></div><div class="bdsm-bar-pct">76%</div></div>
+      </div>
+
+      <div class="bdsm-col">
+        <h4 style="color:var(--pepe);margin-bottom:6px">Pepe · May 2026</h4>
+        <p style="font-size:12px;color:var(--muted);margin-bottom:16px">Result ID: 2kLKsWQs</p>
+        <div style="font-family:'Space Grotesk',sans-serif;font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:8px">Dominant side</div>
+        <div class="bdsm-bar-row"><div class="bdsm-bar-label">Non-monogamist</div><div class="bdsm-bar-track"><div class="bdsm-bar-fill" style="width:100%;background:var(--pepe)"></div></div><div class="bdsm-bar-pct">100%</div></div>
+        <div class="bdsm-bar-row"><div class="bdsm-bar-label">Rigger</div><div class="bdsm-bar-track"><div class="bdsm-bar-fill" style="width:100%;background:var(--pepe)"></div></div><div class="bdsm-bar-pct">100%</div></div>
+        <div class="bdsm-bar-row"><div class="bdsm-bar-label">Sadist</div><div class="bdsm-bar-track"><div class="bdsm-bar-fill" style="width:100%;background:var(--pepe)"></div></div><div class="bdsm-bar-pct">100%</div></div>
+        <div class="bdsm-bar-row"><div class="bdsm-bar-label">Voyeur</div><div class="bdsm-bar-track"><div class="bdsm-bar-fill" style="width:100%;background:var(--pepe)"></div></div><div class="bdsm-bar-pct">100%</div></div>
+        <div class="bdsm-bar-row"><div class="bdsm-bar-label">Exhibitionist</div><div class="bdsm-bar-track"><div class="bdsm-bar-fill" style="width:100%;background:var(--pepe)"></div></div><div class="bdsm-bar-pct">100%</div></div>
+        <div class="bdsm-bar-row"><div class="bdsm-bar-label">Degrader</div><div class="bdsm-bar-track"><div class="bdsm-bar-fill" style="width:100%;background:var(--pepe)"></div></div><div class="bdsm-bar-pct">100%</div></div>
+        <div class="bdsm-bar-row"><div class="bdsm-bar-label">Primal (Hunter)</div><div class="bdsm-bar-track"><div class="bdsm-bar-fill" style="width:98%;background:var(--pepe)"></div></div><div class="bdsm-bar-pct">98%</div></div>
+        <div class="bdsm-bar-row"><div class="bdsm-bar-label">Dominant</div><div class="bdsm-bar-track"><div class="bdsm-bar-fill" style="width:98%;background:var(--pepe)"></div></div><div class="bdsm-bar-pct">98%</div></div>
+        <div class="bdsm-bar-row"><div class="bdsm-bar-label">Experimentalist</div><div class="bdsm-bar-track"><div class="bdsm-bar-fill" style="width:95%;background:var(--pepe)"></div></div><div class="bdsm-bar-pct">95%</div></div>
+        <div class="bdsm-bar-row"><div class="bdsm-bar-label">Master/Mistress</div><div class="bdsm-bar-track"><div class="bdsm-bar-fill" style="width:94%;background:var(--pepe)"></div></div><div class="bdsm-bar-pct">94%</div></div>
+        <div class="bdsm-bar-row"><div class="bdsm-bar-label">Brat tamer</div><div class="bdsm-bar-track"><div class="bdsm-bar-fill" style="width:87%;background:var(--pepe)"></div></div><div class="bdsm-bar-pct">87%</div></div>
+        <div style="font-family:'Space Grotesk',sans-serif;font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin:16px 0 8px">Switch side (new since 2022)</div>
+        <div class="bdsm-bar-row"><div class="bdsm-bar-label">Primal (Prey)</div><div class="bdsm-bar-track"><div class="bdsm-bar-fill" style="width:83%;background:rgba(225,75,135,0.45)"></div></div><div class="bdsm-bar-pct" style="color:var(--muted)">83%</div></div>
+        <div class="bdsm-bar-row"><div class="bdsm-bar-label">Brat</div><div class="bdsm-bar-track"><div class="bdsm-bar-fill" style="width:74%;background:rgba(225,75,135,0.45)"></div></div><div class="bdsm-bar-pct" style="color:var(--muted)">74%</div></div>
+        <div class="bdsm-bar-row"><div class="bdsm-bar-label">Submissive</div><div class="bdsm-bar-track"><div class="bdsm-bar-fill" style="width:72%;background:rgba(225,75,135,0.45)"></div></div><div class="bdsm-bar-pct" style="color:var(--muted)">72%</div></div>
+        <div class="bdsm-bar-row"><div class="bdsm-bar-label">Rope bunny</div><div class="bdsm-bar-track"><div class="bdsm-bar-fill" style="width:50%;background:rgba(225,75,135,0.45)"></div></div><div class="bdsm-bar-pct" style="color:var(--muted)">50%</div></div>
+      </div>
+    </div>
+
+    <div class="bdsm-match" style="margin-top:32px">
+      <h4 style="font-family:'Space Grotesk',sans-serif;font-size:12px;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:16px">Compatibility Reads  -  highest match first</h4>
+      <div class="bdsm-match-row"><div class="bdsm-match-icon">✅</div><div><strong>Rigger / Rope bunny:</strong> Both 100%. The rope interest is not a curiosity. It is a core language for both of them. Perfect match.</div></div>
+      <div class="bdsm-match-row"><div class="bdsm-match-icon">✅</div><div><strong>Exhibitionism:</strong> Both 100%. No negotiation needed here. Perfect match.</div></div>
+      <div class="bdsm-match-row"><div class="bdsm-match-icon">✅</div><div><strong>Dominant / Submissive:</strong> 98% and 99%. The D/s dynamic is not performance. It is wiring on both sides.</div></div>
+      <div class="bdsm-match-row"><div class="bdsm-match-icon">🔥</div><div><strong>Brat / Brat tamer:</strong> Her 100% brat. His 87% brat tamer. Up from 69% in 2022. The structural tension is real. She will push. He decides when to catch it and when to let it run. This is where the daily dynamic lives.</div></div>
+      <div class="bdsm-match-row"><div class="bdsm-match-icon">✅</div><div><strong>Degrader / Degradee:</strong> 100% and 85%. Both went all the way up. This is a fully shared language.</div></div>
+      <div class="bdsm-match-row"><div class="bdsm-match-icon">✅</div><div><strong>Primal Hunter / Primal Prey:</strong> 98% and 82%. The chase dynamic is hardwired on both sides.</div></div>
+      <div class="bdsm-match-row"><div class="bdsm-match-icon">✅</div><div><strong>Sadist / Masochist:</strong> 100% and 76%. Direct match. The intensity difference is not a problem. It is calibration.</div></div>
+      <div class="bdsm-match-row"><div class="bdsm-match-icon">🌀</div><div><strong>The curiosity door:</strong> In 2022 his submissive side was essentially zero. In 2026 the test scored him 72% submissive, 74% brat, 83% primal prey  -  but the lived reality is milder than that. He is not a switch. He is a dominant who has opened a door of curiosity. One time she tied him up. That is where this lives right now: a door ajar, not a side of himself. Worth revisiting in a year.</div></div>
+    </div>
+  </div>
+</section>
 </div>
 <div id="screen-log" class="screen">
   <div class="container screen-pad">
@@ -2679,7 +2808,9 @@ function saveTrigger() {
   };
   var triggers = getTriggers();
   triggers.unshift(entry);
-  localStorage.setItem('jva_triggers', JSON.stringify(triggers));
+  var triggersJson = JSON.stringify(triggers);
+  localStorage.setItem('jva_triggers', triggersJson);
+  jvaServerSaveKey('jva_triggers', triggersJson);
   document.getElementById('trig-desc').value = '';
   document.getElementById('trig-context').value = '';
   document.getElementById('trig-intensity').value = 5;
@@ -2865,6 +2996,7 @@ function showScreen(name) {
   if (tb) tb.classList.add('active');
   window.scrollTo({top:0,behavior:'instant'});
   if (name === 'home') renderHomeTriggers();
+  if (name === 'map') { loadAllQuizResults(); populateSummaryStrip(); populateSideBySide(); }
 }
 
 // HOME TRIGGER SUMMARY
@@ -4012,6 +4144,8 @@ function openQuiz(quizId, person) {
 function closeQuiz() {
   document.getElementById('quizOverlay').classList.remove('active');
   loadAllQuizResults();
+  populateSummaryStrip();
+  populateSideBySide();
 }
 
 function renderQuizBody() {
@@ -4095,7 +4229,9 @@ function saveAndShowResults() {
     });
   }
   var key = 'jva_quiz_' + quizState.quizId + '_' + quizState.person;
-  localStorage.setItem(key, JSON.stringify({scores: scores, completed: new Date().toISOString()}));
+  var quizData = {scores: scores, completed: new Date().toISOString()};
+  localStorage.setItem(key, JSON.stringify(quizData));
+  jvaServerSaveKey(key, quizData);
   quizState.phase = 'results';
   quizState.savedScores = scores;
   renderQuizResults();
@@ -4247,14 +4383,70 @@ function populateSummaryStrip() {
   });
 }
 
+// ── Server sync (VPS is source of truth) ─────────────────────────────────────
+var JVA_API = 'https://api.mexzungu.com';
+var JVA_TOKEN = 'jva-panda-rocket-2026';
+
+function jvaServerLoad(callback) {
+  fetch(JVA_API + '/confluence/load', {
+    headers: { 'X-JVA-Token': JVA_TOKEN }
+  })
+    .then(function(r) { return r.json(); })
+    .then(function(serverData) {
+      // Step 1: collect all local jva_ keys
+      var localPayload = {};
+      for (var i = 0; i < localStorage.length; i++) {
+        var k = localStorage.key(i);
+        if (k && k.startsWith('jva_')) localPayload[k] = localStorage.getItem(k);
+      }
+      // Step 2: merge — VPS wins for keys it has, local wins for keys VPS doesn't
+      var merged = Object.assign({}, localPayload);
+      if (serverData) {
+        Object.keys(serverData).forEach(function(k) {
+          merged[k] = typeof serverData[k] === 'string' ? serverData[k] : JSON.stringify(serverData[k]);
+        });
+      }
+      // Step 3: write merged result into localStorage
+      Object.keys(merged).forEach(function(k) { localStorage.setItem(k, merged[k]); });
+      // Step 4: push merged result back to VPS (one-time sync, non-destructive)
+      fetch(JVA_API + '/confluence/save', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'X-JVA-Token': JVA_TOKEN },
+        body: JSON.stringify(merged)
+      }).catch(function() {});
+      if (callback) callback();
+    })
+    .catch(function() { if (callback) callback(); });
+}
+
+function jvaServerSaveKey(key, value) {
+  var payload = {};
+  payload[key] = value;
+  fetch(JVA_API + '/confluence/save', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'X-JVA-Token': JVA_TOKEN },
+    body: JSON.stringify(payload)
+  }).catch(function() {});
+}
+// ── End server sync ───────────────────────────────────────────────────────────
+
 document.addEventListener('DOMContentLoaded', function() {
-  loadAllQuizResults();
-  var pepeDob = localStorage.getItem('jva_dob_pepe');
-  var agatheDob = localStorage.getItem('jva_dob_agathe');
-  if (pepeDob) { var lpnP = document.getElementById('lpn-pepe-dob'); if (lpnP) lpnP.value = pepeDob; }
-  if (agatheDob) { var lpnA = document.getElementById('lpn-agathe-dob'); if (lpnA) lpnA.value = agatheDob; }
-  populateSideBySide();
-  populateSummaryStrip();
+  // Load server data first, then re-render everything with merged data
+  jvaServerLoad(function() {
+    loadAllQuizResults();
+    renderTriggers();
+    loadMapResults();
+    loadLoveMaps();
+    loadSessionNotes();
+    loadENM();
+    renderHomeTriggers();
+    var pepeDob = localStorage.getItem('jva_dob_pepe');
+    var agatheDob = localStorage.getItem('jva_dob_agathe');
+    if (pepeDob) { var lpnP = document.getElementById('lpn-pepe-dob'); if (lpnP) lpnP.value = pepeDob; }
+    if (agatheDob) { var lpnA = document.getElementById('lpn-agathe-dob'); if (lpnA) lpnA.value = agatheDob; }
+    populateSideBySide();
+    populateSummaryStrip();
+  });
 });
 
 // END QUIZ SYSTEM =====
