@@ -915,9 +915,9 @@ h1, h2 {
 
   /* Score boxes — bigger percentage numbers */
   .stat-num { font-size: 38px; }
-  .stat-lbl { font-size: 11px; letter-spacing: 0.06em; }
+  .stat-lbl { font-size: 13px; letter-spacing: 0.05em; }
   .score-number { font-size: 34px; }
-  .score-label { font-size: 12px; }
+  .score-label { font-size: 13px; }
 
   /* Section health labels (S1 Structure, S2 Time & Presence, etc.) */
   .health-label { font-size: 14px; }
@@ -1000,11 +1000,11 @@ h1, h2 {
 
   /* ENM stats */
   .enm-stat-num { font-size: 26px; }
-  .enm-stat-lbl { font-size: 11px; }
+  .enm-stat-lbl { font-size: 13px; }
 
   /* Map summary cards */
-  .summary-card-label { font-size: 12px; }
-  .summary-result-text { font-size: 13px; }
+  .summary-card-label { font-size: 13px; }
+  .summary-result-text { font-size: 14px; }
 
   /* Calendar cards */
   .cal-date-label { font-size: 13px; }
@@ -1029,6 +1029,45 @@ h1, h2 {
   p { font-size: 14px; }
   li { font-size: 14px; }
   .trig-empty { font-size: 14px; }
+
+  /* Containers fill full screen width on mobile */
+  .stat-row { max-width: 100%; }
+  .home-sec-label { max-width: 100%; }
+  .section-health { max-width: 100%; }
+}
+
+/* PHONE — aggressive scaling for screens ≤480px */
+@media (max-width: 480px) {
+  body { font-size: 15px; }
+  .container { padding: 0 14px; }
+  section { padding: 36px 0; }
+  h2 { font-size: 22px; }
+
+  /* Hero */
+  .confluence-hero { padding: 28px 16px 14px; }
+  .confluence-hero h1 { font-size: 23px; }
+
+  /* Stat row tighter */
+  .stat-row { padding: 0 10px; gap: 8px; }
+  .stat-num { font-size: 30px; }
+  .stat-lbl { font-size: 11px; }
+
+  /* Action buttons — tighter */
+  .action-btn { font-size: 13px; padding: 10px 16px; }
+
+  /* Section health */
+  .section-health { padding: 0 12px; }
+
+  /* Gap cards */
+  .gap-header { padding: 14px 16px; }
+  .gap-body { padding: 14px 16px; }
+  .gap-resolution { padding: 12px 16px; }
+
+  /* Needs cards */
+  .needs-card { padding: 18px; }
+
+  /* Chart boxes */
+  .chart-box { padding: 16px; }
 }
 
 </style>
@@ -1120,7 +1159,7 @@ h1, h2 {
       <div class="stat-lbl">Overall</div>
     </div>
     <div class="stat-card">
-      <div class="stat-num" style="color:var(--green)">95%</div>
+      <div class="stat-num" style="color:var(--green)">100%</div>
       <div class="stat-lbl">Best: Health</div>
     </div>
     <div class="stat-card">
@@ -1148,8 +1187,8 @@ h1, h2 {
     </div>
     <div class="health-row">
       <span class="health-label">S4 Health &amp; Safety</span>
-      <div class="health-bar"><div class="health-fill" style="width:95%;background:var(--green)"></div></div>
-      <span class="health-pct" style="color:var(--green)">95%</span>
+      <div class="health-bar"><div class="health-fill" style="width:100%;background:var(--green)"></div></div>
+      <span class="health-pct" style="color:var(--green)">100%</span>
     </div>
     <div class="health-row">
       <span class="health-label">S5 Emotional Needs</span>
@@ -1272,7 +1311,7 @@ h1, h2 {
       <div class="score-card"><div class="score-number green">85%</div><div class="score-label">Structure</div></div>
       <div class="score-card"><div class="score-number green">91%</div><div class="score-label">Time &amp; Presence</div></div>
       <div class="score-card"><div class="score-number amber">83%</div><div class="score-label">Other Connections</div></div>
-      <div class="score-card"><div class="score-number green">95%</div><div class="score-label">Health &amp; Safety</div></div>
+      <div class="score-card"><div class="score-number green">100%</div><div class="score-label">Health &amp; Safety</div></div>
       <div class="score-card"><div class="score-number green">92%</div><div class="score-label">Emotional Needs</div></div>
       <div class="score-card"><div class="score-number green">88%</div><div class="score-label">The Dynamic</div></div>
       <div class="score-card"><div class="score-number green">86%</div><div class="score-label">Growth &amp; Exit</div></div>
@@ -1425,7 +1464,7 @@ h1, h2 {
       <div class="accordion-header" onclick="toggleAcc(this)">
         <span class="acc-icon">💚</span>
         <span class="acc-title">S4: Health &amp; Safety</span>
-        <span class="acc-score" style="color:var(--green)">95% · Near perfect</span>
+        <span class="acc-score" style="color:var(--green)">100% · Perfect alignment</span>
         <span class="acc-arrow">▼</span>
       </div>
       <div class="accordion-body">
@@ -2320,6 +2359,7 @@ h1, h2 {
         <div class="map-result-row"><div class="map-result-label">Chinese Zodiac</div><div class="map-result-value" id="sbs-pepe-zodiac" style="background:#111;color:#555;border:1px solid #222;border-radius:6px;padding:6px 10px;font-size:13px;min-height:28px;font-style:italic">Enter birthdate</div></div>
         <div class="map-result-row"><div class="map-result-label">Moon Phase at Birth</div><div class="map-result-value" id="sbs-pepe-moon" style="background:#111;color:#555;border:1px solid #222;border-radius:6px;padding:6px 10px;font-size:13px;min-height:28px;font-style:italic">Enter birthdate</div></div>
         <div class="map-result-row"><div class="map-result-label">Tarot Birth Card</div><div class="map-result-value" id="sbs-pepe-tarot" style="background:#111;color:#555;border:1px solid #222;border-radius:6px;padding:6px 10px;font-size:13px;min-height:28px;font-style:italic">Enter birthdate</div></div>
+        <div class="map-result-row"><div class="map-result-label">Mayan Tzolkin</div><div class="map-result-value" id="sbs-pepe-mayan" style="background:#111;color:#555;border:1px solid #222;border-radius:6px;padding:6px 10px;font-size:13px;min-height:28px;font-style:italic">Enter birthdate</div></div>
         <div style="height:1px;background:var(--border);margin:12px 0"></div>
         <div class="map-result-row"><div class="map-result-label">16Personalities</div><input class="map-result-input" id="sbs-pepe-mbti" placeholder="e.g. ENTP-A" oninput="sbsSaveManual('pepe','mbti',this.value)"/></div>
         <div class="map-result-row"><div class="map-result-label">Sun / Moon / Rising</div><input class="map-result-input" id="sbs-pepe-astro" placeholder="e.g. Taurus / Scorpio / Gemini" oninput="sbsSaveManual('pepe','astro',this.value)"/></div>
@@ -2343,6 +2383,7 @@ h1, h2 {
         <div class="map-result-row"><div class="map-result-label">Chinese Zodiac</div><div class="map-result-value" id="sbs-agathe-zodiac" style="background:#111;color:#555;border:1px solid #222;border-radius:6px;padding:6px 10px;font-size:13px;min-height:28px;font-style:italic">Enter birthdate</div></div>
         <div class="map-result-row"><div class="map-result-label">Moon Phase at Birth</div><div class="map-result-value" id="sbs-agathe-moon" style="background:#111;color:#555;border:1px solid #222;border-radius:6px;padding:6px 10px;font-size:13px;min-height:28px;font-style:italic">Enter birthdate</div></div>
         <div class="map-result-row"><div class="map-result-label">Tarot Birth Card</div><div class="map-result-value" id="sbs-agathe-tarot" style="background:#111;color:#555;border:1px solid #222;border-radius:6px;padding:6px 10px;font-size:13px;min-height:28px;font-style:italic">Enter birthdate</div></div>
+        <div class="map-result-row"><div class="map-result-label">Mayan Tzolkin</div><div class="map-result-value" id="sbs-agathe-mayan" style="background:#111;color:#555;border:1px solid #222;border-radius:6px;padding:6px 10px;font-size:13px;min-height:28px;font-style:italic">Enter birthdate</div></div>
         <div style="height:1px;background:var(--border);margin:12px 0"></div>
         <div class="map-result-row"><div class="map-result-label">16Personalities</div><input class="map-result-input" id="sbs-agathe-mbti" placeholder="e.g. INFJ-T" oninput="sbsSaveManual('agathe','mbti',this.value)"/></div>
         <div class="map-result-row"><div class="map-result-label">Sun / Moon / Rising</div><input class="map-result-input" id="sbs-agathe-astro" placeholder="e.g. Aquarius / Pisces / Virgo" oninput="sbsSaveManual('agathe','astro',this.value)"/></div>
@@ -2754,19 +2795,7 @@ h1, h2 {
     <div class="table-wrap">
       <table>
         <tr><th>Date</th><th>What changed</th><th>Original value</th><th>New value</th><th>Source</th></tr>
-        <tr><td>2026-05-10</td><td>Overall compatibility score</td><td>84%</td><td>89%</td><td>Live calibration session (2h41m recording)</td></tr>
-        <tr><td>2026-05-10</td><td>S2 Time &amp; Presence — section score</td><td>75% (amber)</td><td>91% (green)</td><td>Live calibration session</td></tr>
-        <tr><td>2026-05-10</td><td>S3 Other Connections — section score</td><td>71% (red)</td><td>83% (amber)</td><td>Live calibration session</td></tr>
-        <tr><td>2026-05-10</td><td>S2 "Once/week matters to me" — Agathe</td><td>4/5</td><td>5/5</td><td>Confirmed in session: twice/week is the concrete floor</td></tr>
-        <tr><td>2026-05-10</td><td>S2 "Alignment importance" — Pepe</td><td>3/5</td><td>5/5</td><td>Admitted underselling capacity; caution reflex, not honest read</td></tr>
-        <tr><td>2026-05-10</td><td>S3 "Partner tells me when starting someone new" — Pepe</td><td>4/5</td><td>5/5</td><td>Immediate disclosure committed: first time, not just ongoing</td></tr>
-        <tr><td>2026-05-10</td><td>S3 "I have the right to raise concerns" — Pepe</td><td>3/5</td><td>5/5</td><td>PIP framework agreed in session; good-faith concerns are a right</td></tr>
-        <tr><td>2026-05-10</td><td>S7 "Quarterly reviews" — Agathe (renamed to Monthly check-ins)</td><td>3/5</td><td>5/5</td><td>Monthly confirmed; quarterly was her resistance to carrying it alone</td></tr>
-        <tr><td>2026-05-10</td><td>Gap 1 status</td><td>Open</td><td>Resolved</td><td>PIP framework agreed in session</td></tr>
-        <tr><td>2026-05-10</td><td>Gap 2 status</td><td>Open</td><td>Resolved</td><td>Twice/week confirmed; messaging balance agreed</td></tr>
-        <tr><td>2026-05-10</td><td>Gap 4 status</td><td>Open</td><td>Resolved</td><td>Monthly check-ins confirmed by both</td></tr>
-        <tr><td>2026-05-10</td><td>New content: D/s outside bedroom mapping task</td><td>(not in original)</td><td>Added to S6</td><td>Discovered in session: bedroom vs. non-bedroom D/s boundary</td></tr>
-        <tr><td>2026-05-10</td><td>New content: Cathedral &amp; Chapel hierarchy</td><td>(not in original)</td><td>Added to S3 calibration note</td><td>Framework adopted in session</td></tr>
+        <tr><td>2026-05-10</td><td><a href="https://github.com/mexzungu/janis-brain/blob/main/agents/dating/projects/agathe/jva/call-summary-2026-05-10.md" target="_blank" style="color:var(--green)">Alignment Session</a></td><td>84% overall · S2 75% · S3 71% · S4 95% · 3 gaps open</td><td>89% overall · S2 91% · S3 83% · S4 100% · 3 gaps resolved · 12 agreements</td><td>2h41m live calibration recording</td></tr>
         <tr><td>2026-05-01</td><td>Initial site built</td><td>—</td><td>84% overall, 7 sections</td><td>Both questionnaires submitted 2026-04-30</td></tr>
       </table>
     </div>
@@ -2798,6 +2827,7 @@ function saveCalib(sec) {
   var pepe = document.getElementById('calib-' + sec + '-pepe').value;
   var agathe = document.getElementById('calib-' + sec + '-agathe').value;
   localStorage.setItem('jva_notes_' + sec, JSON.stringify({pepe: pepe, agathe: agathe}));
+  jvaServerSaveKey('jva_notes_' + sec, JSON.stringify({pepe: pepe, agathe: agathe}));
   var btn = document.querySelector('#calib-' + sec + ' .calib-save');
   btn.textContent = 'Saved.';
   setTimeout(function(){ btn.textContent = 'Save notes'; }, 2000);
@@ -2872,7 +2902,7 @@ function renderTriggers() {
   recent.forEach(function(t) {
     var ic = t.intensity <= 3 ? 'intensity-low' : t.intensity <= 6 ? 'intensity-mid' : 'intensity-high';
     var whoColor = t.who === 'Pepe' ? '#e14b87' : '#2d9e6b';
-    var shortDesc = t.desc.length > 55 ? t.desc.substring(0, 55) + '...' : t.desc;
+    var desc_ = t.desc || t.description || ''; var shortDesc = desc_.length > 55 ? desc_.substring(0, 55) + '...' : desc_;
     html += '<tr><td>' + t.date + '</td><td style="color:' + whoColor + ';font-weight:600">' + t.who + '</td><td style="font-size:13px">' + shortDesc + '</td><td><span class="intensity-pill ' + ic + '">' + t.intensity + '/10</span></td><td style="font-size:13px">' + t.section + '</td></tr>';
   });
   html += '</tbody></table>';
@@ -2883,6 +2913,7 @@ function renderTriggers() {
 var SBS_MANUAL_FIELDS = ['mbti','astro','hd','vedic','genekeys'];
 function sbsSaveManual(person, field, value) {
   localStorage.setItem('jva_map_' + person + '_' + field, value);
+  jvaServerSaveKey('jva_map_' + person + '_' + field, value);
   document.querySelectorAll('[id="sbs-' + person + '-' + field + '"]').forEach(function(el) {
     if (el.tagName === 'INPUT') el.value = value;
   });
@@ -2942,6 +2973,15 @@ function sbsTarotCard(year, month, day) {
   if (sum === 0) sum = 22;
   var cards = ['The Fool','The Magician','The High Priestess','The Empress','The Emperor','The Hierophant','The Lovers','The Chariot','Strength','The Hermit','Wheel of Fortune','Justice','The Hanged Man','Death','Temperance','The Devil','The Tower','The Star','The Moon','The Sun','Judgement','The World','The Fool'];
   return cards[sum];
+}
+function sbsMayanSign(year, month, day) {
+  var SIGNS = ['Imix','Ik','Akbal','Kan','Chicchan','Cimi','Manik','Lamat','Muluc','Oc','Chuen','Eb','Ben','Ix','Men','Cib','Caban','Etznab','Cauac','Ahau'];
+  var ref = new Date(2012, 11, 21);
+  var d = new Date(year, month - 1, day);
+  var delta = Math.round((d - ref) / 86400000);
+  var signIdx = ((19 + delta) % 20 + 20) % 20;
+  var num = ((4 - 1 + delta) % 13 + 13) % 13 + 1;
+  return num + ' ' + SIGNS[signIdx];
 }
 function sbsSetVal(id, text, empty) {
   document.querySelectorAll('[id="' + id + '"]').forEach(function(el) {
@@ -3045,7 +3085,7 @@ function renderHomeTriggers() {
   triggers.slice(0, 5).forEach(function(t) {
     var col = t.who === 'Pepe' ? 'var(--pepe)' : 'var(--agathe)';
     var ic = t.intensity <= 3 ? 'intensity-low' : t.intensity <= 6 ? 'intensity-mid' : 'intensity-high';
-    var desc = t.desc.length > 60 ? t.desc.substring(0,60)+'...' : t.desc;
+    var d_ = t.desc || t.description || ''; var desc = d_.length > 60 ? d_.substring(0,60)+'...' : d_;
     html += '<div class="home-trigger-row"><div class="home-who-dot" style="background:'+col+'"></div><span style="flex:1;font-size:13px">'+desc+'</span><span class="intensity-pill '+ic+'">'+t.intensity+'/10</span></div>';
   });
   el.innerHTML = html;
@@ -3105,6 +3145,7 @@ function saveLoveMaps() {
     if (ag) data['agathe-'+f] = ag.value;
   });
   localStorage.setItem('jva_lovemaps', JSON.stringify(data));
+  jvaServerSaveKey('jva_lovemaps', JSON.stringify(data));
   var msg = document.getElementById('lm-save-msg');
   if (msg) { msg.style.display='inline'; setTimeout(function(){ msg.style.display='none'; }, 2000); }
 }
@@ -3125,7 +3166,7 @@ function loadLoveMaps() {
 // SESSION NOTES
 function saveSessionNotes() {
   var el = document.getElementById('session-notes');
-  if (el) localStorage.setItem('jva_session_notes', el.value);
+  if (el) { localStorage.setItem('jva_session_notes', el.value); jvaServerSaveKey('jva_session_notes', el.value); }
   var msg = document.getElementById('sn-save-msg');
   if (msg) { msg.style.display='inline'; setTimeout(function(){ msg.style.display='none'; }, 2000); }
 }
@@ -3155,6 +3196,7 @@ function saveENM(section) {
   if (psl) data['pepe-comp-level'] = psl.value;
   if (asl) data['agathe-comp-level'] = asl.value;
   localStorage.setItem('jva_enm', JSON.stringify(data));
+  jvaServerSaveKey('jva_enm', JSON.stringify(data));
   var msg = document.getElementById('enm-'+section+'-msg');
   if (msg) { msg.style.display='inline'; setTimeout(function(){ msg.style.display='none'; }, 2000); }
 }
@@ -3218,8 +3260,8 @@ function calcLifePath() {
   const agatheVal = document.getElementById('lpn-agathe-dob').value;
   const pepeNum = fromDate(pepeVal);
   const agatheNum = fromDate(agatheVal);
-  if (pepeVal) localStorage.setItem('jva_dob_pepe', pepeVal);
-  if (agatheVal) localStorage.setItem('jva_dob_agathe', agatheVal);
+  if (pepeVal) { localStorage.setItem('jva_dob_pepe', pepeVal); jvaServerSaveKey('jva_dob_pepe', pepeVal); }
+  if (agatheVal) { localStorage.setItem('jva_dob_agathe', agatheVal); jvaServerSaveKey('jva_dob_agathe', agatheVal); }
   const result = document.getElementById('lpn-result');
   if (!pepeNum && !agatheNum) { result.style.display='none'; if(typeof populateSideBySide==='function') populateSideBySide(); return; }
   let html = '';
@@ -4368,8 +4410,9 @@ function populateSideBySide() {
       sbsSetVal('sbs-'+person+'-zodiac', zodiacs[((zodYr - 1900) % 12 + 12) % 12], false);
       sbsSetVal('sbs-'+person+'-moon', sbsMoonPhase(yr, mo, dy), false);
       sbsSetVal('sbs-'+person+'-tarot', sbsTarotCard(yr, mo, dy), false);
+      sbsSetVal('sbs-'+person+'-mayan', sbsMayanSign(yr, mo, dy), false);
     } else {
-      ['lpn','zodiac','moon','tarot'].forEach(function(f) {
+      ['lpn','zodiac','moon','tarot','mayan'].forEach(function(f) {
         sbsSetVal('sbs-'+person+'-'+f, 'Enter birthdate', true);
       });
     }
