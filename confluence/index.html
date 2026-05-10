@@ -665,16 +665,17 @@ body { padding-bottom: calc(72px + env(safe-area-inset-bottom)); }
   border-top: 1px solid var(--border);
   padding: 8px 0; padding-bottom: calc(8px + env(safe-area-inset-bottom));
   display: flex; justify-content: space-around; align-items: center;
+  min-height: 60px;
 }
 .tab-btn {
   display: flex; flex-direction: column; align-items: center;
-  background: none; border: none; padding: 4px 8px;
+  background: none; border: none; padding: 6px 10px;
   cursor: pointer; color: var(--muted);
-  font-family: 'Space Grotesk', sans-serif; transition: color 0.2s; min-width: 52px;
+  font-family: 'Space Grotesk', sans-serif; transition: color 0.2s; min-width: 56px;
 }
 .tab-btn.active { color: var(--pepe); }
-.tab-icon { font-size: 20px; line-height: 1.2; display: block; }
-.tab-label { font-size: 9px; letter-spacing: 0.05em; text-transform: uppercase; margin-top: 2px; }
+.tab-icon { font-size: 24px; line-height: 1.2; display: block; }
+.tab-label { font-size: 12px; letter-spacing: 0.05em; text-transform: uppercase; margin-top: 2px; }
 
 /* HOME SCREEN */
 .confluence-hero {
@@ -926,8 +927,15 @@ h1, h2 {
   /* Action buttons (Full Report, ENM Module, Plan & Log, Psych Map) */
   .action-btn { font-size: 14px; padding: 11px 22px; letter-spacing: 0.04em; }
 
-  /* Bottom nav tab labels */
-  .tab-label { font-size: 11px; }
+  /* Bottom nav tab labels — at least 12px, icons at least 24px */
+  .tab-label { font-size: 12px; }
+  .tab-icon { font-size: 26px; }
+  .tab-btn { padding: 8px 10px; min-width: 60px; }
+
+  /* Viewport fill — prevent empty black space below content */
+  html { height: 100%; }
+  body { min-height: 100vh; }
+  .screen.active { min-height: calc(100vh - 60px); }
 
   /* Section labels and headings */
   .section-label { font-size: 13px; }
