@@ -2746,6 +2746,33 @@ h1, h2 {
   </div>
 </div>
 
+<section id="changelog" style="border-top:1px solid var(--border)">
+  <div class="container">
+    <div class="section-label">Site History</div>
+    <h2>📋 Changelog</h2>
+    <p style="color:var(--muted);font-size:13px;margin-bottom:24px">Every change to this page — scores, content, data — logged with date and reason. Original values preserved.</p>
+    <div class="table-wrap">
+      <table>
+        <tr><th>Date</th><th>What changed</th><th>Original value</th><th>New value</th><th>Source</th></tr>
+        <tr><td>2026-05-10</td><td>Overall compatibility score</td><td>84%</td><td>89%</td><td>Live calibration session (2h41m recording)</td></tr>
+        <tr><td>2026-05-10</td><td>S2 Time &amp; Presence — section score</td><td>75% (amber)</td><td>91% (green)</td><td>Live calibration session</td></tr>
+        <tr><td>2026-05-10</td><td>S3 Other Connections — section score</td><td>71% (red)</td><td>83% (amber)</td><td>Live calibration session</td></tr>
+        <tr><td>2026-05-10</td><td>S2 "Once/week matters to me" — Agathe</td><td>4/5</td><td>5/5</td><td>Confirmed in session: twice/week is the concrete floor</td></tr>
+        <tr><td>2026-05-10</td><td>S2 "Alignment importance" — Pepe</td><td>3/5</td><td>5/5</td><td>Admitted underselling capacity; caution reflex, not honest read</td></tr>
+        <tr><td>2026-05-10</td><td>S3 "Partner tells me when starting someone new" — Pepe</td><td>4/5</td><td>5/5</td><td>Immediate disclosure committed: first time, not just ongoing</td></tr>
+        <tr><td>2026-05-10</td><td>S3 "I have the right to raise concerns" — Pepe</td><td>3/5</td><td>5/5</td><td>PIP framework agreed in session; good-faith concerns are a right</td></tr>
+        <tr><td>2026-05-10</td><td>S7 "Quarterly reviews" — Agathe (renamed to Monthly check-ins)</td><td>3/5</td><td>5/5</td><td>Monthly confirmed; quarterly was her resistance to carrying it alone</td></tr>
+        <tr><td>2026-05-10</td><td>Gap 1 status</td><td>Open</td><td>Resolved</td><td>PIP framework agreed in session</td></tr>
+        <tr><td>2026-05-10</td><td>Gap 2 status</td><td>Open</td><td>Resolved</td><td>Twice/week confirmed; messaging balance agreed</td></tr>
+        <tr><td>2026-05-10</td><td>Gap 4 status</td><td>Open</td><td>Resolved</td><td>Monthly check-ins confirmed by both</td></tr>
+        <tr><td>2026-05-10</td><td>New content: D/s outside bedroom mapping task</td><td>(not in original)</td><td>Added to S6</td><td>Discovered in session: bedroom vs. non-bedroom D/s boundary</td></tr>
+        <tr><td>2026-05-10</td><td>New content: Cathedral &amp; Chapel hierarchy</td><td>(not in original)</td><td>Added to S3 calibration note</td><td>Framework adopted in session</td></tr>
+        <tr><td>2026-05-01</td><td>Initial site built</td><td>—</td><td>84% overall, 7 sections</td><td>Both questionnaires submitted 2026-04-30</td></tr>
+      </table>
+    </div>
+  </div>
+</section>
+
 <script>
 
 
@@ -4394,10 +4421,16 @@ var JVA_API = 'https://api.mexzungu.com';
 var JVA_TOKEN = 'jva-panda-rocket-2026';
 
 function jvaServerLoad(callback) {
-  fetch(JVA_API + '/confluence/load', {
+  var loadUrl = JVA_API + '/confluence/load';
+  fetch(loadUrl, {
     headers: { 'X-JVA-Token': JVA_TOKEN }
   })
-    .then(function(r) { return r.json(); })
+    .then(function(r) { if (!r.ok) throw new Error('primary fail'); return r.json(); })
+    .catch(function() {
+      return fetch('https://mexzungu.com/api/jva-load', { headers: { 'X-JVA-Token': JVA_TOKEN } })
+        .then(function(r) { return r.json(); })
+        .catch(function() { return {}; });
+    })
     .then(function(serverData) {
       // Step 1: collect all local jva_ keys
       var localPayload = {};
@@ -4428,11 +4461,23 @@ function jvaServerLoad(callback) {
 function jvaServerSaveKey(key, value) {
   var payload = {};
   payload[key] = value;
+  // Try primary API endpoint
   fetch(JVA_API + '/confluence/save', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json', 'X-JVA-Token': JVA_TOKEN },
     body: JSON.stringify(payload)
-  }).catch(function() {});
+  }).then(function(r) {
+    if (!r.ok) {
+      // Fallback: try mexzungu.com proxy endpoint
+      return fetch('https://mexzungu.com/api/jva-save', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'X-JVA-Token': JVA_TOKEN },
+        body: JSON.stringify(payload)
+      });
+    }
+  }).catch(function() {
+    // Silent fail — localStorage is the local fallback
+  });
 }
 // ── End server sync ───────────────────────────────────────────────────────────
 
