@@ -4038,7 +4038,14 @@ const QUIZZES = {
       {text:"What is your response to jealousy in intimate contexts?", a:{dim:"KN",text:"It can be erotically charged if contained within agreed dynamics. Jealousy play is a real thing"}, b:{dim:"SH",text:"I transform it. Jealousy becomes curiosity, then desire, then creative energy"}},
       {text:"How do you describe your erotic identity to a new partner?", a:{dim:"KN",text:"I name my specific interests, hard limits, and the dynamics I find most compelling"}, b:{dim:"SH",text:"I say I am a bit of everything and I would rather discover what we are together than define it upfront"}},
       {text:"Which is more true for you?", a:{dim:"SX",text:"I prefer direct physical stimulation over atmosphere or buildup"}, b:{dim:"SH",text:"My ideal experience combines multiple styles depending on the moment"}}
-    ]
+    ],
+    interpretations: {
+      EN: { tagline: "Aroused before touch begins", full: "The anticipatory type. Charged silences, held eye contact, and electric tension before any physical contact is your primary erotic language. You can have a complete erotic experience with no touch at all. Emotional attunement and presence amplify everything. Too much physical contact too fast short-circuits arousal rather than building it. Restraint is the amplifier, not the obstacle." },
+      SN: { tagline: "The senses set the stage", full: "The full-body experiencer. Scent, texture, temperature, sound, and taste all participate simultaneously. Environment is not aesthetics, it is physiology. The wrong ambient conditions can block arousal entirely regardless of desire. Slowness is essential: rushing shuts down the system. For you, the room is part of the experience." },
+      SX: { tagline: "Direct, physical, unashamed", full: "The integrated embodiment type. You know your body, you know what you want, and you communicate it without performance. Setup and ritual are optional, you can go from zero to fully present quickly. Often misread as simple when you are actually the least defended type. The directness others find surprising is a form of trust: you show up without the layers." },
+      KN: { tagline: "Psychology is the engine", full: "The mental architect. Power dynamics, ritual, transgression, and taboo are erotic languages, not edge cases. Fantasy and mental framing matter as much as physical acts. Surrender and control, in either direction, amplify the entire experience. You operate with a sophisticated internal map of what creates intensity, and a partner who can hold a clear container is essential." },
+      SH: { tagline: "All modes, fluid between them", full: "The adaptive polymorph. You genuinely embody multiple erotic styles and shift between them based on partner, mood, and context. This is not performance or people-pleasing, it is a biological reality. Real variety is a requirement, not a preference. Repetitive patterns create genuine disengagement. The upside: you can meet almost any partner where they are." }
+    },
   },
   enm_alignment: {
     title: "ENM Alignment",
@@ -4327,6 +4334,7 @@ function renderQuizResults() {
   var topLabel = quiz.dimensions[topDim];
   document.getElementById('quizBody').innerHTML = '<div class="quiz-complete-msg"><h2 style="font-family:Space Grotesk,sans-serif;color:' + personColor + '">' + personName + ' - ' + topLabel + '</h2><p style="color:var(--muted);font-family:Space Grotesk,sans-serif;font-size:14px">Your primary result. Full ranking below.</p></div>'
     + '<div class="quiz-result-section"><div>' + barsHtml + '</div></div>'
+    + (quiz.interpretations && quiz.interpretations[topDim] ? '<div style="margin:20px 0;padding:14px 16px;background:rgba(255,255,255,0.04);border-left:3px solid ' + personColor + ';border-radius:0 8px 8px 0"><p style="margin:0 0 6px;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:' + personColor + '">' + quiz.interpretations[topDim].tagline + '</p><p style="margin:0;font-size:13px;color:#aaa;line-height:1.6">' + quiz.interpretations[topDim].full + '</p></div>' : '')
     + '<div style="text-align:center;margin-top:32px"><button class="quiz-done-btn" style="background:' + personColor + '" onclick="closeQuiz()">Done</button></div>';
 }
 
@@ -4363,7 +4371,8 @@ function renderResultOnCard(quizId, person, scores) {
   }).join('');
   for (var i = 0; i < els.length; i++) {
     els[i].innerHTML = '<span style="font-family:Space Grotesk,sans-serif;font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:' + personColor + '">' + personName + ' - done</span><br>'
-      + '<strong style="font-size:13px">' + topLabel + (secondary ? ' / ' + secondary : '') + '</strong><br><br>'
+      + '<strong style="font-size:13px">' + topLabel + (secondary ? ' / ' + secondary : '') + '</strong><br>'
+      + (quiz.interpretations && quiz.interpretations[sorted[0]] ? '<div style="font-size:11px;color:#888;margin:2px 0 8px;font-style:italic">' + quiz.interpretations[sorted[0]].tagline + '</div>' : '')
       + barsHtml
       + '<button onclick="openQuiz(\'' + quizId + '\',\'' + person + '\')" style="margin-top:8px;font-size:11px;background:none;border:1px solid rgba(255,255,255,0.15);color:#888;padding:3px 10px;border-radius:4px;cursor:pointer;font-family:Space Grotesk,sans-serif">Retake</button>';
     els[i].style.display = 'block';
@@ -4389,7 +4398,7 @@ function sbsGetQuizTop(quizId, person) {
 }
 function populateSideBySide() {
   var quizMap = {
-    'attachment':'attach','love_languages':'love','disc_profile':'disc',
+    'attachment':'attach','love_languages':'love','disc':'disc',
     'conflict_style':'conflict','enneagram':'ennea','big_five':'ocean','erotic_blueprint':'erotic'
   };
   ['pepe','agathe'].forEach(function(person) {
@@ -4424,7 +4433,7 @@ function populateSummaryStrip() {
   var tests = [
     { id: 'summary-card-attachment',  icon: '○', label: 'Attachment Style',      quizId: 'attachment',       manualField: null },
     { id: 'summary-card-love',        icon: '♡', label: 'Love Languages',        quizId: 'love_languages',   manualField: null },
-    { id: 'summary-card-disc',        icon: '◈', label: 'DISC Profile',          quizId: 'disc_profile',     manualField: null },
+    { id: 'summary-card-disc',        icon: '◈', label: 'DISC Profile',          quizId: 'disc',             manualField: null },
     { id: 'summary-card-conflict',    icon: '⚡', label: 'Conflict Style',        quizId: 'conflict_style',   manualField: null },
     { id: 'summary-card-enneagram',   icon: '✦', label: 'Enneagram',             quizId: 'enneagram',        manualField: null },
     { id: 'summary-card-ocean',       icon: '▣', label: 'Big Five (OCEAN)',      quizId: 'big_five',         manualField: null },
